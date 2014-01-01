@@ -5,7 +5,7 @@ Class Notes For STT 3850
 Last compiled:
 
 ```
-[1] "Wednesday, January 01, 2014 - 10:30:33."
+[1] "Wednesday, January 01, 2014 - 15:40:03."
 ```
 
 
@@ -2474,18 +2474,17 @@ Gender   Very Happy Pretty Happy Not to Happy Sum
 ```r
 HADF <- as.data.frame(HAT)
 HATflatfile <- vcdExtra::expand.dft(HADF)
-```
-
-```
-Error: there is no package called 'vcdExtra'
-```
-
-```r
 head(HATflatfile)
 ```
 
 ```
-Error: object 'HATflatfile' not found
+  Gender      Giddy
+1   Male Very Happy
+2   Male Very Happy
+3   Male Very Happy
+4   Male Very Happy
+5   Male Very Happy
+6   Male Very Happy
 ```
 
 ```r
@@ -2493,7 +2492,9 @@ str(HATflatfile)
 ```
 
 ```
-Error: object 'HATflatfile' not found
+'data.frame':	965 obs. of  2 variables:
+ $ Gender: Factor w/ 2 levels "Female","Male": 2 2 2 2 2 2 2 2 2 2 ...
+ $ Giddy : Factor w/ 3 levels "Not to Happy",..: 3 3 3 3 3 3 3 3 3 3 ...
 ```
 
 
@@ -2601,18 +2602,17 @@ head(stuffDF)
 
 ```r
 DFL <- vcdExtra::expand.dft(stuffDF)
-```
-
-```
-Error: there is no package called 'vcdExtra'
-```
-
-```r
 head(DFL)
 ```
 
 ```
-Error: object 'DFL' not found
+  Gender Diet
+1  Women  Yes
+2  Women  Yes
+3  Women  Yes
+4  Women  Yes
+5  Women  Yes
+6  Women  Yes
 ```
 
 ```r
@@ -2622,27 +2622,13 @@ for (i in 1:N) {
     T2 <- xtabs(~sample(Gender) + Diet, data = DFL)
     result[i] <- chisq.test(T2)$statistic
 }
-```
-
-```
-Error: object 'DFL' not found
-```
-
-```r
 obs <- chisq.test(xtabs(~Gender + Diet, data = DFL))$statistic
-```
-
-```
-Error: object 'DFL' not found
-```
-
-```r
 pvalue <- (sum(result >= obs) + 1)/(N + 1)
 pvalue
 ```
 
 ```
-[1] 1e-04
+[1] 0.0104
 ```
 
 
@@ -2694,18 +2680,17 @@ Gender  Flavor 1 Flavor 2 Flavor 3 Sum
 ```r
 candyDF <- as.data.frame(candyT)
 candyflatfile <- vcdExtra::expand.dft(candyDF)
-```
-
-```
-Error: there is no package called 'vcdExtra'
-```
-
-```r
 head(candyflatfile)
 ```
 
 ```
-Error: object 'candyflatfile' not found
+  Gender   Flavor
+1   Boys Flavor 1
+2   Boys Flavor 1
+3   Boys Flavor 1
+4   Boys Flavor 1
+5   Boys Flavor 1
+6   Boys Flavor 1
 ```
 
 ```r
@@ -2713,7 +2698,9 @@ str(candyflatfile)
 ```
 
 ```
-Error: object 'candyflatfile' not found
+'data.frame':	210 obs. of  2 variables:
+ $ Gender: Factor w/ 2 levels "Boys","Girls": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Flavor: Factor w/ 3 levels "Flavor 1","Flavor 2",..: 1 1 1 1 1 1 1 1 1 1 ...
 ```
 
 ```r
@@ -2746,19 +2733,12 @@ for (i in 1:N) {
     T2 <- xtabs(~sample(Gender) + Flavor, data = candyflatfile)
     result[i] <- chisq.test(T2)$statistic
 }
-```
-
-```
-Error: object 'candyflatfile' not found
-```
-
-```r
 pvalue <- (sum(result >= obsstat) + 1)/(N + 1)
 pvalue
 ```
 
 ```
-[1] 1e-04
+[1] 0.1951
 ```
 
 
@@ -3184,7 +3164,7 @@ WD <- BD
 
 
 <!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
-<!-- Wed Jan  1 09:55:43 2014 -->
+<!-- Wed Jan  1 15:41:17 2014 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 1 --- All possible Samples of Size 3 from 3969, 3204, and 2892 </CAPTION>
 <TR> <TH> $x^*_1$ </TH> <TH> $x^*_2$ </TH> <TH> $x^*_3$ </TH> <TH> $\bar{x}^*$ </TH>  </TR>
@@ -3942,39 +3922,7 @@ Level     Percentile
 Calculations and Intervals on Original Scale
 ```
 
-Another 95% bootstrap percentile confidence interval for the ratio of means (ILEC/CLEC) is (
-
-```
-
-Error in eval(expr, envir, enclos) : could not find function "boot.ci"
-
-```
-
-, 
-
-```
-
-Error in eval(expr, envir, enclos) : could not find function "boot.ci"
-
-```
-
-), so with 95% confidence, the true mean repair times for ILEC customers is between 
-
-```
-
-Error in eval(expr, envir, enclos) : could not find function "boot.ci"
-
-```
-
- and 
-
-```
-
-Error in eval(expr, envir, enclos) : could not find function "boot.ci"
-
-```
-
- times less than that for CLEC customers.
+Another 95% bootstrap percentile confidence interval for the ratio of means (ILEC/CLEC) is (0.3274, 0.848), so with 95% confidence, the true mean repair times for ILEC customers is between 0.3274 and 0.848 times less than that for CLEC customers.
 
 
 
@@ -4786,73 +4734,7 @@ ggplot(data = Calculus, aes(sample = Calculus$Yes.Calculus)) + stat_qq() + ggtit
 <img src="figure/NORMALITY2.png" title="plot of chunk NORMALITY" alt="plot of chunk NORMALITY" style="display: block; margin: auto;" />
 
 
-For the $n_X = 18$ students who had no calculus, the mean and standard deviation of their course scores are $\bar{x}=$ 
-
-```
-
-Error in mean(Calculus$No.Calculus) : object 'Calculus' not found
-
-```
-
-, and $s_X =$ 
-
-```
-
-Error in is.data.frame(x) : object 'Calculus' not found
-
-```
-
-. For the $n_Y = 18$ students who had calculus, the mean and standard deviation of their course scores are $\bar{y}=$ 
-
-```
-
-Error in mean(Calculus$Yes.Calculus) : object 'Calculus' not found
-
-```
-
-, and $s_Y =$ 
-
-```
-
-Error in is.data.frame(x) : object 'Calculus' not found
-
-```
-
-. The mean difference is $\bar{x} -\bar{y}=$ 
-
-```
-
-Error in mean(Calculus$No.Calculus) : object 'Calculus' not found
-
-```
-
- with the standard error of the difference of 
-
-```
-
-Error in is.data.frame(x) : object 'Calculus' not found
-
-```
-
- and degrees of freedom are 
-
-```
-
-Error in t.test(Calculus$No.Calculus, Calculus$Yes.Calculus) : 
-  object 'Calculus' not found
-
-```
-
-.  The 0.95 quantile of the $t$ distribution with 
-
-```
-
-Error in t.test(Calculus$No.Calculus, Calculus$Yes.Calculus) : 
-  object 'Calculus' not found
-
-```
-
- degrees of freedom is 1.7223.  Thus, the 90% confidence interval is $-24.333 \pm 1.7233 \times 3.2786 = (-29.9802, -18.6865)$.
+For the $n_X = 18$ students who had no calculus, the mean and standard deviation of their course scores are $\bar{x}=$ 62.6111, and $s_X =$ 13.2227. For the $n_Y = 18$ students who had calculus, the mean and standard deviation of their course scores are $\bar{y}=$ 86.9444, and $s_Y =$ 4.3178. The mean difference is $\bar{x} -\bar{y}=$ -24.3333 with the standard error of the difference of 3.2786 and degrees of freedom are 20.5848.  The 0.95 quantile of the $t$ distribution with 20.5848 degrees of freedom is 1.7223.  Thus, the 90% confidence interval is $-24.333 \pm 1.7233 \times 3.2786 = (-29.9802, -18.6865)$.
 
 **R Note:**
 
