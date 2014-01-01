@@ -36,6 +36,7 @@
 
 * [Downnload LaTeX for Macs (TeXLive)](http://tug.org/mactex/)
 * [Download LaTeX for Windows (MikTeX)](http://miktex.org/)
+* [More Math into LaTeX](http://www.ctan.org/pkg/math-into-latex-4)
 * [Getting started with LaTeX](http://www.tug.org/begin.html)
 * [LaTeX Wikipedia](http://en.wikipedia.org/wiki/LaTeX) 
 * [Some (old) examples from my classes using LaTeX and `knitr`](http://www1.appstate.edu/~arnholta/TeX/index.htm)
