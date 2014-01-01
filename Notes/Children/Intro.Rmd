@@ -1,0 +1,11 @@
+Class Notes For STT 3850
+========================================================
+## Alan T. Arnholt
+
+Last compiled:
+```{r Systime, echo = FALSE}
+format(Sys.time(), "%A, %B %d, %Y - %X.")
+```
+
+
+Most of the material in the notes is taken from the class text _Mathematical Statistics with Resampling and `R`_ by Laura Chihara and Tim Hesterberg with slight modifications.  Some material in the notes is also taken from the first chapter of _Practicing Statistics: Guided Investigations for the Second Course_ by Shonda Kuiper and Jeffrey Sklar.  There are a number of places to get help with `R`.  The class text has some material online at: [https://sites.google.com/site/chiharahesterberg/rtutorials](https://sites.google.com/site/chiharahesterberg/rtutorials).  I have additional materials available on [asulearn](http://asulearn.appstate.edu).

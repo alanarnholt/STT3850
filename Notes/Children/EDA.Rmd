@@ -1,0 +1,179 @@
+```{r setupEDA, echo = FALSE}
+opts_chunk$set(cache.path = './cache/EDA/', fig.path = './figure/EDA/')
+```
+
+
+Exploratory Data Analysis
+========================================================
+
+## Reading *.csv Data
+```{r READIN}
+site <- "http://www1.appstate.edu/~arnholta/Data/FlightDelays.csv"
+FlightDelays <- read.csv(file=url(site))
+head(FlightDelays) # shows first 6 rows of data frame
+str(FlightDelays)  # shows structure of data frame
+levels(FlightDelays$Month)
+FlightDelays$Month <- factor(FlightDelays$Month, levels = c("May", "June"))
+levels(FlightDelays$Month)
+```
+
+## Creating Tables
+```{r TABLES}
+table(FlightDelays$Carrier)
+xtabs(~Carrier, data = FlightDelays)
+```
+
+## Creating Barplots
+```{r Barplots}
+barplot(table(FlightDelays$Carrier))
+require(ggplot2)
+ggplot(data = FlightDelays, aes(x = Carrier)) + geom_bar()
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + geom_bar()
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + geom_bar() + guides(fill = guide_legend(reverse = TRUE))
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + geom_bar(position="dodge") + guides(fill = guide_legend(reverse = TRUE))
+xtabs(~ Carrier + (Delay > 30), data = FlightDelays)
+addmargins(xtabs(~ Carrier + (Delay > 30), data = FlightDelays))
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Delayed30)) + geom_bar(position="dodge")
+ggplot(data = FlightDelays, aes(fill = Carrier, x= Delayed30)) + geom_bar(position="dodge")
+```
+
+## Histograms of `Delay` values.
+
+```{r HistoEDA}
+hist(FlightDelays$Delay)  # Ugly with Defaults...you change
+ggplot(data = FlightDelays, aes(x = Delay)) + geom_histogram()
+ggplot(data = FlightDelays, aes(x = Delay, y = ..density..)) + geom_histogram(binwidth = 10, color = "blue")
+ggplot(data = FlightDelays, aes(x = Delay)) + geom_density(fill = "blue")
+```
+## Numeric Summaries
+
+```{r NS}
+summary(FlightDelays)
+sd(FlightDelays$Delay)
+sd(FlightDelays$Delay)^2
+var(FlightDelays$Delay)
+IQR(FlightDelays$Delay)
+quantile(FlightDelays$Delay)
+```
+
+## Boxplots
+
+```{r BP}
+boxplot(Delay ~ Carrier, data = FlightDelays)
+ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot()
+ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + facet_grid(. ~ Month) 
+```
+
+```{r NCBirths, warning = FALSE}
+site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
+NCBirths <- read.csv(file=url(site))
+head(NCBirths)
+p <- ggplot(data = NCBirths, aes(x = Gender, y = Weight, fill = Gender))
+p + geom_boxplot()
+p + geom_boxplot() + guides(fill = FALSE) + labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here")
+p + geom_boxplot() + guides(fill = FALSE) + labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + scale_fill_manual(values = c('pink', 'blue'))
+p + geom_boxplot() + guides(fill = FALSE) + labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + scale_fill_brewer()
+
+
+```
+
+## Density Plots
+```{r ND}
+curve(dnorm(x), -4, 4, ylab = "", xlab = "")
+x.region <- seq(from = 1, to = 4, length.out = 200)
+y.region <- dnorm(x.region)
+region.x <- c(x.region[1], x.region, x.region[200])
+region.y <- c(0, y.region, 0)
+polygon(region.x, region.y, col = "red")
+abline(h = 0, lwd = 2)
+# Same now with ggplot2
+p <- ggplot(data = data.frame(x = c(-4, 4)), aes(x = x))
+dnorm_func <- function(x){
+  y <- dnorm(x)
+  y[x<1] <- NA
+  return(y)
+}
+p1 <- p + stat_function(fun = dnorm_func, geom = 'area', fill = 'blue', alpha = 0.2)  + geom_hline(yintercept = 0) + stat_function(fun = dnorm) 
+p1
+p1 + labs(x = '', y = '', title = expression(integral(frac(1, sqrt(2*pi))*e^{-x^2/2}*dx, 1, infinity)==0.1586553) ) # Break it down!
+```
+
+## Example 2.11 
+
+Note this is not how `qqnorm` computes the quantiles!  The left graph of Figure 2.9 in the book is not quite correct...it does not use the data in the table...the first value 17.7 should be 21.7.
+
+```{r QUANTILES}
+x <- c(21.7, 22.6, 26.1, 28.3, 30.0, 31.2, 31.5, 33.5, 34.7, 36.0)
+n <- length(x)
+p <- (1:10)/(n + 1)
+q <- qnorm(p)
+rbind(x, p, q)
+plot(q, x)
+XS <- quantile(q, prob = c(.25, .75))
+YS <- quantile(x, prob = c(.25, .75))
+slopeA <- (YS[2] - YS[1])/(XS[2] - XS[1])
+slopeB <- diff(YS)/diff(XS)
+slopeA
+slopeB
+Intercept <- YS[1] - slopeA*XS[1]
+Intercept
+abline(a = Intercept, b = slopeA)
+#
+pc <- (1:10 - 3/8)/n
+qc <- qnorm(pc)
+rbind(x, pc, qc)
+xs <- quantile(qc, prob = c(.25, .75))
+ys <- quantile(x, prob = c(.25, .75))
+slope <- diff(ys)/diff(xs)
+intercept <- ys[1] - slope*xs[1]
+c(intercept, slope)
+```
+Consider using the `R` functions `qqnorm()` and `qqline()`.
+
+```{r QQNORM}
+qqnorm(x)
+qqline(x)
+# ggplot
+ggplot(data = data.frame(x), aes(sample=x)) + stat_qq() + geom_abline(intercept = intercept, slope = slope)
+```
+
+## Empirical Cumulative Distribution Function
+
+The _empirical cumulative distribution function_ (ecdf) is an estimate of the underlying cumulative distribution function for a sample.  The empirical cdf, denoted by $\hat{F}$, is a step function $$\hat{F}(x) = \tfrac{1}{n} (\text{number of values} \leq x),$$
+where $n$ is the sample size.
+
+```{r ECDFbase}
+y <- c(3, 6, 15, 15, 17, 19, 24)
+plot.ecdf(y)
+set.seed(1)  # set seed for reproducibility
+rxs <- rnorm(25)  
+plot.ecdf(rxs, xlim = c(-4, 4))
+curve(pnorm(x), col = "blue", add = TRUE, lwd = 2)
+```
+
+An alternative approach to the book's Figure 2.12 is provided using `ggplot2` after first creating Figure 2.12
+
+```{r BEER}
+site <- "http://www1.appstate.edu/~arnholta/Data/Beerwings.csv"
+Beerwings <- read.csv(file=url(site))
+head(Beerwings) # shows first 6 rows of data frame
+str(Beerwings)  # shows structure of data frame
+beerM <- subset(Beerwings, select = Beer, subset = Gender == "M", drop = TRUE)
+beerF <- subset(Beerwings, select = Beer, subset = Gender == "F", drop = TRUE)
+plot.ecdf(beerM, xlab = "ounces", col = "blue", pch = 19)
+plot.ecdf(beerF, col = "pink", pch = 19, add = TRUE)
+abline(v = 25, lty = "dashed")
+legend("topleft", legend = c("Males", "Females"), pch = 19, col = c("blue", "pink"))
+# Using ggplot2 now
+ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + stat_ecdf() + labs(x = "Beer in ounces", y ="", title = 'ECDF')
+```
+
+## Scatter Plots
+
+```{r Bplot}
+with(data = Beerwings, plot(Hotwings, Beer, xlab = "Hot wings eaten", ylab = "Beer consumed", pch = 19, col = "blue"))
+p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + geom_point() + labs(x = "Hot wings eaten", y = "Beer consumed in ounces")
+p
+p + geom_smooth()
+p + geom_smooth(method = lm)
+```

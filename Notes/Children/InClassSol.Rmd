@@ -1,0 +1,123 @@
+```{r setupInClassSol, echo = FALSE}
+opts_chunk$set(cache.path = './cache/InClassSol/', fig.path = './figure/InCLassSol/')
+```
+
+
+In Class Exercise (Partial Solution)
+========================================================
+
+The birth weight of a baby is of interest to health officials since many studies have shown possible links between weight and conditions later in life, such as obesity or diabetes.  The data set `Girls2004` consists of a random sample of 40 baby girls born in Alaska and 40 baby girls born in Wyoming.  These babies also had a gestation period of at least 37 weeks and were single births. 
+
+
+Import the data `Girls2004` available from [http:\\www1.appstate.edu/arnholta/Data/](http:\\www1.appstate.edu/arnholta/Data/).
+
+```{r Girls2004}
+site <- "http://www1.appstate.edu/~arnholta/Data/Girls2004.csv"
+Girls <- read.csv(file=url(site))
+head(Girls)
+```
+
+  * Perform some exploratory data analysis and obtain summary statistics on the weights of baby girls born in Wyoming and Alaska (do separate analyses for each state).
+  
+```{r GirlsHist, fig.width=7, fig.height=7}
+opar <- par(no.readonly = TRUE)
+par(mfrow=c(2, 2))
+hist(Girls$Weight[Girls$State=="AK"], col = "pink1", breaks = "Scott", xlab = "Weight in g.", main = "Alaska", freq= FALSE)
+lines(density(Girls$Weight[Girls$State=="AK"]), col ="red")
+qqnorm(Girls$Weight[Girls$State=="AK"], col = "pink1")
+qqline(Girls$Weight[Girls$State=="AK"], col = "pink1")
+hist(Girls$Weight[Girls$State=="WY"], col = "pink", breaks = "Scott", xlab = "Weight in g.", main = "Wyoming", freq= FALSE)
+lines(density(Girls$Weight[Girls$State=="WY"]), col ="red")
+qqnorm(Girls$Weight[Girls$State=="WY"], col = "pink")
+qqline(Girls$Weight[Girls$State=="WY"], col = "pink")
+par(opar)
+```
+
+Another approach is to use `lattice`.
+
+```{r GirlsHistLattice}
+require(lattice)
+histogram(~Weight|State, data = Girls, layout=c(1, 2), as.table = TRUE, type = "density")
+qqmath(~Weight|State, data = Girls, layout=c(1, 2), as.table = TRUE)
+qqmath(~Weight, group = State, data = Girls)
+```
+
+A third approach is to use `ggplot2`. (This is my preference.)
+
+```{r GirlsHistggplot2, message = FALSE}
+require(ggplot2)
+p <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(binwidth = 500) + facet_grid(State ~ .)
+p
+p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..), binwidth = 500, fill = "blue") + facet_grid(State ~ .) + geom_density(color = "red", size = 1.5)
+p1
+p2 <- ggplot(data = Girls, aes(sample = Weight, color = State)) + stat_qq()
+p2
+```
+
+## Graphs are fun!
+
+```{r GirlsSummaryFun, comment = NA}
+with(data = Girls, 
+tapply(Weight, State, mean))
+tapply(Girls$Weight, Girls$State, sd)
+AK.weight <- subset(Girls, select = Weight, subset = State == "AK", drop = TRUE)
+WY.weight <- subset(Girls, select = Weight, subset = State == "WY", drop = TRUE)
+c(mean(AK.weight), sd(AK.weight), mean(WY.weight), sd(WY.weight))
+```
+> ANSWER: The mean and standard deviation of weight for baby girls born in Alaska is `r mean(AK.weight)` and `r sd(AK.weight)`, respectively.  The mean and standard deviation of weight for baby girls born in Wyoming is `r mean(WY.weight)` and `r sd(WY.weight)`, respectively. 
+  
+  * Bootstrap the difference in means, plot the distribution, and give summary statistics.  Obtain a 95% bootstrap percentile confidence interval and interpret this interval.
+  
+```{r GirlsBoot, fig.width = 7, fig.height= 3.5}
+B <- 15000
+mean.diff <- numeric(B)
+for(i in 1:B){
+  AK <- sample(AK.weight, size = sum(!is.na(AK.weight)), replace = TRUE)
+  WY <- sample(WY.weight, size = sum(!is.na(WY.weight)), replace = TRUE)
+  mean.diff[i] <- mean(AK) - mean(WY)
+}
+opar <- par(no.readonly = TRUE)
+par(mfrow=c(1, 2))
+hist(mean.diff, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution", xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")), freq= FALSE)
+abline(v = mean(AK.weight) - mean(WY.weight), col = "red")
+curve(dnorm(x, mean(mean.diff), sd(mean.diff)), col ="blue", add= TRUE, lwd = 2)
+qqnorm(mean.diff, col ="blue")
+qqline(mean.diff, col = "red")
+par(opar)
+BIAS <- mean(mean.diff) - (mean(AK.weight) - mean(WY.weight))
+CI <- quantile(mean.diff, prob = c(.025, .975))
+CI
+```
+
+> ANSWER: The mean of the bootstrap distribution of the difference of means ($\hat{\mu}_{\bar{x}^*_1 - \bar{x}^*_2}$) is `r mean(mean.diff)` while the standard error of the bootstrap distribution of means ($\hat{\sigma}_{\bar{x}^*_1 - \bar{x}^*_2}$) is `r sd(mean.diff)`.  We are 95% confident that the mean weight of baby girls born in Alaska are `r CI[1]` to `r CI[2]` grams greater than baby girls born in Wyoming.
+  
+  * What is the bootstrap estimate of the bias?  What fraction of the bootstrap standard error does it represent?
+  
+> ANSWER: The bootstrap estimate of the bias $(Bias_{boot}[\bar{x}^*_1 - \bar{x}^*_2] = E[\bar{x}^*_1 - \bar{x}^*_2] - [\bar{x}_1 - \bar{x}_2])$ is `r BIAS`.  The $Bias_{boot}[\bar{x}^*_1 - \bar{x}^*_2]$ represents `r abs(BIAS/sd(mean.diff)*100)`% of the standard error of the bootstrap.
+  
+  *  Conduct a permutation test to calculate the difference in mean weights and state your conclusion.
+  
+```{r GirlsPer}
+ANS <- tapply(Girls$Weight, Girls$State, mean)
+ANS
+obs.mean.diff <- ANS[1] - ANS[2]
+names(obs.mean.diff) <- NULL
+obs.mean.diff
+R <- 50000
+Weight <- subset(Girls, select = Weight, drop = TRUE)
+result <- numeric(R)  # space to save the random differences
+for (i in 1:R){
+  # sample of size 40, from 1 to 80, without replacement
+  index <- sample(80, size = 40, replace = FALSE)
+  result[i] <- mean(Weight[index]) - mean(Weight[-index])
+}
+hist(result, col = "blue", main = "", xlab = expression(bar(x)[1]- bar(x)[2]))
+abline(v = obs.mean.diff, col = "red")
+pvalue <- (sum(abs(result) >= abs(obs.mean.diff) + 1))/(R + 1) # p-value
+pvalue  # results will vary
+```
+The _p_-value for testing $H_0: \mu_{AK} = \mu_{WY}$ versus $H_A: \mu_{AK} \neq \mu_{WY}$ is `r pvalue`.  The small _p_-value suggests that the mean weight of babies born in Alaska is not the same as the mean weight of babies born in Wyoming.
+  
+  *  For what population(s) if any, does this conclusion hold?  Explain.
+  
+> ANSWER:  The results should hold for single birth babies born in both Alaska and Wyoming with a gestation period of at least 37 weeks.  

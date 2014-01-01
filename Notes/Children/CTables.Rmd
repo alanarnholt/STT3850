@@ -1,0 +1,316 @@
+```{r setupCTables, echo = FALSE}
+opts_chunk$set(cache.path = './cache/CTables/', fig.path = './figure/CTables/')
+```
+
+
+Contingency Tables
+===============================================
+
+
+To obtain information from the General Social Survey, go to [sda.berkley.edu](sda.berkley.edu). Click the ARCHIVE button.  In what follows, we will use information obtained from the [General Social Survey (GSS) Cumulative Datafile 1972-2010](http://sda.berkeley.edu/cgi-bin/hsda?harcsda+gss10). The following data file is obtained by clicking Download > Customized Subset.  Click in the radio button to the left of CSV file (Comma Separated Values with header record).  Enter `age(18-65)` in the Selection Filter(s) box.  Type `DEATHPEN SEX` in the Enter names of individual variables (original or created) to include box.  Scroll to the bottom of the page, and click the Continue button.  Review the page that appears to make sure you have selected the desired variables; then, click the `Create the Files` button.  You should have two hot links: the `Data file` and the `Codebook`.  By clicking on the `Data file` link, the information should open in your browser.  To read the data into `R`, copy the url and store it as follows.  Note the url `site` is temporary.  Consequently, we download the data to a folder on the hard drive.  The initial code is commented out as the url will no longer work after a day or so.  That is, you will need to get a new url if you want to duplicate the entire process.  
+
+```{r DEATHPEN, comment = NA}
+# site <- "http://sda.berkeley.edu/TMPDIR/AAELN0Q9.csv"
+# download.file(url = site, destfile = "../data/DPS.csv")
+DPS <- read.csv(file="../data/DPS.csv")
+xtabs(~SEX + DEATHPEN, data = DPS)
+```
+
+Based on the `Codebook`, values 0, 8, and 9 are missing data values for the variable DEATHPEN.  We would like to store those values in our data frame as NA's (how `R` stores missing data).  Further, it would be nice to label the various categories according to their labels versus their numerical values.  To map character values to the numerical entries, we will use the `plyr` package (it can also be done using straight `R` commands).  
+
+```{r att1}
+library(plyr)
+DPS$DEATHPEN <- mapvalues(DPS$DEATHPEN, from = c(0,1,2,3,4,5,8,9), to =c(NA, "Strongly Agree", "Agree", "Neither Agree nor Disagree", "Disagree", "Strongly Disagree", NA, NA))
+DPS$SEX <- mapvalues(DPS$SEX, from =c(1, 2), to = c("Male", "Female"))
+xtabs(~SEX + DEATHPEN, data = DPS)
+```
+The problem with the latest table is that the labels for the values appear in alphabetical order.  To solve this problem, we convert the character variables, `SEX` and `DEATHPEN` to factors and assign the order of the levels using the `levels=` command.
+
+```{r att2}
+DPS$DEATHPEN <- factor(DPS$DEATHPEN, levels = c("Strongly Agree", "Agree", "Neither Agree nor Disagree", "Disagree", "Strongly Disagree"))
+DPS$SEX <- factor(DPS$SEX, levels = c("Male", "Female"))
+T1 <- xtabs(~SEX + DEATHPEN, data = DPS)
+T1
+addmargins(T1)
+prop.table(T1, 1)
+```
+
+Test for Independence
+========================
+
+If SEX and DEATHPEN are independent, the expected count $E_{ij}$ for any cell is the row total times the column proportion, which is equivalent to the column total times the row proportion: $$E_{ij} = R_i(C_j/n) = C_j(R_i/n) = R_iC_j/n.$$
+
+If SEX and DEATHPEN are independent, then the observed and the expected values for all cells should be similar.  The degree of similarity is measured with the statistic $$\sum_{cells}\dfrac{(OBS - EXP)^2}{EXP}$$
+
+## Null and Alternative Hypotheses
+
+The hypotheses to be tested are written as follows:
+
+$H_0:$ Death penalty opinion is independent of gender (there is no association between death penalty opinion and gender).
+
+$H_A:$ Death penalty opionion is dependent on gender (there is an association between death penalty opinion and gender).
+
+## `R` interlude 
+
+Consider how the `outer()` function works, which we will use to compute expected values.
+
+```{r outer}
+outer(1:3, 1:3)
+outer(1:3, 3:1)
+outer(1:3, 3:1, "+")
+outer(1:3, 3:1, "^")
+```
+
+The expected counts for `T1` are
+
+```{r observed}
+EC <- function(TAB){
+  outer(apply(TAB,1 , sum), apply(TAB, 2, sum))/sum(TAB)
+}
+EC(T1)
+```
+
+To remove all of the `NA` values from `DPS`, use `na.omit()` as follows.
+
+```{r cleaner}
+str(DPS)
+DPSC <- na.omit(DPS)
+str(DPSC)
+```
+Note that `DPSC` has `r length(DPSC$SEX)` observations where `DPS` has `r length(DPS$SEX)` observations, but `r summary(DPS$DEATHPEN)[6]` of the observations in `DPS` are `NA`.  To perform a permutation test, we will need to use the cleaned up version of the data frame `DPSC`.  
+
+## Permutation Test for Independence
+
+To perform a permutation test for independence between two categorical variables, the data will need to be stored in two columns.  For example, if a contingency tables has 1065 entries, that data will need to be stored in an object with 1065 rows and a column for each categorical variable.  If the null hypothesis that `SEX` and `DEATHPEN` are independent is correct, then we could permute either the `SEX` or `DEATHPEN` values, and any other permutation would be equally likely.  For each permutation resample, we will obtain a contingency table and compute the statistic     
+$$\sum_{cells}\dfrac{(OBS - EXP)^2}{EXP}$$ for that permutation.  Note that for every resample, the row and column totals in the contingency table are the same; only the counts in the table change.
+
+```{r permutation1}
+set.seed(123)
+addmargins(table(DPSC$SEX, sample(DPSC$DEATHPEN)))
+addmargins(table(DPSC$SEX, sample(DPSC$DEATHPEN)))
+addmargins(xtabs(~sample(SEX) + DEATHPEN, data = DPSC))
+addmargins(xtabs(~sample(SEX) + DEATHPEN, data = DPSC))
+```
+
+To perform the permutation test, randomly permute one of the catgorical variables.  Each time the categorical variable is permuted, compute the statistic $\sum_{cells}\dfrac{(OBS - EXP)^2}{EXP}$ on the resulting contingency table and store the result.  Repeat this process a large number of times.  The $p$-value will be the fraction of times the simulated statistics equal or exceed the value of the observed statistic.  
+
+```{r perEXP, fig.height = 6, fig.width = 6}
+N <- 10^4 - 1  # Change this for slower computers
+result <- numeric(N)
+for(i in 1:N){
+# T2 <- table(sample(DPSC$SEX), DPSC$DEATHPEN)
+  T2 <- xtabs(~sample(SEX) + DEATHPEN, data =DPSC)
+result[i] <- chisq.test(T2)$statistic  
+}
+obs <- chisq.test(xtabs(~SEX + DEATHPEN, data = DPSC))$statistic
+pvalue <- (sum(result >= obs) + 1)/(N + 1)
+pvalue
+pvalueCH <- chisq.test(xtabs(~SEX + DEATHPEN, data = DPSC))$p.value
+pvalueCH
+# Or chisq.test(DPSC$SEX, DPSC$DEATHPEN)$p.value
+hist(result, breaks = "Scott", col = "pink", freq=FALSE, main = "")
+curve(dchisq(x, 4), 0, 20, add=TRUE, col = "red")
+```
+
+The simulated permutation $p$-value is `r pvalue`.  The $p$-value that is returned from the `chisq.test()` is `r pvalueCH`.  In this case, the two $p$-values are fairly similar.  This will not always be the case.  
+
+## Formatting the Data
+
+Some times, you will have only access to data that has been summarized (contingency tables).  To get your data into the needed format, you may want to use the following function written by [Marc Schwartz](https://stat.ethz.ch/pipermail/r-help/2006-October/115290.html) which will take a contingency table and convert it to a flat file.  The function `expand.dft()` is also in the package `vcdExtra`.  
+
+```{r tabletoPF, eval = FALSE}
+expand.dft <- function(x, na.strings = "NA", as.is = FALSE, dec = ".") {
+    # Take each row in the source data frame table and replicate it
+    # using the Freq value
+    DF <- sapply(1:nrow(x), 
+                 function(i) x[rep(i, each = x$Freq[i]), ],
+                 simplify = FALSE)
+
+    # Take the above list and rbind it to create a single DF
+    # Also subset the result to eliminate the Freq column
+    DF <- subset(do.call("rbind", DF), select = -Freq)
+
+    # Now apply type.convert to the character coerced factor columns  
+    # to facilitate data type selection for each column 
+    for (i in 1:ncol(DF)) {
+        DF[[i]] <- type.convert(as.character(DF[[i]]),
+                                na.strings = na.strings,
+                                as.is = as.is, dec = dec)
+    }
+
+    DF
+}
+```
+
+### Example Conversion
+
+The `x=` argument to `expand.dft()` is a table that has been converted to a data frame.  In the following example, a matrix of values is created that resembles a contingency table.  To convert the matrix to a table, we use the function `as.table()`.To convert the table to a data frame, we use the function `as.data.frame()`.  Finally, we apply the `expand.dft()` function to the contingency table that was converted to a data frame and stored in the object `HADF`.
+
+```{r happy}
+HA <- c(110, 277, 50, 163, 302, 63)
+HAM <- matrix(data = HA, nrow = 2, byrow = TRUE)
+dimnames(HAM) <- list(Gender = c("Male", "Female"), Giddy = c("Very Happy", "Pretty Happy", "Not to Happy"))
+HAM
+HAT <- as.table(HAM)
+HAT
+addmargins(HAT)
+HADF <- as.data.frame(HAT)
+HATflatfile <- vcdExtra::expand.dft(HADF)
+head(HATflatfile)
+str(HATflatfile)
+```
+
+## Questions
+
+From the [http://sda.berkeley.edu/cgi-bin/hsda?harcsda+gss10](http://sda.berkeley.edu/cgi-bin/hsda?harcsda+gss10) page, click Download > Customized Subset.  Click in the radio button to the left of CSV file (Comma Separated Values with header record).  Type `DEATHPEN DEGREE` in the Enter names of individual variables (original or created) to include box.  Click in the radio button All for CASE IDENTIFICATION AND YEAR.  Scroll to the bottom of the page, and click the Continue button.  Review the page that appears to make sure you have selected the desired variables; then, click the `Create the Files` button.  You should have two hot links: the `Data file` and the `Codebook`.  By clicking on the `Data file` link, the information should open in your browser.  To read the data into `R`, copy the url and store it as follows.
+
+```{r deathpenYEAR}
+# site <- "http://sda.berkeley.edu/TMPDIR/AAO0mzEh.csv"
+# download.file(url = site, destfile = "../data/dpy.csv")
+dpy <- read.csv(file = "../data/dpy.csv")
+str(dpy)
+xtabs(~DEATHPEN + DEGREE, data = dpy)
+```
+What is the only YEAR these two questions were asked?
+
+There are several ways to answer this question, here is the first one that comes to mind.   
+
+```{r YEARquestion}
+YQ <- subset(x = dpy, subset = DEATHPEN != 0 & DEGREE != 0)
+head(YQ)
+xtabs(~YEAR, data = YQ)
+```
+To satisfy the curious, the answer is `r YQ$YEAR[1]`. 
+
+## Some code to answer Problem 10
+
+```{r prob10chap3}
+women <- c(35, 146)
+men <- c(8, 97)
+stuff <- rbind(women, men)
+dimnames(stuff) <- list(Gender =c("Women", "Men"), Diet=c("Yes", "No"))
+stuff
+stuffT <- as.table(stuff)
+stuffDF <- as.data.frame(stuffT)
+head(stuffDF)
+DFL <- vcdExtra::expand.dft(stuffDF)
+head(DFL)
+N <- 10^4 - 1  # Change this for slower computers
+result <- numeric(N)
+for (i in 1:N) {
+    T2 <- xtabs(~sample(Gender) + Diet, data = DFL)
+    result[i] <- chisq.test(T2)$statistic
+}
+obs <- chisq.test(xtabs(~ Gender + Diet, data = DFL))$statistic
+pvalue <- (sum(result >= obs) + 1)/(N + 1)
+pvalue
+```
+
+## Test of Homogeneity
+
+The major difference between testing for homogeneity and testing for independence is that you will have samples from two or more populations when testing for homogeneity. Recall that we only had one sample when we tested for independence.  Consider testing whether the proportion of boys is the same as the proportions of girls that favor three different flavors of candy.  That is, $H_0: \pi_{B1} = \pi_{G1}, \pi_{B2} = \pi_{G2}, \pi_{B3} =\pi_{G3}$ versus
+$H_A:$ at least one of the inequalities does not hold.
+
+```{r candy}
+candy <- c(42, 20, 38, 33, 27, 50)
+candyM <- matrix(data = candy, nrow = 2, byrow = TRUE)
+dimnames(candyM) <- list(Gender = c("Boys", "Girls"), Flavor = c("Flavor 1", "Flavor 2", "Flavor 3"))
+candyM
+candyT <- as.table(candyM)
+candyT
+addmargins(candyT)
+candyDF <- as.data.frame(candyT)
+candyflatfile <- vcdExtra::expand.dft(candyDF)
+head(candyflatfile)
+str(candyflatfile)
+E <- chisq.test(candyT)$expected
+E
+obsstat <- chisq.test(candyT)$statistic
+obsstat
+# Now we will run a permutation test.
+N <- 10^4 - 1  # Change this for slower computers
+result <- numeric(N)
+for (i in 1:N) {
+    T2 <- xtabs(~sample(Gender) + Flavor, data = candyflatfile)
+    result[i] <- chisq.test(T2)$statistic
+}
+pvalue <- (sum(result >= obsstat) + 1)/(N + 1)
+pvalue
+```
+
+In this case, there is no evidence to suggest the proportions of boys favoring flavors one, two, and three is any different than the proportions of girls favoring flavors one, two and three.
+
+## Goodness of Fit
+
+A quality engineer has taken 50 samples of size 13 each from a production process.  The numbers of defectives for these samples are given in the code.  Test the null hypothesis at an $\alpha =0.05$ level that the number of defective follows (a) the Poisson distribution, (b) the binomial distribution.
+
+```{r gofdata}
+numberDefectives <- c(0,1,2,3,4,5,"6 or more")
+numberSamples <- c(10, 24, 10, 4, 1, 1, 0)
+names(numberSamples) <- numberDefectives
+numberSamples
+```
+
+Since no parameters are specified, they must be estimated from the data in order to carry out the test in both (a) and (b).
+
+See [dist.pdf](http://asulearn.appstate.edu/file.php/66695/STT3850/dist.pdf) for a summary of various probability distributions.  The Poisson pdf is $P(X =x|\lambda) = \frac{\lambda e^{-\lambda}}{x!}$ with $E[X] =\lambda$. And estimate of the mean number of defectives in the 50 samples is `r sum(numberSamples[-7]*c(0,1,2,3,4,5))/50`.
+
+```{r muest}
+muest <- sum(numberSamples[-7]*c(0,1,2,3,4,5))/50
+muest
+```
+Using $\hat{\lambda} = `r muest`$, we compute the probabilities for each category and subsequent expected values.
+
+```{r pe}
+ps <- dpois(0:4, muest) 
+p5m <- 1 - ppois(4, muest)
+psf <- c(ps, p5m)
+psf
+exh <- psf*50
+exh
+((numberSamples[-7] - exh)^2/exh)
+stat <- sum((numberSamples[-7] - exh)^2/exh)
+stat
+epvalue <- pchisq(stat, 6-1-1, lower=FALSE)
+epvalue
+```
+Since the $p$-value is `r epvalue`, we can not reject the null hypothesis that the distribution follows a Poisson distribution.  That is, there is no evidence to suggest the distribution is something other than the Poisson distribution.
+
+One really needs the expected cell counts to be at least five.  Consider collapsing the number of defectives greater than or equal to 3 to a single category.
+
+```{r collapse}
+ps <- dpois(0:2, muest) 
+p3m <- 1 - ppois(2, muest)
+psf <- c(ps, p3m)
+psf
+exh <- psf*50
+exh
+((numberSamples[-c(7,6,5)] + c(0,0,0,2) - exh)^2/exh)
+stat <- sum((numberSamples[-c(7,6,5)] + c(0,0,0,2) - exh)^2/exh)
+stat
+epvalue2 <- pchisq(stat, 4-1-1, lower=FALSE)
+epvalue2
+# Could use the following but the degrees of freedom will be incorrect for this test!
+chisq.test(c(10, 24, 10, 6), p=psf)
+```
+Note the substantial drop in $p$-value (`r epvalue2`) although the final conclusion is still the same.
+
+For part (b), the null hypothesis is that the number of defectives in each sample of 13 follows the binomial distribution with $n = 13$ and $\pi$ equal the probability of a defective in any sample.  An estimate of $\pi$, $\hat{\pi}$ is the total number of defectives (65) divided by the total number of observations (650).  That is $\hat{\pi} = `r  65/650`$.
+
+```{r binoPart}
+pihat <- 65/650
+ps <- dbinom(0:2, 13, pihat) 
+p3m <- 1 - pbinom(2, 13, pihat)
+psf <- c(ps, p3m)
+psf
+exh <- psf*50
+exh
+((numberSamples[-c(7,6,5)] + c(0,0,0,2) - exh)^2/exh)
+stat <- sum((numberSamples[-c(7,6,5)] + c(0,0,0,2)  - exh)^2/exh)
+stat
+epvalue3 <- pchisq(stat, 4-1-1, lower=FALSE)
+epvalue3
+```
+
+This example illustrates a common result with chi-square goodness-of-fit tests, i.e., that each to two (or more) different null hypotheses may be accepted for the same data set.  Obviously, the true distribution cannot be both binomial and Poisson at the same time which is why the conclusion is that there is not sufficient evidence to suggest the alternative.  This does not make the null hypothesis true!
+

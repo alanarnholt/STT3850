@@ -1,0 +1,46 @@
+
+```{r setup, comment = NA, echo = FALSE, message = FALSE}
+options(width = 80)
+opts_chunk$set(comment = NA, cache = TRUE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', cache.path = './cache/Parent/', figure.path = './figure/Parent/')
+require(ggplot2)
+require(e1071)
+require(plyr)
+```
+
+```{r child='../Children/Intro.Rmd'}
+```
+
+```{r child='../Children/EDA.Rmd'}
+```
+
+```{r child='../Children/Schistosomiasis.Rmd'}
+```
+
+```{r child='../Children/Verizon.Rmd'}
+```
+
+```{r child='../Children/Cocaine.Rmd'}
+```
+
+```{r child='../Children/PRTMPD.Rmd'}
+```
+
+```{r child='../Children/CTables.Rmd'}
+``` 
+
+<!--- Review these starting here -->
+
+```{r child='../Children/SamplingDistributions.Rmd'}
+``` 
+
+```{r child='../Children/BootStrap.Rmd'}
+```
+
+```{r child='../Children/InClass.Rmd'}
+```
+
+```{r child='../Children/InClassSol.Rmd'}
+```
+
+```{r child='../Children/ConfidenceIntervals.Rmd'}
+```
