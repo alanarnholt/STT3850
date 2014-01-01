@@ -5,7 +5,7 @@ Class Notes For STT 3850
 Last compiled:
 
 ```
-[1] "Wednesday, January 01, 2014 - 15:40:03."
+[1] "Wednesday, January 01, 2014 - 5:34:12 PM."
 ```
 
 
@@ -3164,7 +3164,7 @@ WD <- BD
 
 
 <!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
-<!-- Wed Jan  1 15:41:17 2014 -->
+<!-- Wed Jan 01 17:35:44 2014 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 1 --- All possible Samples of Size 3 from 3969, 3204, and 2892 </CAPTION>
 <TR> <TH> $x^*_1$ </TH> <TH> $x^*_2$ </TH> <TH> $x^*_3$ </TH> <TH> $\bar{x}^*$ </TH>  </TR>
@@ -3513,7 +3513,7 @@ quantile(my.boot.statB, probs = c(0.025, 0.975))
 For the North Carolina birth weights, the interval marked by the 2.5 and 97.5 percentiles is (3418.59, 3478.7). Thus, we would state that we are 95% confident that the true mean weight of North Carolina babies born in 2004 is between 3418.59 and 3478.7 g. In the arsenic example, the 2.5% and 97.5% points of the bootstrap distribution give us the interval (92.6729, 162.3456), so we are 95% confident that the true mean arsenic level is between 92.6729 and 162.3456 $\mu g/L$. Note that with $\bar{X}^* =$ 125.0259, this interval can be written (125.0259 -32.353, 125.0259 + 37.3197); in particular, this interval is not symmetric about the mean, reflecting the asymmetry of the bootstrap distribution.
 
 
-The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the 271 observations, 8 are above 1000 $\mu g/L$ and 2 are above 2200 $\mu g/L$ (remember, the sample mean is only 125.3199!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this – that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
+The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the 271 observations, 8 are above 1000 $\mu g/L$ and 2 are above 2200 $\mu g/L$ (remember, the sample mean is only 125.3199!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this  that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
 
 #### TWO SAMPLE BOOTSTRAP
 
@@ -3599,7 +3599,7 @@ Figure 8a shows the bootstrap distribution of the difference of sample means. As
 The right panel of Figure 8b shows a normal-quantile plot for the bootstrap distribution: the distribution is very close to normal.
 
 
-The 95% bootstrap percentile confidence interval for the difference in means (basic – extended) is (0.86, 3.84). Thus, we are 95% confident that commercial times on basic channels are, on average, between 0.86 and 3.84 min. longer than on extended channels (perhalf-hour time periods).
+The 95% bootstrap percentile confidence interval for the difference in means (basic  extended) is (0.86, 3.84). Thus, we are 95% confident that commercial times on basic channels are, on average, between 0.86 and 3.84 min. longer than on extended channels (perhalf-hour time periods).
 
 We can also conduct a permutation test of the hypothesis that the mean commercial times for the two cable options are the same versus the hypothesis that mean times are not. Figure 9a shows the permutation distribution for the difference in mean advertisement time between basic and extended TV channels.
 
@@ -3773,7 +3773,7 @@ Savvy customers will often compare prices at different stores before making a pu
 
 Now, it may be tempting to proceed as in the TV commercials or Verizon repair times examples, looking at the prices as coming from two populations, B & H and J & R. But note that the data are *not independent*! For each camera priced at B & H, we matched it with the price for the same camera at J & R. Thus, the data are called *matched pairs or paired data*.
 
-In this case, for each camera, we compute the difference in price between the two stores (J & R price - B & H price). We then have one variable –-- the price differences –-- and we are back to the one–sample setting. The price differences are shown in Figure 13a.
+In this case, for each camera, we compute the difference in price between the two stores (J & R price - B & H price). We then have one variable -- the price differences -- and we are back to the onesample setting. The price differences are shown in Figure 13a.
 
 
 ```r
@@ -3816,7 +3816,7 @@ Performing a one sample bootstrap with $10^5$ resamples, we find a 95% bootstrap
 
 As with permutation testing, when bootstrapping, we are not limited to simple statistics like the simple mean. Once we have drawn a bootstrap sample, we can calculate any statistic for that sample.
 
-For example, instead of the sample mean, we can use more robust statistics that are less sensitive to extreme observations. Figure 14a shows the bootstrap distribution for the difference in trimmed means, in this case 25% trimmed means, also known as the mid-mean, the mean of the middle 50% of observations. Compared to the bootstrap difference in ordinary means (Figure 12a), this distribution has a much smaller spread. The bootstrap procedure may be used with a wide variety of statistics –-- means, medians, trimmed means, correlation coefficients, and so on –-- using the same procedure. This is a major advantage of the bootstrap. It allows statistical inferences such as confidence intervals to be calculated even for statistics for which there are no easy formulas. It offers hope of reforming statistical practice –-- away from simple but non-robust estimators like a sample mean or least-squares regression, in favor of robust alternatives.
+For example, instead of the sample mean, we can use more robust statistics that are less sensitive to extreme observations. Figure 14a shows the bootstrap distribution for the difference in trimmed means, in this case 25% trimmed means, also known as the mid-mean, the mean of the middle 50% of observations. Compared to the bootstrap difference in ordinary means (Figure 12a), this distribution has a much smaller spread. The bootstrap procedure may be used with a wide variety of statistics -- means, medians, trimmed means, correlation coefficients, and so on -- using the same procedure. This is a major advantage of the bootstrap. It allows statistical inferences such as confidence intervals to be calculated even for statistics for which there are no easy formulas. It offers hope of reforming statistical practice -- away from simple but non-robust estimators like a sample mean or least-squares regression, in favor of robust alternatives.
 
 
 ```r
@@ -4193,9 +4193,9 @@ CLASSICAL INFERENCE: CONFIDENCE INTERVALS
 ### 7.1.1 Confidence Intervals for a Mean, $\sigma$ Known
 
 
-**Example 7.1** The Centers for Disease Control maintains growth charts for infants and children [(http://cdc.gov/growthcharts/zscore.html)](http://cdc.gov/growthcharts/zscore.html). For 13-year-old girls, the mean weight is 101 pounds with a standard deviation of 24.6 pounds. We assume the weights are normally distributed. The public health officials in Sodor are interested in the weights of the teens in their town: they suspect that the mean weight of their girls might be different from the mean weight in the growth chart but are willing to assume that the variation is the same. If they survey a random sample of 150 thirteen-year-old girls and find their mean weight – an estimate of the population mean weight – is 95 pounds, how accurate this estimate be? 
+**Example 7.1** The Centers for Disease Control maintains growth charts for infants and children [(http://cdc.gov/growthcharts/zscore.html)](http://cdc.gov/growthcharts/zscore.html). For 13-year-old girls, the mean weight is 101 pounds with a standard deviation of 24.6 pounds. We assume the weights are normally distributed. The public health officials in Sodor are interested in the weights of the teens in their town: they suspect that the mean weight of their girls might be different from the mean weight in the growth chart but are willing to assume that the variation is the same. If they survey a random sample of 150 thirteen-year-old girls and find their mean weight  an estimate of the population mean weight  is 95 pounds, how accurate this estimate be? 
 
-We assume the 150 sample values are from a normal distribution, $N(\mu, 24.6)$. Then the sampling distribution of mean weights is $N(\mu, 24.6/\sqrt{150})$. Let $\bar{X}$ denote the mean of the 150 weights, so standardizing gives $Z = (\bar{X} – \mu)/(24.6/\sqrt{150}) \sim N(0, 1)$.  For a standard normal random variable $Z$, we have $$P(z_{\alpha/2} < Z < z_{1-\alpha/2})$$ 
+We assume the 150 sample values are from a normal distribution, $N(\mu, 24.6)$. Then the sampling distribution of mean weights is $N(\mu, 24.6/\sqrt{150})$. Let $\bar{X}$ denote the mean of the 150 weights, so standardizing gives $Z = (\bar{X}  \mu)/(24.6/\sqrt{150}) \sim N(0, 1)$.  For a standard normal random variable $Z$, we have $$P(z_{\alpha/2} < Z < z_{1-\alpha/2})$$ 
 
 The random interval $(\bar{X} - 3.937, \bar{X} + 3.937)$ has a probability of 0.95 of containing the mean $\mu$. Now, once you drive your sample, the random variable $\bar{X}$ is replaced by the (observed) sample mean weight of $\bar{x} = 95$, and the interval (91.1, 98.9) is no longer a random interval. We interpret this interval by stating that we are 95% confident that the population mean weight of 13-year-old girls Sodor is between 91.9 in 98.9 pounds.
 
@@ -4686,7 +4686,7 @@ p + geom_abline(intercept = 0, slope = 1, color = "gray")
 The previous graphs compare the distribution of $t$ statistics for samples of size $n = 10$  from a uniform distribution,  size $n = 10$  from an exponential distribution,  and size $n = 100$  from an exponential distribution to the $t$ distribution. The range on all plots is truncated so that we can focus on the range of values important for confidence intervals. Notice that for  the uniform population,  the distribution of the $t$ statistic is close to the  $t$ distribution, except in the tails.  For exponential populations, the discrepancy  is much larger, and the discrepancy decreases only slowly as the sample size increases.  To reduce the discrepancy (the difference between actual and nominal  probabilities) by a factor of 10  requires a sample size 100 times larger. For an exponential population, we must have $n > 5000$  before the actual probabilities of a 95% $t$ interval  missing the true mean in either tail are within 10% of the desired probability of 2.5%;  that is,  the actual tail probabilities are between 2.25% and  2.75%.
 
 
-Before using  a $t$ confidence interval,  you should create a normal quantile plot  to see whether the data are skewed. The larger the sample size, the more skew can be tolerated. There are skewness adjusted versions of $t$ intervals including bootstrap $t$ intervals that we cover later. However, be particularly careful with outliers:  since $\bar{x}$ is sensitive to extreme values, outliers can have a big impact on confidence intervals  – a bigger impact than skewness. If you have outliers in your data, you should investigate: are these recording errors or observations that are not representative of the population? If the former, correct them; and if the latter,  remove them. If the outliers cannot be removed, then advanced,  more robust techniques may be required.
+Before using  a $t$ confidence interval,  you should create a normal quantile plot  to see whether the data are skewed. The larger the sample size, the more skew can be tolerated. There are skewness adjusted versions of $t$ intervals including bootstrap $t$ intervals that we cover later. However, be particularly careful with outliers:  since $\bar{x}$ is sensitive to extreme values, outliers can have a big impact on confidence intervals   a bigger impact than skewness. If you have outliers in your data, you should investigate: are these recording errors or observations that are not representative of the population? If the former, correct them; and if the latter,  remove them. If the outliers cannot be removed, then advanced,  more robust techniques may be required.
 
 ### 7.1.3 Confidence Intervals for a Difference in Means
 
