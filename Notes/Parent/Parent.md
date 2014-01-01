@@ -5,7 +5,7 @@ Class Notes For STT 3850
 Last compiled:
 
 ```
-[1] "Wednesday, January 01, 2014 - 10:04:29."
+[1] "Wednesday, January 01, 2014 - 10:30:33."
 ```
 
 
@@ -1990,9 +1990,9 @@ Recall that if the true _p_-value is 0.02, then we can expect the standard devia
 Mathematical Symbols
 =======================
 
-There are many online references for writing in \LaTeX.  Here is a [link to a pdf](http://mirrors.ibiblio.org/CTAN/info/examples/Math_into_LaTeX-4/SymbolTables.pdf) that you may find useful.
+There are many online references for writing in $\LaTeX$.  Here is a [link to a pdf](http://mirrors.ibiblio.org/CTAN/info/examples/Math_into_LaTeX-4/SymbolTables.pdf) that you may find useful.
 
-Try writing a few equations with \LaTeX.  Once you get the hang of \LaTeX, you will $\heartsuit$ it!  
+Try writing a few equations with $\LaTeX$.  Once you get the hang of $\LaTeX$, you will $\heartsuit$ it!  
 
 $$\bar{y} = \sum_{i=1}^{n} \frac{y_i}{n}$$
 
