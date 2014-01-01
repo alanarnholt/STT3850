@@ -116,33 +116,33 @@ Carrier
 barplot(table(FlightDelays$Carrier))
 ```
 
-<img src="./figure/EDA/Barplots1.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
+<img src="figure/Barplots1.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
 require(ggplot2)
 ggplot(data = FlightDelays, aes(x = Carrier)) + geom_bar()
 ```
 
-<img src="./figure/EDA/Barplots2.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
+<img src="figure/Barplots2.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar()
 ```
 
-<img src="./figure/EDA/Barplots3.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
+<img src="figure/Barplots3.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar() + guides(fill = guide_legend(reverse = TRUE))
 ```
 
-<img src="./figure/EDA/Barplots4.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
+<img src="figure/Barplots4.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar(position = "dodge") + 
     guides(fill = guide_legend(reverse = TRUE))
 ```
 
-<img src="./figure/EDA/Barplots5.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
+<img src="figure/Barplots5.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
 xtabs(~Carrier + (Delay > 30), data = FlightDelays)
@@ -171,13 +171,13 @@ Carrier FALSE TRUE  Sum
 ggplot(data = FlightDelays, aes(x = Carrier, fill = Delayed30)) + geom_bar(position = "dodge")
 ```
 
-<img src="./figure/EDA/Barplots6.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
+<img src="figure/Barplots6.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = FlightDelays, aes(fill = Carrier, x = Delayed30)) + geom_bar(position = "dodge")
 ```
 
-<img src="./figure/EDA/Barplots7.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
+<img src="figure/Barplots7.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 
 ## Histograms of `Delay` values.
@@ -187,26 +187,26 @@ ggplot(data = FlightDelays, aes(fill = Carrier, x = Delayed30)) + geom_bar(posit
 hist(FlightDelays$Delay)  # Ugly with Defaults...you change
 ```
 
-<img src="./figure/EDA/HistoEDA1.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+<img src="figure/HistoEDA1.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = FlightDelays, aes(x = Delay)) + geom_histogram()
 ```
 
-<img src="./figure/EDA/HistoEDA2.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+<img src="figure/HistoEDA2.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = FlightDelays, aes(x = Delay, y = ..density..)) + geom_histogram(binwidth = 10, 
     color = "blue")
 ```
 
-<img src="./figure/EDA/HistoEDA3.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+<img src="figure/HistoEDA3.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = FlightDelays, aes(x = Delay)) + geom_density(fill = "blue")
 ```
 
-<img src="./figure/EDA/HistoEDA4.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+<img src="figure/HistoEDA4.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ## Numeric Summaries
 
@@ -283,20 +283,20 @@ quantile(FlightDelays$Delay)
 boxplot(Delay ~ Carrier, data = FlightDelays)
 ```
 
-<img src="./figure/EDA/BP1.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
+<img src="figure/BP1.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot()
 ```
 
-<img src="./figure/EDA/BP2.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
+<img src="figure/BP2.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + facet_grid(. ~ 
     Month)
 ```
 
-<img src="./figure/EDA/BP3.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
+<img src="figure/BP3.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 
 
@@ -321,28 +321,28 @@ p <- ggplot(data = NCBirths, aes(x = Gender, y = Weight, fill = Gender))
 p + geom_boxplot()
 ```
 
-<img src="./figure/EDA/NCBirths1.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
+<img src="figure/NCBirths1.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
 p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", 
     title = "You Put Something Here")
 ```
 
-<img src="./figure/EDA/NCBirths2.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
+<img src="figure/NCBirths2.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
 p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", 
     title = "You Put Something Here") + scale_fill_manual(values = c("pink", "blue"))
 ```
 
-<img src="./figure/EDA/NCBirths3.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
+<img src="figure/NCBirths3.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
 p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", 
     title = "You Put Something Here") + scale_fill_brewer()
 ```
 
-<img src="./figure/EDA/NCBirths4.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
+<img src="figure/NCBirths4.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
 
@@ -361,7 +361,7 @@ polygon(region.x, region.y, col = "red")
 abline(h = 0, lwd = 2)
 ```
 
-<img src="./figure/EDA/ND1.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
+<img src="figure/ND1.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
 
 ```r
 # Same now with ggplot2
@@ -376,7 +376,7 @@ p1 <- p + stat_function(fun = dnorm_func, geom = "area", fill = "blue", alpha = 
 p1
 ```
 
-<img src="./figure/EDA/ND2.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
+<img src="figure/ND2.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
 
 ```r
 p1 + labs(x = "", y = "", title = expression(integral(frac(1, sqrt(2 * pi)) * e^{
@@ -384,7 +384,7 @@ p1 + labs(x = "", y = "", title = expression(integral(frac(1, sqrt(2 * pi)) * e^
 } * dx, 1, infinity) == 0.1586553))  # Break it down!
 ```
 
-<img src="./figure/EDA/ND3.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
+<img src="figure/ND3.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
 
 
 ## Example 2.11 
@@ -448,7 +448,7 @@ Intercept
 abline(a = Intercept, b = slopeA)
 ```
 
-<img src="./figure/EDA/QUANTILES.png" title="plot of chunk QUANTILES" alt="plot of chunk QUANTILES" style="display: block; margin: auto;" />
+<img src="figure/QUANTILES.png" title="plot of chunk QUANTILES" alt="plot of chunk QUANTILES" style="display: block; margin: auto;" />
 
 ```r
 # 
@@ -489,7 +489,7 @@ qqnorm(x)
 qqline(x)
 ```
 
-<img src="./figure/EDA/QQNORM1.png" title="plot of chunk QQNORM" alt="plot of chunk QQNORM" style="display: block; margin: auto;" />
+<img src="figure/QQNORM1.png" title="plot of chunk QQNORM" alt="plot of chunk QQNORM" style="display: block; margin: auto;" />
 
 ```r
 # ggplot
@@ -497,7 +497,7 @@ ggplot(data = data.frame(x), aes(sample = x)) + stat_qq() + geom_abline(intercep
     slope = slope)
 ```
 
-<img src="./figure/EDA/QQNORM2.png" title="plot of chunk QQNORM" alt="plot of chunk QQNORM" style="display: block; margin: auto;" />
+<img src="figure/QQNORM2.png" title="plot of chunk QQNORM" alt="plot of chunk QQNORM" style="display: block; margin: auto;" />
 
 
 ## Empirical Cumulative Distribution Function
@@ -511,7 +511,7 @@ y <- c(3, 6, 15, 15, 17, 19, 24)
 plot.ecdf(y)
 ```
 
-<img src="./figure/EDA/ECDFbase1.png" title="plot of chunk ECDFbase" alt="plot of chunk ECDFbase" style="display: block; margin: auto;" />
+<img src="figure/ECDFbase1.png" title="plot of chunk ECDFbase" alt="plot of chunk ECDFbase" style="display: block; margin: auto;" />
 
 ```r
 set.seed(1)  # set seed for reproducibility
@@ -520,7 +520,7 @@ plot.ecdf(rxs, xlim = c(-4, 4))
 curve(pnorm(x), col = "blue", add = TRUE, lwd = 2)
 ```
 
-<img src="./figure/EDA/ECDFbase2.png" title="plot of chunk ECDFbase" alt="plot of chunk ECDFbase" style="display: block; margin: auto;" />
+<img src="figure/ECDFbase2.png" title="plot of chunk ECDFbase" alt="plot of chunk ECDFbase" style="display: block; margin: auto;" />
 
 
 An alternative approach to the book's Figure 2.12 is provided using `ggplot2` after first creating Figure 2.12
@@ -563,7 +563,7 @@ abline(v = 25, lty = "dashed")
 legend("topleft", legend = c("Males", "Females"), pch = 19, col = c("blue", "pink"))
 ```
 
-<img src="./figure/EDA/BEER1.png" title="plot of chunk BEER" alt="plot of chunk BEER" style="display: block; margin: auto;" />
+<img src="figure/BEER1.png" title="plot of chunk BEER" alt="plot of chunk BEER" style="display: block; margin: auto;" />
 
 ```r
 # Using ggplot2 now
@@ -571,7 +571,7 @@ ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + stat_ecdf() + labs(x 
     y = "", title = "ECDF")
 ```
 
-<img src="./figure/EDA/BEER2.png" title="plot of chunk BEER" alt="plot of chunk BEER" style="display: block; margin: auto;" />
+<img src="figure/BEER2.png" title="plot of chunk BEER" alt="plot of chunk BEER" style="display: block; margin: auto;" />
 
 
 ## Scatter Plots
@@ -582,7 +582,7 @@ with(data = Beerwings, plot(Hotwings, Beer, xlab = "Hot wings eaten", ylab = "Be
     pch = 19, col = "blue"))
 ```
 
-<img src="./figure/EDA/Bplot1.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
+<img src="figure/Bplot1.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
 
 ```r
 p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + geom_point() + labs(x = "Hot wings eaten", 
@@ -590,19 +590,19 @@ p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + geom_point() + labs
 p
 ```
 
-<img src="./figure/EDA/Bplot2.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
+<img src="figure/Bplot2.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
 
 ```r
 p + geom_smooth()
 ```
 
-<img src="./figure/EDA/Bplot3.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
+<img src="figure/Bplot3.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
 
 ```r
 p + geom_smooth(method = lm)
 ```
 
-<img src="./figure/EDA/Bplot4.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
+<img src="figure/Bplot4.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
 
 
 
@@ -670,7 +670,7 @@ p <- ggplot(data = schis, aes(group, worms)) + geom_point(position = "jitter", a
 p
 ```
 
-<img src="./figure/Schistosomiasis/F2.png" title="plot of chunk F2" alt="plot of chunk F2" style="display: block; margin: auto;" />
+<img src="figure/F2.png" title="plot of chunk F2" alt="plot of chunk F2" style="display: block; margin: auto;" />
 
 
 ACTIVITY
@@ -919,7 +919,7 @@ for (i in 1:N) {
 hist(result, col = "blue", freq = FALSE, main = "")
 ```
 
-<img src="./figure/Schistosomiasis/F31.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
+<img src="figure/F31.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
 
 ```r
 d.res <- density(result)
@@ -930,7 +930,7 @@ ys <- c(0, d.res$y[d.res$x >= 7.6])
 polygon(xs, ys, col = "red")
 ```
 
-<img src="./figure/Schistosomiasis/F32.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
+<img src="figure/F32.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
 
 ```r
 pvalue <- (sum(result >= observed) + 1)/(N + 1)  # p-value
@@ -949,7 +949,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Schistosomiasis/F33.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
+<img src="figure/F33.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(result)
@@ -958,7 +958,7 @@ p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = 
     fill = "blue", alpha = 0.4) + labs(x = "", y = "")
 ```
 
-<img src="./figure/Schistosomiasis/F34.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
+<img src="figure/F34.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
 
 The code snippet **result >= observed** results in a vector of **TRUE's** and **FALSE's** depending on whether or not the mean difference computed for a resample is greater than the observed mean difference.  **sum(result >= observed)** counts the number of **TRUE's**.  Thus, the computed _p_-value is just the proportion of statistics (including the original) that are as large or larger than the original mean difference. The empirical _p_-value is 0.0242.
 
@@ -1073,7 +1073,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Schistosomiasis/EXPLAIN1.png" title="plot of chunk EXPLAIN" alt="plot of chunk EXPLAIN" style="display: block; margin: auto;" />
+<img src="figure/EXPLAIN1.png" title="plot of chunk EXPLAIN" alt="plot of chunk EXPLAIN" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(means)
@@ -1082,7 +1082,7 @@ p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = 
     fill = "blue", alpha = 0.4) + labs(x = "", y = "")
 ```
 
-<img src="./figure/Schistosomiasis/EXPLAIN2.png" title="plot of chunk EXPLAIN" alt="plot of chunk EXPLAIN" style="display: block; margin: auto;" />
+<img src="figure/EXPLAIN2.png" title="plot of chunk EXPLAIN" alt="plot of chunk EXPLAIN" style="display: block; margin: auto;" />
 
 ```r
 # Another approach ....
@@ -1300,7 +1300,7 @@ for (i in 1:N) {
 hist(result, col = "blue", main = "", freq = FALSE)
 ```
 
-<img src="./figure/Schistosomiasis/TWOST1.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
+<img src="figure/TWOST1.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
 
 ```r
 d.res <- density(result)
@@ -1314,7 +1314,7 @@ polygon(xsr, ysr, col = "red")
 polygon(xsl, ysl, col = "red")
 ```
 
-<img src="./figure/Schistosomiasis/TWOST2.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
+<img src="figure/TWOST2.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
 
 ```r
 pvalue <- (sum(result >= observed) + sum(result <= -observed) + 1)/(N + 1)  # p-value
@@ -1333,7 +1333,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Schistosomiasis/TWOST3.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
+<img src="figure/TWOST3.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(result)
@@ -1343,7 +1343,7 @@ p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = 
     x <= -7.6 & x >= min(DF$x)), aes(x = x, y = y), fill = "blue", alpha = 0.4)
 ```
 
-<img src="./figure/Schistosomiasis/TWOST4.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
+<img src="figure/TWOST4.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
 
 The empirical _p_-value for a two-sided test is 0.0556.
 
@@ -1421,7 +1421,7 @@ p <- ggplot(data = west, aes(status, ages)) + geom_point(position = "jitter", ae
 p
 ```
 
-<img src="./figure/Schistosomiasis/AGE.png" title="plot of chunk AGE" alt="plot of chunk AGE" style="display: block; margin: auto;" />
+<img src="figure/AGE.png" title="plot of chunk AGE" alt="plot of chunk AGE" style="display: block; margin: auto;" />
 
   * Conduct a permutation test to determine whether the observed difference between means is likely to occur just by chance.  Here we are interested in only a one-sided test to determine if the mean age of people who were laid off is higher than the mean age of people who were not laid off.
   
@@ -1466,7 +1466,7 @@ for (i in 1:N) {
 hist(result, col = "blue", main = "", xlim = c(-25, 25))
 ```
 
-<img src="./figure/Schistosomiasis/AGE21.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
+<img src="figure/AGE21.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
 
 ```r
 d.res <- density(result)
@@ -1477,7 +1477,7 @@ ys <- c(0, d.res$y[d.res$x >= obsDiff])
 polygon(xs, ys, col = "red")
 ```
 
-<img src="./figure/Schistosomiasis/AGE22.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
+<img src="figure/AGE22.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
 
 ```r
 # ggplot2 approach now
@@ -1487,7 +1487,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Schistosomiasis/AGE23.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
+<img src="figure/AGE23.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(result)
@@ -1496,7 +1496,7 @@ p + geom_area(data = subset(df.dens, x >= obsDiff & x <= max(DF$x)), aes(x = x, 
     fill = "blue", alpha = 0.4) + labs(x = "", y = "")
 ```
 
-<img src="./figure/Schistosomiasis/AGE24.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
+<img src="figure/AGE24.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
 
 ```r
 pvalue <- (sum(result >= obsDiff) + 1)/(N + 1)  # p-value
@@ -1553,7 +1553,7 @@ for (i in 1:N) {
 hist(MedianDiff, col = "blue", main = "")
 ```
 
-<img src="./figure/Schistosomiasis/MEDAGE1.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
+<img src="figure/MEDAGE1.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
 
 ```r
 # ggplot2 approach now
@@ -1563,7 +1563,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Schistosomiasis/MEDAGE2.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
+<img src="figure/MEDAGE2.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(MedianDiff)
@@ -1572,7 +1572,7 @@ p + geom_area(data = subset(df.dens, x >= obsDiffMedian & x <= max(DF$x)), aes(x
     y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
 ```
 
-<img src="./figure/Schistosomiasis/MEDAGE3.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
+<img src="figure/MEDAGE3.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
 
 ```r
 ####### 
@@ -1910,7 +1910,7 @@ hist(DiffProp, col = "blue", breaks = "Scott", xlab = "", main = "")
 abline(v = obsDiffProp2, col = "red")
 ```
 
-<img src="./figure/Cocaine/coke1rep1.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
+<img src="./figure/Verizon/coke1rep1.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
 
 ```r
 pvalue1 <- (sum(DiffProp <= obsDiffProp2) + 1)/(N + 1)
@@ -1929,7 +1929,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Cocaine/coke1rep2.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
+<img src="./figure/Verizon/coke1rep2.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(DiffProp)
@@ -1938,7 +1938,7 @@ p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x =
     y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
 ```
 
-<img src="./figure/Cocaine/coke1rep3.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
+<img src="./figure/Verizon/coke1rep3.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
 
 
 The following code can be used when reading the data into a data frame using the first approach.
@@ -1957,7 +1957,7 @@ hist(DiffProp, col = "blue", breaks = "Scott", xlab = "", main = "")
 abline(v = obsDiffProp, col = "red")
 ```
 
-<img src="./figure/Cocaine/coke2rep1.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
+<img src="./figure/Verizon/coke2rep1.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
 
 ```r
 pvalue <- (sum(DiffProp <= obsDiffProp) + 1)/(N + 1)
@@ -1976,7 +1976,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Cocaine/coke2rep2.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
+<img src="./figure/Verizon/coke2rep2.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(DiffProp)
@@ -1985,7 +1985,7 @@ p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x =
     y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
 ```
 
-<img src="./figure/Cocaine/coke2rep3.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
+<img src="./figure/Verizon/coke2rep3.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
 
 
 Recall that if the true _p_-value is 0.02, then we can expect the standard deviation of our simulated _p_-value to be approximately $\sqrt{p\times(1-p)/N}$, or approximately 0.0014.
@@ -1993,9 +1993,9 @@ Recall that if the true _p_-value is 0.02, then we can expect the standard devia
 Mathematical Symbols
 =======================
 
-There are many online references for writing in $\LaTeX$.  Here is a [link to a pdf](http://mirrors.ibiblio.org/CTAN/info/examples/Math_into_LaTeX-4/SymbolTables.pdf) that you may find useful.
+There are many online references for writing in \LaTeX.  Here is a [link to a pdf](http://mirrors.ibiblio.org/CTAN/info/examples/Math_into_LaTeX-4/SymbolTables.pdf) that you may find useful.
 
-Try writing a few equations with $\LaTeX$.  Once you get the hang of $\LaTeX$, you will $\heartsuit$ it!  
+Try writing a few equations with \LaTeX.  Once you get the hang of \LaTeX, you will $\heartsuit$ it!  
 
 $$\bar{y} = \sum_{i=1}^{n} \frac{y_i}{n}$$
 
@@ -2402,7 +2402,7 @@ hist(result, breaks = "Scott", col = "pink", freq = FALSE, main = "")
 curve(dchisq(x, 4), 0, 20, add = TRUE, col = "red")
 ```
 
-<img src="./figure/CTables/perEXP.png" title="plot of chunk perEXP" alt="plot of chunk perEXP" style="display: block; margin: auto;" />
+<img src="./figure/PRTMPD/perEXP.png" title="plot of chunk perEXP" alt="plot of chunk perEXP" style="display: block; margin: auto;" />
 
 
 The simulated permutation $p$-value is 0.008.  The $p$-value that is returned from the `chisq.test()` is 0.01.  In this case, the two $p$-values are fairly similar.  This will not always be the case.  
@@ -2957,7 +2957,6 @@ This example illustrates a common result with chi-square goodness-of-fit tests, 
 
 
 
-<!--- Review these starting here -->
 
 
 
@@ -3175,7 +3174,7 @@ WD <- BD
 
 
 <!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
-<!-- Tue Dec 31 20:02:22 2013 -->
+<!-- Tue Dec 31 21:52:51 2013 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 1 --- All possible Samples of Size 3 from 3969, 3204, and 2892 </CAPTION>
 <TR> <TH> $x^*_1$ </TH> <TH> $x^*_2$ </TH> <TH> $x^*_3$ </TH> <TH> $\bar{x}^*$ </TH>  </TR>
@@ -3288,7 +3287,7 @@ abline(v = mean(Babies$Weight), col = "blue")
 abline(v = mean(my.boot.statB), col = "red")
 ```
 
-<img src="./figure/BootStrap/boot1.png" title="plot of chunk boot1" alt="plot of chunk boot1" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/boot1.png" title="plot of chunk boot1" alt="plot of chunk boot1" style="display: block; margin: auto;" />
 
 ```r
 boot.bias <- mean(my.boot.statB) - mean(Babies$Weight)
@@ -3320,7 +3319,7 @@ boot.obj <- boot(data = Babies$Weight, statistic = bs.mean, R = 10000)
 plot(boot.obj)
 ```
 
-<img src="./figure/BootStrap/packageBOOT.png" title="plot of chunk packageBOOT" alt="plot of chunk packageBOOT" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/packageBOOT.png" title="plot of chunk packageBOOT" alt="plot of chunk packageBOOT" style="display: block; margin: auto;" />
 
 ```r
 BIAS <- mean(boot.obj$t) - boot.obj$t0
@@ -3373,7 +3372,7 @@ hist(my.boot.stat2, breaks = "Scott", main = "Bootstrap Distribution", freq = FA
 abline(v = mean(rs2), col = "red")
 ```
 
-<img src="./figure/BootStrap/COOLpic.png" title="plot of chunk COOLpic" alt="plot of chunk COOLpic" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/COOLpic.png" title="plot of chunk COOLpic" alt="plot of chunk COOLpic" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3423,7 +3422,7 @@ hist(my.boot.statg2, breaks = "Scott", main = "Bootstrap Distribution", freq = F
 abline(v = mean(rsg2), col = "red")
 ```
 
-<img src="./figure/BootStrap/cool2.png" title="plot of chunk cool2" alt="plot of chunk cool2" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/cool2.png" title="plot of chunk cool2" alt="plot of chunk cool2" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3476,7 +3475,7 @@ qqnorm(arsenic.mean, main = "Figure 7b")
 qqline(arsenic.mean, col = "red")
 ```
 
-<img src="./figure/BootStrap/Bang2.png" title="plot of chunk Bang2" alt="plot of chunk Bang2" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/Bang2.png" title="plot of chunk Bang2" alt="plot of chunk Bang2" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3591,7 +3590,7 @@ qqnorm(times.diff.mean, main = "Normal Q-Q Plot \n (Figure 8b)")
 qqline(times.diff.mean, col = "red")
 ```
 
-<img src="./figure/BootStrap/TIMES1.png" title="plot of chunk TIMES1" alt="plot of chunk TIMES1" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/TIMES1.png" title="plot of chunk TIMES1" alt="plot of chunk TIMES1" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3633,7 +3632,7 @@ qqnorm(times.diff.meanP, main = "Normal Q-Q Plot \n (Figure 9b)")
 qqline(times.diff.meanP, col = "red")
 ```
 
-<img src="./figure/BootStrap/TIMES2a.png" title="plot of chunk TIMES2a" alt="plot of chunk TIMES2a" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/TIMES2a.png" title="plot of chunk TIMES2a" alt="plot of chunk TIMES2a" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3677,7 +3676,7 @@ qqnorm(ILECmean, main = "Normal Q-Q Plot \n Figure 10b")
 qqline(ILECmean, col = "red")
 ```
 
-<img src="./figure/BootStrap/Phone1.png" title="plot of chunk Phone1" alt="plot of chunk Phone1" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/Phone1.png" title="plot of chunk Phone1" alt="plot of chunk Phone1" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3710,7 +3709,7 @@ qqnorm(CLECmean, main = "Normal Q-Q Plot \n Figure 11b")
 qqline(CLECmean, col = "red")
 ```
 
-<img src="./figure/BootStrap/Timesb2.png" title="plot of chunk Timesb2" alt="plot of chunk Timesb2" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/Timesb2.png" title="plot of chunk Timesb2" alt="plot of chunk Timesb2" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3743,7 +3742,7 @@ qqnorm(diffmeans, main = "Normal Q-Q Plot \n Figure 12b")
 qqline(diffmeans, col = "red")
 ```
 
-<img src="./figure/BootStrap/Times12ab.png" title="plot of chunk Times12ab" alt="plot of chunk Times12ab" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/Times12ab.png" title="plot of chunk Times12ab" alt="plot of chunk Times12ab" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3814,7 +3813,7 @@ hist(boot.diffs, freq = FALSE, col = "lightblue", main = "Bootstrap Distribution
 abline(v = mean(boot.diffs), col = "red")
 ```
 
-<img src="./figure/BootStrap/Camera1a.png" title="plot of chunk Camera1a" alt="plot of chunk Camera1a" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/Camera1a.png" title="plot of chunk Camera1a" alt="plot of chunk Camera1a" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3846,7 +3845,7 @@ qqnorm(diffmeans.25, main = "Normal Q-Q Plot \n Figure 14b")
 qqline(diffmeans.25, col = "red")
 ```
 
-<img src="./figure/BootStrap/Robust.png" title="plot of chunk Robust" alt="plot of chunk Robust" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/Robust.png" title="plot of chunk Robust" alt="plot of chunk Robust" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3883,7 +3882,7 @@ qqnorm(boot.ratio, main = "Normal Q-Q Plot \n Figure 15b")
 qqline(boot.ratio, col = "red")
 ```
 
-<img src="./figure/BootStrap/Verizon6.png" title="plot of chunk Verizon6" alt="plot of chunk Verizon6" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/Verizon6.png" title="plot of chunk Verizon6" alt="plot of chunk Verizon6" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3914,7 +3913,7 @@ boot.obj <- boot(data = Phone, statistic = phoneF, R = 10000)
 plot(boot.obj)
 ```
 
-<img src="./figure/BootStrap/BootAgain.png" title="plot of chunk BootAgain" alt="plot of chunk BootAgain" style="display: block; margin: auto;" />
+<img src="./figure/SamplingDistributions/BootAgain.png" title="plot of chunk BootAgain" alt="plot of chunk BootAgain" style="display: block; margin: auto;" />
 
 ```r
 boot.ci(boot.obj, type = "perc")
@@ -4011,7 +4010,7 @@ qqnorm(Girls$Weight[Girls$State == "WY"], col = "pink")
 qqline(Girls$Weight[Girls$State == "WY"], col = "pink")
 ```
 
-<img src="./figure/InCLassSol/GirlsHist.png" title="plot of chunk GirlsHist" alt="plot of chunk GirlsHist" style="display: block; margin: auto;" />
+<img src="./figure/InCLass/GirlsHist.png" title="plot of chunk GirlsHist" alt="plot of chunk GirlsHist" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -4026,19 +4025,19 @@ require(lattice)
 histogram(~Weight | State, data = Girls, layout = c(1, 2), as.table = TRUE, type = "density")
 ```
 
-<img src="./figure/InCLassSol/GirlsHistLattice1.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
+<img src="./figure/InCLass/GirlsHistLattice1.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
 
 ```r
 qqmath(~Weight | State, data = Girls, layout = c(1, 2), as.table = TRUE)
 ```
 
-<img src="./figure/InCLassSol/GirlsHistLattice2.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
+<img src="./figure/InCLass/GirlsHistLattice2.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
 
 ```r
 qqmath(~Weight, group = State, data = Girls)
 ```
 
-<img src="./figure/InCLassSol/GirlsHistLattice3.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
+<img src="./figure/InCLass/GirlsHistLattice3.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
 
 
 A third approach is to use `ggplot2`. (This is my preference.)
@@ -4051,7 +4050,7 @@ p <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(binwidth = 500) + fa
 p
 ```
 
-<img src="./figure/InCLassSol/GirlsHistggplot21.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
+<img src="./figure/InCLass/GirlsHistggplot21.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 ```r
 p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..), 
@@ -4060,14 +4059,14 @@ p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..
 p1
 ```
 
-<img src="./figure/InCLassSol/GirlsHistggplot22.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
+<img src="./figure/InCLass/GirlsHistggplot22.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 ```r
 p2 <- ggplot(data = Girls, aes(sample = Weight, color = State)) + stat_qq()
 p2
 ```
 
-<img src="./figure/InCLassSol/GirlsHistggplot23.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
+<img src="./figure/InCLass/GirlsHistggplot23.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 
 ## Graphs are fun!
@@ -4124,7 +4123,7 @@ qqnorm(mean.diff, col = "blue")
 qqline(mean.diff, col = "red")
 ```
 
-<img src="./figure/InCLassSol/GirlsBoot.png" title="plot of chunk GirlsBoot" alt="plot of chunk GirlsBoot" style="display: block; margin: auto;" />
+<img src="./figure/InCLass/GirlsBoot.png" title="plot of chunk GirlsBoot" alt="plot of chunk GirlsBoot" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -4181,7 +4180,7 @@ hist(result, col = "blue", main = "", xlab = expression(bar(x)[1] - bar(x)[2]))
 abline(v = obs.mean.diff, col = "red")
 ```
 
-<img src="./figure/InCLassSol/GirlsPer.png" title="plot of chunk GirlsPer" alt="plot of chunk GirlsPer" style="display: block; margin: auto;" />
+<img src="./figure/InCLass/GirlsPer.png" title="plot of chunk GirlsPer" alt="plot of chunk GirlsPer" style="display: block; margin: auto;" />
 
 ```r
 pvalue <- (sum(abs(result) >= abs(obs.mean.diff) + 1))/(R + 1)  # p-value

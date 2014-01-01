@@ -28,7 +28,6 @@ require(plyr)
 ```{r child='../Children/CTables.Rmd'}
 ``` 
 
-<!--- Review these starting here -->
 
 ```{r child='../Children/SamplingDistributions.Rmd'}
 ``` 
