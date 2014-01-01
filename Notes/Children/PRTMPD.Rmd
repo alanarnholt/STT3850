@@ -1,6 +1,4 @@
-```{r setupPRTMPD, echo = FALSE}
-opts_chunk$set(cache.path = './cache/PRTMPD/', fig.path = './figure/PRTMPD/')
-```
+
 
 Permutation and Randomization Tests for Matched Pairs Design
 ============================================================

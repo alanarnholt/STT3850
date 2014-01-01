@@ -1,6 +1,4 @@
-```{r setupEDA, echo = FALSE}
-opts_chunk$set(cache.path = './cache/EDA/', fig.path = './figure/EDA/')
-```
+
 
 
 Exploratory Data Analysis

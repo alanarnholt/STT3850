@@ -1,6 +1,4 @@
-```{r setupVerizon, echo = FALSE}
-opts_chunk$set(cache.path = './cache/Verizon/', fig.path = './figure/Verizon/')
-```
+
 
 Verizon Repair Times
 ======================

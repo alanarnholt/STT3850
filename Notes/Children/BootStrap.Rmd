@@ -1,6 +1,4 @@
-```{r setupBootStrap, echo = FALSE}
-opts_chunk$set(cache.path = './cache/BootStrap/', fig.path = './figure/BootStrap/')
-```
+
 
 THE BOOTSTRAP (Chapter 5)
 ========================================================

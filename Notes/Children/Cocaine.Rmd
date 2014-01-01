@@ -1,6 +1,4 @@
-```{r setupCocaine, echo = FALSE}
-opts_chunk$set(cache.path = './cache/Cocaine/', fig.path = './figure/Cocaine/')
-```
+
 
 
 Cocaine Addiction

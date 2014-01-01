@@ -1,6 +1,4 @@
-```{r setupSchistomiasis, echo = FALSE}
-opts_chunk$set(cache.path = './cache/Schistosomiasis/', fig.path = './figure/Schistosomiasis/')
-```
+
 
 Can A New Drug Reduce the Spread of Schistosomiasis?
 ========================================================

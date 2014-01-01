@@ -1,6 +1,4 @@
-```{r setupCIs, echo = FALSE}
-opts_chunk$set(cache.path = './cache/CIs/', fig.path = './figure/CIs/')
-```
+
 
 CLASSICAL INFERENCE: CONFIDENCE INTERVALS
 ==========================================

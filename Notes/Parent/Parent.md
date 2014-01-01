@@ -1,8 +1,3 @@
-
-
-
-
-
 Class Notes For STT 3850
 ========================================================
 ## Alan T. Arnholt
@@ -10,13 +5,18 @@ Class Notes For STT 3850
 Last compiled:
 
 ```
-[1] "Tuesday, December 31, 2013 - 8:00:50 PM."
+[1] "Wednesday, January 01, 2014 - 10:04:29."
 ```
 
 
 
-Most of the material in the notes is taken from the class text _Mathematical Statistics with Resampling and `R`_ by Laura Chihara and Tim Hesterberg with slight modifications.  Some material in the notes is also taken from the first chapter of _Practicing Statistics: Guided Investigations for the Second Course_ by Shonda Kuiper and Jeffrey Sklar.  There are a number of places to get help with `R`.  The class text has some material online at: [https://sites.google.com/site/chiharahesterberg/rtutorials](https://sites.google.com/site/chiharahesterberg/rtutorials).  I have additional materials available on [asulearn](http://asulearn.appstate.edu).
 
+
+
+
+
+
+Most of the material in the notes is taken from the class text _Mathematical Statistics with Resampling and `R`_ by Laura Chihara and Tim Hesterberg with slight modifications.  Some material in the notes is also taken from the first chapter of _Practicing Statistics: Guided Investigations for the Second Course_ by Shonda Kuiper and Jeffrey Sklar.  There are a number of places to get help with `R`.  The class text has some material online at: [https://sites.google.com/site/chiharahesterberg/rtutorials](https://sites.google.com/site/chiharahesterberg/rtutorials).  
 
 
 
@@ -603,7 +603,6 @@ p + geom_smooth(method = lm)
 ```
 
 <img src="figure/Bplot4.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
-
 
 
 
@@ -1596,7 +1595,6 @@ In the actual court case, data from all three rounds of layoffs were statistical
 
 
 
-
 Verizon Repair Times
 ======================
 
@@ -1649,7 +1647,7 @@ hist(result, col = "blue", main = "", breaks = "Scott")
 abline(v = observed)
 ```
 
-<img src="./figure/Verizon/VER1.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
+<img src="figure/VER1.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
 
 ```r
 pvalue <- (sum(result >= observed) + 1)/(N + 1)  # p-value
@@ -1667,7 +1665,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Verizon/VER2.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
+<img src="figure/VER2.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(result)
@@ -1676,7 +1674,7 @@ p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x,
     y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
 ```
 
-<img src="./figure/Verizon/VER3.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
+<img src="figure/VER3.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
 
 
 Using Medians
@@ -1707,7 +1705,7 @@ hist(result, col = "blue", main = "Difference in Medians", breaks = "Scott")
 abline(v = observed)
 ```
 
-<img src="./figure/Verizon/VER21.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
+<img src="figure/VER21.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
 
 ```r
 pvalue <- (sum(result >= observed) + 1)/(N + 1)  # p-value
@@ -1725,7 +1723,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Verizon/VER22.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
+<img src="figure/VER22.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(result)
@@ -1734,7 +1732,7 @@ p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x,
     y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed)
 ```
 
-<img src="./figure/Verizon/VER23.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
+<img src="figure/VER23.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
 
 
 Using 25% Trimmed Means
@@ -1765,7 +1763,7 @@ hist(result, col = "blue", main = "Difference in Trimmed Means", breaks = "Scott
 abline(v = observed)
 ```
 
-<img src="./figure/Verizon/TM11.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
+<img src="figure/TM11.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
 
 ```r
 pvalue1 <- (sum(result >= observed) + 1)/(N + 1)  # p-value
@@ -1783,7 +1781,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Verizon/TM12.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
+<img src="figure/TM12.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(result)
@@ -1793,11 +1791,10 @@ p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x,
     color = "red")
 ```
 
-<img src="./figure/Verizon/TM13.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
+<img src="figure/TM13.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
 
 
 It seems that the more robust statistics (median, 25% trimmed mean) are more sensitive to a possible difference between the populations; the tests are significant with estimated _p_-values of 0.0012 and 3 &times; 10<sup>-4</sup>, respectively.
-
 
 
 
@@ -1910,7 +1907,7 @@ hist(DiffProp, col = "blue", breaks = "Scott", xlab = "", main = "")
 abline(v = obsDiffProp2, col = "red")
 ```
 
-<img src="./figure/Verizon/coke1rep1.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
+<img src="figure/coke1rep1.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
 
 ```r
 pvalue1 <- (sum(DiffProp <= obsDiffProp2) + 1)/(N + 1)
@@ -1929,7 +1926,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Verizon/coke1rep2.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
+<img src="figure/coke1rep2.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(DiffProp)
@@ -1938,7 +1935,7 @@ p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x =
     y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
 ```
 
-<img src="./figure/Verizon/coke1rep3.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
+<img src="figure/coke1rep3.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
 
 
 The following code can be used when reading the data into a data frame using the first approach.
@@ -1957,7 +1954,7 @@ hist(DiffProp, col = "blue", breaks = "Scott", xlab = "", main = "")
 abline(v = obsDiffProp, col = "red")
 ```
 
-<img src="./figure/Verizon/coke2rep1.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
+<img src="figure/coke2rep1.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
 
 ```r
 pvalue <- (sum(DiffProp <= obsDiffProp) + 1)/(N + 1)
@@ -1976,7 +1973,7 @@ p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink"
 p
 ```
 
-<img src="./figure/Verizon/coke2rep2.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
+<img src="figure/coke2rep2.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
 
 ```r
 x.dens <- density(DiffProp)
@@ -1985,7 +1982,7 @@ p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x =
     y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
 ```
 
-<img src="./figure/Verizon/coke2rep3.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
+<img src="figure/coke2rep3.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
 
 
 Recall that if the true _p_-value is 0.02, then we can expect the standard deviation of our simulated _p_-value to be approximately $\sqrt{p\times(1-p)/N}$, or approximately 0.0014.
@@ -1998,7 +1995,6 @@ There are many online references for writing in \LaTeX.  Here is a [link to a pd
 Try writing a few equations with \LaTeX.  Once you get the hang of \LaTeX, you will $\heartsuit$ it!  
 
 $$\bar{y} = \sum_{i=1}^{n} \frac{y_i}{n}$$
-
 
 
 
@@ -2051,7 +2047,7 @@ require(ggplot2)
 ggplot(data = Music, aes(x = Fastdiff.Slowdiff)) + geom_dotplot()
 ```
 
-<img src="./figure/PRTMPD/music.png" title="plot of chunk music" alt="plot of chunk music" style="display: block; margin: auto;" />
+<img src="figure/music.png" title="plot of chunk music" alt="plot of chunk music" style="display: block; margin: auto;" />
 
 
 To perform a randomization test, we mimic the randomization procedure of the study design.  Here, the randomization determined the order in which the subject heard the songs, so randomization is applied to the two measurements of interest for each subject.  To compute a _p_-value, we determine how frequently we would obtain an observed difference as large or larger than 1.857. 
@@ -2067,9 +2063,6 @@ each observed difference by a 1 or a -1.  This randomly assigns an order (`Fastd
   * Use the _p_-value to state your conclusions in the context of the problem.  Address random allocation and random sampling (or lack of either) when stating your conclusions.
 
 CAUTION: the type of randomization in Question 1. does not account for extraneous variables such as a great love for Nine Inch Nails on the part of some students or complete boredom with this band on the part of others (i.e., "musical taste" is a possible confounder that randomizing the order of listening cannot randomize away).  There will always be a caveat in theis type of study, since we are rather crudely letting one Nine Inch Nails song "represent" fast songs.
-
-
-
 
 
 
@@ -2402,7 +2395,7 @@ hist(result, breaks = "Scott", col = "pink", freq = FALSE, main = "")
 curve(dchisq(x, 4), 0, 20, add = TRUE, col = "red")
 ```
 
-<img src="./figure/PRTMPD/perEXP.png" title="plot of chunk perEXP" alt="plot of chunk perEXP" style="display: block; margin: auto;" />
+<img src="figure/perEXP.png" title="plot of chunk perEXP" alt="plot of chunk perEXP" style="display: block; margin: auto;" />
 
 
 The simulated permutation $p$-value is 0.008.  The $p$-value that is returned from the `chisq.test()` is 0.01.  In this case, the two $p$-values are fairly similar.  This will not always be the case.  
@@ -2481,17 +2474,18 @@ Gender   Very Happy Pretty Happy Not to Happy Sum
 ```r
 HADF <- as.data.frame(HAT)
 HATflatfile <- vcdExtra::expand.dft(HADF)
+```
+
+```
+Error: there is no package called 'vcdExtra'
+```
+
+```r
 head(HATflatfile)
 ```
 
 ```
-  Gender      Giddy
-1   Male Very Happy
-2   Male Very Happy
-3   Male Very Happy
-4   Male Very Happy
-5   Male Very Happy
-6   Male Very Happy
+Error: object 'HATflatfile' not found
 ```
 
 ```r
@@ -2499,9 +2493,7 @@ str(HATflatfile)
 ```
 
 ```
-'data.frame':	965 obs. of  2 variables:
- $ Gender: Factor w/ 2 levels "Female","Male": 2 2 2 2 2 2 2 2 2 2 ...
- $ Giddy : Factor w/ 3 levels "Not to Happy",..: 3 3 3 3 3 3 3 3 3 3 ...
+Error: object 'HATflatfile' not found
 ```
 
 
@@ -2609,17 +2601,18 @@ head(stuffDF)
 
 ```r
 DFL <- vcdExtra::expand.dft(stuffDF)
+```
+
+```
+Error: there is no package called 'vcdExtra'
+```
+
+```r
 head(DFL)
 ```
 
 ```
-  Gender Diet
-1  Women  Yes
-2  Women  Yes
-3  Women  Yes
-4  Women  Yes
-5  Women  Yes
-6  Women  Yes
+Error: object 'DFL' not found
 ```
 
 ```r
@@ -2629,13 +2622,27 @@ for (i in 1:N) {
     T2 <- xtabs(~sample(Gender) + Diet, data = DFL)
     result[i] <- chisq.test(T2)$statistic
 }
+```
+
+```
+Error: object 'DFL' not found
+```
+
+```r
 obs <- chisq.test(xtabs(~Gender + Diet, data = DFL))$statistic
+```
+
+```
+Error: object 'DFL' not found
+```
+
+```r
 pvalue <- (sum(result >= obs) + 1)/(N + 1)
 pvalue
 ```
 
 ```
-[1] 0.0104
+[1] 1e-04
 ```
 
 
@@ -2687,17 +2694,18 @@ Gender  Flavor 1 Flavor 2 Flavor 3 Sum
 ```r
 candyDF <- as.data.frame(candyT)
 candyflatfile <- vcdExtra::expand.dft(candyDF)
+```
+
+```
+Error: there is no package called 'vcdExtra'
+```
+
+```r
 head(candyflatfile)
 ```
 
 ```
-  Gender   Flavor
-1   Boys Flavor 1
-2   Boys Flavor 1
-3   Boys Flavor 1
-4   Boys Flavor 1
-5   Boys Flavor 1
-6   Boys Flavor 1
+Error: object 'candyflatfile' not found
 ```
 
 ```r
@@ -2705,9 +2713,7 @@ str(candyflatfile)
 ```
 
 ```
-'data.frame':	210 obs. of  2 variables:
- $ Gender: Factor w/ 2 levels "Boys","Girls": 1 1 1 1 1 1 1 1 1 1 ...
- $ Flavor: Factor w/ 3 levels "Flavor 1","Flavor 2",..: 1 1 1 1 1 1 1 1 1 1 ...
+Error: object 'candyflatfile' not found
 ```
 
 ```r
@@ -2740,12 +2746,19 @@ for (i in 1:N) {
     T2 <- xtabs(~sample(Gender) + Flavor, data = candyflatfile)
     result[i] <- chisq.test(T2)$statistic
 }
+```
+
+```
+Error: object 'candyflatfile' not found
+```
+
+```r
 pvalue <- (sum(result >= obsstat) + 1)/(N + 1)
 pvalue
 ```
 
 ```
-[1] 0.1951
+[1] 1e-04
 ```
 
 
@@ -2960,8 +2973,6 @@ This example illustrates a common result with chi-square goodness-of-fit tests, 
 
 
 
-
-
 Sampling Distributions (Chapter 4)
 ========================================================
 
@@ -2985,7 +2996,7 @@ phat
 plot(xtabs(~phat), ylab = "count", xlab = expression(hat(p)))
 ```
 
-<img src="./figure/SamplingDistributions/sampDIST.png" title="plot of chunk sampDIST" alt="plot of chunk sampDIST" style="display: block; margin: auto;" />
+<img src="figure/sampDIST.png" title="plot of chunk sampDIST" alt="plot of chunk sampDIST" style="display: block; margin: auto;" />
 
 Although proportions between 0.3 and 0.7 occur most often, we see there is a proportion as low as 0.1 heads and as high as 0.8 heads.  Instead of 50 sets of 10 coin flips, the next simulation performs 50,000 sets of 10 tosses.
 
@@ -3023,7 +3034,7 @@ sd(phat)
 plot(xtabs(~phat), ylab = "count", xlab = expression(hat(p)))
 ```
 
-<img src="./figure/SamplingDistributions/sampDISTsim.png" title="plot of chunk sampDISTsim" alt="plot of chunk sampDISTsim" style="display: block; margin: auto;" />
+<img src="figure/sampDISTsim.png" title="plot of chunk sampDISTsim" alt="plot of chunk sampDISTsim" style="display: block; margin: auto;" />
 
 
 The previous plot is an approximation to the *sampling distribution of $\hat{p}$*.  The mean of the sampling distribution of $\hat{p}$ is $\mu_{\hat{p}} = p$, and the standard deviation of the sampling distribution of $\hat{p}$, $\sigma_{\hat{p}} = \sqrt{p\times(1-p)/n}$.  The standard deviation of the simulated $\hat{p}$ values, the standard deviation of a statistic, is called a *standard error*.  In this simulation, the estimated mean of the statistic is written as $\hat{\mu}_{\hat{p}}=$ 0.5006. The standard error of $\hat{p}$, sometimes written as $SE(\hat{p})$ or $\hat{\sigma}_{\hat{p}}$ is 0.1581.
@@ -3110,7 +3121,7 @@ hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "
 mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
 ```
 
-<img src="./figure/SamplingDistributions/CLTsim.png" title="plot of chunk CLTsim" alt="plot of chunk CLTsim" style="display: block; margin: auto;" />
+<img src="figure/CLTsim.png" title="plot of chunk CLTsim" alt="plot of chunk CLTsim" style="display: block; margin: auto;" />
 
 ```r
 
@@ -3128,7 +3139,6 @@ par(mfrow = c(1, 1))
 **Solution:** Let $X=$ the number of heads in 300 flips of a fair coin.  Since $X \sim Bin(n = 300, p = 1/2)$ it follows that $\mu_X = np$ and $\sigma_{X} =\sqrt{np\times(1 - p)}$, and $Y \dot{\sim} N(np, \sqrt{np\times(1 - p)})$.  It follows that $P(X <= 160) = P\left(\frac{X - np}{\sqrt{np \times (1 - p)}} = Z \leq \frac{160 - 150}{\sqrt{300/4}}\right).$  Furthermore, $P(Z \leq 1.154701)=$ 0.8759.  Solve the problem in class using $\hat{p}$ as the random variable.
 
 **Exact Solution:** $P(X \leq 160)= \sum_{x = 0}^{x = 160}\binom{300}{x} 0.5^x 0.5^{300-x}=$ 0.8874.
-
 
 
 
@@ -3174,7 +3184,7 @@ WD <- BD
 
 
 <!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
-<!-- Tue Dec 31 21:52:51 2013 -->
+<!-- Wed Jan  1 09:55:43 2014 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 1 --- All possible Samples of Size 3 from 3969, 3204, and 2892 </CAPTION>
 <TR> <TH> $x^*_1$ </TH> <TH> $x^*_2$ </TH> <TH> $x^*_3$ </TH> <TH> $\bar{x}^*$ </TH>  </TR>
@@ -3287,7 +3297,7 @@ abline(v = mean(Babies$Weight), col = "blue")
 abline(v = mean(my.boot.statB), col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/boot1.png" title="plot of chunk boot1" alt="plot of chunk boot1" style="display: block; margin: auto;" />
+<img src="figure/boot1.png" title="plot of chunk boot1" alt="plot of chunk boot1" style="display: block; margin: auto;" />
 
 ```r
 boot.bias <- mean(my.boot.statB) - mean(Babies$Weight)
@@ -3319,7 +3329,7 @@ boot.obj <- boot(data = Babies$Weight, statistic = bs.mean, R = 10000)
 plot(boot.obj)
 ```
 
-<img src="./figure/SamplingDistributions/packageBOOT.png" title="plot of chunk packageBOOT" alt="plot of chunk packageBOOT" style="display: block; margin: auto;" />
+<img src="figure/packageBOOT.png" title="plot of chunk packageBOOT" alt="plot of chunk packageBOOT" style="display: block; margin: auto;" />
 
 ```r
 BIAS <- mean(boot.obj$t) - boot.obj$t0
@@ -3372,7 +3382,7 @@ hist(my.boot.stat2, breaks = "Scott", main = "Bootstrap Distribution", freq = FA
 abline(v = mean(rs2), col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/COOLpic.png" title="plot of chunk COOLpic" alt="plot of chunk COOLpic" style="display: block; margin: auto;" />
+<img src="figure/COOLpic.png" title="plot of chunk COOLpic" alt="plot of chunk COOLpic" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3422,7 +3432,7 @@ hist(my.boot.statg2, breaks = "Scott", main = "Bootstrap Distribution", freq = F
 abline(v = mean(rsg2), col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/cool2.png" title="plot of chunk cool2" alt="plot of chunk cool2" style="display: block; margin: auto;" />
+<img src="figure/cool2.png" title="plot of chunk cool2" alt="plot of chunk cool2" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3475,7 +3485,7 @@ qqnorm(arsenic.mean, main = "Figure 7b")
 qqline(arsenic.mean, col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/Bang2.png" title="plot of chunk Bang2" alt="plot of chunk Bang2" style="display: block; margin: auto;" />
+<img src="figure/Bang2.png" title="plot of chunk Bang2" alt="plot of chunk Bang2" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3523,7 +3533,7 @@ quantile(my.boot.statB, probs = c(0.025, 0.975))
 For the North Carolina birth weights, the interval marked by the 2.5 and 97.5 percentiles is (3418.59, 3478.7). Thus, we would state that we are 95% confident that the true mean weight of North Carolina babies born in 2004 is between 3418.59 and 3478.7 g. In the arsenic example, the 2.5% and 97.5% points of the bootstrap distribution give us the interval (92.6729, 162.3456), so we are 95% confident that the true mean arsenic level is between 92.6729 and 162.3456 $\mu g/L$. Note that with $\bar{X}^* =$ 125.0259, this interval can be written (125.0259 -32.353, 125.0259 + 37.3197); in particular, this interval is not symmetric about the mean, reflecting the asymmetry of the bootstrap distribution.
 
 
-The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the 271 observations, 8 are above 1000 $\mu g/L$ and 2 are above 2200 $\mu g/L$ (remember, the sample mean is only 125.3199!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this  that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
+The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the 271 observations, 8 are above 1000 $\mu g/L$ and 2 are above 2200 $\mu g/L$ (remember, the sample mean is only 125.3199!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this – that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
 
 #### TWO SAMPLE BOOTSTRAP
 
@@ -3590,7 +3600,7 @@ qqnorm(times.diff.mean, main = "Normal Q-Q Plot \n (Figure 8b)")
 qqline(times.diff.mean, col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/TIMES1.png" title="plot of chunk TIMES1" alt="plot of chunk TIMES1" style="display: block; margin: auto;" />
+<img src="figure/TIMES1.png" title="plot of chunk TIMES1" alt="plot of chunk TIMES1" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3609,7 +3619,7 @@ Figure 8a shows the bootstrap distribution of the difference of sample means. As
 The right panel of Figure 8b shows a normal-quantile plot for the bootstrap distribution: the distribution is very close to normal.
 
 
-The 95% bootstrap percentile confidence interval for the difference in means (basic  extended) is (0.86, 3.84). Thus, we are 95% confident that commercial times on basic channels are, on average, between 0.86 and 3.84 min. longer than on extended channels (perhalf-hour time periods).
+The 95% bootstrap percentile confidence interval for the difference in means (basic – extended) is (0.86, 3.84). Thus, we are 95% confident that commercial times on basic channels are, on average, between 0.86 and 3.84 min. longer than on extended channels (perhalf-hour time periods).
 
 We can also conduct a permutation test of the hypothesis that the mean commercial times for the two cable options are the same versus the hypothesis that mean times are not. Figure 9a shows the permutation distribution for the difference in mean advertisement time between basic and extended TV channels.
 
@@ -3632,7 +3642,7 @@ qqnorm(times.diff.meanP, main = "Normal Q-Q Plot \n (Figure 9b)")
 qqline(times.diff.meanP, col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/TIMES2a.png" title="plot of chunk TIMES2a" alt="plot of chunk TIMES2a" style="display: block; margin: auto;" />
+<img src="figure/TIMES2a.png" title="plot of chunk TIMES2a" alt="plot of chunk TIMES2a" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3676,7 +3686,7 @@ qqnorm(ILECmean, main = "Normal Q-Q Plot \n Figure 10b")
 qqline(ILECmean, col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/Phone1.png" title="plot of chunk Phone1" alt="plot of chunk Phone1" style="display: block; margin: auto;" />
+<img src="figure/Phone1.png" title="plot of chunk Phone1" alt="plot of chunk Phone1" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3709,7 +3719,7 @@ qqnorm(CLECmean, main = "Normal Q-Q Plot \n Figure 11b")
 qqline(CLECmean, col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/Timesb2.png" title="plot of chunk Timesb2" alt="plot of chunk Timesb2" style="display: block; margin: auto;" />
+<img src="figure/Timesb2.png" title="plot of chunk Timesb2" alt="plot of chunk Timesb2" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3742,7 +3752,7 @@ qqnorm(diffmeans, main = "Normal Q-Q Plot \n Figure 12b")
 qqline(diffmeans, col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/Times12ab.png" title="plot of chunk Times12ab" alt="plot of chunk Times12ab" style="display: block; margin: auto;" />
+<img src="figure/Times12ab.png" title="plot of chunk Times12ab" alt="plot of chunk Times12ab" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3783,7 +3793,7 @@ Savvy customers will often compare prices at different stores before making a pu
 
 Now, it may be tempting to proceed as in the TV commercials or Verizon repair times examples, looking at the prices as coming from two populations, B & H and J & R. But note that the data are *not independent*! For each camera priced at B & H, we matched it with the price for the same camera at J & R. Thus, the data are called *matched pairs or paired data*.
 
-In this case, for each camera, we compute the difference in price between the two stores (J & R price - B & H price). We then have one variable -- the price differences -- and we are back to the onesample setting. The price differences are shown in Figure 13a.
+In this case, for each camera, we compute the difference in price between the two stores (J & R price - B & H price). We then have one variable –-- the price differences –-- and we are back to the one–sample setting. The price differences are shown in Figure 13a.
 
 
 ```r
@@ -3813,7 +3823,7 @@ hist(boot.diffs, freq = FALSE, col = "lightblue", main = "Bootstrap Distribution
 abline(v = mean(boot.diffs), col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/Camera1a.png" title="plot of chunk Camera1a" alt="plot of chunk Camera1a" style="display: block; margin: auto;" />
+<img src="figure/Camera1a.png" title="plot of chunk Camera1a" alt="plot of chunk Camera1a" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3826,7 +3836,7 @@ Performing a one sample bootstrap with $10^5$ resamples, we find a 95% bootstrap
 
 As with permutation testing, when bootstrapping, we are not limited to simple statistics like the simple mean. Once we have drawn a bootstrap sample, we can calculate any statistic for that sample.
 
-For example, instead of the sample mean, we can use more robust statistics that are less sensitive to extreme observations. Figure 14a shows the bootstrap distribution for the difference in trimmed means, in this case 25% trimmed means, also known as the mid-mean, the mean of the middle 50% of observations. Compared to the bootstrap difference in ordinary means (Figure 12a), this distribution has a much smaller spread. The bootstrap procedure may be used with a wide variety of statistics -- means, medians, trimmed means, correlation coefficients, and so on -- using the same procedure. This is a major advantage of the bootstrap. It allows statistical inferences such as confidence intervals to be calculated even for statistics for which there are no easy formulas. It offers hope of reforming statistical practice -- away from simple but non-robust estimators like a sample mean or least-squares regression, in favor of robust alternatives.
+For example, instead of the sample mean, we can use more robust statistics that are less sensitive to extreme observations. Figure 14a shows the bootstrap distribution for the difference in trimmed means, in this case 25% trimmed means, also known as the mid-mean, the mean of the middle 50% of observations. Compared to the bootstrap difference in ordinary means (Figure 12a), this distribution has a much smaller spread. The bootstrap procedure may be used with a wide variety of statistics –-- means, medians, trimmed means, correlation coefficients, and so on –-- using the same procedure. This is a major advantage of the bootstrap. It allows statistical inferences such as confidence intervals to be calculated even for statistics for which there are no easy formulas. It offers hope of reforming statistical practice –-- away from simple but non-robust estimators like a sample mean or least-squares regression, in favor of robust alternatives.
 
 
 ```r
@@ -3845,7 +3855,7 @@ qqnorm(diffmeans.25, main = "Normal Q-Q Plot \n Figure 14b")
 qqline(diffmeans.25, col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/Robust.png" title="plot of chunk Robust" alt="plot of chunk Robust" style="display: block; margin: auto;" />
+<img src="figure/Robust.png" title="plot of chunk Robust" alt="plot of chunk Robust" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3882,7 +3892,7 @@ qqnorm(boot.ratio, main = "Normal Q-Q Plot \n Figure 15b")
 qqline(boot.ratio, col = "red")
 ```
 
-<img src="./figure/SamplingDistributions/Verizon6.png" title="plot of chunk Verizon6" alt="plot of chunk Verizon6" style="display: block; margin: auto;" />
+<img src="figure/Verizon6.png" title="plot of chunk Verizon6" alt="plot of chunk Verizon6" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -3913,7 +3923,7 @@ boot.obj <- boot(data = Phone, statistic = phoneF, R = 10000)
 plot(boot.obj)
 ```
 
-<img src="./figure/SamplingDistributions/BootAgain.png" title="plot of chunk BootAgain" alt="plot of chunk BootAgain" style="display: block; margin: auto;" />
+<img src="figure/BootAgain.png" title="plot of chunk BootAgain" alt="plot of chunk BootAgain" style="display: block; margin: auto;" />
 
 ```r
 boot.ci(boot.obj, type = "perc")
@@ -3932,9 +3942,39 @@ Level     Percentile
 Calculations and Intervals on Original Scale
 ```
 
-Another 95% bootstrap percentile confidence interval for the ratio of means (ILEC/CLEC) is (0.3274, 0.848), so with 95% confidence, the true mean repair times for ILEC customers is between 0.3274 and 0.848 times less than that for CLEC customers.
+Another 95% bootstrap percentile confidence interval for the ratio of means (ILEC/CLEC) is (
 
+```
 
+Error in eval(expr, envir, enclos) : could not find function "boot.ci"
+
+```
+
+, 
+
+```
+
+Error in eval(expr, envir, enclos) : could not find function "boot.ci"
+
+```
+
+), so with 95% confidence, the true mean repair times for ILEC customers is between 
+
+```
+
+Error in eval(expr, envir, enclos) : could not find function "boot.ci"
+
+```
+
+ and 
+
+```
+
+Error in eval(expr, envir, enclos) : could not find function "boot.ci"
+
+```
+
+ times less than that for CLEC customers.
 
 
 
@@ -3959,8 +3999,6 @@ Import the data `Girls2004.csv` available from [http:\\www1.appstate.edu/arnholt
   * Conduct a permutation test to calculate the difference in mean weights and state your conclusion.
   
   * For what population(s) if any, does this conclusion hold?  Explain.
-
-
 
 
 
@@ -4010,7 +4048,7 @@ qqnorm(Girls$Weight[Girls$State == "WY"], col = "pink")
 qqline(Girls$Weight[Girls$State == "WY"], col = "pink")
 ```
 
-<img src="./figure/InCLass/GirlsHist.png" title="plot of chunk GirlsHist" alt="plot of chunk GirlsHist" style="display: block; margin: auto;" />
+<img src="figure/GirlsHist.png" title="plot of chunk GirlsHist" alt="plot of chunk GirlsHist" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -4025,19 +4063,19 @@ require(lattice)
 histogram(~Weight | State, data = Girls, layout = c(1, 2), as.table = TRUE, type = "density")
 ```
 
-<img src="./figure/InCLass/GirlsHistLattice1.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
+<img src="figure/GirlsHistLattice1.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
 
 ```r
 qqmath(~Weight | State, data = Girls, layout = c(1, 2), as.table = TRUE)
 ```
 
-<img src="./figure/InCLass/GirlsHistLattice2.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
+<img src="figure/GirlsHistLattice2.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
 
 ```r
 qqmath(~Weight, group = State, data = Girls)
 ```
 
-<img src="./figure/InCLass/GirlsHistLattice3.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
+<img src="figure/GirlsHistLattice3.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
 
 
 A third approach is to use `ggplot2`. (This is my preference.)
@@ -4050,7 +4088,7 @@ p <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(binwidth = 500) + fa
 p
 ```
 
-<img src="./figure/InCLass/GirlsHistggplot21.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
+<img src="figure/GirlsHistggplot21.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 ```r
 p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..), 
@@ -4059,14 +4097,14 @@ p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..
 p1
 ```
 
-<img src="./figure/InCLass/GirlsHistggplot22.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
+<img src="figure/GirlsHistggplot22.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 ```r
 p2 <- ggplot(data = Girls, aes(sample = Weight, color = State)) + stat_qq()
 p2
 ```
 
-<img src="./figure/InCLass/GirlsHistggplot23.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
+<img src="figure/GirlsHistggplot23.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 
 ## Graphs are fun!
@@ -4123,7 +4161,7 @@ qqnorm(mean.diff, col = "blue")
 qqline(mean.diff, col = "red")
 ```
 
-<img src="./figure/InCLass/GirlsBoot.png" title="plot of chunk GirlsBoot" alt="plot of chunk GirlsBoot" style="display: block; margin: auto;" />
+<img src="figure/GirlsBoot.png" title="plot of chunk GirlsBoot" alt="plot of chunk GirlsBoot" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -4180,7 +4218,7 @@ hist(result, col = "blue", main = "", xlab = expression(bar(x)[1] - bar(x)[2]))
 abline(v = obs.mean.diff, col = "red")
 ```
 
-<img src="./figure/InCLass/GirlsPer.png" title="plot of chunk GirlsPer" alt="plot of chunk GirlsPer" style="display: block; margin: auto;" />
+<img src="figure/GirlsPer.png" title="plot of chunk GirlsPer" alt="plot of chunk GirlsPer" style="display: block; margin: auto;" />
 
 ```r
 pvalue <- (sum(abs(result) >= abs(obs.mean.diff) + 1))/(R + 1)  # p-value
@@ -4201,16 +4239,15 @@ The _p_-value for testing $H_0: \mu_{AK} = \mu_{WY}$ versus $H_A: \mu_{AK} \neq 
 
 
 
-
 CLASSICAL INFERENCE: CONFIDENCE INTERVALS
 ==========================================
 
 ### 7.1.1 Confidence Intervals for a Mean, $\sigma$ Known
 
 
-**Example 7.1** The Centers for Disease Control maintains growth charts for infants and children [(http://cdc.gov/growthcharts/zscore.html)](http://cdc.gov/growthcharts/zscore.html). For 13-year-old girls, the mean weight is 101 pounds with a standard deviation of 24.6 pounds. We assume the weights are normally distributed. The public health officials in Sodor are interested in the weights of the teens in their town: they suspect that the mean weight of their girls might be different from the mean weight in the growth chart but are willing to assume that the variation is the same. If they survey a random sample of 150 thirteen-year-old girls and find their mean weight  an estimate of the population mean weight  is 95 pounds, how accurate this estimate be? 
+**Example 7.1** The Centers for Disease Control maintains growth charts for infants and children [(http://cdc.gov/growthcharts/zscore.html)](http://cdc.gov/growthcharts/zscore.html). For 13-year-old girls, the mean weight is 101 pounds with a standard deviation of 24.6 pounds. We assume the weights are normally distributed. The public health officials in Sodor are interested in the weights of the teens in their town: they suspect that the mean weight of their girls might be different from the mean weight in the growth chart but are willing to assume that the variation is the same. If they survey a random sample of 150 thirteen-year-old girls and find their mean weight – an estimate of the population mean weight – is 95 pounds, how accurate this estimate be? 
 
-We assume the 150 sample values are from a normal distribution, $N(\mu, 24.6)$. Then the sampling distribution of mean weights is $N(\mu, 24.6/\sqrt{150})$. Let $\bar{X}$ denote the mean of the 150 weights, so standardizing gives $Z = (\bar{X}  \mu)/(24.6/\sqrt{150}) \sim N(0, 1)$.  For a standard normal random variable $Z$, we have $$P(z_{\alpha/2} < Z < z_{1-\alpha/2})$$ 
+We assume the 150 sample values are from a normal distribution, $N(\mu, 24.6)$. Then the sampling distribution of mean weights is $N(\mu, 24.6/\sqrt{150})$. Let $\bar{X}$ denote the mean of the 150 weights, so standardizing gives $Z = (\bar{X} – \mu)/(24.6/\sqrt{150}) \sim N(0, 1)$.  For a standard normal random variable $Z$, we have $$P(z_{\alpha/2} < Z < z_{1-\alpha/2})$$ 
 
 The random interval $(\bar{X} - 3.937, \bar{X} + 3.937)$ has a probability of 0.95 of containing the mean $\mu$. Now, once you drive your sample, the random variable $\bar{X}$ is replaced by the (observed) sample mean weight of $\bar{x} = 95$, and the interval (91.1, 98.9) is no longer a random interval. We interpret this interval by stating that we are 95% confident that the population mean weight of 13-year-old girls Sodor is between 91.9 in 98.9 pounds.
 
@@ -4251,7 +4288,7 @@ for (i in 1:sims) {
 abline(v = mu, col = "red")
 ```
 
-<img src="./figure/CIs/ACL.png" title="plot of chunk ACL" alt="plot of chunk ACL" style="display: block; margin: auto;" />
+<img src="figure/ACL.png" title="plot of chunk ACL" alt="plot of chunk ACL" style="display: block; margin: auto;" />
 
 ```r
 ACL <- counter/sims * 100
@@ -4272,7 +4309,7 @@ set.seed(11)
 CIsim(samples = 100, n = 30, parameter = 25, sigma = 4, type = "Mean")
 ```
 
-<img src="./figure/CIs/CIsim.png" title="plot of chunk CIsim" alt="plot of chunk CIsim" style="display: block; margin: auto;" />
+<img src="figure/CIsim.png" title="plot of chunk CIsim" alt="plot of chunk CIsim" style="display: block; margin: auto;" />
 
 ```
 6 % of the random confidence intervals do not contain Mu = 25 . 
@@ -4384,7 +4421,7 @@ qqnorm(TS, col = rgb(1, 0, 0, 0.1))
 abline(a = 0, b = 1)
 ```
 
-<img src="./figure/CIs/TS.png" title="plot of chunk TS" alt="plot of chunk TS" style="display: block; margin: auto;" />
+<img src="figure/TS.png" title="plot of chunk TS" alt="plot of chunk TS" style="display: block; margin: auto;" />
 
 ```r
 par(mfrow = c(1, 1))
@@ -4409,7 +4446,7 @@ legend("topright", legend = c("N(0, 1)", "t_1", "t_4", "t_9", "t_36"), lty = c(1
     2, 3, 4, 5), col = c("black", "green", "pink", "red", "blue"), lwd = 1.5)
 ```
 
-<img src="./figure/CIs/tdfs.png" title="plot of chunk tdfs" alt="plot of chunk tdfs" style="display: block; margin: auto;" />
+<img src="figure/tdfs.png" title="plot of chunk tdfs" alt="plot of chunk tdfs" style="display: block; margin: auto;" />
 
 
 We derive the confidence interval for $\mu$ when $\sigma$ is unknown in the same way as when $\sigma$ is known.  Let $t_{1 - \alpha/2; n-1}$ denote the $(1 - \alpha/2)$ quantile of the $t$ distribution with $n - 1$ degrees of freedom, $P(T_{n-1} < t_{1-\alpha/2; n-1}) =1 - \alpha/2, 0 < \alpha <1$. Then using symmetry of the $t$ distribution, we have
@@ -4505,14 +4542,14 @@ qqnorm(NCBirths2004$Weight[NCBirths2004$Gender == "Female"], main = "", col = rg
 qqline(NCBirths2004$Weight[NCBirths2004$Gender == "Female"], col = "blue")
 ```
 
-<img src="./figure/CIs/QQs1.png" title="plot of chunk QQs" alt="plot of chunk QQs" style="display: block; margin: auto;" />
+<img src="figure/QQs1.png" title="plot of chunk QQs" alt="plot of chunk QQs" style="display: block; margin: auto;" />
 
 ```r
 require(lattice)
 qqmath(~Weight | Gender, data = NCBirths2004, col = rgb(1, 0, 0, 0.1))
 ```
 
-<img src="./figure/CIs/QQs2.png" title="plot of chunk QQs" alt="plot of chunk QQs" style="display: block; margin: auto;" />
+<img src="figure/QQs2.png" title="plot of chunk QQs" alt="plot of chunk QQs" style="display: block; margin: auto;" />
 
 ```r
 require(ggplot2)
@@ -4520,7 +4557,7 @@ ggplot(data = NCBirths2004, aes(sample = Weight)) + stat_qq(color = rgb(1, 0, 0,
     0.1)) + facet_grid(. ~ Gender)
 ```
 
-<img src="./figure/CIs/QQs3.png" title="plot of chunk QQs" alt="plot of chunk QQs" style="display: block; margin: auto;" />
+<img src="figure/QQs3.png" title="plot of chunk QQs" alt="plot of chunk QQs" style="display: block; margin: auto;" />
 
 Since $1 - \alpha = 0.99$, it follows that $\alpha/2 = 0.005$.  The 0.995 quantile for the $t$ distribution with 520 degrees of freedom is $t_{0.995; 520}=$ 2.5853.  Thus, the 99% confidence interval is 3398.3167$\pm$ 2.5853$\times$ 485.6911 $/\sqrt{521} =$ (3343.305, 3453.3284) g.
 
@@ -4633,7 +4670,7 @@ qqmath(~TSU, col = "red", xlim = c(-3, 3), ylim = c(-3, 3), distribution = funct
     })
 ```
 
-<img src="./figure/CIs/taccurate1.png" title="plot of chunk taccurate" alt="plot of chunk taccurate" style="display: block; margin: auto;" />
+<img src="figure/taccurate1.png" title="plot of chunk taccurate" alt="plot of chunk taccurate" style="display: block; margin: auto;" />
 
 ```r
 # 
@@ -4646,7 +4683,7 @@ qqmath(~TSE10, col = "red", xlim = c(-3, 3), ylim = c(-3, 3), distribution = fun
     })
 ```
 
-<img src="./figure/CIs/taccurate2.png" title="plot of chunk taccurate" alt="plot of chunk taccurate" style="display: block; margin: auto;" />
+<img src="figure/taccurate2.png" title="plot of chunk taccurate" alt="plot of chunk taccurate" style="display: block; margin: auto;" />
 
 ```r
 # 
@@ -4660,7 +4697,7 @@ qqmath(~TSE100, col = "red", xlim = c(-3, 3), ylim = c(-3, 3), distribution = fu
     })
 ```
 
-<img src="./figure/CIs/taccurate3.png" title="plot of chunk taccurate" alt="plot of chunk taccurate" style="display: block; margin: auto;" />
+<img src="figure/taccurate3.png" title="plot of chunk taccurate" alt="plot of chunk taccurate" style="display: block; margin: auto;" />
 
 ```r
 # 
@@ -4676,7 +4713,7 @@ p <- ggplot(data = DF, aes(sample = TSU)) + stat_qq(distribution = qt, dparams =
 p + geom_abline(intercept = 0, slope = 1, color = "gray")
 ```
 
-<img src="./figure/CIs/ggplots1.png" title="plot of chunk ggplots" alt="plot of chunk ggplots" style="display: block; margin: auto;" />
+<img src="figure/ggplots1.png" title="plot of chunk ggplots" alt="plot of chunk ggplots" style="display: block; margin: auto;" />
 
 ```r
 # 
@@ -4686,7 +4723,7 @@ p <- ggplot(data = DF, aes(sample = TSE10)) + stat_qq(distribution = qt, dparams
 p + geom_abline(intercept = 0, slope = 1, color = "gray")
 ```
 
-<img src="./figure/CIs/ggplots2.png" title="plot of chunk ggplots" alt="plot of chunk ggplots" style="display: block; margin: auto;" />
+<img src="figure/ggplots2.png" title="plot of chunk ggplots" alt="plot of chunk ggplots" style="display: block; margin: auto;" />
 
 ```r
 # 
@@ -4696,12 +4733,12 @@ p <- ggplot(data = DF, aes(sample = TSE100)) + stat_qq(distribution = qt, dparam
 p + geom_abline(intercept = 0, slope = 1, color = "gray")
 ```
 
-<img src="./figure/CIs/ggplots3.png" title="plot of chunk ggplots" alt="plot of chunk ggplots" style="display: block; margin: auto;" />
+<img src="figure/ggplots3.png" title="plot of chunk ggplots" alt="plot of chunk ggplots" style="display: block; margin: auto;" />
 
 The previous graphs compare the distribution of $t$ statistics for samples of size $n = 10$  from a uniform distribution,  size $n = 10$  from an exponential distribution,  and size $n = 100$  from an exponential distribution to the $t$ distribution. The range on all plots is truncated so that we can focus on the range of values important for confidence intervals. Notice that for  the uniform population,  the distribution of the $t$ statistic is close to the  $t$ distribution, except in the tails.  For exponential populations, the discrepancy  is much larger, and the discrepancy decreases only slowly as the sample size increases.  To reduce the discrepancy (the difference between actual and nominal  probabilities) by a factor of 10  requires a sample size 100 times larger. For an exponential population, we must have $n > 5000$  before the actual probabilities of a 95% $t$ interval  missing the true mean in either tail are within 10% of the desired probability of 2.5%;  that is,  the actual tail probabilities are between 2.25% and  2.75%.
 
 
-Before using  a $t$ confidence interval,  you should create a normal quantile plot  to see whether the data are skewed. The larger the sample size, the more skew can be tolerated. There are skewness adjusted versions of $t$ intervals including bootstrap $t$ intervals that we cover later. However, be particularly careful with outliers:  since $\bar{x}$ is sensitive to extreme values, outliers can have a big impact on confidence intervals   a bigger impact than skewness. If you have outliers in your data, you should investigate: are these recording errors or observations that are not representative of the population? If the former, correct them; and if the latter,  remove them. If the outliers cannot be removed, then advanced,  more robust techniques may be required.
+Before using  a $t$ confidence interval,  you should create a normal quantile plot  to see whether the data are skewed. The larger the sample size, the more skew can be tolerated. There are skewness adjusted versions of $t$ intervals including bootstrap $t$ intervals that we cover later. However, be particularly careful with outliers:  since $\bar{x}$ is sensitive to extreme values, outliers can have a big impact on confidence intervals  – a bigger impact than skewness. If you have outliers in your data, you should investigate: are these recording errors or observations that are not representative of the population? If the former, correct them; and if the latter,  remove them. If the outliers cannot be removed, then advanced,  more robust techniques may be required.
 
 ### 7.1.3 Confidence Intervals for a Difference in Means
 
@@ -4740,16 +4777,82 @@ Construct a 90% confidence interval for $\mu_X - \mu_Y$ using the information in
 ggplot(data = Calculus, aes(sample = Calculus$No.Calculus)) + stat_qq() + ggtitle("No Calculus")
 ```
 
-<img src="./figure/CIs/NORMALITY1.png" title="plot of chunk NORMALITY" alt="plot of chunk NORMALITY" style="display: block; margin: auto;" />
+<img src="figure/NORMALITY1.png" title="plot of chunk NORMALITY" alt="plot of chunk NORMALITY" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = Calculus, aes(sample = Calculus$Yes.Calculus)) + stat_qq() + ggtitle("Yes Calculus")
 ```
 
-<img src="./figure/CIs/NORMALITY2.png" title="plot of chunk NORMALITY" alt="plot of chunk NORMALITY" style="display: block; margin: auto;" />
+<img src="figure/NORMALITY2.png" title="plot of chunk NORMALITY" alt="plot of chunk NORMALITY" style="display: block; margin: auto;" />
 
 
-For the $n_X = 18$ students who had no calculus, the mean and standard deviation of their course scores are $\bar{x}=$ 62.6111, and $s_X =$ 13.2227. For the $n_Y = 18$ students who had calculus, the mean and standard deviation of their course scores are $\bar{y}=$ 86.9444, and $s_Y =$ 4.3178. The mean difference is $\bar{x} -\bar{y}=$ -24.3333 with the standard error of the difference of 3.2786 and degrees of freedom are 20.5848.  The 0.95 quantile of the $t$ distribution with 20.5848 degrees of freedom is 1.7223.  Thus, the 90% confidence interval is $-24.333 \pm 1.7233 \times 3.2786 = (-29.9802, -18.6865)$.
+For the $n_X = 18$ students who had no calculus, the mean and standard deviation of their course scores are $\bar{x}=$ 
+
+```
+
+Error in mean(Calculus$No.Calculus) : object 'Calculus' not found
+
+```
+
+, and $s_X =$ 
+
+```
+
+Error in is.data.frame(x) : object 'Calculus' not found
+
+```
+
+. For the $n_Y = 18$ students who had calculus, the mean and standard deviation of their course scores are $\bar{y}=$ 
+
+```
+
+Error in mean(Calculus$Yes.Calculus) : object 'Calculus' not found
+
+```
+
+, and $s_Y =$ 
+
+```
+
+Error in is.data.frame(x) : object 'Calculus' not found
+
+```
+
+. The mean difference is $\bar{x} -\bar{y}=$ 
+
+```
+
+Error in mean(Calculus$No.Calculus) : object 'Calculus' not found
+
+```
+
+ with the standard error of the difference of 
+
+```
+
+Error in is.data.frame(x) : object 'Calculus' not found
+
+```
+
+ and degrees of freedom are 
+
+```
+
+Error in t.test(Calculus$No.Calculus, Calculus$Yes.Calculus) : 
+  object 'Calculus' not found
+
+```
+
+.  The 0.95 quantile of the $t$ distribution with 
+
+```
+
+Error in t.test(Calculus$No.Calculus, Calculus$Yes.Calculus) : 
+  object 'Calculus' not found
+
+```
+
+ degrees of freedom is 1.7223.  Thus, the 90% confidence interval is $-24.333 \pm 1.7233 \times 3.2786 = (-29.9802, -18.6865)$.
 
 **R Note:**
 
@@ -4796,13 +4899,13 @@ Texas <- read.csv(file = url(site))
 ggplot(data = Texas, aes(x = Weight)) + geom_histogram() + facet_grid(Gender ~ .)
 ```
 
-<img src="./figure/CIs/Texas1.png" title="plot of chunk Texas" alt="plot of chunk Texas" style="display: block; margin: auto;" />
+<img src="figure/Texas1.png" title="plot of chunk Texas" alt="plot of chunk Texas" style="display: block; margin: auto;" />
 
 ```r
 ggplot(data = Texas, aes(sample = Weight)) + stat_qq() + facet_grid(Gender ~ .)
 ```
 
-<img src="./figure/CIs/Texas2.png" title="plot of chunk Texas" alt="plot of chunk Texas" style="display: block; margin: auto;" />
+<img src="figure/Texas2.png" title="plot of chunk Texas" alt="plot of chunk Texas" style="display: block; margin: auto;" />
 
 
 
@@ -4999,7 +5102,7 @@ fptilde <- sqrt(ptilde * (1 - ptilde))
 plot(ptilde, fptilde, type = "l", ylab = "", xlab = expression(tilde(p)))
 ```
 
-<img src="./figure/CIs/maxp.png" title="plot of chunk maxp" alt="plot of chunk maxp" style="display: block; margin: auto;" />
+<img src="figure/maxp.png" title="plot of chunk maxp" alt="plot of chunk maxp" style="display: block; margin: auto;" />
 
 
 $$1.96\sqrt{\frac{0.5(1 - 0.5)}{\tilde{n}}} \leq 0.04$$
@@ -5153,7 +5256,7 @@ for (alpha in c(0.01, 0.02, 0.05, 0.1)) {
 }
 ```
 
-<img src="./figure/CIs/coveragePLOT.png" title="plot of chunk coveragePLOT" alt="plot of chunk coveragePLOT" style="display: block; margin: auto;" />
+<img src="figure/coveragePLOT.png" title="plot of chunk coveragePLOT" alt="plot of chunk coveragePLOT" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -5191,7 +5294,7 @@ for (alpha in c(0.01, 0.02, 0.05, 0.1)) {
 }
 ```
 
-<img src="./figure/CIs/WilsonCover.png" title="plot of chunk WilsonCover" alt="plot of chunk WilsonCover" style="display: block; margin: auto;" />
+<img src="figure/WilsonCover.png" title="plot of chunk WilsonCover" alt="plot of chunk WilsonCover" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -5229,7 +5332,7 @@ for (alpha in c(0.01, 0.02, 0.05, 0.1)) {
 }
 ```
 
-<img src="./figure/CIs/ACCover.png" title="plot of chunk ACCover" alt="plot of chunk ACCover" style="display: block; margin: auto;" />
+<img src="figure/ACCover.png" title="plot of chunk ACCover" alt="plot of chunk ACCover" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -5263,7 +5366,7 @@ head(Bangladesh)
 ggplot(data = Bangladesh, aes(x = Arsenic)) + geom_histogram()
 ```
 
-<img src="./figure/CIs/BangladeshA.png" title="plot of chunk BangladeshA" alt="plot of chunk BangladeshA" style="display: block; margin: auto;" />
+<img src="figure/BangladeshA.png" title="plot of chunk BangladeshA" alt="plot of chunk BangladeshA" style="display: block; margin: auto;" />
 
 To use the $t$ interval formula for the mean $\mu$ requires that the statistic $T = (\bar{x} - \mu)/(S/\sqrt{n})$ to follow a $t_{\nu}$. That seems unlikely for data this skewed. Instead, we bootstrap the $t$ statistic: for each of the $10^5$ resamples, we compute the resample mean $\bar{X}^*$, resample standard deviation $S^*$, and then compute the resample $T$ statistic $T^* = (\bar{X}^* - \bar{x})/(S^*/\sqrt{n})$
 
@@ -5305,7 +5408,7 @@ hist(Xbarstar, xlab = substitute(paste(bar(X), "*")), main = substitute(paste("B
     bar(X), "*")), col = "red", breaks = "Scott")
 ```
 
-<img src="./figure/CIs/BOOTarsenic.png" title="plot of chunk BOOTarsenic" alt="plot of chunk BOOTarsenic" style="display: block; margin: auto;" />
+<img src="figure/BOOTarsenic.png" title="plot of chunk BOOTarsenic" alt="plot of chunk BOOTarsenic" style="display: block; margin: auto;" />
 
 ```r
 par(opar)
@@ -5382,7 +5485,7 @@ Calculations and Intervals on Original Scale
 plot(boot.out)
 ```
 
-<img src="./figure/CIs/packageboot1.png" title="plot of chunk packageboot" alt="plot of chunk packageboot" style="display: block; margin: auto;" />
+<img src="figure/packageboot1.png" title="plot of chunk packageboot" alt="plot of chunk packageboot" style="display: block; margin: auto;" />
 
 ```r
 hist(boot.out$t[, 1], col = "pink", breaks = "Scott", main = "", xlab = substitute(paste(bar(X), 
@@ -5390,7 +5493,7 @@ hist(boot.out$t[, 1], col = "pink", breaks = "Scott", main = "", xlab = substitu
 lines(density(boot.out$t[, 1]), lwd = 2)
 ```
 
-<img src="./figure/CIs/packageboot2.png" title="plot of chunk packageboot" alt="plot of chunk packageboot" style="display: block; margin: auto;" />
+<img src="figure/packageboot2.png" title="plot of chunk packageboot" alt="plot of chunk packageboot" style="display: block; margin: auto;" />
 
 ```r
 hist((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5, col = "pink", breaks = "Scott", 
@@ -5398,7 +5501,7 @@ hist((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5, col = "pink", bre
 lines(density((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5), lwd = 2)
 ```
 
-<img src="./figure/CIs/packageboot3.png" title="plot of chunk packageboot" alt="plot of chunk packageboot" style="display: block; margin: auto;" />
+<img src="figure/packageboot3.png" title="plot of chunk packageboot" alt="plot of chunk packageboot" style="display: block; margin: auto;" />
 
 
 The bootstrap intervals for a difference in means follows the same idea.
@@ -5504,7 +5607,7 @@ Calculations and Intervals on Original Scale
 plot(boot.out)
 ```
 
-<img src="./figure/CIs/packageboot2m1.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
+<img src="figure/packageboot2m1.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
 hist(boot.out$t[, 1], col = "pink", breaks = "Scott", main = "", freq = FALSE, xlab = substitute(paste(bar(x)[1], 
@@ -5512,14 +5615,14 @@ hist(boot.out$t[, 1], col = "pink", breaks = "Scott", main = "", freq = FALSE, x
 lines(density(boot.out$t[, 1]), lwd = 2)
 ```
 
-<img src="./figure/CIs/packageboot2m2.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
+<img src="figure/packageboot2m2.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
 qqnorm(boot.out$t[, 1], col = rgb(1, 0, 0, 0.05))
 qqline(boot.out$t[, 1])
 ```
 
-<img src="./figure/CIs/packageboot2m3.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
+<img src="figure/packageboot2m3.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
 # ggplot2 Now
@@ -5530,7 +5633,7 @@ ggplot(data = BO, aes(x = V1, y = ..density..)) + geom_histogram(fill = "pink") 
     color = "red")
 ```
 
-<img src="./figure/CIs/packageboot2m4.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
+<img src="figure/packageboot2m4.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
 p <- ggplot(data = BO, aes(sample = V1)) + stat_qq(pch = ".", color = rgb(1, 0, 0, 
@@ -5538,7 +5641,7 @@ p <- ggplot(data = BO, aes(sample = V1)) + stat_qq(pch = ".", color = rgb(1, 0, 
 p
 ```
 
-<img src="./figure/CIs/packageboot2m5.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
+<img src="figure/packageboot2m5.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
 hist((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5, col = "pink", breaks = "Scott", 
@@ -5546,7 +5649,7 @@ hist((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5, col = "pink", bre
 lines(density((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5), lwd = 2)
 ```
 
-<img src="./figure/CIs/packageboot2m6.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
+<img src="figure/packageboot2m6.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
 qqnorm((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5, col = rgb(1, 0, 
@@ -5554,7 +5657,7 @@ qqnorm((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5, col = rgb(1, 0,
 qqline((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5)
 ```
 
-<img src="./figure/CIs/packageboot2m7.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
+<img src="figure/packageboot2m7.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 
 **7.5.1 Comparing Bootstrap $t$ and Formula $t$ Confidence Intervals**
