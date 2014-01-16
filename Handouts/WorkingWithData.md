@@ -98,7 +98,7 @@ str(poplarC)
 ```
 
 
-In the event different values (999, 99, 9999) for different variables (`var1`, `var2`, `var3`) are used to represent missing values in a data set, the argument \verb|na.strings=| will no longer be able to solve the problem directly.  Although one can pass a vector of the form `na.strings = c(999, 99, 9999)`, this will simply replace all values that are 999,  99, or 9999 with `NA`s.  If the first variable has a legitimate value of 99, then it too would be replaced with an `NA` value.  One solution for this problem in general is to read the data set into a data frame (`DF`), to assign the data frame to a different name so that the cleaned up data set is not confused with the original data, and to use filtering to assign `NA`s to values of `var1`, `var2`, and `var3` that have entries of 999, 99, and 999, respectively.
+In the event different values (999, 99, 9999) for different variables (`var1`, `var2`, `var3`) are used to represent missing values in a data set, the argument `na.strings=` will no longer be able to solve the problem directly.  Although one can pass a vector of the form `na.strings = c(999, 99, 9999)`, this will simply replace all values that are 999,  99, or 9999 with `NA`s.  If the first variable has a legitimate value of 99, then it too would be replaced with an `NA` value.  One solution for this problem in general is to read the data set into a data frame (`DF`), to assign the data frame to a different name so that the cleaned up data set is not confused with the original data, and to use filtering to assign `NA`s to values of `var1`, `var2`, and `var3` that have entries of 999, 99, and 999, respectively.
 
 
 ```r
