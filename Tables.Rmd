@@ -1,0 +1,20 @@
+# Working with Tables and `xtable`
+
+## Alan Arnholt
+
+Suppose we have some results we would like to display in a table such as
+the results from the following code chunk:
+
+```{r echo = FALSE, message = FALSE, comment = NA}
+library(PASWR)
+T1 <- xtabs(~Treatment + Ease, data = EPIDURALf)
+T1
+```
+
+To create a Table with a caption, we need first to load the `xtable` package.
+
+```{r results ='asis'}
+library(xtable)
+print(xtable(T1, caption = "You put something here"), type = 'html')
+```
+
