@@ -11,10 +11,18 @@ T1 <- xtabs(~Treatment + Ease, data = EPIDURALf)
 T1
 ```
 
-To create a Table with a caption, we need first to load the `xtable` package.
+To create a Table with `xtable`, first load the `xtable` package.
 
 ```{r results ='asis'}
 library(xtable)
-print(xtable(T1, caption = "You put something here"), type = 'html')
+print(xtable(T1, caption = "Table 1: Treatment versus Ease"), type = 'html')
 ```
 
+```{r}
+tapply(EPIDURALf$kg, list(EPIDURALf$Ease, EPIDURALf$Doctor), mean)
+```
+
+
+```{r results ='asis', echo = FALSE}
+print(xtable(tapply(EPIDURALf$kg, list(EPIDURALf$Ease, EPIDURALf$Doctor), mean), caption = "Table 2: Put Something Here"), type = 'html')
+```
