@@ -23,7 +23,7 @@ print(xtable(T1, caption = "Table 1: Treatment versus Ease"), type = "html")
 ```
 
 <!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
-<!-- Thu Jan 30 13:09:46 2014 -->
+<!-- Thu Jan 30 13:15:48 2014 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 1: Treatment versus Ease </CAPTION>
 <TR> <TH>  </TH> <TH> Difficult </TH> <TH> Easy </TH> <TH> Impossible </TH>  </TR>
@@ -47,7 +47,7 @@ tapply(EPIDURALf$kg, list(EPIDURALf$Ease, EPIDURALf$Doctor), mean)
 
 
 <!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
-<!-- Thu Jan 30 13:09:46 2014 -->
+<!-- Thu Jan 30 13:15:48 2014 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 2: Put Something Here </CAPTION>
 <TR> <TH>  </TH> <TH> A </TH> <TH> B </TH> <TH> C </TH> <TH> D </TH>  </TR>
