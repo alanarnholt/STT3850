@@ -5,7 +5,7 @@ Class Notes For STT 3850
 Last compiled:
 
 ```
-[1] "Wednesday, January 01, 2014 - 5:34:12 PM."
+[1] "Monday, February 03, 2014 - 6:53:23 PM."
 ```
 
 
@@ -603,6 +603,22 @@ p + geom_smooth(method = lm)
 ```
 
 <img src="figure/Bplot4.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
+
+
+## Integrating with R
+
+
+```r
+f <- function(x) {
+    (x - 1)^3 * exp(-x)
+}
+ans <- integrate(f, lower = 0, upper = Inf)$value
+ans
+```
+
+```
+[1] 2
+```
 
 
 
