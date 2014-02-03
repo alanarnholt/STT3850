@@ -1,0 +1,43 @@
+# Working with Tables and `xtable`
+
+## Alan Arnholt
+
+Suppose we have some results we would like to display in a table such as
+the results from the following code chunk:
+
+```{r echo = FALSE, message = FALSE, comment = NA}
+library(PASWR)
+T1 <- xtabs(~Treatment + Ease, data = EPIDURALf)
+T1
+```
+
+To create a Table with `xtable`, first load the `xtable` package.
+
+```{r results ='asis'}
+library(xtable)
+print(xtable(T1, caption = "Table 1: Treatment versus Ease"), type = 'html')
+```
+
+```{r comment = NA}
+tapply(EPIDURALf$kg, list(EPIDURALf$Ease, EPIDURALf$Doctor), mean)
+```
+
+
+```{r results ='asis', echo = FALSE}
+print(xtable(tapply(EPIDURALf$kg, list(EPIDURALf$Ease, EPIDURALf$Doctor), mean), caption = "Table 2: Put Something Here"), type = 'html')
+```
+Suppose we want the results from a regression.
+
+```{r comment = NA}
+summary(lm(cm ~ kg, data = EPIDURALf))$coefficients
+```
+
+```{r results ='asis', echo = FALSE}
+print(xtable(summary(lm(cm ~ kg, data = EPIDURALf))$coefficients, caption = "Table 3: Put Something Here", digits = 2), type = 'html')
+```
+
+Next we have an ANOVA table:
+
+```{r results ='asis', echo = FALSE}
+print(xtable(anova(lm(cm ~ Ease, data = EPIDURALf)), caption = "Table 4: Put Something Here Again", digits = 4), type = 'html')
+```
