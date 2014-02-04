@@ -5,7 +5,7 @@ Class Notes For STT 3850
 Last compiled:
 
 ```
-[1] "Wednesday, January 01, 2014 - 5:34:12 PM."
+[1] "Monday, February 03, 2014 - 7:17:48 PM."
 ```
 
 
@@ -603,6 +603,22 @@ p + geom_smooth(method = lm)
 ```
 
 <img src="figure/Bplot4.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
+
+
+## Integrating with R
+
+
+```r
+f <- function(x) {
+    (x - 1)^3 * exp(-x)
+}
+ans <- integrate(f, lower = 0, upper = Inf)$value
+ans
+```
+
+```
+[1] 2
+```
 
 
 
@@ -3164,7 +3180,7 @@ WD <- BD
 
 
 <!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
-<!-- Wed Jan 01 17:35:44 2014 -->
+<!-- Mon Feb 03 19:19:21 2014 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 1 --- All possible Samples of Size 3 from 3969, 3204, and 2892 </CAPTION>
 <TR> <TH> $x^*_1$ </TH> <TH> $x^*_2$ </TH> <TH> $x^*_3$ </TH> <TH> $\bar{x}^*$ </TH>  </TR>
