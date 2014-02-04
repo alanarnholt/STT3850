@@ -24,7 +24,7 @@ tapply(EPIDURALf$kg, list(EPIDURALf$Ease, EPIDURALf$Doctor), mean)
 
 
 ```{r results ='asis', echo = FALSE}
-print(xtable(tapply(EPIDURALf$kg, list(EPIDURALf$Ease, EPIDURALf$Doctor), mean), caption = "Table 2: Put Something Here"), type = 'html')
+print(xtable(tapply(EPIDURALf$kg, list(EPIDURALf$Ease, EPIDURALf$Doctor), mean), caption = "Table 2: Pithy Caption---Cease work on that superflous banter and pious jargon"), type = 'html')
 ```
 Suppose we want the results from a regression.
 
