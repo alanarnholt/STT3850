@@ -24,7 +24,7 @@ The data from Poplar3.CSV is read into the data frame poplar using the `read.csv
 ```r
 site <- "http://www1.appstate.edu/~arnholta/PASWR/CD/data/Poplar3.CSV"
 poplar <- read.csv(file = url(site))
-head(poplar, n = 5)  # show first five rows
+head(poplar, n = 6)  # show first five rows
 ```
 
 ```
@@ -34,6 +34,7 @@ head(poplar, n = 5)  # show first five rows
 3    1    1         1     1.06   1.85   0.02   3
 4    1    1         1     2.12   3.64   0.16   3
 5    1    1         1     2.99   4.64   0.37   3
+6    1    1         1     4.01   5.25   0.73   3
 ```
 
 

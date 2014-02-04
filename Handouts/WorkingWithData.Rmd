@@ -28,7 +28,7 @@ The data from Poplar3.CSV is read into the data frame poplar using the `read.csv
 ```{r}
 site <- "http://www1.appstate.edu/~arnholta/PASWR/CD/data/Poplar3.CSV"
 poplar <- read.csv(file = url(site))
-head(poplar, n = 5)  # show first five rows
+head(poplar, n = 6)  # show first five rows
 ```
 
 When dealing with imported data sets, it is always good to examine their contents using functions such as `str()` and `summary()`, which show the structure and provide appropriate summaries, respectively, for different types of objects.

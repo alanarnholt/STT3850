@@ -196,7 +196,7 @@ hljs.initHighlightingOnLoad();
 
 <pre><code class="r">site &lt;- &quot;http://www1.appstate.edu/~arnholta/PASWR/CD/data/Poplar3.CSV&quot;
 poplar &lt;- read.csv(file = url(site))
-head(poplar, n = 5)  # show first five rows
+head(poplar, n = 6)  # show first five rows
 </code></pre>
 
 <pre><code>  Site Year Treatment Diameter Height Weight Age
@@ -205,6 +205,7 @@ head(poplar, n = 5)  # show first five rows
 3    1    1         1     1.06   1.85   0.02   3
 4    1    1         1     2.12   3.64   0.16   3
 5    1    1         1     2.99   4.64   0.37   3
+6    1    1         1     4.01   5.25   0.73   3
 </code></pre>
 
 <p>When dealing with imported data sets, it is always good to examine their contents using functions such as <code>str()</code> and <code>summary()</code>, which show the structure and provide appropriate summaries, respectively, for different types of objects.</p>
