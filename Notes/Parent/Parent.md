@@ -5,7 +5,7 @@ Class Notes For STT 3850
 Last compiled:
 
 ```
-[1] "Monday, February 03, 2014 - 7:17:48 PM."
+[1] "Monday, February 03, 2014 - 7:24:19 PM."
 ```
 
 
@@ -599,7 +599,7 @@ p + geom_smooth()
 <img src="figure/Bplot3.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
 
 ```r
-p + geom_smooth(method = lm)
+p + geom_smooth(method = lm) + theme_bw()
 ```
 
 <img src="figure/Bplot4.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />

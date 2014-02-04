@@ -173,7 +173,7 @@ with(data = Beerwings, plot(Hotwings, Beer, xlab = "Hot wings eaten", ylab = "Be
 p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + geom_point() + labs(x = "Hot wings eaten", y = "Beer consumed in ounces")
 p
 p + geom_smooth()
-p + geom_smooth(method = lm)
+p + geom_smooth(method = lm) + theme_bw()
 ```
 
 ## Integrating with R
