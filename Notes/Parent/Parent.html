@@ -189,7 +189,7 @@ hljs.initHighlightingOnLoad();
 
 <p>Last compiled:</p>
 
-<pre><code>[1] &quot;Thursday, February 06, 2014 - 08:51:46.&quot;
+<pre><code>[1] &quot;Thursday, February 06, 2014 - 09:04:19.&quot;
 </code></pre>
 
 <p>Most of the material in the notes is taken from the class text <em>Mathematical Statistics with Resampling and <code>R</code></em> by Laura Chihara and Tim Hesterberg with slight modifications.  Some material in the notes is also taken from the first chapter of <em>Practicing Statistics: Guided Investigations for the Second Course</em> by Shonda Kuiper and Jeffrey Sklar.  There are a number of places to get help with <code>R</code>.  The class text has some material online at: <a href="https://sites.google.com/site/chiharahesterberg/rtutorials">https://sites.google.com/site/chiharahesterberg/rtutorials</a>.  </p>
@@ -3467,7 +3467,7 @@ CIratio
 
 <h3>Using <code>boot</code> Again</h3>
 
-<pre><code class="r">require(boot)
+<pre><code class="r">library(boot)
 phoneF &lt;- function(data, i){
   d &lt;- data[i, ]
   m &lt;- tapply(d$Time, d$Group, mean)

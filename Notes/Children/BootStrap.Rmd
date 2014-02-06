@@ -488,7 +488,7 @@ As in the difference of means example, the bootstrap distribution of the ratio o
 ### Using `boot` Again
 
 ```{r BootAgain, fig.height=3.5, fig.width=7}
-require(boot)
+library(boot)
 phoneF <- function(data, i){
   d <- data[i, ]
   m <- tapply(d$Time, d$Group, mean)

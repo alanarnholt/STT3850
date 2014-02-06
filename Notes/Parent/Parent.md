@@ -5,7 +5,7 @@ Class Notes For STT 3850
 Last compiled:
 
 ```
-[1] "Thursday, February 06, 2014 - 08:51:46."
+[1] "Thursday, February 06, 2014 - 09:04:19."
 ```
 
 
@@ -3863,7 +3863,7 @@ As in the difference of means example, the bootstrap distribution of the ratio o
 
 
 ```r
-require(boot)
+library(boot)
 phoneF <- function(data, i){
   d <- data[i, ]
   m <- tapply(d$Time, d$Group, mean)
