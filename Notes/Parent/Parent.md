@@ -5,7 +5,7 @@ Class Notes For STT 3850
 Last compiled:
 
 ```
-[1] "Monday, February 03, 2014 - 7:24:19 PM."
+[1] "Thursday, February 06, 2014 - 08:51:46."
 ```
 
 
@@ -30,8 +30,8 @@ Exploratory Data Analysis
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/FlightDelays.csv"
-FlightDelays <- read.csv(file = url(site))
-head(FlightDelays)  # shows first 6 rows of data frame
+FlightDelays <- read.csv(file=url(site))
+head(FlightDelays) # shows first 6 rows of data frame
 ```
 
 ```
@@ -126,26 +126,25 @@ ggplot(data = FlightDelays, aes(x = Carrier)) + geom_bar()
 <img src="figure/Barplots2.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar()
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + geom_bar()
 ```
 
 <img src="figure/Barplots3.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar() + guides(fill = guide_legend(reverse = TRUE))
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + geom_bar() + guides(fill = guide_legend(reverse = TRUE))
 ```
 
 <img src="figure/Barplots4.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar(position = "dodge") + 
-    guides(fill = guide_legend(reverse = TRUE))
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + geom_bar(position="dodge") + guides(fill = guide_legend(reverse = TRUE))
 ```
 
 <img src="figure/Barplots5.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-xtabs(~Carrier + (Delay > 30), data = FlightDelays)
+xtabs(~ Carrier + (Delay > 30), data = FlightDelays)
 ```
 
 ```
@@ -156,7 +155,7 @@ Carrier FALSE TRUE
 ```
 
 ```r
-addmargins(xtabs(~Carrier + (Delay > 30), data = FlightDelays))
+addmargins(xtabs(~ Carrier + (Delay > 30), data = FlightDelays))
 ```
 
 ```
@@ -168,13 +167,13 @@ Carrier FALSE TRUE  Sum
 ```
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Delayed30)) + geom_bar(position = "dodge")
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Delayed30)) + geom_bar(position="dodge")
 ```
 
 <img src="figure/Barplots6.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(fill = Carrier, x = Delayed30)) + geom_bar(position = "dodge")
+ggplot(data = FlightDelays, aes(fill = Carrier, x= Delayed30)) + geom_bar(position="dodge")
 ```
 
 <img src="figure/Barplots7.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
@@ -196,8 +195,7 @@ ggplot(data = FlightDelays, aes(x = Delay)) + geom_histogram()
 <img src="figure/HistoEDA2.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Delay, y = ..density..)) + geom_histogram(binwidth = 10, 
-    color = "blue")
+ggplot(data = FlightDelays, aes(x = Delay, y = ..density..)) + geom_histogram(binwidth = 10, color = "blue")
 ```
 
 <img src="figure/HistoEDA3.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
@@ -292,8 +290,7 @@ ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot()
 <img src="figure/BP2.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + facet_grid(. ~ 
-    Month)
+ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + facet_grid(. ~ Month) 
 ```
 
 <img src="figure/BP3.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
@@ -302,7 +299,7 @@ ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + face
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
-NCBirths <- read.csv(file = url(site))
+NCBirths <- read.csv(file=url(site))
 head(NCBirths)
 ```
 
@@ -324,22 +321,19 @@ p + geom_boxplot()
 <img src="figure/NCBirths1.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", 
-    title = "You Put Something Here")
+p + geom_boxplot() + guides(fill = FALSE) + labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here")
 ```
 
 <img src="figure/NCBirths2.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", 
-    title = "You Put Something Here") + scale_fill_manual(values = c("pink", "blue"))
+p + geom_boxplot() + guides(fill = FALSE) + labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + scale_fill_manual(values = c('pink', 'blue'))
 ```
 
 <img src="figure/NCBirths3.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", 
-    title = "You Put Something Here") + scale_fill_brewer()
+p + geom_boxplot() + guides(fill = FALSE) + labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + scale_fill_brewer()
 ```
 
 <img src="figure/NCBirths4.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
@@ -366,22 +360,19 @@ abline(h = 0, lwd = 2)
 ```r
 # Same now with ggplot2
 p <- ggplot(data = data.frame(x = c(-4, 4)), aes(x = x))
-dnorm_func <- function(x) {
-    y <- dnorm(x)
-    y[x < 1] <- NA
-    return(y)
+dnorm_func <- function(x){
+  y <- dnorm(x)
+  y[x<1] <- NA
+  return(y)
 }
-p1 <- p + stat_function(fun = dnorm_func, geom = "area", fill = "blue", alpha = 0.2) + 
-    geom_hline(yintercept = 0) + stat_function(fun = dnorm)
+p1 <- p + stat_function(fun = dnorm_func, geom = 'area', fill = 'blue', alpha = 0.2)  + geom_hline(yintercept = 0) + stat_function(fun = dnorm) 
 p1
 ```
 
 <img src="figure/ND2.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
 
 ```r
-p1 + labs(x = "", y = "", title = expression(integral(frac(1, sqrt(2 * pi)) * e^{
-    -x^2/2
-} * dx, 1, infinity) == 0.1586553))  # Break it down!
+p1 + labs(x = '', y = '', title = expression(integral(frac(1, sqrt(2*pi))*e^{-x^2/2}*dx, 1, infinity)==0.1586553) ) # Break it down!
 ```
 
 <img src="figure/ND3.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
@@ -393,7 +384,7 @@ Note this is not how `qqnorm` computes the quantiles!  The left graph of Figure 
 
 
 ```r
-x <- c(21.7, 22.6, 26.1, 28.3, 30, 31.2, 31.5, 33.5, 34.7, 36)
+x <- c(21.7, 22.6, 26.1, 28.3, 30.0, 31.2, 31.5, 33.5, 34.7, 36.0)
 n <- length(x)
 p <- (1:10)/(n + 1)
 q <- qnorm(p)
@@ -413,8 +404,8 @@ q  1.3352
 
 ```r
 plot(q, x)
-XS <- quantile(q, prob = c(0.25, 0.75))
-YS <- quantile(x, prob = c(0.25, 0.75))
+XS <- quantile(q, prob = c(.25, .75))
+YS <- quantile(x, prob = c(.25, .75))
 slopeA <- (YS[2] - YS[1])/(XS[2] - XS[1])
 slopeB <- diff(YS)/diff(XS)
 slopeA
@@ -435,7 +426,7 @@ slopeB
 ```
 
 ```r
-Intercept <- YS[1] - slopeA * XS[1]
+Intercept <- YS[1] - slopeA*XS[1]
 Intercept
 ```
 
@@ -451,7 +442,7 @@ abline(a = Intercept, b = slopeA)
 <img src="figure/QUANTILES.png" title="plot of chunk QUANTILES" alt="plot of chunk QUANTILES" style="display: block; margin: auto;" />
 
 ```r
-# 
+#
 pc <- (1:10 - 3/8)/n
 qc <- qnorm(pc)
 rbind(x, pc, qc)
@@ -469,10 +460,10 @@ qc  1.7805
 ```
 
 ```r
-xs <- quantile(qc, prob = c(0.25, 0.75))
-ys <- quantile(x, prob = c(0.25, 0.75))
+xs <- quantile(qc, prob = c(.25, .75))
+ys <- quantile(x, prob = c(.25, .75))
 slope <- diff(ys)/diff(xs)
-intercept <- ys[1] - slope * xs[1]
+intercept <- ys[1] - slope*xs[1]
 c(intercept, slope)
 ```
 
@@ -493,8 +484,7 @@ qqline(x)
 
 ```r
 # ggplot
-ggplot(data = data.frame(x), aes(sample = x)) + stat_qq() + geom_abline(intercept = intercept, 
-    slope = slope)
+ggplot(data = data.frame(x), aes(sample=x)) + stat_qq() + geom_abline(intercept = intercept, slope = slope)
 ```
 
 <img src="figure/QQNORM2.png" title="plot of chunk QQNORM" alt="plot of chunk QQNORM" style="display: block; margin: auto;" />
@@ -515,7 +505,7 @@ plot.ecdf(y)
 
 ```r
 set.seed(1)  # set seed for reproducibility
-rxs <- rnorm(25)
+rxs <- rnorm(25)  
 plot.ecdf(rxs, xlim = c(-4, 4))
 curve(pnorm(x), col = "blue", add = TRUE, lwd = 2)
 ```
@@ -528,8 +518,8 @@ An alternative approach to the book's Figure 2.12 is provided using `ggplot2` af
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/Beerwings.csv"
-Beerwings <- read.csv(file = url(site))
-head(Beerwings)  # shows first 6 rows of data frame
+Beerwings <- read.csv(file=url(site))
+head(Beerwings) # shows first 6 rows of data frame
 ```
 
 ```
@@ -567,8 +557,7 @@ legend("topleft", legend = c("Males", "Females"), pch = 19, col = c("blue", "pin
 
 ```r
 # Using ggplot2 now
-ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + stat_ecdf() + labs(x = "Beer in ounces", 
-    y = "", title = "ECDF")
+ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + stat_ecdf() + labs(x = "Beer in ounces", y ="", title = 'ECDF')
 ```
 
 <img src="figure/BEER2.png" title="plot of chunk BEER" alt="plot of chunk BEER" style="display: block; margin: auto;" />
@@ -578,15 +567,13 @@ ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + stat_ecdf() + labs(x 
 
 
 ```r
-with(data = Beerwings, plot(Hotwings, Beer, xlab = "Hot wings eaten", ylab = "Beer consumed", 
-    pch = 19, col = "blue"))
+with(data = Beerwings, plot(Hotwings, Beer, xlab = "Hot wings eaten", ylab = "Beer consumed", pch = 19, col = "blue"))
 ```
 
 <img src="figure/Bplot1.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
 
 ```r
-p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + geom_point() + labs(x = "Hot wings eaten", 
-    y = "Beer consumed in ounces")
+p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + geom_point() + labs(x = "Hot wings eaten", y = "Beer consumed in ounces")
 p
 ```
 
@@ -609,9 +596,7 @@ p + geom_smooth(method = lm) + theme_bw()
 
 
 ```r
-f <- function(x) {
-    (x - 1)^3 * exp(-x)
-}
+f <- function(x){(x - 1)^3*exp(-x)}
 ans <- integrate(f, lower = 0, upper = Inf)$value
 ans
 ```
@@ -634,7 +619,7 @@ Currently there is one drug, praziquantel (pray'-zee-kwan-tel), in common use fo
 
 
 ```r
-gender <- c(rep("Female", 10), rep("Male", 10))
+gender <- c(rep("Female", 10), rep("Male", 10)) 
 group <- rep(rep(c("Treatment", "Control"), each = 5), 2)
 worms <- c(1, 2, 2, 10, 7, 16, 10, 10, 7, 17, 3, 5, 9, 10, 6, 31, 26, 28, 13, 47)
 schis <- data.frame(gender, group, worms)
@@ -680,8 +665,9 @@ schis
 
 ```r
 require(ggplot2)
-p <- ggplot(data = schis, aes(group, worms)) + geom_point(position = "jitter", aes(color = group)) + 
-    facet_grid(. ~ gender)
+p <- ggplot(data = schis, aes(group, worms)) + 
+  geom_point(position = "jitter", aes(color = group)) + 
+  facet_grid(. ~ gender)
 p
 ```
 
@@ -697,7 +683,9 @@ ACTIVITY
 
 
 ```r
-with(data = schis, schis[order(gender, group, worms), ])
+with(data = schis, 
+schis[order(gender, group, worms),]
+     )
 ```
 
 ```
@@ -727,7 +715,9 @@ with(data = schis, schis[order(gender, group, worms), ])
 
 
 ```r
-with(data = schis, tapply(worms, list(gender, group), median))
+with(data = schis, 
+tapply(worms, list(gender, group), median)    
+     )
 ```
 
 ```
@@ -737,7 +727,9 @@ Male        28         6
 ```
 
 ```r
-with(data = schis, tapply(worms, list(gender, group), mean))
+with(data = schis, 
+tapply(worms, list(gender, group), mean)   
+     )
 ```
 
 ```
@@ -747,7 +739,9 @@ Male        29       6.6
 ```
 
 ```r
-with(data = schis, tapply(worms, list(gender, group), sd))
+with(data = schis, 
+tapply(worms, list(gender, group), sd)    
+     )
 ```
 
 ```
@@ -785,7 +779,7 @@ For a randomization test comparing responses for the two groups, this question b
 Conducting a Randomization Test by Hand
 ===================================================
 
-1. To get the feel for the concept of a _p_-value, write each of the female worm counts on an index card.  Shuffle the 10 index cards, and then draw five cards at random (without replacement).  Call these five cards the treatment group and the five remaining cards the control group.  Under the null hypothesis (i.e. the treatment has no effect on the worms), this allocation mimics precisely what actually happened in our experiment, since the only cause of group differences in the random allocation.  Calculate the mean of the five cards representing the treatment group and the mean of the five cards representing the control group.  Then find the difference between the control and treatment group means that you obtained in your allocation.  To be consistent, take the control group mean minus the treatment group mean.
+1. To get the feel for the concept of a _p_-value, write each of the female worm counts on an index card.  Shuffle the 10 index cards, and then draw five cards at random (without replacement).  Call these five cards the treatment group and the five remaining cards the control group.  Under the null hypothesis (i.e. the treatment has no effect on the worms), this allocation mimics precisely what actually happened in our experiment, since the only cause of group differences is the random allocation.  Calculate the mean of the five cards representing the treatment group and the mean of the five cards representing the control group.  Then find the difference between the control and treatment group means that you obtained in your allocation.  To be consistent, take the control group mean minus the treatment group mean.
 
 2. If you were to do another random allocation, would you get the same difference in means? Explain.
 
@@ -844,7 +838,7 @@ Using R
 
 
 ```r
-ND <- schis[gender == "Female", ]
+ND <- schis[gender=="Female", ]
 ND
 ```
 
@@ -873,7 +867,9 @@ tapply(ND$worms, ND$group, mean)
 
 ```r
 # OR
-ANS1 <- with(data = ND, tapply(worms, group, mean))
+ANS1 <- with(data = ND,
+             tapply(worms, group, mean)
+             )
 ANS1
 ```
 
@@ -924,12 +920,12 @@ Worms2
 ```
 
 ```r
-N <- 10^4 - 1  # number of times fo repeat the process
+N <- 10^4 - 1         # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
-for (i in 1:N) {
-    # sample of size 5, from 1 to 10, without replacement
-    index <- sample(10, size = 5, replace = FALSE)
-    result[i] <- mean(Worms2[index]) - mean(Worms2[-index])
+for (i in 1:N){
+  # sample of size 5, from 1 to 10, without replacement
+  index <- sample(10, size = 5, replace = FALSE)
+  result[i] <- mean(Worms2[index]) - mean(Worms2[-index])
 }
 hist(result, col = "blue", freq = FALSE, main = "")
 ```
@@ -938,17 +934,17 @@ hist(result, col = "blue", freq = FALSE, main = "")
 
 ```r
 d.res <- density(result)
-plot(d.res, main = "", xlab = "", ylab = "")
-polygon(d.res, col = "pink")
+plot(d.res, main ="", xlab = "", ylab = "")
+polygon(d.res, col ="pink")
 xs <- c(7.6, d.res$x[d.res$x >= 7.6])
-ys <- c(0, d.res$y[d.res$x >= 7.6])
+ys <- c(0, d.res$y[d.res$x>=7.6])
 polygon(xs, ys, col = "red")
 ```
 
 <img src="figure/F32.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
 
 ```r
-pvalue <- (sum(result >= observed) + 1)/(N + 1)  # p-value
+pvalue <- (sum(result >= observed) + 1)/(N + 1) # p-value
 pvalue  # results will vary
 ```
 
@@ -959,8 +955,7 @@ pvalue  # results will vary
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
 p
 ```
 
@@ -969,8 +964,7 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), 
-    fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '')
 ```
 
 <img src="figure/F34.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
@@ -990,7 +984,8 @@ Explain what each line of the following code is doing.
 
 
 ```r
-# PROGRAMMING IS THE BEST WAY TO DEBUG YOUR THINKING!  Theoretical Answer
+# PROGRAMMING IS THE BEST WAY TO DEBUG YOUR THINKING!
+# Theoretical Answer
 require(PASWR)
 DATA <- c(1, 2, 2, 10, 7, 16, 10, 10, 7, 17)
 DATA
@@ -1010,6 +1005,7 @@ OBS
 ```
 
 ```r
+#
 # ANS <- t(Combinations(10, 5))
 ANS <- t(combn(10, 5))
 head(ANS)
@@ -1036,8 +1032,8 @@ nn
 
 ```r
 means <- numeric(nn)
-for (i in 1:nn) {
-    means[i] <- mean(DATA[ANS[i, ]]) - mean(DATA[-ANS[i, ]])
+for (i in 1:nn){
+means[i] <- mean(DATA[ANS[i,]]) - mean(DATA[-ANS[i,]])
 }
 sort(means)
 ```
@@ -1063,7 +1059,7 @@ sort(means)
 ```
 
 ```r
-# 
+#
 sum(means >= OBS)
 ```
 
@@ -1093,16 +1089,16 @@ p
 ```r
 x.dens <- density(means)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), 
-    fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') 
 ```
 
 <img src="figure/EXPLAIN2.png" title="plot of chunk EXPLAIN" alt="plot of chunk EXPLAIN" style="display: block; margin: auto;" />
 
 ```r
 # Another approach ....
-P3 <- t(SRS(DATA, n = 5))
-P2 <- t(SRS(DATA, n = 5))
+#
+P3 <- t(SRS(DATA, n=5))
+P2 <- t(SRS(DATA, n=5))
 # Note need to reorder the P2 values
 P2R <- P2[, 252:1]
 apply(P2R, 2, mean)
@@ -1238,7 +1234,7 @@ Activity: A two-sided hypothesis test
 
 
 ```r
-ND <- schis[gender == "Female", ]
+ND <- schis[gender=="Female", ]
 ND
 ```
 
@@ -1267,7 +1263,9 @@ tapply(ND$worms, ND$group, mean)
 
 ```r
 # OR
-ANS1 <- with(data = ND, tapply(worms, group, mean))
+ANS1 <- with(data = ND,
+             tapply(worms, group, mean)
+             )
 ANS1
 ```
 
@@ -1305,12 +1303,12 @@ Worms2
 ```
 
 ```r
-N <- 10^5 - 1  # number of times fo repeat the process
+N <- 10^5 - 1         # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
-for (i in 1:N) {
-    # sample of size 5, from 1 to 10, without replacement
-    index <- sample(10, size = 5, replace = FALSE)
-    result[i] <- mean(Worms2[index]) - mean(Worms2[-index])
+for (i in 1:N){
+  # sample of size 5, from 1 to 10, without replacement
+  index <- sample(10, size = 5, replace = FALSE)
+  result[i] <- mean(Worms2[index]) - mean(Worms2[-index])
 }
 hist(result, col = "blue", main = "", freq = FALSE)
 ```
@@ -1319,10 +1317,10 @@ hist(result, col = "blue", main = "", freq = FALSE)
 
 ```r
 d.res <- density(result)
-plot(d.res, main = "", xlab = "", ylab = "")
-polygon(d.res, col = "pink")
+plot(d.res, main ="", xlab = "", ylab = "")
+polygon(d.res, col ="pink")
 xsr <- c(7.6, d.res$x[d.res$x >= 7.6])
-ysr <- c(0, d.res$y[d.res$x >= 7.6])
+ysr <- c(0, d.res$y[d.res$x>=7.6])
 xsl <- c(-7.6, d.res$x[d.res$x <= -7.6])
 ysl <- c(0, d.res$y[d.res$x <= -7.6])
 polygon(xsr, ysr, col = "red")
@@ -1332,7 +1330,7 @@ polygon(xsl, ysl, col = "red")
 <img src="figure/TWOST2.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
 
 ```r
-pvalue <- (sum(result >= observed) + sum(result <= -observed) + 1)/(N + 1)  # p-value
+pvalue <- (sum(result >= observed) + sum(result <= -observed) + 1)/(N + 1) # p-value
 pvalue  # results will vary
 ```
 
@@ -1343,8 +1341,7 @@ pvalue  # results will vary
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
 p
 ```
 
@@ -1353,9 +1350,7 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), 
-    fill = "blue", alpha = 0.4) + labs(x = "", y = "") + geom_area(data = subset(df.dens, 
-    x <= -7.6 & x >= min(DF$x)), aes(x = x, y = y), fill = "blue", alpha = 0.4)
+p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') + geom_area(data = subset(df.dens, x <= -7.6 & x >= min(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4)
 ```
 
 <img src="figure/TWOST4.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
@@ -1432,7 +1427,8 @@ west
 
 ```r
 require(ggplot2)
-p <- ggplot(data = west, aes(status, ages)) + geom_point(position = "jitter", aes(color = status))
+p <- ggplot(data = west, aes(status, ages)) + 
+  geom_point(position = "jitter", aes(color = status)) 
 p
 ```
 
@@ -1442,7 +1438,8 @@ p
   
 
 ```r
-OBS <- with(data = west, tapply(ages, status, mean))
+OBS <- with(data = west,
+tapply(ages, status, mean))
 OBS
 ```
 
@@ -1471,22 +1468,22 @@ Ages
 ```
 
 ```r
-N <- 10^5 - 1  # number of times fo repeat the process
+N <- 10^5 - 1         # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
-for (i in 1:N) {
-    # sample of size 3, from 1 to 10, without replacement
-    index <- sample(10, size = 3, replace = FALSE)
-    result[i] <- mean(Ages[index]) - mean(Ages[-index])
+for (i in 1:N){
+  # sample of size 3, from 1 to 10, without replacement
+  index <- sample(10, size = 3, replace = FALSE)
+  result[i] <- mean(Ages[index]) - mean(Ages[-index])
 }
-hist(result, col = "blue", main = "", xlim = c(-25, 25))
+hist(result, col = "blue", main = "", xlim =c(-25, 25))
 ```
 
 <img src="figure/AGE21.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
 
 ```r
 d.res <- density(result)
-plot(d.res, main = "", xlab = "", ylab = "", xlim = c(-25, 25))
-polygon(d.res, col = "pink")
+plot(d.res, main ="", xlab = "", ylab = "", xlim =c(-25, 25))
+polygon(d.res, col ="pink")
 xs <- c(obsDiff, d.res$x[d.res$x >= obsDiff])
 ys <- c(0, d.res$y[d.res$x >= obsDiff])
 polygon(xs, ys, col = "red")
@@ -1497,8 +1494,7 @@ polygon(xs, ys, col = "red")
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
 p
 ```
 
@@ -1507,14 +1503,13 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= obsDiff & x <= max(DF$x)), aes(x = x, y = y), 
-    fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= obsDiff & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') 
 ```
 
 <img src="figure/AGE24.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
 
 ```r
-pvalue <- (sum(result >= obsDiff) + 1)/(N + 1)  # p-value
+pvalue <- (sum(result >= obsDiff) + 1)/(N + 1) # p-value
 pvalue  # results will vary
 ```
 
@@ -1529,7 +1524,8 @@ The _p_-value is 0.0508.
   
 
 ```r
-OBSM <- with(data = west, tapply(ages, status, median))
+OBSM <- with(data = west,
+tapply(ages, status, median))
 OBSM
 ```
 
@@ -1558,12 +1554,12 @@ Ages
 ```
 
 ```r
-N <- 10^5 - 1  # number of times fo repeat the process
+N <- 10^5 - 1         # number of times fo repeat the process
 MedianDiff <- numeric(N)  # space to save the random differences
-for (i in 1:N) {
-    # sample of size 3, from 1 to 10, without replacement
-    index <- sample(10, size = 3, replace = FALSE)
-    MedianDiff[i] <- median(Ages[index]) - median(Ages[-index])
+for (i in 1:N){
+  # sample of size 3, from 1 to 10, without replacement
+  index <- sample(10, size = 3, replace = FALSE)
+  MedianDiff[i] <- median(Ages[index]) - median(Ages[-index])
 }
 hist(MedianDiff, col = "blue", main = "")
 ```
@@ -1573,8 +1569,7 @@ hist(MedianDiff, col = "blue", main = "")
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = MedianDiff)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
 p
 ```
 
@@ -1583,15 +1578,14 @@ p
 ```r
 x.dens <- density(MedianDiff)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= obsDiffMedian & x <= max(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= obsDiffMedian & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') 
 ```
 
 <img src="figure/MEDAGE3.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
 
 ```r
-####### 
-pvalueMED <- (sum(MedianDiff >= obsDiffMedian) + 1)/(N + 1)  # p-value
+#######
+pvalueMED <- (sum(MedianDiff >= obsDiffMedian) + 1)/(N + 1) # p-value
 pvalueMED  # results will vary
 ```
 
@@ -1652,12 +1646,12 @@ observed
 ```
 
 ```r
-N <- 10^4 - 1  # number of times fo repeat the process
+N <- 10^4 - 1         # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
-for (i in 1:N) {
-    # sample of size 5, from 1 to 10, without replacement
-    index <- sample(1687, size = 23, replace = FALSE)
-    result[i] <- mean(Ver$Time[index]) - mean(Ver$Time[-index])
+for (i in 1:N){
+  # sample of size 5, from 1 to 10, without replacement
+  index <- sample(1687, size = 23, replace = FALSE)
+  result[i] <- mean(Ver$Time[index]) - mean(Ver$Time[-index])
 }
 hist(result, col = "blue", main = "", breaks = "Scott")
 abline(v = observed)
@@ -1666,7 +1660,7 @@ abline(v = observed)
 <img src="figure/VER1.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
 
 ```r
-pvalue <- (sum(result >= observed) + 1)/(N + 1)  # p-value
+pvalue <- (sum(result >= observed) + 1)/(N + 1) # p-value
 pvalue
 ```
 
@@ -1676,8 +1670,7 @@ pvalue
 
 ```r
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
 p
 ```
 
@@ -1686,8 +1679,7 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') 
 ```
 
 <img src="figure/VER3.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
@@ -1710,12 +1702,12 @@ observed
 ```
 
 ```r
-N <- 10^4 - 1  # number of times fo repeat the process
+N <- 10^4 - 1         # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
-for (i in 1:N) {
-    # sample of size 5, from 1 to 10, without replacement
-    index <- sample(1687, size = 23, replace = FALSE)
-    result[i] <- median(Ver$Time[index]) - median(Ver$Time[-index])
+for (i in 1:N){
+  # sample of size 5, from 1 to 10, without replacement
+  index <- sample(1687, size = 23, replace = FALSE)
+  result[i] <- median(Ver$Time[index]) - median(Ver$Time[-index])
 }
 hist(result, col = "blue", main = "Difference in Medians", breaks = "Scott")
 abline(v = observed)
@@ -1724,7 +1716,7 @@ abline(v = observed)
 <img src="figure/VER21.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
 
 ```r
-pvalue <- (sum(result >= observed) + 1)/(N + 1)  # p-value
+pvalue <- (sum(result >= observed) + 1)/(N + 1) # p-value
 pvalue
 ```
 
@@ -1734,8 +1726,7 @@ pvalue
 
 ```r
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
 p
 ```
 
@@ -1744,8 +1735,7 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed)
+p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') + geom_vline(xintercept = observed)
 ```
 
 <img src="figure/VER23.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
@@ -1757,7 +1747,7 @@ Using 25% Trimmed Means
 
 
 ```r
-ANS <- tapply(Ver$Time, Ver$Group, mean, trim = 0.25)
+ANS <- tapply(Ver$Time, Ver$Group, mean, trim = .25)
 observed <- ANS[1] - ANS[2]
 observed
 ```
@@ -1768,12 +1758,12 @@ observed
 ```
 
 ```r
-N <- 10^4 - 1  # number of times fo repeat the process
+N <- 10^4 - 1         # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
-for (i in 1:N) {
-    # sample of size 5, from 1 to 10, without replacement
-    index <- sample(1687, size = 23, replace = FALSE)
-    result[i] <- mean(Ver$Time[index], trim = 0.25) - mean(Ver$Time[-index], trim = 0.25)
+for (i in 1:N){
+  # sample of size 5, from 1 to 10, without replacement
+  index <- sample(1687, size = 23, replace = FALSE)
+  result[i] <- mean(Ver$Time[index], trim = 0.25) - mean(Ver$Time[-index], trim = 0.25)
 }
 hist(result, col = "blue", main = "Difference in Trimmed Means", breaks = "Scott")
 abline(v = observed)
@@ -1782,7 +1772,7 @@ abline(v = observed)
 <img src="figure/TM11.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
 
 ```r
-pvalue1 <- (sum(result >= observed) + 1)/(N + 1)  # p-value
+pvalue1 <- (sum(result >= observed) + 1)/(N + 1) # p-value
 pvalue1
 ```
 
@@ -1792,8 +1782,7 @@ pvalue1
 
 ```r
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
 p
 ```
 
@@ -1802,9 +1791,7 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed, 
-    color = "red")
+p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') + geom_vline(xintercept = observed, color = 'red')
 ```
 
 <img src="figure/TM13.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
@@ -1825,8 +1812,7 @@ Two different methods to read in the data are illustrated next.
 
 
 ```r
-Outcome <- c(rep("relapse", 10), rep("no relapse", 14), rep("relapse", 18), rep("no relapse", 
-    6))
+Outcome <- c(rep("relapse", 10), rep("no relapse", 14), rep("relapse", 18), rep("no relapse", 6))
 Drug <- c(rep("Desipramine", 24), rep("Lithium", 24))
 Cocaine <- data.frame(Outcome, Drug)
 head(Cocaine)
@@ -1843,7 +1829,9 @@ head(Cocaine)
 ```
 
 ```r
-ANS <- with(data = Cocaine, tapply(Outcome == "relapse", Drug, mean))
+ANS <- with(data = Cocaine,
+            tapply(Outcome == "relapse", Drug, mean)
+            )
 ANS
 ```
 
@@ -1882,7 +1870,9 @@ head(Cocaine2)
 ```
 
 ```r
-ANS2 <- with(data = Cocaine2, tapply(Outcome2, Drug2, mean))
+ANS2 <- with(data = Cocaine2,
+     tapply(Outcome2, Drug2, mean)
+            )
 ANS2
 ```
 
@@ -1912,12 +1902,12 @@ The following code can be used when reading the data into a data frame using the
 
 
 ```r
-N <- 10^4 - 1
+N <- 10^4 -1
 DiffProp <- numeric(N)
 for (i in 1:N) {
-    # sample of size 24 # from the total 48 addicts
-    index <- sample(48, size = 24, replace = FALSE)
-    DiffProp[i] <- mean(Cocaine2$Outcome2[index]) - mean(Cocaine2$Outcome2[-index])
+# sample of size 24 # from the total 48 addicts
+index <- sample(48, size = 24, replace = FALSE)
+DiffProp[i] <- mean(Cocaine2$Outcome2[index]) - mean(Cocaine2$Outcome2[-index])
 }
 hist(DiffProp, col = "blue", breaks = "Scott", xlab = "", main = "")
 abline(v = obsDiffProp2, col = "red")
@@ -1937,8 +1927,7 @@ pvalue1
 ```r
 # ggplot2 approach
 DF <- data.frame(x = DiffProp)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
 p
 ```
 
@@ -1947,8 +1936,7 @@ p
 ```r
 x.dens <- density(DiffProp)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '')
 ```
 
 <img src="figure/coke1rep3.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
@@ -1958,13 +1946,12 @@ The following code can be used when reading the data into a data frame using the
 
 
 ```r
-N <- 10^4 - 1
+N <- 10^4 -1
 DiffProp <- numeric(N)
 for (i in 1:N) {
-    # sample of size 24 # from the total 48 addicts
-    index <- sample(48, size = 24, replace = FALSE)
-    DiffProp[i] <- mean(Cocaine$Outcome[index] == "relapse") - mean(Cocaine$Outcome[-index] == 
-        "relapse")
+# sample of size 24 # from the total 48 addicts
+index <- sample(48, size = 24, replace = FALSE)
+DiffProp[i] <- mean(Cocaine$Outcome[index]=="relapse") - mean(Cocaine$Outcome[-index]=="relapse")
 }
 hist(DiffProp, col = "blue", breaks = "Scott", xlab = "", main = "")
 abline(v = obsDiffProp, col = "red")
@@ -1984,8 +1971,7 @@ pvalue
 ```r
 # ggplot2 approach
 DF <- data.frame(x = DiffProp)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
 p
 ```
 
@@ -1994,8 +1980,7 @@ p
 ```r
 x.dens <- density(DiffProp)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '')
 ```
 
 <img src="figure/coke2rep3.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
@@ -2044,7 +2029,7 @@ The graph below shows a dotplot of the 28 `Fastdiff`-minus`Slowdiff` values.  No
 
 
 ```r
-Music <- read.csv("http://www1.appstate.edu/~arnholta/Data/Music.csv")
+Music <- read.csv('http://www1.appstate.edu/~arnholta/Data/Music.csv')
 head(Music)
 ```
 
@@ -2093,9 +2078,9 @@ To obtain information from the General Social Survey, go to [sda.berkley.edu](sd
 
 
 ```r
-# site <- 'http://sda.berkeley.edu/TMPDIR/AAELN0Q9.csv' download.file(url = site,
-# destfile = '../data/DPS.csv')
-DPS <- read.csv(file = "../data/DPS.csv")
+# site <- "http://sda.berkeley.edu/TMPDIR/AAELN0Q9.csv"
+# download.file(url = site, destfile = "../data/DPS.csv")
+DPS <- read.csv(file="../data/DPS.csv")
 xtabs(~SEX + DEATHPEN, data = DPS)
 ```
 
@@ -2112,10 +2097,8 @@ Based on the `Codebook`, values 0, 8, and 9 are missing data values for the vari
 
 ```r
 library(plyr)
-DPS$DEATHPEN <- mapvalues(DPS$DEATHPEN, from = c(0, 1, 2, 3, 4, 5, 8, 9), to = c(NA, 
-    "Strongly Agree", "Agree", "Neither Agree nor Disagree", "Disagree", "Strongly Disagree", 
-    NA, NA))
-DPS$SEX <- mapvalues(DPS$SEX, from = c(1, 2), to = c("Male", "Female"))
+DPS$DEATHPEN <- mapvalues(DPS$DEATHPEN, from = c(0,1,2,3,4,5,8,9), to =c(NA, "Strongly Agree", "Agree", "Neither Agree nor Disagree", "Disagree", "Strongly Disagree", NA, NA))
+DPS$SEX <- mapvalues(DPS$SEX, from =c(1, 2), to = c("Male", "Female"))
 xtabs(~SEX + DEATHPEN, data = DPS)
 ```
 
@@ -2134,8 +2117,7 @@ The problem with the latest table is that the labels for the values appear in al
 
 
 ```r
-DPS$DEATHPEN <- factor(DPS$DEATHPEN, levels = c("Strongly Agree", "Agree", "Neither Agree nor Disagree", 
-    "Disagree", "Strongly Disagree"))
+DPS$DEATHPEN <- factor(DPS$DEATHPEN, levels = c("Strongly Agree", "Agree", "Neither Agree nor Disagree", "Disagree", "Strongly Disagree"))
 DPS$SEX <- factor(DPS$SEX, levels = c("Male", "Female"))
 T1 <- xtabs(~SEX + DEATHPEN, data = DPS)
 T1
@@ -2254,8 +2236,8 @@ The expected counts for `T1` are
 
 
 ```r
-EC <- function(TAB) {
-    outer(apply(TAB, 1, sum), apply(TAB, 2, sum))/sum(TAB)
+EC <- function(TAB){
+  outer(apply(TAB,1 , sum), apply(TAB, 2, sum))/sum(TAB)
 }
 EC(T1)
 ```
@@ -2382,10 +2364,10 @@ To perform the permutation test, randomly permute one of the catgorical variable
 ```r
 N <- 10^4 - 1  # Change this for slower computers
 result <- numeric(N)
-for (i in 1:N) {
-    # T2 <- table(sample(DPSC$SEX), DPSC$DEATHPEN)
-    T2 <- xtabs(~sample(SEX) + DEATHPEN, data = DPSC)
-    result[i] <- chisq.test(T2)$statistic
+for(i in 1:N){
+# T2 <- table(sample(DPSC$SEX), DPSC$DEATHPEN)
+  T2 <- xtabs(~sample(SEX) + DEATHPEN, data =DPSC)
+result[i] <- chisq.test(T2)$statistic  
 }
 obs <- chisq.test(xtabs(~SEX + DEATHPEN, data = DPSC))$statistic
 pvalue <- (sum(result >= obs) + 1)/(N + 1)
@@ -2407,8 +2389,8 @@ pvalueCH
 
 ```r
 # Or chisq.test(DPSC$SEX, DPSC$DEATHPEN)$p.value
-hist(result, breaks = "Scott", col = "pink", freq = FALSE, main = "")
-curve(dchisq(x, 4), 0, 20, add = TRUE, col = "red")
+hist(result, breaks = "Scott", col = "pink", freq=FALSE, main = "")
+curve(dchisq(x, 4), 0, 20, add=TRUE, col = "red")
 ```
 
 <img src="figure/perEXP.png" title="plot of chunk perEXP" alt="plot of chunk perEXP" style="display: block; margin: auto;" />
@@ -2423,21 +2405,24 @@ Some times, you will have only access to data that has been summarized (continge
 
 ```r
 expand.dft <- function(x, na.strings = "NA", as.is = FALSE, dec = ".") {
-    # Take each row in the source data frame table and replicate it using the Freq
-    # value
-    DF <- sapply(1:nrow(x), function(i) x[rep(i, each = x$Freq[i]), ], simplify = FALSE)
-    
-    # Take the above list and rbind it to create a single DF Also subset the result
-    # to eliminate the Freq column
+    # Take each row in the source data frame table and replicate it
+    # using the Freq value
+    DF <- sapply(1:nrow(x), 
+                 function(i) x[rep(i, each = x$Freq[i]), ],
+                 simplify = FALSE)
+
+    # Take the above list and rbind it to create a single DF
+    # Also subset the result to eliminate the Freq column
     DF <- subset(do.call("rbind", DF), select = -Freq)
-    
-    # Now apply type.convert to the character coerced factor columns to facilitate
-    # data type selection for each column
+
+    # Now apply type.convert to the character coerced factor columns  
+    # to facilitate data type selection for each column 
     for (i in 1:ncol(DF)) {
-        DF[[i]] <- type.convert(as.character(DF[[i]]), na.strings = na.strings, as.is = as.is, 
-            dec = dec)
+        DF[[i]] <- type.convert(as.character(DF[[i]]),
+                                na.strings = na.strings,
+                                as.is = as.is, dec = dec)
     }
-    
+
     DF
 }
 ```
@@ -2451,8 +2436,7 @@ The `x=` argument to `expand.dft()` is a table that has been converted to a data
 ```r
 HA <- c(110, 277, 50, 163, 302, 63)
 HAM <- matrix(data = HA, nrow = 2, byrow = TRUE)
-dimnames(HAM) <- list(Gender = c("Male", "Female"), Giddy = c("Very Happy", "Pretty Happy", 
-    "Not to Happy"))
+dimnames(HAM) <- list(Gender = c("Male", "Female"), Giddy = c("Very Happy", "Pretty Happy", "Not to Happy"))
 HAM
 ```
 
@@ -2520,8 +2504,8 @@ From the [http://sda.berkeley.edu/cgi-bin/hsda?harcsda+gss10](http://sda.berkele
 
 
 ```r
-# site <- 'http://sda.berkeley.edu/TMPDIR/AAO0mzEh.csv' download.file(url = site,
-# destfile = '../data/dpy.csv')
+# site <- "http://sda.berkeley.edu/TMPDIR/AAO0mzEh.csv"
+# download.file(url = site, destfile = "../data/dpy.csv")
 dpy <- read.csv(file = "../data/dpy.csv")
 str(dpy)
 ```
@@ -2591,7 +2575,7 @@ To satisfy the curious, the answer is 1991.
 women <- c(35, 146)
 men <- c(8, 97)
 stuff <- rbind(women, men)
-dimnames(stuff) <- list(Gender = c("Women", "Men"), Diet = c("Yes", "No"))
+dimnames(stuff) <- list(Gender =c("Women", "Men"), Diet=c("Yes", "No"))
 stuff
 ```
 
@@ -2638,7 +2622,7 @@ for (i in 1:N) {
     T2 <- xtabs(~sample(Gender) + Diet, data = DFL)
     result[i] <- chisq.test(T2)$statistic
 }
-obs <- chisq.test(xtabs(~Gender + Diet, data = DFL))$statistic
+obs <- chisq.test(xtabs(~ Gender + Diet, data = DFL))$statistic
 pvalue <- (sum(result >= obs) + 1)/(N + 1)
 pvalue
 ```
@@ -2657,8 +2641,7 @@ $H_A:$ at least one of the inequalities does not hold.
 ```r
 candy <- c(42, 20, 38, 33, 27, 50)
 candyM <- matrix(data = candy, nrow = 2, byrow = TRUE)
-dimnames(candyM) <- list(Gender = c("Boys", "Girls"), Flavor = c("Flavor 1", "Flavor 2", 
-    "Flavor 3"))
+dimnames(candyM) <- list(Gender = c("Boys", "Girls"), Flavor = c("Flavor 1", "Flavor 2", "Flavor 3"))
 candyM
 ```
 
@@ -2766,7 +2749,7 @@ A quality engineer has taken 50 samples of size 13 each from a production proces
 
 
 ```r
-numberDefectives <- c(0, 1, 2, 3, 4, 5, "6 or more")
+numberDefectives <- c(0,1,2,3,4,5,"6 or more")
 numberSamples <- c(10, 24, 10, 4, 1, 1, 0)
 names(numberSamples) <- numberDefectives
 numberSamples
@@ -2784,7 +2767,7 @@ See [dist.pdf](http://asulearn.appstate.edu/file.php/66695/STT3850/dist.pdf) for
 
 
 ```r
-muest <- sum(numberSamples[-7] * c(0, 1, 2, 3, 4, 5))/50
+muest <- sum(numberSamples[-7]*c(0,1,2,3,4,5))/50
 muest
 ```
 
@@ -2796,7 +2779,7 @@ Using $\hat{\lambda} = 1.3$, we compute the probabilities for each category and 
 
 
 ```r
-ps <- dpois(0:4, muest)
+ps <- dpois(0:4, muest) 
 p5m <- 1 - ppois(4, muest)
 psf <- c(ps, p5m)
 psf
@@ -2807,7 +2790,7 @@ psf
 ```
 
 ```r
-exh <- psf * 50
+exh <- psf*50
 exh
 ```
 
@@ -2834,7 +2817,7 @@ stat
 ```
 
 ```r
-epvalue <- pchisq(stat, 6 - 1 - 1, lower = FALSE)
+epvalue <- pchisq(stat, 6-1-1, lower=FALSE)
 epvalue
 ```
 
@@ -2848,7 +2831,7 @@ One really needs the expected cell counts to be at least five.  Consider collaps
 
 
 ```r
-ps <- dpois(0:2, muest)
+ps <- dpois(0:2, muest) 
 p3m <- 1 - ppois(2, muest)
 psf <- c(ps, p3m)
 psf
@@ -2859,7 +2842,7 @@ psf
 ```
 
 ```r
-exh <- psf * 50
+exh <- psf*50
 exh
 ```
 
@@ -2868,7 +2851,7 @@ exh
 ```
 
 ```r
-((numberSamples[-c(7, 6, 5)] + c(0, 0, 0, 2) - exh)^2/exh)
+((numberSamples[-c(7,6,5)] + c(0,0,0,2) - exh)^2/exh)
 ```
 
 ```
@@ -2877,7 +2860,7 @@ exh
 ```
 
 ```r
-stat <- sum((numberSamples[-c(7, 6, 5)] + c(0, 0, 0, 2) - exh)^2/exh)
+stat <- sum((numberSamples[-c(7,6,5)] + c(0,0,0,2) - exh)^2/exh)
 stat
 ```
 
@@ -2886,7 +2869,7 @@ stat
 ```
 
 ```r
-epvalue2 <- pchisq(stat, 4 - 1 - 1, lower = FALSE)
+epvalue2 <- pchisq(stat, 4-1-1, lower=FALSE)
 epvalue2
 ```
 
@@ -2895,9 +2878,8 @@ epvalue2
 ```
 
 ```r
-# Could use the following but the degrees of freedom will be incorrect for this
-# test!
-chisq.test(c(10, 24, 10, 6), p = psf)
+# Could use the following but the degrees of freedom will be incorrect for this test!
+chisq.test(c(10, 24, 10, 6), p=psf)
 ```
 
 ```
@@ -2915,7 +2897,7 @@ For part (b), the null hypothesis is that the number of defectives in each sampl
 
 ```r
 pihat <- 65/650
-ps <- dbinom(0:2, 13, pihat)
+ps <- dbinom(0:2, 13, pihat) 
 p3m <- 1 - pbinom(2, 13, pihat)
 psf <- c(ps, p3m)
 psf
@@ -2926,7 +2908,7 @@ psf
 ```
 
 ```r
-exh <- psf * 50
+exh <- psf*50
 exh
 ```
 
@@ -2935,7 +2917,7 @@ exh
 ```
 
 ```r
-((numberSamples[-c(7, 6, 5)] + c(0, 0, 0, 2) - exh)^2/exh)
+((numberSamples[-c(7,6,5)] + c(0,0,0,2) - exh)^2/exh)
 ```
 
 ```
@@ -2944,7 +2926,7 @@ exh
 ```
 
 ```r
-stat <- sum((numberSamples[-c(7, 6, 5)] + c(0, 0, 0, 2) - exh)^2/exh)
+stat <- sum((numberSamples[-c(7,6,5)] + c(0,0,0,2)  - exh)^2/exh)
 stat
 ```
 
@@ -2953,7 +2935,7 @@ stat
 ```
 
 ```r
-epvalue3 <- pchisq(stat, 4 - 1 - 1, lower = FALSE)
+epvalue3 <- pchisq(stat, 4-1-1, lower=FALSE)
 epvalue3
 ```
 
@@ -2989,7 +2971,7 @@ phat
 ```
 
 ```r
-plot(xtabs(~phat), ylab = "count", xlab = expression(hat(p)))
+plot(xtabs(~phat),ylab= "count",xlab = expression(hat(p)))
 ```
 
 <img src="figure/sampDIST.png" title="plot of chunk sampDIST" alt="plot of chunk sampDIST" style="display: block; margin: auto;" />
@@ -3027,7 +3009,7 @@ sd(phat)
 ```
 
 ```r
-plot(xtabs(~phat), ylab = "count", xlab = expression(hat(p)))
+plot(xtabs(~phat),ylab= "count",xlab = expression(hat(p)))
 ```
 
 <img src="figure/sampDISTsim.png" title="plot of chunk sampDISTsim" alt="plot of chunk sampDISTsim" style="display: block; margin: auto;" />
@@ -3052,76 +3034,67 @@ Consider the following simulations
 
 ```r
 set.seed(123)
-par(mfrow = c(4, 3))
+par(mfrow=c(4,3))
 # X~N(50,15)
-x <- seq(0, 100, 0.01)
-y <- dnorm(x, 50, 15)
-plot(x, y, type = "l", col = "blue", lwd = 2, main = "X~N(50,15)", xlab = "", ylab = "")
+x <- seq(0,100,.01)
+y <- dnorm(x,50,15)
+plot(x,y,type="l",col="blue",lwd=2,main="X~N(50,15)",xlab="",ylab="")
 
 # X~U(0,1)
-x <- seq(0, 1, 0.001)
-y <- dunif(x, 0, 1)
-plot(x, y, type = "l", col = "blue", lwd = 2, main = "X~U(0,1)", xlab = "", ylab = "")
+x <- seq(0,1,.001)
+y <- dunif(x,0,1)
+plot(x,y,type="l",col="blue",lwd=2,main="X~U(0,1)",xlab="",ylab="")
 
 # X~Exp(1)
-x <- seq(0, 5, 0.01)
-y <- dexp(x, 1)
-plot(x, y, type = "l", col = "blue", lwd = 2, main = "X~Exp(1)", xlab = "", ylab = "")
+x <- seq(0,5,.01)
+y <- dexp(x,1)
+plot(x,y,type="l",col="blue",lwd=2,main="X~Exp(1)",xlab="",ylab="")
 
 m <- 20000  # Number of Samples
-EX <- 1.2  # Character expansion
+EX <- 1.2   # Character expansion
 
-xbar.5 <- apply(matrix(rnorm(m * 5, 50, 15), nrow = m), 1, mean)
-hist(xbar.5, breaks = "Scott", col = "blue", xlim = c(0, 100), prob = T, xlab = "", 
-    ylab = "", main = "")
-mtext(expression(bar(x)[5]), side = 3, line = 1, cex = EX)
+xbar.5 <- apply(matrix(rnorm(m*5,50,15),nrow=m),1,mean)
+hist(xbar.5,breaks="Scott",col="blue",xlim=c(0,100),prob=T,xlab="",ylab="",main="")
+mtext(  expression(bar(x)[5]),side=3,line=1,cex=EX)
 
-xbar.5 <- apply(matrix(runif(m * 5, 0, 1), nrow = m), 1, mean)
-hist(xbar.5, breaks = "Scott", col = "blue", xlim = c(0, 1), prob = T, xlab = "", 
-    ylab = "", main = "")
-mtext(expression(bar(x)[5]), side = 3, line = 1, cex = EX)
+xbar.5 <- apply(matrix(runif(m*5,0,1),nrow=m),1,mean)
+hist(xbar.5,breaks="Scott",col="blue",xlim=c(0,1),prob=T,xlab="",ylab="",main="")
+mtext(  expression(bar(x)[5]),side=3,line=1,cex=EX)
 
-xbar.5 <- apply(matrix(rexp(m * 5, 1), nrow = m), 1, mean)
-hist(xbar.5, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "", 
-    ylab = "", main = "")
-mtext(expression(bar(x)[5]), side = 3, line = 1, cex = EX)
+xbar.5 <- apply(matrix(rexp(m*5,1),nrow=m),1,mean)
+hist(xbar.5,breaks="Scott",col="blue",xlim=c(0,5),prob=T,xlab="",ylab="",main="")
+mtext(  expression(bar(x)[5]),side=3,line=1,cex=EX)
 
-xbar.10 <- apply(matrix(rnorm(m * 10, 50, 15), nrow = m), 1, mean)
-hist(xbar.10, breaks = "Scott", col = "blue", xlim = c(0, 100), prob = T, xlab = "", 
-    ylab = "", main = "")
-mtext(expression(bar(x)[10]), side = 3, line = 1, cex = EX)
+xbar.10 <- apply(matrix(rnorm(m*10,50,15),nrow=m),1,mean)
+hist(xbar.10,breaks="Scott",col="blue",xlim=c(0,100),prob=T,xlab="",ylab="",main="")
+mtext(  expression(bar(x)[10]),side=3,line=1,cex=EX)
 
-xbar.10 <- apply(matrix(runif(m * 10, 0, 1), nrow = m), 1, mean)
-hist(xbar.10, breaks = "Scott", col = "blue", xlim = c(0, 1), prob = T, xlab = "", 
-    ylab = "", main = "")
-mtext(expression(bar(x)[10]), side = 3, line = 1, cex = EX)
+xbar.10 <- apply(matrix(runif(m*10,0,1),nrow=m),1,mean)
+hist(xbar.10,breaks="Scott",col="blue",xlim=c(0,1),prob=T,xlab="",ylab="",main="")
+mtext(  expression(bar(x)[10]),side=3,line=1,cex=EX)
 
-xbar.10 <- apply(matrix(rexp(m * 10, 1), nrow = m), 1, mean)
-hist(xbar.10, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "", 
-    ylab = "", main = "")
-mtext(expression(bar(x)[10]), side = 3, line = 1, cex = EX)
+xbar.10 <- apply(matrix(rexp(m*10,1),nrow=m),1,mean)
+hist(xbar.10,breaks="Scott",col="blue",xlim=c(0,5),prob=T,xlab="",ylab="",main="")
+mtext(  expression(bar(x)[10]),side=3,line=1,cex=EX)
 
-xbar.30 <- apply(matrix(rnorm(m * 30, 50, 15), nrow = m), 1, mean)
-hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 100), prob = T, xlab = "", 
-    ylab = "", main = "")
-mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
+xbar.30 <- apply(matrix(rnorm(m*30,50,15),nrow=m),1,mean)
+hist(xbar.30,breaks="Scott",col="blue",xlim=c(0,100),prob=T,xlab="",ylab="",main="")
+mtext(  expression(bar(x)[30]),side=3,line=1,cex=EX)
 
-xbar.30 <- apply(matrix(runif(m * 30, 0, 1), nrow = m), 1, mean)
-hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 1), prob = T, xlab = "", 
-    ylab = "", main = "")
-mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
+xbar.30 <- apply(matrix(runif(m*30,0,1),nrow=m),1,mean)
+hist(xbar.30,breaks="Scott",col="blue",xlim=c(0,1),prob=T,xlab="",ylab="",main="")
+mtext(  expression(bar(x)[30]),side=3,line=1,cex=EX)
 
-xbar.30 <- apply(matrix(rexp(m * 30, 1), nrow = m), 1, mean)
-hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "", 
-    ylab = "", main = "")
-mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
+xbar.30 <- apply(matrix(rexp(m*30,1),nrow=m),1,mean)
+hist(xbar.30,breaks="Scott",col="blue",xlim=c(0,5),prob=T,xlab="",ylab="",main="")
+mtext(  expression(bar(x)[30]),side=3,line=1,cex=EX)
 ```
 
 <img src="figure/CLTsim.png" title="plot of chunk CLTsim" alt="plot of chunk CLTsim" style="display: block; margin: auto;" />
 
 ```r
 
-par(mfrow = c(1, 1))
+par(mfrow=c(1,1))
 ```
 
 
@@ -3154,7 +3127,7 @@ The birth weight of a baby is of interest to health officials since many studies
 ```r
 require(xtable)
 site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
-Babies <- read.csv(file = url(site))
+Babies <- read.csv(file=url(site))
 ```
 
 
@@ -3180,7 +3153,7 @@ WD <- BD
 
 
 <!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
-<!-- Mon Feb 03 19:19:21 2014 -->
+<!-- Thu Feb  6 08:53:08 2014 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 1 --- All possible Samples of Size 3 from 3969, 3204, and 2892 </CAPTION>
 <TR> <TH> $x^*_1$ </TH> <TH> $x^*_2$ </TH> <TH> $x^*_3$ </TH> <TH> $\bar{x}^*$ </TH>  </TR>
@@ -3240,7 +3213,7 @@ mean(rs)
 ```
 
 ```r
-mean(BD[, "xbarstar"])
+mean(BD[,"xbarstar"])
 ```
 
 ```
@@ -3282,13 +3255,11 @@ head(Babies)
 ```r
 B <- 10000
 my.boot.statB <- numeric(B)
-for (i in 1:B) {
-    x <- sample(Babies$Weight, size = sum(!is.na(Babies$Weight)), replace = TRUE)
-    my.boot.statB[i] <- mean(x)
+for (i in 1:B){
+  x <- sample(Babies$Weight, size = sum(!is.na(Babies$Weight)), replace = TRUE) 
+  my.boot.statB[i] <- mean(x)
 }
-hist(my.boot.statB, breaks = "Scott", col = "lightblue", xlab = substitute(paste(bar(X), 
-    "* (g)")), main = "Bootstrap Distribution of means \n for NC birth weights ", 
-    freq = FALSE)
+hist(my.boot.statB, breaks = "Scott", col = 'lightblue', xlab = substitute(paste(bar(X),"* (g)")), main ="Bootstrap Distribution of means \n for NC birth weights ", freq= FALSE)
 abline(v = mean(Babies$Weight), col = "blue")
 abline(v = mean(my.boot.statB), col = "red")
 ```
@@ -3316,11 +3287,10 @@ Note that the bootstrap distribution is approximately normal.  Second, with mean
 
 ```r
 require(boot)
-bs.mean <- function(data, i) {
-    d <- data[i]
-    M <- mean(d)
-    M
-}
+bs.mean <- function(data, i){
+  d <- data[i]
+  M <- mean(d)
+  M}
 boot.obj <- boot(data = Babies$Weight, statistic = bs.mean, R = 10000)
 plot(boot.obj)
 ```
@@ -3349,11 +3319,9 @@ To highlight some key features of the bootstrap distribution, we begin with two 
 opar <- par(no.readonly = TRUE)
 set.seed(11)
 par(mfrow = c(3, 2))
-curve(dnorm(x, 25, 7), from = 25 - 2.5 * 7, 25 + 2.5 * 7, col = "blue", main = "N(25, 7)", 
-    ylab = "", xlab = "")
+curve(dnorm(x, 25, 7), from = 25 - 2.5*7, 25 + 2.5*7, col = "blue", main = "N(25, 7)", ylab = "", xlab = "")
 abline(v = 25, col = "red")
-curve(dnorm(x, 25, 1), from = 25 - 2.5 * 7, 25 + 2.5 * 7, col = "blue", main = "N(25, 1)", 
-    ylab = "", xlab = "")
+curve(dnorm(x, 25, 1), from = 25 - 2.5*7, 25 + 2.5*7, col = "blue", main = "N(25, 1)", ylab = "", xlab = "")
 abline(v = 25, col = "red")
 rs1 <- rnorm(49, 25, 7)
 rs2 <- rnorm(49, 25, 7)
@@ -3362,19 +3330,19 @@ abline(v = mean(rs1), col = "red")
 B <- 10000
 my.boot.stat1 <- numeric(B)
 my.boot.stat2 <- numeric(B)
-for (i in 1:B) {
-    x1 <- sample(rs1, size = 49, replace = TRUE)
-    x2 <- sample(rs2, size = 49, replace = TRUE)
-    my.boot.stat1[i] <- mean(x1)
-    my.boot.stat2[i] <- mean(x2)
+for (i in 1:B){
+  x1 <- sample(rs1, size = 49, replace = TRUE) 
+  x2 <- sample(rs2, size = 49, replace = TRUE) 
+  my.boot.stat1[i] <- mean(x1)
+  my.boot.stat2[i] <- mean(x2)
 }
-hist(my.boot.stat1, breaks = "Scott", main = "Bootstrap Distribution", freq = FALSE, 
-    xlab = "", xlim = c(25 - 2.5 * 7, 25 + 2.5 * 7))
+hist(my.boot.stat1, breaks = "Scott",  main ="Bootstrap Distribution", freq= FALSE, xlab = "", 
+xlim = c(25 - 2.5*7, 25 + 2.5*7))
 abline(v = mean(rs1), col = "red")
 hist(rs2, xlab = "", main = "n = 49")
 abline(v = mean(rs2), col = "red")
-hist(my.boot.stat2, breaks = "Scott", main = "Bootstrap Distribution", freq = FALSE, 
-    xlab = "", xlim = c(25 - 2.5 * 7, 25 + 2.5 * 7))
+hist(my.boot.stat2, breaks = "Scott",  main ="Bootstrap Distribution", freq= FALSE, xlab = "", 
+xlim = c(25 - 2.5*7, 25 + 2.5*7))
 abline(v = mean(rs2), col = "red")
 ```
 
@@ -3399,11 +3367,9 @@ The previous code shows the distributions of two such random samples with sample
 opar <- par(no.readonly = TRUE)
 set.seed(18)
 par(mfrow = c(3, 2))
-curve(dgamma(x, 1, 1/2), from = 0, to = 8, col = "blue", main = "Gamma(1, 1/2)", 
-    ylab = "", xlab = "")
+curve(dgamma(x, 1, 1/2), from = 0, to = 8, col = "blue", main = "Gamma(1, 1/2)", ylab = "", xlab = "")
 abline(v = 2, col = "red")
-curve(dgamma(x, 16, 8), from = 0, 8, col = "blue", main = "Gamma(16, 8)", ylab = "", 
-    xlab = "")
+curve(dgamma(x, 16, 8), from = 0, 8, col = "blue", main = "Gamma(16, 8)", ylab = "", xlab = "")
 abline(v = 2, col = "red")
 rsg1 <- rgamma(16, 1, 1/2)
 rsg2 <- rgamma(16, 1, 1/2)
@@ -3412,19 +3378,19 @@ abline(v = mean(rsg1), col = "red")
 B <- 10000
 my.boot.statg1 <- numeric(B)
 my.boot.statg2 <- numeric(B)
-for (i in 1:B) {
-    xg1 <- sample(rsg1, size = 16, replace = TRUE)
-    xg2 <- sample(rsg2, size = 16, replace = TRUE)
-    my.boot.statg1[i] <- mean(xg1)
-    my.boot.statg2[i] <- mean(xg2)
+for (i in 1:B){
+  xg1 <- sample(rsg1, size = 16, replace = TRUE)
+  xg2 <- sample(rsg2, size = 16, replace = TRUE)
+  my.boot.statg1[i] <- mean(xg1)
+  my.boot.statg2[i] <- mean(xg2)
 }
-hist(my.boot.statg1, breaks = "Scott", main = "Bootstrap Distribution", freq = FALSE, 
-    xlab = "", xlim = c(0, 8))
+hist(my.boot.statg1, breaks = "Scott",  main ="Bootstrap Distribution", freq= FALSE, xlab = "", 
+xlim = c(0, 8))
 abline(v = mean(rsg1), col = "red")
 hist(rsg2, xlab = "", main = "n = 16", xlim = c(0, 8))
 abline(v = mean(rsg2), col = "red")
-hist(my.boot.statg2, breaks = "Scott", main = "Bootstrap Distribution", freq = FALSE, 
-    xlab = "", xlim = c(0, 8))
+hist(my.boot.statg2, breaks = "Scott",  main ="Bootstrap Distribution", freq= FALSE, xlab = "", 
+xlim = c(0, 8))
 abline(v = mean(rsg2), col = "red")
 ```
 
@@ -3454,7 +3420,7 @@ Instead, the bootstrap distribution is useful for *quantifying the behavior of a
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv"
-Bang <- read.csv(file = url(site))  # read data into Bang
+Bang <- read.csv(file=url(site)) # read data into Bang
 ```
 
 
@@ -3463,7 +3429,7 @@ Bang <- read.csv(file = url(site))  # read data into Bang
 
 ```r
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(2, 2))
+par(mfrow=c(2, 2))
 Arsenic <- Bang$Arsenic
 hist(Arsenic, breaks = "Scott", main = "Figure 6a", col = "lightblue")
 qqnorm(Arsenic, main = "Figure 6b")
@@ -3471,12 +3437,11 @@ qqline(Arsenic, col = "red")
 B <- 10000
 n <- sum(!is.na(Arsenic))
 arsenic.mean <- numeric(B)
-for (i in 1:B) {
-    x <- sample(Arsenic, size = n, replace = TRUE)
-    arsenic.mean[i] <- mean(x)
+for (i in 1:B){
+  x <- sample(Arsenic, size = n, replace = TRUE)
+  arsenic.mean[i] <- mean(x)
 }
-hist(arsenic.mean, main = "Figure 7a", col = "lightblue", breaks = "Scott", xlab = substitute(paste(bar(X), 
-    "*")))
+hist(arsenic.mean, main = "Figure 7a", col = "lightblue", breaks = "Scott", xlab = substitute(paste(bar(X),"*")))
 qqnorm(arsenic.mean, main = "Figure 7b")
 qqline(arsenic.mean, col = "red")
 ```
@@ -3492,8 +3457,8 @@ The mean of the bootstrap means is 125.0259, quite close to the sample mean $\ba
 
 
 ```r
-BELOW <- sum(arsenic.mean <= (mean(arsenic.mean) + qnorm(0.025) * sd(arsenic.mean)))/B
-ABOVE <- sum(arsenic.mean >= (mean(arsenic.mean) + qnorm(0.975) * sd(arsenic.mean)))/B
+BELOW <- sum(arsenic.mean <= (mean(arsenic.mean) + qnorm(.025)*sd(arsenic.mean)))/B
+ABOVE <- sum(arsenic.mean >= (mean(arsenic.mean) + qnorm(.975)*sd(arsenic.mean)))/B
 c(BELOW, ABOVE)
 ```
 
@@ -3529,7 +3494,7 @@ quantile(my.boot.statB, probs = c(0.025, 0.975))
 For the North Carolina birth weights, the interval marked by the 2.5 and 97.5 percentiles is (3418.59, 3478.7). Thus, we would state that we are 95% confident that the true mean weight of North Carolina babies born in 2004 is between 3418.59 and 3478.7 g. In the arsenic example, the 2.5% and 97.5% points of the bootstrap distribution give us the interval (92.6729, 162.3456), so we are 95% confident that the true mean arsenic level is between 92.6729 and 162.3456 $\mu g/L$. Note that with $\bar{X}^* =$ 125.0259, this interval can be written (125.0259 -32.353, 125.0259 + 37.3197); in particular, this interval is not symmetric about the mean, reflecting the asymmetry of the bootstrap distribution.
 
 
-The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the 271 observations, 8 are above 1000 $\mu g/L$ and 2 are above 2200 $\mu g/L$ (remember, the sample mean is only 125.3199!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this  that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
+The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the 271 observations, 8 are above 1000 $\mu g/L$ and 2 are above 2200 $\mu g/L$ (remember, the sample mean is only 125.3199!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this – that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
 
 #### TWO SAMPLE BOOTSTRAP
 
@@ -3548,7 +3513,7 @@ We now turn to the problem of comparing two samples. In general, bootstrapping s
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/TV.csv"
-TV <- read.csv(file = url(site))  # read data into TV
+TV <- read.csv(file=url(site)) # read data into TV
 head(TV)
 ```
 
@@ -3583,15 +3548,14 @@ times.Basic <- subset(TV, select = Times, subset = Cable == "Basic", drop = TRUE
 times.Ext <- subset(TV, select = Times, subset = Cable == "Extended", drop = TRUE)
 B <- 10^4
 times.diff.mean <- numeric(B)
-for (i in 1:B) {
-    Basic.sample <- sample(times.Basic, size = length(times.Basic), replace = TRUE)
-    Ext.sample <- sample(times.Ext, size = length(times.Ext), replace = TRUE)
-    times.diff.mean[i] <- mean(Basic.sample) - mean(Ext.sample)
+for (i in 1:B){
+  Basic.sample <- sample(times.Basic, size = length(times.Basic), replace = TRUE)
+  Ext.sample <- sample(times.Ext, size = length(times.Ext), replace = TRUE)
+  times.diff.mean[i] <- mean(Basic.sample) - mean(Ext.sample)
 }
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(times.diff.mean, breaks = "Scott", freq = FALSE, main = "Bootstrap Distribution \n (Figure 8a)", 
-    xlab = substitute(paste(bar(x)[1], "*", -bar(x)[2], "*")), col = "lightblue")
+par(mfrow=c(1, 2))
+hist(times.diff.mean, breaks = "Scott", freq=FALSE, main = "Bootstrap Distribution \n (Figure 8a)", xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")), col = "lightblue")
 qqnorm(times.diff.mean, main = "Normal Q-Q Plot \n (Figure 8b)")
 qqline(times.diff.mean, col = "red")
 ```
@@ -3615,7 +3579,7 @@ Figure 8a shows the bootstrap distribution of the difference of sample means. As
 The right panel of Figure 8b shows a normal-quantile plot for the bootstrap distribution: the distribution is very close to normal.
 
 
-The 95% bootstrap percentile confidence interval for the difference in means (basic  extended) is (0.86, 3.84). Thus, we are 95% confident that commercial times on basic channels are, on average, between 0.86 and 3.84 min. longer than on extended channels (perhalf-hour time periods).
+The 95% bootstrap percentile confidence interval for the difference in means (basic – extended) is (0.86, 3.84). Thus, we are 95% confident that commercial times on basic channels are, on average, between 0.86 and 3.84 min. longer than on extended channels (perhalf-hour time periods).
 
 We can also conduct a permutation test of the hypothesis that the mean commercial times for the two cable options are the same versus the hypothesis that mean times are not. Figure 9a shows the permutation distribution for the difference in mean advertisement time between basic and extended TV channels.
 
@@ -3624,16 +3588,14 @@ We can also conduct a permutation test of the hypothesis that the mean commercia
 obsDIFF <- mean(times.Basic) - mean(times.Ext)
 P <- 10^4
 times.diff.meanP <- numeric(P)
-for (i in 1:P) {
-    index <- sample(length(TV$Times), size = length(TV$Times[TV$Cable == "Basic"]), 
-        replace = FALSE)
-    times.diff.meanP[i] <- mean(TV$Times[index]) - mean(TV$Times[-index])
+for (i in 1:P){
+  index <- sample(length(TV$Times), size = length(TV$Times[TV$Cable == "Basic"]), replace = FALSE)
+  times.diff.meanP[i] <- mean(TV$Times[index]) - mean(TV$Times[-index])
 }
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(times.diff.meanP, breaks = "Scott", freq = FALSE, main = "Randomization Distribution \n (Figure 9a)", 
-    xlab = substitute(paste(bar(x)[1], "*", -bar(x)[2], "*")), col = "lightblue")
-abline(v = obsDIFF, col = "red")
+par(mfrow=c(1, 2))
+hist(times.diff.meanP, breaks = "Scott", freq=FALSE, main = "Randomization Distribution \n (Figure 9a)", xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")), col = "lightblue")
+abline(v= obsDIFF, col = "red")
 qqnorm(times.diff.meanP, main = "Normal Q-Q Plot \n (Figure 9b)")
 qqline(times.diff.meanP, col = "red")
 ```
@@ -3671,13 +3633,12 @@ rt
 times.ILEC <- subset(Phone, select = Time, subset = Group == "ILEC", drop = TRUE)
 B <- 10^4
 ILECmean <- numeric(B)
-for (i in 1:B) {
-    ILECmean[i] <- mean(sample(times.ILEC, size = length(times.ILEC), replace = TRUE))
+for (i in 1:B){
+ ILECmean[i] <- mean(sample(times.ILEC, size = length(times.ILEC), replace = TRUE)) 
 }
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(ILECmean, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 10a", 
-    freq = FALSE, xlab = substitute(paste(bar(x), "*")))
+par(mfrow=c(1, 2))
+hist(ILECmean, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 10a", freq= FALSE, xlab = substitute(paste(bar(x),"*")))
 qqnorm(ILECmean, main = "Normal Q-Q Plot \n Figure 10b")
 qqline(ILECmean, col = "red")
 ```
@@ -3704,13 +3665,12 @@ The bootstrap distribution for the larger ILEC data set ($n =$ 1664) is shown in
 times.CLEC <- subset(Phone, select = Time, subset = Group == "CLEC", drop = TRUE)
 B <- 10^4
 CLECmean <- numeric(B)
-for (i in 1:B) {
-    CLECmean[i] <- mean(sample(times.CLEC, size = length(times.CLEC), replace = TRUE))
+for (i in 1:B){
+ CLECmean[i] <- mean(sample(times.CLEC, size = length(times.CLEC), replace = TRUE)) 
 }
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(CLECmean, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 11a", 
-    freq = FALSE, xlab = substitute(paste(bar(x), "*")))
+par(mfrow=c(1, 2))
+hist(CLECmean, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 11a", freq= FALSE, xlab = substitute(paste(bar(x),"*")))
 qqnorm(CLECmean, main = "Normal Q-Q Plot \n Figure 11b")
 qqline(CLECmean, col = "red")
 ```
@@ -3735,15 +3695,14 @@ The bootstrap distribution for the smaller CLEC data set ($n =$ 23) is shown in 
 ```r
 B <- 10^4
 diffmeans <- numeric(B)
-for (i in 1:B) {
-    ILEC.sample <- sample(times.ILEC, size = length(times.ILEC), replace = TRUE)
-    CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
-    diffmeans[i] <- mean(ILEC.sample) - mean(CLEC.sample)
+for (i in 1:B){
+  ILEC.sample <- sample(times.ILEC, size = length(times.ILEC), replace = TRUE)
+  CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
+  diffmeans[i] <- mean(ILEC.sample) - mean(CLEC.sample)
 }
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(diffmeans, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 12a", 
-    freq = FALSE, xlab = substitute(paste(bar(x)[1], "*", -bar(x)[2], "*")))
+par(mfrow=c(1, 2))
+hist(diffmeans, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 12a", freq= FALSE, xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")))
 qqnorm(diffmeans, main = "Normal Q-Q Plot \n Figure 12b")
 qqline(diffmeans, col = "red")
 ```
@@ -3769,7 +3728,7 @@ The bootstrap distribution for the difference in means is shown in Figure 12a. N
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/Cameras.csv"
-Cameras <- read.csv(file = url(site))
+Cameras <- read.csv(file=url(site))
 head(Cameras)
 ```
 
@@ -3789,15 +3748,15 @@ Savvy customers will often compare prices at different stores before making a pu
 
 Now, it may be tempting to proceed as in the TV commercials or Verizon repair times examples, looking at the prices as coming from two populations, B & H and J & R. But note that the data are *not independent*! For each camera priced at B & H, we matched it with the price for the same camera at J & R. Thus, the data are called *matched pairs or paired data*.
 
-In this case, for each camera, we compute the difference in price between the two stores (J & R price - B & H price). We then have one variable -- the price differences -- and we are back to the onesample setting. The price differences are shown in Figure 13a.
+In this case, for each camera, we compute the difference in price between the two stores (J & R price - B & H price). We then have one variable –-- the price differences –-- and we are back to the one–sample setting. The price differences are shown in Figure 13a.
 
 
 ```r
 CameraDiffs <- Cameras$JR - Cameras$BH
 B <- 10^5
 boot.diffs <- numeric(B)
-for (i in 1:B) {
-    boot.diffs[i] <- mean(sample(CameraDiffs, size = length(CameraDiffs), replace = TRUE))
+for (i in 1:B){
+  boot.diffs[i] <- mean(sample(CameraDiffs, size = length(CameraDiffs), replace = TRUE))
 }
 CIdiff <- quantile(boot.diffs, prob = c(0.025, 0.975))
 CIdiff
@@ -3810,12 +3769,10 @@ CIdiff
 
 ```r
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(CameraDiffs, freq = FALSE, col = "lightblue", main = "Distribution of Price Differences \n Figure 13a", 
-    xlab = "Dollars")
+par(mfrow=c(1, 2))
+hist(CameraDiffs, freq= FALSE, col = "lightblue", main = "Distribution of Price Differences \n Figure 13a", xlab = "Dollars")
 abline(v = mean(CameraDiffs), col = "red")
-hist(boot.diffs, freq = FALSE, col = "lightblue", main = "Bootstrap Distribution of \n Price Differences \n Figure 13b", 
-    xlab = substitute(paste(bar(D), "*")))
+hist(boot.diffs, freq= FALSE, col = "lightblue", main = "Bootstrap Distribution of \n Price Differences \n Figure 13b", xlab = substitute(paste(bar(D),"*")))
 abline(v = mean(boot.diffs), col = "red")
 ```
 
@@ -3832,21 +3789,20 @@ Performing a one sample bootstrap with $10^5$ resamples, we find a 95% bootstrap
 
 As with permutation testing, when bootstrapping, we are not limited to simple statistics like the simple mean. Once we have drawn a bootstrap sample, we can calculate any statistic for that sample.
 
-For example, instead of the sample mean, we can use more robust statistics that are less sensitive to extreme observations. Figure 14a shows the bootstrap distribution for the difference in trimmed means, in this case 25% trimmed means, also known as the mid-mean, the mean of the middle 50% of observations. Compared to the bootstrap difference in ordinary means (Figure 12a), this distribution has a much smaller spread. The bootstrap procedure may be used with a wide variety of statistics -- means, medians, trimmed means, correlation coefficients, and so on -- using the same procedure. This is a major advantage of the bootstrap. It allows statistical inferences such as confidence intervals to be calculated even for statistics for which there are no easy formulas. It offers hope of reforming statistical practice -- away from simple but non-robust estimators like a sample mean or least-squares regression, in favor of robust alternatives.
+For example, instead of the sample mean, we can use more robust statistics that are less sensitive to extreme observations. Figure 14a shows the bootstrap distribution for the difference in trimmed means, in this case 25% trimmed means, also known as the mid-mean, the mean of the middle 50% of observations. Compared to the bootstrap difference in ordinary means (Figure 12a), this distribution has a much smaller spread. The bootstrap procedure may be used with a wide variety of statistics –-- means, medians, trimmed means, correlation coefficients, and so on –-- using the same procedure. This is a major advantage of the bootstrap. It allows statistical inferences such as confidence intervals to be calculated even for statistics for which there are no easy formulas. It offers hope of reforming statistical practice –-- away from simple but non-robust estimators like a sample mean or least-squares regression, in favor of robust alternatives.
 
 
 ```r
 B <- 10^4
 diffmeans.25 <- numeric(B)
-for (i in 1:B) {
-    ILEC.sample <- sample(times.ILEC, size = length(times.ILEC), replace = TRUE)
-    CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
-    diffmeans.25[i] <- mean(ILEC.sample, trim = 0.25) - mean(CLEC.sample, trim = 0.25)
+for (i in 1:B){
+  ILEC.sample <- sample(times.ILEC, size = length(times.ILEC), replace = TRUE)
+  CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
+  diffmeans.25[i] <- mean(ILEC.sample, trim = .25) - mean(CLEC.sample, trim = .25)
 }
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(diffmeans.25, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 14a \n 0.25 Trimmed Means", 
-    freq = FALSE, xlab = substitute(paste(bar(x)[1], "*", -bar(x)[2], "*")))
+par(mfrow=c(1, 2))
+hist(diffmeans.25, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 14a \n 0.25 Trimmed Means", freq= FALSE, xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")))
 qqnorm(diffmeans.25, main = "Normal Q-Q Plot \n Figure 14b")
 qqline(diffmeans.25, col = "red")
 ```
@@ -3875,15 +3831,14 @@ times.ILEC <- subset(Phone, select = Time, subset = Group == "ILEC", drop = TRUE
 times.CLEC <- subset(Phone, select = Time, subset = Group == "CLEC", drop = TRUE)
 B <- 10^4
 boot.ratio <- numeric(B)
-for (i in 1:B) {
-    ILEC.sample <- sample(times.ILEC, size = length(times.ILEC), replace = TRUE)
-    CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
-    boot.ratio[i] <- mean(ILEC.sample)/mean(CLEC.sample)
+for (i in 1:B){
+  ILEC.sample <- sample(times.ILEC, size = length(times.ILEC), replace = TRUE)
+  CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
+  boot.ratio[i] <- mean(ILEC.sample)/mean(CLEC.sample)
 }
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(boot.ratio, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 15a", 
-    freq = FALSE, xlab = substitute(paste(bar(x)[1], "* / ", bar(x)[2], "*")))
+par(mfrow=c(1, 2))
+hist(boot.ratio, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution \n Figure 15a", freq= FALSE, xlab = substitute(paste(bar(x)[1],"* / ", bar(x)[2],"*")))
 qqnorm(boot.ratio, main = "Normal Q-Q Plot \n Figure 15b")
 qqline(boot.ratio, col = "red")
 ```
@@ -3909,12 +3864,11 @@ As in the difference of means example, the bootstrap distribution of the ratio o
 
 ```r
 require(boot)
-phoneF <- function(data, i) {
-    d <- data[i, ]
-    m <- tapply(d$Time, d$Group, mean)
-    rat <- m[2]/m[1]
-    rat
-}
+phoneF <- function(data, i){
+  d <- data[i, ]
+  m <- tapply(d$Time, d$Group, mean)
+  rat <- m[2]/m[1]
+  rat}
 boot.obj <- boot(data = Phone, statistic = phoneF, R = 10000)
 plot(boot.obj)
 ```
@@ -3979,7 +3933,7 @@ Import the data `Girls2004` available from [http:\\www1.appstate.edu/arnholta/Da
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/Girls2004.csv"
-Girls <- read.csv(file = url(site))
+Girls <- read.csv(file=url(site))
 head(Girls)
 ```
 
@@ -3999,17 +3953,15 @@ head(Girls)
 
 ```r
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(2, 2))
-hist(Girls$Weight[Girls$State == "AK"], col = "pink1", breaks = "Scott", xlab = "Weight in g.", 
-    main = "Alaska", freq = FALSE)
-lines(density(Girls$Weight[Girls$State == "AK"]), col = "red")
-qqnorm(Girls$Weight[Girls$State == "AK"], col = "pink1")
-qqline(Girls$Weight[Girls$State == "AK"], col = "pink1")
-hist(Girls$Weight[Girls$State == "WY"], col = "pink", breaks = "Scott", xlab = "Weight in g.", 
-    main = "Wyoming", freq = FALSE)
-lines(density(Girls$Weight[Girls$State == "WY"]), col = "red")
-qqnorm(Girls$Weight[Girls$State == "WY"], col = "pink")
-qqline(Girls$Weight[Girls$State == "WY"], col = "pink")
+par(mfrow=c(2, 2))
+hist(Girls$Weight[Girls$State=="AK"], col = "pink1", breaks = "Scott", xlab = "Weight in g.", main = "Alaska", freq= FALSE)
+lines(density(Girls$Weight[Girls$State=="AK"]), col ="red")
+qqnorm(Girls$Weight[Girls$State=="AK"], col = "pink1")
+qqline(Girls$Weight[Girls$State=="AK"], col = "pink1")
+hist(Girls$Weight[Girls$State=="WY"], col = "pink", breaks = "Scott", xlab = "Weight in g.", main = "Wyoming", freq= FALSE)
+lines(density(Girls$Weight[Girls$State=="WY"]), col ="red")
+qqnorm(Girls$Weight[Girls$State=="WY"], col = "pink")
+qqline(Girls$Weight[Girls$State=="WY"], col = "pink")
 ```
 
 <img src="figure/GirlsHist.png" title="plot of chunk GirlsHist" alt="plot of chunk GirlsHist" style="display: block; margin: auto;" />
@@ -4024,13 +3976,13 @@ Another approach is to use `lattice`.
 
 ```r
 require(lattice)
-histogram(~Weight | State, data = Girls, layout = c(1, 2), as.table = TRUE, type = "density")
+histogram(~Weight|State, data = Girls, layout=c(1, 2), as.table = TRUE, type = "density")
 ```
 
 <img src="figure/GirlsHistLattice1.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
 
 ```r
-qqmath(~Weight | State, data = Girls, layout = c(1, 2), as.table = TRUE)
+qqmath(~Weight|State, data = Girls, layout=c(1, 2), as.table = TRUE)
 ```
 
 <img src="figure/GirlsHistLattice2.png" title="plot of chunk GirlsHistLattice" alt="plot of chunk GirlsHistLattice" style="display: block; margin: auto;" />
@@ -4047,17 +3999,14 @@ A third approach is to use `ggplot2`. (This is my preference.)
 
 ```r
 require(ggplot2)
-p <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(binwidth = 500) + facet_grid(State ~ 
-    .)
+p <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(binwidth = 500) + facet_grid(State ~ .)
 p
 ```
 
 <img src="figure/GirlsHistggplot21.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 ```r
-p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..), 
-    binwidth = 500, fill = "blue") + facet_grid(State ~ .) + geom_density(color = "red", 
-    size = 1.5)
+p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..), binwidth = 500, fill = "blue") + facet_grid(State ~ .) + geom_density(color = "red", size = 1.5)
 p1
 ```
 
@@ -4075,7 +4024,8 @@ p2
 
 
 ```r
-with(data = Girls, tapply(Weight, State, mean))
+with(data = Girls, 
+tapply(Weight, State, mean))
 ```
 
 ```
@@ -4110,18 +4060,17 @@ c(mean(AK.weight), sd(AK.weight), mean(WY.weight), sd(WY.weight))
 ```r
 B <- 15000
 mean.diff <- numeric(B)
-for (i in 1:B) {
-    AK <- sample(AK.weight, size = sum(!is.na(AK.weight)), replace = TRUE)
-    WY <- sample(WY.weight, size = sum(!is.na(WY.weight)), replace = TRUE)
-    mean.diff[i] <- mean(AK) - mean(WY)
+for(i in 1:B){
+  AK <- sample(AK.weight, size = sum(!is.na(AK.weight)), replace = TRUE)
+  WY <- sample(WY.weight, size = sum(!is.na(WY.weight)), replace = TRUE)
+  mean.diff[i] <- mean(AK) - mean(WY)
 }
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(mean.diff, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution", 
-    xlab = substitute(paste(bar(x)[1], "*", -bar(x)[2], "*")), freq = FALSE)
+par(mfrow=c(1, 2))
+hist(mean.diff, breaks = "Scott", col = "lightblue", main = "Bootstrap Distribution", xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")), freq= FALSE)
 abline(v = mean(AK.weight) - mean(WY.weight), col = "red")
-curve(dnorm(x, mean(mean.diff), sd(mean.diff)), col = "blue", add = TRUE, lwd = 2)
-qqnorm(mean.diff, col = "blue")
+curve(dnorm(x, mean(mean.diff), sd(mean.diff)), col ="blue", add= TRUE, lwd = 2)
+qqnorm(mean.diff, col ="blue")
 qqline(mean.diff, col = "red")
 ```
 
@@ -4130,7 +4079,7 @@ qqline(mean.diff, col = "red")
 ```r
 par(opar)
 BIAS <- mean(mean.diff) - (mean(AK.weight) - mean(WY.weight))
-CI <- quantile(mean.diff, prob = c(0.025, 0.975))
+CI <- quantile(mean.diff, prob = c(.025, .975))
 CI
 ```
 
@@ -4173,19 +4122,19 @@ obs.mean.diff
 R <- 50000
 Weight <- subset(Girls, select = Weight, drop = TRUE)
 result <- numeric(R)  # space to save the random differences
-for (i in 1:R) {
-    # sample of size 40, from 1 to 80, without replacement
-    index <- sample(80, size = 40, replace = FALSE)
-    result[i] <- mean(Weight[index]) - mean(Weight[-index])
+for (i in 1:R){
+  # sample of size 40, from 1 to 80, without replacement
+  index <- sample(80, size = 40, replace = FALSE)
+  result[i] <- mean(Weight[index]) - mean(Weight[-index])
 }
-hist(result, col = "blue", main = "", xlab = expression(bar(x)[1] - bar(x)[2]))
+hist(result, col = "blue", main = "", xlab = expression(bar(x)[1]- bar(x)[2]))
 abline(v = obs.mean.diff, col = "red")
 ```
 
 <img src="figure/GirlsPer.png" title="plot of chunk GirlsPer" alt="plot of chunk GirlsPer" style="display: block; margin: auto;" />
 
 ```r
-pvalue <- (sum(abs(result) >= abs(obs.mean.diff) + 1))/(R + 1)  # p-value
+pvalue <- (sum(abs(result) >= abs(obs.mean.diff) + 1))/(R + 1) # p-value
 pvalue  # results will vary
 ```
 
@@ -4209,9 +4158,9 @@ CLASSICAL INFERENCE: CONFIDENCE INTERVALS
 ### 7.1.1 Confidence Intervals for a Mean, $\sigma$ Known
 
 
-**Example 7.1** The Centers for Disease Control maintains growth charts for infants and children [(http://cdc.gov/growthcharts/zscore.html)](http://cdc.gov/growthcharts/zscore.html). For 13-year-old girls, the mean weight is 101 pounds with a standard deviation of 24.6 pounds. We assume the weights are normally distributed. The public health officials in Sodor are interested in the weights of the teens in their town: they suspect that the mean weight of their girls might be different from the mean weight in the growth chart but are willing to assume that the variation is the same. If they survey a random sample of 150 thirteen-year-old girls and find their mean weight  an estimate of the population mean weight  is 95 pounds, how accurate this estimate be? 
+**Example 7.1** The Centers for Disease Control maintains growth charts for infants and children [(http://cdc.gov/growthcharts/zscore.html)](http://cdc.gov/growthcharts/zscore.html). For 13-year-old girls, the mean weight is 101 pounds with a standard deviation of 24.6 pounds. We assume the weights are normally distributed. The public health officials in Sodor are interested in the weights of the teens in their town: they suspect that the mean weight of their girls might be different from the mean weight in the growth chart but are willing to assume that the variation is the same. If they survey a random sample of 150 thirteen-year-old girls and find their mean weight – an estimate of the population mean weight – is 95 pounds, how accurate this estimate be? 
 
-We assume the 150 sample values are from a normal distribution, $N(\mu, 24.6)$. Then the sampling distribution of mean weights is $N(\mu, 24.6/\sqrt{150})$. Let $\bar{X}$ denote the mean of the 150 weights, so standardizing gives $Z = (\bar{X}  \mu)/(24.6/\sqrt{150}) \sim N(0, 1)$.  For a standard normal random variable $Z$, we have $$P(z_{\alpha/2} < Z < z_{1-\alpha/2})$$ 
+We assume the 150 sample values are from a normal distribution, $N(\mu, 24.6)$. Then the sampling distribution of mean weights is $N(\mu, 24.6/\sqrt{150})$. Let $\bar{X}$ denote the mean of the 150 weights, so standardizing gives $Z = (\bar{X} – \mu)/(24.6/\sqrt{150}) \sim N(0, 1)$.  For a standard normal random variable $Z$, we have $$P(z_{\alpha/2} < Z < z_{1-\alpha/2})$$ 
 
 The random interval $(\bar{X} - 3.937, \bar{X} + 3.937)$ has a probability of 0.95 of containing the mean $\mu$. Now, once you drive your sample, the random variable $\bar{X}$ is replaced by the (observed) sample mean weight of $\bar{x} = 95$, and the interval (91.1, 98.9) is no longer a random interval. We interpret this interval by stating that we are 95% confident that the population mean weight of 13-year-old girls Sodor is between 91.9 in 98.9 pounds.
 
@@ -4231,23 +4180,20 @@ We illustrate this with the simulation by drawing random samples of size 30 from
 
 ```r
 set.seed(13)
-counter <- 0  # set counter to 0
+counter <- 0 # set counter to 0
 mu <- 25
 sigma <- 4
 n <- 30
 sims <- 10^4
-plot(x = c(mu - 4 * sigma/sqrt(n), mu + 4 * sigma/sqrt(n)), y = c(1, 100), type = "n", 
-    xlab = "", ylab = "")
-for (i in 1:sims) {
-    x <- rnorm(n, mu, sigma)
-    L <- mean(x) + qnorm(0.025) * sigma/sqrt(n)
-    U <- mean(x) + qnorm(0.975) * sigma/sqrt(n)
-    if (L < mu && mu < U) {
-        counter <- counter + 1
-    }
-    if (i <= 100) {
-        segments(L, i, U, i, col = "blue")
-    }
+plot(x = c(mu - 4*sigma/sqrt(n), mu + 4*sigma/sqrt(n)), y = c(1, 100), type = "n", xlab = "", ylab = "")
+for (i in 1:sims){
+ x <- rnorm(n, mu, sigma)
+ L <- mean(x) + qnorm(.025)*sigma/sqrt(n)
+ U <- mean(x) + qnorm(0.975)*sigma/sqrt(n)
+ if(L < mu && mu < U){counter <- counter + 1}
+ if(i <= 100){
+ segments(L, i, U, i, col = "blue")
+ }
 }
 abline(v = mu, col = "red")
 ```
@@ -4255,7 +4201,7 @@ abline(v = mu, col = "red")
 <img src="figure/ACL.png" title="plot of chunk ACL" alt="plot of chunk ACL" style="display: block; margin: auto;" />
 
 ```r
-ACL <- counter/sims * 100
+ACL <- counter/sims*100
 ACL
 ```
 
@@ -4317,9 +4263,9 @@ We are 90% confident that the population mean lies in the interval (2.3879, 5.74
 xs <- c(3.4, 2.9, 2.8, 5.1, 6.3, 3.9)
 n <- length(xs)
 SIGMA <- 2.5
-alpha <- 0.1
-LL <- mean(xs) - qnorm(1 - alpha/2) * SIGMA/sqrt(n)
-UL <- mean(xs) + qnorm(1 - alpha/2) * SIGMA/sqrt(n)
+alpha <- 0.10
+LL <- mean(xs) - qnorm(1 - alpha/2)*SIGMA/sqrt(n)
+UL <- mean(xs) + qnorm(1 - alpha/2)*SIGMA/sqrt(n)
 CI <- c(LL, UL)
 CI
 ```
@@ -4330,7 +4276,7 @@ CI
 
 ```r
 require(PASWR)  # or use z.test() from PASWR
-z.test(x = xs, sigma.x = SIGMA, conf.level = 0.9)$conf
+z.test(x = xs, sigma.x = SIGMA, conf.level = 0.90)$conf
 ```
 
 ```
@@ -4350,7 +4296,7 @@ MARGIN OF ERROR: The margin of error for a symmetric confidence interval is the 
 
 
 ```r
-n <- ceiling((qnorm(0.975) * 24.6/5)^2)
+n <- ceiling((qnorm(.975)*24.6/5)^2)
 n
 ```
 
@@ -4373,22 +4319,22 @@ set.seed(1)
 N <- 10^4
 TS <- numeric(N)
 n <- 16
-for (i in 1:N) {
-    x <- rnorm(n, 25, 7)
-    xbar <- mean(x)
-    s <- sd(x)
-    TS[i] <- (xbar - 25)/(s/sqrt(n))
+for(i in 1:N){
+  x <- rnorm(n, 25, 7)
+  xbar <- mean(x)
+  s <- sd(x)
+  TS[i] <- (xbar - 25)/(s/sqrt(n))
 }
-par(mfrow = c(1, 2))
+par(mfrow=c(1, 2))
 hist(TS, breaks = "Scott", freq = FALSE, col = "pink", main = "", xlab = expression(t))
-qqnorm(TS, col = rgb(1, 0, 0, 0.1))
+qqnorm(TS, col = rgb(1, 0, 0, .1))
 abline(a = 0, b = 1)
 ```
 
 <img src="figure/TS.png" title="plot of chunk TS" alt="plot of chunk TS" style="display: block; margin: auto;" />
 
 ```r
-par(mfrow = c(1, 1))
+par(mfrow=c(1, 1))
 ```
 
 
@@ -4405,9 +4351,8 @@ curve(dt(x, 1), add = TRUE, lty = 2, col = "green")
 curve(dt(x, 4), add = TRUE, lty = 3, col = "pink")
 curve(dt(x, 9), add = TRUE, lty = 4, col = "red")
 curve(dt(x, 36), add = TRUE, lty = 5, col = "blue")
-abline(h = 0, lwd = 2)
-legend("topright", legend = c("N(0, 1)", "t_1", "t_4", "t_9", "t_36"), lty = c(1, 
-    2, 3, 4, 5), col = c("black", "green", "pink", "red", "blue"), lwd = 1.5)
+abline(h = 0, lwd=2)
+legend("topright", legend = c("N(0, 1)", "t_1", "t_4", "t_9", "t_36"), lty = c(1, 2, 3, 4, 5), col =c("black", "green", "pink", "red", "blue"), lwd = 1.5)
 ```
 
 <img src="figure/tdfs.png" title="plot of chunk tdfs" alt="plot of chunk tdfs" style="display: block; margin: auto;" />
@@ -4448,7 +4393,7 @@ To find the quantile $t_{.95; 27}$ satisfying $P(T_{27} < t_{.95; 27}) = 0.95$,
 
 
 ```r
-qt(0.95, 27)
+qt(.95, 27)
 ```
 
 ```
@@ -4456,9 +4401,9 @@ qt(0.95, 27)
 ```
 
 ```r
-# 
+#
 require(PASWR)
-tsum.test(mean.x = 110, s.x = 7.5, n.x = 28, conf.level = 0.9)$conf
+tsum.test(mean.x = 110, s.x = 7.5, n.x = 28, conf.level = 0.90)$conf
 ```
 
 ```
@@ -4480,7 +4425,7 @@ Compare the 0.95 quantile for a $t$ distribution with 27 degrees of freedom with
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
-NCBirths2004 <- read.csv(file = url(site))
+NCBirths2004 <- read.csv(file=url(site))
 MEANS <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, mean)
 SD <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, sd)
 MEANS
@@ -4501,24 +4446,22 @@ Female   Male
 ```
 
 ```r
-qqnorm(NCBirths2004$Weight[NCBirths2004$Gender == "Female"], main = "", col = rgb(1, 
-    0, 0, 0.2))
-qqline(NCBirths2004$Weight[NCBirths2004$Gender == "Female"], col = "blue")
+qqnorm(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], main = "", col = rgb(1,0,0,.2))
+qqline(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], col = "blue")
 ```
 
 <img src="figure/QQs1.png" title="plot of chunk QQs" alt="plot of chunk QQs" style="display: block; margin: auto;" />
 
 ```r
 require(lattice)
-qqmath(~Weight | Gender, data = NCBirths2004, col = rgb(1, 0, 0, 0.1))
+qqmath(~Weight|Gender,data = NCBirths2004, col = rgb(1,0,0,.1))
 ```
 
 <img src="figure/QQs2.png" title="plot of chunk QQs" alt="plot of chunk QQs" style="display: block; margin: auto;" />
 
 ```r
 require(ggplot2)
-ggplot(data = NCBirths2004, aes(sample = Weight)) + stat_qq(color = rgb(1, 0, 0, 
-    0.1)) + facet_grid(. ~ Gender)
+ggplot(data = NCBirths2004, aes(sample = Weight)) + stat_qq(color = rgb(1,0,0,.1)) + facet_grid(.~Gender)
 ```
 
 <img src="figure/QQs3.png" title="plot of chunk QQs" alt="plot of chunk QQs" style="display: block; margin: auto;" />
@@ -4531,7 +4474,7 @@ Use the command `t.test()` to find confidence intervals.
 
 
 ```r
-girls <- subset(NCBirths2004, select = Weight, subset = Gender == "Female", drop = TRUE)
+girls <- subset(NCBirths2004, select = Weight, subset = Gender =="Female", drop = TRUE)
 t.test(girls, conf.level = 0.99)$conf
 ```
 
@@ -4543,7 +4486,7 @@ attr(,"conf.level")
 
 ```r
 # Or
-t.test(NCBirths2004$Weight[NCBirths2004$Gender == "Female"], conf = 0.99)$conf
+t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = 0.99)$conf
 ```
 
 ```
@@ -4564,26 +4507,22 @@ Let us check this for a nonnormal population by running a simulation.
 
 ```r
 set.seed(13)
-tooLow <- 0  # set counter to 0
-tooHigh <- 0  # set counter to 0
-n <- 20  # sample size
+tooLow <- 0       # set counter to 0
+tooHigh <- 0      # set counter to 0
+n <- 20           # sample size
 q <- qt(0.975, n - 1)
 N <- 10^5
-for (i in 1:N) {
-    x <- rgamma(n, shape = 5, rate = 2)
-    xbar <- mean(x)
-    s <- sd(x)
-    L <- xbar - q * s/sqrt(n)
-    U <- xbar + q * s/sqrt(n)
-    if (U < 5/2) {
-        tooLow <- tooLow + 1
-    }
-    if (L > 5/2) {
-        tooHigh <- tooHigh + 1
-    }
+for(i in 1:N){
+  x <- rgamma(n, shape = 5, rate = 2)
+  xbar <- mean(x)
+  s <- sd(x)
+  L <- xbar - q*s/sqrt(n)
+  U <- xbar + q*s/sqrt(n)
+  if(U < 5/2){tooLow <- tooLow + 1}
+  if(L > 5/2){tooHigh <- tooHigh + 1}
 }
-TL <- tooLow/N * 100
-TH <- tooHigh/N * 100
+TL <- tooLow/N*100
+TH <- tooHigh/N*100
 c(TL, TH)
 ```
 
@@ -4598,102 +4537,87 @@ When the population is nonnormal but symmetric and the sample size is moderate o
 
 ```r
 set.seed(13)
-n <- 10  # sample size
+n <- 10           # sample size
 q <- qt(0.975, n - 1)
 N <- 10^5
 TSU <- numeric(N)
-for (i in 1:N) {
-    x <- runif(n, 0, 1)
-    xbar <- mean(x)
-    s <- sd(x)
-    TSU[i] <- (xbar - 0.5)/(s/sqrt(n))
+for(i in 1:N){
+  x <- runif(n, 0, 1)
+  xbar <- mean(x)
+  s <- sd(x)
+  TSU[i] <- (xbar - 0.5)/(s/sqrt(n))
 }
 TSE10 <- numeric(N)
-for (i in 1:N) {
-    x <- rexp(n, 1)
-    xbar <- mean(x)
-    s <- sd(x)
-    TSE10[i] <- (xbar - 1)/(s/sqrt(n))
+for(i in 1:N){
+  x <- rexp(n, 1)
+  xbar <- mean(x)
+  s <- sd(x)
+  TSE10[i] <- (xbar - 1)/(s/sqrt(n))
 }
 n <- 100
 TSE100 <- numeric(N)
-for (i in 1:N) {
-    x <- rexp(n, 1)
-    xbar <- mean(x)
-    s <- sd(x)
-    TSE100[i] <- (xbar - 1)/(s/sqrt(n))
+for(i in 1:N){
+  x <- rexp(n, 1)
+  xbar <- mean(x)
+  s <- sd(x)
+  TSE100[i] <- (xbar - 1)/(s/sqrt(n))
 }
-# 
+#
 n <- 10
-qqmath(~TSU, col = "red", xlim = c(-3, 3), ylim = c(-3, 3), distribution = function(p) {
-    qt(p, df = n - 1)
-}, xlab = "Theoretical t quantiles", ylab = "Sample quantiles", main = "Uniform, n = 10", 
-    panel = function(x, ...) {
-        panel.qqmath(x, pch = ".", ...)
-        panel.abline(a = 0, b = 1, ...)
-    })
+qqmath(~TSU, col = "red", xlim = c(-3,3), ylim = c(-3,3), distribution = function(p){qt(p, df = n - 1)}, xlab = "Theoretical t quantiles", ylab = "Sample quantiles", main = "Uniform, n = 10", panel = function(x,...){
+  panel.qqmath(x, pch = ".", ...)
+  panel.abline(a = 0, b =1, ...)
+})
 ```
 
 <img src="figure/taccurate1.png" title="plot of chunk taccurate" alt="plot of chunk taccurate" style="display: block; margin: auto;" />
 
 ```r
-# 
-qqmath(~TSE10, col = "red", xlim = c(-3, 3), ylim = c(-3, 3), distribution = function(p) {
-    qt(p, df = n - 1)
-}, xlab = "Theoretical t quantiles", ylab = "Sample quantiles", main = "Exponential, n = 10", 
-    panel = function(x, ...) {
-        panel.qqmath(x, pch = ".", ...)
-        panel.abline(a = 0, b = 1, ...)
-    })
+#
+qqmath(~TSE10, col = "red", xlim = c(-3,3), ylim = c(-3,3), distribution = function(p){qt(p, df = n - 1)}, xlab = "Theoretical t quantiles", ylab = "Sample quantiles", main = "Exponential, n = 10", panel = function(x,...){
+  panel.qqmath(x, pch = ".", ...)
+  panel.abline(a = 0, b = 1, ...)
+})
 ```
 
 <img src="figure/taccurate2.png" title="plot of chunk taccurate" alt="plot of chunk taccurate" style="display: block; margin: auto;" />
 
 ```r
-# 
+#
 n <- 100
-qqmath(~TSE100, col = "red", xlim = c(-3, 3), ylim = c(-3, 3), distribution = function(p) {
-    qt(p, df = n - 1)
-}, xlab = "Theoretical t quantiles", ylab = "Sample quantiles", main = "Exponential, n = 100", 
-    panel = function(x, ...) {
-        panel.qqmath(x, pch = ".", ...)
-        panel.abline(a = 0, b = 1, ...)
-    })
+qqmath(~TSE100,col = "red", xlim = c(-3,3), ylim = c(-3,3), distribution = function(p){qt(p, df = n - 1)}, xlab = "Theoretical t quantiles", ylab = "Sample quantiles", main = "Exponential, n = 100", panel = function(x,...){
+  panel.qqmath(x, pch = ".", ...)
+  panel.abline(a = 0, b = 1, ...)
+})
 ```
 
 <img src="figure/taccurate3.png" title="plot of chunk taccurate" alt="plot of chunk taccurate" style="display: block; margin: auto;" />
 
 ```r
-# 
+#
 ```
 
 
 
 ```r
 DF <- data.frame(TSU, TSE10, TSE100)
-p <- ggplot(data = DF, aes(sample = TSU)) + stat_qq(distribution = qt, dparams = list(df = 9), 
-    pch = ".", color = rgb(1, 0, 0, 0.01)) + xlim(-3, 3) + ylim(-3, 3) + xlab("Theoretical t quantiles") + 
-    ylab("Sample quantiles") + ggtitle("Uniform, n = 10")
+p <- ggplot(data=DF, aes(sample = TSU)) + stat_qq(distribution = qt, dparams = list(df = 9), pch =".", color = rgb(1,0,0,.01)) + xlim(-3, 3) +ylim(-3, 3) +xlab("Theoretical t quantiles") +ylab("Sample quantiles") + ggtitle("Uniform, n = 10")
 p + geom_abline(intercept = 0, slope = 1, color = "gray")
 ```
 
 <img src="figure/ggplots1.png" title="plot of chunk ggplots" alt="plot of chunk ggplots" style="display: block; margin: auto;" />
 
 ```r
-# 
-p <- ggplot(data = DF, aes(sample = TSE10)) + stat_qq(distribution = qt, dparams = list(df = 9), 
-    pch = ".", color = rgb(1, 0, 0, 0.01)) + xlim(-3, 3) + ylim(-3, 3) + xlab("Theoretical t quantiles") + 
-    ylab("Sample quantiles") + ggtitle("Exponential, n = 10")
+#
+p <- ggplot(data=DF, aes(sample = TSE10)) + stat_qq(distribution = qt, dparams = list(df = 9), pch =".", color = rgb(1,0,0,.01)) + xlim(-3, 3) +ylim(-3, 3) +xlab("Theoretical t quantiles") +ylab("Sample quantiles") + ggtitle("Exponential, n = 10")
 p + geom_abline(intercept = 0, slope = 1, color = "gray")
 ```
 
 <img src="figure/ggplots2.png" title="plot of chunk ggplots" alt="plot of chunk ggplots" style="display: block; margin: auto;" />
 
 ```r
-# 
-p <- ggplot(data = DF, aes(sample = TSE100)) + stat_qq(distribution = qt, dparams = list(df = 99), 
-    pch = ".", color = rgb(1, 0, 0, 0.01)) + xlim(-3, 3) + ylim(-3, 3) + xlab("Theoretical t quantiles") + 
-    ylab("Sample quantiles") + ggtitle("Exponential, n = 100")
+#
+p <- ggplot(data=DF, aes(sample = TSE100)) + stat_qq(distribution = qt, dparams = list(df = 99), pch =".", color = rgb(1,0,0,.01)) + xlim(-3, 3) +ylim(-3, 3) +xlab("Theoretical t quantiles") +ylab("Sample quantiles") + ggtitle("Exponential, n = 100")
 p + geom_abline(intercept = 0, slope = 1, color = "gray")
 ```
 
@@ -4702,7 +4626,7 @@ p + geom_abline(intercept = 0, slope = 1, color = "gray")
 The previous graphs compare the distribution of $t$ statistics for samples of size $n = 10$  from a uniform distribution,  size $n = 10$  from an exponential distribution,  and size $n = 100$  from an exponential distribution to the $t$ distribution. The range on all plots is truncated so that we can focus on the range of values important for confidence intervals. Notice that for  the uniform population,  the distribution of the $t$ statistic is close to the  $t$ distribution, except in the tails.  For exponential populations, the discrepancy  is much larger, and the discrepancy decreases only slowly as the sample size increases.  To reduce the discrepancy (the difference between actual and nominal  probabilities) by a factor of 10  requires a sample size 100 times larger. For an exponential population, we must have $n > 5000$  before the actual probabilities of a 95% $t$ interval  missing the true mean in either tail are within 10% of the desired probability of 2.5%;  that is,  the actual tail probabilities are between 2.25% and  2.75%.
 
 
-Before using  a $t$ confidence interval,  you should create a normal quantile plot  to see whether the data are skewed. The larger the sample size, the more skew can be tolerated. There are skewness adjusted versions of $t$ intervals including bootstrap $t$ intervals that we cover later. However, be particularly careful with outliers:  since $\bar{x}$ is sensitive to extreme values, outliers can have a big impact on confidence intervals   a bigger impact than skewness. If you have outliers in your data, you should investigate: are these recording errors or observations that are not representative of the population? If the former, correct them; and if the latter,  remove them. If the outliers cannot be removed, then advanced,  more robust techniques may be required.
+Before using  a $t$ confidence interval,  you should create a normal quantile plot  to see whether the data are skewed. The larger the sample size, the more skew can be tolerated. There are skewness adjusted versions of $t$ intervals including bootstrap $t$ intervals that we cover later. However, be particularly careful with outliers:  since $\bar{x}$ is sensitive to extreme values, outliers can have a big impact on confidence intervals  – a bigger impact than skewness. If you have outliers in your data, you should investigate: are these recording errors or observations that are not representative of the population? If the former, correct them; and if the latter,  remove them. If the outliers cannot be removed, then advanced,  more robust techniques may be required.
 
 ### 7.1.3 Confidence Intervals for a Difference in Means
 
@@ -4755,7 +4679,7 @@ For the $n_X = 18$ students who had no calculus, the mean and standard deviation
 **R Note:**
 
 ```r
-t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.9)
+t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.90)
 ```
 
 ```
@@ -4773,7 +4697,7 @@ mean of x mean of y
 ```
 
 ```r
-t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.9)$conf.int
+t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.90)$conf.int
 ```
 
 ```
@@ -4793,14 +4717,14 @@ attr(,"conf.level")
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/TXBirths2004.csv"
-Texas <- read.csv(file = url(site))
-ggplot(data = Texas, aes(x = Weight)) + geom_histogram() + facet_grid(Gender ~ .)
+Texas <- read.csv(file=url(site))
+ggplot(data = Texas, aes(x = Weight)) + geom_histogram() + facet_grid(Gender~.)
 ```
 
 <img src="figure/Texas1.png" title="plot of chunk Texas" alt="plot of chunk Texas" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = Texas, aes(sample = Weight)) + stat_qq() + facet_grid(Gender ~ .)
+ggplot(data = Texas, aes(sample = Weight)) + stat_qq() + facet_grid(Gender~.)
 ```
 
 <img src="figure/Texas2.png" title="plot of chunk Texas" alt="plot of chunk Texas" style="display: block; margin: auto;" />
@@ -4809,7 +4733,7 @@ ggplot(data = Texas, aes(sample = Weight)) + stat_qq() + facet_grid(Gender ~ .)
 
 
 ```r
-t.test(Texas$Weight ~ Texas$Gender)
+t.test(Texas$Weight~Texas$Gender)
 ```
 
 ```
@@ -4843,9 +4767,7 @@ str(Texas)
 ```
 
 ```r
-Texas <- within(data = Texas, expr = {
-    Gender <- factor(Gender, levels = c("Male", "Female"))
-})
+Texas <- within(data = Texas, expr={Gender <- factor(Gender, levels =c("Male", "Female"))})
 str(Texas)
 ```
 
@@ -4862,7 +4784,7 @@ str(Texas)
 ```
 
 ```r
-t.test(Texas$Weight ~ Texas$Gender)
+t.test(Texas$Weight~Texas$Gender)
 ```
 
 ```
@@ -4908,7 +4830,7 @@ $$\frac{0.59 + (1.645^2/(2 \times 846)) \pm 1.645 \sqrt{0.59 \times 0.41/846 + 1
 
 
 ```r
-prop.test(x = 499, n = 846, conf.level = 0.9, correct = FALSE)
+prop.test(x = 499, n = 846, conf.level = 0.90, correct = FALSE)
 ```
 
 ```
@@ -4926,7 +4848,7 @@ sample estimates:
 ```
 
 ```r
-prop.test(x = 499, n = 846, conf.level = 0.9, correct = FALSE)$conf
+prop.test(x = 499, n = 846, conf.level = 0.90, correct = FALSE)$conf
 ```
 
 ```
@@ -4958,7 +4880,7 @@ $$\left(\tilde{p} - 1.96\sqrt{\frac{\tilde{p}(1 - \tilde{p})}{\tilde{n}}},  \til
 xtilde <- 132
 ntilde <- 214
 ptilde <- xtilde/ntilde
-ptilde + c(-1, 1) * qnorm(0.975) * sqrt(ptilde * (1 - ptilde)/ntilde)
+ptilde + c(-1, 1)*qnorm(.975)*sqrt(ptilde*(1 - ptilde)/ntilde)
 ```
 
 ```
@@ -4995,9 +4917,9 @@ Unfortunately, we do not know $\tilde{p}$ --- if we did, the candidate would not
 
 
 ```r
-ptilde <- seq(0, 1, length = 1000)
-fptilde <- sqrt(ptilde * (1 - ptilde))
-plot(ptilde, fptilde, type = "l", ylab = "", xlab = expression(tilde(p)))
+ptilde <- seq(0, 1, length= 1000)
+fptilde <- sqrt(ptilde*(1 - ptilde))
+plot(ptilde, fptilde, type = "l", ylab = "", xlab =expression(tilde(p)))
 ```
 
 <img src="figure/maxp.png" title="plot of chunk maxp" alt="plot of chunk maxp" style="display: block; margin: auto;" />
@@ -5011,7 +4933,7 @@ $$\left(\frac{1.96(0.5)}{0.04}\right)^2 \leq \tilde{n} \rightarrow \tilde{n}  \g
 
 
 ```r
-ntilde <- (1.96 * (0.5)/0.04)^2
+ntilde <- (1.96*(0.5)/0.04)^2
 n <- ntilde - 4
 n <- ceiling(n)
 n
@@ -5039,13 +4961,13 @@ Now choose a particular value of $p$, say $p=0.8$, so that $X$ has a binomial di
 
 ```r
 alpha <- 0.05
-n <- 30  # number of trials
-x <- 0:n
-sp <- x/n  # sample proportion
-m.err <- qnorm(1 - alpha/2) * sqrt(sp * (1 - sp)/n)
+n <- 30   # number of trials
+x <- 0:n  
+sp <- x/n # sample proportion
+m.err <- qnorm(1 - alpha/2)*sqrt(sp*(1 - sp)/n)
 lcl <- sp - m.err
 ucl <- sp + m.err
-pp <- 0.8  # pp = P(Success)
+pp <- 0.8   # pp = P(Success)
 prob <- dbinom(x, n, pp)
 cover <- (pp >= lcl) & (pp <= ucl)  # vector of 0s and 1s
 RES <- round(cbind(x, sp, lcl, ucl, prob, cover), 4)
@@ -5083,13 +5005,13 @@ Thus the total coverage probability for $p=0.8$ is $P(Cover) = P(X = 19) + P(X =
 
 ```r
 alpha <- 0.05
-n <- 30  # number of trials
-x <- 0:n
-sp <- x/n  # sample proportion
-m.err <- qnorm(1 - alpha/2) * sqrt(sp * (1 - sp)/n)
+n <- 30   # number of trials
+x <- 0:n  
+sp <- x/n # sample proportion
+m.err <- qnorm(1 - alpha/2)*sqrt(sp*(1 - sp)/n)
 lcl <- sp - m.err
 ucl <- sp + m.err
-pp <- 0.79  # pp = P(Success)
+pp <- 0.79   # pp = P(Success)
 prob <- dbinom(x, n, pp)
 cover <- (pp >= lcl) & (pp <= ucl)  # vector of 0s and 1s
 RES <- round(cbind(x, sp, lcl, ucl, prob, cover), 4)
@@ -5128,29 +5050,28 @@ To get a more comprehensive view of the performance of confidence intervals base
 
 ```r
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(2, 2))
-for (alpha in c(0.01, 0.02, 0.05, 0.1)) {
-    n <- 30  # number of trials
-    CL <- 1 - alpha
-    x <- 0:n
-    adj <- 0  #(2 for Agresti-Coull)
-    k <- qnorm(1 - alpha/2)
-    sp <- (x + adj)/(n + 2 * adj)
-    m.err <- k * sqrt(sp * (1 - sp)/(n + 2 * adj))
-    lcl <- sp - m.err
-    ucl <- sp + m.err
-    m <- 2000  # number of values of pp
-    pp <- seq(1/n, 1 - 1/n, length = m)
-    p.cov <- numeric(m)
-    for (i in 1:m) {
-        cover <- (pp[i] >= lcl) & (pp[i] <= ucl)  # vector of 0s and 1s
-        p.rel <- dbinom(x[cover], n, pp[i])
-        p.cov[i] <- sum(p.rel)
-    }
-    plot(pp, p.cov, type = "l", ylim = c(0.6, 1.1), main = paste("n = ", n), xlab = "p", 
-        ylab = "Coverage Probability")
-    lines(c(1/n, 1 - 1/n), c(1 - alpha, 1 - alpha), col = "red", lty = "dashed")
-    text(0.5, CL + 0.05, paste("Targeted Confidence Level =", CL))
+par(mfrow=c(2, 2))
+for(alpha in c(0.01, 0.02, 0.05, 0.10)){
+n <- 30     # number of trials
+CL <- 1 - alpha
+x <- 0:n 
+adj <- 0    #(2 for Agresti-Coull)
+k <- qnorm(1 - alpha/2)
+sp <- (x + adj)/(n + 2*adj)
+m.err <- k * sqrt(sp*(1 - sp)/(n + 2*adj))
+lcl <- sp - m.err
+ucl <- sp + m.err
+m <- 2000 # number of values of pp
+pp <- seq(1/n, 1 - 1/n, length = m)
+p.cov <- numeric(m)
+for(i in 1:m){
+  cover <- (pp[i] >= lcl) & (pp[i] <= ucl)  # vector of 0s and 1s
+  p.rel <- dbinom(x[cover], n, pp[i])
+  p.cov[i] <- sum(p.rel)
+}
+plot(pp, p.cov, type = "l", ylim =c(0.60, 1.1), main = paste("n = ", n), xlab = "p", ylab = "Coverage Probability")
+lines(c(1/n, 1- 1/n), c(1 - alpha, 1- alpha), col = "red", lty = "dashed")
+      text(0.5, CL + 0.05, paste("Targeted Confidence Level =", CL))
 }
 ```
 
@@ -5166,29 +5087,28 @@ Next we use Wilson score intervals to do the same thing.
 
 ```r
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(2, 2))
-for (alpha in c(0.01, 0.02, 0.05, 0.1)) {
-    n <- 30  # number of trials
-    CL <- 1 - alpha
-    x <- 0:n
-    z <- qnorm(1 - alpha/2)
-    sp <- x/n
-    sptilda <- (x + z^2/2)/(n + z^2)
-    m.err <- (z/(n + z^2)) * sqrt(n * sp * (1 - sp) + z^2/4)
-    lcl <- sptilda - m.err
-    ucl <- sptilda + m.err
-    m <- 2000  # number of values of pp
-    pp <- seq(1/n, 1 - 1/n, length = m)
-    p.cov <- numeric(m)
-    for (i in 1:m) {
-        cover <- (pp[i] >= lcl) & (pp[i] <= ucl)  # vector of 0s and 1s
-        p.rel <- dbinom(x[cover], n, pp[i])
-        p.cov[i] <- sum(p.rel)
-    }
-    plot(pp, p.cov, type = "l", ylim = c(0.6, 1.1), main = paste("n = ", n), xlab = "p", 
-        ylab = "Coverage Probability")
-    lines(c(1/n, 1 - 1/n), c(1 - alpha, 1 - alpha), col = "red", lty = "dashed")
-    text(0.5, CL + 0.05, paste("Targeted Confidence Level =", CL))
+par(mfrow=c(2, 2))
+for(alpha in c(0.01, 0.02, 0.05, 0.10)){
+n <- 30     # number of trials
+CL <- 1 - alpha
+x <- 0:n 
+z <- qnorm(1 - alpha/2)
+sp <- x/n
+sptilda <- (x + z^2/2)/(n + z^2)
+m.err <- (z/(n + z^2))*sqrt(n*sp*(1 - sp) + z^2/4)
+lcl <- sptilda - m.err
+ucl <- sptilda + m.err
+m <- 2000 # number of values of pp
+pp <- seq(1/n, 1 - 1/n, length = m)
+p.cov <- numeric(m)
+for(i in 1:m){
+  cover <- (pp[i] >= lcl) & (pp[i] <= ucl)  # vector of 0s and 1s
+  p.rel <- dbinom(x[cover], n, pp[i])
+  p.cov[i] <- sum(p.rel)
+}
+plot(pp, p.cov, type = "l", ylim =c(0.60, 1.1), main = paste("n = ", n), xlab = "p", ylab = "Coverage Probability")
+lines(c(1/n, 1- 1/n), c(1 - alpha, 1- alpha), col = "red", lty = "dashed")
+      text(0.5, CL + 0.05, paste("Targeted Confidence Level =", CL))
 }
 ```
 
@@ -5204,29 +5124,28 @@ Next consider the Agresti-Coull confidence intervals.
 
 ```r
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(2, 2))
-for (alpha in c(0.01, 0.02, 0.05, 0.1)) {
-    n <- 30  # number of trials
-    CL <- 1 - alpha
-    x <- 0:n
-    adj <- 2  # 0 for large sample 2 for Agresti Coull
-    z <- qnorm(1 - alpha/2)
-    sp <- (x + adj)/(n + 2 * adj)
-    m.err <- z * sqrt(sp * (1 - sp)/(n + 2 * adj))
-    lcl <- sp - m.err
-    ucl <- sp + m.err
-    m <- 2000  # number of values of pp
-    pp <- seq(1/n, 1 - 1/n, length = m)
-    p.cov <- numeric(m)
-    for (i in 1:m) {
-        cover <- (pp[i] >= lcl) & (pp[i] <= ucl)  # vector of 0s and 1s
-        p.rel <- dbinom(x[cover], n, pp[i])
-        p.cov[i] <- sum(p.rel)
-    }
-    plot(pp, p.cov, type = "l", ylim = c(0.6, 1.1), main = paste("n = ", n), xlab = "p", 
-        ylab = "Coverage Probability")
-    lines(c(1/n, 1 - 1/n), c(1 - alpha, 1 - alpha), col = "red", lty = "dashed")
-    text(0.5, CL + 0.05, paste("Targeted Confidence Level =", CL))
+par(mfrow=c(2, 2))
+for(alpha in c(0.01, 0.02, 0.05, 0.10)){
+n <- 30     # number of trials
+CL <- 1 - alpha
+x <- 0:n 
+adj <- 2  # 0 for large sample 2 for Agresti Coull
+z <- qnorm(1 - alpha/2)
+sp <- (x + adj)/(n + 2*adj)
+m.err <- z*sqrt(sp*(1 - sp)/(n + 2*adj))
+lcl <- sp - m.err
+ucl <- sp + m.err
+m <- 2000 # number of values of pp
+pp <- seq(1/n, 1 - 1/n, length = m)
+p.cov <- numeric(m)
+for(i in 1:m){
+  cover <- (pp[i] >= lcl) & (pp[i] <= ucl)  # vector of 0s and 1s
+  p.rel <- dbinom(x[cover], n, pp[i])
+  p.cov[i] <- sum(p.rel)
+}
+plot(pp, p.cov, type = "l", ylim =c(0.60, 1.1), main = paste("n = ", n), xlab = "p", ylab = "Coverage Probability")
+lines(c(1/n, 1- 1/n), c(1 - alpha, 1- alpha), col = "red", lty = "dashed")
+      text(0.5, CL + 0.05, paste("Targeted Confidence Level =", CL))
 }
 ```
 
@@ -5246,7 +5165,7 @@ Recall the Bangladesh arsenic levels data.  The distribution of arsenic levels w
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv"
-Bangladesh <- read.csv(file = url(site))
+Bangladesh <- read.csv(file=url(site))
 head(Bangladesh)
 ```
 
@@ -5279,12 +5198,13 @@ Tstar <- numeric(N)
 Sstar <- numeric(N)
 Xbarstar <- numeric(N)
 set.seed(13)
-for (i in 1:N) {
-    x <- sample(Arsenic, size = n, replace = T)
-    Xbarstar[i] <- mean(x)
-    Sstar[i] <- sd(x)
+for (i in 1:N)
+{
+  x <-sample(Arsenic, size = n, replace = T)
+  Xbarstar[i] <- mean(x)
+  Sstar[i] <- sd(x)
 }
-Tstar <- (Xbarstar - xbar)/(Sstar/sqrt(n))
+Tstar <- (Xbarstar - xbar)/(Sstar / sqrt(n))
 CIt <- quantile(Tstar, c(0.025, 0.975))
 names(CIt) <- NULL
 CIt
@@ -5296,14 +5216,12 @@ CIt
 
 ```r
 opar <- par(no.readonly = TRUE)
-par(mfrow = c(2, 2))
-plot(Xbarstar, Sstar, ylab = "S*", xlab = substitute(paste(bar(X), "*")), col = rgb(1, 
-    0, 0, 0.01))
-qqnorm(Tstar, col = rgb(1, 0, 0, 0.01))
+par(mfrow= c(2, 2))
+plot(Xbarstar, Sstar, ylab = "S*", xlab = substitute(paste(bar(X),"*")), col = rgb(1,0,0,0.01))
+qqnorm(Tstar, col = rgb(1,0,0,0.01))
 qqline(Tstar)
 hist(Tstar, xlab = "T*", main = "Bootstrap distribution of T*", col = "red", breaks = "Scott")
-hist(Xbarstar, xlab = substitute(paste(bar(X), "*")), main = substitute(paste("Bootstrap Distribution of ", 
-    bar(X), "*")), col = "red", breaks = "Scott")
+hist(Xbarstar, xlab = substitute(paste(bar(X),"*")), main = substitute(paste("Bootstrap Distribution of ", bar(X),"*")), col = "red", breaks = "Scott")
 ```
 
 <img src="figure/BOOTarsenic.png" title="plot of chunk BOOTarsenic" alt="plot of chunk BOOTarsenic" style="display: block; margin: auto;" />
@@ -5336,8 +5254,8 @@ Thus $Q_1=$ -2.6476 and $Q_2=$ 1.6562, so we compute
 
 
 ```r
-LL <- xbar - CIt[2] * S/sqrt(n)
-UL <- xbar - CIt[1] * S/sqrt(n)
+LL <- xbar - CIt[2]*S/sqrt(n)
+UL <- xbar - CIt[1]*S/sqrt(n)
 c(LL, UL)
 ```
 
@@ -5356,13 +5274,13 @@ confidence intervals.
 
 ```r
 require(boot)
-mean.boot <- function(data, i) {
-    d <- data[i]
-    M <- mean(d)
-    V <- var(d)/length(i)
-    return(c(M, V))
+mean.boot <- function(data, i){
+  d <- data[i]
+  M <- mean(d)
+  V <- var(d)/length(i)
+  return(c(M, V))
 }
-boot.out <- boot(Arsenic, mean.boot, R = 10^5)
+boot.out <- boot(Arsenic, mean.boot, R=10^5)
 boot.ci(boot.out, conf = 0.95, type = c("perc", "stud"))
 ```
 
@@ -5386,17 +5304,15 @@ plot(boot.out)
 <img src="figure/packageboot1.png" title="plot of chunk packageboot" alt="plot of chunk packageboot" style="display: block; margin: auto;" />
 
 ```r
-hist(boot.out$t[, 1], col = "pink", breaks = "Scott", main = "", xlab = substitute(paste(bar(X), 
-    "*")), freq = FALSE)
-lines(density(boot.out$t[, 1]), lwd = 2)
+hist(boot.out$t[,1], col = "pink", breaks = "Scott", main = "", xlab = substitute(paste(bar(X),"*")), freq= FALSE)
+lines(density(boot.out$t[,1]), lwd = 2)
 ```
 
 <img src="figure/packageboot2.png" title="plot of chunk packageboot" alt="plot of chunk packageboot" style="display: block; margin: auto;" />
 
 ```r
-hist((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5, col = "pink", breaks = "Scott", 
-    main = "", xlab = "T*", freq = FALSE)
-lines(density((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5), lwd = 2)
+hist((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5, col = "pink", breaks = "Scott", main = "", xlab ="T*", freq= FALSE)
+lines(density((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5), lwd = 2)
 ```
 
 <img src="figure/packageboot3.png" title="plot of chunk packageboot" alt="plot of chunk packageboot" style="display: block; margin: auto;" />
@@ -5418,9 +5334,9 @@ Recall the Verizon example, where we considered the difference in means of two v
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/Verizon.csv"
-Verizon <- read.csv(file = url(site))
-Time.ILEC <- subset(Verizon, select = Time, Group == "ILEC", drop = TRUE)
-Time.CLEC <- subset(Verizon, select = Time, Group == "CLEC", drop = TRUE)
+Verizon <- read.csv(file=url(site))
+Time.ILEC <- subset(Verizon, select=Time, Group == "ILEC", drop=TRUE)
+Time.CLEC <- subset(Verizon, select=Time, Group == "CLEC", drop=TRUE)
 thetahat <- mean(Time.ILEC) - mean(Time.CLEC)
 nx <- length(Time.ILEC)  #nx=1664
 ny <- length(Time.CLEC)  #ny=23
@@ -5429,13 +5345,15 @@ N <- 10^4
 Tstar <- numeric(N)
 DM <- numeric(N)
 set.seed(1)
-for (i in 1:N) {
-    bootx <- sample(Time.ILEC, nx, replace = TRUE)
-    booty <- sample(Time.CLEC, ny, replace = TRUE)
-    Tstar[i] <- (mean(bootx) - mean(booty) - thetahat)/sqrt(var(bootx)/nx + var(booty)/ny)
-    DM[i] <- mean(bootx) - mean(booty)
+for(i in 1:N)
+{
+  bootx <- sample(Time.ILEC, nx, replace=TRUE)
+  booty <- sample(Time.CLEC, ny, replace=TRUE)
+  Tstar[i] <- (mean(bootx) - mean(booty) - thetahat) /
+    sqrt(var(bootx)/nx + var(booty)/ny)
+  DM[i] <- mean(bootx) - mean(booty)
 }
-CItboot <- thetahat - quantile(Tstar, c(0.975, 0.025)) * SE
+CItboot <- thetahat - quantile(Tstar, c(.975, .025)) * SE
 names(CItboot) <- NULL
 CItboot
 ```
@@ -5477,14 +5395,14 @@ Bootstrap percentile and $t$ confidence intervals using the functions `boot()` a
 
 ```r
 require(boot)
-mean2.boot <- function(data, i) {
-    d <- data[i, ]
-    M <- tapply(d$Time, d$Group, mean)
-    V <- tapply(d$Time, d$Group, var)/tapply(d$Time, d$Group, length)
-    return(c(M[2] - M[1], V[2] + V[1]))
+mean2.boot <- function(data, i){
+  d <- data[i, ]
+  M <- tapply(d$Time, d$Group, mean)
+  V <- tapply(d$Time, d$Group, var)/tapply(d$Time, d$Group, length)
+  return(c(M[2] - M[1], V[2] + V[1]))
 }
 set.seed(1)
-boot.out <- boot(Verizon, mean2.boot, R = 10^4)
+boot.out <- boot(Verizon, mean2.boot, R=10^4)
 boot.ci(boot.out, conf = 0.95, type = c("perc", "stud"))
 ```
 
@@ -5508,16 +5426,15 @@ plot(boot.out)
 <img src="figure/packageboot2m1.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
-hist(boot.out$t[, 1], col = "pink", breaks = "Scott", main = "", freq = FALSE, xlab = substitute(paste(bar(x)[1], 
-    "* - ", bar(x)[2], "*")))
-lines(density(boot.out$t[, 1]), lwd = 2)
+hist(boot.out$t[,1], col = "pink", breaks = "Scott", main = "", freq= FALSE, xlab = substitute(paste(bar(x)[1],"* - ", bar(x)[2],"*")))
+lines(density(boot.out$t[,1]), lwd = 2)
 ```
 
 <img src="figure/packageboot2m2.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
-qqnorm(boot.out$t[, 1], col = rgb(1, 0, 0, 0.05))
-qqline(boot.out$t[, 1])
+qqnorm(boot.out$t[,1], col =rgb(1,0,0,.05))
+qqline(boot.out$t[,1])
 ```
 
 <img src="figure/packageboot2m3.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
@@ -5526,33 +5443,28 @@ qqline(boot.out$t[, 1])
 # ggplot2 Now
 require(ggplot2)
 BO <- as.data.frame(boot.out$t)
-ggplot(data = BO, aes(x = V1, y = ..density..)) + geom_histogram(fill = "pink") + 
-    xlab(substitute(paste(bar(x)[1], "* - ", bar(x)[2], "*"))) + geom_density(size = 1.5, 
-    color = "red")
+ggplot(data = BO, aes(x = V1, y = ..density..)) + geom_histogram(fill = "pink") + xlab(substitute(paste(bar(x)[1],"* - ", bar(x)[2],"*"))) + geom_density(size = 1.5, color = "red")
 ```
 
 <img src="figure/packageboot2m4.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
-p <- ggplot(data = BO, aes(sample = V1)) + stat_qq(pch = ".", color = rgb(1, 0, 0, 
-    0.1))
+p <- ggplot(data = BO, aes(sample = V1)) + stat_qq(pch = ".", color = rgb(1, 0, 0, 0.1)) 
 p
 ```
 
 <img src="figure/packageboot2m5.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
-hist((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5, col = "pink", breaks = "Scott", 
-    main = "", xlab = "T*", freq = FALSE)
-lines(density((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5), lwd = 2)
+hist((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5, col = "pink", breaks = "Scott", main = "", xlab ="T*", freq= FALSE)
+lines(density((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5), lwd = 2)
 ```
 
 <img src="figure/packageboot2m6.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
 
 ```r
-qqnorm((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5, col = rgb(1, 0, 
-    0, 0.05))
-qqline((boot.out$t[, 1] - boot.out$t0[1])/(boot.out$t[, 2])^0.5)
+qqnorm((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5, col = rgb(1,0,0,.05))
+qqline((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5)
 ```
 
 <img src="figure/packageboot2m7.png" title="plot of chunk packageboot2m" alt="plot of chunk packageboot2m" style="display: block; margin: auto;" />
