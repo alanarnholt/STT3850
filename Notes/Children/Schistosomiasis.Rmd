@@ -156,7 +156,7 @@ Worms
 # Another way:
 Worms2 <- subset(ND, select = worms, drop = TRUE)
 Worms2
-N <- 10^4 - 1         # number of times fo repeat the process
+N <- 10^4 - 1         # number of times to repeat the process
 result <- numeric(N)  # space to save the random differences
 for (i in 1:N){
   # sample of size 5, from 1 to 10, without replacement
