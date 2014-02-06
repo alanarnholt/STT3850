@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Thursday, February 06, 2014 - 14:08:53.
+Last compiled Thursday, February 06, 2014 - 14:20:17.
 
 
 
@@ -966,7 +966,7 @@ Worms2
 ```
 
 ```r
-N <- 10^4 - 1  # number of times fo repeat the process
+N <- 10^4 - 1  # number of times to repeat the process
 result <- numeric(N)  # space to save the random differences
 for (i in 1:N) {
     # sample of size 5, from 1 to 10, without replacement
@@ -2931,7 +2931,6 @@ epvalue3
 
 
 This example illustrates a common result with chi-square goodness-of-fit tests, i.e., that each to two (or more) different null hypotheses may be accepted for the same data set.  Obviously, the true distribution cannot be both binomial and Poisson at the same time which is why the conclusion is that there is not sufficient evidence to suggest the alternative.  This does not make the null hypothesis true!
-
 
 
 

@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Thursday, February 06, 2014 - 14:15:07.
+Last compiled Thursday, February 06, 2014 - 14:42:50.
 
 
 
@@ -966,7 +966,7 @@ Worms2
 ```
 
 ```r
-N <- 10^4 - 1  # number of times fo repeat the process
+N <- 10^4 - 1  # number of times to repeat the process
 result <- numeric(N)  # space to save the random differences
 for (i in 1:N) {
     # sample of size 5, from 1 to 10, without replacement
@@ -3095,6 +3095,7 @@ par(mfrow = c(1, 1))
 **Exact Solution:** $P(X \leq 160)= \sum_{x = 0}^{x = 160}\binom{300}{x} 0.5^x 0.5^{300-x}=$ 0.8874.
 
 
+<!---
 
 
 
