@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Thursday, February 06, 2014 - 13:16:09.
+Last compiled Thursday, February 06, 2014 - 14:08:53.
 
 
 
@@ -110,31 +110,37 @@ barplot(table(FlightDelays$Carrier))
 
 ```r
 require(ggplot2)
-ggplot(data = FlightDelays, aes(x = Carrier)) + geom_bar()
+ggplot(data = FlightDelays, aes(x = Carrier)) + 
+  geom_bar()
 ```
 
 <img src="figure/Barplots2.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar()
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + 
+  geom_bar()
 ```
 
 <img src="figure/Barplots3.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar() + guides(fill = guide_legend(reverse = TRUE))
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + 
+  geom_bar() + 
+  guides(fill = guide_legend(reverse = TRUE))
 ```
 
 <img src="figure/Barplots4.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar(position = "dodge") + guides(fill = guide_legend(reverse = TRUE))
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + 
+  geom_bar(position="dodge") + 
+  guides(fill = guide_legend(reverse = TRUE))
 ```
 
 <img src="figure/Barplots5.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-xtabs(~Carrier + (Delay > 30), data = FlightDelays)
+xtabs(~ Carrier + (Delay > 30), data = FlightDelays)
 ```
 
 ```
@@ -145,7 +151,7 @@ Carrier FALSE TRUE
 ```
 
 ```r
-addmargins(xtabs(~Carrier + (Delay > 30), data = FlightDelays))
+addmargins(xtabs(~ Carrier + (Delay > 30), data = FlightDelays))
 ```
 
 ```
@@ -157,13 +163,15 @@ Carrier FALSE TRUE  Sum
 ```
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Delayed30)) + geom_bar(position = "dodge")
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Delayed30)) + 
+  geom_bar(position="dodge")
 ```
 
 <img src="figure/Barplots6.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(fill = Carrier, x = Delayed30)) + geom_bar(position = "dodge")
+ggplot(data = FlightDelays, aes(fill = Carrier, x= Delayed30)) + 
+  geom_bar(position="dodge")
 ```
 
 <img src="figure/Barplots7.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
@@ -179,22 +187,50 @@ hist(FlightDelays$Delay)  # Ugly with Defaults...you change
 <img src="figure/HistoEDA1.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Delay)) + geom_histogram()
+library(lattice)
+histogram(~Delay, data = FlightDelays)
 ```
 
 <img src="figure/HistoEDA2.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Delay, y = ..density..)) + geom_histogram(binwidth = 10, color = "blue")
+histogram(~Delay, data = FlightDelays, type = "density")
 ```
 
 <img src="figure/HistoEDA3.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Delay)) + geom_density(fill = "blue")
+histogram(~Delay, data = FlightDelays, type = "density",
+          panel = function(...){
+            panel.histogram(col = "peru",...)
+            panel.densityplot(col = "red", lwd = 2, ...)
+          }
+          )
 ```
 
 <img src="figure/HistoEDA4.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Delay)) + 
+  geom_histogram()
+```
+
+<img src="figure/HistoEDA5.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Delay, y = ..density..)) + 
+  geom_histogram(binwidth = 10, color = "blue") + 
+  geom_density(color = "red")
+```
+
+<img src="figure/HistoEDA6.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Delay)) + 
+  geom_density(fill = "blue")
+```
+
+<img src="figure/HistoEDA7.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ## Numeric Summaries
 
@@ -274,22 +310,34 @@ boxplot(Delay ~ Carrier, data = FlightDelays)
 <img src="figure/BP1.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot()
+bwplot(Delay ~ Carrier, data = FlightDelays)
 ```
 
 <img src="figure/BP2.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + facet_grid(. ~ Month)
+bwplot(Delay ~ Carrier | Month, data = FlightDelays, as.table = TRUE, layout = c(2, 1))
 ```
 
 <img src="figure/BP3.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot()
+```
+
+<img src="figure/BP4.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + facet_grid(. ~ Month)
+```
+
+<img src="figure/BP5.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
-NCBirths <- read.csv(file = url(site))
+NCBirths <- read.csv(file=url(site))
 head(NCBirths)
 ```
 
@@ -304,35 +352,48 @@ head(NCBirths)
 ```
 
 ```r
-p <- ggplot(data = NCBirths, aes(x = Gender, y = Weight, fill = Gender))
-p + geom_boxplot()
+boxplot(Weight ~ Gender, data = NCBirths, col = c("pink", "blue"))
 ```
 
 <img src="figure/NCBirths1.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here")
+bwplot(Weight ~ Gender, data = NCBirths)
 ```
 
 <img src="figure/NCBirths2.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + 
-    scale_fill_manual(values = c("pink", "blue"))
+p <- ggplot(data = NCBirths, aes(x = Gender, y = Weight, fill = Gender))
+p + geom_boxplot()
 ```
 
 <img src="figure/NCBirths3.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + 
-    scale_fill_brewer()
+p + geom_boxplot() + 
+  guides(fill = FALSE) + 
+  labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here")
 ```
 
 <img src="figure/NCBirths4.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-
+p + geom_boxplot() + 
+  guides(fill = FALSE) + 
+  labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + 
+  scale_fill_manual(values = c('pink', 'blue'))
 ```
+
+<img src="figure/NCBirths5.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
+
+```r
+p + geom_boxplot() + guides(fill = FALSE) + 
+  labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + 
+  scale_fill_brewer() + theme_bw()
+```
+
+<img src="figure/NCBirths6.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 
 ## Density Plots
@@ -352,22 +413,22 @@ abline(h = 0, lwd = 2)
 ```r
 # Same now with ggplot2
 p <- ggplot(data = data.frame(x = c(-4, 4)), aes(x = x))
-dnorm_func <- function(x) {
-    y <- dnorm(x)
-    y[x < 1] <- NA
-    return(y)
+dnorm_func <- function(x){
+  y <- dnorm(x)
+  y[x<1] <- NA
+  return(y)
 }
-p1 <- p + stat_function(fun = dnorm_func, geom = "area", fill = "blue", alpha = 0.2) + geom_hline(yintercept = 0) + 
-    stat_function(fun = dnorm)
-p1
+p1 <- p + stat_function(fun = dnorm_func, geom = 'area', fill = 'blue', alpha = 0.2) + 
+  geom_hline(yintercept = 0) + 
+  stat_function(fun = dnorm) 
+p1 + theme_bw()
 ```
 
 <img src="figure/ND2.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
 
 ```r
-p1 + labs(x = "", y = "", title = expression(integral(frac(1, sqrt(2 * pi)) * e^{
-    -x^2/2
-} * dx, 1, infinity) == 0.1586553))  # Break it down!
+p1 + theme_bw() + 
+  labs(x = '', y = '', title = expression(integral(frac(1, sqrt(2*pi))*e^{-x^2/2}*dx, 1, infinity)==0.1586553) ) # Break it down!
 ```
 
 <img src="figure/ND3.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
@@ -471,7 +532,9 @@ qqline(x)
 
 ```r
 # ggplot
-ggplot(data = data.frame(x), aes(sample = x)) + stat_qq() + geom_abline(intercept = intercept, slope = slope)
+ggplot(data = data.frame(x), aes(sample=x)) + 
+  stat_qq() + 
+  geom_abline(intercept = intercept, slope = slope)
 ```
 
 <img src="figure/QQNORM2.png" title="plot of chunk QQNORM" alt="plot of chunk QQNORM" style="display: block; margin: auto;" />
@@ -505,8 +568,8 @@ An alternative approach to the book's Figure 2.12 is provided using `ggplot2` af
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/Beerwings.csv"
-Beerwings <- read.csv(file = url(site))
-head(Beerwings)  # shows first 6 rows of data frame
+Beerwings <- read.csv(file=url(site))
+head(Beerwings) # shows first 6 rows of data frame
 ```
 
 ```
@@ -544,8 +607,9 @@ legend("topleft", legend = c("Males", "Females"), pch = 19, col = c("blue", "pin
 
 ```r
 # Using ggplot2 now
-ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + stat_ecdf() + labs(x = "Beer in ounces", y = "", 
-    title = "ECDF")
+ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + 
+  stat_ecdf() + 
+  labs(x = "Beer in ounces", y ="", title = 'ECDF')
 ```
 
 <img src="figure/BEER2.png" title="plot of chunk BEER" alt="plot of chunk BEER" style="display: block; margin: auto;" />
@@ -555,15 +619,16 @@ ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + stat_ecdf() + labs(x 
 
 
 ```r
-with(data = Beerwings, plot(Hotwings, Beer, xlab = "Hot wings eaten", ylab = "Beer consumed", pch = 19, 
-    col = "blue"))
+with(data = Beerwings, plot(Hotwings, Beer, xlab = "Hot wings eaten", ylab = "Beer consumed", 
+                            pch = 19, col = "blue"))
 ```
 
 <img src="figure/Bplot1.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
 
 ```r
-p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + geom_point() + labs(x = "Hot wings eaten", 
-    y = "Beer consumed in ounces")
+p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + 
+  geom_point() + 
+  labs(x = "Hot wings eaten", y = "Beer consumed in ounces")
 p
 ```
 

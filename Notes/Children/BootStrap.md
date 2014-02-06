@@ -47,7 +47,7 @@ WD <- BD
 
 
 <!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
-<!-- Thu Feb  6 13:13:43 2014 -->
+<!-- Thu Feb  6 14:11:34 2014 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 1 --- All possible Samples of Size 3 from 3969, 3204, and 2892 </CAPTION>
 <TR> <TH> $x^*_1$ </TH> <TH> $x^*_2$ </TH> <TH> $x^*_3$ </TH> <TH> $\bar{x}^*$ </TH>  </TR>

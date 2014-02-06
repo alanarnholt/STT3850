@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Thursday, February 06, 2014 - 13:03:20.
+Last compiled Thursday, February 06, 2014 - 14:15:07.
 
 
 
@@ -32,20 +32,13 @@ head(FlightDelays)  # shows first 6 rows of data frame
 ```
 
 ```
-  ID Carrier FlightNo Destination DepartTime Day Month FlightLength Delay
-1  1      UA      403         DEN      4-8am Fri   May          281    -1
-2  2      UA      405         DEN     8-Noon Fri   May          277   102
-3  3      UA      409         DEN      4-8pm Fri   May          279     4
-4  4      UA      511         ORD     8-Noon Fri   May          158    -2
-5  5      UA      667         ORD      4-8am Fri   May          143    -3
-6  6      UA      669         ORD      4-8am Fri   May          150     0
-  Delayed30
-1        No
-2       Yes
-3        No
-4        No
-5        No
-6        No
+  ID Carrier FlightNo Destination DepartTime Day Month FlightLength Delay Delayed30
+1  1      UA      403         DEN      4-8am Fri   May          281    -1        No
+2  2      UA      405         DEN     8-Noon Fri   May          277   102       Yes
+3  3      UA      409         DEN      4-8pm Fri   May          279     4        No
+4  4      UA      511         ORD     8-Noon Fri   May          158    -2        No
+5  5      UA      667         ORD      4-8am Fri   May          143    -3        No
+6  6      UA      669         ORD      4-8am Fri   May          150     0        No
 ```
 
 ```r
@@ -117,32 +110,37 @@ barplot(table(FlightDelays$Carrier))
 
 ```r
 require(ggplot2)
-ggplot(data = FlightDelays, aes(x = Carrier)) + geom_bar()
+ggplot(data = FlightDelays, aes(x = Carrier)) + 
+  geom_bar()
 ```
 
 <img src="figure/Barplots2.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar()
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + 
+  geom_bar()
 ```
 
 <img src="figure/Barplots3.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar() + guides(fill = guide_legend(reverse = TRUE))
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + 
+  geom_bar() + 
+  guides(fill = guide_legend(reverse = TRUE))
 ```
 
 <img src="figure/Barplots4.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Month)) + geom_bar(position = "dodge") + 
-    guides(fill = guide_legend(reverse = TRUE))
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + 
+  geom_bar(position="dodge") + 
+  guides(fill = guide_legend(reverse = TRUE))
 ```
 
 <img src="figure/Barplots5.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-xtabs(~Carrier + (Delay > 30), data = FlightDelays)
+xtabs(~ Carrier + (Delay > 30), data = FlightDelays)
 ```
 
 ```
@@ -153,7 +151,7 @@ Carrier FALSE TRUE
 ```
 
 ```r
-addmargins(xtabs(~Carrier + (Delay > 30), data = FlightDelays))
+addmargins(xtabs(~ Carrier + (Delay > 30), data = FlightDelays))
 ```
 
 ```
@@ -165,13 +163,15 @@ Carrier FALSE TRUE  Sum
 ```
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, fill = Delayed30)) + geom_bar(position = "dodge")
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Delayed30)) + 
+  geom_bar(position="dodge")
 ```
 
 <img src="figure/Barplots6.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(fill = Carrier, x = Delayed30)) + geom_bar(position = "dodge")
+ggplot(data = FlightDelays, aes(fill = Carrier, x= Delayed30)) + 
+  geom_bar(position="dodge")
 ```
 
 <img src="figure/Barplots7.png" title="plot of chunk Barplots" alt="plot of chunk Barplots" style="display: block; margin: auto;" />
@@ -187,23 +187,50 @@ hist(FlightDelays$Delay)  # Ugly with Defaults...you change
 <img src="figure/HistoEDA1.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Delay)) + geom_histogram()
+library(lattice)
+histogram(~Delay, data = FlightDelays)
 ```
 
 <img src="figure/HistoEDA2.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Delay, y = ..density..)) + geom_histogram(binwidth = 10, 
-    color = "blue")
+histogram(~Delay, data = FlightDelays, type = "density")
 ```
 
 <img src="figure/HistoEDA3.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Delay)) + geom_density(fill = "blue")
+histogram(~Delay, data = FlightDelays, type = "density",
+          panel = function(...){
+            panel.histogram(col = "peru",...)
+            panel.densityplot(col = "red", lwd = 2, ...)
+          }
+          )
 ```
 
 <img src="figure/HistoEDA4.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Delay)) + 
+  geom_histogram()
+```
+
+<img src="figure/HistoEDA5.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Delay, y = ..density..)) + 
+  geom_histogram(binwidth = 10, color = "blue") + 
+  geom_density(color = "red")
+```
+
+<img src="figure/HistoEDA6.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Delay)) + 
+  geom_density(fill = "blue")
+```
+
+<img src="figure/HistoEDA7.png" title="plot of chunk HistoEDA" alt="plot of chunk HistoEDA" style="display: block; margin: auto;" />
 
 ## Numeric Summaries
 
@@ -213,22 +240,22 @@ summary(FlightDelays)
 ```
 
 ```
-       ID       Carrier      FlightNo    Destination    DepartTime    Day     
- Min.   :   1   AA:2906   Min.   :  71   BNA: 172    4-8am   : 699   Fri:637  
- 1st Qu.:1008   UA:1123   1st Qu.: 371   DEN: 264    4-8pm   : 972   Mon:630  
- Median :2015             Median : 691   DFW: 918    8-Mid   : 257   Sat:453  
- Mean   :2015             Mean   : 827   IAD:  55    8-Noon  :1053   Sun:551  
- 3rd Qu.:3022             3rd Qu.: 787   MIA: 610    Noon-4pm:1048   Thu:566  
- Max.   :4029             Max.   :2255   ORD:1785                    Tue:628  
-                                         STL: 225                    Wed:564  
-  Month       FlightLength     Delay       Delayed30 
- May :1999   Min.   : 68   Min.   :-19.0   No :3432  
- June:2030   1st Qu.:155   1st Qu.: -6.0   Yes: 597  
-             Median :163   Median : -3.0             
-             Mean   :185   Mean   : 11.7             
-             3rd Qu.:228   3rd Qu.:  5.0             
-             Max.   :295   Max.   :693.0             
-                                                     
+       ID       Carrier      FlightNo    Destination    DepartTime    Day       Month     
+ Min.   :   1   AA:2906   Min.   :  71   BNA: 172    4-8am   : 699   Fri:637   May :1999  
+ 1st Qu.:1008   UA:1123   1st Qu.: 371   DEN: 264    4-8pm   : 972   Mon:630   June:2030  
+ Median :2015             Median : 691   DFW: 918    8-Mid   : 257   Sat:453              
+ Mean   :2015             Mean   : 827   IAD:  55    8-Noon  :1053   Sun:551              
+ 3rd Qu.:3022             3rd Qu.: 787   MIA: 610    Noon-4pm:1048   Thu:566              
+ Max.   :4029             Max.   :2255   ORD:1785                    Tue:628              
+                                         STL: 225                    Wed:564              
+  FlightLength     Delay       Delayed30 
+ Min.   : 68   Min.   :-19.0   No :3432  
+ 1st Qu.:155   1st Qu.: -6.0   Yes: 597  
+ Median :163   Median : -3.0             
+ Mean   :185   Mean   : 11.7             
+ 3rd Qu.:228   3rd Qu.:  5.0             
+ Max.   :295   Max.   :693.0             
+                                         
 ```
 
 ```r
@@ -283,23 +310,34 @@ boxplot(Delay ~ Carrier, data = FlightDelays)
 <img src="figure/BP1.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot()
+bwplot(Delay ~ Carrier, data = FlightDelays)
 ```
 
 <img src="figure/BP2.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 ```r
-ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + facet_grid(. ~ 
-    Month)
+bwplot(Delay ~ Carrier | Month, data = FlightDelays, as.table = TRUE, layout = c(2, 1))
 ```
 
 <img src="figure/BP3.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot()
+```
+
+<img src="figure/BP4.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + facet_grid(. ~ Month)
+```
+
+<img src="figure/BP5.png" title="plot of chunk BP" alt="plot of chunk BP" style="display: block; margin: auto;" />
 
 
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
-NCBirths <- read.csv(file = url(site))
+NCBirths <- read.csv(file=url(site))
 head(NCBirths)
 ```
 
@@ -314,36 +352,48 @@ head(NCBirths)
 ```
 
 ```r
-p <- ggplot(data = NCBirths, aes(x = Gender, y = Weight, fill = Gender))
-p + geom_boxplot()
+boxplot(Weight ~ Gender, data = NCBirths, col = c("pink", "blue"))
 ```
 
 <img src="figure/NCBirths1.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", 
-    title = "You Put Something Here")
+bwplot(Weight ~ Gender, data = NCBirths)
 ```
 
 <img src="figure/NCBirths2.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", 
-    title = "You Put Something Here") + scale_fill_manual(values = c("pink", "blue"))
+p <- ggplot(data = NCBirths, aes(x = Gender, y = Weight, fill = Gender))
+p + geom_boxplot()
 ```
 
 <img src="figure/NCBirths3.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-p + geom_boxplot() + guides(fill = FALSE) + labs(x = "Newborn Gender", y = "Weight in ounces", 
-    title = "You Put Something Here") + scale_fill_brewer()
+p + geom_boxplot() + 
+  guides(fill = FALSE) + 
+  labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here")
 ```
 
 <img src="figure/NCBirths4.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 ```r
-
+p + geom_boxplot() + 
+  guides(fill = FALSE) + 
+  labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + 
+  scale_fill_manual(values = c('pink', 'blue'))
 ```
+
+<img src="figure/NCBirths5.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
+
+```r
+p + geom_boxplot() + guides(fill = FALSE) + 
+  labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + 
+  scale_fill_brewer() + theme_bw()
+```
+
+<img src="figure/NCBirths6.png" title="plot of chunk NCBirths" alt="plot of chunk NCBirths" style="display: block; margin: auto;" />
 
 
 ## Density Plots
@@ -363,22 +413,22 @@ abline(h = 0, lwd = 2)
 ```r
 # Same now with ggplot2
 p <- ggplot(data = data.frame(x = c(-4, 4)), aes(x = x))
-dnorm_func <- function(x) {
-    y <- dnorm(x)
-    y[x < 1] <- NA
-    return(y)
+dnorm_func <- function(x){
+  y <- dnorm(x)
+  y[x<1] <- NA
+  return(y)
 }
-p1 <- p + stat_function(fun = dnorm_func, geom = "area", fill = "blue", alpha = 0.2) + 
-    geom_hline(yintercept = 0) + stat_function(fun = dnorm)
-p1
+p1 <- p + stat_function(fun = dnorm_func, geom = 'area', fill = 'blue', alpha = 0.2) + 
+  geom_hline(yintercept = 0) + 
+  stat_function(fun = dnorm) 
+p1 + theme_bw()
 ```
 
 <img src="figure/ND2.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
 
 ```r
-p1 + labs(x = "", y = "", title = expression(integral(frac(1, sqrt(2 * pi)) * e^{
-    -x^2/2
-} * dx, 1, infinity) == 0.1586553))  # Break it down!
+p1 + theme_bw() + 
+  labs(x = '', y = '', title = expression(integral(frac(1, sqrt(2*pi))*e^{-x^2/2}*dx, 1, infinity)==0.1586553) ) # Break it down!
 ```
 
 <img src="figure/ND3.png" title="plot of chunk ND" alt="plot of chunk ND" style="display: block; margin: auto;" />
@@ -398,14 +448,10 @@ rbind(x, p, q)
 ```
 
 ```
-      [,1]    [,2]    [,3]    [,4]    [,5]    [,6]    [,7]    [,8]    [,9]
-x 21.70000 22.6000 26.1000 28.3000 30.0000 31.2000 31.5000 33.5000 34.7000
-p  0.09091  0.1818  0.2727  0.3636  0.4545  0.5455  0.6364  0.7273  0.8182
-q -1.33518 -0.9085 -0.6046 -0.3488 -0.1142  0.1142  0.3488  0.6046  0.9085
-    [,10]
-x 36.0000
-p  0.9091
-q  1.3352
+      [,1]    [,2]    [,3]    [,4]    [,5]    [,6]    [,7]    [,8]    [,9]   [,10]
+x 21.70000 22.6000 26.1000 28.3000 30.0000 31.2000 31.5000 33.5000 34.7000 36.0000
+p  0.09091  0.1818  0.2727  0.3636  0.4545  0.5455  0.6364  0.7273  0.8182  0.9091
+q -1.33518 -0.9085 -0.6046 -0.3488 -0.1142  0.1142  0.3488  0.6046  0.9085  1.3352
 ```
 
 ```r
@@ -455,14 +501,10 @@ rbind(x, pc, qc)
 ```
 
 ```
-      [,1]    [,2]    [,3]    [,4]     [,5]    [,6]    [,7]    [,8]    [,9]
-x  21.7000 22.6000 26.1000 28.3000 30.00000 31.2000 31.5000 33.5000 34.7000
-pc  0.0625  0.1625  0.2625  0.3625  0.46250  0.5625  0.6625  0.7625  0.8625
-qc -1.5341 -0.9842 -0.6357 -0.3518 -0.09414  0.1573  0.4193  0.7144  1.0916
-     [,10]
-x  36.0000
-pc  0.9625
-qc  1.7805
+      [,1]    [,2]    [,3]    [,4]     [,5]    [,6]    [,7]    [,8]    [,9]   [,10]
+x  21.7000 22.6000 26.1000 28.3000 30.00000 31.2000 31.5000 33.5000 34.7000 36.0000
+pc  0.0625  0.1625  0.2625  0.3625  0.46250  0.5625  0.6625  0.7625  0.8625  0.9625
+qc -1.5341 -0.9842 -0.6357 -0.3518 -0.09414  0.1573  0.4193  0.7144  1.0916  1.7805
 ```
 
 ```r
@@ -490,8 +532,9 @@ qqline(x)
 
 ```r
 # ggplot
-ggplot(data = data.frame(x), aes(sample = x)) + stat_qq() + geom_abline(intercept = intercept, 
-    slope = slope)
+ggplot(data = data.frame(x), aes(sample=x)) + 
+  stat_qq() + 
+  geom_abline(intercept = intercept, slope = slope)
 ```
 
 <img src="figure/QQNORM2.png" title="plot of chunk QQNORM" alt="plot of chunk QQNORM" style="display: block; margin: auto;" />
@@ -525,8 +568,8 @@ An alternative approach to the book's Figure 2.12 is provided using `ggplot2` af
 
 ```r
 site <- "http://www1.appstate.edu/~arnholta/Data/Beerwings.csv"
-Beerwings <- read.csv(file = url(site))
-head(Beerwings)  # shows first 6 rows of data frame
+Beerwings <- read.csv(file=url(site))
+head(Beerwings) # shows first 6 rows of data frame
 ```
 
 ```
@@ -564,8 +607,9 @@ legend("topleft", legend = c("Males", "Females"), pch = 19, col = c("blue", "pin
 
 ```r
 # Using ggplot2 now
-ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + stat_ecdf() + labs(x = "Beer in ounces", 
-    y = "", title = "ECDF")
+ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + 
+  stat_ecdf() + 
+  labs(x = "Beer in ounces", y ="", title = 'ECDF')
 ```
 
 <img src="figure/BEER2.png" title="plot of chunk BEER" alt="plot of chunk BEER" style="display: block; margin: auto;" />
@@ -576,14 +620,15 @@ ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + stat_ecdf() + labs(x 
 
 ```r
 with(data = Beerwings, plot(Hotwings, Beer, xlab = "Hot wings eaten", ylab = "Beer consumed", 
-    pch = 19, col = "blue"))
+                            pch = 19, col = "blue"))
 ```
 
 <img src="figure/Bplot1.png" title="plot of chunk Bplot" alt="plot of chunk Bplot" style="display: block; margin: auto;" />
 
 ```r
-p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + geom_point() + labs(x = "Hot wings eaten", 
-    y = "Beer consumed in ounces")
+p <- ggplot(data = Beerwings, aes(x = Hotwings, y = Beer)) + 
+  geom_point() + 
+  labs(x = "Hot wings eaten", y = "Beer consumed in ounces")
 p
 ```
 
@@ -956,8 +1001,7 @@ pvalue  # results will vary
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -966,8 +1010,8 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), 
-    fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", alpha = 0.4) + 
+    labs(x = "", y = "")
 ```
 
 <img src="figure/F34.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
@@ -1040,23 +1084,20 @@ sort(means)
 ```
 
 ```
-  [1] -8.8 -7.6 -7.6 -7.6 -7.6 -7.6 -7.6 -6.4 -6.4 -6.4 -5.6 -5.6 -5.6 -5.6 -5.6
- [16] -5.6 -5.2 -5.2 -5.2 -5.2 -5.2 -4.8 -4.8 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4
- [31] -4.4 -4.4 -4.4 -4.4 -4.4 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -3.6
- [46] -3.6 -3.6 -3.2 -3.2 -3.2 -3.2 -2.8 -2.8 -2.8 -2.8 -2.4 -2.4 -2.4 -2.4 -2.0
- [61] -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0
- [76] -2.0 -2.0 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6
- [91] -1.6 -1.6 -1.6 -1.6 -1.6 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -0.8
-[106] -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4
-[121] -0.4 -0.4 -0.4  0.0  0.0  0.0  0.0  0.0  0.0  0.4  0.4  0.4  0.4  0.4  0.4
-[136]  0.4  0.4  0.4  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  1.2  1.2
-[151]  1.2  1.2  1.2  1.2  1.2  1.2  1.2  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6
-[166]  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  2.0  2.0  2.0  2.0  2.0
-[181]  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.4  2.4
-[196]  2.4  2.4  2.8  2.8  2.8  2.8  3.2  3.2  3.2  3.2  3.6  3.6  3.6  4.0  4.0
-[211]  4.0  4.0  4.0  4.0  4.0  4.0  4.0  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4
-[226]  4.4  4.4  4.4  4.4  4.8  4.8  5.2  5.2  5.2  5.2  5.2  5.6  5.6  5.6  5.6
-[241]  5.6  5.6  6.4  6.4  6.4  7.6  7.6  7.6  7.6  7.6  7.6  8.8
+  [1] -8.8 -7.6 -7.6 -7.6 -7.6 -7.6 -7.6 -6.4 -6.4 -6.4 -5.6 -5.6 -5.6 -5.6 -5.6 -5.6 -5.2 -5.2 -5.2
+ [20] -5.2 -5.2 -4.8 -4.8 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.0 -4.0 -4.0
+ [39] -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -3.6 -3.6 -3.6 -3.2 -3.2 -3.2 -3.2 -2.8 -2.8 -2.8 -2.8 -2.4 -2.4
+ [58] -2.4 -2.4 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0
+ [77] -2.0 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6
+ [96] -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8
+[115] -0.4 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4  0.0  0.0  0.0  0.0  0.0  0.0  0.4  0.4  0.4  0.4
+[134]  0.4  0.4  0.4  0.4  0.4  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  1.2  1.2  1.2  1.2
+[153]  1.2  1.2  1.2  1.2  1.2  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6
+[172]  1.6  1.6  1.6  1.6  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0
+[191]  2.0  2.0  2.0  2.4  2.4  2.4  2.4  2.8  2.8  2.8  2.8  3.2  3.2  3.2  3.2  3.6  3.6  3.6  4.0
+[210]  4.0  4.0  4.0  4.0  4.0  4.0  4.0  4.0  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4
+[229]  4.4  4.8  4.8  5.2  5.2  5.2  5.2  5.2  5.6  5.6  5.6  5.6  5.6  5.6  6.4  6.4  6.4  7.6  7.6
+[248]  7.6  7.6  7.6  7.6  8.8
 ```
 
 ```r
@@ -1080,8 +1121,7 @@ pvalue
 ```r
 # 7/252
 DF <- data.frame(x = means)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -1090,8 +1130,8 @@ p
 ```r
 x.dens <- density(means)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), 
-    fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", alpha = 0.4) + 
+    labs(x = "", y = "")
 ```
 
 <img src="figure/EXPLAIN2.png" title="plot of chunk EXPLAIN" alt="plot of chunk EXPLAIN" style="display: block; margin: auto;" />
@@ -1106,23 +1146,20 @@ apply(P2R, 2, mean)
 ```
 
 ```
-  [1] 12.0 10.2 10.8  9.2  9.2  9.0 11.4 12.0 10.4 10.4 10.2 10.2  8.6  8.6  8.4
- [16]  9.2  9.2  9.0  7.6  7.4  7.4 11.4 12.0 10.4 10.4 10.2 10.2  8.6  8.6  8.4
- [31]  9.2  9.2  9.0  7.6  7.4  7.4 11.4  9.8  9.8  9.6 10.4 10.4 10.2  8.8  8.6
- [46]  8.6  8.6  8.6  8.4  7.0  6.8  6.8  7.6  7.4  7.4  5.8 12.0 12.6 11.0 11.0
- [61] 10.8 10.8  9.2  9.2  9.0  9.8  9.8  9.6  8.2  8.0  8.0 12.0 10.4 10.4 10.2
- [76] 11.0 11.0 10.8  9.4  9.2  9.2  9.2  9.2  9.0  7.6  7.4  7.4  8.2  8.0  8.0
- [91]  6.4 12.0 10.4 10.4 10.2 11.0 11.0 10.8  9.4  9.2  9.2  9.2  9.2  9.0  7.6
-[106]  7.4  7.4  8.2  8.0  8.0  6.4 10.4 10.4 10.2  8.8  8.6  8.6  9.4  9.2  9.2
-[121]  7.6  7.6  7.4  7.4  5.8  6.4 10.0 10.6  9.0  9.0  8.8  8.8  7.2  7.2  7.0
-[136]  7.8  7.8  7.6  6.2  6.0  6.0 10.0  8.4  8.4  8.2  9.0  9.0  8.8  7.4  7.2
-[151]  7.2  7.2  7.2  7.0  5.6  5.4  5.4  6.2  6.0  6.0  4.4 10.0  8.4  8.4  8.2
-[166]  9.0  9.0  8.8  7.4  7.2  7.2  7.2  7.2  7.0  5.6  5.4  5.4  6.2  6.0  6.0
-[181]  4.4  8.4  8.4  8.2  6.8  6.6  6.6  7.4  7.2  7.2  5.6  5.6  5.4  5.4  3.8
-[196]  4.4 10.6  9.0  9.0  8.8  9.6  9.6  9.4  8.0  7.8  7.8  7.8  7.8  7.6  6.2
-[211]  6.0  6.0  6.8  6.6  6.6  5.0  9.0  9.0  8.8  7.4  7.2  7.2  8.0  7.8  7.8
-[226]  6.2  6.2  6.0  6.0  4.4  5.0  9.0  9.0  8.8  7.4  7.2  7.2  8.0  7.8  7.8
-[241]  6.2  6.2  6.0  6.0  4.4  5.0  7.4  7.2  7.2  5.6  6.2  4.4
+  [1] 12.0 10.2 10.8  9.2  9.2  9.0 11.4 12.0 10.4 10.4 10.2 10.2  8.6  8.6  8.4  9.2  9.2  9.0  7.6
+ [20]  7.4  7.4 11.4 12.0 10.4 10.4 10.2 10.2  8.6  8.6  8.4  9.2  9.2  9.0  7.6  7.4  7.4 11.4  9.8
+ [39]  9.8  9.6 10.4 10.4 10.2  8.8  8.6  8.6  8.6  8.6  8.4  7.0  6.8  6.8  7.6  7.4  7.4  5.8 12.0
+ [58] 12.6 11.0 11.0 10.8 10.8  9.2  9.2  9.0  9.8  9.8  9.6  8.2  8.0  8.0 12.0 10.4 10.4 10.2 11.0
+ [77] 11.0 10.8  9.4  9.2  9.2  9.2  9.2  9.0  7.6  7.4  7.4  8.2  8.0  8.0  6.4 12.0 10.4 10.4 10.2
+ [96] 11.0 11.0 10.8  9.4  9.2  9.2  9.2  9.2  9.0  7.6  7.4  7.4  8.2  8.0  8.0  6.4 10.4 10.4 10.2
+[115]  8.8  8.6  8.6  9.4  9.2  9.2  7.6  7.6  7.4  7.4  5.8  6.4 10.0 10.6  9.0  9.0  8.8  8.8  7.2
+[134]  7.2  7.0  7.8  7.8  7.6  6.2  6.0  6.0 10.0  8.4  8.4  8.2  9.0  9.0  8.8  7.4  7.2  7.2  7.2
+[153]  7.2  7.0  5.6  5.4  5.4  6.2  6.0  6.0  4.4 10.0  8.4  8.4  8.2  9.0  9.0  8.8  7.4  7.2  7.2
+[172]  7.2  7.2  7.0  5.6  5.4  5.4  6.2  6.0  6.0  4.4  8.4  8.4  8.2  6.8  6.6  6.6  7.4  7.2  7.2
+[191]  5.6  5.6  5.4  5.4  3.8  4.4 10.6  9.0  9.0  8.8  9.6  9.6  9.4  8.0  7.8  7.8  7.8  7.8  7.6
+[210]  6.2  6.0  6.0  6.8  6.6  6.6  5.0  9.0  9.0  8.8  7.4  7.2  7.2  8.0  7.8  7.8  6.2  6.2  6.0
+[229]  6.0  4.4  5.0  9.0  9.0  8.8  7.4  7.2  7.2  8.0  7.8  7.8  6.2  6.2  6.0  6.0  4.4  5.0  7.4
+[248]  7.2  7.2  5.6  6.2  4.4
 ```
 
 ```r
@@ -1130,23 +1167,20 @@ apply(P3, 2, mean)
 ```
 
 ```
-  [1]  4.4  6.2  5.6  7.2  7.2  7.4  5.0  4.4  6.0  6.0  6.2  6.2  7.8  7.8  8.0
- [16]  7.2  7.2  7.4  8.8  9.0  9.0  5.0  4.4  6.0  6.0  6.2  6.2  7.8  7.8  8.0
- [31]  7.2  7.2  7.4  8.8  9.0  9.0  5.0  6.6  6.6  6.8  6.0  6.0  6.2  7.6  7.8
- [46]  7.8  7.8  7.8  8.0  9.4  9.6  9.6  8.8  9.0  9.0 10.6  4.4  3.8  5.4  5.4
- [61]  5.6  5.6  7.2  7.2  7.4  6.6  6.6  6.8  8.2  8.4  8.4  4.4  6.0  6.0  6.2
- [76]  5.4  5.4  5.6  7.0  7.2  7.2  7.2  7.2  7.4  8.8  9.0  9.0  8.2  8.4  8.4
- [91] 10.0  4.4  6.0  6.0  6.2  5.4  5.4  5.6  7.0  7.2  7.2  7.2  7.2  7.4  8.8
-[106]  9.0  9.0  8.2  8.4  8.4 10.0  6.0  6.0  6.2  7.6  7.8  7.8  7.0  7.2  7.2
-[121]  8.8  8.8  9.0  9.0 10.6 10.0  6.4  5.8  7.4  7.4  7.6  7.6  9.2  9.2  9.4
-[136]  8.6  8.6  8.8 10.2 10.4 10.4  6.4  8.0  8.0  8.2  7.4  7.4  7.6  9.0  9.2
-[151]  9.2  9.2  9.2  9.4 10.8 11.0 11.0 10.2 10.4 10.4 12.0  6.4  8.0  8.0  8.2
-[166]  7.4  7.4  7.6  9.0  9.2  9.2  9.2  9.2  9.4 10.8 11.0 11.0 10.2 10.4 10.4
-[181] 12.0  8.0  8.0  8.2  9.6  9.8  9.8  9.0  9.2  9.2 10.8 10.8 11.0 11.0 12.6
-[196] 12.0  5.8  7.4  7.4  7.6  6.8  6.8  7.0  8.4  8.6  8.6  8.6  8.6  8.8 10.2
-[211] 10.4 10.4  9.6  9.8  9.8 11.4  7.4  7.4  7.6  9.0  9.2  9.2  8.4  8.6  8.6
-[226] 10.2 10.2 10.4 10.4 12.0 11.4  7.4  7.4  7.6  9.0  9.2  9.2  8.4  8.6  8.6
-[241] 10.2 10.2 10.4 10.4 12.0 11.4  9.0  9.2  9.2 10.8 10.2 12.0
+  [1]  4.4  6.2  5.6  7.2  7.2  7.4  5.0  4.4  6.0  6.0  6.2  6.2  7.8  7.8  8.0  7.2  7.2  7.4  8.8
+ [20]  9.0  9.0  5.0  4.4  6.0  6.0  6.2  6.2  7.8  7.8  8.0  7.2  7.2  7.4  8.8  9.0  9.0  5.0  6.6
+ [39]  6.6  6.8  6.0  6.0  6.2  7.6  7.8  7.8  7.8  7.8  8.0  9.4  9.6  9.6  8.8  9.0  9.0 10.6  4.4
+ [58]  3.8  5.4  5.4  5.6  5.6  7.2  7.2  7.4  6.6  6.6  6.8  8.2  8.4  8.4  4.4  6.0  6.0  6.2  5.4
+ [77]  5.4  5.6  7.0  7.2  7.2  7.2  7.2  7.4  8.8  9.0  9.0  8.2  8.4  8.4 10.0  4.4  6.0  6.0  6.2
+ [96]  5.4  5.4  5.6  7.0  7.2  7.2  7.2  7.2  7.4  8.8  9.0  9.0  8.2  8.4  8.4 10.0  6.0  6.0  6.2
+[115]  7.6  7.8  7.8  7.0  7.2  7.2  8.8  8.8  9.0  9.0 10.6 10.0  6.4  5.8  7.4  7.4  7.6  7.6  9.2
+[134]  9.2  9.4  8.6  8.6  8.8 10.2 10.4 10.4  6.4  8.0  8.0  8.2  7.4  7.4  7.6  9.0  9.2  9.2  9.2
+[153]  9.2  9.4 10.8 11.0 11.0 10.2 10.4 10.4 12.0  6.4  8.0  8.0  8.2  7.4  7.4  7.6  9.0  9.2  9.2
+[172]  9.2  9.2  9.4 10.8 11.0 11.0 10.2 10.4 10.4 12.0  8.0  8.0  8.2  9.6  9.8  9.8  9.0  9.2  9.2
+[191] 10.8 10.8 11.0 11.0 12.6 12.0  5.8  7.4  7.4  7.6  6.8  6.8  7.0  8.4  8.6  8.6  8.6  8.6  8.8
+[210] 10.2 10.4 10.4  9.6  9.8  9.8 11.4  7.4  7.4  7.6  9.0  9.2  9.2  8.4  8.6  8.6 10.2 10.2 10.4
+[229] 10.4 12.0 11.4  7.4  7.4  7.6  9.0  9.2  9.2  8.4  8.6  8.6 10.2 10.2 10.4 10.4 12.0 11.4  9.0
+[248]  9.2  9.2 10.8 10.2 12.0
 ```
 
 ```r
@@ -1155,23 +1189,20 @@ sort(DiffMeans)
 ```
 
 ```
-  [1] -8.8 -7.6 -7.6 -7.6 -7.6 -7.6 -7.6 -6.4 -6.4 -6.4 -5.6 -5.6 -5.6 -5.6 -5.6
- [16] -5.6 -5.2 -5.2 -5.2 -5.2 -5.2 -4.8 -4.8 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4
- [31] -4.4 -4.4 -4.4 -4.4 -4.4 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -3.6
- [46] -3.6 -3.6 -3.2 -3.2 -3.2 -3.2 -2.8 -2.8 -2.8 -2.8 -2.4 -2.4 -2.4 -2.4 -2.0
- [61] -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0
- [76] -2.0 -2.0 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6
- [91] -1.6 -1.6 -1.6 -1.6 -1.6 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -0.8
-[106] -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4
-[121] -0.4 -0.4 -0.4  0.0  0.0  0.0  0.0  0.0  0.0  0.4  0.4  0.4  0.4  0.4  0.4
-[136]  0.4  0.4  0.4  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  1.2  1.2
-[151]  1.2  1.2  1.2  1.2  1.2  1.2  1.2  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6
-[166]  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  2.0  2.0  2.0  2.0  2.0
-[181]  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.4  2.4
-[196]  2.4  2.4  2.8  2.8  2.8  2.8  3.2  3.2  3.2  3.2  3.6  3.6  3.6  4.0  4.0
-[211]  4.0  4.0  4.0  4.0  4.0  4.0  4.0  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4
-[226]  4.4  4.4  4.4  4.4  4.8  4.8  5.2  5.2  5.2  5.2  5.2  5.6  5.6  5.6  5.6
-[241]  5.6  5.6  6.4  6.4  6.4  7.6  7.6  7.6  7.6  7.6  7.6  8.8
+  [1] -8.8 -7.6 -7.6 -7.6 -7.6 -7.6 -7.6 -6.4 -6.4 -6.4 -5.6 -5.6 -5.6 -5.6 -5.6 -5.6 -5.2 -5.2 -5.2
+ [20] -5.2 -5.2 -4.8 -4.8 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.4 -4.0 -4.0 -4.0
+ [39] -4.0 -4.0 -4.0 -4.0 -4.0 -4.0 -3.6 -3.6 -3.6 -3.2 -3.2 -3.2 -3.2 -2.8 -2.8 -2.8 -2.8 -2.4 -2.4
+ [58] -2.4 -2.4 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0 -2.0
+ [77] -2.0 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6 -1.6
+ [96] -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -1.2 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8 -0.8
+[115] -0.4 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4 -0.4  0.0  0.0  0.0  0.0  0.0  0.0  0.4  0.4  0.4  0.4
+[134]  0.4  0.4  0.4  0.4  0.4  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  0.8  1.2  1.2  1.2  1.2
+[153]  1.2  1.2  1.2  1.2  1.2  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6
+[172]  1.6  1.6  1.6  1.6  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0  2.0
+[191]  2.0  2.0  2.0  2.4  2.4  2.4  2.4  2.8  2.8  2.8  2.8  3.2  3.2  3.2  3.2  3.6  3.6  3.6  4.0
+[210]  4.0  4.0  4.0  4.0  4.0  4.0  4.0  4.0  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4  4.4
+[229]  4.4  4.8  4.8  5.2  5.2  5.2  5.2  5.2  5.6  5.6  5.6  5.6  5.6  5.6  6.4  6.4  6.4  7.6  7.6
+[248]  7.6  7.6  7.6  7.6  8.8
 ```
 
 ```r
@@ -1189,23 +1220,20 @@ sort(apply(P3, 2, mean))
 ```
 
 ```
-  [1]  3.8  4.4  4.4  4.4  4.4  4.4  4.4  5.0  5.0  5.0  5.4  5.4  5.4  5.4  5.4
- [16]  5.4  5.6  5.6  5.6  5.6  5.6  5.8  5.8  6.0  6.0  6.0  6.0  6.0  6.0  6.0
- [31]  6.0  6.0  6.0  6.0  6.0  6.2  6.2  6.2  6.2  6.2  6.2  6.2  6.2  6.2  6.4
- [46]  6.4  6.4  6.6  6.6  6.6  6.6  6.8  6.8  6.8  6.8  7.0  7.0  7.0  7.0  7.2
- [61]  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2
- [76]  7.2  7.2  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4
- [91]  7.4  7.4  7.4  7.4  7.4  7.6  7.6  7.6  7.6  7.6  7.6  7.6  7.6  7.6  7.8
-[106]  7.8  7.8  7.8  7.8  7.8  7.8  7.8  7.8  7.8  8.0  8.0  8.0  8.0  8.0  8.0
-[121]  8.0  8.0  8.0  8.2  8.2  8.2  8.2  8.2  8.2  8.4  8.4  8.4  8.4  8.4  8.4
-[136]  8.4  8.4  8.4  8.6  8.6  8.6  8.6  8.6  8.6  8.6  8.6  8.6  8.6  8.8  8.8
-[151]  8.8  8.8  8.8  8.8  8.8  8.8  8.8  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0
-[166]  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.2  9.2  9.2  9.2  9.2
-[181]  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.4  9.4
-[196]  9.4  9.4  9.6  9.6  9.6  9.6  9.8  9.8  9.8  9.8 10.0 10.0 10.0 10.2 10.2
-[211] 10.2 10.2 10.2 10.2 10.2 10.2 10.2 10.4 10.4 10.4 10.4 10.4 10.4 10.4 10.4
-[226] 10.4 10.4 10.4 10.4 10.6 10.6 10.8 10.8 10.8 10.8 10.8 11.0 11.0 11.0 11.0
-[241] 11.0 11.0 11.4 11.4 11.4 12.0 12.0 12.0 12.0 12.0 12.0 12.6
+  [1]  3.8  4.4  4.4  4.4  4.4  4.4  4.4  5.0  5.0  5.0  5.4  5.4  5.4  5.4  5.4  5.4  5.6  5.6  5.6
+ [20]  5.6  5.6  5.8  5.8  6.0  6.0  6.0  6.0  6.0  6.0  6.0  6.0  6.0  6.0  6.0  6.0  6.2  6.2  6.2
+ [39]  6.2  6.2  6.2  6.2  6.2  6.2  6.4  6.4  6.4  6.6  6.6  6.6  6.6  6.8  6.8  6.8  6.8  7.0  7.0
+ [58]  7.0  7.0  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2  7.2
+ [77]  7.2  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4  7.4
+ [96]  7.6  7.6  7.6  7.6  7.6  7.6  7.6  7.6  7.6  7.8  7.8  7.8  7.8  7.8  7.8  7.8  7.8  7.8  7.8
+[115]  8.0  8.0  8.0  8.0  8.0  8.0  8.0  8.0  8.0  8.2  8.2  8.2  8.2  8.2  8.2  8.4  8.4  8.4  8.4
+[134]  8.4  8.4  8.4  8.4  8.4  8.6  8.6  8.6  8.6  8.6  8.6  8.6  8.6  8.6  8.6  8.8  8.8  8.8  8.8
+[153]  8.8  8.8  8.8  8.8  8.8  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0  9.0
+[172]  9.0  9.0  9.0  9.0  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2  9.2
+[191]  9.2  9.2  9.2  9.4  9.4  9.4  9.4  9.6  9.6  9.6  9.6  9.8  9.8  9.8  9.8 10.0 10.0 10.0 10.2
+[210] 10.2 10.2 10.2 10.2 10.2 10.2 10.2 10.2 10.4 10.4 10.4 10.4 10.4 10.4 10.4 10.4 10.4 10.4 10.4
+[229] 10.4 10.6 10.6 10.8 10.8 10.8 10.8 10.8 11.0 11.0 11.0 11.0 11.0 11.0 11.4 11.4 11.4 12.0 12.0
+[248] 12.0 12.0 12.0 12.0 12.6
 ```
 
 ```r
@@ -1340,8 +1368,7 @@ pvalue  # results will vary
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -1350,9 +1377,9 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), 
-    fill = "blue", alpha = 0.4) + labs(x = "", y = "") + geom_area(data = subset(df.dens, 
-    x <= -7.6 & x >= min(DF$x)), aes(x = x, y = y), fill = "blue", alpha = 0.4)
+p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", alpha = 0.4) + 
+    labs(x = "", y = "") + geom_area(data = subset(df.dens, x <= -7.6 & x >= min(DF$x)), aes(x = x, y = y), 
+    fill = "blue", alpha = 0.4)
 ```
 
 <img src="figure/TWOST4.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
@@ -1494,8 +1521,7 @@ polygon(xs, ys, col = "red")
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -1504,8 +1530,8 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= obsDiff & x <= max(DF$x)), aes(x = x, y = y), 
-    fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= obsDiff & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
+    alpha = 0.4) + labs(x = "", y = "")
 ```
 
 <img src="figure/AGE24.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
@@ -1570,8 +1596,7 @@ hist(MedianDiff, col = "blue", main = "")
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = MedianDiff)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -1580,8 +1605,8 @@ p
 ```r
 x.dens <- density(MedianDiff)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= obsDiffMedian & x <= max(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= obsDiffMedian & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
+    alpha = 0.4) + labs(x = "", y = "")
 ```
 
 <img src="figure/MEDAGE3.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
@@ -1673,8 +1698,7 @@ pvalue
 
 ```r
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -1683,8 +1707,8 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
+    alpha = 0.4) + labs(x = "", y = "")
 ```
 
 <img src="figure/VER3.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
@@ -1731,8 +1755,7 @@ pvalue
 
 ```r
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -1741,8 +1764,8 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed)
+p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
+    alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed)
 ```
 
 <img src="figure/VER23.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
@@ -1789,8 +1812,7 @@ pvalue1
 
 ```r
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -1799,9 +1821,8 @@ p
 ```r
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed, 
-    color = "red")
+p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
+    alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed, color = "red")
 ```
 
 <img src="figure/TM13.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
@@ -1822,8 +1843,7 @@ Two different methods to read in the data are illustrated next.
 
 
 ```r
-Outcome <- c(rep("relapse", 10), rep("no relapse", 14), rep("relapse", 18), rep("no relapse", 
-    6))
+Outcome <- c(rep("relapse", 10), rep("no relapse", 14), rep("relapse", 18), rep("no relapse", 6))
 Drug <- c(rep("Desipramine", 24), rep("Lithium", 24))
 Cocaine <- data.frame(Outcome, Drug)
 head(Cocaine)
@@ -1934,8 +1954,7 @@ pvalue1
 ```r
 # ggplot2 approach
 DF <- data.frame(x = DiffProp)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -1944,8 +1963,8 @@ p
 ```r
 x.dens <- density(DiffProp)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, y = y), fill = "blue", 
+    alpha = 0.4) + labs(x = "", y = "")
 ```
 
 <img src="figure/coke1rep3.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
@@ -1960,8 +1979,7 @@ DiffProp <- numeric(N)
 for (i in 1:N) {
     # sample of size 24 # from the total 48 addicts
     index <- sample(48, size = 24, replace = FALSE)
-    DiffProp[i] <- mean(Cocaine$Outcome[index] == "relapse") - mean(Cocaine$Outcome[-index] == 
-        "relapse")
+    DiffProp[i] <- mean(Cocaine$Outcome[index] == "relapse") - mean(Cocaine$Outcome[-index] == "relapse")
 }
 hist(DiffProp, col = "blue", breaks = "Scott", xlab = "", main = "")
 abline(v = obsDiffProp, col = "red")
@@ -1981,8 +1999,7 @@ pvalue
 ```r
 # ggplot2 approach
 DF <- data.frame(x = DiffProp)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
 p
 ```
 
@@ -1991,8 +2008,8 @@ p
 ```r
 x.dens <- density(DiffProp)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, 
-    y = y), fill = "blue", alpha = 0.4) + labs(x = "", y = "")
+p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, y = y), fill = "blue", 
+    alpha = 0.4) + labs(x = "", y = "")
 ```
 
 <img src="figure/coke2rep3.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
@@ -2090,8 +2107,8 @@ To obtain information from the General Social Survey, go to [sda.berkley.edu](sd
 
 
 ```r
-# site <- 'http://sda.berkeley.edu/TMPDIR/AAELN0Q9.csv' download.file(url = site,
-# destfile = '../data/DPS.csv')
+# site <- 'http://sda.berkeley.edu/TMPDIR/AAELN0Q9.csv' download.file(url = site, destfile =
+# '../data/DPS.csv')
 DPS <- read.csv(file = "../data/DPS.csv")
 xtabs(~SEX + DEATHPEN, data = DPS)
 ```
@@ -2109,22 +2126,17 @@ Based on the `Codebook`, values 0, 8, and 9 are missing data values for the vari
 
 ```r
 library(plyr)
-DPS$DEATHPEN <- mapvalues(DPS$DEATHPEN, from = c(0, 1, 2, 3, 4, 5, 8, 9), to = c(NA, 
-    "Strongly Agree", "Agree", "Neither Agree nor Disagree", "Disagree", "Strongly Disagree", 
-    NA, NA))
+DPS$DEATHPEN <- mapvalues(DPS$DEATHPEN, from = c(0, 1, 2, 3, 4, 5, 8, 9), to = c(NA, "Strongly Agree", 
+    "Agree", "Neither Agree nor Disagree", "Disagree", "Strongly Disagree", NA, NA))
 DPS$SEX <- mapvalues(DPS$SEX, from = c(1, 2), to = c("Male", "Female"))
 xtabs(~SEX + DEATHPEN, data = DPS)
 ```
 
 ```
         DEATHPEN
-SEX      Agree Disagree Neither Agree nor Disagree Strongly Agree
-  Female   160       67                         58            283
-  Male     103       37                         28            257
-        DEATHPEN
-SEX      Strongly Disagree
-  Female                37
-  Male                  35
+SEX      Agree Disagree Neither Agree nor Disagree Strongly Agree Strongly Disagree
+  Female   160       67                         58            283                37
+  Male     103       37                         28            257                35
 ```
 
 The problem with the latest table is that the labels for the values appear in alphabetical order.  To solve this problem, we convert the character variables, `SEX` and `DEATHPEN` to factors and assign the order of the levels using the `levels=` command.
@@ -2140,13 +2152,9 @@ T1
 
 ```
         DEATHPEN
-SEX      Strongly Agree Agree Neither Agree nor Disagree Disagree
-  Male              257   103                         28       37
-  Female            283   160                         58       67
-        DEATHPEN
-SEX      Strongly Disagree
-  Male                  35
-  Female                37
+SEX      Strongly Agree Agree Neither Agree nor Disagree Disagree Strongly Disagree
+  Male              257   103                         28       37                35
+  Female            283   160                         58       67                37
 ```
 
 ```r
@@ -2155,15 +2163,10 @@ addmargins(T1)
 
 ```
         DEATHPEN
-SEX      Strongly Agree Agree Neither Agree nor Disagree Disagree
-  Male              257   103                         28       37
-  Female            283   160                         58       67
-  Sum               540   263                         86      104
-        DEATHPEN
-SEX      Strongly Disagree  Sum
-  Male                  35  460
-  Female                37  605
-  Sum                   72 1065
+SEX      Strongly Agree Agree Neither Agree nor Disagree Disagree Strongly Disagree  Sum
+  Male              257   103                         28       37                35  460
+  Female            283   160                         58       67                37  605
+  Sum               540   263                         86      104                72 1065
 ```
 
 ```r
@@ -2172,13 +2175,9 @@ prop.table(T1, 1)
 
 ```
         DEATHPEN
-SEX      Strongly Agree   Agree Neither Agree nor Disagree Disagree
-  Male          0.55870 0.22391                    0.06087  0.08043
-  Female        0.46777 0.26446                    0.09587  0.11074
-        DEATHPEN
-SEX      Strongly Disagree
-  Male             0.07609
-  Female           0.06116
+SEX      Strongly Agree   Agree Neither Agree nor Disagree Disagree Strongly Disagree
+  Male          0.55870 0.22391                    0.06087  0.08043           0.07609
+  Female        0.46777 0.26446                    0.09587  0.11074           0.06116
 ```
 
 
@@ -2258,12 +2257,9 @@ EC(T1)
 ```
 
 ```
-       Strongly Agree Agree Neither Agree nor Disagree Disagree
-Male            233.2 113.6                      37.15    44.92
-Female          306.8 149.4                      48.85    59.08
-       Strongly Disagree
-Male                31.1
-Female              40.9
+       Strongly Agree Agree Neither Agree nor Disagree Disagree Strongly Disagree
+Male            233.2 113.6                      37.15    44.92              31.1
+Female          306.8 149.4                      48.85    59.08              40.9
 ```
 
 
@@ -2310,15 +2306,10 @@ addmargins(table(DPSC$SEX, sample(DPSC$DEATHPEN)))
 
 ```
         
-         Strongly Agree Agree Neither Agree nor Disagree Disagree
-  Male              256   107                         27       48
-  Female            284   156                         59       56
-  Sum               540   263                         86      104
-        
-         Strongly Disagree  Sum
-  Male                  22  460
-  Female                50  605
-  Sum                   72 1065
+         Strongly Agree Agree Neither Agree nor Disagree Disagree Strongly Disagree  Sum
+  Male              256   107                         27       48                22  460
+  Female            284   156                         59       56                50  605
+  Sum               540   263                         86      104                72 1065
 ```
 
 ```r
@@ -2327,15 +2318,10 @@ addmargins(table(DPSC$SEX, sample(DPSC$DEATHPEN)))
 
 ```
         
-         Strongly Agree Agree Neither Agree nor Disagree Disagree
-  Male              230   115                         38       43
-  Female            310   148                         48       61
-  Sum               540   263                         86      104
-        
-         Strongly Disagree  Sum
-  Male                  34  460
-  Female                38  605
-  Sum                   72 1065
+         Strongly Agree Agree Neither Agree nor Disagree Disagree Strongly Disagree  Sum
+  Male              230   115                         38       43                34  460
+  Female            310   148                         48       61                38  605
+  Sum               540   263                         86      104                72 1065
 ```
 
 ```r
@@ -2344,15 +2330,10 @@ addmargins(xtabs(~sample(SEX) + DEATHPEN, data = DPSC))
 
 ```
            DEATHPEN
-sample(SEX) Strongly Agree Agree Neither Agree nor Disagree Disagree
-     Male              232   117                         35       47
-     Female            308   146                         51       57
-     Sum               540   263                         86      104
-           DEATHPEN
-sample(SEX) Strongly Disagree  Sum
-     Male                  29  460
-     Female                43  605
-     Sum                   72 1065
+sample(SEX) Strongly Agree Agree Neither Agree nor Disagree Disagree Strongly Disagree  Sum
+     Male              232   117                         35       47                29  460
+     Female            308   146                         51       57                43  605
+     Sum               540   263                         86      104                72 1065
 ```
 
 ```r
@@ -2361,15 +2342,10 @@ addmargins(xtabs(~sample(SEX) + DEATHPEN, data = DPSC))
 
 ```
            DEATHPEN
-sample(SEX) Strongly Agree Agree Neither Agree nor Disagree Disagree
-     Male              218   126                         38       46
-     Female            322   137                         48       58
-     Sum               540   263                         86      104
-           DEATHPEN
-sample(SEX) Strongly Disagree  Sum
-     Male                  32  460
-     Female                40  605
-     Sum                   72 1065
+sample(SEX) Strongly Agree Agree Neither Agree nor Disagree Disagree Strongly Disagree  Sum
+     Male              218   126                         38       46                32  460
+     Female            322   137                         48       58                40  605
+     Sum               540   263                         86      104                72 1065
 ```
 
 
@@ -2420,19 +2396,17 @@ Some times, you will have only access to data that has been summarized (continge
 
 ```r
 expand.dft <- function(x, na.strings = "NA", as.is = FALSE, dec = ".") {
-    # Take each row in the source data frame table and replicate it using the Freq
-    # value
+    # Take each row in the source data frame table and replicate it using the Freq value
     DF <- sapply(1:nrow(x), function(i) x[rep(i, each = x$Freq[i]), ], simplify = FALSE)
     
-    # Take the above list and rbind it to create a single DF Also subset the result
-    # to eliminate the Freq column
+    # Take the above list and rbind it to create a single DF Also subset the result to eliminate the Freq
+    # column
     DF <- subset(do.call("rbind", DF), select = -Freq)
     
-    # Now apply type.convert to the character coerced factor columns to facilitate
-    # data type selection for each column
+    # Now apply type.convert to the character coerced factor columns to facilitate data type selection
+    # for each column
     for (i in 1:ncol(DF)) {
-        DF[[i]] <- type.convert(as.character(DF[[i]]), na.strings = na.strings, as.is = as.is, 
-            dec = dec)
+        DF[[i]] <- type.convert(as.character(DF[[i]]), na.strings = na.strings, as.is = as.is, dec = dec)
     }
     
     DF
@@ -2448,8 +2422,7 @@ The `x=` argument to `expand.dft()` is a table that has been converted to a data
 ```r
 HA <- c(110, 277, 50, 163, 302, 63)
 HAM <- matrix(data = HA, nrow = 2, byrow = TRUE)
-dimnames(HAM) <- list(Gender = c("Male", "Female"), Giddy = c("Very Happy", "Pretty Happy", 
-    "Not to Happy"))
+dimnames(HAM) <- list(Gender = c("Male", "Female"), Giddy = c("Very Happy", "Pretty Happy", "Not to Happy"))
 HAM
 ```
 
@@ -2517,8 +2490,8 @@ From the [http://sda.berkeley.edu/cgi-bin/hsda?harcsda+gss10](http://sda.berkele
 
 
 ```r
-# site <- 'http://sda.berkeley.edu/TMPDIR/AAO0mzEh.csv' download.file(url = site,
-# destfile = '../data/dpy.csv')
+# site <- 'http://sda.berkeley.edu/TMPDIR/AAO0mzEh.csv' download.file(url = site, destfile =
+# '../data/dpy.csv')
 dpy <- read.csv(file = "../data/dpy.csv")
 str(dpy)
 ```
@@ -2654,8 +2627,7 @@ $H_A:$ at least one of the inequalities does not hold.
 ```r
 candy <- c(42, 20, 38, 33, 27, 50)
 candyM <- matrix(data = candy, nrow = 2, byrow = TRUE)
-dimnames(candyM) <- list(Gender = c("Boys", "Girls"), Flavor = c("Flavor 1", "Flavor 2", 
-    "Flavor 3"))
+dimnames(candyM) <- list(Gender = c("Boys", "Girls"), Flavor = c("Flavor 1", "Flavor 2", "Flavor 3"))
 candyM
 ```
 
@@ -2892,8 +2864,7 @@ epvalue2
 ```
 
 ```r
-# Could use the following but the degrees of freedom will be incorrect for this
-# test!
+# Could use the following but the degrees of freedom will be incorrect for this test!
 chisq.test(c(10, 24, 10, 6), p = psf)
 ```
 
@@ -2960,7 +2931,6 @@ epvalue3
 
 
 This example illustrates a common result with chi-square goodness-of-fit tests, i.e., that each to two (or more) different null hypotheses may be accepted for the same data set.  Obviously, the true distribution cannot be both binomial and Poisson at the same time which is why the conclusion is that there is not sufficient evidence to suggest the alternative.  This does not make the null hypothesis true!
-
 
 
 
@@ -3069,48 +3039,39 @@ m <- 20000  # Number of Samples
 EX <- 1.2  # Character expansion
 
 xbar.5 <- apply(matrix(rnorm(m * 5, 50, 15), nrow = m), 1, mean)
-hist(xbar.5, breaks = "Scott", col = "blue", xlim = c(0, 100), prob = T, xlab = "", 
-    ylab = "", main = "")
+hist(xbar.5, breaks = "Scott", col = "blue", xlim = c(0, 100), prob = T, xlab = "", ylab = "", main = "")
 mtext(expression(bar(x)[5]), side = 3, line = 1, cex = EX)
 
 xbar.5 <- apply(matrix(runif(m * 5, 0, 1), nrow = m), 1, mean)
-hist(xbar.5, breaks = "Scott", col = "blue", xlim = c(0, 1), prob = T, xlab = "", 
-    ylab = "", main = "")
+hist(xbar.5, breaks = "Scott", col = "blue", xlim = c(0, 1), prob = T, xlab = "", ylab = "", main = "")
 mtext(expression(bar(x)[5]), side = 3, line = 1, cex = EX)
 
 xbar.5 <- apply(matrix(rexp(m * 5, 1), nrow = m), 1, mean)
-hist(xbar.5, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "", 
-    ylab = "", main = "")
+hist(xbar.5, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "", ylab = "", main = "")
 mtext(expression(bar(x)[5]), side = 3, line = 1, cex = EX)
 
 xbar.10 <- apply(matrix(rnorm(m * 10, 50, 15), nrow = m), 1, mean)
-hist(xbar.10, breaks = "Scott", col = "blue", xlim = c(0, 100), prob = T, xlab = "", 
-    ylab = "", main = "")
+hist(xbar.10, breaks = "Scott", col = "blue", xlim = c(0, 100), prob = T, xlab = "", ylab = "", main = "")
 mtext(expression(bar(x)[10]), side = 3, line = 1, cex = EX)
 
 xbar.10 <- apply(matrix(runif(m * 10, 0, 1), nrow = m), 1, mean)
-hist(xbar.10, breaks = "Scott", col = "blue", xlim = c(0, 1), prob = T, xlab = "", 
-    ylab = "", main = "")
+hist(xbar.10, breaks = "Scott", col = "blue", xlim = c(0, 1), prob = T, xlab = "", ylab = "", main = "")
 mtext(expression(bar(x)[10]), side = 3, line = 1, cex = EX)
 
 xbar.10 <- apply(matrix(rexp(m * 10, 1), nrow = m), 1, mean)
-hist(xbar.10, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "", 
-    ylab = "", main = "")
+hist(xbar.10, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "", ylab = "", main = "")
 mtext(expression(bar(x)[10]), side = 3, line = 1, cex = EX)
 
 xbar.30 <- apply(matrix(rnorm(m * 30, 50, 15), nrow = m), 1, mean)
-hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 100), prob = T, xlab = "", 
-    ylab = "", main = "")
+hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 100), prob = T, xlab = "", ylab = "", main = "")
 mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
 
 xbar.30 <- apply(matrix(runif(m * 30, 0, 1), nrow = m), 1, mean)
-hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 1), prob = T, xlab = "", 
-    ylab = "", main = "")
+hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 1), prob = T, xlab = "", ylab = "", main = "")
 mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
 
 xbar.30 <- apply(matrix(rexp(m * 30, 1), nrow = m), 1, mean)
-hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "", 
-    ylab = "", main = "")
+hist(xbar.30, breaks = "Scott", col = "blue", xlim = c(0, 5), prob = T, xlab = "", ylab = "", main = "")
 mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
 ```
 
