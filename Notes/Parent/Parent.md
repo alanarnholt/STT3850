@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Thursday, February 06, 2014 - 14:45:29.
+Last compiled Thursday, February 06, 2014 - 15:55:15.
 
 
 
@@ -3888,7 +3888,8 @@ plot(boot.obj)
 <img src="figure/BootAgain.png" title="plot of chunk BootAgain" alt="plot of chunk BootAgain" style="display: block; margin: auto;" />
 
 ```r
-boot.ci(boot.obj, type = "perc")
+ans <- boot.ci(boot.obj, type = "perc")
+ans
 ```
 
 ```

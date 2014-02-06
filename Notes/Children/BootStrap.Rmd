@@ -508,10 +508,11 @@ phoneF <- function(data, i){
   rat}
 boot.obj <- boot(data = Phone, statistic = phoneF, R = 10000)
 plot(boot.obj)
-boot.ci(boot.obj, type = "perc")
+ans <- boot.ci(boot.obj, type = "perc")
+ans
 ```
 Another 95% bootstrap percentile confidence interval for the ratio of means (ILEC/CLEC) is 
-(`r boot.ci(boot.obj, type = "perc")$perc[4]`, `r boot.ci(boot.obj, type = "perc")$perc[5]`),
+(`r ans[['percent']][4]`, `r ans[['percent']][5]`),
 so with 95% confidence, the true mean repair times for ILEC customers is between 
-`r boot.ci(boot.obj, type = "perc")$perc[4]` and `r boot.ci(boot.obj, type = "perc")$perc[5]`
+`r ans[['percent']][4]` and `r ans[['percent']][5]`
 times less than that for CLEC customers.
