@@ -43,12 +43,13 @@ A third approach is to use `ggplot2`. (This is my preference.)
 
 ```{r GirlsHistggplot2, message = FALSE}
 require(ggplot2)
-p <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(binwidth = 500) + facet_grid(State ~ .)
-p
-p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..), binwidth = 500, fill = "blue") + facet_grid(State ~ .) + geom_density(color = "red", size = 1.5)
-p1
+p <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(binwidth = 300, fill = "peru", color = "black") + facet_grid(State ~ .)
+p + theme_bw()
+p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..), binwidth = 300, fill = "blue", color = "black") + facet_grid(State ~ .) + geom_density(color = "red", size = 1)
+p1 + theme_bw()
 p2 <- ggplot(data = Girls, aes(sample = Weight, color = State)) + stat_qq()
-p2
+p2 + theme_bw()
+ggplot(data = Girls, aes(sample = Weight, shape = State, color = State)) + stat_qq() + facet_grid(State~.) + theme_bw()
 ```
 
 ## Graphs are fun!
@@ -82,8 +83,13 @@ qqnorm(mean.diff, col ="blue")
 qqline(mean.diff, col = "red")
 par(opar)
 BIAS <- mean(mean.diff) - (mean(AK.weight) - mean(WY.weight))
+BIAS
 CI <- quantile(mean.diff, prob = c(.025, .975))
 CI
+```
+
+```{r GirlsGGplot}
+ggplot(data = data.frame(x = mean.diff), aes(x = x)) + geom_density(fill = "skyblue") + labs(x = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*"))) + theme_bw()
 ```
 
 > ANSWER: The mean of the bootstrap distribution of the difference of means ($\hat{\mu}_{\bar{x}^*_1 - \bar{x}^*_2}$) is `r mean(mean.diff)` while the standard error of the bootstrap distribution of means ($\hat{\sigma}_{\bar{x}^*_1 - \bar{x}^*_2}$) is `r sd(mean.diff)`.  We are 95% confident that the mean weight of baby girls born in Alaska are `r CI[1]` to `r CI[2]` grams greater than baby girls born in Wyoming.

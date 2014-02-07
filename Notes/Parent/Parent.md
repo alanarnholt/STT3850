@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Thursday, February 06, 2014 - 7:11:15 PM.
+Last compiled Thursday, February 06, 2014 - 7:59:56 PM.
 
 
 
@@ -3251,11 +3251,23 @@ abline(v = mean(Babies$Weight), col = "blue")
 abline(v = mean(my.boot.statB), col = "red")
 ```
 
-<img src="figure/boot1.png" title="plot of chunk boot1" alt="plot of chunk boot1" style="display: block; margin: auto;" />
+<img src="figure/boot11.png" title="plot of chunk boot1" alt="plot of chunk boot1" style="display: block; margin: auto;" />
 
 ```r
 boot.bias <- mean(my.boot.statB) - mean(Babies$Weight)
+boot.bias
 ```
+
+```
+[1] -0.1367
+```
+
+```r
+ggplot(data = data.frame(x = my.boot.statB), aes(x = x)) + geom_density(fill = "lightblue") + labs(x = substitute(paste(bar(X), 
+    "* (g)")), title = "Bootstrap Distribution of means \n for NC birth weights") + theme_bw()
+```
+
+<img src="figure/boot12.png" title="plot of chunk boot1" alt="plot of chunk boot1" style="display: block; margin: auto;" />
 
 
 Note that the bootstrap distribution is approximately normal.  Second, with mean 3448.1229, it is centered at approximately the same location as the original mean, 3448.2597.  The difference between where the bootstrap distribution is centered and the mean of the of original sample is the bootstrap bias in this example -0.1367.  In general, the *bias* of an estimate $\hat{\theta}$ is $$Bias[\hat{\theta}] = E[\hat{\theta}] - \theta .$$  The bootstrap estimate of bias is $$Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta},$$ the mean of the bootstrap distribution, minus the estimate from the original data. Third, we get a rough idea of the amount of variability.  We can quantify the variability by computing the standard deviation of the bootstrap distribution, in this case 15.5882.  This is the bootstrap standard error.
@@ -4018,26 +4030,34 @@ A third approach is to use `ggplot2`. (This is my preference.)
 
 ```r
 require(ggplot2)
-p <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(binwidth = 500) + facet_grid(State ~ .)
-p
+p <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(binwidth = 300, fill = "peru", color = "black") + 
+    facet_grid(State ~ .)
+p + theme_bw()
 ```
 
 <img src="figure/GirlsHistggplot21.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 ```r
-p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..), binwidth = 500, fill = "blue") + 
-    facet_grid(State ~ .) + geom_density(color = "red", size = 1.5)
-p1
+p1 <- ggplot(data = Girls, aes(x = Weight)) + geom_histogram(aes(y = ..density..), binwidth = 300, fill = "blue", 
+    color = "black") + facet_grid(State ~ .) + geom_density(color = "red", size = 1)
+p1 + theme_bw()
 ```
 
 <img src="figure/GirlsHistggplot22.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 ```r
 p2 <- ggplot(data = Girls, aes(sample = Weight, color = State)) + stat_qq()
-p2
+p2 + theme_bw()
 ```
 
 <img src="figure/GirlsHistggplot23.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
+
+```r
+ggplot(data = Girls, aes(sample = Weight, shape = State, color = State)) + stat_qq() + facet_grid(State ~ 
+    .) + theme_bw()
+```
+
+<img src="figure/GirlsHistggplot24.png" title="plot of chunk GirlsHistggplot2" alt="plot of chunk GirlsHistggplot2" style="display: block; margin: auto;" />
 
 
 ## Graphs are fun!
@@ -4099,6 +4119,14 @@ qqline(mean.diff, col = "red")
 ```r
 par(opar)
 BIAS <- mean(mean.diff) - (mean(AK.weight) - mean(WY.weight))
+BIAS
+```
+
+```
+[1] 0.4039
+```
+
+```r
 CI <- quantile(mean.diff, prob = c(0.025, 0.975))
 CI
 ```
@@ -4107,6 +4135,15 @@ CI
   2.5%  97.5% 
  89.92 524.93 
 ```
+
+
+
+```r
+ggplot(data = data.frame(x = mean.diff), aes(x = x)) + geom_density(fill = "skyblue") + labs(x = substitute(paste(bar(x)[1], 
+    "*", -bar(x)[2], "*"))) + theme_bw()
+```
+
+<img src="figure/GirlsGGplot.png" title="plot of chunk GirlsGGplot" alt="plot of chunk GirlsGGplot" style="display: block; margin: auto;" />
 
 
 > ANSWER: The mean of the bootstrap distribution of the difference of means ($\hat{\mu}_{\bar{x}^*_1 - \bar{x}^*_2}$) is 308.8539 while the standard error of the bootstrap distribution of means ($\hat{\sigma}_{\bar{x}^*_1 - \bar{x}^*_2}$) is 110.7742.  We are 95% confident that the mean weight of baby girls born in Alaska are 89.9219 to 524.9344 grams greater than baby girls born in Wyoming.

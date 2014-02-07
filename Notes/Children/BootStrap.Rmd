@@ -77,6 +77,8 @@ hist(my.boot.statB, breaks = "Scott", col = 'lightblue', xlab = substitute(paste
 abline(v = mean(Babies$Weight), col = "blue")
 abline(v = mean(my.boot.statB), col = "red")
 boot.bias <- mean(my.boot.statB) - mean(Babies$Weight)
+boot.bias
+ggplot(data = data.frame(x = my.boot.statB), aes(x =x)) + geom_density(fill = "lightblue") + labs(x = substitute(paste(bar(X),"* (g)")), title = "Bootstrap Distribution of means \n for NC birth weights") + theme_bw() 
 ```
 
 Note that the bootstrap distribution is approximately normal.  Second, with mean `r mean(my.boot.statB)`, it is centered at approximately the same location as the original mean, `r mean(Babies$Weight)`.  The difference between where the bootstrap distribution is centered and the mean of the of original sample is the bootstrap bias in this example `r boot.bias`.  In general, the *bias* of an estimate $\hat{\theta}$ is $$Bias[\hat{\theta}] = E[\hat{\theta}] - \theta .$$  The bootstrap estimate of bias is $$Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta},$$ the mean of the bootstrap distribution, minus the estimate from the original data. Third, we get a rough idea of the amount of variability.  We can quantify the variability by computing the standard deviation of the bootstrap distribution, in this case `r sd(my.boot.statB)`.  This is the bootstrap standard error.

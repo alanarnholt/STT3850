@@ -3,17 +3,19 @@ Class Notes For STT 3850
 ## Alan T. Arnholt
 
 
-```{r Systime, echo = FALSE, comment = NA}
+```{r Systime, echo = FALSE, comment = NA, message = FALSE}
+options(width = 100)
+require(ggplot2)
+require(e1071)
+require(plyr)
+require(PASWR)
+require(boot)
 DT <- format(Sys.time(), "%A, %B %d, %Y - %X.")
 ```
 Last compiled `r DT`
 
 ```{r setup, comment = NA, echo = FALSE, message = FALSE}
-options(width = 100)
 opts_chunk$set(comment = NA, cache = TRUE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', cache.path = './cache/Parent/', figure.path = './figure/Parent/', tidy = TRUE)
-require(ggplot2)
-require(e1071)
-require(plyr)
 ```
 
 ```{r child='../Children/Intro.Rmd'}
