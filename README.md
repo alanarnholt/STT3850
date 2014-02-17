@@ -1,5 +1,8 @@
 # Resources you may find helpful
 
+## John Chambers recounts the history of S and R
+[John Chambers recounts the history of S and R](http://blog.revolutionanalytics.com/2014/01/john-chambers-recounts-the-history-of-s-and-r.html)
+
 ## R
 * [R homepage](http://www.r-project.org/)
 * [Download R](http://cran.r-project.org/)
