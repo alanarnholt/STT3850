@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Wednesday, February 19, 2014 - 08:44:30.
+Last compiled Wednesday, February 19, 2014 - 08:53:51.
 
 
 
@@ -968,12 +968,13 @@ Worms2
 ```r
 N <- 10^4 - 1  # number of times to repeat the process
 result <- numeric(N)  # space to save the random differences
+set.seed(5)
 for (i in 1:N) {
     # sample of size 5, from 1 to 10, without replacement
     index <- sample(10, size = 5, replace = FALSE)
     result[i] <- mean(Worms2[index]) - mean(Worms2[-index])
 }
-hist(result, col = "blue", freq = FALSE, main = "")
+hist(result, col = "blue", freq = FALSE, main = "", breaks = "Scott")
 ```
 
 <img src="figure/F31.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
@@ -995,7 +996,7 @@ pvalue  # results will vary
 ```
 
 ```
-[1] 0.0242
+[1] 0.0274
 ```
 
 ```r
@@ -1011,12 +1012,13 @@ p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", alpha = 0.4) + 
-    labs(x = "", y = "") + theme_bw()
+    labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), y = "", title = "Randomization Distribution") + 
+    theme_bw()
 ```
 
 <img src="figure/F34.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
 
-The code snippet **result >= observed** results in a vector of **TRUE's** and **FALSE's** depending on whether or not the mean difference computed for a resample is greater than the observed mean difference.  **sum(result >= observed)** counts the number of **TRUE's**.  Thus, the computed _p_-value is just the proportion of statistics (including the original) that are as large or larger than the original mean difference. The empirical _p_-value is 0.0242.
+The code snippet **result >= observed** results in a vector of **TRUE's** and **FALSE's** depending on whether or not the mean difference computed for a resample is greater than the observed mean difference.  **sum(result >= observed)** counts the number of **TRUE's**.  Thus, the computed _p_-value is just the proportion of statistics (including the original) that are as large or larger than the original mean difference. The empirical _p_-value is 0.0274.
 
 Because the sample sizes in the schistosomiasis study are small, it is possible to apply mathematical methods to obtain an **exact _p_-value** for this randomization test.  An exact _p_-value can be obtained by writing down the set of all possibilities (assuming each possible outcome is equally likely under the null hypothesis) and then calculating the proportion of the set for which the difference is at least as large as the observed difference.  In the schistosomiasis study, this requires listing every possible combination in which five of the 10 female mice can be allocated to the treatment (and the other five mice are assigned to the control).  There are $\binom{10}{5}=$ 252 possible combinations.  For each of these combinations, the difference between the treatment and control means is then calculated.  The exact _p_-value is the proportion of times in which the difference in the means is at least as large as the observed difference of 7.6 worms.  Of these 252 combinations, six have a mean difference of 7.6 and one has a mean difference greater than 7.6 (namely 8.8).  Since all 252 of these random allocations are equally likely, the exact _p_-value in this example is 7/252 = 0.0278.  However, most real studies are too large to list all possible samples.  Randomization tests are almost always adequate, providing approximate _p_-values that are close enough to the true _p_-value.  
 
@@ -1380,7 +1382,7 @@ x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", alpha = 0.4) + 
     labs(x = "", y = "") + geom_area(data = subset(df.dens, x <= -7.6 & x >= min(DF$x)), aes(x = x, y = y), 
-    fill = "blue", alpha = 0.4)
+    fill = "blue", alpha = 0.4) + labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), y = "", title = "Randomization Distribution")
 ```
 
 <img src="figure/TWOST4.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
@@ -1534,7 +1536,8 @@ p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= obsDiff & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
-    alpha = 0.4) + labs(x = "", y = "")
+    alpha = 0.4) + labs(x = "", y = "") + labs(x = expression(bar(x)[Job] - bar(x)[LaidOff]), y = "", 
+    title = "Randomization Distribution")
 ```
 
 <img src="figure/AGE24.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
@@ -1610,7 +1613,8 @@ p
 x.dens <- density(MedianDiff)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= obsDiffMedian & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
-    alpha = 0.4) + labs(x = "", y = "")
+    alpha = 0.4) + labs(x = "", y = "") + labs(x = expression(tilde(x)[Job] - tilde(x)[LaidOff]), y = "", 
+    title = "Randomization Distribution")
 ```
 
 <img src="figure/MEDAGE3.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
