@@ -20,7 +20,8 @@ schis
 require(ggplot2)
 p <- ggplot(data = schis, aes(group, worms)) + 
   geom_point(position = "jitter", aes(color = group)) + 
-  facet_grid(. ~ gender)
+  facet_grid(. ~ gender) + 
+  theme_bw()
 p
 ```
 
@@ -174,11 +175,11 @@ pvalue <- (sum(result >= observed) + 1)/(N + 1) # p-value
 pvalue  # results will vary
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4) + theme_bw()
 p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '')
+p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') + theme_bw()
 ```
 The code snippet **result >= observed** results in a vector of **TRUE's** and **FALSE's** depending on whether or not the mean difference computed for a resample is greater than the observed mean difference.  **sum(result >= observed)** counts the number of **TRUE's**.  Thus, the computed _p_-value is just the proportion of statistics (including the original) that are as large or larger than the original mean difference. The empirical _p_-value is `r pvalue`.
 
@@ -219,7 +220,7 @@ pvalue
 # 7/252
 DF <- data.frame(x = means)
 p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", 
-    alpha = 0.4)
+    alpha = 0.4) + theme_bw()
 p
 x.dens <- density(means)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
@@ -273,13 +274,14 @@ observed
 Worms2 <- subset(ND, select = worms, drop = TRUE)
 Worms2
 N <- 10^5 - 1         # number of times fo repeat the process
+set.seed(13)
 result <- numeric(N)  # space to save the random differences
 for (i in 1:N){
   # sample of size 5, from 1 to 10, without replacement
   index <- sample(10, size = 5, replace = FALSE)
   result[i] <- mean(Worms2[index]) - mean(Worms2[-index])
 }
-hist(result, col = "blue", main = "", freq = FALSE)
+hist(result, col = "blue", main = "", freq = FALSE, breaks = "Scott")
 d.res <- density(result)
 plot(d.res, main ="", xlab = "", ylab = "")
 polygon(d.res, col ="pink")
@@ -293,7 +295,9 @@ pvalue <- (sum(result >= observed) + sum(result <= -observed) + 1)/(N + 1) # p-v
 pvalue  # results will vary
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
+p <- ggplot(data = DF) + 
+  geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4) + 
+  theme_bw()
 p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
@@ -341,7 +345,7 @@ rm(ages, status)
 west
 require(ggplot2)
 p <- ggplot(data = west, aes(status, ages)) + 
-  geom_point(position = "jitter", aes(color = status)) 
+  geom_point(position = "jitter", aes(color = status), size = 5) + theme_bw()
 p
 ```
   * Conduct a permutation test to determine whether the observed difference between means is likely to occur just by chance.  Here we are interested in only a one-sided test to determine if the mean age of people who were laid off is higher than the mean age of people who were not laid off.
@@ -355,6 +359,7 @@ names(obsDiff) <- NULL
 obsDiff
 Ages <- subset(west, select = ages, drop = TRUE)
 Ages
+set.seed(12)
 N <- 10^5 - 1         # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
 for (i in 1:N){
@@ -362,7 +367,7 @@ for (i in 1:N){
   index <- sample(10, size = 3, replace = FALSE)
   result[i] <- mean(Ages[index]) - mean(Ages[-index])
 }
-hist(result, col = "blue", main = "", xlim =c(-25, 25))
+hist(result, col = "blue", main = "", xlim =c(-25, 25), breaks = "Scott")
 d.res <- density(result)
 plot(d.res, main ="", xlab = "", ylab = "", xlim =c(-25, 25))
 polygon(d.res, col ="pink")
@@ -371,7 +376,9 @@ ys <- c(0, d.res$y[d.res$x >= obsDiff])
 polygon(xs, ys, col = "red")
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
+p <- ggplot(data = DF) + 
+  geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4) + 
+  theme_bw()
 p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
@@ -389,20 +396,24 @@ OBSM <- with(data = west,
 tapply(ages, status, median))
 OBSM
 obsDiffMedian <- OBSM[2] - OBSM[1]
+names(obsDiffMedian) <- NULL
 obsDiffMedian
 Ages <- subset(west, select = ages, drop = TRUE)
 Ages
 N <- 10^5 - 1         # number of times fo repeat the process
 MedianDiff <- numeric(N)  # space to save the random differences
+set.seed(11)
 for (i in 1:N){
   # sample of size 3, from 1 to 10, without replacement
   index <- sample(10, size = 3, replace = FALSE)
   MedianDiff[i] <- median(Ages[index]) - median(Ages[-index])
 }
-hist(MedianDiff, col = "blue", main = "")
+hist(MedianDiff, col = "blue", main = "", breaks = "Scott")
 # ggplot2 approach now
 DF <- data.frame(x = MedianDiff)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4)
+p <- ggplot(data = DF) + 
+  geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4) + 
+  theme_bw()
 p
 x.dens <- density(MedianDiff)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)

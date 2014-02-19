@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Tuesday, February 18, 2014 - 10:44:44 AM.
+Last compiled Wednesday, February 19, 2014 - 08:24:43.
 
 
 
@@ -670,7 +670,7 @@ ans
 Can A New Drug Reduce the Spread of Schistosomiasis?
 ========================================================
 
-Schistosomiasis (skis-tuh-soh-may'-uh-sis) is a disease in humans caused by parasitic flatworms called schistosomes (skis'-tuh-sohms).  Schistosomiasis arrects about 200 million people worldwide and is a serious problem in sub-Saharan Africa, South America, China, and Southeast Asia.  The disease can cause death, but more commonly results in chronic and debilitating symptoms, arising primarily from the body's immune reaction to parasite eggs lodged in the liver, spleen,and intestines.
+Schistosomiasis (skis-tuh-soh-may'-uh-sis) is a disease in humans caused by parasitic flatworms called schistosomes (skis'-tuh-sohms).  Schistosomiasis affects about 200 million people worldwide and is a serious problem in sub-Saharan Africa, South America, China, and Southeast Asia.  The disease can cause death, but more commonly results in chronic and debilitating symptoms, arising primarily from the body's immune reaction to parasite eggs lodged in the liver, spleen,and intestines.
 
 Currently there is one drug, praziquantel (pray'-zee-kwan-tel), in common use for treatment of schistosomiasis; it is inexpensive and effective. However, many organizations are concerned about relying on a single drug to treat a serious disease that affects so many people worldwide. Drug resistance may have prompted an outbreak in the 1990s in Senegal, where cure rates were low.  In 2007, several researchers published work on a  promising drug called K11777, which, in theory, might treat schistosomiasis.
 
@@ -723,7 +723,7 @@ schis
 ```r
 require(ggplot2)
 p <- ggplot(data = schis, aes(group, worms)) + geom_point(position = "jitter", aes(color = group)) + 
-    facet_grid(. ~ gender)
+    facet_grid(. ~ gender) + theme_bw()
 p
 ```
 
@@ -869,7 +869,7 @@ Calculate the _p_-value as the fraction of times the random statistics are more 
 Using Computer Simulations to Conduct a Hypothesis Test
 =========================================================
 
-1. Write code to allocate randomly each of the female worm counts to either the teatment or the control group.
+1. Write code to allocate randomly each of the female worm counts to either the treatment or the control group.
 
 2. Take the control group average minus the K11777 treatment group average.
 
@@ -1001,7 +1001,7 @@ pvalue  # results will vary
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -1011,7 +1011,7 @@ p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", alpha = 0.4) + 
-    labs(x = "", y = "")
+    labs(x = "", y = "") + theme_bw()
 ```
 
 <img src="figure/F34.png" title="plot of chunk F3" alt="plot of chunk F3" style="display: block; margin: auto;" />
@@ -1121,7 +1121,7 @@ pvalue
 ```r
 # 7/252
 DF <- data.frame(x = means)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -1252,14 +1252,14 @@ The direction of the alternative hypothesis is derived from the research hypothe
 
 > Key Concept:  The direction of the alternative hypothesis does not depend on the sample data, but instead is determined by the research hypothesis before the data are collected.
 
-We will now make our definition of the _p_-value more general for a wider variety of significance testing situations.  The _p_-value is the probability of observing a group difference as extreme as or more extreme than the group difference actually observed in the sample data, assuming that there is nothing creating groupd differences except the random allocation process.
+We will now make our definition of the _p_-value more general for a wider variety of significance testing situations.  The _p_-value is the probability of observing a group difference as extreme as or more extreme than the group difference actually observed in the sample data, assuming that there is nothing creating group differences except the random allocation process.
 
-This definition is consistent with the earlier definition for one-sided alternatives, as we can interpret _extreme_ to mean either greater than or less than, depending on the direction fo the alternative hypothesis.  But in the two-sided case, _extreme_ encompasses both directions.  In the K11777 example, we observed a difference of 7.6 between control and treament group means.  Thus, the two-sided _p_-value calculation is a count of all instances among the N replications where the randomly allocated mean difference is either as small as or smaller than -7.6 worms ($\leq -7.6$) or as great or greater than 7.6 worms ($\geq 7.6$).  This is often written as $|diff| \geq 7.6$.
+This definition is consistent with the earlier definition for one-sided alternatives, as we can interpret _extreme_ to mean either greater than or less than, depending on the direction of the alternative hypothesis.  But in the two-sided case, _extreme_ encompasses both directions.  In the K11777 example, we observed a difference of 7.6 between control and treatment group means.  Thus, the two-sided _p_-value calculation is a count of all instances among the N replications where the randomly allocated mean difference is either as small as or smaller than -7.6 worms ($\leq -7.6$) or as great or greater than 7.6 worms ($\geq 7.6$).  This is often written as $|diff| \geq 7.6$.
 
 Activity: A two-sided hypothesis test
 ======================================
 
-  * Run the simulaltion study again to fine the empirical _p_-value for a two-sided hypothesis test to determine if there is a difference between the treatment and control group means for female mice.
+  * Run the simulation study again to fine the empirical _p_-value for a two-sided hypothesis test to determine if there is a difference between the treatment and control group means for female mice.
 
 
 ```r
@@ -1331,13 +1331,14 @@ Worms2
 
 ```r
 N <- 10^5 - 1  # number of times fo repeat the process
+set.seed(13)
 result <- numeric(N)  # space to save the random differences
 for (i in 1:N) {
     # sample of size 5, from 1 to 10, without replacement
     index <- sample(10, size = 5, replace = FALSE)
     result[i] <- mean(Worms2[index]) - mean(Worms2[-index])
 }
-hist(result, col = "blue", main = "", freq = FALSE)
+hist(result, col = "blue", main = "", freq = FALSE, breaks = "Scott")
 ```
 
 <img src="figure/TWOST1.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
@@ -1362,13 +1363,13 @@ pvalue  # results will vary
 ```
 
 ```
-[1] 0.05562
+[1] 0.05536
 ```
 
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -1384,7 +1385,7 @@ p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = 
 
 <img src="figure/TWOST4.png" title="plot of chunk TWOST" alt="plot of chunk TWOST" style="display: block; margin: auto;" />
 
-The empirical _p_-value for a two-sided test is 0.0556.
+The empirical _p_-value for a two-sided test is 0.0554.
 
   * Is the number of simulations resulting in a difference greater than or equal to 7.6 identical to the number of simulations resulting in a difference less than or equal to -7.6?  Explain why these values are likely to be close but not identical.
   
@@ -1411,7 +1412,7 @@ sum(result <= -observed)
 What Can We Conclude from the Schistosomiasis Study?
 ======================================================
 
-The key question in this study is whwther K11777 will reduce the spread of a common and potentially deadly disease.  The result that you calculated from the one-sided randomization hypothesis test should have been close to the exact _p_-value of 0.0278.  This small _p_-value allows you to reject the null hypothesis and conclude that the worm counts are lower in the female treatment group than in the female control group.  In every study, it is important to consider how random allocation and random sampling impact the conclusions.
+The key question in this study is whether K11777 will reduce the spread of a common and potentially deadly disease.  The result that you calculated from the one-sided randomization hypothesis test should have been close to the exact _p_-value of 0.0278.  This small _p_-value allows you to reject the null hypothesis and conclude that the worm counts are lower in the female treatment group than in the female control group.  In every study, it is important to consider how random allocation and random sampling impact the conclusions.
 
 > _Random allocation_: The schistosomiasis stude was an **experiment** because the units (female mice) were randomly allocated to treatment or contol groups.  To the best of our knowledge this experiment controlled for any outside influences and allows us to state that there is a cause and effect relationship between the treatment and response.  Therefore, we can conclude that K11777 did _cause_ a reduction in the average number of schistosome parasites in these female mice.
 
@@ -1422,7 +1423,7 @@ More importantly, the results have not shown that this new drug will have the sa
 Permutation Test versus Randomization Tests
 =====================================================
 
-The random allocation of experimental units (e.g. mice) to groups provides the basis for statistical inference in a randomized comparative experiment.  In the schistosomiasis K11777 treatment study, we used a significance test to ascertain whether cause and effect was at work.  In the context of the random allocation study design, we called our significance test a randomization test.  In **observational studies**, subjects are not randomnly allocated to groups.  In this context, we apply the same inferential procedures as in the previous experiment, but we commonly call the significance test a **permutation test** rather than a a randomization test.  More importantly, in observational studies, the results of the test cannot typically be used to claim cause and effect; a reseracher should exhibit more caution in the interpretation of results.
+The random allocation of experimental units (e.g. mice) to groups provides the basis for statistical inference in a randomized comparative experiment.  In the schistosomiasis K11777 treatment study, we used a significance test to ascertain whether cause and effect was at work.  In the context of the random allocation study design, we called our significance test a randomization test.  In **observational studies**, subjects are not randomly allocated to groups.  In this context, we apply the same inferential procedures as in the previous experiment, but we commonly call the significance test a **permutation test** rather than a a randomization test.  More importantly, in observational studies, the results of the test cannot typically be used to claim cause and effect; a researcher should exhibit more caution in the interpretation of results.
 
 > Key Concept: Wheras in experiments units are randomly allocated to treatment groups, observational studies do no impose a treatment on a unit.  Because the random allocation process protects against potential biases caused by extraneous variables, experiments are often used to show causation.
 
@@ -1456,7 +1457,8 @@ west
 
 ```r
 require(ggplot2)
-p <- ggplot(data = west, aes(status, ages)) + geom_point(position = "jitter", aes(color = status))
+p <- ggplot(data = west, aes(status, ages)) + geom_point(position = "jitter", aes(color = status), size = 5) + 
+    theme_bw()
 p
 ```
 
@@ -1495,6 +1497,7 @@ Ages
 ```
 
 ```r
+set.seed(12)
 N <- 10^5 - 1  # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
 for (i in 1:N) {
@@ -1502,7 +1505,7 @@ for (i in 1:N) {
     index <- sample(10, size = 3, replace = FALSE)
     result[i] <- mean(Ages[index]) - mean(Ages[-index])
 }
-hist(result, col = "blue", main = "", xlim = c(-25, 25))
+hist(result, col = "blue", main = "", xlim = c(-25, 25), breaks = "Scott")
 ```
 
 <img src="figure/AGE21.png" title="plot of chunk AGE2" alt="plot of chunk AGE2" style="display: block; margin: auto;" />
@@ -1521,7 +1524,7 @@ polygon(xs, ys, col = "red")
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -1542,10 +1545,10 @@ pvalue  # results will vary
 ```
 
 ```
-[1] 0.05075
+[1] 0.05005
 ```
 
-The _p_-value is 0.0508.
+The _p_-value is 0.05.
   
   * Modify the code used in the previous problem to test if the median age of people who were laid off is higher than the median age of people who were not laid off.  Report the _p_-value and compare your results to those in the previous question.
   
@@ -1563,12 +1566,12 @@ OBSM
 
 ```r
 obsDiffMedian <- OBSM[2] - OBSM[1]
+names(obsDiffMedian) <- NULL
 obsDiffMedian
 ```
 
 ```
-LaidOff 
-     17 
+[1] 17
 ```
 
 ```r
@@ -1583,12 +1586,13 @@ Ages
 ```r
 N <- 10^5 - 1  # number of times fo repeat the process
 MedianDiff <- numeric(N)  # space to save the random differences
+set.seed(11)
 for (i in 1:N) {
     # sample of size 3, from 1 to 10, without replacement
     index <- sample(10, size = 3, replace = FALSE)
     MedianDiff[i] <- median(Ages[index]) - median(Ages[-index])
 }
-hist(MedianDiff, col = "blue", main = "")
+hist(MedianDiff, col = "blue", main = "", breaks = "Scott")
 ```
 
 <img src="figure/MEDAGE1.png" title="plot of chunk MEDAGE" alt="plot of chunk MEDAGE" style="display: block; margin: auto;" />
@@ -1596,7 +1600,7 @@ hist(MedianDiff, col = "blue", main = "")
 ```r
 # ggplot2 approach now
 DF <- data.frame(x = MedianDiff)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -1618,10 +1622,10 @@ pvalueMED  # results will vary
 ```
 
 ```
-[1] 0.1667
+[1] 0.1675
 ```
 
-The _p_-value is 0.1667.
+The _p_-value is 0.1675.
 
 Since there was no random allocation (i.e., people were not randomly assigned to layoff group), statistical significance does not give us the right to assert that greater age is _causing_ a difference in being laid off.  We "imagine" an experiment in which workers are randomly allocated to a layoff group and then determine if the observed average difference between the ages of laid-off workers and those not laid off is significantly larger than would be expected to occur by chance is a randomized comparative experiment.
 
@@ -3137,8 +3141,8 @@ WD <- BD
 ```
 
 
-<!-- html table generated in R 3.0.1 by xtable 1.7-1 package -->
-<!-- Tue Feb 18 10:45:53 2014 -->
+<!-- html table generated in R 3.0.2 by xtable 1.7-1 package -->
+<!-- Thu Feb  6 17:40:11 2014 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> Table 1 --- All possible Samples of Size 3 from 3969, 3204, and 2892 </CAPTION>
 <TR> <TH> $x^*_1$ </TH> <TH> $x^*_2$ </TH> <TH> $x^*_3$ </TH> <TH> $\bar{x}^*$ </TH>  </TR>
@@ -3499,7 +3503,7 @@ quantile(my.boot.statB, probs = c(0.025, 0.975))
 For the North Carolina birth weights, the interval marked by the 2.5 and 97.5 percentiles is (3417.4202, 3478.9063). Thus, we would state that we are 95% confident that the true mean weight of North Carolina babies born in 2004 is between 3417.4202 and 3478.9063 g. In the arsenic example, the 2.5% and 97.5% points of the bootstrap distribution give us the interval (92.8419, 162.8321), so we are 95% confident that the true mean arsenic level is between 92.8419 and 162.8321 $\mu g/L$. Note that with $\bar{X}^* =$ 125.4621, this interval can be written (125.4621 -32.6203, 125.4621 + 37.37); in particular, this interval is not symmetric about the mean, reflecting the asymmetry of the bootstrap distribution.
 
 
-The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the 271 observations, 8 are above 1000 $\mu g/L$ and 2 are above 2200 $\mu g/L$ (remember, the sample mean is only 125.3199!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this  that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
+The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the 271 observations, 8 are above 1000 $\mu g/L$ and 2 are above 2200 $\mu g/L$ (remember, the sample mean is only 125.3199!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this – that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
 
 #### TWO SAMPLE BOOTSTRAP
 
@@ -3586,7 +3590,7 @@ Figure 8a shows the bootstrap distribution of the difference of sample means. As
 The right panel of Figure 8b shows a normal-quantile plot for the bootstrap distribution: the distribution is very close to normal.
 
 
-The 95% bootstrap percentile confidence interval for the difference in means (basic  extended) is (0.85, 3.81). Thus, we are 95% confident that commercial times on basic channels are, on average, between 0.85 and 3.81 min. longer than on extended channels (perhalf-hour time periods).
+The 95% bootstrap percentile confidence interval for the difference in means (basic – extended) is (0.85, 3.81). Thus, we are 95% confident that commercial times on basic channels are, on average, between 0.85 and 3.81 min. longer than on extended channels (perhalf-hour time periods).
 
 We can also conduct a permutation test of the hypothesis that the mean commercial times for the two cable options are the same versus the hypothesis that mean times are not. Figure 9a shows the permutation distribution for the difference in mean advertisement time between basic and extended TV channels.
 
@@ -3763,7 +3767,7 @@ Savvy customers will often compare prices at different stores before making a pu
 
 Now, it may be tempting to proceed as in the TV commercials or Verizon repair times examples, looking at the prices as coming from two populations, B & H and J & R. But note that the data are *not independent*! For each camera priced at B & H, we matched it with the price for the same camera at J & R. Thus, the data are called *matched pairs or paired data*.
 
-In this case, for each camera, we compute the difference in price between the two stores (J & R price - B & H price). We then have one variable -- the price differences -- and we are back to the onesample setting. The price differences are shown in Figure 13a.
+In this case, for each camera, we compute the difference in price between the two stores (J & R price - B & H price). We then have one variable –-- the price differences –-- and we are back to the one–sample setting. The price differences are shown in Figure 13a.
 
 
 ```r
@@ -3807,7 +3811,7 @@ Performing a one sample bootstrap with $10^5$ resamples, we find a 95% bootstrap
 
 As with permutation testing, when bootstrapping, we are not limited to simple statistics like the simple mean. Once we have drawn a bootstrap sample, we can calculate any statistic for that sample.
 
-For example, instead of the sample mean, we can use more robust statistics that are less sensitive to extreme observations. Figure 14a shows the bootstrap distribution for the difference in trimmed means, in this case 25% trimmed means, also known as the mid-mean, the mean of the middle 50% of observations. Compared to the bootstrap difference in ordinary means (Figure 12a), this distribution has a much smaller spread. The bootstrap procedure may be used with a wide variety of statistics -- means, medians, trimmed means, correlation coefficients, and so on -- using the same procedure. This is a major advantage of the bootstrap. It allows statistical inferences such as confidence intervals to be calculated even for statistics for which there are no easy formulas. It offers hope of reforming statistical practice -- away from simple but non-robust estimators like a sample mean or least-squares regression, in favor of robust alternatives.
+For example, instead of the sample mean, we can use more robust statistics that are less sensitive to extreme observations. Figure 14a shows the bootstrap distribution for the difference in trimmed means, in this case 25% trimmed means, also known as the mid-mean, the mean of the middle 50% of observations. Compared to the bootstrap difference in ordinary means (Figure 12a), this distribution has a much smaller spread. The bootstrap procedure may be used with a wide variety of statistics –-- means, medians, trimmed means, correlation coefficients, and so on –-- using the same procedure. This is a major advantage of the bootstrap. It allows statistical inferences such as confidence intervals to be calculated even for statistics for which there are no easy formulas. It offers hope of reforming statistical practice –-- away from simple but non-robust estimators like a sample mean or least-squares regression, in favor of robust alternatives.
 
 
 ```r
@@ -4215,9 +4219,9 @@ CLASSICAL INFERENCE: CONFIDENCE INTERVALS
 ### 7.1.1 Confidence Intervals for a Mean, $\sigma$ Known
 
 
-**Example 7.1** The Centers for Disease Control maintains growth charts for infants and children [(http://cdc.gov/growthcharts/zscore.html)](http://cdc.gov/growthcharts/zscore.html). For 13-year-old girls, the mean weight is 101 pounds with a standard deviation of 24.6 pounds. We assume the weights are normally distributed. The public health officials in Sodor are interested in the weights of the teens in their town: they suspect that the mean weight of their girls might be different from the mean weight in the growth chart but are willing to assume that the variation is the same. If they survey a random sample of 150 thirteen-year-old girls and find their mean weight  an estimate of the population mean weight  is 95 pounds, how accurate this estimate be? 
+**Example 7.1** The Centers for Disease Control maintains growth charts for infants and children [(http://cdc.gov/growthcharts/zscore.html)](http://cdc.gov/growthcharts/zscore.html). For 13-year-old girls, the mean weight is 101 pounds with a standard deviation of 24.6 pounds. We assume the weights are normally distributed. The public health officials in Sodor are interested in the weights of the teens in their town: they suspect that the mean weight of their girls might be different from the mean weight in the growth chart but are willing to assume that the variation is the same. If they survey a random sample of 150 thirteen-year-old girls and find their mean weight – an estimate of the population mean weight – is 95 pounds, how accurate this estimate be? 
 
-We assume the 150 sample values are from a normal distribution, $N(\mu, 24.6)$. Then the sampling distribution of mean weights is $N(\mu, 24.6/\sqrt{150})$. Let $\bar{X}$ denote the mean of the 150 weights, so standardizing gives $Z = (\bar{X}  \mu)/(24.6/\sqrt{150}) \sim N(0, 1)$.  For a standard normal random variable $Z$, we have $$P(z_{\alpha/2} < Z < z_{1-\alpha/2})$$ 
+We assume the 150 sample values are from a normal distribution, $N(\mu, 24.6)$. Then the sampling distribution of mean weights is $N(\mu, 24.6/\sqrt{150})$. Let $\bar{X}$ denote the mean of the 150 weights, so standardizing gives $Z = (\bar{X} – \mu)/(24.6/\sqrt{150}) \sim N(0, 1)$.  For a standard normal random variable $Z$, we have $$P(z_{\alpha/2} < Z < z_{1-\alpha/2})$$ 
 
 The random interval $(\bar{X} - 3.937, \bar{X} + 3.937)$ has a probability of 0.95 of containing the mean $\mu$. Now, once you drive your sample, the random variable $\bar{X}$ is replaced by the (observed) sample mean weight of $\bar{x} = 95$, and the interval (91.1, 98.9) is no longer a random interval. We interpret this interval by stating that we are 95% confident that the population mean weight of 13-year-old girls Sodor is between 91.9 in 98.9 pounds.
 
@@ -4706,7 +4710,7 @@ p + geom_abline(intercept = 0, slope = 1, color = "gray")
 The previous graphs compare the distribution of $t$ statistics for samples of size $n = 10$  from a uniform distribution,  size $n = 10$  from an exponential distribution,  and size $n = 100$  from an exponential distribution to the $t$ distribution. The range on all plots is truncated so that we can focus on the range of values important for confidence intervals. Notice that for  the uniform population,  the distribution of the $t$ statistic is close to the  $t$ distribution, except in the tails.  For exponential populations, the discrepancy  is much larger, and the discrepancy decreases only slowly as the sample size increases.  To reduce the discrepancy (the difference between actual and nominal  probabilities) by a factor of 10  requires a sample size 100 times larger. For an exponential population, we must have $n > 5000$  before the actual probabilities of a 95% $t$ interval  missing the true mean in either tail are within 10% of the desired probability of 2.5%;  that is,  the actual tail probabilities are between 2.25% and  2.75%.
 
 
-Before using  a $t$ confidence interval,  you should create a normal quantile plot  to see whether the data are skewed. The larger the sample size, the more skew can be tolerated. There are skewness adjusted versions of $t$ intervals including bootstrap $t$ intervals that we cover later. However, be particularly careful with outliers:  since $\bar{x}$ is sensitive to extreme values, outliers can have a big impact on confidence intervals   a bigger impact than skewness. If you have outliers in your data, you should investigate: are these recording errors or observations that are not representative of the population? If the former, correct them; and if the latter,  remove them. If the outliers cannot be removed, then advanced,  more robust techniques may be required.
+Before using  a $t$ confidence interval,  you should create a normal quantile plot  to see whether the data are skewed. The larger the sample size, the more skew can be tolerated. There are skewness adjusted versions of $t$ intervals including bootstrap $t$ intervals that we cover later. However, be particularly careful with outliers:  since $\bar{x}$ is sensitive to extreme values, outliers can have a big impact on confidence intervals  – a bigger impact than skewness. If you have outliers in your data, you should investigate: are these recording errors or observations that are not representative of the population? If the former, correct them; and if the latter,  remove them. If the outliers cannot be removed, then advanced,  more robust techniques may be required.
 
 ### 7.1.3 Confidence Intervals for a Difference in Means
 
