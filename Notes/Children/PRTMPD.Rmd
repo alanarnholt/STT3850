@@ -30,7 +30,9 @@ The graph below shows a dotplot of the 28 `Fastdiff`-minus`Slowdiff` values.  No
 Music <- read.csv('http://www1.appstate.edu/~arnholta/Data/Music.csv')
 head(Music)
 require(ggplot2)
-ggplot(data = Music, aes(x = Fastdiff.Slowdiff)) + geom_dotplot()
+ggplot(data = Music, aes(x = Fastdiff.Slowdiff)) + 
+  geom_dotplot(fill = "blue") + 
+  theme_bw() + labs(x = "FastDiff - SlowDiff", y = "")
 ```
 
 To perform a randomization test, we mimic the randomization procedure of the study design.  Here, the randomization determined the order in which the subject heard the songs, so randomization is applied to the two measurements of interest for each subject.  To compute a _p_-value, we determine how frequently we would obtain an observed difference as large or larger than 1.857. 

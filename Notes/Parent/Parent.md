@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Wednesday, February 19, 2014 - 09:06:28.
+Last compiled Wednesday, February 19, 2014 - 09:12:03.
 
 
 
@@ -2089,7 +2089,8 @@ head(Music)
 
 ```r
 require(ggplot2)
-ggplot(data = Music, aes(x = Fastdiff.Slowdiff)) + geom_dotplot()
+ggplot(data = Music, aes(x = Fastdiff.Slowdiff)) + geom_dotplot(fill = "blue") + theme_bw() + labs(x = "FastDiff - SlowDiff", 
+    y = "")
 ```
 
 <img src="figure/music.png" title="plot of chunk music" alt="plot of chunk music" style="display: block; margin: auto;" />
