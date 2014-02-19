@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Wednesday, February 19, 2014 - 08:53:51.
+Last compiled Wednesday, February 19, 2014 - 09:06:28.
 
 
 
@@ -1884,12 +1884,12 @@ Desipramine     Lithium
 
 ```r
 obsDiffProp <- ANS[1] - ANS[2]
+names(obsDiffProp) <- NULL
 obsDiffProp
 ```
 
 ```
-Desipramine 
-    -0.3333 
+[1] -0.3333
 ```
 
 
@@ -1923,12 +1923,12 @@ Desipramine     Lithium
 
 ```r
 obsDiffProp2 <- ANS2[1] - ANS2[2]
+names(obsDiffProp2) <- NULL
 obsDiffProp2
 ```
 
 ```
-Desipramine 
-    -0.3333 
+[1] -0.3333
 ```
 
 
@@ -1944,6 +1944,7 @@ The following code can be used when reading the data into a data frame using the
 ```r
 N <- 10^4 - 1
 DiffProp <- numeric(N)
+set.seed(4)
 for (i in 1:N) {
     # sample of size 24 # from the total 48 addicts
     index <- sample(48, size = 24, replace = FALSE)
@@ -1961,13 +1962,13 @@ pvalue1
 ```
 
 ```
-[1] 0.0205
+[1] 0.0184
 ```
 
 ```r
 # ggplot2 approach
 DF <- data.frame(x = DiffProp)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -1977,7 +1978,7 @@ p
 x.dens <- density(DiffProp)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, y = y), fill = "blue", 
-    alpha = 0.4) + labs(x = "", y = "")
+    alpha = 0.4) + labs(x = expression(hat(p)[Desipramine] - hat(p)[Lithium]), y = "", title = "Randomization Distribution")
 ```
 
 <img src="figure/coke1rep3.png" title="plot of chunk coke1rep" alt="plot of chunk coke1rep" style="display: block; margin: auto;" />
@@ -1989,6 +1990,7 @@ The following code can be used when reading the data into a data frame using the
 ```r
 N <- 10^4 - 1
 DiffProp <- numeric(N)
+set.seed(4)
 for (i in 1:N) {
     # sample of size 24 # from the total 48 addicts
     index <- sample(48, size = 24, replace = FALSE)
@@ -2006,13 +2008,13 @@ pvalue
 ```
 
 ```
-[1] 0.0201
+[1] 0.0184
 ```
 
 ```r
 # ggplot2 approach
 DF <- data.frame(x = DiffProp)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -2022,7 +2024,7 @@ p
 x.dens <- density(DiffProp)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, y = y), fill = "blue", 
-    alpha = 0.4) + labs(x = "", y = "")
+    alpha = 0.4) + labs(x = expression(hat(p)[Desipramine] - hat(p)[Lithium]), y = "", title = "Randomization Distribution")
 ```
 
 <img src="figure/coke2rep3.png" title="plot of chunk coke2rep" alt="plot of chunk coke2rep" style="display: block; margin: auto;" />
