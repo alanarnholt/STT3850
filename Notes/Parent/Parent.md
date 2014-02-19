@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Wednesday, February 19, 2014 - 08:24:43.
+Last compiled Wednesday, February 19, 2014 - 08:44:30.
 
 
 
@@ -1641,11 +1641,11 @@ Verizon Repair Times
 ======================
 
 
-Verizon is the primary local telephone company (incumbent local exchange carrier ILEC) for a large area of the eastern United States.  AS such, it is responsible for providing repair service for the customers of other telephone companies known as competing local exchange carriers (CLECs) in this region.  Verizon is subject to fines if the repair times (the time it takes to fix a problem) for CLEC customers are substantially worse thatn those for Verizon customers.  The data set **Verizon.csv** stored in the class **Data** directory contains a random sample of repair times for 1664 ILEC and 23 CLEC customers.  The mean repair time for ILEC customers is 8.4 hours, while that for CLEC customers is 16.5 hours.  Could a difference this large be easily explained by chance?
+Verizon is the primary local telephone company (incumbent local exchange carrier ILEC) for a large area of the eastern United States.  AS such, it is responsible for providing repair service for the customers of other telephone companies known as competing local exchange carriers (CLECs) in this region.  Verizon is subject to fines if the repair times (the time it takes to fix a problem) for CLEC customers are substantially worse than those for Verizon customers.  The data set **Verizon.csv** stored in the class **Data** directory contains a random sample of repair times for 1664 ILEC and 23 CLEC customers.  The mean repair time for ILEC customers is 8.4 hours, while that for CLEC customers is 16.5 hours.  Could a difference this large be easily explained by chance?
 
 The permutation distribution (difference of means) is skewed to the left, but that does not matter; both the observed statistic and the permutation resamples are affected by imbalance and skewness in the same way.  This test works fine even with unbalanced sample sizes of 1664 and 23, and even for very skewed data.
 
-Note that the Verizon data has long tails.  The mean is not the best measure of center to use with long tailed distributions.  We may want to use a statistic that is less sensitive to skewed distributions.  There are a number of reasons to do this.  One is to get a better measure of what is important in practice, how inconvenienced customers are by the repairs.  After a while, each additional hour probably does not matter as much, yet a sample mean treats an extra 10 hours on a repair time of 100 hours the same as an extra 10 hours on a repair of 1 hour.  Second, a large recorded repair time might just be a blunder; for example, a repair time of $10^6$ hours must be a mistake.  Third, a more robust statistic could be more sensitive at detecting real differences in the distributions -- the mean is so sensitive to large observations that it pays less attention to moderate observations, wheras a statistic more sensitive to moderate observations could detect differences between populations that show up in the moderate observations.
+Note that the Verizon data has long tails.  The mean is not the best measure of center to use with long tailed distributions.  We may want to use a statistic that is less sensitive to skewed distributions.  There are a number of reasons to do this.  One is to get a better measure of what is important in practice, how inconvenienced customers are by the repairs.  After a while, each additional hour probably does not matter as much, yet a sample mean treats an extra 10 hours on a repair time of 100 hours the same as an extra 10 hours on a repair of 1 hour.  Second, a large recorded repair time might just be a blunder; for example, a repair time of $10^6$ hours must be a mistake.  Third, a more robust statistic could be more sensitive at detecting real differences in the distributions -- the mean is so sensitive to large observations that it pays less attention to moderate observations, whereas a statistic more sensitive to moderate observations could detect differences between populations that show up in the moderate observations.
 
 Using Means
 =============
@@ -1680,6 +1680,7 @@ observed
 ```r
 N <- 10^4 - 1  # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
+set.seed(10)
 for (i in 1:N) {
     # sample of size 5, from 1 to 10, without replacement
     index <- sample(1687, size = 23, replace = FALSE)
@@ -1697,12 +1698,12 @@ pvalue
 ```
 
 ```
-[1] 0.0183
+[1] 0.0195
 ```
 
 ```r
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -1712,7 +1713,7 @@ p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
-    alpha = 0.4) + labs(x = "", y = "")
+    alpha = 0.4) + labs(x = expression(bar(x)[CLEC] - bar(x)[ILEC]), y = "", title = "Permutation Distribution")
 ```
 
 <img src="figure/VER3.png" title="plot of chunk VER" alt="plot of chunk VER" style="display: block; margin: auto;" />
@@ -1737,6 +1738,7 @@ observed
 ```r
 N <- 10^4 - 1  # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
+set.seed(9)
 for (i in 1:N) {
     # sample of size 5, from 1 to 10, without replacement
     index <- sample(1687, size = 23, replace = FALSE)
@@ -1754,12 +1756,12 @@ pvalue
 ```
 
 ```
-[1] 0.0012
+[1] 0.0017
 ```
 
 ```r
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -1769,7 +1771,8 @@ p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
-    alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed)
+    alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed, lty = "dashed") + labs(x = expression(tilde(x)[CLEC] - 
+    tilde(x)[ILEC]), y = "", title = "Permutation Distribution")
 ```
 
 <img src="figure/VER23.png" title="plot of chunk VER2" alt="plot of chunk VER2" style="display: block; margin: auto;" />
@@ -1794,13 +1797,14 @@ observed
 ```r
 N <- 10^4 - 1  # number of times fo repeat the process
 result <- numeric(N)  # space to save the random differences
+set.seed(8)
 for (i in 1:N) {
     # sample of size 5, from 1 to 10, without replacement
     index <- sample(1687, size = 23, replace = FALSE)
     result[i] <- mean(Ver$Time[index], trim = 0.25) - mean(Ver$Time[-index], trim = 0.25)
 }
 hist(result, col = "blue", main = "Difference in Trimmed Means", breaks = "Scott")
-abline(v = observed)
+abline(v = observed, lty = "dashed")
 ```
 
 <img src="figure/TM11.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
@@ -1811,12 +1815,12 @@ pvalue1
 ```
 
 ```
-[1] 3e-04
+[1] 5e-04
 ```
 
 ```r
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4)
+p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = "pink", alpha = 0.4) + theme_bw()
 p
 ```
 
@@ -1826,13 +1830,14 @@ p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x, y = y), fill = "blue", 
-    alpha = 0.4) + labs(x = "", y = "") + geom_vline(xintercept = observed, color = "red")
+    alpha = 0.4) + labs(x = expression(bar(x)[T.25.CLEC] - bar(x)[T.25.ILEC]), y = "", title = "Permutation Distribution") + 
+    geom_vline(xintercept = observed, color = "red", lty = "dashed")
 ```
 
 <img src="figure/TM13.png" title="plot of chunk TM1" alt="plot of chunk TM1" style="display: block; margin: auto;" />
 
 
-It seems that the more robust statistics (median, 25% trimmed mean) are more sensitive to a possible difference between the populations; the tests are significant with estimated _p_-values of 0.0012 and 3 &times; 10<sup>-4</sup>, respectively.
+It seems that the more robust statistics (median, 25% trimmed mean) are more sensitive to a possible difference between the populations; the tests are significant with estimated _p_-values of 0.0017 and 5 &times; 10<sup>-4</sup>, respectively.
 
 
 
