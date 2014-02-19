@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Wednesday, February 19, 2014 - 09:12:03.
+Last compiled Wednesday, February 19, 2014 - 09:23:24.
 
 
 
@@ -2371,6 +2371,7 @@ To perform the permutation test, randomly permute one of the catgorical variable
 ```r
 N <- 10^4 - 1  # Change this for slower computers
 result <- numeric(N)
+set.seed(3)
 for (i in 1:N) {
     # T2 <- table(sample(DPSC$SEX), DPSC$DEATHPEN)
     T2 <- xtabs(~sample(SEX) + DEATHPEN, data = DPSC)
@@ -2382,7 +2383,7 @@ pvalue
 ```
 
 ```
-[1] 0.008
+[1] 0.0096
 ```
 
 ```r
@@ -2397,13 +2398,23 @@ pvalueCH
 ```r
 # Or chisq.test(DPSC$SEX, DPSC$DEATHPEN)$p.value
 hist(result, breaks = "Scott", col = "pink", freq = FALSE, main = "")
-curve(dchisq(x, 4), 0, 20, add = TRUE, col = "red")
+curve(dchisq(x, 4), 0, 20, add = TRUE, col = "red", lwd = 4)
 ```
 
-<img src="figure/perEXP.png" title="plot of chunk perEXP" alt="plot of chunk perEXP" style="display: block; margin: auto;" />
+<img src="figure/perEXP1.png" title="plot of chunk perEXP" alt="plot of chunk perEXP" style="display: block; margin: auto;" />
+
+```r
+### Using ggplot2 now
+library(ggplot2)
+DF <- data.frame(x = result)
+p <- ggplot(data = DF, aes(x = x)) + geom_density(fill = "pink") + theme_bw()
+p + stat_function(fun = dchisq, arg = list(df = 4), color = "red", lwd = 2)
+```
+
+<img src="figure/perEXP2.png" title="plot of chunk perEXP" alt="plot of chunk perEXP" style="display: block; margin: auto;" />
 
 
-The simulated permutation $p$-value is 0.008.  The $p$-value that is returned from the `chisq.test()` is 0.01.  In this case, the two $p$-values are fairly similar.  This will not always be the case.  
+The simulated permutation $p$-value is 0.0096.  The $p$-value that is returned from the `chisq.test()` is 0.01.  In this case, the two $p$-values are fairly similar.  This will not always be the case.  
 
 ## Formatting the Data
 
@@ -2618,6 +2629,7 @@ head(DFL)
 ```
 
 ```r
+set.seed(2)
 N <- 10^4 - 1  # Change this for slower computers
 result <- numeric(N)
 for (i in 1:N) {
@@ -2630,7 +2642,7 @@ pvalue
 ```
 
 ```
-[1] 0.0104
+[1] 0.0092
 ```
 
 
@@ -2730,6 +2742,7 @@ X-squared
 # Now we will run a permutation test.
 N <- 10^4 - 1  # Change this for slower computers
 result <- numeric(N)
+set.seed(1)
 for (i in 1:N) {
     T2 <- xtabs(~sample(Gender) + Flavor, data = candyflatfile)
     result[i] <- chisq.test(T2)$statistic
@@ -2739,7 +2752,7 @@ pvalue
 ```
 
 ```
-[1] 0.1951
+[1] 0.1941
 ```
 
 

@@ -93,6 +93,7 @@ To perform the permutation test, randomly permute one of the catgorical variable
 ```{r perEXP, fig.height = 6, fig.width = 6}
 N <- 10^4 - 1  # Change this for slower computers
 result <- numeric(N)
+set.seed(3)
 for(i in 1:N){
 # T2 <- table(sample(DPSC$SEX), DPSC$DEATHPEN)
   T2 <- xtabs(~sample(SEX) + DEATHPEN, data =DPSC)
@@ -105,7 +106,12 @@ pvalueCH <- chisq.test(xtabs(~SEX + DEATHPEN, data = DPSC))$p.value
 pvalueCH
 # Or chisq.test(DPSC$SEX, DPSC$DEATHPEN)$p.value
 hist(result, breaks = "Scott", col = "pink", freq=FALSE, main = "")
-curve(dchisq(x, 4), 0, 20, add=TRUE, col = "red")
+curve(dchisq(x, 4), 0, 20, add=TRUE, col = "red", lwd = 4)
+### Using ggplot2 now
+library(ggplot2)
+DF <- data.frame(x = result)
+p <- ggplot(data = DF, aes(x= x)) + geom_density(fill = "pink") + theme_bw()
+p + stat_function(fun = dchisq, arg = list(df = 4), color = "red", lwd = 2)
 ```
 
 The simulated permutation $p$-value is `r pvalue`.  The $p$-value that is returned from the `chisq.test()` is `r pvalueCH`.  In this case, the two $p$-values are fairly similar.  This will not always be the case.  
@@ -191,6 +197,7 @@ stuffDF <- as.data.frame(stuffT)
 head(stuffDF)
 DFL <- vcdExtra::expand.dft(stuffDF)
 head(DFL)
+set.seed(2)
 N <- 10^4 - 1  # Change this for slower computers
 result <- numeric(N)
 for (i in 1:N) {
@@ -226,6 +233,7 @@ obsstat
 # Now we will run a permutation test.
 N <- 10^4 - 1  # Change this for slower computers
 result <- numeric(N)
+set.seed(1)
 for (i in 1:N) {
     T2 <- xtabs(~sample(Gender) + Flavor, data = candyflatfile)
     result[i] <- chisq.test(T2)$statistic
