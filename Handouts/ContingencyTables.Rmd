@@ -7,7 +7,7 @@ Consider the following data
 stuff <- c(110, 277, 50, 163, 302, 63)
 mat <- matrix(data = stuff, nrow = 2, byrow = TRUE)
 mat
-dimnames(mat) <- list(Gender = c("Male", "Female"), Happy = c("Very Happy", "Pretty Happy", "Not to Happy"))
+dimnames(mat) <- list(Gender = c("Male", "Female"), Happy = c("Very Happy", "Pretty Happy", "Not too Happy"))
 mat
 addmargins(mat)
 prop.table(mat)
