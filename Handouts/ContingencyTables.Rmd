@@ -1,0 +1,43 @@
+## Notes
+### Alan Arnholt
+
+Consider the following data
+
+```{r dataentry, comment = NA}
+stuff <- c(110, 277, 50, 163, 302, 63)
+mat <- matrix(data = stuff, nrow = 2, byrow = TRUE)
+mat
+dimnames(mat) <- list(Gender = c("Male", "Female"), Happy = c("Very Happy", "Pretty Happy", "Not to Happy"))
+mat
+addmargins(mat)
+prop.table(mat)
+addmargins(prop.table(mat))
+110/965
+.4528497*.2829016
+```
+
+```{r, comment = NA}
+chisq.test(mat)
+chisq.test(mat)$obs
+chisq.test(mat)$exp
+chisq.test(mat)$obs - chisq.test(mat)$exp
+sum((chisq.test(mat)$obs - chisq.test(mat)$exp)^2/chisq.test(mat)$exp)
+```
+## Permutation Test
+
+```{r, comment = NA}
+maT <- as.table(mat)
+MAT <- as.data.frame(maT)
+MATflat <- vcdExtra::expand.dft(MAT)
+head(MATflat)
+set.seed(2)
+N <- 10^4 - 1  # Change this for slower computers
+result <- numeric(N)
+for (i in 1:N) {
+    T2 <- xtabs(~sample(Gender) + Happy, data = MATflat)
+    result[i] <- chisq.test(T2)$statistic
+}
+obs <- chisq.test(xtabs(~Gender + Happy, data = MATflat))$statistic
+pvalue <- (sum(result >= obs) + 1)/(N + 1)
+pvalue
+```
