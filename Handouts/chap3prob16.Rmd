@@ -1,0 +1,22 @@
+## Class Example
+
+```{r}
+site <- "http://www1.appstate.edu/~arnholta/Data/GSS2002.csv"
+GSS <- read.csv(site)
+GSS[1:5, c('Pres00', 'Gender')]
+xtabs(~Gender + Pres00, data = GSS)
+addmargins(xtabs(~Gender + Pres00, data = GSS))
+addmargins(xtabs(~sample(Gender) + Pres00, data = GSS))
+addmargins(xtabs(~sample(Gender) + Pres00, data = GSS))
+```
+
+## We have a problem Houston!
+
+```{r}
+index <- which(is.na(GSS$Gender) | is.na(GSS$Pres00))
+GSS1 <- GSS[,c('Pres00', 'Gender')]
+GSS2 <- GSS1[-index,] 
+addmargins(xtabs(~Gender + Pres00, data = GSS2))
+addmargins(xtabs(~sample(Gender) + Pres00, data = GSS2))
+addmargins(xtabs(~sample(Gender) + Pres00, data = GSS2))
+```
