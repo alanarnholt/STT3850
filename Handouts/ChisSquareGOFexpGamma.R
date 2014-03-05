@@ -29,3 +29,4 @@ library(ggplot2)
 p <- ggplot(data = data.frame(x = stuff), aes(x = x)) + geom_density(fill = "yellow") + theme_bw()
 p
 p + stat_function(fun = dgamma, args = list(alpha, lambda), color ="darkgreen", lwd = 2, lty = "dashed")
+
