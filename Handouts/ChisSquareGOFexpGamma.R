@@ -22,6 +22,7 @@ abline(v = X2obs, col = "red", lty = "dashed")
 qs <- qgamma(seq(0, 1, by = 0.1), 3, 6)
 OB <- cut(stuff, breaks = qs, include.lowest = TRUE)
 T1 <- xtabs(~OB)
+T1
 OBS <- as.vector(T1)
 OBS
 EXP <- rep(10, 10)
