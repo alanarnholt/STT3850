@@ -5,7 +5,7 @@ Class Notes For STT 3850
 
 
 
-Last compiled Wednesday, February 19, 2014 - 09:23:24.
+Last compiled Tuesday, March 18, 2014 - 08:55:56.
 
 
 
@@ -2968,7 +2968,11 @@ This example illustrates a common result with chi-square goodness-of-fit tests, 
 Sampling Distributions (Chapter 4)
 ========================================================
 
-Toss a fair coin $n = 10$ times and note the proportion of heads $\hat{p}$.  If you repeat the experiment, you probably would not get the same proportion of heads.  If you toss 50 sets of 10 coin flips, you might see outcomes (i.e., proportions of heads, $\hat{p}$) such as those below.
+A **sampling distribution** is the distribution of a *statistic* is its probability distribution.  In other words, the sampling distribution of a statistic summarizes a data set, and represents how the statistic varies across random data sets.
+
+The standard deviation of a statistic *T* is written $\sigma_{T} = SE[T]$.  An estimate for the standard deviation of a statistic *T* is written $\hat{\sigma}_{T} = \widehat{SE[T]}$.
+
+**EXAMPLE:** Toss a fair coin $n = 10$ times and note the proportion of heads $\hat{p}$.  If you repeat the experiment, you probably would not get the same proportion of heads.  If you toss 50 sets of 10 coin flips, you might see outcomes (i.e., proportions of heads, $\hat{p}$) such as those below.
 
 
 ```r
@@ -3029,7 +3033,50 @@ plot(xtabs(~phat), ylab = "count", xlab = expression(hat(p)))
 <img src="figure/sampDISTsim.png" title="plot of chunk sampDISTsim" alt="plot of chunk sampDISTsim" style="display: block; margin: auto;" />
 
 
-The previous plot is an approximation to the *sampling distribution of $\hat{p}$*.  The mean of the sampling distribution of $\hat{p}$ is $\mu_{\hat{p}} = p$, and the standard deviation of the sampling distribution of $\hat{p}$, $\sigma_{\hat{p}} = \sqrt{p\times(1-p)/n}$.  The standard deviation of the simulated $\hat{p}$ values, the standard deviation of a statistic, is called a *standard error*.  In this simulation, the estimated mean of the statistic is written as $\hat{\mu}_{\hat{p}}=$ 0.5006. The standard error of $\hat{p}$, sometimes written as $SE(\hat{p})$ or $\hat{\sigma}_{\hat{p}}$ is 0.1581.
+The previous plot is an approximation to the *sampling distribution of $\hat{p}$*.  The mean of the sampling distribution of $\hat{p}$ is $\mu_{\hat{p}} = p$, and the standard deviation of the sampling distribution of $\hat{p}$, $\sigma_{\hat{p}} = \sqrt{p\times(1-p)/n}$.  The standard deviation of the simulated $\hat{p}$ values, the standard deviation of a statistic, is called a *standard error*.  In this simulation, the estimated mean of the statistic is written as $\hat{\mu}_{\hat{p}}=$ 0.5006. The standard error of $\hat{p}$, sometimes written as $SE(\hat{p})$ or $\sigma_{\hat{p}}$ is 0.1581.
+
+## Probability Review
+
+Let $X:S \rightarrow \textbf{R}$ denote a random variable and $f$ denote its density function.  The mean of $X$, also known as the *expected value* of $X$, is
+
+$$E[X] = \mu_X = \mu = \int_{-\infty}^{\infty}xf(x)\,dx$$
+and the variance of $X$ is
+$$V[X]=\sigma^2_{X}=\int_{-\infty}^{\infty}(x - \mu_{X})^2f(x)\,dx.$$
+
+If $X:S\rightarrow {x_1, x_2, \ldots}$ is a discrete random variable with $P(X = x_i)=p_i$, then
+
+$$E[X] = \mu_X = \mu = \sum_{i=1}x_i\cdot p_i$$
+and the variance of $X$ is
+$$V[X]=\sigma^2_{X}=\sum_{i = 1}(x_i - \mu_X)^2\cdot p_i.$$
+
+If $X_1, X_2, \ldots , X_n$ are identically distributed random variables with mean $\mu$ and variance $\sigma^2$, then
+
+$$E[\bar{X}] = \mu_{\bar{X}} = \mu,$$ and
+$$Var[\bar{X}] = \sigma^2_{\bar{X}} = \frac{\sigma^2}{n}$$
+
+If $X$ and $Y$ are random variables, then
+
+$$E[X + Y] = E[X] + E[Y],$$ and if X and Y are **independent** then
+$$V[X + Y] = V[X] + V[Y].$$
+
+Given constants $a$ and $b$ and random variables $X$ and $Y$,
+
+$$E[aX \pm bY] = aE[X] \pm bE[Y],$$
+and if $X$ and $Y$ are independent then
+$$V[aX \pm bY] = a^2V[X] + b^2V[Y].$$
+
+**Theorem:** Let $X_1, X_2, \ldots, X_n$ be independent normal random variables with mean $\mu_i$,
+and variance $\sigma^2_i, i = 1, 2, \ldots, n,$ respectively. Let $a_1, a_2, \ldots, a_n$ be arbitrary constants.  Then $a_1X_1 + a_2X_2 + \cdots + a_nX_n$ is a normal variable with mean $a_1\mu_1 + a_2\mu_2 + \cdots a_n\mu_n$ and variance $a_1^2\sigma_1^2 + a_2^2\sigma_2^2 + \cdots + a_n^2\sigma_n^2.$
+
+**Corollary:**  Let $X_1, X_2, \ldots, X_n$ be independent normal random variables 
+with common mean $\mu$, and common variance $\sigma^2$.  Then 
+$$ \bar{X} \sim N(\mu_\bar{X}, \sigma_{\bar{X}})$$
+
+Recall that $\mu_{\bar{X}} = \mu$ and that $\sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}}$, so the previous result is often written as 
+
+$$ \bar{X} \sim N(\mu, \sigma/\sqrt{n})$$
+
+**Do problem 13 now.**
 
 ## The Central Limit Theorem
 
@@ -3119,9 +3166,19 @@ par(mfrow = c(1, 1))
 
 **Example 4.9** Toss a fair coin 300 times.  Find the approximate probability of getting at most 160 heads.
 
-**Solution:** Let $X=$ the number of heads in 300 flips of a fair coin.  Since $X \sim Bin(n = 300, p = 1/2)$ it follows that $\mu_X = np$ and $\sigma_{X} =\sqrt{np\times(1 - p)}$, and $Y \dot{\sim} N(np, \sqrt{np\times(1 - p)})$.  It follows that $P(X <= 160) = P\left(\frac{X - np}{\sqrt{np \times (1 - p)}} = Z \leq \frac{160 - 150}{\sqrt{300/4}}\right).$  Furthermore, $P(Z \leq 1.154701)=$ 0.8759.  Solve the problem in class using $\hat{p}$ as the random variable.
+**Solution:** Let $X=$ the number of heads in 300 flips of a fair coin.  Since $X \sim Bin(n = 300, p = 1/2)$ it follows that $\mu_X = np$ and $\sigma_{X} =\sqrt{np\times(1 - p)}$, and $Y \dot{\sim} N(np, \sqrt{np\times(1 - p)})$.  It follows that $P(X \leq 160) = P\left(\frac{X - np}{\sqrt{np \times (1 - p)}} = Z \leq \frac{160 - 150}{\sqrt{300/4}}\right).$  Furthermore, $P(Z \leq 1.154701)=$ 0.8759.  Solve the problem in class using $\hat{p}$ as the random variable.
 
 **Exact Solution:** $P(X \leq 160)= \sum_{x = 0}^{x = 160}\binom{300}{x} 0.5^x 0.5^{300-x}=$ 0.8874.
+
+
+```r
+pbinom(160, 300, 1/2)
+```
+
+```
+[1] 0.8874
+```
+
 
 
 
