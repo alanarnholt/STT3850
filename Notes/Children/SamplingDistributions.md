@@ -112,6 +112,45 @@ $$ \bar{X} \sim N(\mu, \sigma/\sqrt{n})$$
 
 **Do problem 13 now.**
 
+## Calculating Sampling Distributions
+
+**Theorem 4.1** Suppose we have continuous random variables $X_1, X_2, \ldots, X_n$ that are i.i.d with pdf $f$ and cdf $F$.  Define their minimum and maximum to be the random variables
+
+$$X_{\textrm{min}} = \textrm{min}\{X_1, X_2, \ldots, X_n\},$$
+$$X_{\textrm{max}} = \textrm{max}\{X_1, X_2, \ldots, X_n\}.$$
+
+Then the pdf's for $X_{\textrm{min}}$ and $X_{\textrm{max}}$ are
+
+$$f_{\textrm{min}}(x) = n\left(1 - F(x)\right)^{n-1}f(x),$$
+$$f_{\textrm{max}}(x) = nF^{n-1}(x)f(x).$$
+
+**Example 4.5**  Let $X_1, X_2, \ldots, X_{10}$ be a random sample from a distribution with pdf
+$f(x)  = 2/x^3, x \geq1.$  Let $X_{\textrm{min}}$ denote the minimum of the sample.  Find the probability that $X_{\textrm{min}}$ is less than or equal to 1.2.
+
+**Solution:**  First, we compute the cdf $F$ corresponding to $f$:
+$$F(x) = \int_{1}^{x}\frac{2}{t^3}\,dt = \frac{-1}{t^2}\Bigr|_{1}^{x} = 1 - \frac{1}{x^2}$$
+
+If follows that
+
+$$f_{\textrm{min}}(x) = 10\left(1 - \left(1 - \frac{1}{x^2}\right)\right)^{10-1}\frac{2}{x^3} =  \frac{20}{x^{21}}, x \geq 1.$$
+
+Therefore,
+
+$$P(X_{\textrm{min}} \leq 1.2) = \int_{1}^{1.2}\frac{20}{x^{21}}\,dx = \frac{-1}{x^{20}}\Bigr|_{1}^{1.2} = 1 - \frac{1}{1.2^{20}} = 0.9739$$.
+
+One might also choose to integrate numerically using the function `integrate()`.
+
+
+```r
+fmin <- function(x){20/x^21}
+integrate(fmin, 1, 1.2)
+```
+
+```
+## 0.9739 with absolute error < 1.1e-14
+```
+
+
 ## The Central Limit Theorem
 
 Let $X_1, X_2,...,X_n$ be independent identically distributed random variables with mean $\mu$ and variance $\sigma^2$, both finite.  Then for any constant z,
