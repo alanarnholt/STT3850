@@ -8,26 +8,66 @@ The standard deviation of a statistic *T* is written $\sigma_{T} = SE[T]$.  An e
 
 **EXAMPLE:** Toss a fair coin $n = 10$ times and note the proportion of heads $\hat{p}$.  If you repeat the experiment, you probably would not get the same proportion of heads.  If you toss 50 sets of 10 coin flips, you might see outcomes (i.e., proportions of heads, $\hat{p}$) such as those below.
 
-```{r sampDIST}
+
+```r
 set.seed(12)
 cointoss <- rbinom(50, 10, 1/2)
 phat <- cointoss/10
 xtabs(~phat)
+```
+
+```
+## phat
+## 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 
+##   1   3   6  10  12  11   6   1
+```
+
+```r
 plot(xtabs(~phat),ylab= "count",xlab = expression(hat(p)))
 ```
+
+![plot of chunk sampDIST](figure/sampDIST.png) 
+
 Although proportions between 0.3 and 0.7 occur most often, we see there is a proportion as low as 0.1 heads and as high as 0.8 heads.  Instead of 50 sets of 10 coin flips, the next simulation performs 50,000 sets of 10 tosses.
 
-```{r sampDISTsim}
+
+```r
 set.seed(12)
 cointoss <- rbinom(50000, 10, 1/2)
 phat <- cointoss/10
 xtabs(~phat)
+```
+
+```
+## phat
+##     0   0.1   0.2   0.3   0.4   0.5   0.6   0.7   0.8   0.9     1 
+##    47   480  2187  5837 10252 12238 10321  5853  2264   469    52
+```
+
+```r
 mean(phat)
+```
+
+```
+## [1] 0.5006
+```
+
+```r
 sd(phat)
+```
+
+```
+## [1] 0.1581
+```
+
+```r
 plot(xtabs(~phat),ylab= "count",xlab = expression(hat(p)))
 ```
 
-The previous plot is an approximation to the *sampling distribution of $\hat{p}$*.  The mean of the sampling distribution of $\hat{p}$ is $\mu_{\hat{p}} = p$, and the standard deviation of the sampling distribution of $\hat{p}$, $\sigma_{\hat{p}} = \sqrt{p\times(1-p)/n}$.  The standard deviation of the simulated $\hat{p}$ values, the standard deviation of a statistic, is called a *standard error*.  In this simulation, the estimated mean of the statistic is written as $\hat{\mu}_{\hat{p}}=$ `r mean(phat)`. The standard error of $\hat{p}$, sometimes written as $SE(\hat{p})$ or $\sigma_{\hat{p}}$ is `r sd(phat)`.
+![plot of chunk sampDISTsim](figure/sampDISTsim.png) 
+
+
+The previous plot is an approximation to the *sampling distribution of $\hat{p}$*.  The mean of the sampling distribution of $\hat{p}$ is $\mu_{\hat{p}} = p$, and the standard deviation of the sampling distribution of $\hat{p}$, $\sigma_{\hat{p}} = \sqrt{p\times(1-p)/n}$.  The standard deviation of the simulated $\hat{p}$ values, the standard deviation of a statistic, is called a *standard error*.  In this simulation, the estimated mean of the statistic is written as $\hat{\mu}_{\hat{p}}=$ 0.5006. The standard error of $\hat{p}$, sometimes written as $SE(\hat{p})$ or $\sigma_{\hat{p}}$ is 0.1581.
 
 ## Probability Review
 
@@ -86,7 +126,8 @@ Where $\Phi$ is the cdf of the standard normal distribution.  The central limit 
 
 Consider the following simulations
 
-```{r CLTsim, fig.height = 12, fig.width= 9}
+
+```r
 set.seed(123)
 par(mfrow=c(4,3))
 # X~N(50,15)
@@ -142,9 +183,15 @@ mtext(  expression(bar(x)[30]),side=3,line=1,cex=EX)
 xbar.30 <- apply(matrix(rexp(m*30,1),nrow=m),1,mean)
 hist(xbar.30,breaks="Scott",col="blue",xlim=c(0,5),prob=T,xlab="",ylab="",main="")
 mtext(  expression(bar(x)[30]),side=3,line=1,cex=EX)
+```
+
+![plot of chunk CLTsim](figure/CLTsim.png) 
+
+```r
 
 par(mfrow=c(1,1))
 ```
+
 
 #### Note:  The usual rule of thumb, found in most textbooks, is that the CLT is reasonably accurate if $n \geq 30$.  Such rules are wishful thinking, dating to a pre-computer age when one had few realistic alternatives to using the CLT because most other methods were computationally infeasible.
 
@@ -153,10 +200,16 @@ par(mfrow=c(1,1))
 
 **Example 4.9** Toss a fair coin 300 times.  Find the approximate probability of getting at most 160 heads.
 
-**Solution:** Let $X=$ the number of heads in 300 flips of a fair coin.  Since $X \sim Bin(n = 300, p = 1/2)$ it follows that $\mu_X = np$ and $\sigma_{X} =\sqrt{np\times(1 - p)}$, and $Y \dot{\sim} N(np, \sqrt{np\times(1 - p)})$.  It follows that $P(X \leq 160) = P\left(\frac{X - np}{\sqrt{np \times (1 - p)}} = Z \leq \frac{160 - 150}{\sqrt{300/4}}\right).$  Furthermore, $P(Z \leq 1.154701)=$ `r pnorm((160-150)/sqrt(300/4))`.  Solve the problem in class using $\hat{p}$ as the random variable.
+**Solution:** Let $X=$ the number of heads in 300 flips of a fair coin.  Since $X \sim Bin(n = 300, p = 1/2)$ it follows that $\mu_X = np$ and $\sigma_{X} =\sqrt{np\times(1 - p)}$, and $Y \dot{\sim} N(np, \sqrt{np\times(1 - p)})$.  It follows that $P(X \leq 160) = P\left(\frac{X - np}{\sqrt{np \times (1 - p)}} = Z \leq \frac{160 - 150}{\sqrt{300/4}}\right).$  Furthermore, $P(Z \leq 1.154701)=$ 0.8759.  Solve the problem in class using $\hat{p}$ as the random variable.
 
-**Exact Solution:** $P(X \leq 160)= \sum_{x = 0}^{x = 160}\binom{300}{x} 0.5^x 0.5^{300-x}=$ `r pbinom(160, 300, 1/2)`.
+**Exact Solution:** $P(X \leq 160)= \sum_{x = 0}^{x = 160}\binom{300}{x} 0.5^x 0.5^{300-x}=$ 0.8874.
 
-```{r ES}
+
+```r
 pbinom(160, 300, 1/2)
 ```
+
+```
+## [1] 0.8874
+```
+
