@@ -1,0 +1,11 @@
+### Grades from the First Opportunity to Excel
+
+```{r}
+grades <- read.csv("../Data/GT1.csv")
+str(grades)
+hist(grades$Score)
+library(ggplot2)
+ggplot(data = grades, aes(x = Score)) +  geom_density(fill = "green") + theme_bw()
+median(grades$Score)
+IQR(grades$Score)
+```
