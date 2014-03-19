@@ -49,9 +49,11 @@
 * [R Presentations](https://support.rstudio.com/hc/en-us/sections/200130218-R-Presentations)
 * [Slidify](http://slidify.org/index.html)
 
-## GIT
+## Git
 * [GitHub Help Page](https://help.github.com/)
 * [Git Tutorials (bitbucket)](https://www.atlassian.com/git/tutorial)
 * [Create a Project](http://gitimmersion.com/lab_03.html)
 * [Git Cheatsheet](http://www.ndpsoftware.com/git-cheatsheet.html)
 * [Free Code School Intro to Git](https://www.codeschool.com/courses/try-git)
+* [Pro Git Book](http://git-scm.com/book)
+* [Try Git on GitHub](http://try.github.io/levels/1/challenges/1)
