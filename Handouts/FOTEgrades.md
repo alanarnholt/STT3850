@@ -19,7 +19,7 @@ library(ggplot2)
 ![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-11.png) 
 
 ```r
-ggplot(data = grades, aes(x = Score)) +  geom_density(fill = "green") + theme_bw()
+ggplot(data = grades, aes(x = Score)) + geom_density(fill = "green") + theme_bw()
 ```
 
 ![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-12.png) 
@@ -38,5 +38,13 @@ IQR(grades$Score)
 
 ```
 ## [1] 22
+```
+
+```r
+sd(grades$Score)
+```
+
+```
+## [1] 14.85
 ```
 

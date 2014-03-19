@@ -8,4 +8,5 @@ library(ggplot2)
 ggplot(data = grades, aes(x = Score)) +  geom_density(fill = "green") + theme_bw()
 median(grades$Score)
 IQR(grades$Score)
+sd(grades$Score)
 ```
