@@ -23,7 +23,7 @@ xtabs(~phat)
 ```
 
 ```r
-plot(xtabs(~phat),ylab= "count",xlab = expression(hat(p)))
+plot(xtabs(~phat), ylab = "count", xlab = expression(hat(p)))
 ```
 
 ![plot of chunk sampDIST](figure/sampDIST.png) 
@@ -61,7 +61,7 @@ sd(phat)
 ```
 
 ```r
-plot(xtabs(~phat),ylab= "count",xlab = expression(hat(p)))
+plot(xtabs(~phat), ylab = "count", xlab = expression(hat(p)))
 ```
 
 ![plot of chunk sampDISTsim](figure/sampDISTsim.png) 
@@ -142,7 +142,9 @@ One might also choose to integrate numerically using the function `integrate()`.
 
 
 ```r
-fmin <- function(x){20/x^21}
+fmin <- function(x) {
+    20/x^21
+}
 integrate(fmin, 1, 1.2)
 ```
 
@@ -168,67 +170,79 @@ Consider the following simulations
 
 ```r
 set.seed(123)
-par(mfrow=c(4,3))
+par(mfrow = c(4, 3))
 # X~N(50,15)
-x <- seq(0,100,.01)
-y <- dnorm(x,50,15)
-plot(x,y,type="l",col="blue",lwd=2,main="X~N(50,15)",xlab="",ylab="")
+x <- seq(0, 100, 0.01)
+y <- dnorm(x, 50, 15)
+plot(x, y, type = "l", col = "tomato2", lwd = 2, main = "X~N(50,15)", xlab = "", 
+    ylab = "")
 
 # X~U(0,1)
-x <- seq(0,1,.001)
-y <- dunif(x,0,1)
-plot(x,y,type="l",col="blue",lwd=2,main="X~U(0,1)",xlab="",ylab="")
+x <- seq(0, 1, 0.001)
+y <- dunif(x, 0, 1)
+plot(x, y, type = "l", col = "tomato2", lwd = 2, main = "X~U(0,1)", xlab = "", 
+    ylab = "")
 
 # X~Exp(1)
-x <- seq(0,5,.01)
-y <- dexp(x,1)
-plot(x,y,type="l",col="blue",lwd=2,main="X~Exp(1)",xlab="",ylab="")
+x <- seq(0, 5, 0.01)
+y <- dexp(x, 1)
+plot(x, y, type = "l", col = "tomato2", lwd = 2, main = "X~Exp(1)", xlab = "", 
+    ylab = "")
 
 m <- 20000  # Number of Samples
-EX <- 1.2   # Character expansion
+EX <- 1.2  # Character expansion
 
-xbar.5 <- apply(matrix(rnorm(m*5,50,15),nrow=m),1,mean)
-hist(xbar.5,breaks="Scott",col="blue",xlim=c(0,100),prob=T,xlab="",ylab="",main="")
-mtext(  expression(bar(x)[5]),side=3,line=1,cex=EX)
+xbar.5 <- apply(matrix(rnorm(m * 5, 50, 15), nrow = m), 1, mean)
+hist(xbar.5, breaks = "Scott", col = "tomato2", xlim = c(0, 100), prob = T, 
+    xlab = "", ylab = "", main = "")
+mtext(expression(bar(x)[5]), side = 3, line = 1, cex = EX)
 
-xbar.5 <- apply(matrix(runif(m*5,0,1),nrow=m),1,mean)
-hist(xbar.5,breaks="Scott",col="blue",xlim=c(0,1),prob=T,xlab="",ylab="",main="")
-mtext(  expression(bar(x)[5]),side=3,line=1,cex=EX)
+xbar.5 <- apply(matrix(runif(m * 5, 0, 1), nrow = m), 1, mean)
+hist(xbar.5, breaks = "Scott", col = "tomato2", xlim = c(0, 1), prob = T, xlab = "", 
+    ylab = "", main = "")
+mtext(expression(bar(x)[5]), side = 3, line = 1, cex = EX)
 
-xbar.5 <- apply(matrix(rexp(m*5,1),nrow=m),1,mean)
-hist(xbar.5,breaks="Scott",col="blue",xlim=c(0,5),prob=T,xlab="",ylab="",main="")
-mtext(  expression(bar(x)[5]),side=3,line=1,cex=EX)
+xbar.5 <- apply(matrix(rexp(m * 5, 1), nrow = m), 1, mean)
+hist(xbar.5, breaks = "Scott", col = "tomato2", xlim = c(0, 5), prob = T, xlab = "", 
+    ylab = "", main = "")
+mtext(expression(bar(x)[5]), side = 3, line = 1, cex = EX)
 
-xbar.10 <- apply(matrix(rnorm(m*10,50,15),nrow=m),1,mean)
-hist(xbar.10,breaks="Scott",col="blue",xlim=c(0,100),prob=T,xlab="",ylab="",main="")
-mtext(  expression(bar(x)[10]),side=3,line=1,cex=EX)
+xbar.10 <- apply(matrix(rnorm(m * 10, 50, 15), nrow = m), 1, mean)
+hist(xbar.10, breaks = "Scott", col = "tomato2", xlim = c(0, 100), prob = T, 
+    xlab = "", ylab = "", main = "")
+mtext(expression(bar(x)[10]), side = 3, line = 1, cex = EX)
 
-xbar.10 <- apply(matrix(runif(m*10,0,1),nrow=m),1,mean)
-hist(xbar.10,breaks="Scott",col="blue",xlim=c(0,1),prob=T,xlab="",ylab="",main="")
-mtext(  expression(bar(x)[10]),side=3,line=1,cex=EX)
+xbar.10 <- apply(matrix(runif(m * 10, 0, 1), nrow = m), 1, mean)
+hist(xbar.10, breaks = "Scott", col = "tomato2", xlim = c(0, 1), prob = T, xlab = "", 
+    ylab = "", main = "")
+mtext(expression(bar(x)[10]), side = 3, line = 1, cex = EX)
 
-xbar.10 <- apply(matrix(rexp(m*10,1),nrow=m),1,mean)
-hist(xbar.10,breaks="Scott",col="blue",xlim=c(0,5),prob=T,xlab="",ylab="",main="")
-mtext(  expression(bar(x)[10]),side=3,line=1,cex=EX)
+xbar.10 <- apply(matrix(rexp(m * 10, 1), nrow = m), 1, mean)
+hist(xbar.10, breaks = "Scott", col = "tomato2", xlim = c(0, 5), prob = T, xlab = "", 
+    ylab = "", main = "")
+mtext(expression(bar(x)[10]), side = 3, line = 1, cex = EX)
 
-xbar.30 <- apply(matrix(rnorm(m*30,50,15),nrow=m),1,mean)
-hist(xbar.30,breaks="Scott",col="blue",xlim=c(0,100),prob=T,xlab="",ylab="",main="")
-mtext(  expression(bar(x)[30]),side=3,line=1,cex=EX)
+xbar.30 <- apply(matrix(rnorm(m * 30, 50, 15), nrow = m), 1, mean)
+hist(xbar.30, breaks = "Scott", col = "tomato2", xlim = c(0, 100), prob = T, 
+    xlab = "", ylab = "", main = "")
+mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
 
-xbar.30 <- apply(matrix(runif(m*30,0,1),nrow=m),1,mean)
-hist(xbar.30,breaks="Scott",col="blue",xlim=c(0,1),prob=T,xlab="",ylab="",main="")
-mtext(  expression(bar(x)[30]),side=3,line=1,cex=EX)
+xbar.30 <- apply(matrix(runif(m * 30, 0, 1), nrow = m), 1, mean)
+hist(xbar.30, breaks = "Scott", col = "tomato2", xlim = c(0, 1), prob = T, xlab = "", 
+    ylab = "", main = "")
+mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
 
-xbar.30 <- apply(matrix(rexp(m*30,1),nrow=m),1,mean)
-hist(xbar.30,breaks="Scott",col="blue",xlim=c(0,5),prob=T,xlab="",ylab="",main="")
-mtext(  expression(bar(x)[30]),side=3,line=1,cex=EX)
+xbar.30 <- apply(matrix(rexp(m * 30, 1), nrow = m), 1, mean)
+hist(xbar.30, breaks = "Scott", col = "tomato2", xlim = c(0, 5), prob = T, xlab = "", 
+    ylab = "", main = "")
+mtext(expression(bar(x)[30]), side = 3, line = 1, cex = EX)
 ```
 
 ![plot of chunk CLTsim](figure/CLTsim.png) 
 
 ```r
 
-par(mfrow=c(1,1))
+par(mfrow = c(1, 1))
 ```
 
 
