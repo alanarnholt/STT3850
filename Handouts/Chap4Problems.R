@@ -60,4 +60,60 @@ pnorm(4.2, EX, sqrt(VX)/sqrt(244), lower = FALSE)
 ## 10
 ## phat ~approx N(.286, sqrt(0.286*(1 - 0.286)/800) )
 ## P(220/800 < phat < 230/800) = 
-pnorm(230/800 + 1/(2*800), .286, sqrt(0.286*(1 - 0.286)/800))
+pnorm(230/800 + 1/(2*800), .286, sqrt(0.286*(1 - 0.286)/800)) - 
+  pnorm(220/800 - 1/(2*800), .286, sqrt(0.286*(1 - 0.286)/800))
+## Exact answer
+sum(dbinom(220:230, 800, 0.286))
+## or
+pbinom(230, 800, .286) - pbinom(219, 800, .286)
+## I like this type of problem....
+## 11 xbar ~ N(1/2, 1/sqrt(12n)).....P(|xbar - 1/2|/(1/sqrt(12n)) < 1.6448) >= 0.90
+##
+n <- ceiling((qnorm(.95)/.05)^2/12)
+n
+## 12
+# E[X] = 1/lambda = 1/(1/10) = 10
+set.seed(13)
+sims <- 10000
+xbar <- numeric(sims)
+for(i in 1:sims){
+  xbar[i] <- mean(rexp(30, 1/10))
+}
+mean(xbar)
+mean(xbar >= 12)
+library(ggplot2)
+ggplot(data = data.frame(x = xbar), aes(x = x)) + geom_density() + theme_bw() + stat_function(fun = dgamma, args = list(30*1, 30/10), lty = "dashed", color = "red")
+##
+## 13
+## W ~ N(36, sqrt(8^2/10 + 7^2/15) = 3.109126)
+set.seed(13)
+sims <- 10000
+xbar <- numeric(sims)
+ybar <- numeric(sims)
+for(i in 1:sims){
+  xbar[i] <- mean(rnorm(10, 20, 8))
+  ybar[i] <- mean(rnorm(15, 16, 7))
+}
+W <- xbar + ybar
+mean(W)  # close to 36
+sd(W)    # close to 3.11
+mean(W < 40)
+# Exact answer
+pnorm(40, 36, sqrt(8^2/10 + 7^2/15))
+#####
+## 14
+# W ~ N(-3, sqrt(3^2/9 + 5^2/12) = 1.755942)
+set.seed(13)
+sims <- 10000
+xbar <- numeric(sims)
+ybar <- numeric(sims)
+for(i in 1:sims){
+  xbar[i] <- mean(rnorm(9, 7, 3))
+  ybar[i] <- mean(rnorm(12, 10, 5))
+}
+W <- xbar - ybar
+mean(W)  # close to -3
+sd(W)    # close to 1.76
+mean(W < 1.5)
+# Exact answer
+pnorm(1.5, -3, sqrt(3^2/9 + 5^2/12))
