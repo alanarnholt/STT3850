@@ -1,4 +1,5 @@
 # Problems
+## 1
 Population <- c(1, 2, 5, 6, 10, 12)
 SS <- t(combn(x = Population, m = 3))
 MD <- apply(SS, 1, median)
@@ -117,3 +118,50 @@ sd(W)    # close to 1.76
 mean(W < 1.5)
 # Exact answer
 pnorm(1.5, -3, sqrt(3^2/9 + 5^2/12))
+## 15 & 16
+
+## 17
+set.seed(13)
+sims <- 10000
+WE <- numeric(sims)
+for(i in 1:sims){
+  WE[i] <- sum(rexp(20, 2))
+}
+mean(WE)
+var(WE)
+mean(WE <= 10)
+## 18
+set.seed(13)
+sims <- 10000
+WE <- numeric(sims)
+for(i in 1:sims){
+  WE[i] <- mean(rexp(30, 1/3))
+}
+mean(WE)
+sd(WE)
+mean(WE <= 3.5)
+## 19
+curve(dexp(x, 1/20), 0, 100)
+abline(v = qexp(0.5, 1/20))
+abline(h = 0)
+qexp(0.5, 1/20)
+##
+set.seed(13)
+first <- rexp(50, 1/20)
+mean(first)
+sd(first)
+#
+sims <- 10000
+MD50 <- numeric(sims)
+MD100 <- numeric(sims)
+MD500 <- numeric(sims)
+MD1000 <- numeric(sims)
+for(i in 1:sims){
+  MD50[i] <- median(rexp(50, 1/20))
+  MD100[i] <- median(rexp(100, 1/20))
+  MD500[i] <- median(rexp(500, 1/20))
+  MD1000[i] <- median(rexp(1000, 1/20))
+}
+c(mean(MD50), mean(MD100), mean(MD500), mean(MD1000), sd(MD50), sd(MD100), sd(MD500), sd(MD1000))
+## 20
+
