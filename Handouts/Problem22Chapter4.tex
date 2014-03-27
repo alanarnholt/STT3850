@@ -91,9 +91,12 @@ $f(x) = 3x^2, 0\leq x \leq 1.$
 
 \begin{enumerate}[(a)]
 \item Find the pdf for $X_{\textrm{min}}.$ \label{parta}
+\pause
 \item Find the pdf for $X_{\textrm{max}}.$ \label{partb}
+\pause
 \item If $n = 10,$ find the probability that the largest value, $X_{\textrm{max}},$ is greater than 0.92 \label{partc}
-\item if $n = 10,$ find the expected value of $X_{\textrm{max}}.$ \label{partd}
+\pause
+\item If $n = 10,$ find the expected value of $X_{\textrm{max}}.$ \label{partd}
 \end{enumerate}
 
 \end{frame}
@@ -128,8 +131,10 @@ that
 
 \begin{frame}[fragile]{$P(X_{\textrm{max}} > 0.92)$}
 
-\eqref{partc}
+\eqref{partc} Using \eqref{Xmax} gives:
 \[f_{\textrm{max}}(x) = 10\left(x^3\right)^{10-1}3x^2 = 30x^{29},  0\leq x \leq 1\]
+
+\[P(X_{\textrm{max}} > 0.92) = \int_{0.92}^{1}30x^{29}\,dx\]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -149,6 +154,7 @@ that
 
 \begin{frame}[fragile]{$E[X_{\textrm{max}}]$}
 
+\eqref{partd}
 \[E[X_{\textrm{max}}] = \int_{0}^{1}x_{\textrm{max}} f_{\textrm{max}}(x) = \int_{0}^{1}30x^{30}\]
 
 \begin{Shaded}
@@ -171,12 +177,32 @@ that
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{curve}\NormalTok{(f, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{n =} \DecValTok{500}\NormalTok{, }\DataTypeTok{col =}\StringTok{"purple"}\NormalTok{)}
+\KeywordTok{curve}\NormalTok{(f, }\FloatTok{0.85}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{n =} \DecValTok{500}\NormalTok{, }\DataTypeTok{col =}\StringTok{"purple"}\NormalTok{, }
+      \DataTypeTok{xlab =} \KeywordTok{expression}\NormalTok{(x[max]), }
+      \DataTypeTok{ylab =} \KeywordTok{expression}\NormalTok{(f[max](x)))}
 \KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \NormalTok{ans, }\DataTypeTok{lty =} \StringTok{"dashed"}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Problem22Chapter4_files/figure-beamer/unnamed-chunk-2.pdf}
+
+\end{frame}
+
+\begin{frame}[fragile]{What does the pdf look like with
+\texttt{ggplot2}?}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.85}\NormalTok{, }\DecValTok{1}\NormalTok{)), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \NormalTok{x)) +}\StringTok{ }
+\StringTok{  }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun =} \NormalTok{f, }\DataTypeTok{color =} \StringTok{"purple"}\NormalTok{) +}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_bw}\NormalTok{() +}
+\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xinter =} \NormalTok{ans, }\DataTypeTok{lty =} \StringTok{"dashed"}\NormalTok{, }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{) +}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{expression}\NormalTok{(x[max]), }\DataTypeTok{y =} \KeywordTok{expression}\NormalTok{(f[max](x)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Problem22Chapter4_files/figure-beamer/unnamed-chunk-3.pdf}
 
 \end{frame}
 
