@@ -1,0 +1,183 @@
+\documentclass[ignorenonframetext,]{beamer}
+\usetheme{Madrid}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifxetex
+  \usepackage{fontspec,xltxtra,xunicode}
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\else
+  \ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \else
+    \usepackage[utf8]{inputenc}
+  \fi
+\fi
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textbf{{#1}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\usepackage{graphicx}
+% Redefine \includegraphics so that, unless explicit options are
+% given, the image width will not exceed the width of the page.
+% Images get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\ScaleIfNeeded{%
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{\Oldincludegraphics[width=\ScaleIfNeeded]{#2}}
+
+% Comment these out if you don't want a slide with just the
+% part/section/subsection/subsubsection title:
+\AtBeginPart{
+  \let\insertpartnumber\relax
+  \let\partname\relax
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \let\insertsectionnumber\relax
+  \let\sectionname\relax
+  \frame{\sectionpage}
+}
+\AtBeginSubsection{
+  \let\insertsubsectionnumber\relax
+  \let\subsectionname\relax
+  \frame{\subsectionpage}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{0}
+
+\title{Chapter 4 Problem 22}
+\author{Alan Arnholt}
+\date{March 27, 2014}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Problem 22}
+
+Let $X_1, X_2, \ldots X_n \overset{iid}\sim F$ with corresponding pdf
+$f(x) = 3x^2, 0\leq x \leq 1.$
+
+\begin{enumerate}[(a)]
+\item Find the pdf for $X_{\textrm{min}}.$ \label{parta}
+\item Find the pdf for $X_{\textrm{max}}.$ \label{partb}
+\item If $n = 10,$ find the probability that the largest value, $X_{\textrm{max}},$ is greater than 0.92 \label{partc}
+\item if $n = 10,$ find the expected value of $X_{\textrm{max}}.$ \label{partd}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{$f_{\textrm{min}}(x)$}
+
+\eqref{parta} The pdf for $X_{\textrm{min}}$ is:
+
+\begin{equation}\label{Xmin}
+f_{\textrm{min}}(x) = n\left(1 - F(X)\right)^{n-1}f(x)
+\end{equation}
+
+Since $F(x) = \int_{0}^{x}3t^2\,dt = x^3, 0\leq x \leq 1,$ it follows
+that
+\[f_{\textrm{min}}(x) = n\left(1 - x^3\right)^{n-1}3x^2,  0\leq x \leq 1\]
+
+\end{frame}
+
+\begin{frame}{$f_{\textrm{max}}(x)$}
+
+\eqref{partb} The pdf for $X_{\textrm{max}}$ is:
+
+\begin{equation}\label{Xmax}
+f_{\textrm{max}}(x) = nF^{n-1}(x)f(x)
+\end{equation}
+
+Since $F(x) = \int_{0}^{x}3t^2\,dt = x^3, 0\leq x \leq 1,$ it follows
+that
+\[f_{\textrm{max}}(x) = n\left(x^3\right)^{n-1}3x^2,  0\leq x \leq 1\]
+
+\end{frame}
+
+\begin{frame}[fragile]{$P(X_{\textrm{max}} > 0.92)$}
+
+\eqref{partc}
+\[f_{\textrm{max}}(x) = 10\left(x^3\right)^{10-1}3x^2 = 30x^{29},  0\leq x \leq 1\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f <-}\StringTok{ }\NormalTok{function(x)\{}\DecValTok{30}\NormalTok{*x^}\DecValTok{29}\NormalTok{\}}
+\NormalTok{ans <-}\StringTok{ }\KeywordTok{integrate}\NormalTok{(f, }\FloatTok{0.92}\NormalTok{, }\DecValTok{1}\NormalTok{)$value}
+\NormalTok{ans}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.918
+\end{verbatim}
+
+\[P(X_{\textrm{max}} > 0.92) = \int_{0.92}^{1}30x^{29}\,dx = 0.918.\]
+
+\end{frame}
+
+\begin{frame}[fragile]{$E[X_{\textrm{max}}]$}
+
+\[E[X_{\textrm{max}}] = \int_{0}^{1}x_{\textrm{max}} f_{\textrm{max}}(x) = \int_{0}^{1}30x^{30}\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f1 <-}\StringTok{ }\NormalTok{function(x)\{}\DecValTok{30}\NormalTok{*x^}\DecValTok{30}\NormalTok{\}}
+\NormalTok{ans <-}\StringTok{ }\KeywordTok{integrate}\NormalTok{(f1, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)$value}
+\NormalTok{ans}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.9677
+\end{verbatim}
+
+\[E[X_{\textrm{max}}] = 0.9677\]
+
+\end{frame}
+
+\begin{frame}[fragile]{What does the pdf look like?}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{curve}\NormalTok{(f, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{n =} \DecValTok{500}\NormalTok{, }\DataTypeTok{col =}\StringTok{"purple"}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \NormalTok{ans, }\DataTypeTok{lty =} \StringTok{"dashed"}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Problem22Chapter4_files/figure-beamer/unnamed-chunk-2.pdf}
+
+\end{frame}
+
+\end{document}

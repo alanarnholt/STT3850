@@ -1,0 +1,71 @@
+---
+title: "Chapter 4 Problem 22"
+author: "Alan Arnholt"
+date: "March 27, 2014"
+output:
+  beamer_presentation:
+    keep_tex: yes
+    theme: Madrid
+incremental: yes
+---
+## Problem 22
+
+Let $X_1, X_2, \ldots X_n \overset{iid}\sim F$ with corresponding pdf $f(x) = 3x^2, 0\leq x \leq 1.$
+
+\begin{enumerate}[(a)]
+\item Find the pdf for $X_{\textrm{min}}.$ \label{parta}
+\item Find the pdf for $X_{\textrm{max}}.$ \label{partb}
+\item If $n = 10,$ find the probability that the largest value, $X_{\textrm{max}},$ is greater than 0.92 \label{partc}
+\item if $n = 10,$ find the expected value of $X_{\textrm{max}}.$ \label{partd}
+\end{enumerate}
+
+## $f_{\textrm{min}}(x)$
+
+\eqref{parta}  The pdf for $X_{\textrm{min}}$ is:
+\begin{equation}\label{Xmin}
+f_{\textrm{min}}(x) = n\left(1 - F(X)\right)^{n-1}f(x)
+\end{equation}
+
+Since $F(x) = \int_{0}^{x}3t^2\,dt = x^3, 0\leq x \leq 1,$ it follows that 
+$$f_{\textrm{min}}(x) = n\left(1 - x^3\right)^{n-1}3x^2,  0\leq x \leq 1$$
+
+## $f_{\textrm{max}}(x)$
+
+\eqref{partb} The pdf for $X_{\textrm{max}}$ is:
+\begin{equation}\label{Xmax}
+f_{\textrm{max}}(x) = nF^{n-1}(x)f(x)
+\end{equation}
+
+Since $F(x) = \int_{0}^{x}3t^2\,dt = x^3, 0\leq x \leq 1,$ it follows that 
+$$f_{\textrm{max}}(x) = n\left(x^3\right)^{n-1}3x^2,  0\leq x \leq 1$$
+
+## $P(X_{\textrm{max}} > 0.92)$
+
+\eqref{partc} $$f_{\textrm{max}}(x) = 10\left(x^3\right)^{10-1}3x^2 = 30x^{29},  0\leq x \leq 1$$
+
+```{r label = FUNC, comment = NA}
+f <- function(x){30*x^29}
+ans <- integrate(f, 0.92, 1)$value
+ans
+```
+
+$$P(X_{\textrm{max}} > 0.92) = \int_{0.92}^{1}30x^{29}\,dx = `r ans`.$$
+
+## $E[X_{\textrm{max}}]$
+
+$$E[X_{\textrm{max}}] = \int_{0}^{1}x_{\textrm{max}} f_{\textrm{max}}(x) = \int_{0}^{1}30x^{30}$$
+
+```{r comment = NA}
+f1 <- function(x){30*x^30}
+ans <- integrate(f1, 0, 1)$value
+ans
+```
+
+$$E[X_{\textrm{max}}] = `r ans`$$
+
+## What does the pdf look like?
+
+```{r comment = NA, fig.height = 3, fig.width = 5}
+curve(f, 0, 1, n = 500, col ="purple")
+abline(v = ans, lty = "dashed", col = "red")
+```

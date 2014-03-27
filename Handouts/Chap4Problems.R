@@ -15,6 +15,8 @@ MIN
 mean(MIN)  # mean of the sampling distribution
 # This statistic is an estimate of the population Min (3).
 ggplot(data = data.frame(x = MIN), aes(x = x)) + geom_density() + theme_bw()
+#
+
 ####
 A <- c(1, 3, 4, 5)
 B <- c(5, 7, 9)
