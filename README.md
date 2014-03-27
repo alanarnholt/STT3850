@@ -7,6 +7,7 @@
 * [R homepage](http://www.r-project.org/)
 * [Download R](http://cran.r-project.org/)
 * [RStudio (IDE)](http://rstudio.org/)
+* [RStudio (IDE) preview relase](https://www.rstudio.com/ide/download/preview)
 * [RStudio Documentation](https://support.rstudio.com/hc/en-us/categories/200035113-Documentation)
 * [Quick R (all types of examples)](http://www.statmethods.net/index.html)
 * [Roger Peng's Computing for Data Analysis Videos](http://bit.ly/UC5UDc)
@@ -34,6 +35,7 @@
 * [Using RMarkdown](https://support.rstudio.com/hc/en-us/sections/200149716-R-Markdown)
 * [Markdown](http://daringfireball.net/projects/markdown/)
 * [Getting started with R Markdown Blog](http://jeromyanglim.blogspot.com.au/2012/05/getting-started-with-r-markdown-knitr.html)
+* [RMarkdown V2](http://rmarkdown.rstudio.com)
   
 ## LaTeX  
 
