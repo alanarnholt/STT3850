@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 Class Notes For STT 3850
 ========================================================
 ## Alan T. Arnholt

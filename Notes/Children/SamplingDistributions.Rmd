@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 
 Sampling Distributions (Chapter 4)
 ========================================================
@@ -64,7 +67,7 @@ and variance $\sigma^2_i, i = 1, 2, \ldots, n,$ respectively. Let $a_1, a_2, \ld
 
 **Corollary:**  Let $X_1, X_2, \ldots, X_n$ be independent normal random variables 
 with common mean $\mu$, and common variance $\sigma^2$.  Then 
-$$ \bar{X} \sim N(\mu_\bar{X}, \sigma_{\bar{X}})$$
+$$ \bar{X} \sim N(\mu_{\bar{X}}, \sigma_{\bar{X}})$$
 
 Recall that $\mu_{\bar{X}} = \mu$ and that $\sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}}$, so the previous result is often written as 
 

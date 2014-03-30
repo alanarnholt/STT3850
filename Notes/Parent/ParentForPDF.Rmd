@@ -1,0 +1,59 @@
+---
+output: pdf_document
+---
+Class Notes For STT 3850
+========================================================
+## Alan T. Arnholt
+
+
+```{r Systime, echo = FALSE, comment = NA, message = FALSE}
+options(width = 60)
+require(ggplot2)
+require(e1071)
+require(plyr)
+require(PASWR)
+require(boot)
+require(knitr)
+DT <- format(Sys.time(), "%A, %B %d, %Y - %X.")
+```
+Last compiled `r DT`
+
+```{r setup, comment = NA, echo = FALSE, message = FALSE}
+opts_chunk$set(comment = NA, cache = TRUE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', cache.path = './cache/Parent/', figure.path = './figure/Parent/', tidy = TRUE)
+```
+
+```{r child='../Children/Intro.Rmd'}
+```
+
+```{r child='../Children/EDA.Rmd'}
+```
+
+```{r child='../Children/Schistosomiasis.Rmd'}
+```
+
+```{r child='../Children/Verizon.Rmd'}
+```
+
+```{r child='../Children/CocaineForPDF.Rmd'}
+```
+
+```{r child='../Children/PRTMPD.Rmd'}
+```
+
+```{r child='../Children/CTables.Rmd'}
+``` 
+
+```{r child='../Children/SamplingDistributions.Rmd'}
+``` 
+
+```{r child='../Children/BootStrapEXP.Rmd'}
+```
+
+```{r child='../Children/InClass.Rmd'}
+```
+
+```{r child='../Children/InClassSol.Rmd'}
+```
+
+```{r child='../Children/ConfidenceIntervals.Rmd'}
+```

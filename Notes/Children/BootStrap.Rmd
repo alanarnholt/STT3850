@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 
 
 THE BOOTSTRAP (Chapter 5)
@@ -56,7 +59,7 @@ Of course, it is hard for three observations to accurately approximate the popul
 
 There are now $1009^{1009}$ samples, too many for exhaustive calculation. Instead, we draw samples randomly, of size 1009 with replacement from the data, and calculate the mean for each. We repeat this many times, say 10,000, to create the bootstrap distribution. You can imagine that there is a table like Table 1 with $1009^{1009}$ rows, and we are randomly picking 10,000 rows from that table.
 
-> #### BOOTSTRAP FOR A SINGLE POPULATION
+#### BOOTSTRAP FOR A SINGLE POPULATION
 
 > Given a sample of size $n$ from a population,
 
@@ -65,6 +68,7 @@ There are now $1009^{1009}$ samples, too many for exhaustive calculation. Instea
 > 3.  Construct the bootstrap distribution of the statistic.  Inspect its spread, bias, and shape.
 
 ```{r boot1}
+library(ggplot2)
 set.seed(13)
 head(Babies)
 B <- 10000
@@ -83,11 +87,10 @@ ggplot(data = data.frame(x = my.boot.statB), aes(x =x)) + geom_density(fill = "l
 
 Note that the bootstrap distribution is approximately normal.  Second, with mean `r mean(my.boot.statB)`, it is centered at approximately the same location as the original mean, `r mean(Babies$Weight)`.  The difference between where the bootstrap distribution is centered and the mean of the of original sample is the bootstrap bias in this example `r boot.bias`.  In general, the *bias* of an estimate $\hat{\theta}$ is $$Bias[\hat{\theta}] = E[\hat{\theta}] - \theta .$$  The bootstrap estimate of bias is $$Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta},$$ the mean of the bootstrap distribution, minus the estimate from the original data. Third, we get a rough idea of the amount of variability.  We can quantify the variability by computing the standard deviation of the bootstrap distribution, in this case `r sd(my.boot.statB)`.  This is the bootstrap standard error.
  
-> #### BOOTSTRAP STANDARD ERROR
+#### BOOTSTRAP STANDARD ERROR
 > The *bootstrap standard error* of a statistic is the standard deviation of the bootstrap distribution of the statistic.
  
-> #### BIAS
->
+#### BIAS
 > A statistic used to estimate a parameter is *biased* when the mean of its sampling distribution is not equal to the true value of the parameter.  The bias of a statistic $\hat{\theta}$ is $Bias[\hat{\theta}] = E[\hat{\theta}] - \theta$.  A statistic is **unbiased** if its bias is zero.
 >
 > The bootstrap method allows us to check for bias by seeing whether the bootstrap distribution of a statistic is centered at the statistic of the original random sample.  The bootstrap estimate of bias is the mean of the bootstrap distribution minus the statistic for the original data, $Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta}$.
@@ -148,10 +151,8 @@ par(opar)
 
 The previous code shows the distributions of two such random samples with sample means $\bar{x}_1 =$ `r mean(rs1)`, $\bar{x}_2 =$ `r mean(rs2)` and standard deviations $s_1 =$ `r sd(rs1)`, $s_2 =$ `r sd(rs2)`, respectively.  Based on the graphs above, we can see that the bootstrap distribution has roughly the same spread and shape as the theoretical sampling distribution, but the centers are different.  This example illustrates some important features of the bootstrap that hold for other statistics besides the mean:  the bootstrap distribution of a particular statistic $\hat{\theta}$ has approximately the same spread and shape as the sampling distirubiton of the statistic $\hat{\theta}$, but the center of the bootstrap distirbution is at the center of the original sample.  Hence we do not use the center of the bootstrap distribution in its own right, but we do compare the center of the bootstrap distribution with the observed statistic; if they differ, it indicates bias.
 
-> #### BOOTSTRAP DISTRIBUTIONS AND SAMPLING DISTRIBUTIONS
->
+#### BOOTSTRAP DISTRIBUTIONS AND SAMPLING DISTRIBUTIONS
 > For most statistics, bootstrap distributions aproximate the spread, bias, and shape of the actual sampling distribution.
-
 
 * Example 2: We now consider an example where neither the population nor the sampling distribution is normal.  A random variable $X$ that has a Gamma distribution is written $X \sim \Gamma(\alpha, \lambda)$.  If $X$ is a Gamma random variable, then $E[X] = \alpha/\lambda$, and $Var[X] = \alpha/\lambda^2$.  Let $X_1,\ldots , X_n \sim \Gamma(\alpha, \lambda)$. It is a fact that the sampling distribution of the mean $\bar{X}$ is $\Gamma(n\alpha, n\lambda)$.  We draw a random sample of size $n = 16$ from a $\Gamma(\alpha = 1, \lambda = 1/2)$ (population mean 2, standard deviation 2). 
 
@@ -272,6 +273,7 @@ We now turn to the problem of comparing two samples. In general, bootstrapping s
 > 1. Draw a resample of size $m$ with replacement from the first sample in a separate resample of size $n$ for the second sample. Compute a statistic that compares the two groups, such as the difference between the two sample means.
 > 2. Repeat this resampling process many times say 10,000.
 > 3. Construct the bootstrap distribution of the statistic. Inspect its spread, bias, and shape.
+
 
 * Example 4: A high school student was curious about the total number of minutes devoted to commercials during any given half-hour time period on basic and extended cable TV channels.
 
@@ -407,7 +409,6 @@ par(opar)
 CIdiff <- quantile(diffmeans, prob = c(0.025, 0.975))
 CIdiff
 ```
-
 The bootstrap distribution for the difference in means is shown in Figure 12a. Note the strong skewness in the distribution. The mean of the bootstrap distribution is `r mean(diffmeans)` with a standard error of `r sd(diffmeans)`. A 95% bootstrap percentile confidence interval for the difference in means (ILEC-CLEC) is given by (`r CIdiff[1]`, `r CIdiff[2]`) and so we would say that with 95% confidence, the repair times for ILEC customers are, on average, `r -1*CIdiff[2]` $-$ `r -1*CIdiff[1]` hours shorter than the repair times for CLEC customers.
 
 #### THE TWO INDEPENDENT POPULATIONS ASSUMPTION

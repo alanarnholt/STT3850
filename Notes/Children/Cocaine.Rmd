@@ -57,6 +57,7 @@ abline(v = obsDiffProp2, col = "red")
 pvalue1 <- (sum(DiffProp <= obsDiffProp2) + 1)/(N + 1)
 pvalue1
 # ggplot2 approach
+library(ggplot2)
 DF <- data.frame(x = DiffProp)
 p <- ggplot(data = DF) + 
   geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4) +

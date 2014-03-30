@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 
 
 CLASSICAL INFERENCE: CONFIDENCE INTERVALS
@@ -73,10 +76,10 @@ CIsim(samples = 100, n = 30, parameter = 25, sigma = 4, type = "Mean")
 
 In our first example, we constructed a 95% confidence interval, but we can use other levels of confidence more generally let $q$ denote the $(1 - \alpha/2)$ quantile that satisfies $P(Z < q) = 1 - \alpha/2$. Then, by symmetry, $P(-q < Z < q) = 1 - \alpha$.  We will represent the quantile $q$ in a standard normal distribution with the notation $z_{1 - \alpha/2}$.  For example, $z_{.975}=$ `r qnorm(.975)`.  Let $\bar{X}$ denote the mean of a random sample of size $n$ from a normal distribution $N(\mu, \sigma)$.  Then, since $\bar{X} \sim N(\mu, \sigma/\sqrt{n})$, by mimicking the previous algebra, we have
 
-\[\begin{align}
+\begin{align}
 1 - \alpha &= P(z_{\alpha/2} < Z < z_{1 -\alpha/2}) \\
 &= P\left( \bar{X} - z_{1 - \alpha/2}\sigma/\sqrt{n}, \bar{X} + z_{1 - \alpha/2}\sigma/\sqrt{n}  \right)
-\end{align}\]
+\end{align}
 
 **Example 7.3**  Suppose the sample 3.4, 2.9, 2.8, 5.1, 6.3, 3.9 is drawn from the normal distribution with unknown $\mu$ and known $\sigma = 2.5$.  Find a 90% confidence interval for $\mu$.
 
@@ -157,12 +160,12 @@ legend("topright", legend = c("N(0, 1)", "t_1", "t_4", "t_9", "t_36"), lty = c(1
 
 We derive the confidence interval for $\mu$ when $\sigma$ is unknown in the same way as when $\sigma$ is known.  Let $t_{1 - \alpha/2; n-1}$ denote the $(1 - \alpha/2)$ quantile of the $t$ distribution with $n - 1$ degrees of freedom, $P(T_{n-1} < t_{1-\alpha/2; n-1}) =1 - \alpha/2, 0 < \alpha <1$. Then using symmetry of the $t$ distribution, we have
 
-\[
+
 \begin{align}
 1 - \alpha &= P\left(-t_{1 - \alpha/2; n-1} < \frac{\bar{X} - \mu}{S/\sqrt{n}} < t_{1 - \alpha/2; n-1}  \right) \\
 &=  P\left(\bar{X}-t_{1 - \alpha/2; n-1}\times \frac{S}{\sqrt{n}} < \mu < \bar{X} + t_{1 - \alpha/2; n-1} \times \frac{S}{\sqrt{n}}  \right)
 \end{align}
-\]
+
 
 **$T$ CONFIDENCE INTERVAL FOR NORMAL MEAN WITH UNKNOWN STANDARD DEVIATION**
 If $X_i \sim N(\mu, \sigma), i = 1, \ldots, n,$ with $\sigma$ unknown, then a $(1 - \alpha)\times 100\%$ confidence interval for $\mu$ is given by
