@@ -1,5 +1,5 @@
 ---
-output: pdf_document
+output: html_document
 ---
 Class Notes For STT 3850
 ========================================================
@@ -7,7 +7,7 @@ Class Notes For STT 3850
 
 
 ```{r Systime, echo = FALSE, comment = NA, message = FALSE}
-options(width = 100)
+options(width = 80)
 require(ggplot2)
 require(e1071)
 require(plyr)
@@ -19,7 +19,7 @@ DT <- format(Sys.time(), "%A, %B %d, %Y - %X.")
 Last compiled `r DT`
 
 ```{r setup, comment = NA, echo = FALSE, message = FALSE}
-opts_chunk$set(comment = NA, cache = TRUE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', cache.path = './cache/Parent/', figure.path = './figure/Parent/', tidy = TRUE)
+opts_chunk$set(comment = NA, cache = TRUE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', tidy = TRUE)
 ```
 
 ```{r child='../Children/Intro.Rmd'}
