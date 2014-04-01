@@ -20,7 +20,7 @@ DT <- format(Sys.time(), "%A, %B %d, %Y - %X.")
 Last compiled `r DT`
 
 ```{r setup, comment = NA, echo = FALSE, message = FALSE}
-opts_chunk$set(comment = NA, cache = TRUE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', tidy = TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff= 60))
+opts_chunk$set(comment = NA, cache = FALSE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', tidy = TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff= 60))
 ```
 
 ```{r child='../Children/Intro.Rmd'}

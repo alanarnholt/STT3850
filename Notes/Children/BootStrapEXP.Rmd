@@ -2,6 +2,11 @@
 output: pdf_document
 ---
 
+```{r setup, comment = NA, echo = FALSE, message = FALSE}
+library(knitr)
+opts_chunk$set(comment = NA, cache = FALSE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', tidy = TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff= 60))
+```
+
 
 THE BOOTSTRAP (Chapter 5)
 ========================================================
@@ -40,7 +45,9 @@ WD <- BD
 
 ```{r BT, results='asis', echo =FALSE}
 colnames(WD) <- c("$x^*_1$", "$x^*_2$", "$x^*_3$", "$\\bar{x}^*$")
-print(xtable(WD, caption = "Table 1 --- All possible Samples of Size 3 from 3969, 3204, and 2892"), type = "latex", include.rownames=FALSE)
+rws <- c(0, 13, 26)
+col <- rep("\\rowcolor[gray]{0.90}", 3)
+print(xtable(WD, caption = "All possible Samples of Size 3 from 3969, 3204, and 2892", digits = 0, align ="ccccc", label = "BT5"),  type = "latex", include.rownames=FALSE, sanitize.text.function=function(x){x}, add.to.row = list(pos = as.list(rws), command = col), booktabs = TRUE, comment = FALSE)
 ```
 
 The idea behind the bootstrap is that if the original sample is representative of the population, then the bootstrap distribution of the mean will look approximately like the sampling distribution of the mean; that is, have roughly the same spread and shape. However, the mean of the bootstrap distribution will be the same as the mean of the original sample, not necessarily that of the original population.
