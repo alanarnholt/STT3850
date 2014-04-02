@@ -1,11 +1,4 @@
----
-output: pdf_document
----
 
-```{r setup, comment = NA, echo = FALSE, message = FALSE}
-library(knitr)
-opts_chunk$set(comment = NA, cache = FALSE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', tidy = TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff= 60))
-```
 
 
 THE BOOTSTRAP (Chapter 5)
