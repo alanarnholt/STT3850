@@ -12,7 +12,7 @@ The birth weight of a baby is of interest to health officials since many studies
 ### INTRODUCTION TO THE BOOTSTRAP
 
 ```{r SETUP}
-require(xtable)
+require(xtable) #
 site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
 Babies <- read.csv(file=url(site))
 ```

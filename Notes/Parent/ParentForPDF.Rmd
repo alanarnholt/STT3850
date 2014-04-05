@@ -8,7 +8,7 @@ Class Notes For STT 3850
 
 
 ```{r Systime, echo = FALSE, comment = NA, message = FALSE}
-options(width = 60)
+options(width = 61)
 require(ggplot2)
 require(e1071)
 require(plyr)

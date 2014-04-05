@@ -15,7 +15,7 @@ head(Cocaine)
 ANS <- with(data = Cocaine,
             tapply(Outcome == "relapse", Drug, mean)
             )
-ANS
+ANS #
 obsDiffProp <- ANS[1] - ANS[2]
 names(obsDiffProp) <- NULL
 obsDiffProp
