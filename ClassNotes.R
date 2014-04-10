@@ -85,3 +85,127 @@ $\int_{0}^{2}\frac{3}{8}y^2, \dy = `r ans`$
   #anything with a bar is sample mean
   #
   
+  
+#notes for Rick
+#If there is a hat on a greek letter, it's a statistic
+
+#* *Skewness* The skewness of the bootstrap ditribution does relfect the skewness of the sampling distribution.
+#The first point bears emphasis.  It means that *the bootstrap is not used to get better paramter estimates* because 
+#the bootstrap distributions are centered around statistics theta hat calculated from the data rather than unknown 
+#population values.  Drawing thousands of bootstrap observations from the original data is not like drawing 
+#observations from the underlying population, it does not create new data.
+
+#Equation for bias
+Bias_B(ThetaHat*) = E(ThetaHat*) - (ThetaHat)
+
+site <- "http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv"
+Bang <- read.csv(file=url(site)) # read data into Bang
+
+#paramters
+opar <- par(no.readonly = TRUE)
+par(mfrow=c(2, 2))
+Arsenic <- Bang$Arsenic
+hist(Arsenic, breaks = "Scott", main = "Figure 6a", col = "lightblue")
+qqnorm(Arsenic, main = "Figure 6b")
+qqline(Arsenic, col = "red")
+B <- 10000
+n <- sum(!is.na(Arsenic))
+arsenic.mean <- numeric(B)
+set.seed(7)
+for (i in 1:B){
+  x <- sample(Arsenic, size = n, replace = TRUE)
+  arsenic.mean[i] <- mean(x)
+}
+hist(arsenic.mean, main = "Figure 7a", col = "lightblue", breaks = "Scott", xlab = substitute(paste(bar(X),"*")))
+qqnorm(arsenic.mean, main = "Figure 7b")
+qqline(arsenic.mean, col = "red")
+
+#95% of the data (between 2.5% to the left and 2.5% to the right of the graph) is 95% confidence interval
+#Getting z-scores
+BELOW <- sum(arsenic.mean <= (mean(arsenic.mean) + qnorm(.025)*sd(arsenic.mean)))/B
+ABOVE <- sum(arsenic.mean >= (mean(arsenic.mean) + qnorm(.975)*sd(arsenic.mean)))/B
+c(BELOW, ABOVE)
+
+#BOOTSTRAP FOR COMPARING TWO POPULATIONS
+#Given independent samples of sizes m and n from two populations,
+#Draw a resample of size m with replacement from the first sample in a separate resample of size n for the 
+#second sample. Compute a statistic that compares the two groups, such as the difference between the two sample means.
+#Repeat this resampling process many times say 10,000.
+#Construct the bootstrap distribution of the statistic. Inspect its spread, bias, and shape.
+
+site <- "http://www1.appstate.edu/~arnholta/Data/TV.csv"
+TV <- read.csv(file=url(site)) # read data into TV
+head(TV)
+ct <- tapply(TV$Times, TV$Cable, mean)
+
+#Doing a sample to compare the populations
+times.Basic <- subset(TV, select = Times, subset = Cable == "Basic", drop = TRUE)
+times.Ext <- subset(TV, select = Times, subset = Cable == "Extended", drop = TRUE)
+B <- 10^4
+times.diff.mean <- numeric(B)
+set.seed(5)
+for (i in 1:B){
+  Basic.sample <- sample(times.Basic, size = length(times.Basic), replace = TRUE)
+  Ext.sample <- sample(times.Ext, size = length(times.Ext), replace = TRUE)
+  times.diff.mean[i] <- mean(Basic.sample) - mean(Ext.sample)
+}
+opar <- par(no.readonly = TRUE)
+par(mfrow=c(1, 2))
+hist(times.diff.mean, breaks = "Scott", freq=FALSE, main = "Bootstrap Distribution \n (Figure 8a)", xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")), col = "lightblue")
+qqnorm(times.diff.mean, main = "Normal Q-Q Plot \n (Figure 8b)")
+qqline(times.diff.mean, col = "red")
+
+#getting the quantile
+par(opar)
+CI <- quantile(times.diff.mean, prob = c(0.025, 0.975))
+CI
+
+
+#NOT FINISHED
+#THE BACK TWO ROWS PRESENT THIS ON TUESDAY
+14. Import the data from Girls2004 (see Section 1.2).
+
+(a) Perform some exploratory data analysis and obtain summary statistics on the
+weights of baby girls born in Wyoming and Arkansas (do separate analyses for each state).
+
+site <- "http://www1.appstate.edu/~arnholta/Data/Girls2004.csv"
+girls <- read.csv(file=url(site))
+hist(girls$Weight, breaks = "Scott", main = "Figure 6a", col = "lightblue")
+qqnorm(girls$Weight, main = "Figure 6b")
+qqline(Arsenic, col = "red")
+
+
+(b) Bootstrap the difference in means, plot the distribution, and give the summary
+statistics. Obtain a 95% bootstrap percentile confidence interval and
+interpret this interval.
+
+weightAK <- subset(girls, select = Weight, subset = State == "AK", drop = TRUE)
+weightWY <- subset(girls, select = Weight, subset = State == "WY", drop = TRUE)
+B <- 10^4
+weight.diff.mean <- numeric(B)
+set.seed(5)
+for (i in 1:B){
+  AK.sample <- sample(weightAK, size = length(weightAK), replace = TRUE)
+  WY.sample <- sample(weightWY, size = length(weightWY), replace = TRUE)
+  weight.diff.mean[i] <- mean(AK.sample) - mean(WY.sample)
+}
+opar <- par(no.readonly = TRUE)
+par(mfrow=c(1, 2))
+hist(weight.diff.mean, breaks = "Scott", freq=FALSE, main = "Bootstrap Distribution \n (Figure 8a)", xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")), col = "lightblue")
+qqnorm(weight.diff.mean, main = "Normal Q-Q Plot \n (Figure 8b)")
+qqline(weight.diff.mean, col = "red")
+
+par(opar)
+CI <- quantile(weight.diff.mean, prob = c(0.025, 0.975))
+CI
+
+(c) What is the bootstrap estimate of the bias? What fraction of the bootstrap
+standard error does it represent?
+
+bootstrapEstimate = mean(weight.diff.mean) - (mean(weightAK) - mean(weightWY))
+
+(d) Conduct a permutation test to calculate the difference in mean weights and
+state your conclusion.
+
+(e) For what population(s), if any, does this conclusion hold? Explain.
+  
