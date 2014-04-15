@@ -1,0 +1,108 @@
+
+
+
+Cocaine Addiction
+========================================================
+
+
+Two different methods to read in the data are illustrated next.
+
+```{r Cocaine}
+Outcome <- c(rep("relapse", 10), rep("no relapse", 14), rep("relapse", 18), rep("no relapse", 6))
+Drug <- c(rep("Desipramine", 24), rep("Lithium", 24))
+Cocaine <- data.frame(Outcome, Drug)
+head(Cocaine)
+ANS <- with(data = Cocaine,
+            tapply(Outcome == "relapse", Drug, mean)
+            )
+ANS #
+obsDiffProp <- ANS[1] - ANS[2]
+names(obsDiffProp) <- NULL
+obsDiffProp
+```
+
+```{r drug2}
+Outcome2 <- c(rep(1, 10), rep(0, 14), rep(1, 18), rep(0, 6))
+Drug2 <- c(rep("Desipramine", 24), rep("Lithium", 24))
+Cocaine2 <- data.frame(Outcome2, Drug2)
+head(Cocaine2)
+ANS2 <- with(data = Cocaine2,
+     tapply(Outcome2, Drug2, mean)
+            )
+ANS2
+obsDiffProp2 <- ANS2[1] - ANS2[2]
+names(obsDiffProp2) <- NULL
+obsDiffProp2
+```
+
+Regardless of the method used to read in the data, the observed difference in proportion of addicts who relapse using Desipramine and Lithium is `r round(obsDiffProp, 4)`. 
+
+
+Repeating the Experiment
+========================
+
+The following code can be used when reading the data into a data frame using the second approach.
+
+```{r coke1rep}
+N <- 10^4 -1
+DiffProp <- numeric(N)
+set.seed(4)
+for (i in 1:N) {
+# sample of size 24 # from the total 48 addicts
+index <- sample(48, size = 24, replace = FALSE)
+DiffProp[i] <- mean(Cocaine2$Outcome2[index]) - mean(Cocaine2$Outcome2[-index])
+}
+hist(DiffProp, col = "blue", breaks = "Scott", xlab = "", main = "")
+abline(v = obsDiffProp2, col = "red")
+pvalue1 <- (sum(DiffProp <= obsDiffProp2) + 1)/(N + 1)
+pvalue1
+# ggplot2 approach
+library(ggplot2)
+DF <- data.frame(x = DiffProp)
+p <- ggplot(data = DF) + 
+  geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4) +
+  theme_bw()
+p
+x.dens <- density(DiffProp)
+df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
+p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + 
+  labs(x = expression(hat(p)[Desipramine] - hat(p)[Lithium]), y = '', title = "Randomization Distribution")
+```
+
+The following code can be used when reading the data into a data frame using the first approach.
+
+```{r coke2rep}
+N <- 10^4 -1
+DiffProp <- numeric(N)
+set.seed(4)
+for (i in 1:N) {
+# sample of size 24 # from the total 48 addicts
+index <- sample(48, size = 24, replace = FALSE)
+DiffProp[i] <- mean(Cocaine$Outcome[index]=="relapse") - mean(Cocaine$Outcome[-index]=="relapse")
+}
+hist(DiffProp, col = "blue", breaks = "Scott", xlab = "", main = "")
+abline(v = obsDiffProp, col = "red")
+pvalue <- (sum(DiffProp <= obsDiffProp) + 1)/(N + 1)
+pvalue
+# ggplot2 approach
+DF <- data.frame(x = DiffProp)
+p <- ggplot(data = DF) + 
+  geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4) + 
+  theme_bw()
+p
+x.dens <- density(DiffProp)
+df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
+p + geom_area(data = subset(df.dens, x <= obsDiffProp & x >= min(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + 
+  labs(x = expression(hat(p)[Desipramine] - hat(p)[Lithium]), y = '', title = "Randomization Distribution")
+```
+
+Recall that if the true _p_-value is 0.02, then we can expect the standard deviation of our simulated _p_-value to be approximately $\sqrt{p\times(1-p)/N}$, or approximately `r round((.02*.98/N)^.5, 4)`.
+
+Mathematical Symbols
+=======================
+
+There are many online references for writing in \LaTeX.  Here is a [link to a pdf](http://mirrors.ibiblio.org/CTAN/info/examples/Math_into_LaTeX-4/SymbolTables.pdf) that you may find useful.
+
+Try writing a few equations with \LaTeX.  Once you get the hang of \LaTeX, you will $\heartsuit$ it!  
+
+$$\bar{y} = \sum_{i=1}^{n} \frac{y_i}{n}$$

@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 
 
 Can A New Drug Reduce the Spread of Schistosomiasis?
