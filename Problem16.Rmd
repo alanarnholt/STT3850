@@ -1,0 +1,110 @@
+Homework - Chapter 5 Problem 16
+========================================================
+
+---
+author: Dan Reed
+title: "Problem16"
+output: html_document
+---
+
+16. Import the data from Flight Delays Case Study in Section 1.1 data into R.
+Although the data are on all UA and AA ???ights ???own in May and June of 2009,
+we will assume these represent a sample from a larger population of UA and
+AA ???ights ???own under similar circumstances. We will consider the ratio of
+means of the ???ight delay lengths,??UA/??AA.
+
+(a) Perform some exploratory data analysis on ???ight delay lengths for each of
+UA and AA ???ights.
+
+```{r}
+site = "http://www1.appstate.edu/~arnholta/Data/FlightDelays.csv"
+Flights = read.csv(site)
+AA = Flights$Delay[Flights$Carrier=="AA"]
+UA = Flights$Delay[Flights$Carrier=="UA"]
+
+mean(AA)
+sd(AA)
+hist(AA, col = 'blue')
+
+mean(UA)
+sd(UA)
+hist(UA, col='red')
+```
+Both distributions are unimodal and skewed right, with a center around 0.
+
+(b) Bootstrap the mean of ???ight delay lengths for each airline separately and
+describe the distribution.
+
+```{r, echo=FALSE}
+N = 10000
+AA.mean = numeric(N)
+UA.mean = numeric(N)
+sample.bias = numeric(N)
+set.seed(13)
+
+for(i in 1:N){
+  AA.sample = sample(AA, size=length(AA), replace = TRUE)
+  UA.sample = sample(UA, size=length(UA), replace = TRUE)
+  AA.mean[i] = mean(AA.sample)
+  UA.mean[i] = mean(UA.sample)
+  sample.bias[i] = mean(UA.sample) - mean(AA.sample)
+}
+
+par(mfrow = c(1, 2))
+hist(UA.mean, freq=FALSE, main = "Bootstrap Distribution", col = 'red')
+hist(AA.mean, freq=FALSE, main = "Bootstrap Distribution", col = 'blue')
+
+```
+
+Both distributions are unimodal, and centered. The center of UA is about 15, and the center of AA is about 10.5.
+
+( c ) Bootstrap the ratio of means. Provide plots of the bootstrap distribution and
+describe the distribution.
+
+```{r}
+N = 10000
+ratio = numeric(N)
+
+for(i in 1:N){
+  AA.sample = sample(AA, size=length(AA), replace = TRUE)
+  UA.sample = sample(AA, size=length(UA), replace = TRUE)
+  ratio[i] = mean(AA.sample)/mean(UA.sample)
+}
+
+hist(ratio, col='purple')
+```
+
+The shape is unimodal, with some skew to the right.
+
+
+(d) Find the 95% bootstrap percentile interval for the ratio of means. Interpret
+this interval.
+
+```{r}
+quant = quantile(ratio, probs=c(0.025, 0.975))
+quant
+```
+
+Well, it appears based on this that most ratio's fall closer to 1 then anything else, meaning that 
+overall the delay times for the two airlines are very similar.
+
+(e) What is the bootstrap estimate of the bias? What fraction of the bootstrap
+standard error does it represent?
+
+```{r}
+data = mean(AA) - mean(UA)
+bias = mean(sample.bias) - data
+standardError = bias/sd(sample.bias)
+bias
+standardError
+```
+The bias is 11.78485 and the standard error is 7.7156%
+
+
+(f) For inference in this text, we assume that the observations are independent.
+Is that condition met here? Explain
+
+The two airlines are both affected by third party variables such as weather, but one airline 
+being delayed does not directly affect whether or not the other airline is delayed.
+Therefore, the condition that the observations are independent is met for this data set.
+
