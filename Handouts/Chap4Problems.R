@@ -117,9 +117,9 @@ for(i in 1:sims){
 W <- xbar - ybar
 mean(W)  # close to -3
 sd(W)    # close to 1.76
-mean(W < 1.5)
+mean(W < -1.5)
 # Exact answer
-pnorm(1.5, -3, sqrt(3^2/9 + 5^2/12))
+pnorm(-1.5, -3, sqrt(3^2/9 + 5^2/12))
 ## 15 & 16
 
 ## 17
