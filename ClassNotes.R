@@ -209,3 +209,45 @@ state your conclusion.
 
 (e) For what population(s), if any, does this conclusion hold? Explain.
   
+qqnorm(height)
+qqline(height)
+xbar <- mean(height)
+z <- qnorm(.95)
+sigma <- 2
+n<-length(height)
+CI <- xbar + c(-1,1)*z*sigma/sqrt(n)
+CI
+library(PASWR)
+z.test(x=height, sigma.x = 2, conf.level = .90)
+zobs <- (mean(height) - 0)/(2/sqrt(12))
+
+s <- sd(height)
+CT <- qt(.95, n-1)
+CI <- xbar + c(-1, 1)*CT*s/sqrt(n)
+t.test(height, mu =74, alternative ="less")
+
+
+If x1 ... xn ~iid N(miu1, sigma1)
+and y1 .... ym ~iid N(miu2, sigma2)
+xbar - ybar ~ N(miu1-miu2, sqrt(sigma1^2/n + sigma2^2/m))
+z = (xbar - ybar)-(miu1 - miu2) / sqrt(sigma1^2/n + sigma2^2/m)
+
+site <- "http://www1.appstate.edu/~arnholta/Data/FlightDelays.csv"
+FD <- read.csv(site)
+library(ggplot2)
+ggplot(data=FD, aes(x=Delay)) + geom_density() + facet_grid(Carrier~.)
+tapply(FD$Delay, FD$Carrier, mean)
+CI.93(miu_aa - miu_ua) = [-8.67, -3.096]
+t.test(Delay~Carrier, data=FD, conf.level=0.93)
+#df(r) = 1843.762
+qt(c(.035,.965),1843.762)
+
+Stuff <- 10^4
+pTest <- numeric(Stuff)
+set.seed(13)
+n <- sum(!is.na(FD$Delay))
+for (i in 1:Stuff){
+  x <- sample(FD$Delay, size = n, replace = TRUE)
+  pTest[i] <- mean(x)
+}
+t.test(Delay~Month, data=FD, conf.level=0.97)
