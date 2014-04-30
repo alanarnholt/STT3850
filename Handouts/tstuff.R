@@ -6,33 +6,37 @@ ggplot(data = FD, aes(x = Carrier, y = Delay)) + geom_boxplot() + theme_bw()
 ggplot(data = FD, aes(x = Delay)) + facet_grid(Carrier ~ .) + geom_density(fill = "pink") + theme_bw()
 ggplot(data = FD, aes(sample = Delay, color = Carrier)) + stat_qq() + theme_bw()
 SD <- with(data = FD, tapply(Delay, Carrier, sd))
+SD
 MEANS <- with(data = FD, tapply(Delay, Carrier, mean))
+MEANS
 xtabs(~Carrier, data = FD)
 #  
 # Permutation test
 delays <- FD$Delay
-theta.obs <- MEANS[2] - MEANS[1]
+theta.obs <- MEANS[1] - MEANS[2]
 names(theta.obs) <- NULL
 theta.obs
 SIMS <- 10^4 - 1
 theta.hat <- numeric(SIMS)
 set.seed(1)
 for(i in 1:SIMS){
-  index <- sample(2906 + 1123, size = 1123, replace = FALSE)
+  index <- sample(2906 + 1123, size = 2906, replace = FALSE)
   theta.hat[i] <- mean(delays[index]) - mean(delays[-index])
 }
 hist(theta.hat, freq= FALSE, breaks = "Scott")
-curve(dt(x, 1843), -5, 5, add = TRUE)
 theta.obs
+pvalue <- (sum(theta.hat <= theta.obs) + 1)/(SIMS + 1)
+pvalue
+
 set.seed(2)
 for(i in 1:SIMS){
-  index <- sample(2906 + 1123, size = 1123, replace = FALSE)
-  theta.hat[i] <- (mean(delays[index]) - mean(delays[-index]))/sqrt((sd(delays[index])^2/1123 + sd(delays[-index])^2/4029))
+  index <- sample(2906 + 1123, size = 2906, replace = FALSE)
+  theta.hat[i] <- (mean(delays[index]) - mean(delays[-index]))/sqrt((sd(delays[index])^2/2906 + sd(delays[-index])^2/1123))
 }
 hist(theta.hat, freq= FALSE, breaks = "Scott", xlim = c(-5, 5))
 curve(dt(x, 1843), -5, 5, add = TRUE)
 t.test(Delay ~ Carrier, data = FD)$stat
-simPvalue <- mean(theta.hat <= t.test(Delay ~ Carrier, data = FD)$stat)
+simPvalue <- (sum(theta.hat <= t.test(Delay ~ Carrier, data = FD)$stat) + 1)/(SIMS + 1)
 simPvalue
 t.test(Delay ~ Carrier, data = FD)
 ########################################
