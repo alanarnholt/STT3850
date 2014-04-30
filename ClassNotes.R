@@ -209,6 +209,71 @@ state your conclusion.
 
 (e) For what population(s), if any, does this conclusion hold? Explain.
   
+<<<<<<< HEAD
+#11   - same as 10
+site = "http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv"
+chlorine = read.csv(file=url(site))
+chlorine <- subset(chlorine, select = Chlorine, subset = !is.na(Chlorine), drop = T)
+chlorine = sort(chlorine)
+B <- 10^4
+Boot.mean = numeric(B)
+set.seed(7)
+n <- sum(!is.na(chlorine))
+for (i in 1:B){
+  x <- sample(chlorine, size = n, replace = TRUE)
+  Boot.mean[i] <- mean(x, trim=.25)
+}
+mean(Boot.mean)
+quantile(Boot.mean, probs = c(.025, .975))
+Bias <- mean(Boot.mean) - mean(chlorine)
+Bias/sd(Boot.mean)
+
+#Bioequivalence
+
+qqnorm(height)
+qqline(height)
+xbar <- mean(height)
+z <- qnorm(.95)
+sigma <- 2
+n<-length(height)
+CI <- xbar + c(-1,1)*z*sigma/sqrt(n)
+CI
+library(PASWR)
+z.test(x=height, sigma.x = 2, conf.level = .90)
+zobs <- (mean(height) - 0)/(2/sqrt(12))
+
+s <- sd(height)
+CT <- qt(.95, n-1)
+CI <- xbar + c(-1, 1)*CT*s/sqrt(n)
+t.test(height, mu =74, alternative ="less")
+
+
+If x1 ... xn ~iid N(miu1, sigma1)
+and y1 .... ym ~iid N(miu2, sigma2)
+xbar - ybar ~ N(miu1-miu2, sqrt(sigma1^2/n + sigma2^2/m))
+z = (xbar - ybar)-(miu1 - miu2) / sqrt(sigma1^2/n + sigma2^2/m)
+
+site <- "http://www1.appstate.edu/~arnholta/Data/FlightDelays.csv"
+FD <- read.csv(site)
+library(ggplot2)
+ggplot(data=FD, aes(x=Delay)) + geom_density() + facet_grid(Carrier~.)
+tapply(FD$Delay, FD$Carrier, mean)
+CI.93(miu_aa - miu_ua) = [-8.67, -3.096]
+t.test(Delay~Carrier, data=FD, conf.level=0.93)
+#df(r) = 1843.762
+qt(c(.035,.965),1843.762)
+
+Stuff <- 10^4
+pTest <- numeric(Stuff)
+set.seed(13)
+n <- sum(!is.na(FD$Delay))
+for (i in 1:Stuff){
+  x <- sample(FD$Delay, size = n, replace = TRUE)
+  pTest[i] <- mean(x)
+}
+t.test(Delay~Month, data=FD, conf.level=0.97)
+
+=======
 qqnorm(height)
 qqline(height)
 xbar <- mean(height)
