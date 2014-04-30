@@ -76,3 +76,93 @@ set.seed(1)
 b.obj <- boot(FD, statistic = fbt, R = B)
 boot.ci(b.obj, type = c("perc", "stud"))
 plot(b.obj)
+
+####
+## Prob 26
+####
+site <- "http://www1.appstate.edu/~arnholta/Data/MnGroundwater.csv"
+GW <- read.csv(site)
+str(GW)
+# Base histogram
+hist(GW$Alkalinity, xlab = "Alkalinity", freq = FALSE, 
+     breaks = "Scott", col = "pink", main = "")
+qqnorm(GW$Alkalinity)
+qqline(GW$Alkalinity)
+# That was ugly :( --- this is better! :)
+library(ggplot2)
+p <- ggplot(data = GW, aes(x = Alkalinity)) + 
+  geom_density(fill = "pink", alpha = 0.3) + 
+  theme_bw()
+p
+pqq <- ggplot(data = GW, aes(sample = Alkalinity)) + stat_qq() + theme_bw()
+pqq
+# part b
+xbar <- mean(GW$Alkalinity)
+S <- sd(GW$Alkalinity)
+n <- sum(!is.na(GW$Alkalinity))
+ct <- qt(c(0.975, 0.025), n - 1)
+c(xbar, S, n, ct)
+CI <- xbar - ct*S/sqrt(n)
+CI
+# using t.test
+t.test(GW$Alkalinity)$conf
+# 
+B <- 10^4 - 1
+alk <- GW$Alkalinity
+MALK <- numeric(B)
+TALK <- numeric(B)
+set.seed(1)
+for(i in 1:B){
+  bootsample <- sample(alk, size = n, replace = TRUE)
+  MALK[i] <- mean(bootsample)
+  TALK[i] <- (mean(bootsample) - xbar)/(sd(bootsample)/sqrt(n))
+}
+percentileCI <- quantile(MALK, probs = c(0.025, 0.975))
+percentileCI
+CT <- quantile(TALK, probs = c(0.975, 0.025))
+CT
+CIbootT <- xbar - CT*S/sqrt(n)
+CIbootT
+#### Using boot
+library(boot)
+mb <- function(data, i){
+    d <- data[i, ]
+    M <- mean(d$Alkalinity)
+    V <- var(d$Alkalinity)/length(d$Alkalinity)
+    c(M, V)
+  }
+b.obj <- boot(GW, statistic = mb, R = B)
+b.obj
+boot.ci(b.obj, type = c("perc", "stud"))
+#### Show all next to each other...
+t.test(GW$Alkalinity)$conf
+percentileCI
+CIbootT
+boot.ci(b.obj, type = c("perc", "stud"))
+#### Prob 27
+site <- "http://www1.appstate.edu/~arnholta/Data/TXBirths2004.csv"
+Births <- read.csv(site)
+head(Births)
+T1 <- xtabs(~Smoker, data = Births)
+T1
+# b
+p <- ggplot(data = Births, aes(x = Weight)) + 
+  geom_density(fill = "blue", alpha = 0.3) + 
+  facet_grid(Smoker~.) + 
+  theme_bw()
+p
+# c
+t.test(Weight ~ Smoker, data = Births)$conf
+
+tmf <- function(data, i){
+  d <- data[i, ]
+  M <- tapply(d$Weight, d$Smoker, mean)
+  V <- tapply(d$Weight, d$Smoker, var)/tapply(d$Weight, d$Smoker, length)
+  c(M[1] - M[2], V[1] + V[2])
+}
+b.obj <- boot(Births, statistic = tmf, R = 10^4 - 1)
+b.obj
+boot.ci(b.obj, type = c("perc", "stud"))
+t.test(Weight ~ Smoker, data = Births)$conf
+# part d
+t.test(Weight ~ Smoker, data = Births, alternative = "greater")
