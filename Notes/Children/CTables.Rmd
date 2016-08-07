@@ -1,5 +1,7 @@
 ---
-output: pdf_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 Contingency Tables
@@ -114,7 +116,7 @@ curve(dchisq(x, 4), 0, 20, add=TRUE, col = "red", lwd = 4)
 library(ggplot2)
 DF <- data.frame(x = result)
 p <- ggplot(data = DF, aes(x= x)) + geom_density(fill = "pink") + theme_bw()
-p + stat_function(fun = dchisq, arg = list(df = 4), color = "red", lwd = 2)
+p + stat_function(fun = dchisq, args = list(df = 4), color = "red", lwd = 2)
 ```
 
 The simulated permutation $p$-value is `r pvalue`.  The $p$-value that is returned from the `chisq.test()` is `r pvalueCH`.  In this case, the two $p$-values are fairly similar.  This will not always be the case.  

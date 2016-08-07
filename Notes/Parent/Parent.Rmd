@@ -1,5 +1,8 @@
 ---
-output: html_document
+output: 
+  html_document: 
+    highlight: textmate
+    theme: cosmo
 ---
 Class Notes For STT 3850
 ========================================================

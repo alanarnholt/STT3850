@@ -1,0 +1,10 @@
+base
+ggplot2
+e1071
+plyr
+MASS
+lattice
+PASWR
+boot
+knitr
+xtable
