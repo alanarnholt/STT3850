@@ -2,7 +2,7 @@
 output: 
   html_document: 
     highlight: textmate
-    theme: cosmo
+    theme: yeti
 ---
 Class Notes For STT 3850
 ========================================================
@@ -11,18 +11,18 @@ Class Notes For STT 3850
 
 ```{r Systime, echo = FALSE, comment = NA, message = FALSE}
 options(width = 80)
-require(ggplot2)
-require(e1071)
-require(plyr)
-require(PASWR)
-require(boot)
-require(knitr)
+library(ggplot2)
+library(e1071)
+library(plyr)
+library(PASWR2)
+library(boot)
+library(knitr)
 DT <- format(Sys.time(), "%A, %B %d, %Y - %X.")
 ```
 Last compiled `r DT`
 
 ```{r setup, comment = NA, echo = FALSE, message = FALSE}
-opts_chunk$set(comment = NA, cache = TRUE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', tidy = TRUE)
+opts_chunk$set(comment = NA, cache = TRUE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', tidy = FALSE)
 ```
 
 ```{r child='../Children/Intro.Rmd'}

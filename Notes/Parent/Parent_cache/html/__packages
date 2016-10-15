@@ -8,3 +8,7 @@ PASWR
 boot
 knitr
 xtable
+RDocumentation
+PASWR2
+dplyr
+statsr

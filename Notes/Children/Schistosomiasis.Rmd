@@ -1,5 +1,7 @@
 ---
-output: pdf_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 
@@ -41,6 +43,8 @@ schis[order(gender, group, worms),]
      )
 ```
 
+## Old School
+
 ```{r STATS}
 with(data = schis, 
 tapply(worms, list(gender, group), median)    
@@ -51,6 +55,16 @@ tapply(worms, list(gender, group), mean)
 with(data = schis, 
 tapply(worms, list(gender, group), sd)    
      )
+```
+
+## Hadley Verse
+
+```{r HV1}
+library(dplyr)
+ans <- schis %>%
+  group_by(gender, group) %>%
+  summarize(Median = median(worms), Mean = mean(worms), SD = sd(worms))
+ans
 ```
 
 The descriptive analysis in Questions 1 and 2 points to a positive treatment effect: K11777 appears to have reduced the number of parasite worms in this sample.  But descriptive statistics are usually only the first step in ascertaining whether an effect is real; we often conduct a significance test or create a confidence interval to determine if chance alone could explain the effect.
@@ -94,9 +108,10 @@ The reasoning in the previous activity leads us to the randomization test and an
 > **Key Concept:** Assuming that nothing except the random allocation process is creating group differences, the _p_-value of a randomization test is the probability of obtaining a group difference as large as or larger than the group difference actually observed in the experiment.
 
 > **Key Concept:** The calculation of an empirical _p_-value requires these steps:
-* Repeat the random allocation process a number of times (N times).
-* Record, each time, whether or not the group difference exceeds or is the same as the one observed in the actual experiment (let X be the number of times the group difference exceeds or is the same as the one observed).
-* Compute (X + 1)/(N + 1) to get the _p_-value, the proportion of times the difference exceeds or is the same as the observed difference.
+
+* Repeat the random allocation process a number of times ($N$ times).
+* Record, each time, whether or not the group difference exceeds or is the same as the one observed in the actual experiment (let $X$ be the number of times the group difference exceeds or is the same as the one observed).
+* Compute $(X + 1)/(N + 1)$ to get the _p_-value, the proportion of times the difference exceeds or is the same as the observed difference.
 
 **Note:** Including the observed value as one of the possible allocations is a more conservative approach and protects against getting a _p_-value of 0.  Our observation from the actual experiment provides evidence that the true _p_-value is greater than zero.
 
@@ -108,12 +123,13 @@ While physical simulations (such as the index cards activity) help us understand
 Two-Sample Permutation Test
 =============================
 > Pool the _m + n_ values.
+
 * **repeat**
-  * Draw a resample of size _m_ without replacement.
-  * Use the remaining _n_ observations for the other sample.
-  * Calculate the difference in means or another test statistic that compares samples.
+    + Draw a resample of size _m_ without replacement.
+    + Use the remaining _n_ observations for the other sample.
+    + Calculate the difference in means or another test statistic that compares samples.
 * **until** 
-  * we have enough samples
+    + we have enough samples
 
 Calculate the _p_-value as the fraction of times the random statistics are more or as extreme as the original statistic. Optionally, plot a histogram of the random statistic values.   
  
@@ -127,7 +143,7 @@ Using Computer Simulations to Conduct a Hypothesis Test
 
 2. Take the control group average minus the K11777 treatment group average.
 
-3. Write code that perform steps 1. and 2. N = 99,999 times.  Compute and report the empirical _p_-value.
+3. Write code that perform steps 1. and 2. $N = 99,999$ times.  Compute and report the empirical _p_-value.
 
 4. Create a histogram of the N simulated differences between group means and comment of the shape of the histogram.  
 
@@ -151,6 +167,14 @@ observed <- ANS1[1] - ANS1[2]
 observed
 names(observed) <- NULL
 observed
+# OR
+NDHV <- schis %>%
+  filter(gender == "Female") %>%
+  group_by(group) %>%
+  summarize(Means = mean(worms))
+NDHV
+obs <- NDHV[1, 2] - NDHV[2, 2]
+obs
 ```
 Since we will be working with the **worms** variable for females only, we will create a vector holding these values.  Then, we will draw a random sample of size 5 from the numbers 1 through 10 (there are 10 observations).  The worms values corresponding to these positions will be values for the Control group and the remaining ones for the Treatment group.  The mean difference of this permutation will be stored in **result**.  This will be repeated many times.
 
@@ -168,6 +192,24 @@ for (i in 1:N){
   index <- sample(10, size = 5, replace = FALSE)
   result[i] <- mean(Worms2[index]) - mean(Worms2[-index])
 }
+pvalue <- (sum(result >= observed) + 1)/(N + 1) # p-value
+pvalue  # results will vary
+```
+
+## Hadley Verse Permutation
+
+```{r, label = "HVperm"}
+library(statsr)
+MDIFF <- ND %>%
+          rep_sample_n(size = 10, reps = N, replace = FALSE) %>%
+          summarize(MD = mean(worms[6:10]) - mean(worms[1:5]))
+pvalue2 <- (sum(MDIFF$MD >= observed) + 1)/(N + 1)
+pvalue2
+```
+
+## Graphs
+
+```{r, label = "GRnow1"}
 hist(result, col = "blue", freq = FALSE, main = "", breaks = "Scott")
 d.res <- density(result)
 plot(d.res, main ="", xlab = "", ylab = "")
@@ -175,16 +217,22 @@ polygon(d.res, col ="pink")
 xs <- c(7.6, d.res$x[d.res$x >= 7.6])
 ys <- c(0, d.res$y[d.res$x>=7.6])
 polygon(xs, ys, col = "red")
-pvalue <- (sum(result >= observed) + 1)/(N + 1) # p-value
-pvalue  # results will vary
+```
+
+```{r, label = "GRnow2"}
 # ggplot2 approach now
 DF <- data.frame(x = result)
-p <- ggplot(data = DF) + geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4) + theme_bw()
+p <- ggplot(data = DF) + 
+  geom_density(aes(x = x, y = ..density..), fill = 'pink', alpha = 0.4) + 
+  theme_bw()
 p
 x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
-p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), y = '', title = "Randomization Distribution") + theme_bw()
+p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + 
+  labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), y = '', title = "Randomization Distribution") + 
+  theme_bw()
 ```
+
 The code snippet **result >= observed** results in a vector of **TRUE's** and **FALSE's** depending on whether or not the mean difference computed for a resample is greater than the observed mean difference.  **sum(result >= observed)** counts the number of **TRUE's**.  Thus, the computed _p_-value is just the proportion of statistics (including the original) that are as large or larger than the original mean difference. The empirical _p_-value is `r pvalue`.
 
 Because the sample sizes in the schistosomiasis study are small, it is possible to apply mathematical methods to obtain an **exact _p_-value** for this randomization test.  An exact _p_-value can be obtained by writing down the set of all possibilities (assuming each possible outcome is equally likely under the null hypothesis) and then calculating the proportion of the set for which the difference is at least as large as the observed difference.  In the schistosomiasis study, this requires listing every possible combination in which five of the 10 female mice can be allocated to the treatment (and the other five mice are assigned to the control).  There are $\binom{10}{5}=$ `r choose(10,5)` possible combinations.  For each of these combinations, the difference between the treatment and control means is then calculated.  The exact _p_-value is the proportion of times in which the difference in the means is at least as large as the observed difference of 7.6 worms.  Of these 252 combinations, six have a mean difference of 7.6 and one has a mean difference greater than 7.6 (namely 8.8).  Since all 252 of these random allocations are equally likely, the exact _p_-value in this example is 7/252 = 0.0278.  However, most real studies are too large to list all possible samples.  Randomization tests are almost always adequate, providing approximate _p_-values that are close enough to the true _p_-value.  
@@ -201,13 +249,11 @@ Explain what each line of the following code is doing.
 ```{r EXPLAIN}
 # PROGRAMMING IS THE BEST WAY TO DEBUG YOUR THINKING!
 # Theoretical Answer
-require(PASWR)
 DATA <- c(1, 2, 2, 10, 7, 16, 10, 10, 7, 17)
 DATA
 OBS <- mean(DATA[6:10]) - mean(DATA[1:5])
 OBS
 #
-# ANS <- t(Combinations(10, 5))
 ANS <- t(combn(10, 5))
 head(ANS)
 nn <- dim(ANS)[1]
@@ -231,8 +277,9 @@ df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= 7.6 & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') 
 # Another approach ....
 #
-P3 <- t(SRS(DATA, n=5))
-P2 <- t(SRS(DATA, n=5))
+library(PASWR2)
+P3 <- t(srs(DATA, n=5))
+P2 <- t(srs(DATA, n=5))
 # Note need to reorder the P2 values
 P2R <- P2[, 252:1]
 apply(P2R, 2, mean)
@@ -324,7 +371,7 @@ What Can We Conclude from the Schistosomiasis Study?
 
 The key question in this study is whether K11777 will reduce the spread of a common and potentially deadly disease.  The result that you calculated from the one-sided randomization hypothesis test should have been close to the exact _p_-value of 0.0278.  This small _p_-value allows you to reject the null hypothesis and conclude that the worm counts are lower in the female treatment group than in the female control group.  In every study, it is important to consider how random allocation and random sampling impact the conclusions.
 
-> _Random allocation_: The schistosomiasis stude was an **experiment** because the units (female mice) were randomly allocated to treatment or contol groups.  To the best of our knowledge this experiment controlled for any outside influences and allows us to state that there is a cause and effect relationship between the treatment and response.  Therefore, we can conclude that K11777 did _cause_ a reduction in the average number of schistosome parasites in these female mice.
+> _Random allocation_: The schistosomiasis study was an **experiment** because the units (female mice) were randomly allocated to treatment or contol groups.  To the best of our knowledge this experiment controlled for any outside influences and allows us to state that there is a cause and effect relationship between the treatment and response.  Therefore, we can conclude that K11777 did _cause_ a reduction in the average number of schistosome parasites in these female mice.
 
 > _Random sampling_: Mice for this study are typically ordered from a facility that breeds and rasies lab mice.  It is possilbe that the mice in this study were biologically related or were exposed to something that caused their response to be different from that of other mice.  Similarly, there are risks in simply assuming that male mice have the same response as females.  Since our sample of 10 female mice was not selected at random from the population of all mice, we should question whether the results from this study hold for all mice.
 
@@ -348,12 +395,13 @@ status <- c(rep("Job", 6), rep("LaidOff", 2), "Job", "LaidOff")
 west <- data.frame(ages, status)
 rm(ages, status)
 west
-require(ggplot2)
+library(ggplot2)
 p <- ggplot(data = west, aes(status, ages)) + 
   geom_point(position = "jitter", aes(color = status), size = 5) + theme_bw()
 p
 ```
-  * Conduct a permutation test to determine whether the observed difference between means is likely to occur just by chance.  Here we are interested in only a one-sided test to determine if the mean age of people who were laid off is higher than the mean age of people who were not laid off.
+  
+* Conduct a permutation test to determine whether the observed difference between means is likely to occur just by chance.  Here we are interested in only a one-sided test to determine if the mean age of people who were laid off is higher than the mean age of people who were not laid off.
   
 ```{r AGE2}
 OBS <- with(data = west,
@@ -372,6 +420,18 @@ for (i in 1:N){
   index <- sample(10, size = 3, replace = FALSE)
   result[i] <- mean(Ages[index]) - mean(Ages[-index])
 }
+pvalue <- (sum(result >= obsDiff) + 1)/(N + 1) # p-value
+pvalue  # results will vary
+
+# Hadley Verse 
+NS <- west %>%
+          rep_sample_n(size = 10, reps = N, replace = FALSE) %>%
+          summarize(MD = mean(ages[1:3]) - mean(ages[4:10]))
+pvalue3 <- (sum(NS$MD >= obsDiff) + 1)/(N + 1)
+pvalue3
+```
+
+```{r, label = "vgnow"}
 hist(result, col = "blue", main = "", xlim =c(-25, 25), breaks = "Scott")
 d.res <- density(result)
 plot(d.res, main ="", xlab = "", ylab = "", xlim =c(-25, 25))
@@ -389,8 +449,7 @@ x.dens <- density(result)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
 p + geom_area(data = subset(df.dens, x >= obsDiff & x <= max(DF$x)), aes(x = x, y = y), fill = 'blue', alpha = 0.4) + labs(x = '', y = '') +
   labs(x = expression(bar(x)[Job] - bar(x)[LaidOff]), y = '', title = "Randomization Distribution")
-pvalue <- (sum(result >= obsDiff) + 1)/(N + 1) # p-value
-pvalue  # results will vary
+
 ```
 The _p_-value is `r pvalue`.
   

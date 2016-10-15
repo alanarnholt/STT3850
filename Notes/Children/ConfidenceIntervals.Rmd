@@ -351,8 +351,8 @@ CI_{1 - \alpha}(\mu_X - \mu_Y) = \left(\bar{X} - \bar{Y} - t_{1 - \alpha/2; \nu}
 **Example 7.8**
 
 ```{r Calculus}
-require(PASWR)
-require(ggplot2)
+library(PASWR)
+library(ggplot2)
 ```
 
 Construct a 90% confidence interval for $\mu_X - \mu_Y$ using the information in `Calculus` which provides the assessment scores for students enrolled in a biostatistics course according to whether they had completed a calculus course prior to enrolling in the biostatistics course. Before constructing a confidence interval, one should verify the assumptions needed to have a valid confidence interval.  In this case we need to check for normality of both samples.
