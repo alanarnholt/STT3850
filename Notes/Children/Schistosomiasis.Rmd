@@ -200,11 +200,22 @@ pvalue  # results will vary
 
 ```{r, label = "HVperm"}
 library(statsr)
+tobs <- t.test(worms ~ group, alternative = "greater", data = ND)$stat
+tobs
 MDIFF <- ND %>%
           rep_sample_n(size = 10, reps = N, replace = FALSE) %>%
-          summarize(MD = mean(worms[6:10]) - mean(worms[1:5]))
+          summarize(MD = mean(worms[6:10]) - mean(worms[1:5]), TD = (mean(worms[6:10]) - mean(worms[1:5]))/(sqrt(var(worms[6:10])/5 + var(worms[1:5])/5)))
 pvalue2 <- (sum(MDIFF$MD >= observed) + 1)/(N + 1)
 pvalue2
+pvalue3 <- (sum(MDIFF$TD >= tobs) +1)/(N + 1)
+pvalue3
+```
+
+```{r, label = "NewGraph"}
+ggplot(data = MDIFF) + 
+  geom_histogram(aes(x = TD, y = ..density..), fill = "green", alpha = 0.5, binwidth = 0.25) + 
+  theme_bw() + 
+  stat_function(fun = dt, args = list(df = t.test(worms ~ group, alternative = "greater", data = ND)$parameter))
 ```
 
 ## Graphs
