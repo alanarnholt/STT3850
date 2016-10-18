@@ -22,7 +22,7 @@ schis
 ```
 
 ```{r F2, fig.width=7, fig.height= 3.5}
-require(ggplot2)
+library(ggplot2)
 p <- ggplot(data = schis, aes(group, worms)) + 
   geom_point(position = "jitter", aes(color = group)) + 
   facet_grid(. ~ gender) + 
@@ -210,6 +210,12 @@ pvalue2 <- (sum(MDIFF$MD >= observed) + 1)/(N + 1)
 pvalue2
 pvalue3 <- (sum(MDIFF$TD >= tobs) +1)/(N + 1)
 pvalue3
+# OR theoretical using inference() from statsr
+inference(y = worms, x = group, data = ND, type = "ht", method = "theoretical", 
+          statistic = "mean", null = 0, alternative = "greater")
+# OR using simulation from inference() from statsr
+inference(y = worms, x = group, data = ND, type = "ht", method = "simulation", 
+          statistic = "mean", null = 0, alternative = "greater")
 ```
 
 ```{r, label = "NewGraph"}
