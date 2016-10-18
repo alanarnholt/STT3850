@@ -2,13 +2,12 @@ base
 ggplot2
 e1071
 plyr
-MASS
 lattice
-PASWR
+PASWR2
 boot
 knitr
-xtable
-RDocumentation
-PASWR2
 dplyr
 statsr
+xtable
+MASS
+PASWR

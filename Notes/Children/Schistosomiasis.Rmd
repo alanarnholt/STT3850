@@ -75,6 +75,7 @@ Statistical Inference Through a Randomization Test
 ==================================================
 
 Whether they take the form of significance tests or confidence intervals, inferential procedures rest on the **fundamental question for inference:** "What would happen if we did this many times?" Let's unpack this question in the context of the female mice schistosomiasis.  We observed a difference in means of 7.6 = 12 - 4.4 worms between the control and treatment groups.  While we expect that this large difference reflects the effectiveness of the drug, it is possible that chance alone could explain this difference.  This "chance alone" position is usually called the null hypothesis and includes the following assumptions:
+
 * The number of parasitic worms found in the liver naturally varies from mouse to mouse.
 * Whether or not the drug is effective, there clearly is variability in the responses of mice to the infestation of schistosomes.
 * Each group exhibits this variability, and even if the drug is not effective, some mice do better than others.

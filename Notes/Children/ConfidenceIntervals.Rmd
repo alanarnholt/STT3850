@@ -1,5 +1,5 @@
 ---
-output: pdf_document
+output: html_document
 ---
 
 
@@ -50,12 +50,12 @@ ACL <- counter/sims*100
 ACL
 ```
 
-The function `CIsim()` from the `PASWR` package is used to run a similar simulation below.
+The function `cisim()` from the `PASWR2` package is used to run a similar simulation below.
 
-```{r CIsim}
-require(PASWR)
+```{r cisim}
+library(PASWR2)
 set.seed(11)
-CIsim(samples = 100, n = 30, parameter = 25, sigma = 4, type = "Mean")
+cisim(samples = 100, n = 30, parameter = 25, sigma = 4, type = "Mean")
 ```
 
 **Example 7.2** An engineer test the gas mileage of a random sample of $n = 30$ of his company cars ready to be sold.  The 95% confidence interval for the mean mileage of all the cars is (29.5, 33.4) miles per gallon.  Evaluate the following statements:
@@ -99,7 +99,7 @@ LL <- mean(xs) - qnorm(1 - alpha/2)*SIGMA/sqrt(n)
 UL <- mean(xs) + qnorm(1 - alpha/2)*SIGMA/sqrt(n)
 CI <- c(LL, UL)
 CI
-require(PASWR)  # or use z.test() from PASWR
+# or use z.test() from PASWR2
 z.test(x = xs, sigma.x = SIGMA, conf.level = 0.90)$conf
 ```
 
@@ -188,7 +188,7 @@ To find the quantile $t_{.95; 27}$ satisfying $P(T_{27} < t_{.95; 27}) = 0.95$,
 ```{r qt}
 qt(.95, 27)
 #
-require(PASWR)
+# Using function from PASWR2
 tsum.test(mean.x = 110, s.x = 7.5, n.x = 28, conf.level = 0.90)$conf
 ```
 
@@ -214,9 +214,9 @@ MEANS
 SD
 qqnorm(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], main = "", col = rgb(1,0,0,.2))
 qqline(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], col = "blue")
-require(lattice)
+# Using lattice
 qqmath(~Weight|Gender,data = NCBirths2004, col = rgb(1,0,0,.1))
-require(ggplot2)
+# Using ggplot2
 ggplot(data = NCBirths2004, aes(sample = Weight)) + stat_qq(color = rgb(1,0,0,.1)) + facet_grid(.~Gender)
 ```
 Since $1 - \alpha = 0.99$, it follows that $\alpha/2 = 0.005$.  The 0.995 quantile for the $t$ distribution with 520 degrees of freedom is $t_{0.995; 520}=$ `r qt(.995, 520)`.  Thus, the 99% confidence interval is `r MEANS[1]`$\pm$ `r qt(.995, 520)`$\times$ `r SD[1]` $/\sqrt{521} =$ (`r t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = .99)$conf[1]`, `r t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = .99)$conf[2]`) g.
