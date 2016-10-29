@@ -1,5 +1,5 @@
 ---
-output: pdf_document
+output: html_document
 ---
 
 
@@ -25,7 +25,7 @@ If we knew the sampling distribution of sample means for samples of size `r sum(
 
 The bootstrap is a procedure that uses the given sample to create a new distribution, called the **bootstrap distribution**, that approximates the sampling distribution for the sample mean (or for other statistics). We will begin by considering only a small subset of the birth weights--- three observations, 3969, 3204, and 2892.
 
-To find the bootstrap distribution of the mean, we draw samples (called _re-samples_ or _bootstrap samples_) of size $n$, with replacement, from the original sample and then compute the mean of each resample. In other words, we now treat the original sample as the population. For instance, Table 1, created with the folowing code shows all $3^3$ or 27 samples of size 3, taking order into account (the notation $x^*$ indicates a resampled observation and $\bar{x}^*$ or $\bar{\theta}^*$ the statistic for the bootstrap sample).
+To find the bootstrap distribution of the mean, we draw samples (called _re-samples_ or _bootstrap samples_) of size $n$, with replacement, from the original sample and then compute the mean of each resample. In other words, we now treat the original sample as the population. For instance, Table 1, created with the following code shows all $3^3$ or 27 samples of size 3, taking order into account (the notation $x^*$ indicates a resampled observation and $\bar{x}^*$ or $\bar{\theta}^*$ the statistic for the bootstrap sample).
 
 ```{r BS, comment = NA}
 rs <- c(3969, 3204, 2892)
@@ -55,7 +55,7 @@ mean(BD[,"xbarstar"])
 
 Thus, the standard deviation of all the resample means listed in Table 1 is `r sd(xbarstar)` and we use this value as an estimate of actual standard error (standard deviation of the true sampling distribution).
 
-Of course, it is hard for three observations to accurately approximate the population. Let us work with the full data set; we draw resmaples of size $n = 1009$ from the 1009 birth weights and calculate the mean for each.
+Of course, it is hard for three observations to accurately approximate the population. Let us work with the full data set; we draw resamples of size $n = 1009$ from the 1009 birth weights and calculate the mean for each.
 
 There are now $1009^{1009}$ samples, too many for exhaustive calculation. Instead, we draw samples randomly, of size 1009 with replacement from the data, and calculate the mean for each. We repeat this many times, say 10,000, to create the bootstrap distribution. You can imagine that there is a table like Table 1 with $1009^{1009}$ rows, and we are randomly picking 10,000 rows from that table.
 
@@ -149,7 +149,7 @@ abline(v = mean(rs2), col = "red")
 par(opar)
 ```
 
-The previous code shows the distributions of two such random samples with sample means $\bar{x}_1 =$ `r mean(rs1)`, $\bar{x}_2 =$ `r mean(rs2)` and standard deviations $s_1 =$ `r sd(rs1)`, $s_2 =$ `r sd(rs2)`, respectively.  Based on the graphs above, we can see that the bootstrap distribution has roughly the same spread and shape as the theoretical sampling distribution, but the centers are different.  This example illustrates some important features of the bootstrap that hold for other statistics besides the mean:  the bootstrap distribution of a particular statistic $\hat{\theta}$ has approximately the same spread and shape as the sampling distirubiton of the statistic $\hat{\theta}$, but the center of the bootstrap distirbution is at the center of the original sample.  Hence we do not use the center of the bootstrap distribution in its own right, but we do compare the center of the bootstrap distribution with the observed statistic; if they differ, it indicates bias.
+The previous code shows the distributions of two such random samples with sample means $\bar{x}_1 =$ `r mean(rs1)`, $\bar{x}_2 =$ `r mean(rs2)` and standard deviations $s_1 =$ `r sd(rs1)`, $s_2 =$ `r sd(rs2)`, respectively.  Based on the graphs above, we can see that the bootstrap distribution has roughly the same spread and shape as the theoretical sampling distribution, but the centers are different.  This example illustrates some important features of the bootstrap that hold for other statistics besides the mean:  the bootstrap distribution of a particular statistic $\hat{\theta}$ has approximately the same spread and shape as the sampling distribution of the statistic $\hat{\theta}$, but the center of the bootstrap distribution is at the center of the original sample.  Hence we do not use the center of the bootstrap distribution in its own right, but we do compare the center of the bootstrap distribution with the observed statistic; if they differ, it indicates bias.
 
 #### BOOTSTRAP DISTRIBUTIONS AND SAMPLING DISTRIBUTIONS
 > For most statistics, bootstrap distributions aproximate the spread, bias, and shape of the actual sampling distribution.
@@ -192,13 +192,13 @@ The first graph in the second and third rows shows the distribution of a random 
 
 #### For most common estimators and under fairly general distribution assumptions, the following need to be noted:
 
-* *Center* The center of the bootstrap distribution is *not* an accurate approximation for the center of the sampling distribution.  For example, the center of the bootstrap distribution for $\bar{X}$ is centered at approximately $\bar{x} = \mu_{\hat{F}}$, the mean of the sample, wheras the sampling distribution is centered at $\mu$.
+* *Center* The center of the bootstrap distribution is *not* an accurate approximation for the center of the sampling distribution.  For example, the center of the bootstrap distribution for $\bar{X}$ is centered at approximately $\bar{x} = \mu_{\hat{F}}$, the mean of the sample, whereas the sampling distribution is centered at $\mu$.
 
 * *Spread* The spread of the bootstrap distribution does reflect the spread of the sampling distribution.
 
 * *Bias* The bootstrap bias estimate does reflect the bias of the sampling distribution.  Bias occurs if a sampling distribution is not centered at the parameter
 
-* *Skewness* The skewness of the bootstrap ditribution does relfect the skewness of the sampling distribution.
+* *Skewness* The skewness of the bootstrap distribution does reflect the skewness of the sampling distribution.
 
 The first point bears emphasis.  It means that *the bootstrap is not used to get better paramter estimates* because the bootstrap distributions are centered around statistics $\hat{\theta}$ calculated from the data rather than unknown population values.  Drawing thousands of bootstrap observations from the original data is not like drawing observations from the underlying population, it does not create new data. 
 
@@ -344,7 +344,7 @@ The permutation distribution is used for a single purpose: calculate a _p_-value
 
 The permutation test for this example results in a _p_-value of `r pvalue`; thus, we conclude that the main commercial times are not the same between the two types of cable TV channels.
 
-* Example 5: Verizon is the primary local telephone company (incumbent local exchange carrier, ILEC) for a large area of the eastern United States.  As such it is responsible for providing repair service for the customers of other telephone companies known as competing local exchange carriers (CLECs) in this region.  Verison is subject to fines if the repair times (the time it takes to fix a problem) for CLEC customers are substantially worse than those for Verizon customers.  The data set `Verizon` contains a random sample of repair times for 1664 ILEC and 23 CLEC customers. 
+* Example 5: Verizon is the primary local telephone company (incumbent local exchange carrier, ILEC) for a large area of the eastern United States.  As such it is responsible for providing repair service for the customers of other telephone companies known as competing local exchange carriers (CLECs) in this region.  Verizon is subject to fines if the repair times (the time it takes to fix a problem) for CLEC customers are substantially worse than those for Verizon customers.  The data set `Verizon` contains a random sample of repair times for 1664 ILEC and 23 CLEC customers. 
 
 ```{r Phone1, fig.height=3.5, fig.width=7}
 site <- "http://www1.appstate.edu/~arnholta/Data/Verizon.csv"
