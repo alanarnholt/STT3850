@@ -1,0 +1,105 @@
+blockquote {
+  font-style: italic
+}
+#footer > p:first-child {
+    float: left;
+    text-align: left;
+    width: 33.3%; }
+
+#footer > p:nth-child(2) {
+    float: left;
+    text-align: center;
+    width: 33.4%; 
+}
+
+#footer > p:last-child {
+    float: right;
+    text-align: right;
+    width: 33.3%; }
+
+
+/* navbar */
+.navbar-default {
+    background-color: black;
+    border-color: #E7E7E7;
+    border-bottom: 5px solid #FFD700;
+}
+/* title */
+.navbar-default .navbar-brand {
+    color: #ffffff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #FFD700;
+    background-color: gray;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #FFD700;
+    background-color: gray;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: black;
+    background-color: #FFD700;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: black;
+    background-color: #FFD700;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #FFD700;
+    border-bottom-color: #FFD700;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #FFD700;
+    border-bottom-color: #FFD700;
+}
+.navbar-default .navbar-nav > .open > a .caret, 
+.navbar-default .navbar-nav > .open > a:hover .caret, 
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #FFD700;
+    border-bottom-color: #FFD700;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+}
+
+
+hr {
+height: 2px;
+color: #FFD700;
+background-color: #FFD700;
+border: none;
+}
+
+
+<link rel="stylesheet" href="./font-awesome-4.5.0/css/font-awesome.min.css">
+
+

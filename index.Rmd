@@ -1,0 +1,12 @@
+---
+title: "Welcome"
+---
+
+
+
+
+* [Class RStudio Server](https://mathr.math.appstate.edu) (you must be registered in the course to access the server)
+
+
+
+* * *
