@@ -9,9 +9,10 @@ navbar:
       href: https://alanarnholt.github.io/resources.html
     - text: "For Students"
       href: https://alanarnholt.github.io/for-students.html
-    - text: "Home Page"
-      href: https://alanarnholt.github.io  
+     
   right:
+    - text: "Home Page"
+      href: https://alanarnholt.github.io 
     - icon: fa-github fa-lg
       href: https://github.com/alanarnholt/STT3850/         
 output:
