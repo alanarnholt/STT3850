@@ -3,12 +3,17 @@ output_dir: "."
 navbar:
   title: "STT 3850"
   left:
-    - text: "Class Notes"
+    - text: "Class Notes (2014)"
       href: https://alanarnholt.github.io/STT3850/Notes/Parent/Parent.html
     - text: "Resources"
       href: https://alanarnholt.github.io/resources.html
     - text: "For Students"
       href: https://alanarnholt.github.io/for-students.html
+    - text: "Syllabus"
+      href: ./Syllabus/SyllabusF2017.html
+    - text: "Course Pacing"
+      href: ./CoursePacing/CoursePacingF2017.html
+      
      
   right:
     - text: "Alan T. Arnholt"

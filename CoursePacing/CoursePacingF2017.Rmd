@@ -1,0 +1,1326 @@
+---
+title: "STT 3850 Course Schedule - Tentative - Building"
+author: "Alan T. Arnholt"
+date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: yeti
+    css: "../css/style.css"
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+### General Notes: {-}
+
+```{block, note-text, type='rmdnote'}
+1.  
+2.
+3.
+```
+
+#### Grading Rubric for Assignments {-}
+
+Field | Excellent (3) | Competent (2)  | Needs Work (1)
+------|---------------|----------------|---------------
+Reproducible | All graphs, code, and answers are created from text files.  Answers are never hardcoded but instead are inserted using inline R code.  An automatically generated references section with properly formatted citations when appropriate and `sessionInfo()` are provided at the end of the document. | All graphs, code, and answers are created from text files.  Answers are  hardcoded. No `sessionInfo()` is provided at the end of the document. References are present but not cited properly or not automatically generated. | Document uses copy and paste with graphs or code.  Answers are hardcoded; and references, when appropriate are hardcoded.
+Statistical Understanding | Answers to questions demonstrate clear statistical understanding by comparing theoretical answers to simulated answers.  When hypotheses are tested, classical methods are compared and contrasted to randomization methods.  When confidence intervals are constructed, classical approaches are compared and contrasted with bootstrap procedures.  The scope of inferential conclusions made is appropriate for the sampling method. | Theoretical and simulated answers are computed but no discussion is present comparing and contrasting the results.  When hypotheses are tested, results for classical and randomization methods are presented but are not compared and contrasted.  When confidence intervals are constructed, classical and bootstrap approaches are computed but the results are not compared and contrasted.  The scope of inferential conclusions made is appropriate for the sampling method. | Theoretical and simulated answers are not computed correctly.  No comparison between classical and randomization approaches is present when testing hypotheses.  When confidence intervals are constructed, there is no comparison between classical and bootstrap confidence intervals .
+Graphics | Graphs for categorical data (barplot, mosaic plot, etc.) have appropriately labeled axes and titles.  Graphs for quantitative data (histograms, density plots, violin plots, etc.) have appropriately labeled axes and titles.  Multivariate graphs use appropriate legends and labels.  Computer variable names are replaced with descriptive variable names. | Appropriate graphs for the type of data are used.  Not all axes have appropriate labels or computer variable names are used in the graphs. | Inappropriate graphs are used for the type of data.  Axes are not labeled and computer variable names appear in the graphs.
+Coding  | Code (primarily R) produces correct answers.  Non-standard or complex functions are commented.  Code is formatted using a consistent standard. | Code produces correct answers.  Commenting is not used with non-standard and complex functions.  No consistent code formatting is used. | Code does not produce correct answers.  Code has no comments and is not formatted.
+Clarity  | Few errors of grammar and usage; any minor errors do not interfere with meaning.  Language style and word choice are highly effective and enhance meaning.  Style and word choice are appropriate for the assignment. | Some errors of grammar and usage; errors do not interfere with meaning.  Language style and word choice are, for the most part, effective and appropriate for the assignment. | Major errors of grammar and usage make meaning unclear.  Language style and word choice are ineffective and/or inappropriate.
+
+
+## Week 1: (Aug 22-24) {-}
+
+
+* Sign-up for free accounts on [GitHub](https://github.com) and [Rpubs](https://rpubs.com).
+
+* When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinquishing characteristic in your username.  Please use the same **username** for your account on Rpubs. 
+
+* Once you have a GitHub account, send an email to arnholtat@appstate.edu with a Subject line of **STT 3850 - GitHub Username**, and tell me in the body of your email your first name, last name, and your GitHub username.  I will then manually add you as a team member to the repository in the STAT-ATA-ASU organization that has your name (**LastName-FirstName**).  This repository will be where you store all of your work for this course.  I will also change your repository to a private repository.
+
+* Become familiar with the Appstate [RStudio server](https://mathr.math.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
+
+* Test drive RStudio by following the directions from [Jenny Bryan's STAT 545 course](https://stat545-ubc.github.io/git07_git-github-rstudio.html).  Additional material can be found in the detailed `Bookdown` document [Happy Git and GitHub for the useR](http://happygitwithr.com/).  Chapters 8, 10-13 of [Happy Git and GitHub for the useR](http://happygitwithr.com/) will be helpful if you need more directions for test driving RStudio. Note: Git, R, and the RStudio IDE have already been installed for you on the RStudio server.    
+
+* Read the [Git and GitHub](http://r-pkgs.had.co.nz/git.html) chapter from Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/)
+
+  
+ 
+```{block, week1optional, type='rmdoptional'}
+#### Optional {-}
+* You may want to install [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and optionally [$LaTeX$](http://www.ctan.org/starter) on your personal computer. If you do, you will want to follow Jenny Bryan's excellent advice for [installing R and RStudio](http://stat545-ubc.github.io/block000_r-rstudio-install.html) and [installing Git](http://stat545-ubc.github.io/git01_git-install.html).  Jenny's advice is also in chapters 6 and 7 of [Happy Git and GitHub for the useR](http://happygitwithr.com/).  Note: [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), and [$LaTeX$](http://www.ctan.org/starter) are installed on the [Appstate RStudio](https://mathr.math.appstate.edu/) server.
+
+* Watch the following videos as appropriate:
+
+* [Install R on Mac (2 min)](https://www.youtube.com/watch?v=lJxVRgiX-ik)    
+* [Install R for Windows (3 min)](https://www.youtube.com/watch?v=LII6of-5Odw)    
+* [Install R and RStudio on Windows (5 min)](https://www.youtube.com/watch?v=eD07NznguA4)    
+
+* [Colaboration and time travel: version control with git, github and RStudio (48 minutes)](https://www.rstudio.com/resources/webinars/archives/)      
+* [Reproducible Reporting (58 minutes)](https://www.rstudio.com/resources/webinars/archives/)
+```
+
+## Week 2: (Aug 28-31) {-}
+
+* Watch all videos for week one of [*Introduction to Probability and Data*](https://www.coursera.org/learn/probability-intro).
+
+* Read sections 1.1-1.5 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Read chapters 4 and 5 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/) (Conducting a Literature Review and Writing About Empirical Research).
+
+* Using [zotero](https://www.zotero.org/) will be covered.
+
+* Watch [creating RStudio projects from Github Repos (5 min)](https://www.youtube.com/watch?v=YxZ8J2rqhEM) 
+
+* Clone the repository to your local machine using RStudio by following these instructions:
+
+1. [Fork](https://help.github.com/articles/fork-a-repo/) the repository.
+2. Copy the clone URL to the clipboard.
+3. Click `File > New Project > Version Control > Git`
+4. Paste the clone URL (`https://github.com/YourUserName/STAT-ATA-ASU/STT5811ClassRepo.git`) in the `Repository URL:` box.
+5. Type a name (suggestion `UserNameSTT5811`) in the `Project directory name:` box.
+6. Change if needed the location in the `Create project as subdirectory of:` box.
+7. Click the `Create Project` box.  You should now have a local copy of the forked repository on your local machine.  Congratulations!  
+
+* Set the upstream remote in your fork to this repository with the command
+```
+git remote add upstream https://github.com/STAT-ATA-ASU/STT5811ClassRepo.git
+```
+* Verify with
+```
+git remote -v
+```
+* To obtain updates from the upstream repository type
+```
+git pull upstream master
+```
+
+* If the upstream repository is using `gh-pages`, use `gh-pages` instead of `master` to obtain updates.
+```
+git pull upstream gh-pages
+```
+
+* If there are conflicts, you will need to resolve them before proceeding.
+
+* Create a free account on [DataCamp](https://www.datacamp.com/).  Complete chapter 1 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Fork the [StatsWithRLabs](https://github.com/STAT-ATA-ASU/StatsWithRLabs) repository to your private GitHub account.  Complete the `intro_to_r_ASU2.Rmd` lab, and submit your compiled `*html` file no later than 5:00 p.m., August 26, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2236).  Make sure you commit and push your your final product to your private repository.  Install the `statsr` package by running the following from the R command line:
+
+```
+devtools::install_github('alanarnholt/statsr')
+```
+
+#### Learning Objectives [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Sections 1.1-1.5 {-}
+
+  1. Identify variables as numerical or categorical.
+
+* If the variable is numerical, further classify it as continuous or discrete based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
+* If the variable is categorical, determine if it is ordinal or not based on whether the levels have a natural ordering.
+
+  2. Define associated variables as variables that show some relationship with one another. Further categorize this relationship as a positive or negative association when possible.
+
+  3. Define variables that are not associated as independent.
+
+```{block, test1, type='rmdexercise'}
+Test yourself: Give one example of each type of variable you have learned.
+```
+
+  4. Identify the explanatory variable in a pair of variables as the variable suspected of affecting the other, however note that labeling variables as explanatory and response does not guarantee that the relationship between the two is actually causal, even if there is an association identified between the two variables.
+
+  5. Classify a study as observational or experimental. Determine and explain whether the study’s results can be generalized to the population and whether the results suggest an association or causation between the quantities studied.
+
+* If random sampling has been employed in data collection, the results should be generalizable to the target population.
+* If random assignment has been employed in study design, the results suggest causality.
+
+  6. Identify confounding variables and sources of bias in a given study.
+
+  7. Distinguish among simple random, stratified, and cluster sampling. Recognize the benefits and drawbacks of choosing one sampling scheme over another.
+
+* Simple random sampling: Each subject in the population is equally likely to be selected.
+Stratified sampling: First divide the population into homogeneous strata (subjects within each stratum are similar, across strata are different); then, randomly sample from within each strata.
+* Cluster sampling: First, divide the population into clusters (subjects within each cluster are non-homogeneous, but clusters are similar to each other). Next, randomly sample a few clusters. Finally, randomly sample from within each cluster.
+
+  8. Identify the four principles of experimental design, and recognize their purposes: control any possible confounders; randomize into treatment and control groups; replicate by using a sufficiently large sample or repeating the experiment; and block any variables that might influence the response.
+
+  9. Identify if single or double blinding has been used in a study.
+
+```{block, test2, type='rmdexercise'}
+Test yourself:
+
+1. Describe when a study’s results can be generalized to the population at large and when causation can be inferred.
+2. Explain why random sampling allows for generalizability of results.
+3. Explain why random assignment allows for making causal conclusions.
+4. Describe a situation where cluster sampling is more efficient than simple random or stratified sampling.
+5. Explain how blinding can help eliminate the placebo effect and other biases.
+```
+
+```{block, week2optional, type='rmdoptional'}
+#### Optional Videos---Statistics In Action {-}
+
+* [Hans Rosling's 200 Countries, 200 Years, 4 Minutes - The Joy of Stats - BBC Four](https://www.youtube.com/watch?v=jbkSRLYSojo)
+* [The Best Stats You've Ever Seen | Hans Rosling | TED Talks](https://www.youtube.com/watch?v=hVimVzgtD6w)
+* [Steven Levitt on child carseats](https://www.youtube.com/watch?v=um5gMZcZWm0)
+* [Statistician Susan Murphy, 2013 MacArthur Fellow | MacArthur Foundation](https://www.youtube.com/watch?v=Bz0e5xGDHaU)
+* [Agricultural Ecologist David Lobell, 2013 MacArthur Fellow | MacArthur Foundation](https://www.youtube.com/watch?v=Tm2cCnRjcOM)
+* [The Electronic Coach](https://www.youtube.com/watch?v=dhh8Ao4yweQ)
+* [As ‘Normal’ as Rabbits’ Weights and Dragons’ Wings](http://www.nytimes.com/2013/09/24/science/as-normal-as-rabbits-weights-and-dragons-wings.html?_r=2)
+
+#### Practice Exercises  {-}
+
+* End of chapter exercises in Chapter 1 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 1.1, 1.3, 1.11, 1.13, 1.17, 1.19, 1.25, 1.27, 1.31
+```
+
+## Week 3 (Sep 4(No class)-7) {-}
+
+* Watch all videos for week two of [*Introduction to Probability and Data*](https://www.coursera.org/learn/probability-intro).
+
+* Read sections 1.6-1.8 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Read chapters 6, 8, and 9 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/).
+
+* Complete chapter 2 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Complete the `intro_to_data_ASU2.Rmd` lab, and submit your compiled `*html` file no later than 5:00 p.m., September 2, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2237).  Make sure you commit and push your your final product to your private repository.
+
+
+* Integrating [zotero](www.zotero.com) with [RMarkdown](http://rmarkdown.rstudio.com) will be discussed during the first part of the week.  An example document will be stored in this folder.
+
+* You may find these [videos helpful](https://www.youtube.com/watch?v=dto4gARbsi0&list=PLJBNI3mCp9g0wsSDK111qgimqVF1dwPXO).
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 1.6 {-}
+
+  1. Use scatterplots to display the relationship between two numerical variables, making sure to note the direction (positive or negative), form (linear or non-linear), and strength of the relationship as well as any unusual observations.
+
+  2. When describing the distribution of a numerical variable, mention its shape, center, and spread, as well as any unusual observations.
+
+  3. Note that there are three commonly used measures of center and spread:
+
+* center: mean (the arithmetic average), median (the midpoint), and mode (the most frequent observation).
+* spread: standard deviation (variability around the mean), range (max-min), and interquartile range (middle 50% of the distribution).
+
+  4. Identify the shape of a distribution as unimodal, bimodal, multimodal, or uniform; and if the shape is unimodal, further classify the distribution as symmetric, right skewed, or left skewed.
+
+  5. Use histograms and box plots to visualize the shape, center, and spread of numerical distributions. Use intensity maps to visualize the spatial distribution of the data.
+
+  6. Define a robust statistic (e.g. median, IQR) as a statistic that is not heavily affected by skewness or extreme outliers. Determine when robust statistics are more appropriate measures of center and spread compared to non-robust statistics.
+
+  7. Recognize when transformations (e.g. log) can make the distribution of data more symmetric and easier to model.
+
+```{block, test3, type='rmdexercise'}
+Test yourself:
+
+1. Describe what is meant by robust statistics and when they are used.
+2. Describe when and why we might want to apply a log transformation to a variable.
+```
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Sections 1.7-1.8 {-}
+
+  1. Use frequency tables and bar plots to describe the distribution of one categorical variable.
+
+  2. Use contingency tables and segmented bar plots or mosaic plots to assess the relationship between two categorical variables.
+
+  3. Use side-by-side box plots for assessing the relationship between a numerical and a categorical variable.
+
+```{block, test4, type='rmdexercise'}
+Test yourself:
+
+1. Interpret the plot in Figure 1.40 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os)  (page 39).
+2. You collect data on 100 classmates, 70 females and 30 males. 10% of the class are smokers, and smoking is independent of gender. Calculate how many males and how many females would be expected to be smokers. Sketch a mosaic plot of this scenario.
+```
+
+```{block, week3optional, type='rmdoptional'}
+#### Optional Videos {-}
+
+* [Case Study: Using Stents to Prevent Strokes](https://www.youtube.com/watch?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8&v=nEHFF1ADpWE)
+* [Data Basics: Observations, Variable, and Data Matrices](https://www.youtube.com/watch?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8&v=Mjif8PTgzUs)
+* [Data Collection Principles](https://www.youtube.com/watch?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8&v=2N_bkiyTiXU)
+* [Observational Studies and Sampling Strategies](https://www.youtube.com/watch?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8&v=KyuaX10l3GQ)
+* [Designing Experiments](https://www.youtube.com/watch?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8&v=g7JGe_ykB3I)
+* [Summarizing and Graphing Numerical Data](https://www.youtube.com/watch?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8&v=Xm0PPtci3JE)
+* [Exploring Categorical Data](https://www.youtube.com/watch?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8&v=7NhNeADL8fA)
+* [Using Randomization to Analyze a Gender Discrimination Study](https://www.youtube.com/watch?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8&v=2pHhjx9hyM4)
+
+#### Practice Exercises {-}
+
+* End of chapter exercises in Chapter 1 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 1.39, 1.41, 1.45, 1.49, 1.51, 1.55, 1.59, 1.63, 1.65, 1.67, 1.69
+```
+
+## Week 4: (Sep 11 - 14) {-}
+
+* Watch all videos for week three of [*Introduction to Probability and Data*](https://www.coursera.org/learn/probability-intro).
+
+* Read sections 2.1-2.5 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Read chapter 7 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/).
+
+* Complete chapter 3 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Complete the `probability_ASU2.Rmd` lab, and submit your compiled `*html` file no later than 5:00 p.m., September 9, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2238).  Make sure you commit and push your your final product to your private repository.
+         
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 2.1 {-}
+
+  1. Define the probability of an outcome as the proportion of times the outcome would occur if we observed the random process that gives rise to it an infinite number of times.
+
+  2. Explain why the long-run relative frequency of repeated independent events approaches the true probability as the number of trials increases, i.e. why the law of large numbers holds.
+
+  3. Define disjoint (mutually exclusive) events as events that cannot both happen at the same time:
+
+* if $A$ and $B$ are disjoint, $P(A \cap B) = 0.$
+
+  4. Distinguish between disjoint and independent events.
+
+* If $A$ and $B$ are independent, then having information on $A$ does not tell us anything about $B$ (and vice versa).
+* If $A$ and $B$ are disjoint, then knowing that $A$ occurs tells us that $B$ cannot occur (and vice versa).
+* Disjoint (mutually exclusive) events are always dependent since if one event occurs we know the other one cannot *is not quite correct.* **NOTE:** $P(A \cap B) = 0$ if $P(A)=0,$ and then $A$ and $B$ are both disjoint AND independent.
+
+  5. Draw Venn diagrams representing events and their probabilities.
+
+  6. Define a probability distribution as a list of the possible outcomes with corresponding probabilities that satisfies three rules:
+
+* The outcomes listed must be disjoint.
+* Each probability must be between 0 and 1, inclusive.
+* The probabilities must total 1.
+
+  7. Define complementary outcomes as mutually exclusive outcomes of the same random process whose probabilities add up to 1.
+
+* If $A$ and $B$ are complementary, $P(A) + P(B) = 1.$ $B$ is often called $A^c =$ "$A$ complement."
+
+  8. Distinguish between union of events ($A$ or $B$) and intersection of events ($A$ and $B$).
+
+* Calculate the probability of a union of events using the (general) addition rule:
+ + if $A$ and $B$ are not mutually exclusive, $P(A \cup B) = P(A) + P(B) - P(A \cap B):$ and
+ + if $A$ and $B$ are mutually exclusive, $P (A \cup B) = P (A) + P (B)$, since for mutually exclusive events $P(A \cap B) = 0.$
+
+* Calculate the probability of the intersection of independent events using the multiplication rule:
+ + if $A$ and $B$ are independent, $P(A \cap B) = P(A) \times P(B)$
+ + If $A$ and $B$ are dependent, $P(A \cap B) = P(A|B) \times P(B)$
+
+```{block, test5, type='rmdexercise'}
+Test yourself:
+
+1. What is the probability of getting a head on the 6th coin flip if in the first 5 flips the coin landed on a head each time?
+
+2. True / False: Being right handed and having blue eyes are mutually exclusive events.
+
+3. $P(A) = 0.5,$ $P(B) = 0.6,$ and there are no other possible outcomes in the sample space. What is $P(A \cap B)?$
+```
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 2.2 {-}
+
+  1. Distinguish between marginal and conditional probabilities.
+
+  2. Construct tree diagrams to calculate conditional probabilities and probabilities of the intersection of non-independent events using Bayes’ theorem: $P(A|B)=\frac{P(A \cap B)}{P(B)}.$
+
+```{block, test6, type='rmdexercise'}
+
+Test yourself: 50% of students in a class are social science majors and the rest are not. 70% of the social science students, and 40% of the non-social science students are in a biology class. Create a contingency table and a tree diagram summarizing these probabilities. Calculate the percentage of students in this class who are in a biology class.
+```
+
+
+```{block, week4optional, type='rmdoptional'}
+#### Optional Video 
+
+* [Would You Take This Bet?](https://www.youtube.com/watch?v=vBX-KulgJ1o)
+
+#### Practice Exercises 
+
+* End of chapter exercises in Chapter 2 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 2.1, 2.3, 2.5, 2.7, 2.13, 2.15, 2.19, 2.21, 2.23
+```
+
+## Week 5: (Sep 18 - 21) {-}
+
+* Watch all videos for week four of [*Introduction to Probability and Data*](https://www.coursera.org/learn/probability-intro).
+
+* Read sections 3.1, 3.2, and 3.4 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+
+* Complete chapter 4 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Compile and read the `exampleEDA.Rmd` lab.
+
+* Read chapter 9 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/).
+
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 3.1-3.2 {-}
+
+  1. Define the standardized score ($z$-score) of a data point as the number of standard deviations it is away from the mean: $z = \frac{x - \mu}{\sigma}.$
+
+  2. Use the $z\!~\text{-score}$
+
+* if the distribution is normal to determine the percentile score of a data point (using technology or normal probability tables);
+* regardless of the shape of the distribution to assess whether or not the particular observation is considered to be unusual (more than 2 standard deviations away from the mean).
+
+  3. Depending on the shape of the distribution, determine whether the median would have a negative, positive, or zero $z$-score, keeping in mind that the mean always has a $z$-score of 0.
+
+  4. Assess whether or not a distribution is nearly normal using either the 68-95-99.7% rule or graphical methods such as a normal probability plot.
+
+```{block, test7, type='rmdexercise'}
+Test yourself: True/False: In a right skewed distribution the $z\!~\text{-score}$ of the median is positive.
+```
+
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 3.4 {-}
+
+  1. Determine if a random variable is binomial using the four conditions:
+
+1. The trials are independent.
+2. The number of trials, $n$, is fixed.
+3. Each trial outcome can be classified as a success or a failure.
+4. The probability of a success, $p$, is the same for each trial.
+
+  2. Calculate the number of possible scenarios for obtaining $k$ successes in n trials using the binomial coefficient: $\binom{n}{k}=\frac{n!}{k!(n-k)!}.$
+
+  3. Calculate probability of a given number of successes in a given number of trials using the binomial distribution: $P(X=k)=\binom{n}{k}p^k(1-p)^{(n-k)}.$
+
+  4. Calculate the expected value $(\mu = np)$ and standard deviation $\left(\sigma = \sqrt{np(1-p)}\right)$ of a binomial distribution. 
+
+  5. When number of trials is sufficiently large ($np \ge 10$ and $n(1-p) \ge 10$), use the normal approximation to calculate binomial probabilities. Explain why this approach works.
+
+```{block, test8, type='rmdexercise'}
+Test yourself:
+
+1. True/False: We can use the binomial distribution to determine the probability that in 10 rolls of a die, the first 6 occurs on the 8th roll.
+2. True / False: If a family has 3 children, there are 8 possible combinations of gender order.
+3. True/ False: When $n = 100$ and $p = 0.92$, we can use the normal approximation to the binomial to calculate the probability of 90 or more successes.
+```
+
+```{block, week5optional, type='rmdoptional'}
+#### Optional:
+* Watch the [*Data Wrangling with R and RStudio* (55 minutes)](https://www.rstudio.com/resources/webinars/archives/) video.
+* Watch the first 30 minutes of [*The Grammar of Graphics and Data Science*](https://www.rstudio.com/resources/webinars/archives/).
+* Read the vignette in the `PDS` package.
+* [Shading normal areas](../rmarkdownSTUFF/NormalGGio.html)
+
+#### Practice Exercises 
+
+* End of chapter exercises in Chapter 3 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 3.3, 3.5, 3.9, 3.11, 3.17, 3.25, 3.27, 3.29, 3.33
+```
+
+## Week 6: (Sep 25 - 28) {-}
+
+* Fork the [StatsWithRProjects](https://github.com/STAT-ATA-ASU/StatsWithRProjects) repository to your private GitHub account.  Complete the `Project1Template.Rmd` project, and submit your compiled `*html` file no later than 5:00 p.m., September 23, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2245).  Make sure you commit and push your your final product to your private repository. 
+
+
+
+
+## Week 7: (Oct 2 - 5) {-}
+
+
+* Watch all videos for week one of [*Inferential Statistics*](https://www.coursera.org/learn/inferential-statistics-intro/home/welcome).
+
+* Read sections 4.1-4.2 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Complete chapter 4 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Complete the `sampling_distributions_ASU2.Rmd` lab and submit your compiled `*html` file no later than ~~5:00 p.m., September 30~~ 11:00 p.m., October 2, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2239).  Make sure you commit and push your your final product to your private repository.
+
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 4.1 {-}
+
+  1. Define a statistic as a point estimate for a population parameter. For example, the sample mean is used to estimate the population mean. Note that "point estimate" and "statistic" are synonymous.
+
+  2. Recognize that point estimates (such as the sample mean) will vary from one sample to another.  We define this variability as sampling variability (sometimes called sampling variation).
+
+  3. Calculate the sampling variability of the mean, the standard deviation of $\bar{x}$, as $\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$ where $\sigma$ is the population standard deviation.
+
+* Note that when the population standard deviation $\sigma$ is not known (almost always), the standard error $SE$ can be computed using the sample standard deviation $s$, so that $SE_{\bar{x}} = \frac{s}{\sqrt{n}}$.
+
+  4. Distinguish between standard deviation ($\sigma$ or $s$) and standard error ($SE$): standard deviation measures the variability in the data, while standard error measures the variability in point estimates from different samples of the same size and from the same population; it measures the sampling variability.
+
+  5. Recognize that when the sample size increases we would expect the sampling variability to decrease.
+
+* Conceptually: Imagine taking many samples from the population. When the size of each sample is large, the sample means will be much more consistent across samples than when the sample sizes are small.
+* Mathematically: Remember $SE = \frac{s}{\sqrt{n}}$. Then, when $n$ increases, $SE$ will decrease since $n$ is in the denominator.
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 4.2 {-}
+
+  1. Define a confidence interval as the plausible range of values for a population parameter.
+
+  2. Define the confidence level as the expected percentage of random samples which yield confidence intervals that capture the true population parameter.
+
+  3. Recognize that the Central Limit Theorem (CLT) is about the distribution of point estimates. Under certain conditions, this distribution will be nearly normal.
+
+In the case of the mean, the CLT tells us that if the sample size is sufficiently large and the observations in the sample are independent, then the distribution of the sample mean will be nearly normal.  The distribution will be centered at the true population mean and have a standard deviation of $\frac{\sigma}{\sqrt{n}}$.  The distribution of $\bar{x}$ is written with symbols as
+
+\begin{equation}
+\bar{X} \dot{\sim} N\left(\mu_{\bar{x}} = \mu, \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}\right)
+\label{clt}
+\end{equation}
+
+
+  4. Recall that independence of observations in a sample is provided by random sampling (in the case of observational studies) or random assignment (in the case of experiments).
+
+In addition, the sample should not be too large compared to the population. More precisely, the sample should be smaller than 10% of the population. Samples that are too large will likely contain observations that are not independent.
+
+  5. Recognize that the nearly normal distribution of the point estimate (as suggested by the CLT) implies that a confidence interval can be calculated as
+
+* $\text{point estimate} \pm z_{1 - \alpha/2}\cdot SD_{\text{point estimate}}$---For averages this is: $\bar{x} \pm z_{1 - \alpha/2}\cdot \frac{\sigma}{\sqrt{n}}$
+
+  6. Define margin of error as the distance required to travel in either direction away from the point estimate when constructing a confidence interval, i.e. $z_{1 - \alpha/2}\cdot \frac{\sigma}{\sqrt{n}}.$
+
+Notice that this corresponds to half the width of the confidence interval.
+
+  7. Interpret a confidence interval as "We are XX% confident that the true population parameter is in this interval," where XX% is the desired confidence level.
+
+* Note that your interpretation must always be in context of the data – mention what the population is and what the parameter is (mean or proportion).
+
+
+
+```{block, test9, type='rmdexercise'}
+Test yourself:
+
+1. For each of the following situations, state whether the variable is categorical or numerical and whether the parameter of interest is a mean or a proportion.
+
+    + In a survey, college students are asked whether they agree with their parents’ political ideology.
+    + In a survey, college students are asked what percentage of their non-class time they spend studying.
+    
+2. Suppose heights of all women in the US have a mean of 63.7 inches and a random sample of 100 women's heights yields a sample mean of 65.2 inches. Which values are the population parameter and the point estimate, respectively? Which one is $\mu$ and which one is $\bar{x}$?
+
+3. Suppose heights of all women in the US have a standard deviation of 2.7 inches and a random sample of 100 women's heights yields a standard deviation of 4 inches. Which value is the population parameter and which value is the point estimate? Which one is $\sigma$ and which one is $s$?
+
+4. Explain, in plain English, what you see in Figure 4.8 of the book (page 166).
+
+5. List the conditions necessary for the CLT to hold. 
+
+6. Confirm that $z_{1-\alpha/2}$ for a 98% confidence level is 2.33. (Include a sketch of the normal curve in your response.)
+
+7. Calculate a 95% confidence interval for the average height of US women using a random sample of 100 women where the sample mean is 63 inches and the sample standard deviation is 3 inches. Interpret this interval in context of the data.
+
+8. Explain, in plain English, the difference between the standard error and the margin of error.
+
+9. A little more challenging: Suppose heights of all men in the US have a mean of 69.1 inches and a standard deviation of 2.9 inches. What is the probability that a random sample of 100 men will yield a sample average less than 70 inches? 
+```
+
+```{block, week7optional, type='rmdoptional'}
+#### Optional Videos
+
+* [Variability in Point Estimates, e.g. the Sample Mean](https://www.youtube.com/watch?list=PLkIselvEzpM7Pjo94m1e7J5jkIZkbQAl4&v=DNIauUrRIEM)
+* [Constructing Confidence Intervals](https://www.youtube.com/watch?list=PLkIselvEzpM7Pjo94m1e7J5jkIZkbQAl4&v=FUaXoKdCre4)
+* [Hypothesis Testing Fundamentals](https://www.youtube.com/watch?list=PLkIselvEzpM7Pjo94m1e7J5jkIZkbQAl4&v=NVbPE1_Cbx8)
+
+#### Practice Exercises 
+
+* End of chapter exercises in Chapter 4 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 4.1, 4.3, 4.5, 4.33, 4. 35, 4.37, 4.41, 4.9, 4.11, 4.13, 4.15
+```
+
+## Week 8: (Oct 9 - 11; Oct 12 - 13 Fall Break) {-}
+
+* Watch all videos for week two of [*Inferential Statistics*](https://www.coursera.org/learn/inferential-statistics-intro/home/welcome).
+
+* Read sections 4.3-4.6 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Read chapter 10 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/).
+
+* Complete chapter 5 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Complete the `confidence_intervals_ASU2.Rmd` lab, and submit your compiled `*html` file no later than 5:00 p.m., October 7, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2240).  Make sure you commit and push your your final product to your private repository.
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 4.3 {-}
+
+  1. Explain how the hypothesis testing framework resembles a court trial.
+
+  2. Recognize that in hypothesis testing we evaluate two competing claims:
+
+* the null hypothesis, which represents a skeptical perspective or the status quo, and
+* the alternative hypothesis, which represents an alternative under consideration and is often represented by a range of possible parameter values.
+
+  3. Construction of hypotheses:
+
+* Always construct hypotheses about population parameters (e.g. population mean, $\mu$) and not the sample statistics (e.g. sample mean, $\bar{x}$). Note that the population parameter is unknown while the statistic is measured using the observed data and hence there is no point in hypothesizing about it.
+* Define the null value as the value the parameter is set to equal in the null hypothesis.
+* The alternative hypothesis may be one-sided ($\mu <$ or $>$ the null value) or two-sided ($\mu \ne$ the null value). The choice depends on the research question.
+
+  4. Define a $p\!~\text{-value}$ as the conditional probability of obtaining a statistic at least as extreme as the one observed given that the null hypothesis is true.
+
+* $p\!~\text{-value}$=P(observed or more extreme statistic | $H_0$ true)
+
+  5. Calculate a $p\!~\text{-value}$ as the area under the normal curve beyond the observed sample mean (either in one tail or both, depending on the alternative hypothesis). Note that in doing so you can use a $z\!~\text{-score}$, where
+
+* $p\!~\text{-value}$=P(observed or more extreme statistic | $H_0$ true)
+
+* Always sketch the normal curve when calculating the $p\!~\text{-value}$, and shade the appropriate area(s) depending on whether the alternative hypothesis is one- or two-sided.
+
+  6. Infer that if a confidence interval does not contain the null value, the null hypothesis should be rejected in favor of the alternative.
+
+  7. Compare the $p\!~\text{-value}$ to the significance level to make a decision between the hypotheses:
+
+* If the $p\!~\text{-value}$ < the significance level, reject the null hypothesis. This means that obtaining a statistic at least as extreme as the observed data is extremely unlikely to happen just by chance. Conclude that the data provides evidence for the alternative hypothesis.
+* If the $p\!~\text{-value}$ > the significance level, fail to reject the null hypothesis. This means that obtaining a statistic at least as extreme as the observed data is likely to happen by chance. Conclude that the data does not provide evidence for the alternative hypothesis.
+* Note that we can never “accept” the null hypothesis since the hypothesis testing framework does not allow us to confirm it.
+
+  8. Note that the conclusion of a hypothesis test might be erroneous regardless of the decision we make.
+
+* Define a Type I error as rejecting the null hypothesis when the null hypothesis is actually true.
+* Define a Type II error as failing to reject the null hypothesis when the alternative hypothesis is actually true.
+
+  9. Note that the probability of making a Type I error is equivalent to the significance level, and choose a significance level depending on the risks associated with Type I and Type II errors.
+
+Use a smaller $\alpha$ if a Type I error is more critical than a Type II error.  Use a larger $\alpha$ if a Type II error is more critical than a Type I error.
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 4.4-4.5 {-}
+
+  1. Recognize that sampling distributions of point estimates coming from samples that don’t meet the required conditions for the CLT (about sample size, skew, and independence) will not be normal.
+
+  2. Formulate the framework for statistical inference using hypothesis testing and nearly normal point estimates:
+
+1. Set up the hypotheses first in plain language and then using appropriate notation.
+2. Identify the appropriate statistic that can be used as a point estimate for the parameter of interest.
+3. Verify that the conditions for the CLT hold.
+4. Compute the $SE$, sketch the sampling distribution, and shade area(s) representing the $p\!~\text{-value}$.
+5. Using the sketch and the normal model, calculate the $p\!~\text{-value}$; and determine if the null hypothesis should be rejected or not. State your conclusion in context of the data and the research question.
+
+  3. If the conditions necessary for the CLT to hold are not met, note this and do not go forward with the analysis. (We will learn later about methods to use in these situations.)
+
+  4. Calculate the required sample size to obtain a given margin of error at a given confidence level by working backwards from the given margin of error.
+
+  5. Distinguish between statistical significance vs. practical significance.
+
+  6. Define power as the probability of correctly rejecting the null hypothesis (the complement of a Type II error).
+
+
+```{block, test10, type='rmdexercise'}
+Test yourself:
+
+1. List the errors in the following hypotheses: $H_0:\bar{x} \gt 20$ versus $H_A:\bar{x} \ge 25$
+
+2. What is wrong with the following statement: "If the $p\!~\text{-value}$ is large, we accept the null hypothesis since a large $p\!~\text{-value}$ implies that the observed difference between the null value and the sample statistic is quite likely to happen just by chance"?
+
+3. Suppose a researcher is interested in evaluating the claim "the average height of adult males in the US is 69.1 inches," and she believes this is an underestimate.
+
+    a. How should she set up her hypotheses?
+
+    b. Explain to her, in plain language, how she should collect data and carry out a hypothesis test.
+
+    c. Suppose she collects a random sample of 40 adult males where the average is 70.2 inches.  A test returns a $p\!~\text{-value}$ of 0.0082. What should she conclude?
+
+    d. Interpret this $p\!~\text{-value}$ (as a conditional probability) in context of the question.
+
+    e. Suppose that the true average is in fact 69.1 inches. If the researcher rejects the null hypothesis, what type of an error is the researcher making? In order to avoid making such an error, should she have used a smaller or a larger significance level?
+
+4. Describe the differences and similarities between testing a hypothesis using simulation and testing a hypothesis using theory. Discuss how the calculation of the $p\!~\text{-value}$ changes while the definition of the $p\!~\text{-value}$ stays the same.
+
+
+5. In a random sample of 1,017 Americans, 60% said they do not trust the mass media when it comes to reporting the news fully, accurately, and fairly. The standard error associated with this estimate is 0.015 (1.5%). What is the margin of error of a 95% confidence level? Calculate a 95% confidence interval and interpret it in context. 
+
+6. If we want to decrease the margin of error, and hence have a more precise confidence interval, should we increase or decrease the sample size?
+```
+
+```{block, week8optional, type='rmdoptional'}
+#### Optional Videos
+
+* [Why do we use 0.05? Part 1 of 2](https://www.youtube.com/watch?v=BqXgM-PCcls)
+* [Central Limit Theorem for the Sample Mean](https://www.youtube.com/watch?list=PLkIselvEzpM7Pjo94m1e7J5jkIZkbQAl4&v=lsCc_pS3O28)
+* [Inference for Estimators Other Than the Mean](https://www.youtube.com/watch?list=PLkIselvEzpM7Pjo94m1e7J5jkIZkbQAl4&v=PUMBNtVKr_g)
+* [Determining an Appropriate Sample Size](https://www.youtube.com/watch?list=PLkIselvEzpM7Pjo94m1e7J5jkIZkbQAl4&v=TFxx-hNvlQE)
+
+#### Practice Exercises 
+
+* End of chapter exercises in Chapter 4 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 4.17, 4.19, 4.23, 4.25, 4.27, 4.43, 4.45, 4.29, 4.31, 4.47
+```
+
+## Week 9: (Oct 16 - 19) {-}
+
+```{block, MIDTERM, type='rmdnote'}
+* Midterm Exam---October 11
+```
+
+
+## Week 10: (Oct 23 - 26) {-}
+
+* Watch all videos for week three of [*Inferential Statistics*](https://www.coursera.org/learn/inferential-statistics-intro/home/welcome).
+
+* Read sections 5.1-5.5 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Read [_Can A New Drug Reduce the Spread of Schistosomiasis?_](https://alanarnholt.github.io/STT3850/Notes/Parent/Parent.html)---Use control f on the web page to find the appropriate text inside the notes.
+
+* Read chapter 11 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/).
+
+* Complete chapter 6 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Complete the `inf_for_numerical_data_ASU2.Rmd` lab, and submit your compiled `*html` file no later than 5:00 p.m., October 21, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2241).  Make sure you commit and push your your final product to your private repository.
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Sections 5.1-5.4 {-}
+
+  1. Use the $t$-distribution for inference on a single mean, mean of differences (paired groups), and difference of independent means.
+
+  2. Explain how the shape of the $t$-distribution accounts for the additional variability introduced by using $s$ (sample standard deviation) in place of $\sigma$ (population standard deviation).
+
+  3. Describe how the $t$-distribution is different from the normal distribution and what “heavy tail” means in this context.
+
+  4. Note that the $t$-distribution has a single parameter, degrees of freedom. As the number of degrees of freedom increases, this distribution approaches the normal distribution.
+
+  5. Use a $t$-statistic with degrees of freedom $df=n-1$ for inference for a population mean:
+
+* CI: $\bar{x} \pm t_{1-\alpha/2, n-1}\cdot SE_{\bar{x}}$
+
+* HT: $t_{n-1}=\frac{\bar{x}-\mu_0}{SE_{\bar{x}}}$ where $SE_{\bar{x}} = \frac{s}{\sqrt{n}}.$
+
+  6. Describe how to obtain a $p\!~\text{-value}$ for a $t\!~\text{-test}$ and a critical $t_{1 - \alpha/2, n-1}$ value for a confidence interval.
+
+  7. Define observations as paired if each observation in one dataset has a special correspondence or connection with exactly one observation in the other data set.
+
+  8. Carry out inference for paired data by first subtracting the paired observations from each other.  Then, treat the set of differences as a new numerical variable on which to do inference (such as a confidence interval or hypothesis test for the average difference).
+
+  9. Calculate the standard error of the mean difference between two paired (dependent) samples as $SE = \frac{s_{diff}}{\sqrt{n_{diff}}}.$ Use this standard error in hypothesis testing and confidence intervals comparing means of paired (dependent) groups.
+
+  10. Use a $t$-statistic, with degrees of freedom $df=n_{diff}-1$ for inference with the mean difference in two paired (dependent) samples:
+
+* CI: $\bar{x}_{diff} \pm t_{1-\alpha/2, n_{diff}-1}\cdot SE$
+
+* HT: $t_{n_{diff}-1}=\frac{\bar{x}_{diff}-\mu_0}{SE}$ where $SE = \frac{s_{diff}}{\sqrt{n_{diff}}}.$
+
+  11. Recognize that a good interpretation of a confidence interval for the difference between two parameters includes a comparative statement (mentioning which group has the larger parameter).
+
+  12. Recognize that a confidence interval for the difference between two parameters that doesn’t include 0 is in agreement with a hypothesis test where the null hypothesis that sets the two parameters equal to each other is rejected.
+
+  13. Calculate the standard error for the difference between means of two independent samples as $SE = \sqrt{\frac{s_1^2}{n_1}+\frac{s^2_2}{n_2}}.$  Use this standard error in hypothesis testing and confidence intervals comparing means of independent groups.
+
+  14. Use a $t$-statistic with $\nu$ degrees of freedom for conducting inference with the difference in two independent means:
+
+* CI: $\bar{x}_1 - \bar{x}_2 \pm t_{1-\alpha/2, \nu}\cdot SE$
+
+* HT: $t_{\nu}=\frac{(\bar{x}_1 - \bar{x}_2) -(\mu_1 -\mu_2)}{SE}$ where $SE = \sqrt{\frac{s_1^2}{n_1}+\frac{s^2_2}{n_2}}.$
+
+  15. Calculate the power of a test for a given effect size and significance level in two steps: 
+
+1. Find the cutoff for the statistic that will allow the null hypothesis to be rejected at the given significance level.
+2. Calculate the probability of obtaining that statistic given the effect size.
+
+  16. Explain how power changes for changes in effect size, sample size, significance level, and standard error.
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 5.5 {-}
+
+  1. Define analysis of variance (ANOVA) as a statistical inference method that is used to determine, by simultaneously considering many groups at once, if the variability between the sample means is so large that it seems unlikely to be from chance alone.
+
+  2. Recognize that the null hypothesis in ANOVA sets all means equal to each other and that the alternative hypothesis suggest that at least one mean is different.
+
+\begin{align*}
+H_O:&\mu_1 = \mu_2,\ldots,\mu_k\\
+H_A:& \text{at least one mean is different}
+\end{align*}
+
+  3. List the conditions necessary for performing ANOVA:
+
+1. The observations should be independent within and across groups.
+2. The data within each group should be nearly normal
+3. The variability across the groups should be roughly equal. 
+
+Use graphical diagnostics to check if these conditions are met.
+
+  4. Recognize that the test statistic for ANOVA, the $F$-statistic, is calculated as the ratio of the mean square between groups ($MSG$, variability between groups) and mean square error ($MSE$, variability within groups errors). Also recognize that the $F$-statistic has a right skewed distribution with two different measures of degrees of freedom: one for the numerator ($df_G=k-1,$ where $k$ is the number of groups) and one for the denominator ($df_E=n-k,$ where $n$ is the total sample size).
+
+* Note that you will not be expected to calculate $MSG$ or $MSE$ from the raw data. However, you should have a conceptual understanding of how they are calculated and what they measure.
+
+  5. Describe why calculation of the $p\!~\text{-value}$ for ANOVA is always "one sided."
+
+  6. Describe why conducting many $t\!~\text{-test}$s for differences between each pair of means leads to an increased Type I Error rate and why we use a corrected significance level (Bonferroni correction, $\alpha^*=\alpha/K$, where $K$ is the number of comparisons being considered) to combat inflating this error rate.
+
+* Note that $K = \frac{k(k-1)}{2}$, where $k$ is the number of groups.
+
+  7. Describe why it is possible to reject the null hypothesis in ANOVA but not find significant differences between groups when doing pairwise comparisons.
+
+  8. Describe how bootstrap distributions are constructed. Recognize how bootstrap distributions are different from sampling distributions.
+
+  9. Construct bootstrap confidence intervals using one of the following methods:
+
+* Percentile method: XX% confidence level is the middle XX% of the bootstrap distribution.
+* Standard error method: If the standard error of the bootstrap distribution is known and the distribution is nearly normal, the bootstrap interval can also be calculated as 
+
+\begin{equation}
+\text{point estimate} \pm t_{1 - \alpha/2, df}\cdot SE_{boot}.
+\label{bsci}
+\end{equation}
+
+  10. Recognize that when the bootstrap distribution is extremely skewed and sparse, the bootstrap confidence interval may not be reliable.
+  
+```{block, test11, type='rmdexercise'}
+Test yourself:
+
+1. What is the $t$-value for a 95% confidence interval for a mean where the sample size is 13?
+
+2. What is the $p\!~\text{-value}$ for a hypothesis test where the alternative hypothesis is two-sided, the sample size is 20, and the test statistic, $t$, is calculated to be 1.75?
+
+3. 20 cardiac patients' blood pressures are measured before and after taking a medication. For a given patient, are the before and after blood pressure measurements dependent (paired) or independent?
+
+4. A random sample of 100 students was obtained and then randomly assigned into two equal-sized groups. One group rode on a roller coaster while the other rode a simulator at an amusement park. Afterwards, their blood pressure measurements were taken. Are the measurements dependent (paired) or independent?
+
+5. Describe how the two sample means test is different from the paired means test.
+
+6. A 95% confidence interval for the difference between the number of calories consumed by mature and juvenile cats $(\mu_{mat}-\mu_{juv})$ is (80 calories, 100 calories). Interpret this interval, and determine if it suggests a significant difference between the two means.
+
+7. We would like to compare the average incomes of Americans who live in the Northeast, Midwest, South, and West. What are the appropriate hypotheses?
+
+8. Suppose the sample in question 7 has 1000 observations, what are the degrees of freedom associated with the $F$-statistic?
+
+9. Suppose the appropriate null hypothesis from question 7 is rejected. Describe how we would discover which regions' averages are different from each other. Make sure to discuss how many pairwise comparisons we would need to make and what the corrected significance level would be.
+
+10. What visualizations are useful for checking each of the conditions required for performing ANOVA?
+
+11. How is a bootstrap distribution different from a sampling distribution?
+
+12. If a bootstrap distribution is constructed using 200 simulations, how would we find the 95% bootstrap confidence interval? 
+```
+
+```{block, week10optional, type='rmdoptional'}
+
+#### Practice Exercises 
+
+* End of chapter exercises in Chapter 5 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 5.1, 5.3, 5.5, 5.13, 5.17, 5.19, 5.21, 5.23, 5.27, 5.31, 5.35, 5.37, 5.39, 5.41, 5.43, 5.45, 5.47, 5.49, 5.51
+```
+
+```{block, INCLASS, type='rmdnote'}
+[Discuss](../rmarkdownSTUFF/Baseball.html) 
+```
+
+
+## Week 11: (Oct 25, 27) {-}
+
+* Watch all videos for week four of [*Inferential Statistics*](https://www.coursera.org/learn/inferential-statistics-intro/home/welcome).
+
+* Read sections 6.1-6.6 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Read chapter 12 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/).
+
+* Complete chapter 7 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Complete the `inf_for_categorical_data_ASU2.Rmd` lab, and submit your compiled `*html` file no later than 5:00 p.m., October 28, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2242).  Make sure you commit and push your your final product to your private repository.
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Sections 6.1-6.2 {-}
+
+  1. Define the population proportion as $p$ (parameter) and sample proportion as $\hat{p}$.
+
+  2. Calculate the sampling variability of the proportion, the standard deviation, as $\sigma_{\hat{p}}=SD_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}$, where $p$ is the population proportion.
+
+* Note that when the population proportion $p$ is not known (almost always), the standard error of the sample proportion is written as $SE_{\hat{p}} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.$
+
+  3. Recognize that the Central Limit Theorem (CLT) is about the distribution of point estimates. Under certain conditions, the distribution of $\hat{p}$ will be nearly normal. The CLT tells us that if
+    + the observations in the sample are independent,
+    + the sample size is sufficiently large (checked using the success/failure condition: $np\ge10$ and $n(1-p)\ge 10$, then the distribution of the sample proportion will be nearly normal, centered at the true population proportion with a standard deviation of $SD_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}.$ The distribution of $\hat{p}$ is written with symbols as
+
+\begin{equation}
+\hat{p} \dot{\sim} N\left(\mu_{\hat{p}}=p, \sigma_{\hat{p}}=\sqrt{\frac{p(1-p)}{n}} \right)
+\label{disphat}
+\end{equation}
+
+  4. Note that if the CLT doesn’t apply and the sample proportion is low (close to 0), the sampling distribution will likely be right skewed. If the sample proportion is high (close to 1), the sampling distribution will likely be left skewed.
+
+  5. Remember that confidence intervals are calculated as
+
+* $\text{point estimate} \pm \text{margin of error}$
+* and standardized test statistics are calculated as 
+
++ $Z = \frac{\text{statistic} - \mu_{\text{statistic}}}{\sigma_{\text{statistic}}}$
+
++ $T = \frac{\text{statistic} - \mu_{\text{statistic}}}{\hat{\sigma}_{\text{statistic}}}$
+
+  6. Note that the standard error calculation for the confidence interval and the hypothesis test are different when dealing with proportions. With hypothesis testing we assume that the null hypothesis is true. Remember: $p\!~\text{-value}$ = P(observed or more extreme test statistic | $H_0$ true).
+
+* For confidence intervals use $\hat{p}$ (observed sample proportion) when calculating the standard error and checking the success/failure condition:
+
+* $SE_{\hat{p}} = \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}$
+
+* For hypothesis tests use $p_0$ (null value) when calculating the standard error and checking the success/failure condition:
+
+* $SE_{\hat{p}} = \sqrt{\frac{p_0(1 - p_0)}{n}}$
+
+Such a discrepancy does not exist when conducting inference for means since the mean does not factor into the calculation of the standard error.
+
+  7. Explain why when calculating the required minimum sample size for a given margin of error at a given confidence level we use $\hat{p} = 0.5$ if there are no previous studies suggesting a more accurate estimate.
+
+* Conceptually: When there is no additional information, 50% chance of success is a good guess for events with only two outcomes (success or failure).
+
+* Mathematically: Using $\hat{p} = 0.5$ yields the most conservative (highest) estimate for the required sample size.
+
+  8. Note that the calculation of the standard error for the distribution of the difference in two independent sample proportions differs for a confidence interval and a hypothesis test.
+
+* confidence interval and hypothesis test when $H_0: p_1 - p_2 = \text{some value other than 0:}$ $SE_{\hat{p}_1 - \hat{p}_2} = \sqrt{\frac{\hat{p}_1(1 - \hat{p}_1)}{n_1} + \frac{\hat{p}_2(1 - \hat{p}_2)}{n_2}}$
+
+* hypothesis test when $H_0:p_1 - p_2 = 0:$ $SE_{\hat{p}_1 - \hat{p}_2} = \sqrt{\frac{\hat{p}_{pool}(1 - \hat{p}_{pool})}{n_1} + \frac{\hat{p}_{pool}(1 - \hat{p}_{pool})}{n_2}}$ where $\hat{p}_{pool}$ is the overall rate of success: $\hat{p}_{pool} = \frac{\text{number of successes in group 1 + number of successes in group 2}}{n_1 + n_2}$
+
+  9. Note that the reason for the difference in calculations of standard error is the same as in the case of the single proportion. When the null hypothesis claims that the two population proportions are equal, we need to take that information into consideration when calculating the standard error for the hypothesis test. Consequently, we use a common proportion for both samples.
+
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Sections 6.3-6.6 {-}
+
+  1. Use a chi-squared test of goodness of fit to evaluate if the distribution of levels of a single categorical variable follows a hypothesized distribution.
+
+* $H_0:$ The distribution of observed counts follows the hypothesized distribution and any observed differences are due to chance.
+
+* $H_A:$ The distribution of observed counts does not follow the hypothesized distribution.
+
+  2. Calculate the expected counts for a given level (cell) in a one-way table as the sample size times the hypothesized proportion for that level.
+
+  3. Calculate the chi-squared test statistic as
+
+$$\chi^2 = \sum_{i=1}^k\frac{(\text{observed count} - \text{expected count})^2}{\text{expected count}}, \text{where } k \text{ is the number of cells.}$$
+
+  4. Note that the chi-squared statistic is always positive and follows a right skewed distribution with one parameter, which is the degrees of freedom.
+
+  5. Note that the degrees of freedom for the chi-squared statistic for the goodness of fit test is $df=k-1$.
+
+  6. List the conditions necessary for performing a chi-squared test (goodness of fit or independence)
+
+1. The observations should be independent.
+2. The expected counts for each cell should be at least five.
+3. The degrees of freedom should be at least two (if not, use methods for evaluating proportions).
+
+  7. Describe how to use the chi-squared table to obtain a $p\!~\text{-value}$.
+
+  8. When evaluating the independence of two categorical variables, where at least one has more than two levels, use a chi-squared test of independence.
+
+* $H_0:$ The two variables are independent.
+
+* $H_A:$ The two variables are dependent.
+
+  9. Calculate expected counts in two-way tables as
+
+$$E =\frac{\text{row total}\times\text{column total}}{\text{grand total}}$$
+
+
+  10. Calculate the degrees of freedom for chi-squared test of independence as $df=(R-1)\times(C-1)$, where $R$ is the number of rows in a two-way table, and $C$ is the number of columns.
+
+  11. Note that there is no such thing as a chi-squared confidence interval for proportions.
+
+  12. Use simulation methods when sample size conditions are not met for inference for categorical variables.
+
+* Note that the $t$-distribution is only appropriate to use for means. When the sample size is not sufficiently large and the parameter of interest is a proportion or a difference between two proportions, we need to use simulation.
+
+  13. In hypothesis testing
+
+* for one categorical variable, generate simulated samples based on the null hypothesis. Next, calculate the number of samples that are at least as extreme as the observed data.
+* for two categorical variables, use a randomization test.
+
+  14. Use bootstrap methods for confidence intervals for categorical variables with at most two levels.
+
+```{block, test12, type='rmdexercise'}
+Test yourself:
+
+1. Suppose 10% of ASU students smoke. You collect many random samples of 100 ASU students at a time and calculate a sample proportion of students who smoke $(\hat{p})$ for each sample. What would you expect the distribution of $\hat{p}$ to be? Describe its shape, center, and spread.
+
+2. Suppose you want to construct a confidence interval with a margin of error no more than 4% for the proportion of ASU students who smoke. How would your calculation of the required sample size change if you do not know anything about the smoking habits of ASU students versus if you have a reliable previous study estimating that about 10% of ASU students smoke?
+
+3.  Suppose a 95% confidence interval for the difference between the proportion of male and the proportion of female ASU students who smoke is (-0.08, 0.11). Interpret this interval, making sure to incorporate a comparative statement about the two sexes of ASU students.  
+
+4.  Does the above interval suggest a significant difference between the true proportions of smokers in the two groups?
+
+5.  Suppose you had a sample of 100 male ASU students where 11 of them smoke and a sample of 80 female ASU students where 10 of them smoke. Calculate $\hat{p}_{pool}$.
+
+6.  When and why do we use $\hat{p}_{pool}$ in the calculation of the standard error for the difference between two sample proportions?
+
+7.  Explain the different hypothesis tests one could use when assessing the distribution of a categorical variable (e.g. smoking status) with only two levels (e.g. levels: smoker and non-smoker) vs. more than two levels (e.g. levels: heavy smoker, moderate smoker, occasional smoker, non-smoker).
+
+8.  Why is the $p\!~\text{-value}$ for chi-squared tests always "one sided"?
+
+9.  What are the null and alternative hypotheses in the chi-squared test of independence?
+
+10. Suppose a chi-squared test of independence between two categorical variables (one with 5, the other with 3 levels) yields a test statistic of $\chi^2 = 14$. What is the conclusion of the hypothesis test at a 5% significance level?
+
+11. Suppose you want to estimate the proportion of ASU students who smoke. You collect a random sample of 100 students, where only 8 of them smoke. Should you use the theoretical methods ($Z$) to construct a confidence interval based on these data? If not, describe how you could calculate a 95% bootstrap confidence interval.
+```
+
+```{block, week11optional, type='rmdoptional'}
+
+#### Practice Exercises 
+
+* End of chapter exercises in Chapter 6 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 6.1, 6.3, 6.5, 6.9, 6.11, 6.13, 6.15, 6.19, 6.21, 6.23, 6.25, 6.27, 6.29, 6.31, 6.33, 6.35, 6.51, 6.53, 6.55, 6.39, 6.41, 6.43, 6.45, 6.47
+```
+
+
+## Week 12: (Nov 1, 3) {-}
+
+*  Complete the `Project2Template.Rmd` project found in your [StatsWithRProjects](https://github.com/STAT-ATA-ASU/StatsWithRProjects) forked repository. Submit your compiled `*html` file no later than 5:00 p.m., November 4, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2246).  Make sure you commit and push your final product to your private repository. 
+
+
+
+## Week 13: (Nov 8, 10) {-}
+
+* Watch all videos for week one of [*Linear Regression and Modeling*](https://www.coursera.org/learn/linear-regression-model/home/welcome).
+
+* Read sections 7.1-7.2 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Read chapter 13 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/).
+
+* Complete chapter 8 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* No Lab this week!
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 7.1 {-}
+
+  1. Define the explanatory variable as the independent variable (predictor) and the response variable as the dependent variable (predicted).
+
+  2. Plot the explanatory variable ($x$) on the $x$-axis and the response variable ($y$) on the $y$-axis, and fit a linear regression model 
+
+$$y = \beta_0 + \beta_1 x + \varepsilon,$$
+
+where $\beta_0$ is the intercept, $\beta_1$ is the slope, and $\varepsilon$ is random error.
+
+* Note that the point estimates (estimated from observed data) for $\beta_0$ and $\beta_1$ are $b_0$ and $b_1$, respectively.
+
+  3. When describing the association between two numerical variables, evaluate
+
+* direction: positive $(x\uparrow,y\uparrow)$, negative $(x\downarrow,y\uparrow)$
+* form: linear or not
+* strength: determined by the scatter around the underlying relationship
+
+  4. Define correlation as the linear association between two numerical variables.
+
+* Note that a relationship that is nonlinear is simply called an association.
+
+  5. Note that the correlation coefficient ($r$, also called Pearson's $r$) has the following properties:
+
+* The magnitude (absolute value) of the correlation coefficient measures the strength of the linear association between two numerical variables.
+* The sign of the correlation coefficient indicates the direction of association.
+* The correlation coefficient is always between -1 and 1. 
+
+  + $r= -1$ indicates perfect negative linear association. 
+  + $r= +1$ indicates perfect positive linear association. 
+  + $r=0$ indicates no linear relationship.
+
+* The correlation coefficient is unit-less.
+* Since the correlation coefficient is unit-less, it is not affected by changes in the center or scale of either variable (such as unit conversions).
+* The correlation of $X$ with $Y$ is the same as the correlation of $Y$ with $X$.
+* The correlation coefficient is sensitive to outliers.
+
+  6. Recall that correlation does not imply causation.
+
+  7. Define residual ($e$) as the difference between the observed ($y$) and predicted ($\hat{y}$) values of the response variable.
+
+$$e_i = y_i - \hat{y}_i$$
+
+  8. Define the least squares line as the line that minimizes the sum of the squared residuals.  Recognize if the conditions for using least squares:
+
+1. linearity
+2. nearly normal residuals
+3. constant variability
+
+have been satisfied.
+
+  9. Define an indicator variable as a binary explanatory variable (with two levels).
+
+  10. Calculate the estimate for the slope ($b_1$) as
+
+$$b_1 = r \frac{s_y}{s_x},$$ 
+
+where $r$ is the correlation coefficient, $s_y$ is the standard deviation of the response variable, and $s_x$ is the standard deviation of the explanatory variable.
+
+  11. Interpret the slope as
+
+* When $x$ is numerical: "For each unit increase in $x$, we would expect y to be lower/higher on average by $|b_1|$ units."
+* When $x$ is categorical: "The value of the response variable is predicted to be $|b_1|$ units higher/lower between the baseline level and the other level of the explanatory variable."
+* Note that whether the response variable increases or decreases is determined by the sign of $b_1$.
+
+  12. Note that the least squares line always passes through the average of the response and explanatory variables $(\bar{x}, \bar{y}).$
+
+  13. Use the above property to calculate the estimate for the intercept $(b_0)$ as
+
+\begin{equation}
+b_0 = \bar{y} - b_1\bar{x},
+\label{b0}
+\end{equation}
+
+where $b_1$ is the slope, $\bar{y}$ is the average of the response variable, and $\bar{x}$ is the average of explanatory variable.
+
+  14. Interpret the intercept as
+
+* "When $x=0$, we would expect $y$ to equal, on average, $b_0$"---when $x$ is numerical.
+* "The expected average value of the response variable for the reference level of the explanatory variable is $b_0$"---when $x$ is categorical.
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 7.2 {-}
+
+  1. Predict the value of the response variable for a given value of the explanatory variable, $x^*$, by plugging $x^*$ into the linear model:
+
+$$\hat{y} = b_0 + b_1 x^*$$
+
+* Only predict for values of $x^*$ that are in the range of the observed data.
+* Do not extrapolate beyond the range of the data unless you are confident that the linear pattern continues.
+
+  2. Define $R^2$ as the percentage of the variability in the response variable explained by changes in the explanatory variable.
+
+* For a good model, we would like this number to be as close to 100% as possible.
+* $R^2$ is calculated as the square of the correlation coefficient.
+
+
+```{block, test13, type='rmdexercise'}
+Test yourself:
+
+1.  A teaching assistant gives a quiz. There are 10 questions on the quiz and no partial credit is given. After grading the papers, the TA writes down the number of questions each student answered correctly. What is the correlation between the number of questions answered correctly and incorrectly? Hint: Make up some data for number of questions right, calculate number of questions wrong, and plot them against each other.
+
+2. Suppose you fit a linear regression model predicting the score on an exam from the number of hours studied. Say you have studied for 4 hours. Would you prefer to be on the line, below the line, or above the line? What would the residual for your score be (0, negative, or positive)?
+
+3. Someone hands you the scatter diagram shown below, but has forgotten to label the axes. Can you calculate the correlation coefficient? 
+```
+
+```{r, label = "usp", echo = FALSE, fig.align = "center", fig.cap="Scatter plot 1"}
+set.seed(123)
+x <- sort(rnorm(20))
+y <- sort(rnorm(20))
+plot(x, y, xlab = "", ylab = "", col = "lightblue", pch = 19)
+```
+
+```{block, test14, type='rmdexercise'}
+4.  We would not want to fit a least squares line to the data shown in the scatterplot below. Which of the conditions does it appear to violate?
+```
+
+```{r, INC, echo = FALSE, fig.align = 'center', fig.cap = "Scatter plot 2"}
+set.seed(21)
+n <- 200
+y <- 1:n + rnorm(n, 0, 1)
+x <- y + rnorm(n, 0, 30)*(1:n)/n
+plot(x, y, xlab = "", ylab = "", col = "lightblue", pch = 19)
+```
+
+```{block, test15, type='rmdexercise'}
+5. Derive the formula for $b_0$ as a function of $b_1$ given the fact that the linear model is $\hat{y}=b_0 + b_1x$ and that the least squares line goes through $(\bar{x}, \bar{y})$.
+
+6. One study on male college students found their average height to be 70 inches with a standard deviation of 2 inches. Their average weight was 140 pounds with a standard deviation of 25 pounds. The correlation between their height and weight was 0.60. Assuming that the two variables are linearly associated, write the linear model for predicting weight from height.
+
+7. Is a male who is 72 inches tall and who weighs 115 pounds on the line, below the line, or above the line calculated in question 6?
+
+8.  What is an indicator variable, and what do levels 0 and 1 mean for such variables?
+
+9.  If the correlation between two variables $y$ and $x$ is 0.6, what percent of the variability in $y$ do changes in $x$ explain?
+
+10.  The model below predicts GPA based on an indicator variable (0: not premed, 1: premed). Interpret the intercept and slope estimates in context of the data.
+
+$$\widehat{\text{gpa}}= 3.57 − 0.01 \times \text{premed}$$
+```
+
+```{block, week13optional, type='rmdoptional'}
+#### Optional Videos
+
+* [Line Fitting, Residuals, and Correlation](https://www.youtube.com/watch?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM&v=mPvtZhdPBhQ)
+* [Fitting a Line with Least Squares Regression](https://www.youtube.com/watch?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM&v=z8DmwG2G4Qc)
+
+#### Practice Exercises 
+
+* End of chapter exercises in Chapter 7 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 7.1, 7.3, 7.7, 7.9, 7.11, 7.13, 7.15
+```
+
+## Week 14: (Nov 15, 17) {-}
+
+* Watch all videos for week two of [*Linear Regression and Modeling*](https://www.coursera.org/learn/linear-regression-model/home/welcome).
+
+* Read sections 7.3-7.4 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Read chapter 15 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/).
+
+* Review chapter 8 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Complete the `simple_regression_ASU2.Rmd` lab, and submit your compiled `*html` file no later than 5:00 p.m., November 18, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2243).  Make sure you commit and push your your final product to your private repository.
+
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Sections 7.3-7.4 {-}
+
+  1. Define a leverage point as a point that lies away from the center of the data in the horizontal direction.
+
+  2. Define an influential point as a point that influences (changes) the slope of the regression line.
+
+*  An influential point is usually a leverage point that is removed from the trajectory of the rest of the data.
+
+  3. Do not remove outliers from an analysis without good reason.
+
+  4. Be cautious about using a categorical explanatory variable when one of the levels has very few observations as these may act as influential points.
+
+  5. Determine whether an explanatory variable is a significant predictor for the response variable using the $t\!~\text{-test}$ and the associated $p\!~\text{-value}$ in the regression output.
+
+  6. When testing for the significance of the predictor the null hypothesis $H_0:\beta_1=0$.  Recognize that standard software output returns a $p\!~\text{-value}$ for a two-sided alternative hypothesis.
+
+* Note that $\beta_1=0$ means the regression line is horizontal, suggesting there is no relationship between the explanatory and response variable.
+
+  7. Calculate the $T\!~\text{-score}$ for the hypothesis test as
+
+$$T_{df} = \frac{b_1 - \text{null value}}{SE_{b_1}}
+\text{ with } df = n - 2$$.
+
+* Note that the $T\!~\text{-score}$ has $n-2$ degrees of freedom since we lose one degree of freedom for each parameter we estimate.  In simple linear regression, we estimate the intercept and the slope.
+
+  8. Note that a hypothesis test for the intercept is often irrelevant since it is usually out of the range of the data.
+
+  9. Calculate a confidence interval for the slope as
+
+$$b_1 \pm t_{1- \alpha/2, df}\cdot SE_{b_1}$$
+
+where $df=n-2$ and $t_{1- \alpha/2, df}$ is the critical score associated with the given confidence level at the desired degrees of freedom.
+
+* Note that the standard error of the slope estimate $SE_{b_1}$ can be found on the regression output.
+
+
+```{block, test16, type='rmdexercise'}
+Test yourself: 
+
+1. Determine whether each of the three unusual observations (traingles) in the plot below would be primarily considered an outlier, a high leverage point, or an influential point.
+```
+
+```{r, echo = FALSE, fig.align = 'center', fig.cap = "Scatter plot 3"}
+set.seed(21)
+n <- 97
+y <- 1:n + rnorm(n, 0, 20)
+x <- y + rnorm(n, 0, 20)
+x <- c(x, 170, 160, 60)
+y <- c(y, 155, 50, 135)
+plot(x, y, xlab = "", ylab = "", col = "pink", pch = 19)
+points(c(170, 160, 60), c(155, 50, 135), col = c("red", "green", "blue"), pch = 17, cex = 2)
+mod1 <- lm(y ~ x)
+```
+
+```{block, test17, type='rmdexercise'}
+2. Given the regression output below for predicting $y$ from $x$ where $n=100$, verify the $t$- and $p\!~\text{-values}$. Determine whether $x$ is a significant predictor of $y$, and interpret the $p\!~\text{-value}$ in context.
+```
+
+```{r, table, echo = FALSE}
+htmlTable::htmlTable(round(summary(mod1)$coef,4), css.cell = "padding-left: 1em; padding-right: 1em;")
+```
+
+
+```{block, test18, type='rmdexercise'}
+3. Calculate a 95% confidence interval for the slope from the output above. 
+```
+
+```{block, week14optional, type='rmdoptional'}
+#### Optional Videos
+
+* [Types of Outliers in Linear Regression](https://www.youtube.com/watch?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM&v=jZEKAlo1E54)
+* [Inference for Linear Regression](https://www.youtube.com/watch?list=PLkIselvEzpM63ikRfN41DNIhSgzboELOM&v=depiT-hTaGA)
+
+#### Practice Exercises 
+
+* End of chapter exercises in Chapter 7 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 7.25, 7.37, 7.39, 7.41, 7.43
+```
+
+## Week 15: (Nov 22, 29---No class 23-25 Thanksgiving) {-}
+
+* Watch all videos for week three of [*Linear Regression and Modeling*](https://www.coursera.org/learn/linear-regression-model/home/welcome).
+
+* Read sections 8.1-8.3 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
+
+* Complete chapter 9 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
+
+* Complete the `multiple_regression_ASU2.Rmd` lab, and submit your compiled `*html` file no later than 5:00 p.m., November 30, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2244).  Make sure you commit and push your your final product to your private repository.
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Sections 8.1-8.2 {-}
+
+  1. Define the fitted multiple linear regression model as
+
+$$\hat{y} = b_0 +b_1x_1+b_2x_2+\cdots+b_kx_k$$
+
+where there are $k$ predictors (explanatory variables).
+
+  2. Interpret the estimate for the intercept $(b_0)$ as the expected value of $y$ when all predictors are equal to 0, on average.
+
+  3. Interpret the estimate for a slope (say $b_1$) as "All else held constant, for each unit increase in $x_1$, we would expect $y$ to be higher/lower on average by $b_1$."
+
+  4. Define collinearity as a high correlation between two independent variables such that the two variables contribute redundant information to the model, which is something we want to avoid in multiple linear regression.
+
+  5. Note that $R^2$ will increase with each explanatory variable added to the model, regardless of whether or not the added variable is a meaningful predictor of the response variable. We use adjusted $R^2$, which applies a penalty for the number of predictors included in the model, to assess the strength of a multiple linear regression model.
+
+$$R^2_{adj}= 1 - \frac{SSE/(n-k-1)}{SST/(n-1)}$$
+
+where $n$ is the number of cases and $k$ is the number of predictors.  Note that $R^2_{adj}$ will only increase if the added variable has a meaningful contribution to the amount of explained variability in $y$, i.e. if the gains from adding the variable exceed the penalty.
+
+  6. Define model selection as identifying the best model for predicting a given response variable.
+
+  7. Note that we usually prefer simpler (parsimonious) models over more complicated ones.
+
+  8. Define the full model as the model with all explanatory variables included as predictors.
+
+
+#### Learning Objectives for [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Section 8.3 {-}
+
+  1. The significance of the model as a whole is assessed using an $F$-test where:
+
+* $H_0:\beta_1=\beta_2=\cdots=\beta_k$,
+* $H_A: \text{at least one } \beta_i \ne 0$,
+* there are $df = n-k-1$ degrees of freedom, and
+* the observed $F$ value is usually reported at the bottom of the regression output.
+
+  2. Note that the $p\!~\text{-values}$ associated with each predictor are conditional on other variables being included in the model, so they can be used to assess if a given predictor is significant, given that all others are in the model.
+
+* $H_0:\beta_1=0$, given all other variables are included in the model
+* $H_A:\beta_1\ne0$, given all other variables are included in the model
+* These $p\!~\text{-values}$ are calculated based on a $t$ distribution with $n-k-1$ degrees of freedom
+* The same degrees of freedom can be used to construct a confidence interval for the slope parameter of each predictor:
+
+$$b_i \pm t_{1-\alpha/2, n-k-1}\cdot SE_{b_i}$$
+
+  3. Stepwise model selection (backward or forward) can be done based on $p\!~\text{-values}$ (drop variables that are not significant) or based on adjusted $R^2$ (choose the model with highest adjusted $R^2$).
+
+  4. The general idea behind backward-selection is to start with the full model and eliminate one variable at a time until the ideal model is reached.
+
+* $p\!~\text{-value}$ method:
+1. Start with the full model.
+2. Drop the variable with the highest $p\!~\text{-value}$ and refit the model.
+3. Repeat until all remaining variables are significant.
+
+* adjusted $R^2$ method:
+1. Start with the full model.
+2. Refit all possible models omitting one variable at a time.  Choose the model with the highest adjusted $R^2$.
+3. Repeat until maximum possible adjusted $R^2$ is reached.
+
+  5. The general idea behind forward-selection is to start with only one variable and add one variable at a time until the ideal model is obtained.
+
+* $p\!~\text{-value}$ method:
+
+1. Try all possible simple linear regression models predicting $y$ using one explanatory variable at a time. Choose the model where the explanatory variable of choice has the lowest $p\!~\text{-value}$.
+
+2. Try all possible models adding one more explanatory variable at a time.  Choose the model where the added explanatory variable has the lowest $p\!~\text{-value}$.
+
+3.  Repeat until all added variables are significant.
+
+* adjusted $R^2$ method:
+
+1. Try all possible simple linear regression models predicting $y$ using one explanatory variable at a time. Choose the model with the highest adjusted $R^2$.
+2. Try all possible models adding one more explanatory variable at a time. Choose the model with the highest adjusted $R^2$.
+3. Repeat until maximum possible adjusted $R^2$ is reached.
+
+  6. The adjusted $R^2$ method is more computationally intensive; but, it is more reliable, since it does not depend on an arbitrary significance level.
+
+  7. List the conditions for multiple linear regression as
+
+1. linear relationship between each (numerical) explanatory variable and the response---checked using scatterplots of $y$ vs. each $x$, and residuals plots of residuals vs. each $x$
+2. nearly normal residuals with mean 0---checked using a normal probability plot and histogram of residuals
+3. constant variability of residuals---checked using residuals plots of residuals vs. $\hat{y}$, and residuals vs. each $x$
+4. independence of residuals (and hence observations)---checked using a scatterplot of residuals vs. order of data collection (will reveal non-independence if data have time series structure)
+
+  8. Note that no model is perfect, but even imperfect models can be useful.
+  
+```{block, test18b, type='rmdexercise'}  
+Test yourself:
+
+1.  How are multiple linear regression and simple linear regression different?
+
+2. What does "all else held constant" mean in the interpretation of a slope coefficient in multiple linear regression?
+
+3. What is collinearity? Why do we want to avoid collinearity in multiple regression models?
+
+4.  Explain the difference between $R^2$ and adjusted $R^2$. Which one will be higher? Which one tells us the variability in $y$ explained by the model? Which one is a better measure of the strength of a linear regression model?
+
+5. Define the term "parsimonious model."
+
+6. Describe the backward-selection algorithm using adjusted $R^2$ as the criterion for model selection.
+
+7. If a residuals plot (residuals vs. $x$ or residuals vs. $\hat{y}$) shows a fan shape, we worry about non-constant variability of residuals. What would the shape of these residuals be if the absolute value of the residuals are plotted against a predictor or $\hat{y}$?
+```
+
+```{block, week15optional, type='rmdoptional'}
+#### Optional Videos
+
+* [Introduction to Multiple Regression](https://www.youtube.com/watch?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&v=sQpAuyfEYZg)
+* [Model Selection in Multiple Regression](https://www.youtube.com/watch?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&v=VB1qSwoF-l0)
+* [Checking Multiple Regression Diagnostics Using Graphs](https://www.youtube.com/watch?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&v=3KSUeYMKt5A)
+* [Basic Ideas of Logistic Regression](https://www.youtube.com/watch?list=PLkIselvEzpM5f1HYzIjFt52SD4izsJ2_I&v=uYC2eLVSpI8)
+
+#### Practice Exercises 
+
+* End of chapter exercises in Chapter 8 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 8.1, 8.3, 8.5, 8.7, 8.9, 8.11. 8.13
+```
+
+### Final Exam {-}
+
+```{block, FINAL, type='rmdnote'}
+*  Complete the `Project3Template.Rmd` project found in your [StatsWithRProjects](https://github.com/STAT-ATA-ASU/StatsWithRProjects) forked repository. Submit your compiled `*html` file no later than 5:00 p.m., December 7, to [CrowdGrader](https://www.crowdgrader.org/crowdgrader/venues/view_venue/2247).  Make sure you commit and push your final product to your private repository. 
+```
