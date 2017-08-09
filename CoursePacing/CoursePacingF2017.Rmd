@@ -37,16 +37,13 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 ## Week 1: (Aug 22-24) {-}
 
 
-* Sign-up for free accounts on [GitHub](https://github.com) and [Rpubs](https://rpubs.com).
+* Sign-up for a free account on [GitHub](https://github.com).
 
-* When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinquishing characteristic in your username.  Please use the same **username** for your account on Rpubs. 
-
-* Once you have a GitHub account, send an email to arnholtat@appstate.edu with a Subject line of **STT 3850 - GitHub Username**, and tell me in the body of your email your first name, last name, and your GitHub username.  I will then manually add you as a team member to the repository in the STAT-ATA-ASU organization that has your name (**LastName-FirstName**).  This repository will be where you store all of your work for this course.  I will also change your repository to a private repository.
+* When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinquishing characteristic in your username.   
 
 * Become familiar with the Appstate [RStudio server](https://mathr.math.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
 
 * Test drive RStudio by following the directions from [Jenny Bryan's STAT 545 course](https://stat545-ubc.github.io/git07_git-github-rstudio.html).  Additional material can be found in the detailed `Bookdown` document [Happy Git and GitHub for the useR](http://happygitwithr.com/).  Chapters 8, 10-13 of [Happy Git and GitHub for the useR](http://happygitwithr.com/) will be helpful if you need more directions for test driving RStudio. Note: Git, R, and the RStudio IDE have already been installed for you on the RStudio server.    
-
 * Read the [Git and GitHub](http://r-pkgs.had.co.nz/git.html) chapter from Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/)
 
   
@@ -67,47 +64,8 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 ## Week 2: (Aug 28-31) {-}
 
-* Watch all videos for week one of [*Introduction to Probability and Data*](https://www.coursera.org/learn/probability-intro).
 
-* Read sections 1.1-1.5 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os).
 
-* Read chapters 4 and 5 of [*PDS*](https://alanarnholt.github.io/PDS-Bookdown2/) (Conducting a Literature Review and Writing About Empirical Research).
-
-* Using [zotero](https://www.zotero.org/) will be covered.
-
-* Watch [creating RStudio projects from Github Repos (5 min)](https://www.youtube.com/watch?v=YxZ8J2rqhEM) 
-
-* Clone the repository to your local machine using RStudio by following these instructions:
-
-1. [Fork](https://help.github.com/articles/fork-a-repo/) the repository.
-2. Copy the clone URL to the clipboard.
-3. Click `File > New Project > Version Control > Git`
-4. Paste the clone URL (`https://github.com/YourUserName/STAT-ATA-ASU/STT5811ClassRepo.git`) in the `Repository URL:` box.
-5. Type a name (suggestion `UserNameSTT5811`) in the `Project directory name:` box.
-6. Change if needed the location in the `Create project as subdirectory of:` box.
-7. Click the `Create Project` box.  You should now have a local copy of the forked repository on your local machine.  Congratulations!  
-
-* Set the upstream remote in your fork to this repository with the command
-```
-git remote add upstream https://github.com/STAT-ATA-ASU/STT5811ClassRepo.git
-```
-* Verify with
-```
-git remote -v
-```
-* To obtain updates from the upstream repository type
-```
-git pull upstream master
-```
-
-* If the upstream repository is using `gh-pages`, use `gh-pages` instead of `master` to obtain updates.
-```
-git pull upstream gh-pages
-```
-
-* If there are conflicts, you will need to resolve them before proceeding.
-
-* Create a free account on [DataCamp](https://www.datacamp.com/).  Complete chapter 1 of [*Data Analysis and Statistical Inference* ](https://www.datacamp.com/courses/statistical-inference-and-data-analysis)
 
 * Fork the [StatsWithRLabs](https://github.com/STAT-ATA-ASU/StatsWithRLabs) repository to your private GitHub account.  Complete the `intro_to_r_ASU2.Rmd` lab, and submit your compiled `*html` file no later than 5:00 p.m., August 26, to [CrowdGrader](	https://www.crowdgrader.org/crowdgrader/venues/view_venue/2236).  Make sure you commit and push your your final product to your private repository.  Install the `statsr` package by running the following from the R command line:
 
@@ -115,49 +73,16 @@ git pull upstream gh-pages
 devtools::install_github('alanarnholt/statsr')
 ```
 
-#### Learning Objectives [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os) Sections 1.1-1.5 {-}
-
-  1. Identify variables as numerical or categorical.
-
-* If the variable is numerical, further classify it as continuous or discrete based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
-* If the variable is categorical, determine if it is ordinal or not based on whether the levels have a natural ordering.
-
-  2. Define associated variables as variables that show some relationship with one another. Further categorize this relationship as a positive or negative association when possible.
-
-  3. Define variables that are not associated as independent.
+#### Learning Objectives 
+1.
+2.
 
 ```{block, test1, type='rmdexercise'}
 Test yourself: Give one example of each type of variable you have learned.
 ```
 
-  4. Identify the explanatory variable in a pair of variables as the variable suspected of affecting the other, however note that labeling variables as explanatory and response does not guarantee that the relationship between the two is actually causal, even if there is an association identified between the two variables.
 
-  5. Classify a study as observational or experimental. Determine and explain whether the study’s results can be generalized to the population and whether the results suggest an association or causation between the quantities studied.
 
-* If random sampling has been employed in data collection, the results should be generalizable to the target population.
-* If random assignment has been employed in study design, the results suggest causality.
-
-  6. Identify confounding variables and sources of bias in a given study.
-
-  7. Distinguish among simple random, stratified, and cluster sampling. Recognize the benefits and drawbacks of choosing one sampling scheme over another.
-
-* Simple random sampling: Each subject in the population is equally likely to be selected.
-Stratified sampling: First divide the population into homogeneous strata (subjects within each stratum are similar, across strata are different); then, randomly sample from within each strata.
-* Cluster sampling: First, divide the population into clusters (subjects within each cluster are non-homogeneous, but clusters are similar to each other). Next, randomly sample a few clusters. Finally, randomly sample from within each cluster.
-
-  8. Identify the four principles of experimental design, and recognize their purposes: control any possible confounders; randomize into treatment and control groups; replicate by using a sufficiently large sample or repeating the experiment; and block any variables that might influence the response.
-
-  9. Identify if single or double blinding has been used in a study.
-
-```{block, test2, type='rmdexercise'}
-Test yourself:
-
-1. Describe when a study’s results can be generalized to the population at large and when causation can be inferred.
-2. Explain why random sampling allows for generalizability of results.
-3. Explain why random assignment allows for making causal conclusions.
-4. Describe a situation where cluster sampling is more efficient than simple random or stratified sampling.
-5. Explain how blinding can help eliminate the placebo effect and other biases.
-```
 
 ```{block, week2optional, type='rmdoptional'}
 #### Optional Videos---Statistics In Action {-}
@@ -172,7 +97,7 @@ Test yourself:
 
 #### Practice Exercises  {-}
 
-* End of chapter exercises in Chapter 1 of [*OpenIntro Statistics, 3rd Edition*](https://www.openintro.org/stat/textbook.php?stat_book=os): 1.1, 1.3, 1.11, 1.13, 1.17, 1.19, 1.25, 1.27, 1.31
+* End of chapter exercises 
 ```
 
 ## Week 3 (Sep 4(No class)-7) {-}
