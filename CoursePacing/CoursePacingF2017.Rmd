@@ -34,7 +34,7 @@ Coding  | Code (primarily R) produces correct answers.  Non-standard or complex 
 Clarity  | Few errors of grammar and usage; any minor errors do not interfere with meaning.  Language style and word choice are highly effective and enhance meaning.  Style and word choice are appropriate for the assignment. | Some errors of grammar and usage; errors do not interfere with meaning.  Language style and word choice are, for the most part, effective and appropriate for the assignment. | Major errors of grammar and usage make meaning unclear.  Language style and word choice are ineffective and/or inappropriate.
 
 
-## Week 1: (Aug 22-24) {-}
+## Week 1: (Aug 22--24) {-}
 
 
 * Sign-up for a free account on [GitHub](https://github.com).
@@ -59,7 +59,7 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 ```
 
-## Week 2: (Aug 28-31) {-}
+## Week 2: (Aug 28--31) {-}
 
 * Become familiar with the Appstate [RStudio server](https://mathr.math.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
 
@@ -69,7 +69,7 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 
 
-## Week 3 (Sep 4(No class)-7) {-}
+## Week 3 (Sep 4 (No class) Sep 5--7) {-}
 
 * Complete _Foundations of Probability in R_ (datacamp)
 
@@ -84,7 +84,7 @@ Test yourself:
 
 
 
-## Week 4: (Sep 11 - 14) {-}
+## Week 4: (Sep 11--14) {-}
 
 * Complete _Reporting with R Markdown_ (datacamp)
 
@@ -100,20 +100,20 @@ Test yourself:
 * You may want to install [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and optionally [$LaTeX$](http://www.ctan.org/starter) on your personal computer. If you do, you will want to follow Jenny Bryan's excellent advice for [installing R and RStudio](http://stat545-ubc.github.io/block000_r-rstudio-install.html) and [installing Git](http://stat545-ubc.github.io/git01_git-install.html).  Jenny's advice is also in chapters 6 and 7 of [Happy Git and GitHub for the useR](http://happygitwithr.com/).  Note: [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), and [$LaTeX$](http://www.ctan.org/starter) are installed on the [Appstate RStudio](https://mathr.math.appstate.edu/) server.
 ```
 
-## Week 5: (Sep 18 - 21) {-}
+## Week 5: (Sep 18--21) {-}
 
 * Complete _Data Manipulation in R with `dplyr`_ (datacamp)
 
-## Week 6: (Sep 25 - 28) {-}
+## Week 6: (Sep 25--28) {-}
 
 * Complete _Data Visualization with `ggplot2`_ (Part 1) (datacamp)
 
-## Week 7: (Oct 2 - 5) {-}
+## Week 7: (Oct 2--5) {-}
 
 * Complete _Exploratory Data Analysis_ (datacamp)
 
 
-## Week 8: (Oct 9 - 11; Oct 12 - 13 Fall Break) {-}
+## Week 8: (Oct 9--11; Oct 12--13 Fall Break) {-}
 
 * Review and Midterm
 
@@ -121,37 +121,49 @@ Test yourself:
 * Midterm Exam---October 11
 ```
 
-## Week 9: (Oct 16 - 19) {-}
+## Week 9: (Oct 16--19) {-}
 
 * Complete _Intermediate R_ (datacamp)
 
-## Week 10: (Oct 23 - 26) {-}
+## Week 10: (Oct 23--26) {-}
 
 * Complete _Foundations of Inference_ (datacamp)
 
-## Week 11: (Oct 30 - Nov 2) {-}
+## Week 11: (Oct 30--Nov 2) {-}
 
 * Chapter 3 of MSWRAR
 
-## Week 12: (Nov 6 - 9) {-}
+* Suggested Problems: 3-7, 10--12, 16--18
+
+## Week 12: (Nov 6--9) {-}
 
 * Chapter 4 of MSWRAR 
 
-## Week 13: (Nov 13 - 16) {-}
+* Suggested Problems: 2, 5, 12--16
+
+## Week 13: (Nov 13--16) {-}
 
 * Chapter 5 of MSWRAR
 
-## Week 14: (Nov 20-21; 22-24 Thanksgiving Break) {-}
+* Suggested Problems: 7, 9--17
+
+## Week 14: (Nov 20--21; 22--24 Thanksgiving Break) {-}
 
 * Chapter 5 of MSWRAR
 
-## Week 15: (Nov 27 - 30) {-}
+* Suggested Problems: 7, 9--17
+
+## Week 15: (Nov 27--30) {-}
 
 * Chapter 7 of MSWRAR
 
-## Week 16: (Dec 4 - 6; Dec 7 is Reading Day) {-}
+* Suggested Problems: 2--4, 9, 11--14, 17--18, 20--27, 29, 38
+
+## Week 16: (Dec 4--6; Dec 7 is Reading Day) {-}
 
 * Chapter 8 of MSWRAR
+
+* Suggested Problems: 1--10
 
 ### Final Exam {-}
 
