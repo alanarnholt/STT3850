@@ -19,8 +19,9 @@ MathJax.Hub.Config({
 
 ```{block, note-text, type='rmdnote'}
 1.  Expect a quiz the first 10 minutes of class every Thursday.  
-2.  The first 10 - 15 minutes of class will be lecture.  Please bring a notebook and pencil to every class.
+2.  Please bring a notebook and pencil to every class.
 3.  The text for this course is _Mathematical Statistics with Resampling and R_ (MSWRAR)
+4. Access the [DataCamp](https://www.datacamp.com/) assignments via AsULearn.
 ```
 
 #### Grading Rubric for Homework Assignments {-}
@@ -41,7 +42,7 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 * When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinquishing characteristic in your username.   
 
-* _Complete Introduction to R_ (datacamp)
+* _Complete Introduction to R_ [(DataCamp)](https://www.datacamp.com/)
 
   
  
@@ -63,17 +64,17 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 * Become familiar with the Appstate [RStudio server](https://mathr.math.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
 
-* Complete _A Hands-on Introduction to Statistics with R_ (datacamp)
+* Complete _A Hands-on Introduction to Statistics with R_ [(DataCamp)](https://www.datacamp.com/)
 
-* Complete _Intro to Statistics with R: Student's T-test_ (datacamp)
+* Complete _Intro to Statistics with R: Student's T-test_ [(DataCamp)](https://www.datacamp.com/)
 
 
 
 ## Week 3 (Sep 4 (No class) Sep 5--7) {-}
 
-* Complete _Foundations of Probability in R_ (datacamp)
+* Complete _Foundations of Probability in R_ [(DataCamp)](https://www.datacamp.com/)
 
-* Start _Reporting with R Markdown_ (datacamp)
+* Start _Reporting with R Markdown_ [(DataCamp)](https://www.datacamp.com/)
 
 ```{block, test3, type='rmdexercise'}
 Test yourself:
@@ -86,9 +87,9 @@ Test yourself:
 
 ## Week 4: (Sep 11--14) {-}
 
-* Complete _Reporting with R Markdown_ (datacamp)
+* Complete _Reporting with R Markdown_ [(DataCamp)](https://www.datacamp.com/)
 
-* Complete _Introduction to Data_ (datacamp)
+* Complete _Introduction to Data_ [(DataCamp)](https://www.datacamp.com/)
 
 * Test drive RStudio by following the directions from [Jenny Bryan's STAT 545 course](https://stat545-ubc.github.io/git07_git-github-rstudio.html).  Additional material can be found in the detailed `Bookdown` document [Happy Git and GitHub for the useR](http://happygitwithr.com/).  Chapters 8, 10-13 of [Happy Git and GitHub for the useR](http://happygitwithr.com/) will be helpful if you need more directions for test driving RStudio. Note: Git, R, and the RStudio IDE have already been installed for you on the RStudio server.    
 * Read the [Git and GitHub](http://r-pkgs.had.co.nz/git.html) chapter from Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/)
@@ -102,15 +103,15 @@ Test yourself:
 
 ## Week 5: (Sep 18--21) {-}
 
-* Complete _Data Manipulation in R with `dplyr`_ (datacamp)
+* Complete _Data Manipulation in R with `dplyr`_ [(DataCamp)](https://www.datacamp.com/)
 
 ## Week 6: (Sep 25--28) {-}
 
-* Complete _Data Visualization with `ggplot2`_ (Part 1) (datacamp)
+* Complete _Data Visualization with `ggplot2`_ (Part 1) [(DataCamp)](https://www.datacamp.com/)
 
 ## Week 7: (Oct 2--5) {-}
 
-* Complete _Exploratory Data Analysis_ (datacamp)
+* Complete _Exploratory Data Analysis_ [(DataCamp)](https://www.datacamp.com/)
 
 
 ## Week 8: (Oct 9--11; Oct 12--13 Fall Break) {-}
@@ -123,11 +124,11 @@ Test yourself:
 
 ## Week 9: (Oct 16--19) {-}
 
-* Complete _Intermediate R_ (datacamp)
+* Complete _Intermediate R_ [(DataCamp)](https://www.datacamp.com/)
 
 ## Week 10: (Oct 23--26) {-}
 
-* Complete _Foundations of Inference_ (datacamp)
+* Complete _Foundations of Inference_ [(DataCamp)](https://www.datacamp.com/)
 
 ## Week 11: (Oct 30--Nov 2) {-}
 
