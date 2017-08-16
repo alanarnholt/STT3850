@@ -11,14 +11,14 @@ output:
 
 **Instructor:**  Dr. Alan T. Arnholt    
 **Office:** Walker Hall 237      
-**Office Hours:** 10-11:30 M, W, and F
+**Office Hours:** 10-11:30am M, W, and F
 
 Make an appointment to see me by clicking https://arnholtat.youcanbook.me/.
 
-Course Teaching Assistants:
+Teaching Assistants:
 
   * Patrick Daye: dayep@appstate.edu --- Office Hours TBA
-  * Kory Illenye: illenyekd@appstate.edu --- Office Hours TBA
+  * Kory Illenye: illenyekd@appstate.edu --- Office Hours: M 6-7pm Math Lab; T 10-11am 307A
 
 **Course Description:**  
 
@@ -68,6 +68,8 @@ Grades will be kept on AsULearn. You should monitor your grades throughout the t
 **How To Get Unstuck**
 
 Well constructed questions will elicit answers more rapidly than poorly constructed questions.  This [video](https://www.youtube.com/watch?v=ZFaWxxzouCY&list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ&index=3) provides some background on asking questions.  This stackoverflow thread details how to create a [minimal R reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example/5963610#5963610). Please read [How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html) by Eric Raymond and Rick Moen and heed their advice.
+
+Please ask your well worded questions on [piazza](https://piazza.com/appstate/fall2017/stt3850/home).  Piazza will allow your fellow students to follow and answer questions quite possibly before the instructor or a TA has the chance to provide an answer.  Piazza also allows the user to format code and write mathematics with LaTeX.  
 
 **University Policies**
 
