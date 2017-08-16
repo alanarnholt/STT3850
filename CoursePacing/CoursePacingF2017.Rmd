@@ -21,7 +21,7 @@ MathJax.Hub.Config({
 1.  Expect a quiz the first 10 minutes of class every Thursday.  
 2.  Please bring a notebook and pencil to every class.
 3.  The text for this course is _Mathematical Statistics with Resampling and R_ (MSWRAR)
-4. Access the [DataCamp](https://www.datacamp.com/) assignments via AsULearn.
+4.  Access the [DataCamp](https://www.datacamp.com/) assignments via [AsULearn](https://asulearn.appstate.edu/).
 ```
 
 #### Grading Rubric for Homework Assignments {-}
