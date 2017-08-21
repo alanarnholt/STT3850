@@ -44,6 +44,8 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 * _Complete Introduction to R_ [(DataCamp)](https://www.datacamp.com/)
 
+* _Introduction to R_ [slides](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/IntroToR.html)
+
   
  
 ```{block, week1optional, type='rmdoptional'}
