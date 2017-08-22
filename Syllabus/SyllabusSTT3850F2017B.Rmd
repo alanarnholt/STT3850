@@ -3,10 +3,7 @@ title: "STT 3850 Syllabus - Fall 2017"
 author: ''
 date: "Fall 2017"
 output: 
-  html_document: 
-    theme: yeti
-    highlight: textmate
-    css: "../css/style.css"
+  pdf_document
 ---
 
 **Instructor:**  Dr. Alan T. Arnholt    
