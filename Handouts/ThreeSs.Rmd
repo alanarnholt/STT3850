@@ -100,7 +100,7 @@ A bottled water company acquires its water from two independent sources, X and Y
 
 **Solution:** To solve this problem, start by verifying the reasonableness of the normality assumption.
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, message = FALSE}
 library(PASWR2)     # load the PASWR2 package
 library(ggplot2)    # load the ggplot2 package
 library(lsr)        # load the lsr package

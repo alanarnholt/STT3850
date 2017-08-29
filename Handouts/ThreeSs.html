@@ -118,7 +118,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Three S’s</h1>
 <h4 class="author"><em>Alan T. Arnholt</em></h4>
-<h4 class="date"><em>Tuesday, August 29, 2017 - 11:05:50.</em></h4>
+<h4 class="date"><em>Tuesday, August 29, 2017 - 11:12:09.</em></h4>
 
 </div>
 
@@ -221,9 +221,8 @@ ggplot(data = mtcars, aes(x = qsec, ..density..)) +
 <h3>Example 9.12 from PASWR2</h3>
 <p>A bottled water company acquires its water from two independent sources, X and Y. The company suspects that the sodium content in the water from source X is less than the sodium content from source Y. An independent agency measures the sodium content in 20 samples from source X and 10 samples from source Y and stores them in data frame <code>WATER</code> of the <code>PASWR2</code> package. Is there statistical evidence to suggest the average sodium content in the water from source X is less than the average sodium content in Y?</p>
 <p><strong>Solution:</strong> To solve this problem, start by verifying the reasonableness of the normality assumption.</p>
-<pre class="r"><code>library(PASWR2)     # load the PASWR2 package</code></pre>
-<pre><code>Loading required package: lattice</code></pre>
-<pre class="r"><code>library(ggplot2)    # load the ggplot2 package
+<pre class="r"><code>library(PASWR2)     # load the PASWR2 package
+library(ggplot2)    # load the ggplot2 package
 library(lsr)        # load the lsr package
 library(DescTools)  # load the DescTools package
 boxplot(sodium ~ source, data = WATER)</code></pre>
