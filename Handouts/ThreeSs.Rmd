@@ -139,6 +139,7 @@ library(dplyr)
 NDF <- WATER %>%
 group_by(source) %>%
 summarize(Mean = mean(sodium), VAR = var(sodium), n = n())
+NDF
 sp <- sqrt((122.77*19 + 5.28*9)/(20 + 10 - 2))
 sp
 C_D <- (76.4 - 81.2)/sp
