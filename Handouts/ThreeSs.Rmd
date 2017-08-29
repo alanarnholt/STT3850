@@ -1,0 +1,84 @@
+---
+title: "Three S's"
+author: "Alan T. Arnholt"
+date: '`r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+```
+
+## Using R Markdown
+
+Using R Markdown allows us to write both text and code in the same document.  Use R code chunks to insert code:
+
+````markdown
+`r ''````{r}
+# Some code
+x <- 1:10
+```
+````
+
+Use inline `R` to write answers inline using the following format: `` ``r ''`r R_CODE` ``.  For example, to compute the mean of the values 1, 3, 5, and 7, one might can use `` ``r ''`r mean(c(1, 3, 5, 7))` ``.  The mean of 1, 3, 5, and 7 is `r mean(c(1, 3, 5, 7))`.
+
+### Using packages
+
+To use functions in packages such as `psych`, one must either specify the package by prepending the function with the package name and two colons or load the package using the command `library(PackageName)`.
+
+Consider using the function `describe` on the `mtcars` data set.
+
+```{r, error = TRUE}
+describe(mtcars) # psych has not been loaded!
+psych::describe(mtcars)
+```
+
+### Characterizing `qsec`
+
+* Shape
+
+```{r}
+hist(mtcars$qsec, col = "blue", freq = FALSE, 
+      main = "Histogram of time to travel quarter mile",
+      xlab = "time in seconds")
+```
+
+* Center
+
+```{r}
+Mean <- mean(mtcars$qsec)
+Mean
+```
+
+* Spread
+
+```{r}
+SD <- sd(mtcars$qsec)
+SD
+```
+
+The distribution of `qsec` is unimodal and symmetric with a mean of `r round(Mean,2)` seconds and a standard deviation of `r round(SD, 2)` seconds.
+
+## Superimposing a Normal Distribution
+
+```{r}
+hist(mtcars$qsec, col = "blue", freq = FALSE, 
+      main = "Histogram of time to travel quarter mile",
+      xlab = "time in seconds", xlim = c(13, 23))
+curve(dnorm(x, Mean, SD), 13, 23, col = "purple", add = TRUE, lwd = 3)
+```
+
+## Using `ggplot2`
+
+```{r}
+library(ggplot2)
+ggplot(data = mtcars, aes(x = qsec, ..density..)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") + 
+  xlim(Mean - 3.5*SD, Mean + 3.5*SD) +
+  labs(x = "Time in seconds") +
+  geom_density(fill = "red", alpha = 0.4) +
+  stat_function(fun = dnorm, args = list(mean = Mean, sd = SD), 
+                inherit.aes = FALSE, size = 2, color = "purple") +
+  theme_bw()
+```
+
