@@ -118,7 +118,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Three S’s</h1>
 <h4 class="author"><em>Alan T. Arnholt</em></h4>
-<h4 class="date"><em>Tuesday, August 29, 2017 - 12:30:38.</em></h4>
+<h4 class="date"><em>Tuesday, August 29, 2017 - 12:32:37.</em></h4>
 
 </div>
 
@@ -273,16 +273,8 @@ attr(,&quot;magnitude&quot;)
 [1] &quot;medium&quot;</code></pre>
 <pre class="r"><code>cohensD(formula = sodium ~ source, data = WATER)</code></pre>
 <pre><code>[1] 0.5205894</code></pre>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>NDF &lt;- WATER %&gt;%
+<pre class="r"><code>library(dplyr)
+NDF &lt;- WATER %&gt;%
 group_by(source) %&gt;%
 summarize(Mean = mean(sodium), VAR = var(sodium), n = n())
 sp &lt;- sqrt((122.77*19 + 5.28*9)/(20 + 10 - 2))

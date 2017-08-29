@@ -132,7 +132,7 @@ TR
 
 5. **English Conclusion** --- There is evidence to suggest the average sodium content for source X is less than the average sodium content for source Y.
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 CohenD(WATER$x, WATER$y, na.rm = TRUE)
 cohensD(formula = sodium ~ source, data = WATER)
 library(dplyr)
