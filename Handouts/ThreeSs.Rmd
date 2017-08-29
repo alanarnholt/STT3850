@@ -113,8 +113,6 @@ LeveneTest(sodium ~ source, data = WATER)
 ggplot(data = WATER, aes(sample = sodium, color = source)) + 
 stat_qq() + 
 theme_bw()
-CohenD(WATER$x, WATER$y, na.rm = TRUE)
-cohensD(formula = sodium ~ source, data = WATER)
 ```
 
 1. **Hypotheses** --- $H_0: \mu_X - \mu_Y = 0$ versus $H_1: \mu_X - \mu_Y <0$
@@ -133,3 +131,16 @@ TR
 4. **Statistical Conclusion** --- Since the p-value is `r TR$p.value`, reject the null hypothesis.
 
 5. **English Conclusion** --- There is evidence to suggest the average sodium content for source X is less than the average sodium content for source Y.
+
+```{r}
+CohenD(WATER$x, WATER$y, na.rm = TRUE)
+cohensD(formula = sodium ~ source, data = WATER)
+library(dplyr)
+NDF <- WATER %>%
+group_by(source) %>%
+summarize(Mean = mean(sodium), VAR = var(sodium), n = n())
+sp <- sqrt((122.77*19 + 5.28*9)/(20 + 10 - 2))
+sp
+C_D <- (76.4 - 81.2)/sp
+C_D
+```
