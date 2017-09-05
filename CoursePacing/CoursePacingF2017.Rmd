@@ -78,6 +78,8 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 * Complete _Foundations of Probability in R_ [(DataCamp)](https://www.datacamp.com/)
 
+* [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)
+
 * Start _Reporting with R Markdown_ [(DataCamp)](https://www.datacamp.com/)
 
 ```{block, test3, type='rmdexercise'}
