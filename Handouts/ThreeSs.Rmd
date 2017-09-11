@@ -1,0 +1,147 @@
+---
+title: "Three S's"
+author: "Alan T. Arnholt"
+date: '`r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
+```
+
+## Using R Markdown
+
+Using R Markdown allows us to write both text and code in the same document.  Use R code chunks to insert code:
+
+````markdown
+`r ''````{r}
+# Some code
+x <- 1:10
+```
+````
+
+Use inline `R` to write answers inline using the following format: `` ``r ''`r R_CODE` ``.  For example, to compute the mean of the values 1, 3, 5, and 7, one might can use `` ``r ''`r mean(c(1, 3, 5, 7))` ``.  The mean of 1, 3, 5, and 7 is `r mean(c(1, 3, 5, 7))`.
+
+### Using packages
+
+To use functions in packages such as `psych`, one must either specify the package by prepending the function with the package name and two colons or load the package using the command `library(PackageName)`.
+
+Consider using the function `describe` on the `mtcars` data set.
+
+```{r, error = TRUE}
+describe(mtcars) # psych has not been loaded!
+psych::describe(mtcars)
+```
+
+### Characterizing `qsec`
+
+* Shape
+
+```{r}
+hist(mtcars$qsec, col = "blue", freq = FALSE, 
+      main = "Histogram of time to travel quarter mile",
+      xlab = "time in seconds")
+```
+
+* Center
+
+```{r}
+Mean <- mean(mtcars$qsec)
+Mean
+```
+
+* Spread
+
+```{r}
+SD <- sd(mtcars$qsec)
+SD
+```
+
+The distribution of `qsec` is unimodal and symmetric with a mean of `r round(Mean,2)` seconds and a standard deviation of `r round(SD, 2)` seconds.
+
+## Superimposing a Normal Distribution
+
+```{r}
+hist(mtcars$qsec, col = "blue", freq = FALSE, 
+      main = "Histogram of time to travel quarter mile",
+      xlab = "time in seconds", xlim = c(13, 23))
+curve(dnorm(x, Mean, SD), 13, 23, col = "purple", add = TRUE, lwd = 3)
+```
+
+## Using `ggplot2`
+
+```{r}
+library(ggplot2)
+ggplot(data = mtcars, aes(x = qsec, ..density..)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") + 
+  xlim(Mean - 3.5*SD, Mean + 3.5*SD) +
+  labs(x = "Time in seconds") +
+  geom_density(fill = "red", alpha = 0.4) +
+  stat_function(fun = dnorm, args = list(mean = Mean, sd = SD), 
+                inherit.aes = FALSE, size = 2, color = "purple") +
+  theme_bw()
+```
+
+## Tests of Significance
+
+1. Hypotheses --- State the null and alternative hypotheses.
+
+2. Test Statistic
+
+3. Rejection Region Calculations
+
+4. Statistical Conclusion
+
+5. English Conclusion
+
+### Example 9.12 from PASWR2
+
+A bottled water company acquires its water from two independent sources, X and Y.  The company suspects that the sodium content in the water from source X is less than the sodium content from source Y.  An independent agency measures the sodium content in 20 samples from source X and 10 samples from source Y and stores them in data frame `WATER` of the `PASWR2` package.  Is there statistical evidence to suggest the average sodium content in the water from source X is less than the average sodium content in Y?
+
+**Solution:** To solve this problem, start by verifying the reasonableness of the normality assumption.
+
+```{r, warning = FALSE, message = FALSE}
+library(PASWR2)     # load the PASWR2 package
+library(ggplot2)    # load the ggplot2 package
+library(lsr)        # load the lsr package
+library(DescTools)  # load the DescTools package
+boxplot(sodium ~ source, data = WATER)
+ggplot(data = WATER, aes(x = source, y = sodium)) + 
+geom_boxplot() +
+theme_bw()
+LeveneTest(sodium ~ source, data = WATER)
+ggplot(data = WATER, aes(sample = sodium, color = source)) + 
+stat_qq() + 
+theme_bw()
+```
+
+1. **Hypotheses** --- $H_0: \mu_X - \mu_Y = 0$ versus $H_1: \mu_X - \mu_Y <0$
+
+2. **Test Statistic** ---The test statistic is $\bar{X} - \bar{Y}$.  The standardized test statistic under the assumptioon that $H_0$ is true and its approximate distribution are
+
+$$\frac{\left[(\bar{X}-\bar{Y} - \delta_0) \right]}{\sqrt{\frac{S_X^2}{n_x}+\frac{S_Y^2}{n_Y}}} \overset{\bullet}{\sim} t_{\nu}$$
+
+3. **Rejection Region Calculations** --- $P(t_{obs} < t_{0.05, 22.069}) = `r qt(0.05, 22.069)`.$
+
+```{r}
+TR <- t.test(sodium ~ source, data = WATER, alternative = "less")
+TR
+```
+
+4. **Statistical Conclusion** --- Since the p-value is `r TR$p.value`, reject the null hypothesis.
+
+5. **English Conclusion** --- There is evidence to suggest the average sodium content for source X is less than the average sodium content for source Y.
+
+```{r, message = FALSE, warning = FALSE}
+CohenD(WATER$x, WATER$y, na.rm = TRUE)
+cohensD(formula = sodium ~ source, data = WATER)
+library(dplyr)
+NDF <- WATER %>%
+group_by(source) %>%
+summarize(Mean = mean(sodium), VAR = var(sodium), n = n())
+NDF
+sp <- sqrt((122.77*19 + 5.28*9)/(20 + 10 - 2))
+sp
+C_D <- (76.4 - 81.2)/sp
+C_D
+```
