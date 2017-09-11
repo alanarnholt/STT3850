@@ -1,0 +1,156 @@
+---
+title: "R Markdown"
+author: "Alan T. Arnholt"
+date: '`r format(Sys.time(), "%b %d, %Y")`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", message = FALSE)
+```
+
+## Understanding the data
+
+* Use `summary()` and `str()`
+
+* Use the short cut to insert a code chunk! - `Ctrl +  Alt  + I`
+
+```{r}
+summary(UCBAdmissions)
+str(UCBAdmissions)
+```
+
+## Wrangle data
+
+### Using `dplyr`
+
+Main verbs:
+
+* Pick observations by their values with `filter()`
+* Reorder the rows with `arrange()`
+* Pick variables by their name with `select()`
+* Create new variables with `mutate()`
+* Collapse many values to a single summary with `summarize()`
+
+See the [data transformation cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/source/pdfs/data-transformation-cheatsheet.pdf) for more information.
+
+```{r}
+UCB <- as.data.frame(UCBAdmissions)
+UCB
+# Not quite what we want yet
+library(dplyr)
+ucb_admit <- UCB %>% 
+  slice(rep(1:n(), Freq)) %>% 
+  select(-Freq)
+ucb_admit
+```
+
+## A few summary numbers
+
+```{r}
+ucb_admit %>%
+  count(Admit, Gender)
+```
+
+Does this look like discrimination?  We will display the data using `ggplot2`.  First we will need to load the package using `library()`.  See the [Data Visualization with `ggplot2` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/source/pdfs/ggplot2-cheatsheet-2.1.pdf) for more details.
+
+```{r}
+library(ggplot2)
+ggplot(data = ucb_admit, aes(x = Gender, fill = Admit)) + 
+  geom_bar(position = "dodge")
+```
+
+What do you think?
+
+```{r}
+ggplot(data = ucb_admit, aes(x = Gender, fill = Admit)) + 
+  geom_bar(position = "fill") + 
+  labs(y = "Fraction") +
+  scale_fill_manual(values = c("green", "red")) + 
+  theme_bw()
+```
+
+## Computing the actual numbers
+
+* To insert the pipe operator (`%>%`) use the short cut `Ctrl + Shift + M`
+
+```{r}
+library(tidyr)
+ucb_admit %>%
+  count(Admit, Gender) 
+ucb_admit %>%
+  count(Admit, Gender) %>%
+  spread(Admit, n)
+ucb_admit %>%
+  count(Admit, Gender) %>%
+  spread(Admit, n) %>% 
+  mutate(Percent_Rejected = Rejected / (Admitted + Rejected),
+         Percent_Accepted = Admitted /(Admitted + Rejected))
+```
+
+Next we store the `tibble` as the object `basicUCB`.
+
+```{r}
+basicUCB <- ucb_admit %>%
+  count(Admit, Gender) %>%
+  spread(Admit, n) %>% 
+  mutate(Percent_Rejected = Rejected / (Admitted + Rejected),
+         Percent_Accepted = Admitted /(Admitted + Rejected))
+basicUCB
+```
+
+A graph of the percent that were accepted follows.
+
+```{r}
+ggplot(data = basicUCB, aes(x = Gender, y = Percent_Accepted)) + 
+  geom_bar(stat = "identity", fill = c("blue", "pink")) + 
+  theme_bw()
+```
+
+Next, we look at the percentages in each department.
+
+```{r}
+UCBres <- ucb_admit %>%
+  group_by(Dept) %>%
+  count(Admit, Gender) %>%
+  spread(Admit, n) %>%
+  mutate(Percent_Accepted = Admitted/(Admitted + Rejected), 
+         Percent_Rejected = Rejected/(Admitted + Rejected))
+UCBres
+```
+
+Graphing the information in `UCBres`.
+
+```{r}
+ggplot(data = UCBres, aes(x = Dept, y = Percent_Accepted, fill = Gender)) + 
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(y = "Percent Admitted", x = "Department") + 
+  theme_bw() + 
+  scale_fill_manual(values = c("blue", "pink"))
+```
+
+```{r}
+ggplot(data = UCBres, aes(x = Dept, y = Percent_Rejected, fill = Gender)) + 
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(y = "Percent Rejected", x = "Department") + 
+  theme_bw() + 
+  scale_fill_manual(values = c("blue", "pink"))
+```
+
+## Visualizing Categorical Data
+
+* Use the `vcd` package
+
+```{r}
+library(vcd)
+mosaic(~Gender, data = UCB)
+mosaic(~Gender + Admit, data = UCB)
+mosaic(~Gender + Admit, data = UCB, shade = TRUE)
+mosaic(~Dept + Gender + Admit, data = UCB, shade = TRUE)
+mosaic(~Dept + Gender + Admit, data = UCB, shade = TRUE, 
+       direction = c("v", "h", "v"))
+mosaic(~Dept + Gender + Admit, data = UCB, shade = TRUE, 
+       direction = c("v", "h", "v"), highlighting = "Admit")
+```
+
+
