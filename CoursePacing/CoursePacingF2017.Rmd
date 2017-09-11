@@ -99,6 +99,7 @@ Test yourself:
 
 * Test drive RStudio by following the directions from [Jenny Bryan's STAT 545 course](https://stat545-ubc.github.io/git07_git-github-rstudio.html).  Additional material can be found in the detailed `Bookdown` document [Happy Git and GitHub for the useR](http://happygitwithr.com/).  Chapters 8, 10-13 of [Happy Git and GitHub for the useR](http://happygitwithr.com/) will be helpful if you need more directions for test driving RStudio. Note: Git, R, and the RStudio IDE have already been installed for you on the RStudio server.    
 * Read the [Git and GitHub](http://r-pkgs.had.co.nz/git.html) chapter from Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/)
+* Brian Caffo's take on [R IDEs](https://www.youtube.com/watch?v=O2UFfiGdGFA)
 
 
 
