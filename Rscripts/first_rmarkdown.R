@@ -91,3 +91,45 @@ mosaic(~Dept + Gender + Admit, data = UCB, shade = TRUE,
 mosaic(~Dept + Gender + Admit, data = UCB, shade = TRUE, 
        direction = c("v", "h", "v"), highlighting = "Admit")
 
+## ------------------------------------------------------------------------
+library(openintro)
+data(county)
+str(county)
+summary(county)
+
+## ------------------------------------------------------------------------
+county_noDC <- county %>% 
+  filter(state != "District of Columbia") %>% 
+  droplevels()
+dim(county_noDC)
+
+## ------------------------------------------------------------------------
+set.seed(123)
+county_srs <- county_noDC %>% 
+  sample_n(size = 100)
+head(county_srs)
+
+## ------------------------------------------------------------------------
+county_srs %>% 
+  summarize(Average = mean(fed_spend))
+
+## ------------------------------------------------------------------------
+county_srs %>%
+  summarize(Number = n_distinct(state))
+
+## ------------------------------------------------------------------------
+set.seed(321)
+county_str <- county_noDC %>% 
+  group_by(state) %>% 
+  sample_n(size = 2)
+head(county_str)
+
+## ------------------------------------------------------------------------
+county_str %>% 
+  summarize(Average = mean(fed_spend))
+
+## ------------------------------------------------------------------------
+county_str %>% 
+  ungroup() %>% # return ungrouped copy of table
+  summarize(Average = mean(fed_spend, na.rm = TRUE))
+
