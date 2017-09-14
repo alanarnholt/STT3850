@@ -105,6 +105,8 @@ Test yourself:
 
 * [R Markdown Assignment](RMarkdown.pdf)
 
+* [R Markdown Extra Credit](RmarkdownEC.pdf)
+
 
 ```{block, week4optional, type='rmdoptional'}
 #### Optional {-}
