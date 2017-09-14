@@ -107,6 +107,8 @@ Test yourself:
 
 * [R Markdown Extra Credit](RMarkdownEC.pdf)
 
+* [LaTeX/knitr Extra Credit](knitrEC.pdf)
+
 
 ```{block, week4optional, type='rmdoptional'}
 #### Optional {-}
