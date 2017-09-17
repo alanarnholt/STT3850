@@ -47,3 +47,5 @@ pvalue
 
 library(car)
 qqPlot(Worms)
+ggplot(data = ND, aes(sample = worms, color = group)) + 
+  geom_qq()
