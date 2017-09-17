@@ -45,5 +45,5 @@ for(i in 1:sims){
 pvalue <- (sum(sim.diff >= obs.diff$Mean) + 1)/(sims + 1)
 pvalue
 
-library(cars)
+library(car)
 qqPlot(Worms)
