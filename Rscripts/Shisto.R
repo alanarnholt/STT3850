@@ -25,9 +25,19 @@ ans
 ND <- schis[gender=="Female", ]
 ND
 
+ggplot(data = ND, aes(group, worms)) + 
+  geom_point(position = "jitter", aes(color = group)) + 
+  theme_bw()
+
+ggplot(data = ND, aes(group, worms)) + 
+  geom_boxplot() +
+  theme_bw()
+
+
 ans2 <- ND %>%
   group_by(group) %>%
-  summarize(Mean = mean(worms), SD = sd(worms))
+  summarize(Mean = mean(worms), SD = sd(worms), 
+            Median = median(worms), iqr = IQR(worms))
 ans2
 
 obs.diff <- ans2[1, 2] - ans2[2, 2]
