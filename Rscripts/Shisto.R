@@ -90,8 +90,54 @@ ggplot(data = MDIFF, aes(x = MD)) +
   labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), 
        title = "Randomization Distribution")
 # 
-ggplot(data = MDIFF, aes(x = MD, y = ..density..)) + 
-  geom_histogram(fill = "pink", binwidth = 2) + 
+ggplot(data = MDIFF, aes(x = MD)) + 
+  geom_histogram(fill = "pink", binwidth = 1, color = "black") + 
+  geom_histogram(data = subset(MDIFF, MD >= 7.6), binwidth = 1, fill = "red", color = "black") + 
   theme_bw() +
   labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), 
        title = "Randomization Distribution")
+
+## Theoretical Now
+
+# Given a vector of length n + m
+# Take a resample of size m without replacement.
+n <- 5
+m <- 5
+ncb <- choose(n + m, m)
+ncb
+CB <- t(combn(n + m, m))
+head(CB)
+nn <- dim(CB)[1]
+nn
+#
+ND$worms
+
+diffmeans <- numeric(nn)
+for(i in 1:nn){
+  diffmeans[i] <- mean(ND$worms[CB[i, ]]) - mean(ND$worms[-CB[i,]])
+}
+sort(diffmeans)
+sum(diffmeans >= 7.6)
+theo_pvalue <- mean(diffmeans >= 7.6)
+theo_pvalue
+MASS::fractions(theo_pvalue)
+#
+# Write a function!
+rdtf <- function(x, y){
+  x <- x[!is.na(x)]
+  y <- y[!is.na(y)]
+  nx <- length(x)
+  ny <- length(y)
+  cv <- c(x, y)
+  nn <- choose(nx + ny, nx)
+  CB <- t(combn(nx + ny, nx))
+  DM <- numeric(nn)
+  for(i in 1:nn){
+    DM[i] <- mean(cv[CB[i, ]]) - mean(cv[-CB[i, ]])
+  }
+  sort(DM)
+}
+#
+rdtf(c(1, 2, 2, 10, 7), c(16, 10, 10, 7, 17))
+#
+rdtf(c(25, 33, 35, 38, 48, 55, 56), c(55, 55, 64))
