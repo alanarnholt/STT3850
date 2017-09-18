@@ -59,3 +59,39 @@ library(car)
 qqPlot(Worms)
 ggplot(data = ND, aes(sample = worms, color = group)) + 
   geom_qq()
+
+# Tidy Verse
+# Need to install oilabs
+# devtools::install_github('OpenIntroOrg/oilabs-r-package')
+library(oilabs)
+rep_sample_n(ND, size = 10, reps = 2)
+ND
+sims <- 10^4 - 1
+MDIFF <- rep_sample_n(ND, size = 10, reps = sims) %>%
+          summarize(MD = mean(worms[6:10]) - mean(worms[1:5]))
+pvalue <- (sum(MDIFF$MD >= 7.6) + 1)/(sims + 1)
+pvalue
+#
+t.test(worms ~ group, data = ND)
+#
+ggplot(data = MDIFF, aes(x = MD)) + 
+  geom_density(fill = "pink") + 
+  theme_bw()
+#
+# prep work
+x.dens <- density(MDIFF$MD)
+df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
+#
+ggplot(data = MDIFF, aes(x = MD)) + 
+  geom_density(fill = "pink") + 
+  theme_bw() + 
+  geom_area(data = subset(df.dens, x >= 7.6 & x <= max(MDIFF$MD)), 
+            aes(x = x, y = y), fill = "red") + 
+  labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), 
+       title = "Randomization Distribution")
+# 
+ggplot(data = MDIFF, aes(x = MD, y = ..density..)) + 
+  geom_histogram(fill = "pink", binwidth = 2) + 
+  theme_bw() +
+  labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), 
+       title = "Randomization Distribution")
