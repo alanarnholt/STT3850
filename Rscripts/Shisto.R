@@ -78,6 +78,23 @@ ggplot(data = MDIFF, aes(x = MD)) +
   geom_density(fill = "pink") + 
   theme_bw()
 #
+
+
+### Using replicate() now
+f <- function(x){
+  index <- sample(10, 5)
+  MD <- mean(x[index]) - mean(x[-index])
+  MD
+}
+
+ANS <- replicate(n = 10^4 - 1, expr = f(Worms))
+pvalue <- (sum(ANS >= 7.6) + 1)/(10^4 - 1 + 1 )
+pvalue
+
+
+
+
+
 # prep work
 x.dens <- density(MDIFF$MD)
 df.dens <- data.frame(x = x.dens$x, y = x.dens$y)
@@ -141,3 +158,18 @@ rdtf <- function(x, y){
 rdtf(c(1, 2, 2, 10, 7), c(16, 10, 10, 7, 17))
 #
 rdtf(c(25, 33, 35, 38, 48, 55, 56), c(55, 55, 64))
+
+# ChickWeight
+ChickWeight %>% 
+  group_by(Diet) %>%
+  summarize(mean(weight), sd(weight))
+#
+ggplot(data = ChickWeight, aes(x = factor(Diet), y = weight)) +
+  geom_boxplot() + 
+  theme_bw()
+###
+Weight <- ChickWeight %>% 
+  filter(Diet == "3" | Diet == "4") %>%
+  select(weight, Diet)
+Weight
+Weight$weight
