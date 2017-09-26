@@ -6,9 +6,12 @@ DF <- read_excel("TMP.xlsx")
 head(DF)
 # Problems with Age_Cohort
 table(DF$Age_Cohort)
-DF$Age_Cohort <- ifelse(DF$Age_Cohort == "42898", "6-12", DF$Age_Cohort)
+# DF$Age_Cohort <- ifelse(DF$Age_Cohort == "42898", "6-12", DF$Age_Cohort)
+# or
+DF$Age_Cohort <- gsub(42898, "6-12", DF$Age_Cohort)
+DF$Age_Cohort <- gsub("0 - 5", "0-5", DF$Age_Cohort)
 table(DF$Age_Cohort)
-# levels(DF$Age_Cohort) <- c("0-5", "6-12", "13-17", "18-21", "22-50", "51 +")
+DF$Age_Cohort <- factor(DF$Age_Cohort, levels =  c("0-5", "6-12", "13-17", "18-21", "22-50", "51 +"))
 table(DF$Age_Cohort)
 library(dplyr)
 library(ggplot2)
@@ -30,10 +33,12 @@ DF %>%
   labs(title = "Average Expenditure by Gender", y = "Mean Expenditure") + 
   theme_bw() + 
   scale_fill_manual(values = c("purple", "blue"))
+
 # Typical expenditure for Hispanics
 DF %>% 
   group_by(Ethnicity) %>% 
   summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n())
+
 DF %>% 
   group_by(Ethnicity) %>% 
   summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n()) %>%  
