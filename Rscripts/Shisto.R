@@ -162,7 +162,7 @@ rdtf(c(25, 33, 35, 38, 48, 55, 56), c(55, 55, 64))
 # ChickWeight
 ChickWeight %>% 
   group_by(Diet) %>%
-  summarize(mean(weight), sd(weight))
+  summarize(mean(weight), median(weight))
 #
 ggplot(data = ChickWeight, aes(x = factor(Diet), y = weight)) +
   geom_boxplot() + 
