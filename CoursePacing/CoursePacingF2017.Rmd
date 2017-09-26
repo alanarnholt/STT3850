@@ -123,6 +123,8 @@ Test yourself:
 
 * Complete _Data Visualization with `ggplot2`_ (Part 1) [(DataCamp)](https://www.datacamp.com/)
 
+* Work on [Class Assignment](../Rmarkdown/ClassAssignment.html)
+
 ## Week 7: (Oct 2--5) {-}
 
 * Complete _Exploratory Data Analysis_ [(DataCamp)](https://www.datacamp.com/)
