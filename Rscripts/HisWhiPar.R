@@ -8,7 +8,7 @@ head(DF)
 table(DF$Age_Cohort)
 DF$Age_Cohort <- ifelse(DF$Age_Cohort == "42898", "6-12", DF$Age_Cohort)
 table(DF$Age_Cohort)
-levels(DF$Age_Cohort) <- c("0-5", "6-12", "13-17", "18-21", "22-50", "51 +")
+# levels(DF$Age_Cohort) <- c("0-5", "6-12", "13-17", "18-21", "22-50", "51 +")
 table(DF$Age_Cohort)
 library(dplyr)
 library(ggplot2)
@@ -145,3 +145,4 @@ DF %>%
   theme_bw() + 
   scale_fill_manual(values = c("chocolate", "peachpuff")) + 
   labs(x = "Age Cohort", y = "Number in Group", title = "Consumers by Ethnicity and Age Cohort")
+
