@@ -11,6 +11,8 @@ table(DF$Age_Cohort)
 DF$Age_Cohort <- gsub(42898, "6-12", DF$Age_Cohort)
 DF$Age_Cohort <- gsub("0 - 5", "0-5", DF$Age_Cohort)
 table(DF$Age_Cohort)
+#
+table(DF$Age_Cohort)
 DF$Age_Cohort <- factor(DF$Age_Cohort, levels =  c("0-5", "6-12", "13-17", "18-21", "22-50", "51 +"))
 table(DF$Age_Cohort)
 library(dplyr)
