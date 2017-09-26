@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Read in data
 
-* Download the file `TLP.xlsx` from asulearn and upload it to your account.  Use the package `readxl` along with the function `read_excel()` to read the excel spreadsheet into an R object named `DF`.
+* Download the file `TMP.xlsx` from asulearn and upload it to your account.  Use the package `readxl` along with the function `read_excel()` to read the excel spreadsheet into an R object named `DF`.
 
 * Find and fix the problem(s) with the variable `Age_Cohort`.
 
