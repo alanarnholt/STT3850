@@ -220,7 +220,7 @@ pvalue
 ```
 
 ```{r}
-model <- lm(Expenditures ~ Age_Cohort + Ethnicity + Age_Cohort:Ethnicity, 
+model <- lm(Expenditures ~ Age_Cohort * Ethnicity, 
             data = subset(DF, Ethnicity == "White not Hispanic" | Ethnicity == "Hispanic"))
 summary(model)
 ```
