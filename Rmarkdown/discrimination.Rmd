@@ -58,6 +58,15 @@ DF %>%
 
 ```{r}
 DF %>% 
+  group_by(Age_Cohort) %>% 
+  summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n())
+```
+
+
+
+
+```{r}
+DF %>% 
   group_by(Ethnicity) %>% 
   summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n()) %>%  
   ggplot(aes(x = reorder(Ethnicity, ME), y = ME)) +
@@ -96,6 +105,19 @@ ggplot(data = DF, aes(x = reorder(Age_Cohort, Expenditures, median), y = Expendi
 ggplot(data = DF, aes(x = reorder(Age_Cohort, Expenditures, median), y = Expenditures)) + geom_boxplot(varwidth = TRUE) + theme_bw() + 
   facet_grid(Ethnicity ~ Gender)
 ```
+
+```{r}
+DF %>% 
+  group_by(Gender, Ethnicity) %>% 
+  summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n())
+```
+
+```{r}
+DF %>% 
+  group_by(Ethnicity, Age_Cohort) %>% 
+  summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n())
+```
+
 
 ## Just consider White and Hispanic
 
