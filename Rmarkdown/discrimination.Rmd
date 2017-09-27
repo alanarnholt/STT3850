@@ -144,7 +144,7 @@ DF %>%
 DF %>%
   filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>%
   ggplot(aes(x = reorder(Age_Cohort, Expenditures, median), y = Expenditures, fill = Ethnicity)) + 
-  geom_boxplot() + 
+  geom_boxplot(position = position_dodge(0.9)) + 
   theme_bw() + 
   scale_fill_manual(values = c("chocolate", "peachpuff"))
 ```
