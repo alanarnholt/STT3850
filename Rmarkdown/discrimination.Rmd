@@ -173,6 +173,50 @@ DF %>%
 
 ```
 
+## Age Expenditures Relationship?
 
+```{r}
+ggplot(data = subset(DF,Ethnicity == "White not Hispanic" | Ethnicity == "Hispanic" ), aes(x = Age, y = Expenditures, color = Ethnicity)) + 
+  geom_point(alpha = 0.8) +
+  geom_smooth(se = FALSE) + 
+  theme_bw() + 
+  scale_color_manual(values = c("chocolate", "peachpuff"))
+```
+
+## Tests?
+
+```{r}
+NDF <- DF %>%
+  filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>% 
+  select(Ethnicity, Expenditures)
+NDF %>% 
+  group_by(Ethnicity) %>% 
+  summarize(AVG = mean(Expenditures))
+DT::datatable(NDF)
+White <- NDF$Expenditures[NDF$Ethnicity=="White not Hispanic"]
+mean(White)
+Hispanic <- NDF$Expenditures[NDF$Ethnicity=="Hispanic"]
+mean(Hispanic)
+nW <- length(White)
+nH <- length(Hispanic)
+BV <- c(White, Hispanic)
+obs_diff <- mean(White) - mean(Hispanic)
+obs_diff
+sims <- 10^4 - 1
+ans <- numeric(sims)
+for(i in 1:sims){
+  index <- sample(nW + nH, nW)
+  ans[i] <- mean(BV[index]) - mean(BV[-index])
+}
+hist(ans, xlim = c(-obs_diff-10, obs_diff+10))
+abline(v = obs_diff)
+#
+ggplot(data = data.frame(x = ans), aes(x = x)) + 
+  geom_histogram(binwidth = 500, fill = "pink", color = "black") + 
+  theme_bw() + 
+  geom_vline(xintercept = obs_diff)
+pvalue <- (sum(ans >= obs_diff) + 1)/(sims + 1)
+pvalue
+```
 
 
