@@ -19,6 +19,8 @@ DF <- read_excel("../Rscripts/TMP.xlsx")
 head(DF)
 DF$Age_Cohort <- gsub(42898, "6-12", DF$Age_Cohort)
 DF$Age_Cohort <- gsub("0 - 5", "0-5", DF$Age_Cohort)
+DF$Age_Cohort <- factor(DF$Age_Cohort, levels = c("0-5","6-12","13-17","18-21","22-50","51 +"))
+table(DF$Age_Cohort)
 DT::datatable(DF)
 ```
 
@@ -131,6 +133,10 @@ DF %>%
 DF %>%
   filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>% 
   group_by(Age_Cohort, Ethnicity) %>% 
+  summarize(ME = mean(Expenditures), n = n())
+DF %>%
+  filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>% 
+  group_by(Age_Cohort, Ethnicity) %>% 
   summarize(ME = mean(Expenditures), n = n()) %>%
   ggplot(aes(x = reorder(Age_Cohort, ME), y = ME, fill = Ethnicity)) + 
   geom_bar(stat = "identity", position = "dodge") + 
@@ -224,4 +230,5 @@ model <- lm(Expenditures ~ Age_Cohort * Ethnicity,
             data = subset(DF, Ethnicity == "White not Hispanic" | Ethnicity == "Hispanic"))
 summary(model)
 ```
+
 
