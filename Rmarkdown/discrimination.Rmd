@@ -1,0 +1,178 @@
+---
+title: "Discrimination?"
+author: "Alan T. Arnholt"
+date: "9/26/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.align = "center", comment = NA)
+```
+
+## Loading the Data
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+DF <- read_excel("../Rscripts/TMP.xlsx")
+head(DF)
+DF$Age_Cohort <- gsub(42898, "6-12", DF$Age_Cohort)
+DF$Age_Cohort <- gsub("0 - 5", "0-5", DF$Age_Cohort)
+DT::datatable(DF)
+```
+
+## Together
+
+```{r}
+DF %>% 
+  group_by(Gender) %>% 
+  summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n(), SD = sd(Expenditures))
+```
+
+```{r}
+ggplot(data = DF, aes(x = Gender, y = Expenditures, fill = Gender)) + 
+  geom_boxplot() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("pink", "blue"))
+```
+
+```{r}
+DF %>% 
+  group_by(Gender) %>% 
+  summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n()) %>%
+  ggplot(aes(x = Gender, y= ME, fill = Gender)) + 
+  geom_bar(stat = "identity") + 
+  labs(title = "Average Expenditure by Gender", y = "Mean Expenditure") + 
+  theme_bw() + 
+  scale_fill_manual(values = c("pink", "blue"))
+```
+
+```{r}
+DF %>% 
+  group_by(Ethnicity) %>% 
+  summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n())
+```
+
+```{r}
+DF %>% 
+  group_by(Ethnicity) %>% 
+  summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n()) %>%  
+  ggplot(aes(x = reorder(Ethnicity, ME), y = ME)) +
+  geom_bar(stat="identity", fill = "red") + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 50, hjust = 1)) + 
+  labs(x = "", y = "Mean Expenditure", title = "Average Expenditure by Ethnicity")
+```
+
+```{r}
+ggplot(data = DF, aes(x = reorder(Ethnicity, Expenditures, median), y = Expenditures)) + 
+  geom_boxplot() +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 50, hjust = 1)) +
+  labs(x = "")
+```
+
+## Typical expenditure for 22-50 year old
+
+```{r}
+DF %>% 
+  group_by(Age_Cohort) %>% 
+  summarize(ME = mean(Expenditures), MDE = median(Expenditures), n= n())
+```
+
+```{r}
+ggplot(data = DF, aes(x = reorder(Age_Cohort, Expenditures, median), y = Expenditures)) + geom_boxplot() + theme_bw()
+```
+
+```{r}
+ggplot(data = DF, aes(x = reorder(Age_Cohort, Expenditures, median), y = Expenditures)) + geom_boxplot() + theme_bw() + 
+  facet_grid(.~Gender)
+```
+
+```{r}
+ggplot(data = DF, aes(x = reorder(Age_Cohort, Expenditures, median), y = Expenditures)) + geom_boxplot(varwidth = TRUE) + theme_bw() + 
+  facet_grid(Ethnicity ~ Gender)
+```
+
+## Just consider White and Hispanic
+
+```{r}
+DF %>%
+  filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>% 
+  group_by(Ethnicity) %>% 
+  summarize(ME = mean(Expenditures), n = n())
+```
+
+```{r}
+DF %>%
+  filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>% 
+  group_by(Ethnicity) %>% 
+  summarize(ME = mean(Expenditures), n = n()) %>% 
+  ggplot(aes(x = Ethnicity, y = ME, fill = Ethnicity)) + 
+  geom_bar(stat = "identity") +
+  theme_bw() + 
+  scale_fill_manual(values = c("chocolate", "peachpuff")) + 
+  labs(y = "Mean Expenditure")
+```
+
+```{r}
+DF %>%
+  filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>%
+  ggplot(aes(x = Ethnicity, y = Expenditures, fill = Ethnicity)) + 
+  geom_boxplot() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("chocolate", "peachpuff"))
+```
+
+
+
+```{r}
+DF %>%
+  filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>% 
+  group_by(Age_Cohort, Ethnicity) %>% 
+  summarize(ME = mean(Expenditures), n = n()) %>%
+  ggplot(aes(x = reorder(Age_Cohort, ME), y = ME, fill = Ethnicity)) + 
+  geom_bar(stat = "identity", position = "dodge") + 
+  theme_bw() + 
+  labs(x = "Age Cohort", y = "Average Expenditure", 
+       title = "Average Expenditures by Age Cohort and Ethnicity") + 
+  scale_fill_manual(values = c("chocolate", "peachpuff"))
+```
+
+```{r}
+DF %>%
+  filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>%
+  ggplot(aes(x = reorder(Age_Cohort, Expenditures, median), y = Expenditures, fill = Ethnicity)) + 
+  geom_boxplot() + 
+  theme_bw() + 
+  scale_fill_manual(values = c("chocolate", "peachpuff"))
+```
+
+
+## Some Explanation
+
+```{r}
+DF %>%
+  filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>% 
+  group_by(Age_Cohort, Ethnicity) %>% 
+  summarize(ME = mean(Expenditures), n = n())
+```
+
+
+```{r}
+DF %>%
+  filter(Ethnicity %in% c("Hispanic", "White not Hispanic")) %>% 
+  group_by(Age_Cohort, Ethnicity) %>% 
+  summarize(ME = mean(Expenditures), n = n()) %>%
+  ggplot(aes(x = reorder(Age_Cohort, ME), y = n, fill = Ethnicity)) + 
+  geom_bar(stat = "identity", position = "dodge") + 
+  theme_bw() + 
+  scale_fill_manual(values = c("chocolate", "peachpuff")) + 
+  labs(x = "Age Cohort", y = "Number in Group", title = "Consumers by Ethnicity and Age Cohort")
+
+```
+
+
+
+
