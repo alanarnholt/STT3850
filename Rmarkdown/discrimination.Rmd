@@ -219,4 +219,9 @@ pvalue <- (sum(ans >= obs_diff) + 1)/(sims + 1)
 pvalue
 ```
 
+```{r}
+model <- lm(Expenditures ~ Age_Cohort + Ethnicity + Age_Cohort:Ethnicity, 
+            data = subset(DF, Ethnicity == "White not Hispanic" | Ethnicity == "Hispanic"))
+summary(model)
+```
 
