@@ -125,6 +125,8 @@ Test yourself:
 
 * Work on [Class Assignment](../Rmarkdown/ClassAssignment.html)
 
+* Some ideas for how to answer the [Class Assignment](../Rmarkdown/discrimination.html)
+
 ## Week 7: (Oct 2--5) {-}
 
 * Complete _Exploratory Data Analysis_ [(DataCamp)](https://www.datacamp.com/)
