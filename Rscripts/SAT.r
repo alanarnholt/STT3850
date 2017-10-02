@@ -1,3 +1,23 @@
+library(dplyr)
+# anscombe
+apply(anscombe, 2, mean)
+apply(anscombe, 2, sd)
+hist(anscombe$x1)  
+hist(anscombe$x4)
+plot(y1 ~ x1, data = anscombe)
+# 
+# Direction, Form, Strength, Outliers
+library(ggplot2)
+ggplot(data = anscombe, aes(x = x1, y = y1)) + geom_point() + theme_bw() + geom_smooth(method = "lm")
+ggplot(data = anscombe, aes(x = x2, y = y2)) + geom_point() + theme_bw() + geom_smooth(method = "lm")
+ggplot(data = anscombe, aes(x = x3, y = y3)) + geom_point() + theme_bw() + geom_smooth(method = "lm")
+ggplot(data = anscombe, aes(x = x4, y = y4)) + geom_point() + theme_bw() + geom_smooth(method = "lm")
+anscombe %>% 
+  summarize(cor(x1, y1))
+# 
+# VIT2005
+
+
 library(mosaicData)
 head(SAT)
 library(dplyr)
