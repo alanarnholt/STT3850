@@ -16,7 +16,10 @@ anscombe %>%
   summarize(cor(x1, y1))
 # 
 # VIT2005
-
+library(PASWR2)
+ggplot(data = VIT2005, aes(x = area, y = totalprice)) + geom_point() + theme_bw()
+mod <- lm(totalprice ~ area, data = VIT2005)
+summary(mod)
 
 library(mosaicData)
 head(SAT)
