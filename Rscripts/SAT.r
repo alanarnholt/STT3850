@@ -5,6 +5,9 @@ apply(anscombe, 2, sd)
 hist(anscombe$x1)  
 hist(anscombe$x4)
 plot(y1 ~ x1, data = anscombe)
+plot(y2 ~ x2, data = anscombe)
+plot(y3 ~ x3, data = anscombe)
+plot(y4 ~ x4, data = anscombe)
 # 
 # Direction, Form, Strength, Outliers
 library(ggplot2)
@@ -62,3 +65,4 @@ ggplot(data = SAT, aes(x = salary, y = sat, color = sat_bin)) +
   geom_text(aes(label = state), vjust = -0.5, hjust = 0) + 
   theme_bw() +
   geom_line(data = broom::augment(mod3), aes(y  = .fitted)) 
+
