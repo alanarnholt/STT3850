@@ -19,7 +19,8 @@ GSS2002 %>%
   summarize(n()) %>% 
   na.omit() %>% 
   ggplot(aes(x = Education, y = `n()`, fill = DeathPenalty)) + 
-  geom_bar(stat = "identity", position = "fill")
+  geom_bar(stat = "identity", position = "fill") + 
+  scale_fill_manual(values = c("red", "purple"))
 
 
 GSSFIX <- GSS2002 %>% 
@@ -63,5 +64,7 @@ GSS2002 %>%
   summarize(n()) %>% 
   na.omit() %>% 
   ggplot(aes(x = Religion, y = `n()`, fill = Politics)) + 
-  geom_bar(stat = "identity", position = "fill")
+  geom_bar(stat = "identity", position = "fill") + 
+  scale_fill_brewer(type = "div") + 
+  theme_bw()
   
