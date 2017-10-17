@@ -32,6 +32,7 @@ TS$Average
 
 ```{r}
 ANS <- t(combn(6, 3))
+ANS
 dim(ANS)
 DF$time
 DR <- matrix(NA, nrow = 20, ncol = 3)
@@ -41,6 +42,7 @@ for(i in 1:20){
   CO[i,] <- DF$time[-ANS[i, ]]
 }
 VALUES <- as.data.frame(cbind(DR, CO))
+names(VALUES) <- paste(rep(c("D", "C"), each = 3), 1:3, sep = "")
 VALUES$DM <- apply(VALUES[, 1:3], 1, mean)
 VALUES$CM <- apply(VALUES[, 4:6], 1, mean)
 VALUES$DiffMean <- VALUES$DM - VALUES$CM
