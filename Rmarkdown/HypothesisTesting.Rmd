@@ -1,0 +1,52 @@
+---
+title: "Hypothesis Testing"
+author: "Alan T. Arnholt"
+date: "10/17/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.align = "center", comment = NA)
+library(tidyverse)
+```
+
+# Introduction
+
+## Creating the data
+
+```{r}
+DF <- data.frame(time = c(30, 25, 20, 18, 21, 22), treatment = rep(c("Drug", "Control"), each = 3))
+DF <- tbl_df(DF)
+DF
+DF %>% 
+  group_by(treatment) %>% 
+  summarize(Average  = mean(time))
+ANS <- DF %>% 
+  group_by(treatment) %>% 
+  summarize(Average  = mean(time))
+TS <- ANS[2, 2] - ANS[1, 2]
+TS$Average
+```
+
+### All possible
+
+```{r}
+ANS <- t(combn(6, 3))
+dim(ANS)
+DF$time
+DR <- matrix(NA, nrow = 20, ncol = 3)
+CO <- matrix(NA, nrow = 20, ncol = 3)
+for(i in 1:20){
+  DR[i,] <- DF$time[ANS[i,]] 
+  CO[i,] <- DF$time[-ANS[i, ]]
+}
+VALUES <- as.data.frame(cbind(DR, CO))
+VALUES$DM <- apply(VALUES[, 1:3], 1, mean)
+VALUES$CM <- apply(VALUES[, 4:6], 1, mean)
+VALUES$DiffMean <- VALUES$DM - VALUES$CM
+DT::datatable(VALUES)
+```
+
+
+
+
