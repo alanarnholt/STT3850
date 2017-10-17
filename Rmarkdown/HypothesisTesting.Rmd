@@ -49,4 +49,14 @@ DT::datatable(VALUES)
 
 
 
+```{r}
+sims <- 10^4 - 1
+ans <- numeric(sims)
+for(i in 1:sims){
+  index <- sample(1:6, 3)
+  ans[i] <- mean(DF$time[index]) - mean(DF$time[-index])
+}
+pvalue <- (sum(ans >= 4.666666) + 1)/(sims + 1)
+pvalue
+```
 
