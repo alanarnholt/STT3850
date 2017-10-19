@@ -40,7 +40,7 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 * Sign-up for a free account on [GitHub](https://github.com).
 
-* When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinquishing characteristic in your username.   
+* When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinguishing characteristic in your username.   
 
 * _Complete Introduction to R_ [(DataCamp)](https://www.datacamp.com/)
 
@@ -147,6 +147,8 @@ Test yourself:
 ## Week 10: (Oct 23--26) {-}
 
 * Complete _Foundations of Inference_ [(DataCamp)](https://www.datacamp.com/)
+
+* Write a summary (less than two pages) using the [bookdown](https://bookdown.org/yihui/bookdown/) format `html_document2` of the key ideas in _Foundations of Inference_.  Your summary should include a discussion/definition of the following: hypotheses (null and alternative), null distribution, test statistic, p-value, types of errors in hypothesis testing, confidence intervals, and bootstrapping. Properly labeled Figures, Tables, and Equations will be extra credit.  Print out and turn in a hard copy of your html document with your source code stapled to the back of the html no later than 5pm October 26, 2017.    
 
 ## Week 11: (Oct 30--Nov 2) {-}
 
