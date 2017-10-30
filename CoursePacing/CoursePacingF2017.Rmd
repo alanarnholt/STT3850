@@ -154,7 +154,7 @@ Test yourself:
 
 * Chapter 3 of MSWRAR
 
-* Suggested Problems: 3-7, 10--12, 16--18
+* Complete the problems in the [R Markdown file](../Homework/Chapter3HWK.Rmd)
 
 ## Week 12: (Nov 6--9) {-}
 
