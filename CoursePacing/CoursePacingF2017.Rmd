@@ -154,7 +154,7 @@ Test yourself:
 
 * Chapter 3 of MSWRAR
 
-* Complete the problems in the [R Markdown file](../Homework/Chapter3HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) no later than 5pm November 2, 2017.  Make sure to write down on the sign-up sheet (available in class) the url where your work is published.
+* Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter3HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) no later than 5pm November 2, 2017.  Make sure to write down on the sign-up sheet (available in class) the url where your work is published.
 
 ## Week 12: (Nov 6--9) {-}
 
