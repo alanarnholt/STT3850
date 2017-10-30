@@ -86,7 +86,8 @@ DDF %>%
 ggplot(aes(x = diff_perm)) + 
   geom_histogram(binwidth = 0.07, fill = "pink", color = "black") + 
   theme_bw() + 
-  labs(x = expression(hat(p)[W] - hat(p)[E]))
+  labs(x = expression(hat(p)[W] - hat(p)[E])) + 
+  geom_vline(xintercept = -0.09, linetype = "dashed")
 
 ## ------------------------------------------------------------------------
 set.seed(34)
