@@ -150,6 +150,8 @@ Test yourself:
 
 * Write a summary (less than two pages) using the [bookdown](https://bookdown.org/yihui/bookdown/) format `html_document2` of the key ideas in _Foundations of Inference_.  Your summary should include a discussion/definition of the following: hypotheses (null and alternative), null distribution, test statistic, p-value, types of errors in hypothesis testing, confidence intervals, and bootstrapping. Properly labeled Figures, Tables, and Equations will be extra credit.  Print out and turn in a hard copy of your html document with your source code stapled to the back of the html no later than 5pm October 26, 2017.    
 
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+
 ## Week 11: (Oct 30--Nov 2) {-}
 
 * Chapter 3 of MSWRAR
