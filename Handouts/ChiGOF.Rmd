@@ -1,0 +1,82 @@
+---
+title: "Goodness-Of-Fit"
+author: "Alan Arnholt"
+date: "11/1/2017"
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE)
+```
+
+# Goodness-Of-Fit: All Parameters Known
+
+## Example 3.8
+
+Bansley et al. (1992) investigated the relationship between month of birth and achievement in sport.  Birth dates were collected for players in teams competing in the 1990 World Cup soccer games.
+
+```{r}
+Observed <- c(150, 138, 140, 100)
+names(Observed) <- c("Aug-Oct", "Nov-Jan", "Feb-April", "May-July")
+Observed
+```
+
+We wish to test whether these data are consistent with the hypothesis that birthdays of soccer players are uniformly distributed across the four quarters of the year.  Let $P_i$ denote the probability of a birth occurring in the $i^{\text{th}}$ quarter; the hypotheses are as follows:
+
+$H_0: p_1 = \tfrac{1}{4}, p_2 = \tfrac{1}{4}, p_3 = \tfrac{1}{4}, p_4 = \tfrac{1}{4}$
+
+$H_A: p_i \neq \tfrac{1}{4} \text{for at least one } i.$
+
+There were a total of $n = `r sum(Observed)`$ players considered for this study, so the expected count for each quater is $528/4 = 132$.
+
+```{r}
+chisq.test(Observed, p = c(1/4, 1/4, 1/4, 1/4))
+```
+
+Given the _p-value_ of `r round(chisq.test(Observed, p = c(1/4, 1/4, 1/4, 1/4))$p.value,4)` evidence suggests birthdays for World Cup soccer players are not uniformly distributed.
+
+* The degrees of freedom for a goodness-of-fit test with $k$ cells and no parameters estimated from the data is $k - 1$.
+
+
+## Example 3.9 - (There are a few typos in the book for this Example - including the conclusion)
+
+Suppose you draw 100 numbers at random from an unknown distribution.  Thirty values fall in the interval $(0, 0.25]$, 30 fall in $(0.25, 0.75]$, 22 fall in $(0.75, 1.25]$, and the rest fall in $(1.25, \infty]$.  Your friend claims that the distribution is exponential with parameter $\lambda = 1$.  Do you believe her?
+
+* A random variable $X$ has the exponential distribution with parameter $\lambda > 0$ if its **pdf** is
+
+$$f(x) = \lambda e^{-\lambda x},\quad x \geq 0.$$
+
+We wish to test the following:
+
+$H_0:$ The data are from an exponential distribution with $\lambda = 1$.
+
+$H_A:$ The data are not from an exponential distribution with $\lambda = 1$.
+
+Given $X \sim \text{Exp}(\lambda = 1)$.  The probabilities for each interval are as follows:
+
+$p_1 = P(0 \leq X \leq 0.25)=\int_0^{0.25}e^{-x}\,dx =`r pexp(0.25, 1)`$
+
+$p_2 = P(0.25 \leq X \leq 0.75)=\int_{0.25}^{0.75}e^{-x}\,dx =`r pexp(0.75, 1) - pexp(0.25, 1)`$
+
+$p_3 = P(0.75 \leq X \leq 1.25)=\int_{0.75}^{1.25}e^{-x}\,dx =`r pexp(1.25, 1) - pexp(0.75, 1)`$
+
+$p_4 = P(1.25 \leq X \leq \infty)=\int_{1.25}^{\infty}e^{-x}\,dx =`r pexp(1.25, 1, lower = FALSE)`$
+
+```{r}
+p1 <- pexp(0.25, 1)
+p2 <- pexp(0.75, 1) - pexp(0.25, 1)
+p3 <- pexp(1.25, 1) - pexp(0.75, 1)
+p4 <- pexp(1.25, 1, lower = FALSE)
+ps <- c(p1, p2, p3, p4)
+ps
+EXP <- ps*100
+EXP
+OBS <- c(30, 30, 22, 18)
+test_stat <- sum((OBS - EXP)^2/EXP)
+test_stat
+# Another approach
+chisq.test(OBS, p = ps)
+pvalue <- chisq.test(OBS, p = ps)$p.value
+pvalue
+```
+* If you test using $\alpha = 0.05$, you will fail to reject the null hypothesis since the _p-value_ $= `r pvalue` > \alpha = 0.05$.  There is not convincing evidence that the data do not come from an Exp($\lambda = 1$).
