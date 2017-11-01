@@ -136,7 +136,7 @@ Observed</code></pre>
 <p>We wish to test whether these data are consistent with the hypothesis that birthdays of soccer players are uniformly distributed across the four quarters of the year. Let <span class="math inline">\(P_i\)</span> denote the probability of a birth occurring in the <span class="math inline">\(i^{\text{th}}\)</span> quarter; the hypotheses are as follows:</p>
 <p><span class="math inline">\(H_0: p_1 = \tfrac{1}{4}, p_2 = \tfrac{1}{4}, p_3 = \tfrac{1}{4}, p_4 = \tfrac{1}{4}\)</span></p>
 <p><span class="math inline">\(H_A: p_i \neq \tfrac{1}{4} \text{for at least one } i.\)</span></p>
-<p>There were a total of <span class="math inline">\(n = 528\)</span> players considered for this study, so the expected count for each quater is <span class="math inline">\(528/4 = 132\)</span>.</p>
+<p>There were a total of <span class="math inline">\(n = 528\)</span> players considered for this study, so the expected count for each quarter is <span class="math inline">\(528/4 = 132\)</span>.</p>
 <pre class="r"><code>chisq.test(Observed, p = c(1/4, 1/4, 1/4, 1/4))</code></pre>
 <pre><code>
     Chi-squared test for given probabilities

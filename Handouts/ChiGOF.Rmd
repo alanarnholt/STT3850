@@ -27,7 +27,7 @@ $H_0: p_1 = \tfrac{1}{4}, p_2 = \tfrac{1}{4}, p_3 = \tfrac{1}{4}, p_4 = \tfrac{1
 
 $H_A: p_i \neq \tfrac{1}{4} \text{for at least one } i.$
 
-There were a total of $n = `r sum(Observed)`$ players considered for this study, so the expected count for each quater is $528/4 = 132$.
+There were a total of $n = `r sum(Observed)`$ players considered for this study, so the expected count for each quarter is $528/4 = 132$.
 
 ```{r}
 chisq.test(Observed, p = c(1/4, 1/4, 1/4, 1/4))
