@@ -1,0 +1,108 @@
+---
+title: "Samping Distributions"
+author: "Alan Arnholt"
+date: "11/1/2017"
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE)
+```
+
+# Uniform Distribution
+
+## Definition
+
+A random variable $X$ has a uniform distribution on the interval $[a, b]$ (for $a < b$) if its **pdf** is
+
+\begin{equation}
+f(x) = 
+\begin{cases}
+\frac{1}{b-a},  & a \leq x \leq b \\
+0,  & \text{otherwise.}
+\end{cases}
+(#eq:unif)
+\end{equation}
+
+If $X \sim \text{Unif}(a, b)$, then 
+
+\begin{equation}
+E(X) = \frac{a + b}{2}
+(\#eq:EU)
+\end{equation}
+
+\begin{equation}
+V(X) = \frac{(b-a)^2}{12}
+(\#eq:VU)
+\end{equation}
+
+## Example
+
+Suppose $X \sim \text{Unif}(10, 20)$. 
+
+a.  Find the $E(X)$ and $V(X)$ using the definitions of $E(X)$ and $V(X)$.
+
+```{r}
+# part a.
+xfx <- function(x){x/10}
+EX <- integrate(xfx, 10, 20)$value
+EX
+x2fx  <- function(x){(x - EX)^2/10}
+VX <- integrate(x2fx, 10, 20)$value
+VX
+```
+      
+b. Find the $E(X)$ and $V(X)$ using the short cut formulas in \@ref(eq:EU) and \@ref(eq:VU).
+
+$E(X) = \frac{a+b}{2}=\frac{10 + 20}{2} = 15$, and $V(X) = \frac{(b-a)^2}{12} = \frac{(20 - 10)^2}{12} = \frac{100}{12} = `r 100/12`.$
+      
+c. Simulate 10,000 values of the random variable and estimate $E(X)$ and $V(X)$.
+
+```{r}
+# part c.
+set.seed(89)
+sims <- 10^4
+X <- runif(sims, 10, 20)
+EX <- mean(X)
+VX <- var(X)
+c(EX, VX)
+```
+d. Find $E(\bar{X})$ and $V(\bar{X})$ for $n = 8$ exactly and via simulation.
+
+$E(\bar{X}) = \mu_{\bar{X}} = \mu_X = 15$, $V(\bar{X}) = \frac{\sigma^2_{X}}{n} = \frac{\frac{100}{12}}{8} = `r 100/12/8`$ 
+
+```{r}
+set.seed(46)
+sims <- 10^4
+n <- 8
+a <- 10
+b <- 20
+xbar <- numeric(sims)
+for(i in 1:sims){
+  X <- runif(n, a, b)
+  xbar[i] <- mean(X)
+}
+mean(xbar)
+var(xbar)
+```
+
+# Exponential
+
+## Problem
+
+Let $X_1, X_2, \ldots, X_{20} \overset{i.i.d}\sim\text{Exp}(\lambda = 2)$.  Let $Y = \sum_{i=1}^{20}X_i.$
+
+a.  Simulate the sampling distribution of $Y$ in `R`.
+
+```{r}
+sims <- 10^4
+Y <- numeric(sims)
+for(i in 1:sims){
+ Y[i] <- sum(rexp(20, 2))
+}
+EY <- mean(Y)
+VY <- var(Y)
+c(EY, VY)
+mean(Y <= 10)
+```
+
