@@ -1,0 +1,104 @@
+---
+title: "Chapter Four Homework"
+author: "Your Name Here"
+date: '`r format(Sys.time(), "%A, %b %d, %Y - %X")`'
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
+library(tidyverse)
+```
+
+1. Consider the population $\{3, 6, 7, 9, 11, 14\}$.  For samples of size 3 without replacement, find (and plot) the sampling distribution of the minimum.  What is the mean of the sampling distribution?  The statistic is an estimate of some parameter---what is the value of the parameter?
+
+```{r}
+# Your code here
+```
+
+
+2.  Let $X_1, X_2, \ldots, X_n$ be a random sample from some distribution and suppose $Y = T(X_1, X_2, \ldots, X_n)$ is a statistic.  Suppose the sampling distribution of $Y$ has pdf $f(y) = (3/8)y^2$ for $0 \leq y \leq 2.$  Find $P(0 \leq Y \leq 1/5)$.
+
+```{r}
+# Your code here
+```
+
+$P(0 \leq Y \leq 1/5) =$
+
+
+3. A friend claim that she has drawn a random sample of size 30, from the exponential distribution with $\lambda = 1/10$.  The mean of her sample is 12.
+
+    a. What is the expected value of a sample mean?
+    b. Run a simulation by drawing 10,000 random samples, each of size 30, from $\text{Exp}(\lambda = 1/10)$ and then compute the mean.  What proportion of the sample means are as large as or larger than 12?
+    c. Is a mean of 12 unusual for a sample of size 30 from $\text{Exp}(\lambda = 1/10)$?
+    
+
+
+
+```{r}
+library(tidyverse)
+set.seed(123)
+# Your code here
+```
+
+ 
+4. Let $X_1, X_2, \ldots , X_{10} \overset{i.i.d}\sim N(20, 8)$ and $Y_1, Y_2, \ldots, Y_{15} \overset{i.i.d}\sim N(16, 7)$.  Let $W = \bar{X} + \bar{Y}.$
+
+      a. Give the exact sampling distribution of $W$
+      b. Simulate the sampling distribution in `R` and plot your results.  Check that the simulated mean and standard error are close to the theoretical mean and standard error.
+      c. Use your simulation to find $P(W < 40).$  Calculate an exact answer and compare.
+      
+    
+
+```{r}
+# part b
+```
+
+```{r}
+# part c.
+```
+
+5. Let $X_1, X_2, \ldots , X_{9} \overset{i.i.d}\sim N(7, 3)$ and $Y_1, Y_2, \ldots, Y_{12} \overset{i.i.d}\sim N(10, 5)$.  Let $W = \bar{X} - \bar{Y}.$ 
+
+      a.  GIve the exact sampling distribution of $W$.
+      b. Simulate the sampling distribution of $W$ in `R` and plot your results using `ggplot2`.  Check that the simulated mean and the standard error are close to the theoretical mean and the standard error.
+      c.  Use your simulation to find $P(W < -1.5)$.  Calculate an exact answer and compare.
+      
+
+```{r}
+# part b.
+
+# part c.
+# simulated answer
+
+# Exact answer
+
+```
+6.  Let $X_1, X_2, \ldots , X_n$ be a random sample from $N(0, 1)$.  Let $W = X_1^2 + X_2^2 + \cdots + X_N^2.$   Describe the sampling distribution of $W$ by running a simulation, using $n = 2.$  What is the mean and variance of the sampling distribution of $W$?  Repeat using $n = 4, n = 5.$  What observations or conjectures do you have for general $n$?
+
+```{r}
+# Your code here
+```
+
+
+7.  Let $X$ be a uniform random variable on the interval $[40, 60]$ and $Y$ a uniform random variable on $[45, 80].$  Assume that $X$ and $Y$ are independent.
+
+      a. Compute the expected value and variance of $X + Y.$
+      b. Simulate the sampling distribution of $X + Y.$  Desribe the graph of the distribution of $X + Y$.  Compute the mean and variance of the sampling distribution and compare this to the theoretical mean and variance.
+      c.  Suppose the time (in minutes) Jack takes to complete his statistics homework is $\text{Unif}[40, 60]$ and the time JIll takes is $\text{Unif}[40, 60].$  Assume they work independently.  One day they announce that their total time to finish an assignment was less than 90 min.  How likely is this?
+      
+
+
+```{r}
+# Your code here
+```
+
+$P(X + Y < 90) =?$
+
+```{r}
+# part c
+# P(W < 90)
+```
+
+
+    

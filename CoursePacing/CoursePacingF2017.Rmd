@@ -166,6 +166,8 @@ Test yourself:
 
 * Suggested Problems: 2, 5, 12--16
 
+* Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter4HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) no later than 5pm November 9, 2017.  Make sure to write down on the sign-up sheet (available in class) the url where your work is published.
+
 ## Week 13: (Nov 13--16) {-}
 
 * Chapter 5 of MSWRAR
