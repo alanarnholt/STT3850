@@ -2,7 +2,7 @@
 title: "Samping Distributions"
 author: "Alan Arnholt"
 date: "11/1/2017"
-output: bookdown::html_document2
+output: bookdown::pdf_document2
 ---
 
 ```{r setup, include=FALSE}
@@ -21,7 +21,7 @@ f(x) =
 \frac{1}{b-a},  & a \leq x \leq b \\
 0,  & \text{otherwise.}
 \end{cases}
-(#eq:unif)
+(\#eq:unif)
 \end{equation}
 
 If $X \sim \text{Unif}(a, b)$, then 
