@@ -1,8 +1,8 @@
 ---
 title: "Samping Distributions"
 author: "Alan Arnholt"
-date: "11/1/2017"
-output: bookdown::pdf_document2
+date: "11/7/2017"
+output: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
