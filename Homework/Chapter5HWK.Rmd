@@ -420,7 +420,7 @@ Your answer:
 
 ------------  
 
-9. Import the data from Flight Delays Case Study in Section 1.1 data into `R`. Although the data are on all UA and AA flights flown in May and June of 2009, we will assume these represent a sample from a larger population of UA and AA flights flown under similiar circumstances. We will consider the ratio of the means of the flight delay lengths, $\mu_{\text{UA}} / \mu_{\text{AA}}$.
+9. Import the data from Flight Delays Case Study in Section 1.1 data into `R`. Although the data are on all UA and AA flights flown in May and June of 2009, we will assume these represent a sample from a larger population of UA and AA flights flown under similar circumstances. We will consider the ratio of the means of the flight delay lengths, $\mu_{\text{UA}} / \mu_{\text{AA}}$.
 
     (a) Perform some exploratory data analysis on flight delay lengths for each of UA and AA flights.
     
