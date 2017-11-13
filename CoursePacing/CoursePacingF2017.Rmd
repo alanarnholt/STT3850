@@ -174,13 +174,13 @@ Test yourself:
 
 * Chapter 5 of MSWRAR
 
-* Suggested Problems: 7, 9--17
+* Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter5HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) no later than 5pm November 21, 2017.  Make sure to write down on the sign-up sheet (available in class) the url where your work is published.
 
 ## Week 14: (Nov 20--21; 22--24 Thanksgiving Break) {-}
 
 * Chapter 5 of MSWRAR
 
-* Suggested Problems: 7, 9--17
+* Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter5HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) no later than 5pm November 21, 2017.  Make sure to write down on the sign-up sheet (available in class) the url where your work is published.
 
 ## Week 15: (Nov 27--30) {-}
 

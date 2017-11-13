@@ -1,0 +1,555 @@
+---
+title: "Chapter Five Homework"
+author: "Your Name Here"
+date: '`r format(Sys.time(), "%A, %b %d, %Y - %X")`'
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
+library(tidyverse)
+```
+
+1. Consider a population that has a normal distribution with mean $\mu = 36$, standard deviation $\sigma = 8$
+
+    (a) The sampling distribution of $\bar{X}$ for samples of size 200 will have what distribution, mean, and standard error?
+    
+    (b) Use `R` to draw a random sample of size $200$ from this population. Conduct EDA on your sample.
+    
+    (c) Compute the bootstrap distribution for your sample mean, and note the bootstrap mean and standard error.
+    
+    (d) Compare the bootstrap distribution to the theoretical sampling distribution by creating a table like Table 5.2.
+    
+    (e) Repeat parts a-d for sample sizes of $n = 50$ and $n = 10$. Carefully describe your observations about the effects of sample size on the bootstrap distribution.
+ 
+------------ 
+
+Your answers:
+
+a.  
+
+b.
+
+```{r}
+# Your code here
+set.seed(13)
+
+```
+
+
+
+c.
+
+```{r}
+# Your code here
+
+```
+
+d.
+
+```{r}
+# Your code here
+
+```
+
+----------------
+
+e.
+
+Parts a-d for $n = 10$:
+
+a.  
+
+b.
+
+```{r}
+# Your code here
+
+```
+
+c.
+
+```{r}
+# Your code here
+set.seed(31)
+
+```
+
+d.
+
+```{r}
+# Your code here
+
+```
+
+------------
+
+Parts a-d for $n = 50$:
+
+a.  
+
+b.
+
+```{r}
+# Your code here
+
+```
+
+
+c.
+
+```{r}
+# Your code here
+set.seed(31)
+
+```
+
+d.
+
+```{r}
+# Your code here
+
+```
+
+ 
+**Your Answer here.**
+
+------------ 
+
+2. We investigate the bootstrap distribution of the median. Create random samples of size $n$ for various $n$ and bootstrap the median. Describe the bootstrap distribution.
+Change the sample sizes to 36 and 37; 200 and 201; 10,000 and 10,001. Note the similarities/dissimilarities, trends and so on. Why does the parity of the sample size matter? 
+
+```{r, label = "Label1415", fig.cap = "Histograms of bootstrapped median values"}
+set.seed(31)
+ne <- 14 # n even
+no <- 15 # n odd
+
+wwe <- rnorm(ne) # draw random sample of size ne
+wwo <- rnorm(no) # draw random sample of size no
+
+N <- 10^4
+even.boot <- numeric(N) # save space
+odd.boot <- numeric(N)
+for (i in 1:N)
+{
+  x.even <- sample(wwe, ne, replace = TRUE)
+  x.odd <- sample(wwo, no, replace = TRUE)
+  even.boot[i] <- median(x.even)
+  odd.boot[i] <- median(x.odd)
+}
+
+Median <- c(even.boot, odd.boot)
+Parity <- rep(c("n = 14", "n = 15"), each = N)
+DF <- data.frame(Median = Median, Parity = Parity)
+
+ggplot(data = DF, aes(x = Median)) + 
+  geom_histogram(fill = "lightblue", color = "black") + 
+  theme_bw() + 
+  facet_grid(Parity ~.)
+```
+
+--------------
+
+```{r, label = "Label3637", fig.cap = "Histograms of bootstrapped median values", cache = TRUE}
+set.seed(31)
+# Your code here
+
+```
+
+
+```{r, label = "Label200201", fig.cap = "Histograms of bootstrapped median values", cache = TRUE}
+set.seed(31)
+# Your code here
+
+```
+
+
+```{r, label = "Label10000", fig.cap = "Histograms of bootstrapped median values", cache = TRUE}
+set.seed(31)
+# Your code here
+
+```
+
+
+------------ 
+
+Your answer:
+
+ 
+------------      
+
+3. Import the data from data set `Bangladesh`. In addition to arsenic concentrations for 271 wells, the data set contains cobalt and chlorine concentrations.
+    
+    (a) Conduct EDA on the chlorine concentrations and describe the salient features.
+    
+    (b) Bootstrap the mean.
+    
+    (c) Find and interpret the 95% bootstrap percentile confidence interval.
+    
+    (d) What is the bootstrap estimate of the bias? What fraction of the bootstrap standard error does it represent?
+    
+```{r, label = "Bang"}
+Bangladesh <- read.csv("http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv")
+head(Bangladesh)
+```
+
+The `Chlorine` variable has some missing values. The following code will remove these entries:
+    
+```{r}
+chlorine <- subset(Bangladesh, select = Chlorine, subset = !is.na(Chlorine), drop = TRUE)
+```
+
+------------ 
+
+Your answers:
+
+a.
+
+```{r}
+# Your code here
+
+```
+
+
+
+b.
+
+```{r}
+# Your code here
+
+```
+
+
+c.
+
+```{r}
+# Your code here
+
+```
+
+
+
+d.
+
+
+ 
+------------  
+
+4. Consider Bangladesh chlorine (concentration). Bootstrap the trimmed mean (say, trim the upper and lower 25%) and compare your results with the usual mean (previous exercise).
+
+------------ 
+
+Your answer:
+
+```{r}
+# Your code here
+
+```
+
+
+ 
+------------  
+
+5. The data set `FishMercury` contains mercury levels (parts per million) for 30 fish caught in lakes in Minnesota.
+
+    (a) Create a histogram or boxplot of the data. What do you observe?
+    
+    (b) Bootstrap the mean and record the bootstrap standard error and the 95% bootstrap percentile interval.
+    
+    (c) Remove the outlier and bootstrap the mean of the remaining data. Record the bootstrap standard error and the 95% bootstrap percentile interval.
+    
+    (d) What effect did removing the outlier have on the bootstrap distribution, in particular, the standard error?
+    
+```{r, label = "Fish"}
+FishMercury <- read.csv("http://www1.appstate.edu/~arnholta/Data/FishMercury.csv")
+head(FishMercury)
+```    
+
+------------ 
+
+Your answers:
+
+a.
+
+```{r}
+# Your code here
+```
+
+Note that there is one value (`r max(FishMercury$Mercury)`) very far removed from the rest of the values.
+
+b.
+
+```{r}
+# Your code here
+```
+
+
+
+c.
+
+```{r}
+# Your code here
+```
+
+
+d.
+ 
+
+
+------------  
+    
+6. In section 3.3, we performed a permutation test to determine if men and women consumed, on average, different amounts of hot wings.
+
+    (a) Bootstrap the difference in means and describe the bootstrap distribution.
+    
+    (b) Find a 95% bootstrap percentile confidence interval for the difference of means and give a sentence interpreting this interval.
+    
+    (c) How do the bootstrap and permutation distribution differ?
+    
+------------ 
+
+```{r}
+BeerWings <- read.csv("http://www1.appstate.edu/~arnholta/Data/Beerwings.csv")
+head(BeerWings)
+```
+
+Your answers:
+
+a.
+
+```{r}
+# Your code here
+
+```
+
+
+
+
+b.
+
+```{r}
+# Your code here
+```
+
+
+
+c.
+
+
+ 
+------------      
+    
+7. Import the data from `Girls2004` (see Section 1.2).
+
+    (a) Perform some exploratory data analysis and obtain summary statistics on the weight of baby girls born in Wyoming and Arkansas (do seperate analyses for each state).
+    
+    (b) Bootstrap  the difference in means, plot the distribution, and give the summary statistics. Obtain a 95% bootstrap percentile confidence interval and interpret this interval.
+    
+    (c) What is the bootstrap estimate of the bias? What fraction of the bootstrap standard error does it represent?
+    
+    (d) Conduct a permutation test to calculate the difference in mean weights and state your conclusion?
+    
+    (e) For what population(s), if any does this calculation hold? Explain?
+
+```{r, label = "Girls"}
+Girls2004 <- read.csv("http://www1.appstate.edu/~arnholta/Data/Girls2004.csv")
+head(Girls2004)
+```
+
+------------ 
+
+Your answers:
+
+a.
+
+```{r}
+# Your code here
+# Part a.
+
+```
+
+
+b.
+
+```{r}
+# Your code here
+```
+
+
+c.
+
+```{r}
+# Your code here
+
+```
+
+
+
+d.
+
+```{r}
+# Your code here
+
+```
+
+
+
+e.
+
+
+ 
+------------  
+    
+8. Do chocolate and vanilla ice creams have the same number of calories? The data set `IceCream` contains calorie information for a sample of brands of chocolate and vanilla ice cream. Use the bootstrap to determine whether or not  there is a difference in the mean number of calories.
+
+```{r, label = "IceCream"}
+IceCream <- read.csv("http://www1.appstate.edu/~arnholta/Data/IceCream.csv")
+head(IceCream)
+```
+
+------------ 
+
+Your answer:
+
+```{r}
+# Your code here
+
+```
+
+
+
+------------  
+
+9. Import the data from Flight Delays Case Study in Section 1.1 data into `R`. Although the data are on all UA and AA flights flown in May and June of 2009, we will assume these represent a sample from a larger population of UA and AA flights flown under similiar circumstances. We will consider the ratio of the means of the flight delay lengths, $\mu_{\text{UA}} / \mu_{\text{AA}}$.
+
+    (a) Perform some exploratory data analysis on flight delay lengths for each of UA and AA flights.
+    
+    (b) Bootstrap the mean of flight delay lengths for each airline seperately and describe the distribution.
+    
+    (c) Bootstrap the ratio of means. Provide plots of the bootstrap distribution and describe the distribution.
+    
+    (d) Find the 95% bootstrap percentile interval for the ratio of means. Interpret this interval.
+    
+    (e) What is the bootstrap estimate of the bias? What fraction of the bootstrap standard error does it represent?
+    
+    (f) For inference in this text, we assume that the observations are independent. Is that condition met here? Explain.
+    
+```{r, label = "FD"}
+FlightDelays <- read.csv("http://www1.appstate.edu/~arnholta/Data/FlightDelays.csv")
+```
+
+------------ 
+
+Your answers:
+
+a.
+
+```{r}
+# Your code here
+
+```
+
+
+b.
+
+```{r}
+# Your code here
+
+```
+
+
+c.
+
+```{r}
+# Your code here
+
+```
+
+
+
+d.
+
+```{r}
+# Your code here
+
+```
+
+
+
+e.
+
+```{r}
+# Your code here
+
+```
+
+
+
+f.
+
+ 
+------------  
+    
+10. Two college students collected data on the price of hardcover textbooks from two disciplinary areas: Mathematics and the Natural Sciences, and the Social Sciences (Hien and Baker (2010)). The data are in the file `BookPrices`.
+
+    (a) Perform some exploratory data analysis on book prices for each of the two disciplinary areas.
+    
+    (b) Bootstrap the mean of the book price for each area separately and describe the distributions.
+    
+    (c) Bootstrap the ratio of means. Provide plots of the bootstrap distribution and comment.
+    
+    (d) Find the 95% bootstrap percentile interval for the ratio of means. Interpret this interval.
+    
+    (e) What is the bootstrap estimate of the bias? What fraction of the bootstrap standard error does it represent?
+    
+```{r, label = "BookPrices"}
+BookPrices <- read.csv("http://www1.appstate.edu/~arnholta/Data/BookPrices.csv")
+```
+
+------------ 
+
+Your answers:
+
+a.
+
+```{r}
+# Your code here
+
+```
+
+
+b.
+
+```{r}
+# Your code here
+
+```
+
+
+
+c.
+
+```{r}
+# Your code here
+
+```
+
+
+
+d.
+
+```{r}
+# Your code here
+
+```
+
+
+e.
+
+```{r}
+# Your code here
+
+```
+
+ 
+------------  
