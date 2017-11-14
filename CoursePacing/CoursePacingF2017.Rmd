@@ -192,7 +192,7 @@ Test yourself:
 
 * Chapter 7 of MSWRAR
 
-* Suggested Problems: 2--4, 9, 11--14, 17--18, 20--27, 29, 38
+* Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter7HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) no later than 5pm November 30, 2017.  Make sure to write down on the sign-up sheet (available in class) the url where your work is published.
 
 ## Week 16: (Dec 4--6; Dec 7 is Reading Day) {-}
 

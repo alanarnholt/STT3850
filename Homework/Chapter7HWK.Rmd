@@ -1,0 +1,331 @@
+---
+title: "Chapter Seven Homework"
+author: ""
+date: '`r format(Sys.time(), "%A, %b %d, %Y - %X")`'
+output: bookdown::html_document2
+---
+
+*This is entirely our own work except as noted at the end of the document.*
+
+
+```{r setup, comment = NA, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = NA, cache = TRUE, fig.show='hold',fig.height=4, fig.width=4)
+library(e1071)
+library(tidyverse)
+```
+
+**Prob1** - Import the data set `Spruce` into `R`.
+
+* Create exploratory plots to check the distribution of the variable `Ht.change`.
+
+```{r prob1a}
+# Your code here
+
+```
+  
+* Find a 95% $t$ confidence interval for the mean height change over the 5-year period of the study and give a sentence interpreting your interval.
+  
+```{r prob1b}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+
+* Create exploratory plots to compare the distributions of the variable `Ht.change` for the seedlings in the fertilized and nonfertilized plots.
+
+```{r prob1c}
+# Your code here
+
+```
+
+* Find the 95% one-sided lower $t$ confidence bound for the difference in mean heights ($\mu_F - \mu_{NF}$) over the 5-year period of the study and give a sentence interpreting your interval.
+
+```{r prob1d}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+
+**Prob2** - Consider the data set `Girls2004` with birth weights of baby girls born in Wyoming or Alaska.
+  
+* Create exploratory plots and compare the distribution of weight between the babies born in the two states.
+  
+```{r prob2a}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Find a 95% $t$ confidence interval for the difference in mean weights for girls born in these two states.  Give a sentence interpreting this interval.
+
+```{r prob2b}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Create exploratory plots and compare the distribution of weights between babies born to nonsmokers and babies born to smokers.
+
+```{r prob2c}
+# Your code here
+
+```
+
+> SOLUTION:  
+
+* Find a 95% $t$ confidence interval for the difference in mean weights between babies born to nonsmokers and smokers.  Give a sentence interpreting this interval.
+
+```{r prob2d}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+**Prob3** - Import the `FlightDelays` data set into `R`.  Although the data represent all flights for United Airlines and American Airlines in May and June 2009, assume for this exercise that these flights are a sample from all flights flown by the two airlines under similar conditions.  We will compare the lengths of flight delays between the two airlines.  
+
+* Create exploratory plots of the lengths of delays for the two airlines.
+
+```{r prob3, warning=FALSE}
+# Your code here
+
+```
+
+* Find a 95% $t$ confidence interval for the difference  in mean flight delays between the two airlines and interpret this interval.
+
+```{r prob3a}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+
+**Prob4** - Run a simulation to see if the $t$ ratio $T = (\bar{X} -\mu)/(S/\sqrt{n})$ has a $t$ distribution or even an approximate $t$ distribution when the samples are drawn from a nonnormal distribution.  Be sure to superimpose the appropriate $t$ density curve over the density of your simulated $T$.  Try two different nonnormal distributions $\left( Unif(a = 0, b = 1), Exp(\lambda = 1) \right)$ and remember to see if sample size makes a difference (use $n = 15$ and $n=500$).
+
+```{r prob4}
+# Your code here
+
+```
+
+
+
+> SOULTION:     
+
+**Prob5** - One question is the 2002 General Social Survey asked participants whom they voted for in the 2000 election.  Of the 980 women who voted, 459 voted for Bush.  Of the 759 men who voted, 426 voted for Bush.
+
+* Find a 95% confidence interval for the proportion of women who voted for Bush.
+
+```{r prob5a}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Find a 95% confidence interval for the proportion of men who voted for Bush.  Do the intervals for the men and women overlap?  What, if anything, can you conclude about gender difference in voter preference?
+
+```{r prob5b}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+
+```{r prob5c}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+**Prob6** - A retail store wishes to conduct a marketing survey of its customers to see if customers would favor longer store hours. How many people should be in their sample if the marketers want their margin of error to be at most 3% with 95% confidence, assuming
+
+  * they have no preconceived idea of how customers will respond, and
+
+```{r prob6a}
+# Your code here
+
+```
+  
+> SOLUTION: 
+  
+  * a previous survey indicated that about 65% of customers favor longer store hours.
+
+```{r prob6b}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+**Prob7** - Suppose researchers wish to study the effectiveness of a new drug to alleviate hives due to math anxiety.  Seven hundred math students are randomly assigned to take either this drug or a placebo.  Suppose 34 of the 350 students who took the drug break out in hives compared to 56 of the 350 students who took the placebo.
+
+* Compute a 95% confidence interval for the proportion of students taking the drug who break out in hives.
+
+```{r prob7a}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Compute a 95% confidence interval for the proportion of students taking the placebo who break out in hives.
+
+```{r prob7b}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Do the intervals overlap?  What, if anything, can you conclude about the effectiveness of the drug?
+
+> SOLUTION:  
+
+* Compute 95% confidence interval for the difference in proportions of students who break out in hives by using or not using this drug and give a sentence interpreting this interval.
+
+```{r prob7d}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+**Prob8** - An article in the March 2003 *New England Journal of Medicine* describes a study to see if aspirin is effective in reducing the incidence of colorectal adenomas, a precursor to most colorectal cancers (Sandler et al. (2003)).  Of 517 patients in the study, 259 were randomly assigned to receive aspirin and the remaining 258 received a placebo.  One or more adenomas were found in 44 of the aspirin group and 70 in the placebo group.  Find a 95% one-sided upper bound for the difference in proportions $(p_A - p_P)$ and interpret your interval.
+
+```{r prob8}
+# Your code here
+
+```
+
+> SOLUTION:  
+
+**Prob9** - The data set `Bangladesh` has measurements on water quality from 271 wells in Bangladsesh.  There are two missing values in the chlorine variable.  Use the following `R` code to remove these two observations.
+
+`> chlorine <- with(Bangladesh, Chlorine[!is.na(Chlorine)])`
+
+```{r prob9}
+# Your code here
+
+```
+
+* Compute the numeric summaries of the chlorine levels and create a plot and comment on the distribution.
+
+```{r prob9a}
+# Your code here
+
+```
+
+> SOLUTION:  
+
+* Find a 95% $t$ confidence interval for the mean $\mu$ of chlorine levels in Bangladesh wells.
+
+```{r prob9b}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Find a 95% bootstrap percentile and bootstrap $t$ confidence intervals for the mean chlorine level and compare results.  Which confidence interval will you report?
+
+```{r prob9c}
+# Your code here
+
+```
+
+> SOLUTION:
+
+* *Johnson's $t$ confidence interval* adjusts for skewness by shifting endpoints right or left for positive or negative skewness, respectively.  The interval is $\bar{X} + \hat{\kappa_3}/(6\sqrt{n})(1 + 2q^2) \pm q(S/\sqrt{n})$, where $\hat{\kappa_3}$ is a sample estimate of the population skewness $E(X - \mu)/\sigma^3$ and $q$ denotes the $1 - \alpha/2$ quantile for a $t$ distribution with $n-1$ degrees of freedom.  Calculate Johnson's $t$ interval for the arsenic data (in `Bangladesh`) and compare with the formula $t$ and bootstrap $t$ intervals.
+
+```{r prob9d}
+# Your code here
+
+```
+
+> SOLUTION:
+
+**Prob10** - The data set `MnGroundwater` has measurements on water quality of 895 randomly selected wells in Minnesota.
+
+```{r prob10}
+# Your code here
+
+```
+
+* Create a histogram, a density, and a normal quantile plot of the alkalinity and comment on the distribution.
+
+```{r prob10a, message = FALSE}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Find the 95% $t$ confidence interval for the mean $\mu$ of alkalinity levels in Minnesota wells.
+
+```{r prob10b}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Find the 95% bootstrap percentile and bootstrap $t$ confidence intervals for the mean alkalinity level and compare the results.  Which confidence interval will you report?
+
+```{r prob10c}
+# Your code here
+
+```
+
+> SOLUTION:  
+
+**Prob11** Consider the babies born in Texas in 2004 (`TXBirths2004`).  We will compare the weights of babies born to nonsmokers and smokers.
+
+```{r prob11}
+# Your code here
+
+```
+
+* How many nonsmokers and smokers are there in this data set?
+
+```{r prob11a}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Create exploratory plots of the weights for the two groups and comment on the distributions.
+
+```{r prob11b}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Compute the 95% confidence interval for the difference in means using the formula $t$, bootstrap percentile, and bootstrap $t$ methods and compare your results.  Which interval would you report?
+
+```{r prob11c}
+# Your code here
+
+```
+
+> SOLUTION: 
+
+* Modify your result from the previous question to obtain a one-sided 95% $t$ confidence interval (hypothesizing that babies born to nonsmokers weigh more than babies born to smokers).
+
+```{r prob11d}
+# Your code here
+
+```
+
+> SOLUTION: 
