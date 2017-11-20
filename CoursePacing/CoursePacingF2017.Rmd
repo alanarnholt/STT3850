@@ -188,6 +188,8 @@ Test yourself:
 
 * Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter5HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) no later than 5pm November 21, 2017.  Make sure to write down on the sign-up sheet (available in class) the url where your work is published.
 
+* [Chapter 5 notes](../Notes/Children/BootStrap2.html)
+
 ## Week 15: (Nov 27--30) {-}
 
 * Chapter 7 of MSWRAR
