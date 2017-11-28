@@ -120,6 +120,8 @@ MARGIN OF ERROR: The margin of error for a symmetric confidence interval is the 
 ```{r E7.4}
 n <- ceiling((qnorm(.975)*24.6/5)^2)
 n
+# Using nsize from PASWR2
+nsize(b = 5, sigma = 24.6, conf.level = 0.95, type = "mu")
 ```
 
 **Remark** Note that with the with of the interval, given by $z_{1 - \alpha/2}\times(\sigma/\sqrt{n})$, depends on the level of confidence (which determines $z_{1-\alpha/2}$), the standard deviation,  and the sample size.  Analysts cannot control $\sigma$,  but can adjust $z_{1 - \alpha/2}$ or $n$. To make the confidence interval narrower, they can either increase the sample size $n$ or decrease  the size of the quantile $z_{1-\alpha/2}$, which amounts to decreasing  the confidence level.
@@ -189,6 +191,7 @@ The command `pt` or `qt` give probabilities or quantiles, respectively, for the 
 ```{r pt}
 pt(2.8, 27)
 ```
+
 To find the quantile $t_{.95; 27}$ satisfying $P(T_{27} < t_{.95; 27}) = 0.95$, 
 
 ```{r qt}
@@ -207,6 +210,10 @@ site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
 NCBirths2004 <- read.csv(file=url(site))
 MEANS <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, mean)
 SD <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, sd)
+# OR
+NCBirths2004 %>% 
+  group_by(Gender) %>% 
+  summarize(Mean = mean(Weight), SD = sd(Weight), n = n())
 ```
 
 **Solution** The mean and standard deviation of the weights of $n =$ `r sum(NCBirths2004$Gender == "Female")` girls is `r MEANS[1]` and `r SD[1]`g, respectively. A normal quantile plot shows that the weights are approximately normally distributed, so a $t$ interval is reasonable.
@@ -223,7 +230,10 @@ qqline(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], col = "blue")
 # Using lattice
 qqmath(~Weight|Gender,data = NCBirths2004, col = rgb(1,0,0,.1))
 # Using ggplot2
-ggplot(data = NCBirths2004, aes(sample = Weight)) + stat_qq(color = rgb(1,0,0,.1)) + facet_grid(.~Gender)
+ggplot(data = NCBirths2004, aes(sample = Weight)) + 
+  stat_qq(color = rgb(1,0,0,.1)) + 
+  facet_grid(.~ Gender) + 
+  theme_bw()
 ```
 Since $1 - \alpha = 0.99$, it follows that $\alpha/2 = 0.005$.  The 0.995 quantile for the $t$ distribution with 520 degrees of freedom is $t_{0.995; 520}=$ `r qt(.995, 520)`.  Thus, the 99% confidence interval is `r MEANS[1]`$\pm$ `r qt(.995, 520)`$\times$ `r SD[1]` $/\sqrt{521} =$ (`r t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = .99)$conf[1]`, `r t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = .99)$conf[2]`) g.
 
@@ -236,6 +246,10 @@ girls <- subset(NCBirths2004, select = Weight, subset = Gender =="Female", drop 
 t.test(girls, conf.level = 0.99)$conf
 # Or
 t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = 0.99)$conf
+# Or
+JG <- NCBirths2004 %>% 
+  filter(Gender == "Female") 
+t.test(JG$Weight, conf = 0.99)
 ```
 
 **Assumptions** With any statistical procedure, one of the first questions to ask is, How robust is it?  That is, what happens if the assumptions underlying the procedure are violated? The $t$ confidence interval assumes that the underlying populations is normal, so what happens if that is not the case?
@@ -319,14 +333,35 @@ qqmath(~TSE100,col = "red", xlim = c(-3,3), ylim = c(-3,3), distribution = funct
 
 ```{r ggplots}
 DF <- data.frame(TSU, TSE10, TSE100)
-p <- ggplot(data=DF, aes(sample = TSU)) + stat_qq(distribution = qt, dparams = list(df = 9), pch =".", color = rgb(1,0,0,.01)) + xlim(-3, 3) +ylim(-3, 3) +xlab("Theoretical t quantiles") +ylab("Sample quantiles") + ggtitle("Uniform, n = 10")
-p + geom_abline(intercept = 0, slope = 1, color = "gray")
+p <- ggplot(data=DF, aes(sample = TSU)) + 
+  stat_qq(distribution = qt, dparams = list(df = 9), pch =".", color = rgb(1,0,0,.01)) + 
+  xlim(-3, 3) + 
+  ylim(-3, 3) + 
+  xlab("Theoretical t quantiles") + 
+  ylab("Sample quantiles") + 
+  ggtitle("Uniform, n = 10")
+p + geom_abline(intercept = 0, slope = 1, color = "gray") + 
+  theme_bw()
 #
-p <- ggplot(data=DF, aes(sample = TSE10)) + stat_qq(distribution = qt, dparams = list(df = 9), pch =".", color = rgb(1,0,0,.01)) + xlim(-3, 3) +ylim(-3, 3) +xlab("Theoretical t quantiles") +ylab("Sample quantiles") + ggtitle("Exponential, n = 10")
-p + geom_abline(intercept = 0, slope = 1, color = "gray")
+p <- ggplot(data=DF, aes(sample = TSE10)) + 
+  stat_qq(distribution = qt, dparams = list(df = 9), pch =".", color = rgb(1, 0, 0, .01)) + 
+  xlim(-3, 3) + 
+  ylim(-3, 3) + 
+  xlab("Theoretical t quantiles") + 
+  ylab("Sample quantiles") + 
+  ggtitle("Exponential, n = 10")
+p + geom_abline(intercept = 0, slope = 1, color = "gray") + 
+  theme_bw()
 #
-p <- ggplot(data=DF, aes(sample = TSE100)) + stat_qq(distribution = qt, dparams = list(df = 99), pch =".", color = rgb(1,0,0,.01)) + xlim(-3, 3) +ylim(-3, 3) +xlab("Theoretical t quantiles") +ylab("Sample quantiles") + ggtitle("Exponential, n = 100")
-p + geom_abline(intercept = 0, slope = 1, color = "gray")
+p <- ggplot(data = DF, aes(sample = TSE100)) + 
+  stat_qq(distribution = qt, dparams = list(df = 99), pch =".", color = rgb(1, 0, 0, .01)) + 
+  xlim(-3, 3) + 
+  ylim(-3, 3) + 
+  xlab("Theoretical t quantiles") + 
+  ylab("Sample quantiles") + 
+  ggtitle("Exponential, n = 100")
+p + geom_abline(intercept = 0, slope = 1, color = "gray") +
+  theme_bw()
 ```
 The previous graphs compare the distribution of $t$ statistics for samples of size $n = 10$  from a uniform distribution,  size $n = 10$  from an exponential distribution,  and size $n = 100$  from an exponential distribution to the $t$ distribution. The range on all plots is truncated so that we can focus on the range of values important for confidence intervals. Notice that for  the uniform population,  the distribution of the $t$ statistic is close to the  $t$ distribution, except in the tails.  For exponential populations, the discrepancy  is much larger, and the discrepancy decreases only slowly as the sample size increases.  To reduce the discrepancy (the difference between actual and nominal  probabilities) by a factor of 10  requires a sample size 100 times larger. For an exponential population, we must have $n > 5000$  before the actual probabilities of a 95% $t$ interval  missing the true mean in either tail are within 10% of the desired probability of 2.5%;  that is,  the actual tail probabilities are between 2.25% and  2.75%.
 
@@ -394,22 +429,22 @@ t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.90)$conf.int
 site <- "http://www1.appstate.edu/~arnholta/Data/TXBirths2004.csv"
 Texas <- read.csv(file=url(site))
 ggplot(data = Texas, aes(x = Weight)) + 
-  geom_histogram() + 
+  geom_histogram(fill = "blue", color = "black") + 
   facet_grid(Gender~.) + 
   theme_bw()
 ggplot(data = Texas, aes(sample = Weight)) + 
-  stat_qq() + 
+  stat_qq(color = rgb(0, 0, 1, 0.15)) + 
   facet_grid(Gender~.) + 
   theme_bw()
 ```
 
 
 ```{r Texas2}
-t.test(Texas$Weight~Texas$Gender)
+t.test(Texas$Weight ~ Texas$Gender)
 str(Texas)
 Texas <- within(data = Texas, expr={Gender <- factor(Gender, levels =c("Male", "Female"))})
 str(Texas)
-t.test(Texas$Weight~Texas$Gender)
+t.test(Texas$Weight ~ Texas$Gender)
 ```
 
 **7.4 CONFIDENCE ITERVALS FOR PROPORTIONS**
@@ -648,7 +683,9 @@ Recall the Bangladesh arsenic levels data.  The distribution of arsenic levels w
 site <- "http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv"
 Bangladesh <- read.csv(file=url(site))
 head(Bangladesh)
-ggplot(data = Bangladesh, aes(x = Arsenic)) + geom_histogram()
+ggplot(data = Bangladesh, aes(x = Arsenic)) + 
+  geom_histogram(fill = "blue") + 
+  theme_bw()
 ```
 To use the $t$ interval formula for the mean $\mu$ requires that the statistic $T = (\bar{x} - \mu)/(S/\sqrt{n})$ to follow a $t_{\nu}$. That seems unlikely for data this skewed. Instead, we bootstrap the $t$ statistic: for each of the $10^5$ resamples, we compute the resample mean $\bar{X}^*$, resample standard deviation $S^*$, and then compute the resample $T$ statistic $T^* = (\bar{X}^* - \bar{x})/(S^*/\sqrt{n})$
 
@@ -803,8 +840,14 @@ qqline(boot.out$t[,1])
 # ggplot2 Now
 require(ggplot2)
 BO <- as.data.frame(boot.out$t)
-ggplot(data = BO, aes(x = V1, y = ..density..)) + geom_histogram(fill = "pink") + xlab(substitute(paste(bar(x)[1],"* - ", bar(x)[2],"*"))) + geom_density(size = 1.5, color = "red")
-p <- ggplot(data = BO, aes(sample = V1)) + stat_qq(pch = ".", color = rgb(1, 0, 0, 0.1)) 
+ggplot(data = BO, aes(x = V1, y = ..density..)) + 
+  geom_histogram(fill = "pink") + 
+  xlab(substitute(paste(bar(x)[1],"* - ", bar(x)[2],"*"))) + 
+  geom_density(size = 1.5, color = "red") + 
+  theme_bw()
+p <- ggplot(data = BO, aes(sample = V1)) + 
+  stat_qq(pch = ".", color = rgb(1, 0, 0, 0.1)) +
+  theme_bw()
 p
 hist((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5, col = "pink", breaks = "Scott", main = "", xlab ="T*", freq= FALSE)
 lines(density((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5), lwd = 2)
