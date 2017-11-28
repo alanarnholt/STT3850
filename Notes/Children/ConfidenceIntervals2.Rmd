@@ -166,6 +166,20 @@ abline(h = 0, lwd=2)
 legend("topright", legend = c("N(0, 1)", "t_1", "t_4", "t_9", "t_36"), lty = c(1, 2, 3, 4, 5), col =c("black", "green", "pink", "red", "blue"), lwd = 1.5)
 ```
 
+```{r, tdfs2, fig.width = 7, fig.height = 7}
+# with ggplot2
+ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) + 
+  theme_bw() +
+  labs(x = "", y = "") +
+  stat_function(fun = dt, args = list(df = 1), n = 200, color = "green", linetype = "dashed") + 
+  stat_function(fun = dt, args = list(df = 4), n = 200, color = "pink", linetype = "dashed") + 
+  stat_function(fun = dt, args = list(df = 9), n = 200, color = "red", linetype = "dashed") + 
+  stat_function(fun = dt, args = list(df = 36), n = 200, color = "blue", linetype = "dashed") + 
+  stat_function(fun = dnorm, n = 200, color = "black", linetype = "dashed") +
+  geom_hline(yintercept = 0)
+```
+
+
 We derive the confidence interval for $\mu$ when $\sigma$ is unknown in the same way as when $\sigma$ is known.  Let $t_{1 - \alpha/2; n-1}$ denote the $(1 - \alpha/2)$ quantile of the $t$ distribution with $n - 1$ degrees of freedom, $P(T_{n-1} < t_{1-\alpha/2; n-1}) =1 - \alpha/2, 0 < \alpha <1$. Then using symmetry of the $t$ distribution, we have
 
 
