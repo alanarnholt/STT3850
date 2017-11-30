@@ -504,7 +504,7 @@ Now, the limits of the interval given for the score interval are pretty messy, s
 
 **The AGRESTI-COULL 95% CONFIDENCE INTERVAL FOR A PROPORTION**
 
-If $X$ denotes the number of successes in a sample of size $n$, let $\tilde{X} = X = 2, \tilde{n} = n + 4,$ and $\tilde{p} = \tilde{X}/\tilde{n}$.  Then an approximate 95% confidence interval for $p$ is
+If $X$ denotes the number of successes in a sample of size $n$, let $\tilde{X} = X + 2, \tilde{n} = n + 4,$ and $\tilde{p} = \tilde{X}/\tilde{n}$.  Then an approximate 95% confidence interval for $p$ is
 
 $$\left(\tilde{p} - 1.96\sqrt{\frac{\tilde{p}(1 - \tilde{p})}{\tilde{n}}},  \tilde{p} + 1.96\sqrt{\frac{\tilde{p}(1 - \tilde{p})}{\tilde{n}}}   \right)$$
 
