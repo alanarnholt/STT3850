@@ -206,4 +206,6 @@ Test yourself:
 
 ```{block, FINAL, type='rmdnote'}
 *  Follow the MWF meeting pattern on the [University Exam Schedule](https://registrar.appstate.edu/sites/registrar.appstate.edu/files/asu_fall_2017_exam_schedule_final_3.pdf) to determine your final exam time and date.
+
+* Nice [Tidyverse Cheat Sheet](http://datacamp-community.s3.amazonaws.com/e63a8f6b-2aa3-4006-89e0-badc294b179c)
 ```
