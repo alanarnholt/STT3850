@@ -1,0 +1,81 @@
+---
+title: "More Bootstrapping"
+author: "Alan T. Arnholt"
+date: '`r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
+output: 
+  bookdown::html_document2: 
+    highlight: textmate
+    theme: yeti
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(resampledata)
+DT::datatable(TXBirths2004)
+DF <- TXBirths2004 %>% 
+  filter(Gender == "Male", Smoker == "No", Gestation < 37)
+ggplot(data = DF, aes(x = Weight)) + 
+  geom_density(fill = "purple", alpha = 0.5) + 
+  theme_bw()
+DF %>% 
+  summarize(Mean = mean(Weight), SD = sd(Weight), n = n())
+```
+
+```{r}
+set.seed(58)
+thetahat <- mean(DF$Weight)
+thetahat
+SEthetahat <- sd(DF$Weight)/sqrt(sum(!is.na(DF$Weight)))
+SEthetahat
+# T Bootstrap
+sims <- 10^4
+Tstar <- numeric(sims)
+for(i in 1:sims){
+  bs <- sample(DF$Weight, size = sum(!is.na(DF$Weight)), replace = TRUE)
+  Tstar[i] <- (mean(bs) - thetahat)/(sd(bs)/sqrt(sum(!is.na(DF$Weight))))
+}
+ggplot(data = data.frame(Tstar = Tstar), aes(x = Tstar)) +
+  geom_density(fill = "purple", alpha = 0.5) + 
+  theme_bw()
+TS <- quantile(Tstar, prob = c(0.025, 0.975))
+TS
+# Compare to
+qt(c(0.025, 0.975), sum(!is.na(DF$Weight)) - 1)
+```
+
+Note that $Q_1 = t^*_{0.025} = `r TS[1]`$, and $Q_2 = t^*_{0.975} = `r TS[2]`$.  The bootstrap $t$ confidenc interval is 
+$$CI_{1 - \alpha}(\mu)=[\bar{X} - Q_2\cdot S/\sqrt{n}, \bar{X} - Q_1\cdot S/\sqrt{n}]$$ or 
+$$CI_{1 - \alpha}(\mu)=[\bar{X} - t^*_{1 - \alpha/2}\cdot S/\sqrt{n}, \bar{X} - t^*_{\alpha/2}\cdot S/\sqrt{n}]$$
+
+In this case, a 95% bootstrap $t$ confidence interval is:
+
+$$CI_{1 - \alpha}(\mu)=[`r thetahat` - `r TS[2]`\cdot `r SEthetahat`, `r thetahat` - `r TS[1]`\cdot `r SEthetahat`]$$
+
+$$CI_{1 - \alpha}(\mu)= [`r thetahat - TS[2]*SEthetahat`, `r thetahat - TS[1]*SEthetahat`]$$
+
+COmpare to a standard $t$ confidence interval:
+
+```{r}
+t.test(DF$Weight)
+```
+
+## Using package `boot` {-}
+
+```{r}
+library(boot)
+mean.boot <- function(data, i){
+  d <- data[i]
+  M <- mean(d)
+  V <- var(d)/length(i)
+  return(c(M, V))
+}
+boot.out <- boot(DF$Weight, mean.boot, R = 10^4)
+boot.ci(boot.out, conf = 0.95, type = c("perc", "stud"))
+```
+
+
