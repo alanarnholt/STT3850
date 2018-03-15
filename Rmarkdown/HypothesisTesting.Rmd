@@ -1,8 +1,8 @@
 ---
 title: "Hypothesis Testing"
 author: "Alan T. Arnholt"
-date: "10/17/2017"
-output: html_document
+date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
+output: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
@@ -12,12 +12,25 @@ library(tidyverse)
 
 # Introduction
 
+Consider the mice example in Section 3.1 let $\mu_d$ denote the true mean time that a randomly selected mouse that received the drug takes to run through the maze; let $\mu_c$ denote the true mean time for a control mouse.  Then,
+
+$$H_0:\mu_d - \mu_c = 0.$$
+That is, on average, there is no difference in the mean times between mice who receive the drug and mice in the control group.
+
+The alternative hypothesis is 
+
+$$H_A: \mu_d - \mu_c > 0.$$
+
+That is, on average, mice who receive the drug have slower times (larger values) than the mice in the control group.
+
+
 ## Creating the data
 
 ```{r}
 DF <- data.frame(time = c(30, 25, 20, 18, 21, 22), treatment = rep(c("Drug", "Control"), each = 3))
 DF <- tbl_df(DF)
 DF
+# tidyverse approach
 DF %>% 
   group_by(treatment) %>% 
   summarize(Average  = mean(time))
@@ -26,9 +39,14 @@ ANS <- DF %>%
   summarize(Average  = mean(time))
 TS <- ANS[2, 2] - ANS[1, 2]
 TS$Average
+# the way the book does it
+ANS2 <- tapply(DF$time, DF$treatment, mean)
+ANS2
+MD <- ANS2[2] - ANS2[1]
+MD
 ```
 
-### All possible
+## All possible distributions of {30, 25, 20, 18, 21, 22} into Two Sets
 
 ```{r}
 ANS <- t(combn(6, 3))
@@ -46,19 +64,41 @@ names(VALUES) <- paste(rep(c("D", "C"), each = 3), 1:3, sep = "")
 VALUES$DM <- apply(VALUES[, 1:3], 1, mean)
 VALUES$CM <- apply(VALUES[, 4:6], 1, mean)
 VALUES$DiffMean <- VALUES$DM - VALUES$CM
-DT::datatable(VALUES)
+DT::datatable(round(VALUES, 2))
 ```
-
-
 
 ```{r}
-sims <- 10^4 - 1
+pvalue <- sum(VALUES$DiffMean >= MD)/choose(6,3)
+pvalue
+MASS::fractions(pvalue)
+```
+
+The theoretical _p_-value is $`r pvalue`$.
+
+## Statistical Conclusion
+
+# PERMUTATION TESTS
+
+This problem has a total of $\binom{6}{3} = `r choose(6,3)`$ arrangements of six items into two sets each with three observations.  Tuesdays problem had a total of $\binom{10}{5} = `r choose(10,5)`$ arrangements of ten items into two sets each with five observations.  While it is possible to enumerate all possible outcomes and compute the theoretical answer, once the group sizes increase this becomes computationally infeasible.  Consider $\binom{30}{15} = `r choose(30,15)`$! So, what we typically do is take a "large" number of permutations (generally 10,000) and let this simulation approximate the true distribution.  
+
+```{r}
+set.seed(123)
+sims <- 10^4 - 1 
 ans <- numeric(sims)
 for(i in 1:sims){
-  index <- sample(1:6, 3)
+  index <- sample.int(n = 6, size = 3, replace = FALSE)
   ans[i] <- mean(DF$time[index]) - mean(DF$time[-index])
 }
-pvalue <- (sum(ans >= 4.666666) + 1)/(sims + 1)
+pvalue <- (sum(ans >= MD) + 1)/(sims + 1)
 pvalue
 ```
+
+```{r, label = "dist", fig.cap = "Permutation Distribution of $\\bar{X}_c - \\bar{X}_d$"}
+library(ggplot2)
+ggplot(data = data.frame(md = ans), aes(x = md)) + 
+  geom_density(fill = "pink") + 
+  theme_bw() + 
+  labs(x = expression(bar(X)[c]-bar(X)[d]))
+```
+
 
