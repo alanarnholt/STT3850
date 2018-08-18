@@ -47,9 +47,6 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 * _Introduction to R_ [slides](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/IntroToR.html)
 
-
-
-  
  
 ```{block, week1optional, type='rmdoptional'}
 #### Optional {-}
@@ -238,8 +235,10 @@ Test yourself:
 
 * [Chapter 7 notes](../Notes/Children/ConfidenceIntervals2.html)
 
+```{block, week15optional, type='rmdoptional'}
+#### Optional {-}
 * Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter7HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) 
-
+```
 
 
 ## Week 16: (Dec 3--5; Dec 6 is Reading Day) {-}
