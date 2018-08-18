@@ -102,3 +102,7 @@ Note: All technology used in the class is either open source (free) or will be a
 **Assignments**
 
 The [CoursePacing guide](../CoursePacing/CoursePacingF2018.html) has all course assignments and due dates.
+
+**DataCamp**
+
+[Click here to register with DataCamp](https://www.datacamp.com/groups/shared_links/a269a8926e4a8f53113d7826eecef079f9ffeb39)
