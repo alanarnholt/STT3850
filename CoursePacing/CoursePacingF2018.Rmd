@@ -101,6 +101,8 @@ Test yourself:
 #### Optional {-}
 
 * Complete _Data Visualization with `ggplot2`_ (Part 1) [(DataCamp)](https://www.datacamp.com/)
+
+* Nice [Tidyverse Cheat Sheet](http://datacamp-community.s3.amazonaws.com/e63a8f6b-2aa3-4006-89e0-badc294b179c)
 ```
 
 
@@ -249,6 +251,4 @@ Test yourself:
 
 ```{block, FINAL, type='rmdnote'}
 *  Final exam
-
-* Nice [Tidyverse Cheat Sheet](http://datacamp-community.s3.amazonaws.com/e63a8f6b-2aa3-4006-89e0-badc294b179c)
 ```
