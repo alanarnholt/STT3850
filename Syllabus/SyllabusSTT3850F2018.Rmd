@@ -1,12 +1,13 @@
 ---
 title: "STT 3850 Syllabus - Fall 2018"
 author: ''
-date: ""
-output: 
-  html_document: 
-    theme: yeti
+date: ''
+output:
+  html_document:
+    css: ../css/style.css
     highlight: textmate
-    css: "../css/style.css"
+    theme: yeti
+  pdf_document: default
 ---
 
 **Instructor:**  Dr. Alan T. Arnholt    
