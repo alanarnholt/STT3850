@@ -47,6 +47,8 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 * _Introduction to R_ [slides](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/IntroToR.html)
 
+* Watch Paul the Octopus [clip](https://www.youtube.com/watch?v=3ESGpRUMj9E) (61 seconds).
+
  
 ```{block, week1optional, type='rmdoptional'}
 #### Optional {-}
