@@ -2,11 +2,11 @@
 title: "Tentative STT 3850 Course Schedule"
 author: "Alan T. Arnholt"
 date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
-output: 
-  html_document: 
+output:
+  html_document:
+    css: ../css/style.css
     highlight: textmate
     theme: yeti
-    css: "../css/style.css"
 ---
 
 <script type="text/x-mathjax-config">
