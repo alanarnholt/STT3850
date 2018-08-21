@@ -37,7 +37,7 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 ## Week 1: (Aug 21--23) {-}
 
 
-* Read chapters 1 and 2 of [MD](htpps://modern.dive)
+* Read chapters 1 and 2 of [MD](https://moderndive.com)
 
 * Sign-up for a free account on [GitHub](https://github.com).
 
@@ -66,7 +66,7 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 ## Week 2: (Aug 27--31) {-}
 
-* Read chapter 3 of [MD](htpps://modern.dive) --- Data Visualization via `ggplot2`
+* Read chapter 3 of [MD](https://moderndive.com) --- Data Visualization via `ggplot2`
 
 * Read [Getting used to R, RStudio, and R Markdown](https://ismayc.github.io/rbasics-book/)
 
@@ -82,7 +82,7 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 ## Week 3 (Sep 3 (No class) Sep 4--7) {-}
 
-* Read Chapter 4 of [MD](htpps://modern.dive) --- Tidy Data via `tidyr`
+* Read Chapter 4 of [MD](https://moderndive.com) --- Tidy Data via `tidyr`
 
 * [Three S's](../Handouts/ThreeSs.html)
 
@@ -111,7 +111,7 @@ Test yourself:
 
 ## Week 4: (Sep 10--14) {-}
 
-* Read chapter 5 of [MD](htpps://modern.dive) --- Data Wrangling via `dplyr`
+* Read chapter 5 of [MD](https://moderndive.com) --- Data Wrangling via `dplyr`
 
 * Read Chapter 2 of MSWR
 
@@ -146,7 +146,7 @@ Test yourself:
 
 ## Week 7: (Oct 1--5) {-}
 
-* Read Chapters 4 and 5 of [MD](htpps://modern.dive) --- Basic Regression and Multiple Regression
+* Read Chapters 4 and 5 of [MD](https://moderndive.com) --- Basic Regression and Multiple Regression
 
 * Work on _Modeling with Data in Tidyverse_ [(DataCamp)](https://www.datacamp.com/) --- Due Oct 12
 
@@ -160,13 +160,13 @@ Test yourself:
 
 * Complete _Modeling with Data in Tidyverse_ [(DataCamp)](https://www.datacamp.com/) --- Due Oct 12
 
-* Review Chapters 4 and 5 of [MD](htpps://modern.dive) --- Basic Regression and Multiple Regression
+* Review Chapters 4 and 5 of [MD](https://moderndive.com) --- Basic Regression and Multiple Regression
 
 
 
 ## Week 9: (Oct 15--19) {-}
 
-* Read Chapter 8 of [MD](htpps://modern.dive) --- Sampling
+* Read Chapter 8 of [MD](https://moderndive.com) --- Sampling
 
 * Read Chapter 4 of MSWR --- Sampling Distributions; Suggested Problems 2, 5, 12-16
 
@@ -180,7 +180,7 @@ Test yourself:
 
 ## Week 10: (Oct 22--26) {-}
 
-* Read Chapter 9 of [MD](htpps://modern.dive) --- Confidence Intervals
+* Read Chapter 9 of [MD](https://moderndive.com) --- Confidence Intervals
 
 * Start _Inference for Numerical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 2
 
@@ -190,7 +190,7 @@ Test yourself:
 
 ## Week 11: (Oct 29--Nov 2) {-}
 
-* Read Chapter 10 of [MD](htpps://modern.dive) --- Hypothesis Testing
+* Read Chapter 10 of [MD](https://moderndive.com) --- Hypothesis Testing
 
 * Complete _Inference for Numerical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 2
 
