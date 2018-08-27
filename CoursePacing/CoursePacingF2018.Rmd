@@ -72,9 +72,11 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 * Become familiar with the Appstate [RStudio server](https://mathr.math.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
 
-* Complete Chapters 1-3 of _Intermediate R_ [(DataCamp)](https://www.datacamp.com/) --- Due Aug 31
+* Complete _Introduction to Data_ [(DataCamp)](https://www.datacamp.com/courses/introduction-to-data) --- Due Aug 31
 
-* Complete _Introduction to Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Aug 31
+* Complete Chapters 1-3 of _Intermediate R_ [(DataCamp)](https://www.datacamp.com/courses/intermediate-r) --- Due Aug 31
+
+
 
 
 
@@ -86,9 +88,9 @@ Clarity  | Few errors of grammar and usage; any minor errors do not interfere wi
 
 * [Three S's](../Handouts/ThreeSs.html)
 
-* Complete _Reporting with R Markdown_ [(DataCamp)](https://www.datacamp.com/) --- Due Sep 7
+* Complete _Reporting with R Markdown_ [(DataCamp)](https://www.datacamp.com/courses/reporting-with-r-markdown) --- Due Sep 7
 
-*  Complete _Introduction to the Tidyverse_ [(DataCamp)](https://www.datacamp.com/) --- Due Sep 7
+*  Complete _Introduction to the Tidyverse_ [(DataCamp)](https://www.datacamp.com/courses/introduction-to-the-tidyverse) --- Due Sep 7
 
 
 ```{block, test3, type='rmdexercise'}
@@ -125,7 +127,7 @@ Test yourself:
 
 ## Week 5: (Sep 17--21) {-}
 
-* Complete _Working with Data in the Tidyverse_ [(DataCamp)](https://www.datacamp.com/) --- Due Sep 21
+* Complete _Working with Data in the Tidyverse_ [(DataCamp)](https://www.datacamp.com/courses/working-with-data-in-the-tidyverse) --- Due Sep 21
 
 ```{block, week5optional, type='rmdoptional'}
 #### Optional {-}
