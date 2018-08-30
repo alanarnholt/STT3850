@@ -142,3 +142,5 @@ ggplot(data = flights_namedports, aes(x = carrier, fill = name)) +
   geom_bar(position = "fill") + 
   theme_bw() + 
   labs(y = "Fraction")
+
+
