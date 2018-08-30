@@ -1,0 +1,75 @@
+---
+title: "Working with Data in the Tidyverse"
+author: "Modified Data Camp Material"
+date: '`r format(Sys.time(), "%b %d, %Y")`'
+output: bookdown::html_document2
+---
+
+```{r label = "setup", include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, message = FALSE, warning = FALSE)
+```
+
+# Import your Data
+
+### Read a CSV file
+
+In this exercise, you'll use `read_csv()` twice. The first time you will only specify the filename, but you'll notice a problem with the imported data. The second time you'll use a new argument called skip to fix the problem. Remember to use `?read_csv` to read more about arguments like skip and how to use them.
+
+The data you'll work with is from "The Great British Bake-Off." The file "bakeoff.csv" contains data for each episode of the show, organized by series and baker.
+
+```{r}
+url <- "https://assets.datacamp.com/production/repositories/1613/datasets/53cf6583aa659942b787897319a1ac053cbcfa5a/bakeoff.csv"
+
+library(readr)
+# Create bakeoff from "bakeoff.csv"
+bakeoff <- read_csv(url)
+bakeoff
+```
+
+
+```{r}
+# Load dplyr
+library(dplyr)
+
+# Filter rows where showstopper is UNKNOWN 
+bakeoff %>% 
+    filter(showstopper == "UNKNOWN")
+
+# Edit to add list of missing values
+bakeoff <- read_csv(url,
+                    na = c("", "NA", "UNKNOWN"))
+
+# Filter rows where showstopper is NA 
+bakeoff %>% 
+ filter(is.na(showstopper))
+```
+
+```{r}
+library(readr)
+bakeoff <- read_csv("./DATA/baker_results.csv")
+```
+
+
+```{r}
+library(dplyr)
+library(skimr)
+bakeoff %>% 
+  count(series)
+# Same as below
+bakeoff %>% 
+  group_by(series) %>% 
+  summarize(n = n())
+```
+
+### Distinct and count
+
+In every episode of "The Great British Bake-Off", bakers complete 3 challenges and the show's judges award the title "Star Baker" to the baker who excelled in that week's challenges (with the exception of the finale). Each baker's result for every episode is stored in `bakeoff` - `result` is a character variable, and the value "SB" stands for star baker.
+
+* View the distinct values for the result variable. Is "SB" one of them?
+
+```{r}
+bakeoff %>% 
+  distinct(result)
+```
+
+* 

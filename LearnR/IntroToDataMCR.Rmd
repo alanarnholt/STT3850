@@ -79,6 +79,29 @@ hsb2_mine <- hsb2 %>%
 DT::datatable(hsb2_mine)
 ```
 
+### Combining levels of a different factor
+
+Another common way of creating a new variable based on an existing one is by combining levels of a categorical variable. For example, the `email50` dataset has a categorical variable called `number` with levels "none", "small", and "big", but suppose we're only interested in whether an email contains a number. In this exercise, we will create a variable containing this information and also visualize it.
+
+* Create a new column in `email50` called `number_yn` that is "no" if there is no number in the email and "yes" otherwise. Use `case_when()` for this. Assign this to `email50_fortified`.
+
+* Run the code provided to visualize the distribution of the `number_yn` variable.
+
+```{r}
+# Create number_yn variable in email50
+email50_fortified <- email50 %>%
+  mutate(number_yn = case_when(
+    number == "none" ~ "no",
+    number != "none" ~ "yes"
+    )
+  )
+library(ggplot2)
+# Visualize number_yn
+ggplot(email50_fortified, aes(x = number_yn)) +
+  geom_bar() + 
+  theme_bw()
+```
+
 
 
 ```{r, fig.align = "center"}
@@ -388,6 +411,22 @@ xtabs(~cls_type, data = evals)
 evals %>%
  count(cls_type)
 ```
+
+Or better yet use `case_when`:
+
+```{r}
+evals <- evals %>%
+  mutate(cls_type = case_when(
+    cls_students <= 18 ~ "small",
+    cls_students <= 59 ~ "midsize",
+    cls_students >= 60 ~ "large"
+    )
+  )
+xtabs(~cls_type, data = evals) 
+evals %>%
+ count(cls_type)
+```
+
 
 ### Create a scatterplot
 
