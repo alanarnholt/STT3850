@@ -47,11 +47,17 @@ ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) +
   geom_bar(position="dodge") + 
   theme_bw()
 xtabs(~ Carrier + (Delay > 30), data = FlightDelays)
+prop.table(xtabs(~Carrier + Delayed30, data = FlightDelays), 1)
 addmargins(xtabs(~ Carrier + (Delay > 30), data = FlightDelays))
 ggplot(data = FlightDelays, aes(x = Carrier, fill= Delayed30)) + 
   geom_bar(position="dodge")
 ggplot(data = FlightDelays, aes(fill = Carrier, x= Delayed30)) + 
   geom_bar(position="dodge")
+#
+ggplot(data = FlightDelays, aes(x = Carrier, fill= Delayed30)) + 
+  geom_bar(position="fill") + 
+  theme_bw() +
+  labs(y = "Fraction")
 ```
 
 ## Histograms of `Delay` values.
@@ -93,6 +99,12 @@ library(dplyr)
 FlightDelays %>% 
   summarize(Mean = mean(Delay), SD = sd(Delay), 
             Median = median(Delay), IQR = IQR(Delay))
+#
+FlightDelays %>% 
+  group_by(Carrier) %>% 
+  count(Delayed30) %>% 
+  mutate(prop_delayed = n / sum(n)) %>% 
+  filter(Delayed30 == "Yes")
 ```
 
 
