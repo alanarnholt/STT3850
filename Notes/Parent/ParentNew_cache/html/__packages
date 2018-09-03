@@ -10,3 +10,5 @@ dplyr
 bindrcpp
 statsr
 xtable
+MASS
+PASWR

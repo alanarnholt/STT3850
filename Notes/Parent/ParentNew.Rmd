@@ -15,7 +15,6 @@ Class Notes For STT 3850
 options(width = 80)
 library(ggplot2)
 library(e1071)
-library(plyr)
 library(PASWR2)
 library(boot)
 library(knitr)
