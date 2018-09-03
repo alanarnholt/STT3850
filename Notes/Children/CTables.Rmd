@@ -20,9 +20,8 @@ xtabs(~SEX + DEATHPEN, data = DPS)
 Based on the `Codebook`, values 0, 8, and 9 are missing data values for the variable DEATHPEN.  We would like to store those values in our data frame as NA's (how `R` stores missing data).  Further, it would be nice to label the various categories according to their labels versus their numerical values.  To map character values to the numerical entries, we will use the `plyr` package (it can also be done using straight `R` commands).  
 
 ```{r att1}
-library(plyr)
-DPS$DEATHPEN <- mapvalues(DPS$DEATHPEN, from = c(0,1,2,3,4,5,8,9), to =c(NA, "Strongly Agree", "Agree", "Neither Agree nor Disagree", "Disagree", "Strongly Disagree", NA, NA))
-DPS$SEX <- mapvalues(DPS$SEX, from =c(1, 2), to = c("Male", "Female"))
+DPS$DEATHPEN <- plyr::mapvalues(DPS$DEATHPEN, from = c(0,1,2,3,4,5,8,9), to =c(NA, "Strongly Agree", "Agree", "Neither Agree nor Disagree", "Disagree", "Strongly Disagree", NA, NA))
+DPS$SEX <- plyr::mapvalues(DPS$SEX, from =c(1, 2), to = c("Male", "Female"))
 xtabs(~SEX + DEATHPEN, data = DPS)
 ```
 The problem with the latest table is that the labels for the values appear in alphabetical order.  To solve this problem, we convert the character variables, `SEX` and `DEATHPEN` to factors and assign the order of the levels using the `levels=` command.

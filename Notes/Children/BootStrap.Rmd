@@ -15,7 +15,7 @@ The birth weight of a baby is of interest to health officials since many studies
 
 ```{r SETUP}
 require(xtable)
-site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/NCBirths2004.csv"
 Babies <- read.csv(file=url(site))
 ```
 
@@ -205,7 +205,7 @@ The first point bears emphasis.  It means that *the bootstrap is not used to get
 Instead, the bootstrap distribution is useful for *quantifying the behavior of a parameter estimate*, such as its standard error, skewness, bias, or for calculating confidence intervals.
 
 ```{r ARSENIC}
-site <- "http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Bangladesh.csv"
 Bang <- read.csv(file=url(site)) # read data into Bang
 ```
 
@@ -278,7 +278,7 @@ We now turn to the problem of comparing two samples. In general, bootstrapping s
 * Example 4: A high school student was curious about the total number of minutes devoted to commercials during any given half-hour time period on basic and extended cable TV channels.
 
 ```{r TV1}
-site <- "http://www1.appstate.edu/~arnholta/Data/TV.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/TV.csv"
 TV <- read.csv(file=url(site)) # read data into TV
 head(TV)
 ct <- tapply(TV$Times, TV$Cable, mean)
@@ -347,7 +347,7 @@ The permutation test for this example results in a _p_-value of `r pvalue`; thus
 * Example 5: Verizon is the primary local telephone company (incumbent local exchange carrier, ILEC) for a large area of the eastern United States.  As such it is responsible for providing repair service for the customers of other telephone companies known as competing local exchange carriers (CLECs) in this region.  Verizon is subject to fines if the repair times (the time it takes to fix a problem) for CLEC customers are substantially worse than those for Verizon customers.  The data set `Verizon` contains a random sample of repair times for 1664 ILEC and 23 CLEC customers. 
 
 ```{r Phone1, fig.height=3.5, fig.width=7}
-site <- "http://www1.appstate.edu/~arnholta/Data/Verizon.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Verizon.csv"
 Phone <- read.csv(file = url(site))
 rt <- tapply(Phone$Time, Phone$Group, mean)
 rt
@@ -475,7 +475,7 @@ CIdiff.25
 Example 6: In the Verizon data, rather than looking at the difference in means, suppose we look at the ratio of means. The sample ratio is `r mean(times.ILEC)/mean(times.CLEC)`, so for ILEC customers, repair times are about half of that for CLEC customers.
 
 ```{r Verizon6, fig.height=3.5, fig.width=7}
-site <- "http://www1.appstate.edu/~arnholta/Data/Verizon.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Verizon.csv"
 Phone <- read.csv(file = url(site))
 times.ILEC <- subset(Phone, select = Time, subset = Group == "ILEC", drop = TRUE)
 times.CLEC <- subset(Phone, select = Time, subset = Group == "CLEC", drop = TRUE)

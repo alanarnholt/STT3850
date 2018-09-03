@@ -1,5 +1,5 @@
 ---
-output: pdf_document
+output: html_document
 ---
 
 
@@ -30,10 +30,10 @@ Each subject gives us two measurements of interest for analysis: (1) fast song m
 The graph below shows a dotplot of the 28 `Fastdiff`-minus`Slowdiff` values.  Notice that positive numbers predominate and the mean difference is 1.857 beats per minute, both suggesting that the fast song does indeed heighten response (pulse rate) more than the slow song.  We need to confirm this suspicion with a randomization test.
 
 ```{r music}
-Music <- read.csv('http://www1.appstate.edu/~arnholta/Data/Music.csv')
+Music <- read.csv('https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Music.csv')
 head(Music)
 require(ggplot2)
-ggplot(data = Music, aes(x = Fastdiff.Slowdiff)) + 
+ggplot(data = Music, aes(x = Fastdiff_Minus_Slowdiff)) + 
   geom_dotplot(fill = "blue") + 
   theme_bw() + labs(x = "FastDiff - SlowDiff", y = "")
 ```
