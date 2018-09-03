@@ -1,5 +1,5 @@
 ---
-output: pdf_document
+output: html_document
 ---
 
 
@@ -9,7 +9,7 @@ Exploratory Data Analysis
 
 ## Reading *.csv Data
 ```{r READIN}
-site <- "http://www1.appstate.edu/~arnholta/Data/FlightDelays.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/FlightDelays.csv"
 FlightDelays <- read.csv(file=url(site))
 head(FlightDelays) # shows first 6 rows of data frame
 str(FlightDelays)  # shows structure of data frame
@@ -90,7 +90,7 @@ ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() +
 ```
 
 ```{r NCBirths, warning = FALSE, tidy = FALSE}
-site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/NCBirths2004.csv"
 NCBirths <- read.csv(file=url(site))
 head(NCBirths)
 boxplot(Weight ~ Gender, data = NCBirths, col = c("pink", "blue"))
@@ -191,7 +191,7 @@ curve(pnorm(x), col = "blue", add = TRUE, lwd = 2)
 An alternative approach to the book's Figure 2.12 is provided using `ggplot2` after first creating Figure 2.12
 
 ```{r BEER, tidy = FALSE}
-site <- "http://www1.appstate.edu/~arnholta/Data/Beerwings.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Beerwings.csv"
 Beerwings <- read.csv(file=url(site))
 head(Beerwings) # shows first 6 rows of data frame
 str(Beerwings)  # shows structure of data frame

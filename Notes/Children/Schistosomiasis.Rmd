@@ -57,7 +57,7 @@ tapply(worms, list(gender, group), sd)
      )
 ```
 
-## Hadley Verse
+## Tidy Verse
 
 ```{r HV1}
 library(dplyr)
@@ -197,7 +197,7 @@ pvalue <- (sum(result >= observed) + 1)/(N + 1) # p-value
 pvalue  # results will vary
 ```
 
-## Hadley Verse Permutation
+## Tidy Verse Permutation
 
 ```{r, label = "HVperm"}
 library(statsr)

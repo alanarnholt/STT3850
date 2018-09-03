@@ -1,5 +1,5 @@
 ---
-output: pdf_document
+output: html_document
 ---
 
 
@@ -18,7 +18,7 @@ Using Means
 
 ```{r VER, comment = NA}
 library(ggplot2)
-Ver <- read.csv("http://www1.appstate.edu/~arnholta/Data/Verizon.csv")
+Ver <- read.csv("https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Verizon.csv")
 head(Ver)
 ANS <- tapply(Ver$Time, Ver$Group, mean)
 observed <- ANS[1] - ANS[2]
