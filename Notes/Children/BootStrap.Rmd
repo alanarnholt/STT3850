@@ -414,7 +414,7 @@ The bootstrap distribution for the difference in means is shown in Figure 12a. N
 #### THE TWO INDEPENDENT POPULATIONS ASSUMPTION
 
 ```{r TWOIP}
-site <- "http://www1.appstate.edu/~arnholta/Data/Cameras.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Cameras.csv"
 Cameras <- read.csv(file=url(site))
 head(Cameras)
 ```

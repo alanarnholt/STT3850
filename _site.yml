@@ -3,7 +3,7 @@ output_dir: "."
 navbar:
   title: "STT 3850"
   left:
-    - text: "Class Notes (2014)"
+    - text: "Class Notes"
       href: https://alanarnholt.github.io/STT3850/Notes/Parent/Parent.html
     - text: "Resources"
       href: https://alanarnholt.github.io/resources.html

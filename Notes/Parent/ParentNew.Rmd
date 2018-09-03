@@ -1,0 +1,64 @@
+---
+output: 
+  html_document: 
+    highlight: textmate
+    theme: yeti
+---
+
+Class Notes For STT 3850
+========================================================
+
+## Alan T. Arnholt
+
+
+```{r Systime, echo = FALSE, comment = NA, message = FALSE}
+options(width = 80)
+library(ggplot2)
+library(e1071)
+library(plyr)
+library(PASWR2)
+library(boot)
+library(knitr)
+DT <- format(Sys.time(), "%A, %B %d, %Y - %X.")
+```
+Last compiled `r DT`
+
+```{r setup, comment = NA, echo = FALSE, message = FALSE}
+opts_chunk$set(comment = NA, cache = TRUE, fig.height = 5, fig.width = 5, message = FALSE, warning = FALSE, fig.align = 'center', tidy = FALSE)
+```
+
+```{r child='../Children/Intro.Rmd'}
+```
+
+```{r child='../Children/EDA.Rmd'}
+```
+
+```{r child='../Children/Schistosomiasis.Rmd'}
+```
+
+```{r child='../Children/Verizon.Rmd'}
+```
+
+```{r child='../Children/Cocaine.Rmd'}
+```
+
+```{r child='../Children/PRTMPD.Rmd'}
+```
+
+```{r child='../Children/CTables.Rmd'}
+``` 
+
+```{r child='../Children/SamplingDistributions.Rmd'}
+``` 
+
+```{r child='../Children/BootStrap.Rmd'}
+```
+
+```{r child='../Children/InClass.Rmd'}
+```
+
+```{r child='../Children/InClassSol.Rmd'}
+```
+
+```{r child='../Children/ConfidenceIntervals.Rmd'}
+```

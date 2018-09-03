@@ -197,7 +197,7 @@ Compare the 0.95 quantile for a $t$ distribution with 27 degrees of freedom with
 **Example 7.6** Find a 99% confidence interval for the mean weight of baby girls born in North Carolina in 2004.
 
 ```{r NCBirthsData, echo = FALSE}
-site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/NCBirths2004.csv"
 NCBirths2004 <- read.csv(file=url(site))
 MEANS <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, mean)
 SD <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, sd)
@@ -206,7 +206,7 @@ SD <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, sd)
 **Solution** The mean and standard deviation of the weights of $n =$ `r sum(NCBirths2004$Gender == "Female")` girls is `r MEANS[1]` and `r SD[1]`g, respectively. A normal quantile plot shows that the weights are approximately normally distributed, so a $t$ interval is reasonable.
 
 ```{r QQs}
-site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/NCBirths2004.csv"
 NCBirths2004 <- read.csv(file=url(site))
 MEANS <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, mean)
 SD <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, sd)
@@ -322,6 +322,7 @@ p + geom_abline(intercept = 0, slope = 1, color = "gray")
 p <- ggplot(data=DF, aes(sample = TSE100)) + stat_qq(distribution = qt, dparams = list(df = 99), pch =".", color = rgb(1,0,0,.01)) + xlim(-3, 3) +ylim(-3, 3) +xlab("Theoretical t quantiles") +ylab("Sample quantiles") + ggtitle("Exponential, n = 100")
 p + geom_abline(intercept = 0, slope = 1, color = "gray")
 ```
+
 The previous graphs compare the distribution of $t$ statistics for samples of size $n = 10$  from a uniform distribution,  size $n = 10$  from an exponential distribution,  and size $n = 100$  from an exponential distribution to the $t$ distribution. The range on all plots is truncated so that we can focus on the range of values important for confidence intervals. Notice that for  the uniform population,  the distribution of the $t$ statistic is close to the  $t$ distribution, except in the tails.  For exponential populations, the discrepancy  is much larger, and the discrepancy decreases only slowly as the sample size increases.  To reduce the discrepancy (the difference between actual and nominal  probabilities) by a factor of 10  requires a sample size 100 times larger. For an exponential population, we must have $n > 5000$  before the actual probabilities of a 95% $t$ interval  missing the true mean in either tail are within 10% of the desired probability of 2.5%;  that is,  the actual tail probabilities are between 2.25% and  2.75%.
 
 
@@ -337,38 +338,19 @@ Of course, in practice we usually do not know the population variances, so we wi
 
 $$T = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{S_X^2/n_X + S_Y^2/n_Y}}$$
 
-The exact distribution of this statistic is a n unsolved problem.  It does, however, have approximately a $t$ distribution if the populations are normal.  The difficult part is the degrees of freedom.  The degrees of freedom are given with Welch's approximation:
+The exact distribution of this statistic is an unsolved problem.  It does, however, have approximately a $t$ distribution if the populations are normal.  The difficult part is the degrees of freedom.  The degrees of freedom are given with Welch's approximation:
 
 $$\nu = \frac{(s_X^2/n_x + s_Y^2/n_Y)^2}{(s_X^2/n_X)^2/(n_X - 1) + (S_Y^2/n_Y)^2/(n_Y -1)}.$$
 
 **$T$ CONFIDENCE INTERVAL FOR DIFFERENCE  IN MEANS**
+
 If $X_i \sim N(\mu_X, \sigma_X), i = 1, \ldots, n_X,$ and $Y_j \sim N(\mu_Y, \sigma_Y), j = 1, \ldots, n_Y,$  then an approximate $(1 - \alpha)\times 100\%$ confidence interval for $\mu_X - \mu_Y$ is given by
 
 \[
 CI_{1 - \alpha}(\mu_X - \mu_Y) = \left(\bar{X} - \bar{Y} - t_{1 - \alpha/2; \nu}\times \sqrt{\frac{S_X^2 + S_Y^2}{n_X + n_Y}},  \bar{X} - \bar{Y} + t_{1 - \alpha/2; \nu}\times \sqrt{\frac{S_X^2 + S_Y^2}{n_X + n_Y}}  \right)
 \]
 
-**Example 7.8**
 
-```{r Calculus}
-library(PASWR)  # Update 
-library(ggplot2)
-```
-
-Construct a 90% confidence interval for $\mu_X - \mu_Y$ using the information in `Calculus` which provides the assessment scores for students enrolled in a biostatistics course according to whether they had completed a calculus course prior to enrolling in the biostatistics course. Before constructing a confidence interval, one should verify the assumptions needed to have a valid confidence interval.  In this case we need to check for normality of both samples.
-
-```{r NORMALITY}
-ggplot(data = Calculus, aes(sample = Calculus$No.Calculus)) + stat_qq() + ggtitle("No Calculus")
-ggplot(data = Calculus, aes(sample = Calculus$Yes.Calculus)) + stat_qq() + ggtitle("Yes Calculus")
-```
-
-For the $n_X = 18$ students who had no calculus, the mean and standard deviation of their course scores are $\bar{x}=$ `r mean(Calculus[['No.Calculus']])`, and $s_X =$ `r sd(Calculus[['No.Calculus']])`. For the $n_Y = 18$ students who had calculus, the mean and standard deviation of their course scores are $\bar{y}=$ `r mean(Calculus[['Yes.Calculus']])`, and $s_Y =$ `r sd(Calculus[['Yes.Calculus']])`. The mean difference is $\bar{x} -\bar{y}=$ `r mean(Calculus[['No.Calculus']]) - mean(Calculus[['Yes.Calculus']])` with the standard error of the difference of `r sqrt(var(Calculus[['No.Calculus']])/18 + var(Calculus[['Yes.Calculus']])/18)` and degrees of freedom are `r t.test(Calculus[['No.Calculus']], Calculus[['Yes.Calculus']])[['parameter']]`.  The 0.95 quantile of the $t$ distribution with `r t.test(Calculus[['No.Calculus']], Calculus[['Yes.Calculus']])[['parameter']]` degrees of freedom is `r qt(0.95, 20.585)`.  Thus, the 90% confidence interval is $-24.333 \pm 1.7233 \times 3.2786 = (-29.9802, -18.6865)$.
-
-**R Note:**
-```{r CalcTtest}
-t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.90)
-t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.90)$conf.int
-```
 
 **Remark**
 
@@ -378,7 +360,7 @@ t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.90)$conf.int
 **Example 7.9**  Consider the weights of boy and girl babies born in Texas in 2004.  Construct a 95% $t$ confidence interval for the mean difference in weights (boys - girls).
 
 ```{r Texas}
-site <- "http://www1.appstate.edu/~arnholta/Data/TXBirths2004.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/TXBirths2004.csv"
 Texas <- read.csv(file=url(site))
 ggplot(data = Texas, aes(x = Weight)) + geom_histogram() + facet_grid(Gender~.)
 ggplot(data = Texas, aes(sample = Weight)) + stat_qq() + facet_grid(Gender~.)
@@ -621,7 +603,7 @@ The bootstrap percentile confidence interval for giving a range of plausible val
 Recall the Bangladesh arsenic levels data.  The distribution of arsenic levels was skewed right.
 
 ```{r BangladeshA}
-site <- "http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Bangladesh.csv"
 Bangladesh <- read.csv(file=url(site))
 head(Bangladesh)
 ggplot(data = Bangladesh, aes(x = Arsenic)) + geom_histogram()
@@ -723,7 +705,7 @@ $$\left( (\bar{x_1} - \bar{x_2}) - Q^*_2 \times \sqrt{s_1^2/n_1 + s_2^2/n_2} , (
 Recall the Verizon example, where we considered the difference in means of two very skewed distributions of repair times for two very unbalanced samples ($n_1 = 23$ versus $n_2 = 1664$).  Let us look at the data again.  
 
 ```{r verizon}
-site <- "http://www1.appstate.edu/~arnholta/Data/Verizon.csv"
+site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Verizon.csv"
 Verizon <- read.csv(file=url(site))
 Time.ILEC <- subset(Verizon, select=Time, Group == "ILEC", drop=TRUE)
 Time.CLEC <- subset(Verizon, select=Time, Group == "CLEC", drop=TRUE)
