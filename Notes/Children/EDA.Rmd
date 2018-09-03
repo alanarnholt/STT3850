@@ -17,6 +17,11 @@ str(FlightDelays)  # shows structure of data frame
 levels(FlightDelays$Month)
 FlightDelays$Month <- factor(FlightDelays$Month, levels = c("May", "June"))
 levels(FlightDelays$Month)
+dplyr::glimpse(FlightDelays)
+```
+
+```{r, echo = FALSE}
+DT::datatable(FlightDelays)
 ```
 
 ## Creating Tables
@@ -30,7 +35,7 @@ xtabs(~Carrier, data = FlightDelays)
 
 ```{r Barplots, tidy = FALSE}
 barplot(table(FlightDelays$Carrier))
-require(ggplot2)
+library(ggplot2)
 ggplot(data = FlightDelays, aes(x = Carrier)) + 
   geom_bar()
 ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + 
@@ -40,7 +45,7 @@ ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) +
   guides(fill = guide_legend(reverse = TRUE))
 ggplot(data = FlightDelays, aes(x = Carrier, fill= Month)) + 
   geom_bar(position="dodge") + 
-  guides(fill = guide_legend(reverse = TRUE))
+  theme_bw()
 xtabs(~ Carrier + (Delay > 30), data = FlightDelays)
 addmargins(xtabs(~ Carrier + (Delay > 30), data = FlightDelays))
 ggplot(data = FlightDelays, aes(x = Carrier, fill= Delayed30)) + 
@@ -82,15 +87,28 @@ IQR(FlightDelays$Delay)
 quantile(FlightDelays$Delay)
 ```
 
+```{r}
+# Tidyverse Approach
+library(dplyr)
+FlightDelays %>% 
+  summarize(Mean = mean(Delay), SD = sd(Delay), 
+            Median = median(Delay), IQR = IQR(Delay))
+```
+
+
 ## Boxplots
 
 ```{r BP}
+# Base R
 boxplot(Delay ~ Carrier, data = FlightDelays)
+# Lattice
 bwplot(Delay ~ Carrier, data = FlightDelays)
 bwplot(Delay ~ Carrier|Month, data = FlightDelays, as.table = TRUE, layout = c(2, 1))
+# GGplot2
 ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot()
 ggplot(data = FlightDelays, aes(x = Carrier, y = Delay)) + geom_boxplot() + 
-  facet_grid(. ~ Month) 
+  facet_grid(. ~ Month) +
+  theme_bw()
 ```
 
 ```{r NCBirths, warning = FALSE, tidy = FALSE}
@@ -103,14 +121,18 @@ p <- ggplot(data = NCBirths, aes(x = Gender, y = Weight, fill = Gender))
 p + geom_boxplot()
 p + geom_boxplot() + 
   guides(fill = FALSE) + 
-  labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here")
+  labs( x = "Newborn Gender", y = "Weight in ounces", 
+        title = "You Put Something Here")
 p + geom_boxplot() + 
   guides(fill = FALSE) + 
-  labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + 
+  labs( x = "Newborn Gender", y = "Weight in ounces", 
+        title = "You Put Something Here") + 
   scale_fill_manual(values = c('pink', 'blue'))
 p + geom_boxplot() + guides(fill = FALSE) + 
-  labs( x = "Newborn Gender", y = "Weight in ounces", title = "You Put Something Here") + 
-  scale_fill_brewer() + theme_bw()
+  labs( x = "Newborn Gender", y = "Weight in ounces", 
+        title = "You Put Something Here") + 
+  scale_fill_brewer() + 
+  theme_bw()
 ```
 
 ## Density Plots
@@ -176,7 +198,8 @@ qqline(x)
 # ggplot
 ggplot(data = data.frame(x), aes(sample=x)) + 
   stat_qq() + 
-  geom_abline(intercept = intercept, slope = slope)
+  geom_abline(intercept = intercept, slope = slope) + 
+  theme_bw()
 ```
 
 ## Empirical Cumulative Distribution Function
@@ -209,7 +232,8 @@ legend("topleft", legend = c("Males", "Females"), pch = 19, col = c("blue", "pin
 # Using ggplot2 now
 ggplot(data = Beerwings, aes(x = Beer, colour = Gender)) + 
   stat_ecdf() + 
-  labs(x = "Beer in ounces", y ="", title = 'ECDF')
+  labs(x = "Beer in ounces", y ="", title = 'ECDF') + 
+  theme_bw()
 ```
 
 ## Scatter Plots
