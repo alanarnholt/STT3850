@@ -10,18 +10,25 @@ ggplot(data = schis, aes(x = group, y = worms)) +
   geom_point() + 
   theme_bw()
 # Add some jitter
+set.seed(10)
 ggplot(data = schis, aes(x = group, y = worms)) +
   geom_point(position = "jitter") + 
   theme_bw()
 # Add some color to groups
-ggplot(data = schis, aes(x = group, y = worms, color = group)) +
+ggplot(data = schis, aes(x = group, y = worms, 
+                         shape = group, 
+                         color = group)) +
   geom_point(position = "jitter") + 
   theme_bw()
 # Labels
-ggplot(data = schis, aes(x = group, y = worms, color = group)) +
+ggplot(data = schis, aes(x = group, 
+                         y = worms, 
+                         color = group,
+                         shape = group)) +
   geom_point(position = "jitter") + 
   theme_bw() + 
-  labs(x = "", y = "Number of schistosomes", title = "K11777 results",
+  labs(x = "", y = "Number of schistosomes", 
+       title = "K11777 results",
        subtitle = "Some reference goes here")
 # OCD like me....how to ceter title?
 ggplot(data = schis, aes(x = group, y = worms, color = group)) +
@@ -71,11 +78,15 @@ all_alaska_flights <- flights %>%
   filter(carrier == "AS")
 all_alaska_flights
 # Scatterplot
-ggplot(data = all_alaska_flights, aes(x = dep_delay, y = arr_delay)) + 
+ggplot(data = all_alaska_flights, 
+       aes(x = dep_delay, 
+           y = arr_delay)) + 
   geom_point()
 # Too many overlapping points!----fix with alpha
-ggplot(data = all_alaska_flights, aes(x = dep_delay, y = arr_delay)) + 
-  geom_point(alpha = 0.15) + 
+ggplot(data = all_alaska_flights, 
+       aes(x = dep_delay, 
+           y = arr_delay)) + 
+  geom_point(alpha = 0.15, color = "purple", size = 0.2) + 
   theme_bw()
 # Linegraphs
 View(weather)
@@ -85,7 +96,8 @@ early_january_weather <-  weather %>%
 early_january_weather <-  weather %>%
   filter(origin == "EWR" & month == 1 & day <= 15)
 # Hourly temp in Newark
-ggplot(data = early_january_weather, aes(x = time_hour, y = temp)) + 
+ggplot(data = early_january_weather, 
+       aes(x = time_hour, y = temp)) + 
   geom_line(color = "skyblue", size = 1.5) + 
   labs(title = "Hourly temperature in Newark for January 1-15, 2013",
        x = "", y = "Temperture in Fahrenheit") + 
@@ -95,11 +107,14 @@ ggplot(data = weather, aes(x = temp)) +
   geom_histogram()
 ## The default is UGLY
 ggplot(data = weather, aes(x = temp)) + 
-  geom_histogram(color = "black", fill = "purple", bins = 30) + 
+  geom_histogram(color = "black", 
+                 fill = "purple", bins = 30) + 
   theme_bw()
 ## Facets
 ggplot(data = weather, aes(x = temp)) + 
-  geom_histogram(binwidth = 4, color = "black", fill = "skyblue") + 
+  geom_histogram(binwidth = 4, 
+                 color = "black", 
+                 fill = "skyblue") + 
   facet_wrap(~ month, nrow = 4)
 ##---not quite the solution---need to arrange months not alphabetically
 ggplot(data = weather, aes(x = temp)) + 
