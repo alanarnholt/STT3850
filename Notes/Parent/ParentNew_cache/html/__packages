@@ -1,7 +1,6 @@
 base
 ggplot2
 e1071
-plyr
 lattice
 PASWR2
 boot

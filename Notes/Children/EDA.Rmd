@@ -7,7 +7,8 @@ output: html_document
 Exploratory Data Analysis
 ========================================================
 
-## Reading *.csv Data
+## Reading `*.csv` Data
+
 ```{r READIN}
 site <- "https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/FlightDelays.csv"
 FlightDelays <- read.csv(file=url(site))
@@ -19,12 +20,14 @@ levels(FlightDelays$Month)
 ```
 
 ## Creating Tables
+
 ```{r TABLES}
 table(FlightDelays$Carrier)
 xtabs(~Carrier, data = FlightDelays)
 ```
 
 ## Creating Barplots
+
 ```{r Barplots, tidy = FALSE}
 barplot(table(FlightDelays$Carrier))
 require(ggplot2)
@@ -67,6 +70,7 @@ ggplot(data = FlightDelays, aes(x = Delay, y = ..density..)) +
 ggplot(data = FlightDelays, aes(x = Delay)) + 
   geom_density(fill = "blue")
 ```
+
 ## Numeric Summaries
 
 ```{r NS}
@@ -110,6 +114,7 @@ p + geom_boxplot() + guides(fill = FALSE) +
 ```
 
 ## Density Plots
+
 ```{r ND, tidy = FALSE}
 curve(dnorm(x), -4, 4, ylab = "", xlab = "")
 x.region <- seq(from = 1, to = 4, length.out = 200)
