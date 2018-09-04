@@ -116,4 +116,4 @@ p + geom_area(data = subset(df.dens, x >= observed & x <= max(DF$x)), aes(x = x,
   geom_vline(xintercept = observed, color = 'red', lty = "dashed")
 ```
 
-It seems that the more robust statistics (median, 25% trimmed mean) are more sensitive to a possible difference between the populations; the tests are significant with estimated _p_-values of `r pvalue` and `r pvalue1`, respectively.
+It seems that the more robust statistics (median, 25% trimmed mean) are more sensitive to a possible difference between the populations; the tests are significant with estimated _p_-values of $`r pvalue`$ and $`r pvalue1`$, respectively.

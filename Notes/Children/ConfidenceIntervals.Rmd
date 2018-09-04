@@ -353,6 +353,7 @@ CI_{1 - \alpha}(\mu_X - \mu_Y) = \left(\bar{X} - \bar{Y} - t_{1 - \alpha/2; \nu}
 **Example 7.8**
 
 ```{r label = "CALC"}
+# Something new
 library(PASWR)  # Update to PASWR2 sometime
 library(ggplot2)
 ```
