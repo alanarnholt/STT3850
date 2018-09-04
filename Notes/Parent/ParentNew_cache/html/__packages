@@ -5,10 +5,10 @@ lattice
 PASWR2
 boot
 knitr
+resampledata
 dplyr
 bindrcpp
 statsr
 xtable
 MASS
 PASWR
-resampledata

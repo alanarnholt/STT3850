@@ -46,7 +46,7 @@ Testing the Effect of Music on Relaxation
 1. Before they looked at the data, Anne and Anna decided to use a one- sided test to see whether fast music increased pulse rate more than slow music.  Why is it important to determine the direction of the test before looking at the data?
 
 2. Create a simulation to test the `Music` data.  Randomly multiply each
-each observed difference by a 1 or a -1.  This randomly assigns an order (`Fastdiff - Slowdiff`) or (`Slowdiff - Fastdiff`).  Then for each iteration, calculate the mean difference.  The _p_-value is the proportion of times your simulation found a mean difference greater than or equal to `r mean(Music$Fastdiff.Slowdiff)`.
+each observed difference by a 1 or a -1.  This randomly assigns an order (`Fastdiff - Slowdiff`) or (`Slowdiff - Fastdiff`).  Then for each iteration, calculate the mean difference.  The _p_-value is the proportion of times your simulation found a mean difference greater than or equal to `r mean(Music$Fastdiff_Minus_Slowdiff)`.
   * Create a histogram of the mean differences.  Mark the area on the histogram that represents your _p_-value.
   * Use the _p_-value to state your conclusions in the context of the problem.  Address random allocation and random sampling (or lack of either) when stating your conclusions.
 
