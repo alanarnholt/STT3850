@@ -140,6 +140,28 @@ head(Ver)</code></pre>
 5 22.23  ILEC
 6  1.20  ILEC</code></pre>
 <pre class="r"><code>ANS &lt;- tapply(Ver$Time, Ver$Group, mean)
+ANS</code></pre>
+<pre><code>     CLEC      ILEC 
+16.509130  8.411611 </code></pre>
+<pre class="r"><code># Tidyverse
+library(dplyr)</code></pre>
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>Ver %&gt;% 
+  group_by(Group) %&gt;% 
+  summarize(N = n(), Mean = mean(Time))</code></pre>
+<pre><code># A tibble: 2 x 3
+  Group     N  Mean
+  &lt;fct&gt; &lt;int&gt; &lt;dbl&gt;
+1 CLEC     23 16.5 
+2 ILEC   1664  8.41</code></pre>
+<pre class="r"><code>#
 observed &lt;- ANS[1] - ANS[2]
 observed</code></pre>
 <pre><code>   CLEC 

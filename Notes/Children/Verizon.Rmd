@@ -21,6 +21,13 @@ library(ggplot2)
 Ver <- read.csv("https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/DataCSV/Verizon.csv")
 head(Ver)
 ANS <- tapply(Ver$Time, Ver$Group, mean)
+ANS
+# Tidyverse
+library(dplyr)
+Ver %>% 
+  group_by(Group) %>% 
+  summarize(N = n(), Mean = mean(Time))
+#
 observed <- ANS[1] - ANS[2]
 observed
 N <- 10^4 - 1         # number of times fo repeat the process
