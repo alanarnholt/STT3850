@@ -8,6 +8,7 @@ output: bookdown::html_document2
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
 library(tidyverse)
+library(resampledata)
 ```
 
 1. In the Flight Delays Case Study in Section 1.1,
@@ -17,7 +18,8 @@ library(tidyverse)
     b. The flight delays occured in May and June of 2009.  Conduct a two-sided permutation test to see if the difference in mean delay times between the 2 months is statistically significant.
     
 ```{r}
-FD <- read.csv("http://www1.appstate.edu/~arnholta/Data/FlightDelays.csv")
+FD <- FlightDelays
+glimpse(FD)
 # a. Your code here
 ``` 
 
@@ -125,7 +127,7 @@ T1
     d. Conduct a permutation test for independence.
     
 ```{r, message = TRUE}
-Cereals <- read.csv("http://www1.appstate.edu/~arnholta/Data/Cereals.csv")
+str(Cereals)
 # Your code here
 ```
 
@@ -139,7 +141,7 @@ Cereals <- read.csv("http://www1.appstate.edu/~arnholta/Data/Cereals.csv")
     c. Repeat the test but use the permutation test for independence. Does your conclusion change? (Be sure to remove observations with missing values)
     
 ```{r}
-GSS2002 <- read.csv("http://www1.appstate.edu/~arnholta/Data/GSS2002.csv")
+str(GSS2002)
 # Your code here
 ```
     

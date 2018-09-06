@@ -8,6 +8,7 @@ output: bookdown::html_document2
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
 library(tidyverse)
+library(resampledata)
 ```
 
 1. Consider a population that has a normal distribution with mean $\mu = 36$, standard deviation $\sigma = 8$
@@ -189,7 +190,6 @@ Your answer:
     (d) What is the bootstrap estimate of the bias? What fraction of the bootstrap standard error does it represent?
     
 ```{r, label = "Bang"}
-Bangladesh <- read.csv("http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv")
 head(Bangladesh)
 ```
 
@@ -261,7 +261,6 @@ Your answer:
     (d) What effect did removing the outlier have on the bootstrap distribution, in particular, the standard error?
     
 ```{r, label = "Fish"}
-FishMercury <- read.csv("http://www1.appstate.edu/~arnholta/Data/FishMercury.csv")
 head(FishMercury)
 ```    
 
@@ -309,8 +308,7 @@ d.
 ------------ 
 
 ```{r}
-BeerWings <- read.csv("http://www1.appstate.edu/~arnholta/Data/Beerwings.csv")
-head(BeerWings)
+head(Beerwings)
 ```
 
 Your answers:
@@ -352,7 +350,6 @@ c.
     (e) For what population(s), if any does this calculation hold? Explain?
 
 ```{r, label = "Girls"}
-Girls2004 <- read.csv("http://www1.appstate.edu/~arnholta/Data/Girls2004.csv")
 head(Girls2004)
 ```
 
@@ -403,7 +400,6 @@ e.
 8. Do chocolate and vanilla ice creams have the same number of calories? The data set `IceCream` contains calorie information for a sample of brands of chocolate and vanilla ice cream. Use the bootstrap to determine whether or not  there is a difference in the mean number of calories.
 
 ```{r, label = "IceCream"}
-IceCream <- read.csv("http://www1.appstate.edu/~arnholta/Data/IceCream.csv")
 head(IceCream)
 ```
 
@@ -435,7 +431,7 @@ Your answer:
     (f) For inference in this text, we assume that the observations are independent. Is that condition met here? Explain.
     
 ```{r, label = "FD"}
-FlightDelays <- read.csv("http://www1.appstate.edu/~arnholta/Data/FlightDelays.csv")
+head(FlightDelays)
 ```
 
 ------------ 
@@ -503,7 +499,7 @@ f.
     (e) What is the bootstrap estimate of the bias? What fraction of the bootstrap standard error does it represent?
     
 ```{r, label = "BookPrices"}
-BookPrices <- read.csv("http://www1.appstate.edu/~arnholta/Data/BookPrices.csv")
+head(BookPrices)
 ```
 
 ------------ 

@@ -12,6 +12,7 @@ output: bookdown::html_document2
 knitr::opts_chunk$set(comment = NA, cache = TRUE, fig.show='hold',fig.height=4, fig.width=4)
 library(e1071)
 library(tidyverse)
+library(resampledata)
 ```
 
 **Prob1** - Import the data set `Spruce` into `R`.

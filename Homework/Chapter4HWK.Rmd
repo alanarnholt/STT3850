@@ -8,6 +8,7 @@ output: bookdown::html_document2
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
 library(tidyverse)
+library(resampledata)
 ```
 
 1. Consider the population $\{3, 6, 7, 9, 11, 14\}$.  For samples of size 3 without replacement, find (and plot) the sampling distribution of the minimum.  What is the mean of the sampling distribution?  The statistic is an estimate of some parameter---what is the value of the parameter?
