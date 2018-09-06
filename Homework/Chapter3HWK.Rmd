@@ -1,6 +1,6 @@
 ---
 title: "Chapter Three Homework"
-author: ""
+author: "Your Name Here"
 date: '`r format(Sys.time(), "%b %d, %Y")`'
 output: bookdown::html_document2
 ---
@@ -23,12 +23,13 @@ glimpse(FD)
 # a. Your code here
 ``` 
 
-
+> SOLUTION: 
 
 ```{r}
 # b. Your code here
 ```
 
+> SOLUTION: 
     
 2. In the Flight Delays Case Study in Section 1.1, the data contain flight delays for two airlines, American Airlines and United Airlines.
 
@@ -40,11 +41,13 @@ glimpse(FD)
 # a. Your code here
 ```
 
+> SOLUTION: 
+
 ```{r}
 # b. Your code here
 ```
 
-    
+> SOLUTION:     
     
 3. In the Flight Delays Case Study in Section 1.1, repeat Exercise 3 part (a) using three test statistics: (i) the mean of the United Airlines delay times, (ii) the sum of the United Airlines delay times, and (iii) the difference in the means, and compare the P-values. Make sure all three test statistics are computed within the same `for` loop.
 
@@ -52,6 +55,7 @@ glimpse(FD)
 # Your code here
 ```
 
+> SOLUTION: 
 
 4. In the Flight Delays Case Study in Section 1.1,
     
@@ -60,9 +64,16 @@ glimpse(FD)
     b. Conduct a two-sided test to see if the difference in trimmed means is statistically significant.
     
 ```{r}
-# Your code here
+# a. Your code here
 ```
-    
+
+> SOLUTION: 
+
+```{r}
+# b. Your code here
+```
+
+> SOLUTION:    
     
 5. In the Flight Delays Case Study in Section 1.1,
 
@@ -74,9 +85,13 @@ glimpse(FD)
 # a. Your code here
 ```
 
+> SOLUTION:
+
 ```{r}
 # b. Your code here
 ```
+
+> SOLUTION:
 
 6. Research at the University of Nebraska conducted a study to investigate sex differences in dieting trends among a group of Midwestern college students (Davy et al. (2006)). Students were recruited from an introductory nutrition course during one term. Below are data from one question asked to 286 participants.
 
@@ -94,6 +109,8 @@ DT
 ```{r}
 # Your code here
 ```
+
+> SOLUTION:
 
 7. A national polling company conducted a survey in 2001 asking a randomly selected group of Americans of 18 years of age or older whether they supported limited use of marijuana for medicinal purposes. Here is a summary of the data:
 
@@ -115,6 +132,8 @@ T1
 # Your code here
 ```
 
+> SOLUTION:
+
 
 8. Two students went to a local supermarket and collected data on cereals; they classified by their target consumer (children versus adults) and the placement of the cereal on the shelf (bottom, middle, and top). The data are given in `Cereals`.
 
@@ -131,6 +150,7 @@ str(Cereals)
 # Your code here
 ```
 
+> SOLUTION:
 
 9. From GSS 2002 Case Study in Section 1.6,
     
@@ -144,7 +164,8 @@ str(Cereals)
 str(GSS2002)
 # Your code here
 ```
-    
+ 
+> SOLUTION:    
 
 10. From GSS 2002 Case Study in Section 1.6,
 
@@ -156,6 +177,7 @@ str(GSS2002)
 # Your code here
 ```
 
+> SOLUTION: 
     
 11. From GSS 2002 Case Study in Section 1.6,
 
@@ -168,4 +190,4 @@ str(GSS2002)
 # Your code here
 ```
     
-    
+> SOLUTION:    
