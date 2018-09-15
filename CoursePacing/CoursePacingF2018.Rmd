@@ -127,11 +127,12 @@ Test yourself:
 
 ## Week 5: (Sep 17--21) {-}
 
-* Complete _Working with Data in the Tidyverse_ [(DataCamp)](https://www.datacamp.com/courses/working-with-data-in-the-tidyverse) --- Due Sep 21
+* ~~Complete _Working with Data in the Tidyverse_ [(DataCamp)](https://www.datacamp.com/courses/working-with-data-in-the-tidyverse) --- Due Sep 21~~
 
 ```{block, week5optional, type='rmdoptional'}
 #### Optional {-}
 * Complete _Data Manipulation in R with `dplyr`_ [(DataCamp)](https://www.datacamp.com/)
+* Complete _Working with Data in the Tidyverse_ [(DataCamp)](https://www.datacamp.com/courses/working-with-data-in-the-tidyverse)
 ```
 
 ## Week 6: (Sep 24--28) {-}
