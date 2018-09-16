@@ -149,7 +149,7 @@ Test yourself:
 
 ## Week 7: (Oct 1--5) {-}
 
-* Read Chapters 4 and 5 of [MD](https://moderndive.com) --- Basic Regression and Multiple Regression
+* Read Chapters 6 and 7 of [MD](https://moderndive.com) --- Basic Regression and Multiple Regression
 
 * Work on _Modeling with Data in Tidyverse_ [(DataCamp)](https://www.datacamp.com/) --- Due Oct 12
 
@@ -163,7 +163,7 @@ Test yourself:
 
 * Complete _Modeling with Data in Tidyverse_ [(DataCamp)](https://www.datacamp.com/) --- Due Oct 12
 
-* Review Chapters 4 and 5 of [MD](https://moderndive.com) --- Basic Regression and Multiple Regression
+* Review Chapters 6 and 7 of [MD](https://moderndive.com) --- Basic Regression and Multiple Regression
 
 
 
