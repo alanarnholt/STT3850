@@ -1,7 +1,7 @@
 ---
 title: "Discrimination?"
 author: "Alan T. Arnholt"
-date: `r format(Sys.time(), "%B %d, %Y")`
+date: "Today"
 output: html_document
 ---
 
