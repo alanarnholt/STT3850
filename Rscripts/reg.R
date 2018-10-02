@@ -38,3 +38,26 @@ ggplot(data = Boston, aes(x = lstat, y = resid(mod))) +
   geom_point() + 
   theme_bw()
 summary(mod)
+#####
+mod2 <- lm(medv ~ rm + lstat, data = Boston)
+summary(mod2)
+X <- model.matrix(mod2)
+y <- Boston$medv
+betahat <- solve(t(X)%*%X)%*%t(X)%*%y
+betahat
+XTXI <- summary(mod2)$cov.unscaled
+MSE <- summary(mod2)$sigma^2
+var.cov.b <- MSE*XTXI
+var.cov.b
+diag(var.cov.b)^.5
+# or vcov
+vcov(mod2)
+diag(vcov(mod2))^.5
+betahat/diag(vcov(mod2))^.5
+
+plot(mod2)
+par(mfrow = c(2, 2))
+plot(mod2)
+par(mfrow = c(1, 1))
+
+
