@@ -60,4 +60,79 @@ par(mfrow = c(2, 2))
 plot(mod2)
 par(mfrow = c(1, 1))
 
+#####
+library(rpart)
+model <- rpart(medv~., data = Boston)
+model
+library(rattle)
+fancyRpartPlot(model)
+library(partykit)
+mod3 <- ctree(medv ~., data = Boston)
+plot(mod3)
 
+####
+library(dplyr)
+library(ggplot2)
+library(ISLR)
+ggplot(data = Credit, aes(x = Rating, y = Balance, color = Gender)) + 
+  geom_point() +
+  theme_bw()
+
+ggplot(data = Credit, aes(x = Rating, y = Balance, color = Ethnicity)) + 
+  geom_point() +
+  theme_bw() + 
+  geom_smooth(method = "lm", se = FALSE)
+
+Credit %>% 
+  group_by(Ethnicity) %>% 
+  summarize(Mean = mean(Balance))
+
+TG <- Credit %>% 
+  group_by(Gender) %>% 
+  summarize(Mean = mean(Balance))
+TG
+
+
+mod <- lm(Balance ~ Ethnicity, data = Credit)
+summary(mod)
+mod <- lm(Balance ~ Gender, data = Credit)
+summary(mod)
+#
+mod32 <- lm(Balance ~ Ethnicity + Rating, data = Credit)
+summary(mod32)
+#
+mod33 <- lm(Balance ~ Gender + Rating, data = Credit)
+summary(mod33)
+####
+library(carData)
+str(Prestige)
+ggplot(data = na.omit(Prestige), aes(x = prestige, y = income, color = type)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw()
+####
+Prestige %>% 
+  na.omit() %>% 
+  group_by(type) %>% 
+  summarize(Mean = mean(income))
+
+
+mod <- lm(income ~ type, data = Prestige)
+summary(mod)
+summary(mod)$coeff[1, 1]
+
+ggplot(data = na.omit(Prestige), aes(x = prestige, y = income, color = type)) +
+  geom_point() +
+  theme_bw() + 
+  geom_hline(yintercept = c(summary(mod)$coeff[1, 1], 
+                            summary(mod)$coeff[1, 1] + summary(mod)$coeff[2, 1], 
+                            summary(mod)$coeff[1, 1] + summary(mod)$coeff[3, 1]))
+CP <- na.omit(Prestige)
+y <- CP$income
+X <- model.matrix(mod)
+head(X)
+solve(t(X)%*%X)
+betahat <- solve(t(X)%*%X)%*%t(X)%*%y
+betahat
+###
+contrasts(Prestige$type)
