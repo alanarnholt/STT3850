@@ -136,11 +136,11 @@ betahat <- solve(t(X)%*%X)%*%t(X)%*%y
 betahat
 ###
 contrasts(Prestige$type)
-
 ### Model building with Credit
 library(ISLR)
 mod.fs <- lm(Balance ~ 1, data = Credit)
-SCOPE <- (~Income + Limit + Rating +Cards + Age +Education + Gender + Student + Married + Ethnicity)
+SCOPE <- (~Income + Limit + Rating + Cards + Age + Education + 
+            Gender + Student + Married + Ethnicity)
 add1(mod.fs, scope = SCOPE, test = "F")
 #
 mod.fs <- update(mod.fs, .~. + Rating)
@@ -159,12 +159,16 @@ summary(mod.fs)
 ######
 ### Using stepAIC
 library(MASS)
-stepAIC(lm(Balance ~ 1, data = Credit), scope = SCOPE, direction = "forward", test = "F")
+stepAIC(lm(Balance ~ 1, data = Credit), scope = SCOPE, 
+        direction = "forward", test = "F")
 ####
 # OR also forward selection
 null <- lm(Balance ~ 1, data = Credit)
 full <- lm(Balance ~ ., data = Credit)
-stepAIC(null, scope = list(lower = null, upper = full), direction = "forward", test = "F")
+stepAIC(null, scope = list(lower = null, upper = full), 
+        direction = "forward", test = "F")
+stepAIC(full, scope = list(lower = null, upper = full), 
+        direction = "backward", test = "F")
 # Backward Elimination
 mod.be <- lm(Balance ~ ., data = Credit)
 drop1(mod.be, test = "F")
@@ -209,3 +213,8 @@ mod_FS <- train(y = training$Balance,
                 method = "leapForward")
 mod_FS
 summary(mod_FS)
+
+
+library(ISLR)
+mod2 <- lm(Balance ~ ., data = Credit)
+summary(mod2)
