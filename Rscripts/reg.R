@@ -136,3 +136,76 @@ betahat <- solve(t(X)%*%X)%*%t(X)%*%y
 betahat
 ###
 contrasts(Prestige$type)
+
+### Model building with Credit
+library(ISLR)
+mod.fs <- lm(Balance ~ 1, data = Credit)
+SCOPE <- (~Income + Limit + Rating +Cards + Age +Education + Gender + Student + Married + Ethnicity)
+add1(mod.fs, scope = SCOPE, test = "F")
+#
+mod.fs <- update(mod.fs, .~. + Rating)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, .~. + Income)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, .~. + Student)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, .~. + Limit)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, .~. + Cards)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, .~. + Age)
+add1(mod.fs, scope = SCOPE, test = "F")
+summary(mod.fs)
+######
+### Using stepAIC
+library(MASS)
+stepAIC(lm(Balance ~ 1, data = Credit), scope = SCOPE, direction = "forward", test = "F")
+####
+# OR also forward selection
+null <- lm(Balance ~ 1, data = Credit)
+full <- lm(Balance ~ ., data = Credit)
+stepAIC(null, scope = list(lower = null, upper = full), direction = "forward", test = "F")
+# Backward Elimination
+mod.be <- lm(Balance ~ ., data = Credit)
+drop1(mod.be, test = "F")
+mod.be <- update(mod.be, .~. - Education)
+drop1(mod.be, test = "F")
+mod.be <- update(mod.be, .~. - Married)
+drop1(mod.be, test = "F")
+mod.be <- update(mod.be, .~. - Ethnicity)
+drop1(mod.be, test = "F")
+mod.be <- update(mod.be, .~. - ID)
+drop1(mod.be, test = "F")
+mod.be <- update(mod.be, .~. - Gender)
+drop1(mod.be, test = "F")
+summary(mod.be)
+#####
+## Using stepAIC
+##
+stepAIC(lm(Balance~., data = Credit), scope = full, direction = "backward", test = "F")
+###
+library(car)
+residualPlots(mod.fs)
+plot(mod.fs)
+#####
+## Using Caret
+library(ISLR)
+library(caret)
+set.seed(3175)
+trainIndex <- createDataPartition(y = Credit$Balance,
+                                  p = 0.80,
+                                  list = FALSE,
+                                  times = 1)
+training <- Credit[trainIndex, ]
+testing <- Credit[-trainIndex, ]
+dim(training)
+mycontrol <- trainControl(method = "repeatedcv",
+                          number = 10,
+                          repeats = 5,
+                          savePredictions = "final")
+mod_FS <- train(y = training$Balance,
+                x = training[, -c(1, 8, 9, 10, 11, 12)],
+                trControl = mycontrol,
+                method = "leapForward")
+mod_FS
+summary(mod_FS)
