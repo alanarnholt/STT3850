@@ -345,14 +345,14 @@ summary(mod2)
 ```{r, echo = FALSE}
 library(scatterplot3d)
 s3d <- scatterplot3d(x = AD$TV, y = AD$radio, 
-              z = AD$Sales, xlab = "TV", 
+              z = AD$sales, xlab = "TV", 
               ylab = "Radio", zlab = "Sales",
               box = TRUE, pch = 20, color = "white",
               cex.symbols = 0.75, angle = 60, grid = FALSE)
 s3d$plane3d(mod2 <- lm(sales ~ TV + radio, data = AD), 
             lty = "dotted", lty.box = "solid")
 orig <- s3d$xyz.convert(x = AD$TV, y = AD$radio, 
-                        z = AD$Sales)
+                        z = AD$sales)
 plane <- s3d$xyz.convert(x = AD$TV, y = AD$radio,  fitted(mod2))
 i.negpos <- 1 + (resid(mod2) > 0)
 segments(orig$x, orig$y, plane$x, plane$y,
