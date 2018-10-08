@@ -153,9 +153,12 @@ Test yourself:
 
 * Work on _Modeling with Data in Tidyverse_ [(DataCamp)](https://www.datacamp.com/) --- Due Oct 12
 
+* Read through [_Misc Regression_](../Rmarkdown/MiscRegression.html)
+
 ```{block, week7optional, type='rmdoptional'}
 #### Optional {-}
 * Read Chapter 9 of MSWR
+* Answer the questions at the end of [_Misc Regression_](../Rmarkdown/MiscRegression.html) for extra credit (Turn in before Fall Break starts)
 ```
 
 
