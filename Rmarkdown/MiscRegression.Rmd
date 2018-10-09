@@ -4,8 +4,8 @@ author: "Alan Arnholt"
 date: 'Last updated: `r format(Sys.time(), "%b %d, %Y")`'
 output: 
     bookdown::html_document2:
-    highlight: textmate
-    theme: yeti
+      highlight: tango
+      theme: yeti
 ---
 
 ```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
@@ -28,6 +28,8 @@ datatable(AD[, -1], rownames = FALSE,
 ```
 
 ## Base R Graph
+
+
 
 ```{r, label = "base1", fig.cap = "Base R scatterplot of `sales` versus `TV`"}
 plot(sales ~ TV, data = AD, col = "red", pch = 19)
@@ -500,7 +502,7 @@ modP <- lm(Balance ~ Income*Student, data = Credit)
 summary(modP)
 ```
 
-Fitted Model: $\widehat{\text{Balance}}  = `r coef(modP)[1]` + `r coef(modP)[2]`\cdot \text{Income} + `r coef(modP)[3]`\cdot \text{Student} + `r coef(modP)[4]`\cdot\text{Income}\times\text{Student}$
+Fitted Model: $\widehat{\text{Balance}}  = `r coef(modP)[1]` + `r coef(modP)[2]`\cdot \text{Income} + `r coef(modP)[3]`\cdot \text{Student} `r coef(modP)[4]`\cdot\text{Income}\times\text{Student}$
 
 ### Predictors with Only Two Levels
 
