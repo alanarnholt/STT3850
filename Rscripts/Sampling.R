@@ -7,7 +7,9 @@ px <- dbinom(x, n, p)
 plot(x, px, type = "h")
 curve(dnorm(x, n*p, sqrt(n*p*(1 - p))), add = TRUE)
 
-
+EX <- sum(x*px)
+VX <- sum((x - EX)^2*px)
+c(EX, VX)
 
 sims <- 10000
 phat <- numeric(sims)
