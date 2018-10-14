@@ -1,0 +1,66 @@
+---
+title: "Credit Problem"
+author: "Alan Arnholt"
+date: 'Last updated: `r format(Sys.time(), "%b %d, %Y")`'
+output:
+  bookdown::html_document2:
+    highlight: espresso
+    theme: united
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+set.seed(123)
+library(knitr)
+knitr::opts_chunk$set(comment = NA, fig.show = 'as.is', fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = TRUE))
+```
+
+* Create a model that predicts an individuals credit rating (`Rating`).
+
+Read in the data:
+
+```{r}
+Credit <- read.csv("http://www-bcf.usc.edu/~gareth/ISL/Credit.csv")
+Credit$Utilization <- Credit$Balance / (Credit$Income*100)
+# DT::datatable(Credit[, -1], rownames = FALSE)
+```
+
+
+```{r, results = "hide"}
+library(MASS)
+mod.fs <- stepAIC(lm(Rating ~ 1, data = Credit), scope = .~Income + Limit + Cards + Age + Education + Gender + Student + Married + Ethnicity + Balance + Utilization, direction = "forward", test = "F")
+mod.be <- stepAIC(lm(Rating ~ Income + Limit + Cards + Age + Education + Gender + Student + Married + Ethnicity + Balance + Utilization, data = Credit), direction = "backward", test = "F")
+```
+
+```{r}
+summary(mod.fs)
+summary(mod.be) 
+car::vif(mod.be)
+car::vif(mod.fs)
+```
+
+I prefer `mod.fs` since it has less multicollinearity.
+
+* Create another model that predicts rating with `Limit`, `Cards`, `Married`, `Student`, and `Education` as features. 
+
+```{r}
+mod <- lm(Rating ~ Limit + Cards + Married + Student + Education, data = Credit)
+summary(mod)
+par(mfrow = c(2, 2))
+plot(mod)
+par(mfrow = c(1, 1))
+```
+
+* Use your model to predict the `Rating` for an individual that has a credit card limit of
+$6,000, has 4 credit cards, is married, and is not a student, and has an undergraduate degree (`Education` = 16).
+
+```{r}
+predict(mod, newdata = data.frame(Limit = 6000, Cards = 4, Married = "Yes", Student = "No", Education = 16), response = "pred")
+```
+
+* Use your model to predict the `Rating` for an individual that has a credit card limit of
+$12,000, has 2 credit cards, is married, is not a student, and has an eighth grade education (`Education` = 8).
+
+```{r}
+predict(mod, newdata = data.frame(Limit = 12000, Cards = 2, Married = "Yes", Student = "No", Education = 8), response = "pred")
+```
+
