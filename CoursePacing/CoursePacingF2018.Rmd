@@ -174,7 +174,7 @@ Test yourself:
 
 * Read Chapter 8 of [MD](https://moderndive.com) --- Sampling
 
-* Read Chapter 4 of MSWR --- Sampling Distributions; Suggested Problems 2, 5, 12-16
+* Read Chapter 4 of MSWR --- Sampling Distributions; [Problems 2, 5, 12-16](../Homework/Chapter4HWK.Rmd)
 
 * [Sampling Distributions](../Handouts/EVuniform.html)
 
