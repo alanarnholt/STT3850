@@ -178,6 +178,8 @@ Test yourself:
 
 * [Sampling Distributions](../Handouts/EVuniform.html)
 
+* [In Class Problems](../Slides/ProbabilityProblems.html)
+
 * Complete _Foundations of Probability in R_ [(DataCamp)](https://www.datacamp.com/) --- Due Oct 19
 
 * [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)

@@ -1,0 +1,109 @@
+---
+title: "In Class Problems"
+author: "Alan T. Arnholt"
+date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Bayes #1
+
+Dan's Diner employs three dishwashers. Al washes 20 % of the dishes and breaks only 1 % of those he handles. Betty and Chuck each wash 40% of the dishes, and Betty breaks only 1% of hers, but Chuck breaks 5% of the dishes he washes. You go to Dan's for supper one night and hear a dish break at the sink. What's the probability that Chuck is on the job? (0.769)
+
+## Bayes #2
+
+Nicole is flying from Boston to Denver with a connection in Chicago. The probability her first flight leaves on time is 0.25. If the flight is on time, the probability that her luggage will make the connecting flight is 0.85, but if the flight is delayed, the probability that the luggage will make it is only 0.55.
+
+Suppose you pick her up at the Denver airport and her luggage is not there. What is the probability that Nicole's first flight was delayed? ($P(\text{delayed}) = 0.90$) 
+
+## Expected Values #1
+
+You draw a card from a deck. If you get a red card, you win nothing. If you get a spade, you win $8. For any club, you get $20 plus an extra $40 for the ace of clubs.
+
+* Create a probability model for the amount you win at this game.
+* Find the expected amount you'll win. ($7.77)
+* How much would you be willing to pay to play this game?
+
+## Expected Values #2
+
+A couple plans to have children until they get a girl, but they agree they will not have more than three children, even if all are boys. Assume that the probability of having a girl is 53.00%.
+
+* Create a probability model for the number of children they'll have.
+* Find the expected number of children. (1.6909)
+* Find the expected number of boys they'll have. (0.7947)
+
+## Standard Deviation #1
+
+You draw a card from a deck. If you get a red card, you win nothing. If you get a spade, you win $13. For any club, you win $26 plus an extra $15 for the ace of clubs. Find the standard deviation of the amount you might win drawing a card.
+
+* The standard deviation is_____ ($11.39)
+
+## Standard Deviation #2
+
+A couple plans to have children until they get a girl, but they agree they will not have more than three children, even if all are boys. Assume that the probability of having a girl is 0.46. Let `X` be a random variable indicating how many children the couple will have. Find the standard deviation of the random variable `X`.
+
+* $\sigma = 0.850$
+
+## Expected Value and Variance #1
+
+An insurance policy costs $110 and will pay policyholders $9,000 if they suffer a major injury (resulting in hospitalization) or $2000 if they suffer a minor injury (resulting in lost time from work). The company estimates that 1 in every 2083 policyholders will suffer a major injury and that 1 in 495 will suffer a minor injury.
+
+* Create a probability model for the profit on a policy.
+* What's the company's expected profit on the policy? ($101.64)
+* What's the standard deviation? ($216.5632)
+
+## Coffee
+
+At a certain coffee shop, all the customers buy a cup of coffee and some also buy a doughnut. The shop owner believes that the number of cups he sells each day is normally distributed with a mean of 320 cups and a standard deviation of 22 cups. He also believes that the number of doughnuts he sells each day is independent of the coffee sales and is normally distributed with a mean of 160 doughnuts and a standard deviation of 16. 
+
+* The shop is open every day but Sunday. Assuming day-to-day sales are independent, what's the probability he'll sell over 2000 cups of coffee in a week? (0.069)
+
+## Coffee Continued
+
+* If he makes a profit of 50 cents on each cup of coffee and 40 cents on each doughnut, can he reasonably expect to have a day's profit of over $300? Explain. (No. $300 is more than 5 standard deviations above the mean.)
+
+* What's the probability that on any given day he'll sell a doughnut to more than half of his coffee customers? (0.5)
+
+## Pregnancies
+
+Assume that the duration of human pregnancies can be described by a normal model with mean 265 days and standard deviation 15 days. Answer the following questions.
+
+* What percentage of pregnancies should last between 275 and 290 days? (20.5%)
+
+* At least how many days should the longest 20% of all pregnancies last? (277.6)
+
+## Pregnancies continued
+
+* Suppose a certain obstetrician is currently providing prenatal care to 90 pregnant women. Let $\bar{y}$ represent the mean length of their pregnancies. According to the central limit theorem, what is the mean and standard deviation SD($\bar{y}$) of the normal model of the distribution of the sample mean, $\bar{y}$?
+The mean is (265).  SD($\bar{y}$) = 1.58. 
+
+* What is the probability that the mean duration of these patients' pregnancies will be less than 267 days? (0.897)
+
+## Potato Chips
+
+The weight of potato chips in a large-size bag is stated to be 24 ounces. The amount that the packaging machine puts in these bags is believed to have a normal model with a mean of 24.1 ounces and a standard deviation of 0.07 ounces.
+
+* What fraction of all bags sold are underweight? (0.0766)
+
+* Some of the chips are sold in "bargain packs" of 3 bags. What's the probability that none of the 3 is underweight? (0.7874)
+
+* What's the probability that the mean weight of the 3 bags is below the stated amount? (0.0067)
+
+* What's the probability that the mean weight of a 24-bag case of potato chips is below 24 ounces? (0.0000)
+
+## IQ
+
+Suppose that the IQs of university A's students can be described by a normal model with mean 150 and standard deviation 8 points. Also suppose that IQs of students from university B can be described by a normal model with mean 130 and standard deviation 10.
+
+* Select a student at random from university A. Find the probability that the student's IQ is at least 140  points. (0.894)
+
+* Select a student at random from each school. Find the probability that the university A student's IQ is at least 10 points higher than the university B student's IQ. (0.782)
+
+## IQ continued
+
+* Select 3 university B students at random. Find the probability that this group's average IQ is at least 140 points. (0.042)
+
+* Also select 3 university A students at random. What's the probability that their average IQ is at least 10 points higher than the average for the 3 university B students? (0.912)
