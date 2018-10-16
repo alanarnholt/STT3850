@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Bayes #1
 
-Dan's Diner employs three dishwashers. Al washes 20 % of the dishes and breaks only 1 % of those he handles. Betty and Chuck each wash 40% of the dishes, and Betty breaks only 1% of hers, but Chuck breaks 5% of the dishes he washes. You go to Dan's for supper one night and hear a dish break at the sink. What's the probability that Chuck is on the job? (0.769)
+Dan's Diner employs three dishwashers. Al washes 20% of the dishes and breaks only 1% of those he handles. Betty and Chuck each wash 40% of the dishes, and Betty breaks only 1% of hers, but Chuck breaks 5% of the dishes he washes. You go to Dan's for supper one night and hear a dish break at the sink. What's the probability that Chuck is on the job? (0.769)
 
 ## Bayes #2
 
