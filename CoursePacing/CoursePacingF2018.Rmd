@@ -190,6 +190,8 @@ Test yourself:
 
 * Read Chapter 9 of [MD](https://moderndive.com) --- Confidence Intervals
 
+* Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
+
 * Start _Inference for Numerical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 2
 
 * [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
