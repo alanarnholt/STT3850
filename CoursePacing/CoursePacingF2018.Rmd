@@ -194,6 +194,8 @@ Test yourself:
 
 * Start _Inference for Numerical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 2
 
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
 * [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
 
 

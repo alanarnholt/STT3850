@@ -1,0 +1,290 @@
+---
+title: "`infer` Examples"
+author: "Notes"
+date: '`r Sys.Date()`'
+output: bookdown::html_document2
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+library(knitr)
+library(tidyverse)
+knitr::opts_chunk$set(comment = NA, fig.show = 'as.is', fig.align = "center", fig.height = 4.5, fig.width = 5.5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = TRUE))
+```
+
+# Various pipelines
+
+To read about the `mtcars` data set, type `?mtcars` at the `R` prompt.
+
+```{r}
+str(mtcars)
+DT::datatable(mtcars)
+```
+
+We want to test $H_0: \mu_{\text{Manual}} - \mu_{\text{Automatic}} = 0$ versus $H_A: \mu_{\text{Manual}} - \mu_{\text{Automatic}} > 0$
+
+
+To do so, first change the variable `am` to a factor and reorder the levels of the variable.  
+
+```{r}
+mtcars <- mtcars %>% 
+  mutate(am = factor(am, levels = c("1","0"), labels = c("Manual", "Automatic")),
+         cyl = factor(cyl, levels = c("4", "6", "8")))
+mtcars %>% 
+  group_by(am) %>% 
+  summarize(Mean = mean(mpg), SD = sd(mpg), n = n())
+mtcars %>% 
+  group_by(cyl) %>% 
+  summarize(Mean = mean(mpg), SD = sd(mpg), n = n())
+```
+```{r, fig.width = 10}
+p1 <- ggplot(data = mtcars, aes(x = mpg)) +
+  geom_histogram(binwidth = 3, fill = "lightblue", color = "black") +
+  facet_wrap(~am) + 
+  theme_bw()
+#
+p2 <- ggplot(data = mtcars, aes(x = mpg)) +
+  geom_density(fill = "lightblue", color = "black") +
+  facet_wrap(~am) + 
+  theme_bw()
+p3 <- ggplot(data = mtcars, aes(sample = mpg, color = am)) + 
+  geom_qq() + 
+  facet_wrap(.~am) + 
+  theme_bw()
+#
+p4 <- ggplot(data = mtcars, aes(sample = mpg, color = am)) + 
+  geom_qq() + 
+  theme_bw() + 
+  scale_color_manual(values = c("blue", "red"))
+gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 2)
+```
+
+
+```{r}
+SIMS <- 1000  # set this 
+library(infer)
+mtcars %>%
+    specify(mpg ~ am) %>% # alt: response = mpg, explanatory = am
+    hypothesize(null = "independence") %>%
+    generate(reps = SIMS, type = "permute") %>%
+    calculate(stat = "t", order = c("Manual", "Automatic")) %>%  # 0 = automatic, 1 = manual
+    visualize(method = "both") #"simulation" is the default method
+```
+
+```{r}
+mtcars %>%
+    specify(response = mpg, explanatory = am) %>% # alt: mpg ~ am
+    hypothesize(null = "independence") %>%
+    generate(reps = SIMS, type = "permute") %>%
+    calculate(stat = "t", order = c("Manual", "Automatic")) %>%  # 0 = automatic, 1 = manual
+    visualize(method = "both") #"simulation" is the default method
+```
+```{r}
+TS <- mtcars %>%
+    specify(mpg ~ am) %>% # alt: response = mpg, explanatory = am
+    hypothesize(null = "independence") %>%
+    generate(reps = SIMS, type = "permute") %>%
+    calculate(stat = "t", order = c("Manual", "Automatic")) # 0 = automatic, 1 = manual
+#####
+obs_stat <- t.test(mpg ~ am, data = mtcars)$stat
+obs_stat
+####
+ggplot(data =TS, aes(x = stat, y = ..density..)) +
+  geom_histogram(fill = "lightblue", color = "black", binwidth = 0.3) + 
+  theme_bw() + 
+  geom_vline(xintercept = obs_stat, linetype = "dashed") 
+####
+get_pvalue(TS, obs_stat, direction = "greater")
+####
+pvalue <- (sum(TS$stat >= obs_stat) + 1)/(SIMS + 1)
+pvalue
+```
+
+## Using a `for()` loop
+
+```{r}
+sims <- SIMS
+ts <- numeric(sims)
+for(i in 1:sims){
+  ts[i] <- t.test(mpg ~ sample(am), data = mtcars)$stat
+}
+pvalue <- (sum(ts >= obs_stat) + 1)/(sims + 1)
+pvalue
+```
+
+## Using Difference in Means
+
+```{r}
+DM <- mtcars %>%
+    specify(mpg ~ am) %>% # alt: response = mpg, explanatory = am
+    hypothesize(null = "independence") %>%
+    generate(reps = SIMS, type = "permute") %>%
+    calculate(stat = "diff in means", order = c("Manual", "Automatic")) # 0 = automatic, 1 = manual
+#####
+obs_MDIFF <- mtcars %>% 
+  group_by(am) %>% 
+  summarize(MD = mean(mpg)) %>% 
+  mutate(MeanDiff = -diff(MD)) %>% 
+  pull()
+obs_stat <- obs_MDIFF[1]
+obs_stat
+get_pvalue(DM, obs_stat = obs_stat, direction = "greater")
+pvalue <- mean(DM$stat >= obs_stat)
+pvalue
+# Better yet
+pvalue1 <- (sum(DM$stat >= obs_stat) + 1)/(SIMS + 1)
+pvalue1
+```
+
+### With a `for` loop
+
+```{r}
+sims <- SIMS - 1
+dm <- numeric(sims)
+for(i in 1:sims){
+  dm[i] <- -diff(tapply(mtcars$mpg, sample(mtcars$am), mean))
+}
+ggplot(data = data.frame(stat = dm), aes(x = stat)) + 
+  geom_density(fill = "purple") + 
+  theme_bw() + 
+  geom_vline(xintercept = obs_stat, linetype = "dashed")
+pvalue <- (sum(dm >= obs_stat) + 1)/(sims + 1)
+pvalue
+```
+
+## Confidence Intervals
+
+Consturct a 92% CI for the true mean quarter mile time.
+
+```{r}
+BM <- specify(mtcars, response = qsec) %>% 
+  generate(reps = SIMS, type = "bootstrap") %>% 
+  calculate(stat = "mean")
+visualize(BM)
+```
+
+```{r}
+# Bootstrap Percentile CI
+PCI <- BM %>%
+  summarize(l = quantile(stat, 0.04),
+            u = quantile(stat, 0.96)) 
+PCI
+###
+# Visualize
+BM %>% visualize(endpoints = PCI, 
+                          direction = "between",
+                          ci_fill = "pink") + 
+  theme_bw()
+####
+ggplot(data = BM, aes(x = stat, fill = stat > PCI$l & stat < PCI$u) ) +
+  geom_histogram(binwidth = 0.15) + 
+  scale_fill_manual(values = c("blue", "green")) +
+  theme_bw()
+
+```
+
+```{r}
+# Bootstrap SE CI
+(n <- sum(!is.na(mtcars$qsec)))
+(multiplier <- qt(0.96, n - 1))
+(SEBM <- sd(BM$stat))
+(CI <- mean(mtcars$qsec) + c(-1, 1)*multiplier*SEBM)
+#
+# Visualize
+BM %>% visualize(endpoints = CI, 
+                          direction = "between",
+                          ci_fill = "yellow") + 
+  theme_bw()
+```
+
+### Using a `for()` loop for CI
+
+```{r}
+sims <- SIMS
+ME <- numeric(sims)
+for(i in 1:sims){
+  bss <- sample(mtcars$qsec, size = sum(!is.na(mtcars$qsec)), replace = TRUE)
+  ME[i] <- mean(bss)
+}
+# Percentile CI
+(PCI <- quantile(ME, probs = c(0.04, 0.96)))
+# SE CI
+(multiplier <- qt(0.96, 32 - 1))
+(SCI <- mean(mtcars$qsec) + c(-1, 1)*multiplier*sd((ME)))
+```
+
+## ANOVA
+
+```{r}
+mtcars %>% 
+  group_by(cyl) %>% 
+  summarize(Mean = mean(mpg), SD = sd(mpg), n = n())
+
+(GM <- mean(mtcars$mpg))
+(MT1 <- mean(mtcars$mpg[mtcars$cyl == "4"]))
+(MT2 <- mean(mtcars$mpg[mtcars$cyl == "6"]))
+(MT3 <- mean(mtcars$mpg[mtcars$cyl == "8"]))
+
+(SSTreat <- 11*(MT1 - GM)^2 + 7*(MT2 - GM)^2 + 14*(MT3 - GM)^2)
+(SSTotal <- sum((mtcars$mpg - GM)^2))
+(SSError <- SSTotal - SSTreat)
+```
+
+```{r}
+# Checks
+ggplot(data = mtcars, aes(sample = mpg)) +
+  geom_qq() +
+  facet_wrap(.~cyl) + 
+  theme_bw()
+# Questionable whether the assumption of constant variance across treatments
+# is satisfied
+ggplot(data = mtcars, aes(x = cyl, y = mpg)) +
+  geom_boxplot() + 
+  theme_bw()
+# If assumptions are satisfied use what follows
+mod.aov <- aov(mpg ~ cyl, data = mtcars)
+summary(mod.aov)
+obs_stat <- summary(mod.aov)[[1]][1, 4]
+obs_stat
+# OR
+obs_stat <- anova(lm(mpg~cyl, data = mtcars))[1, 4]
+obs_stat
+```
+
+## Using a resampling approach to test equality of multiple means
+
+$H_0:\mu_4 = \mu_6 = \mu_8$ versus $H_A: \mu_i \neq \mu_j \text{ for some } (i, j)$
+
+### `infer` approach
+
+```{r}
+FS <- mtcars %>% 
+  specify(mpg ~ cyl) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = SIMS, type = "permute") %>% 
+  calculate(stat = "F")
+visualize(FS, method = "both")
+get_pvalue(FS, obs_stat = obs_stat, direction = "greater")
+```
+
+### `for()` loop
+
+```{r}
+sims <- SIMS -1
+FFS <- numeric(sims)
+for(i in 1:sims){
+  FFS[i] <- summary(aov(mpg ~ sample(cyl), data = mtcars))[[1]][1, 4]
+}
+pvalue <- (sum(FFS >= obs_stat) + 1)/(sims + 1)
+pvalue
+```
+
+```{r}
+ggplot(data = data.frame(stat = FFS), aes(x = stat)) +
+  geom_density(color = "red", fill = "tomato") + 
+  theme_bw() + 
+  stat_function(fun = df, args = list(2, 29), color = "blue")
+```
+
+
+
+
