@@ -286,5 +286,33 @@ ggplot(data = data.frame(stat = FFS), aes(x = stat)) +
 ```
 
 
+## Testing a single parameter with a bootstrap approach
+
+Consider testing $H_0:\mu_{qsec} = 17$ versus $H_A:\mu_{qsec} \neq 17$
+
+```{r}
+(xbar <- mean(mtcars$qsec))
+(null <- 17 - xbar)
+
+sims <- SIMS
+bm <- numeric(sims)
+for(i in 1:sims){
+  bss <- sample(mtcars$qsec, size = 32, replace = TRUE) + null
+  bm[i] <- mean(bss)
+}
+# Base histogram
+hist(bm, breaks = "Scott", col = "lightblue")
+# ggplot2 histogram
+ggplot(data = data.frame(x = bm), aes(x = x)) +
+  geom_histogram(color = "black", fill = "lightblue", binwidth = 0.1) + theme_bw()
+  
+pvalue <- (sum(bm >= xbar)*2 + 1)/(sims + 1)
+pvalue
+# Or
+pvalue2 <- (sum(bm >= 17 - null) + sum(bm <= 17 + null) + 1)/(sims + 1)
+pvalue2
+#
+t.test(mtcars$qsec, mu = 17, alternative = "two.sided")
+```
 
 
