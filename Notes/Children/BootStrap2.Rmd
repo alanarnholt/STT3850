@@ -17,9 +17,9 @@ The birth weight of a baby is of interest to health officials since many studies
 ### INTRODUCTION TO THE BOOTSTRAP {-}
 
 ```{r SETUP}
+library(resampledata)
 library(xtable)
-site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
-Babies <- read.csv(file=url(site))
+Babies <- NCBirths2004
 ```
 
 For the North Carolina data, the mean weight of the `r sum(!is.na(Babies$Weight))` babies in the sample is `r round(mean(Babies$Weight),2)` g. We are interested in $\mu$, the true birth weight mean for all North Carolina babies born in 2004; this is probably not the same as the sample mean. We have already mentioned the different samples of the same size will yield different sample means, so how can we gauge the accuracy of the `r round(mean(Babies$Weight),2)` as an estimate to $\mu$?
@@ -110,6 +110,19 @@ ggplot(data = data.frame(x = my.boot.statB), aes(x = x)) +
 ```
 
 Note that the bootstrap distribution is approximately normal.  Second, with mean `r mean(my.boot.statB)`, it is centered at approximately the same location as the original mean, `r mean(Babies$Weight)`.  The difference between where the bootstrap distribution is centered and the mean of the of original sample is the bootstrap bias in this example `r boot.bias`.  In general, the *bias* of an estimate $\hat{\theta}$ is $$Bias[\hat{\theta}] = E[\hat{\theta}] - \theta .$$  The bootstrap estimate of bias is $$Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta},$$ the mean of the bootstrap distribution, minus the estimate from the original data. Third, we get a rough idea of the amount of variability.  We can quantify the variability by computing the standard deviation of the bootstrap distribution, in this case `r sd(my.boot.statB)`.  This is the bootstrap standard error.
+
+#### Using the `infer` package {-}
+
+```{r}
+library(infer)
+bsd <- Babies %>% 
+  specify(response = Weight) %>% 
+  generate(reps = 10^4, type = "bootstrap") %>% 
+  calculate(stat = "mean")
+visualize(bsd)
+(BSB <- mean(bsd$stat) - mean(Babies$Weight))  # Bootstrap Bias
+```
+
  
 #### BOOTSTRAP STANDARD ERROR {-}
 
@@ -250,8 +263,7 @@ The first point bears emphasis.  It means that *the bootstrap is not used to get
 Instead, the bootstrap distribution is useful for *quantifying the behavior of a parameter estimate*, such as its standard error, skewness, bias, or for calculating confidence intervals.
 
 ```{r ARSENIC}
-site <- "http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv"
-Bang <- read.csv(file=url(site)) # read data into Bang
+Bang <- Bangladesh
 ```
 
 * Example 3: Arsenic is a naturally occurring element in the groundwater of Bangladesh. However, much of this groundwater is used for drinking water by rural populations, so arsenic poisoning is a serious health issue. Figure 6a displays the distribution of arsenic concentrations from `r sum(!is.na(Bang$Arsenic))` wells in Bangladesh. The sample mean and standard deviation are $\bar{x}=$ `r mean(Bang$Arsenic)` and s = `r sd(Bang$Arsenic)`, respectively (measured in micrograms per liter). We draw resamples of size `r sum(!is.na(Bang$Arsenic))` with replacement from the data and compute the mean for each resample. Figures 7a and 7b show a histogram and a normal quantile plot of the bootstrap distribution, respectively. The bootstrap distribution looks quite normal, with some skewness. This is the central limit theorem at work---when the sample size is large enough, the sampling distribution for the mean is approximately normal, even if the population is not normal.
@@ -323,8 +335,6 @@ We now turn to the problem of comparing two samples. In general, bootstrapping s
 * Example 4: A high school student was curious about the total number of minutes devoted to commercials during any given half-hour time period on basic and extended cable TV channels.
 
 ```{r TV1}
-site <- "http://www1.appstate.edu/~arnholta/Data/TV.csv"
-TV <- read.csv(file=url(site)) # read data into TV
 head(TV)
 ct <- tapply(TV$Times, TV$Cable, mean)
 ct
@@ -403,8 +413,7 @@ The permutation test for this example results in a _p_-value of `r pvalue`; thus
 * Example 5: Verizon is the primary local telephone company (incumbent local exchange carrier, ILEC) for a large area of the eastern United States.  As such it is responsible for providing repair service for the customers of other telephone companies known as competing local exchange carriers (CLECs) in this region.  Verizon is subject to fines if the repair times (the time it takes to fix a problem) for CLEC customers are substantially worse than those for Verizon customers.  The data set `Verizon` contains a random sample of repair times for 1664 ILEC and 23 CLEC customers. 
 
 ```{r Phone1, fig.height=3.5, fig.width=7}
-site <- "http://www1.appstate.edu/~arnholta/Data/Verizon.csv"
-Phone <- read.csv(file = url(site))
+Phone <- Verizon
 rt <- tapply(Phone$Time, Phone$Group, mean)
 rt
 # Tidy approach
@@ -480,8 +489,6 @@ The bootstrap distribution for the difference in means is shown in Figure 12a. N
 #### THE TWO INDEPENDENT POPULATIONS ASSUMPTION {-}
 
 ```{r TWOIP}
-site <- "http://www1.appstate.edu/~arnholta/Data/Cameras.csv"
-Cameras <- read.csv(file=url(site))
 head(Cameras)
 ```
 
@@ -547,8 +554,7 @@ CIdiff.25
 Example 6: In the Verizon data, rather than looking at the difference in means, suppose we look at the ratio of means. The sample ratio is `r mean(times.ILEC)/mean(times.CLEC)`, so for ILEC customers, repair times are about half of that for CLEC customers.
 
 ```{r Verizon6, fig.height=3.5, fig.width=7}
-site <- "http://www1.appstate.edu/~arnholta/Data/Verizon.csv"
-Phone <- read.csv(file = url(site))
+Phone <- Verizon
 times.ILEC <- subset(Phone, select = Time, subset = Group == "ILEC", drop = TRUE)
 times.CLEC <- subset(Phone, select = Time, subset = Group == "CLEC", drop = TRUE)
 set.seed(4)
