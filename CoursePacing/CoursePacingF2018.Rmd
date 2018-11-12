@@ -215,6 +215,8 @@ Test yourself:
 
 * Start _Inference for Categorical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 16
 
+* [In class Examples](../Rmarkdown/InClassNotes.html)
+
 
 
 ## Week 13: (Nov 12--16) {-}
