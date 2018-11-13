@@ -41,3 +41,84 @@ SI <- mtcars %>%
 SI
 ```
 The mean `qsec` time for six cylinder cars is `r round(SI[2, 2],2)` seconds.
+
+# Chi-Square Test?
+
+Two different professors teach an introductory statistics course. Table \@ref(tab:TP) shows the distribution of final grades they reported. We wonder whether one of these professors is an "easier" grader.
+
+```{r, label = "TP", echo = FALSE}
+mat <- matrix(data = c(3, 10, 11, 11, 14, 8, 10, 1, 4, 0), nrow = 5, byrow = TRUE)
+dimnames(mat) <- list(Grade = c("A","B","C","D","F"), Professor = c("Alpha", "Beta"))
+tt <- as.table(mat)
+knitr::kable(tt, caption = "Grades for Alpha and Beta")
+```
+
+* Will you test goodness-of-fit, **homogeneity**, or independence?
+
+*  Write the appropriate hypotheses.
+
+$H_0:$ The distribution of grades is the same for the two professors. $H_A:$ The distribution of grades is different for the two professors.
+
+* Find the expected counts for each cell.
+
+```{r}
+chisq.test(tt)$exp
+```
+
+* Explain why the chi-square procedures are not appropriate for this table. **Since some of the cells have expected counts less than 5, the chi-square procedures are not appropriate.**
+
+* Solution---Permutation
+
+## Make `tt` tidy
+
+```{r}
+ttt <- tt %>% 
+  broom::tidy() %>% 
+  uncount(n)
+ttt
+```
+
+## Using `infer`
+
+```{r}
+T1 <- xtabs(~Grade + Professor, data = ttt)
+obs_stat <- chisq.test(T1)$stat
+obs_stat
+library(infer)
+null <- ttt %>% 
+  specify(Grade ~ Professor) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 999, type = "permute") %>% 
+  calculate(stat = "Chisq")
+visualize(null, method = "both")
+get_pvalue(null, obs_stat, direction = "right")
+(pvalue <- (sum(null$stat >= obs_stat) + 1)/(999 + 1))
+```
+
+## Using a `for()` loop
+
+Figure \@ref(fig:appcom) shows the theoretical $\chi^2_4$ distribution in blue, while the permutation distribution from using computation is shown as the pink density.
+
+```{r}
+sims <- 10^3 - 1
+x2 <- numeric(sims)
+for(i in 1:sims){
+  TT <- xtabs(~Grade + sample(Professor), data = ttt)
+  x2[i] <- chisq.test(TT)$stat
+}
+pvalue <- (sum(x2 >= obs_stat) + 1)/(sims + 1)
+pvalue
+```
+
+```{r, label = "appcom", fig.cap = "Theoretical and computation null distribution"}
+DF <- data.frame(x = x2)
+ggplot(data = DF, aes(x = x)) + 
+  geom_density(fill = "pink", alpha = 0.3) + 
+  theme_bw() + 
+  stat_function(fun = dchisq, args = list(df = 4), color = "blue") 
+```
+
+
+
+
+
