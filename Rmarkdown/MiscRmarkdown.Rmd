@@ -1,0 +1,43 @@
+---
+title: "Examples"
+author: "Alan T. Arnholt"
+date: "11/13/2018"
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, comment = NA)
+```
+
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Consider Table \@ref(tab:cars).
+
+```{r label = "cars", echo = FALSE, results = "asis"}
+knitr::kable(head(mtcars), booktabs = TRUE,
+             caption = 'First six rows of `mtcars`')
+```
+
+# Including Plots
+
+You can also embed plots such as Figure \@ref(fig:pressure).
+
+```{r label = "pressure", echo = FALSE, fig.cap = "Scatterplot of `pressure` versus `temperature`",fig.align = "center"}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Inline `R` Code
+
+```{r}
+mtcars$cyl <- factor(mtcars$cyl)
+library(tidyverse)
+SI <- mtcars %>% 
+  group_by(cyl) %>% 
+  summarize(Mean = mean(qsec), SD = sd(qsec))
+SI
+```
+The mean `qsec` time for six cylinder cars is `r round(SI[2, 2],2)` seconds.
