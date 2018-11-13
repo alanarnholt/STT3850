@@ -15,7 +15,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Consider Table \@ref(tab:cars).
 
-```{r label = "cars", echo = FALSE, results = "asis"}
+```{r label = "cars", echo = FALSE}
 knitr::kable(head(mtcars), booktabs = TRUE,
              caption = 'First six rows of `mtcars`')
 ```
