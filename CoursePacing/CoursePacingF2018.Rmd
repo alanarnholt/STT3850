@@ -225,6 +225,8 @@ Test yourself:
 
 * [Chapter 5 notes](../Notes/Children/BootStrap2.html)
 
+* [Misc RMarkdown Examples](../Rmarkdown/MiscRmarkdown.html)
+
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
 * Complete _Inference for Categorical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 16

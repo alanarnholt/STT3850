@@ -266,7 +266,7 @@ Instead, the bootstrap distribution is useful for *quantifying the behavior of a
 Bang <- Bangladesh
 ```
 
-* Example 3: Arsenic is a naturally occurring element in the groundwater of Bangladesh. However, much of this groundwater is used for drinking water by rural populations, so arsenic poisoning is a serious health issue. Figure 6a displays the distribution of arsenic concentrations from `r sum(!is.na(Bang$Arsenic))` wells in Bangladesh. The sample mean and standard deviation are $\bar{x}=$ `r mean(Bang$Arsenic)` and s = `r sd(Bang$Arsenic)`, respectively (measured in micrograms per liter). We draw resamples of size `r sum(!is.na(Bang$Arsenic))` with replacement from the data and compute the mean for each resample. Figures 7a and 7b show a histogram and a normal quantile plot of the bootstrap distribution, respectively. The bootstrap distribution looks quite normal, with some skewness. This is the central limit theorem at work---when the sample size is large enough, the sampling distribution for the mean is approximately normal, even if the population is not normal.
+* Example 3: Arsenic is a naturally occurring element in the groundwater of Bangladesh. However, much of this groundwater is used for drinking water by rural populations, so arsenic poisoning is a serious health issue. Figure 6a displays the distribution of arsenic concentrations from `r sum(!is.na(Bang$Arsenic))` wells in Bangladesh. The sample mean and standard deviation are $\bar{x}=$ `r round(mean(Bang$Arsenic),2)` and s = `r round(sd(Bang$Arsenic),2)`, respectively (measured in micrograms per liter). We draw resamples of size `r sum(!is.na(Bang$Arsenic))` with replacement from the data and compute the mean for each resample. Figures 7a and 7b show a histogram and a normal quantile plot of the bootstrap distribution, respectively. The bootstrap distribution looks quite normal, with some skewness. This is the central limit theorem at work---when the sample size is large enough, the sampling distribution for the mean is approximately normal, even if the population is not normal.
 
 ```{r Bang2, fig.height=7, fig.width=7}
 opar <- par(no.readonly = TRUE)
@@ -289,7 +289,7 @@ qqline(arsenic.mean, col = "red")
 par(opar)
 ```
 
-The mean of the bootstrap means is `r mean(arsenic.mean)`, quite close to the sample mean $\bar{X}$ (the difference is `r mean(arsenic.mean) - mean(Arsenic)`, to seven decimal places). The bootstrap standard error is the standard deviation of the bootstrap distribution; in this case, the bootstrap standard error is `r sd(arsenic.mean)`.
+The mean of the bootstrap means is `r round(mean(arsenic.mean),2)`, quite close to the sample mean $\bar{X}$ (the difference is `r round(mean(arsenic.mean) - mean(Arsenic),4)`, to four decimal places). The bootstrap standard error is the standard deviation of the bootstrap distribution; in this case, the bootstrap standard error is `r round(sd(arsenic.mean),2)`.
 
 ```{r SimpleSUM}
 BELOW <- sum(arsenic.mean <= (mean(arsenic.mean) + qnorm(.025)*sd(arsenic.mean)))/B
@@ -314,10 +314,25 @@ In the North Carolina birth weights case study, the bootstrap distribution shows
 quantile(my.boot.statB, probs = c(0.025, 0.975))
 ```
 
-For the North Carolina birth weights, the interval marked by the 2.5 and 97.5 percentiles is (`r quantile(my.boot.statB, probs = c(0.025, 0.975))[1]`, `r quantile(my.boot.statB, probs = c(0.025, 0.975))[2]`). Thus, we would state that we are 95% confident that the true mean weight of North Carolina babies born in 2004 is between `r quantile(my.boot.statB, probs = c(0.025, 0.975))[1]` and `r quantile(my.boot.statB, probs = c(0.025, 0.975))[2]` g. In the arsenic example, the 2.5% and 97.5% points of the bootstrap distribution give us the interval (`r quantile(arsenic.mean, probs = c(0.025, 0.975))[1]`, `r quantile(arsenic.mean, probs = c(0.025, 0.975))[2]`), so we are 95% confident that the true mean arsenic level is between `r quantile(arsenic.mean, probs = c(0.025, 0.975))[1]` and `r quantile(arsenic.mean, probs = c(0.025, 0.975))[2]` $\mu g/L$. Note that with $\bar{X}^* =$ `r mean(arsenic.mean)`, this interval can be written (`r mean(arsenic.mean)` `r quantile(arsenic.mean, probs = c(0.025, 0.975))[1] - mean(arsenic.mean)`, `r mean(arsenic.mean)` + `r quantile(arsenic.mean, probs = c(0.025, 0.975))[2] - mean(arsenic.mean)`); in particular, this interval is not symmetric about the mean, reflecting the asymmetry of the bootstrap distribution.
+For the North Carolina birth weights, the interval marked by the 2.5 and 97.5 percentiles is (`r round(quantile(my.boot.statB, probs = c(0.025, 0.975))[1],2)`, `r round(quantile(my.boot.statB, probs = c(0.025, 0.975))[2],2)`). Thus, we would state that we are 95% confident that the true mean weight of North Carolina babies born in 2004 is between `r round(quantile(my.boot.statB, probs = c(0.025, 0.975))[1],2)` and `r round(quantile(my.boot.statB, probs = c(0.025, 0.975))[2],2)` g. In the arsenic example, the 2.5% and 97.5% points of the bootstrap distribution give us the interval (`r round(quantile(arsenic.mean, probs = c(0.025, 0.975))[1],2)`, `r round(quantile(arsenic.mean, probs = c(0.025, 0.975))[2],2)`), so we are 95% confident that the true mean arsenic level is between `r round(quantile(arsenic.mean, probs = c(0.025, 0.975))[1],2)` and `r round(quantile(arsenic.mean, probs = c(0.025, 0.975))[2],2)` $\mu g/L$. Note that with $\bar{X}^* =$ `r round(mean(arsenic.mean),2)`, this interval can be written (`r round(mean(arsenic.mean),2)` `r round(quantile(arsenic.mean, probs = c(0.025, 0.975))[1],2) - round(mean(arsenic.mean),2)`, `r round(mean(arsenic.mean),2)` + `r round(quantile(arsenic.mean, probs = c(0.025, 0.975))[2] - mean(arsenic.mean),2)`); in particular, this interval is not symmetric about the mean, reflecting the asymmetry of the bootstrap distribution.
 
 
-The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the `r length(Arsenic)` observations, `r sum(Arsenic > 1000)` are above 1000 $\mu g/L$ and `r sum(Arsenic > 2200)` are above 2200 $\mu g/L$ (remember, the sample mean is only `r mean(Arsenic)`!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this – that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
+The arsenic data illustrate an interesting point. A good confidence interval for the mean need not necessarily be symmetric: an endpoint will be further from the sample mean in the direction of any outliers. A confidence interval is an insurance policy: rather than relying on a single statistic, the sample mean, as an estimate of $\mu$, we give a range of possible values for $\mu$. We can see that there are some extremely large arsenic measurements: of the `r length(Arsenic)` observations, `r sum(Arsenic > 1000)` are above 1000 $\mu g/L$ and `r sum(Arsenic > 2200)` are above 2200 $\mu g/L$ (remember, the sample mean is only `r round(mean(Arsenic),2)`!). What we do not know is just how huge arsenic levels in the population can be, or how many huge ones there are. It could be that huge observations are underrepresented in our data set. In order to protect against this – that is, to have only a 2.5% chance of missing a true big mean, the interval of plausible values for $\mu$ must stretch far to the right. Conversely, there is less risk of missing the true mean on the low side, so the left endpoint need not be as far away from the mean.
+
+### Using `infer`
+
+```{r}
+library(infer)
+bootdist <- Bang %>% 
+  specify(response = Arsenic) %>% 
+  generate(reps = 10^4, type = "bootstrap") %>% 
+  calculate(stat = "mean")
+visualize(bootdist)
+get_ci(bootdist, level = 0.95)
+# Or
+quantile(bootdist$stat, probs = c(0.025, 0.975))
+```
+
 
 #### TWO SAMPLE BOOTSTRAP {-}
 
