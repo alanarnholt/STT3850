@@ -48,7 +48,7 @@ TS
 qt(c(0.025, 0.975), sum(!is.na(DF$Weight)) - 1)
 ```
 
-Note that $Q_1 = t^*_{0.025} = `r TS[1]`$, and $Q_2 = t^*_{0.975} = `r TS[2]`$.  The bootstrap $t$ confidenc interval is 
+Note that $Q_1 = t^*_{0.025} = `r TS[1]`$, and $Q_2 = t^*_{0.975} = `r TS[2]`$.  The bootstrap $t$ confidence interval is 
 $$CI_{1 - \alpha}(\mu)=[\bar{X} - Q_2\cdot S/\sqrt{n}, \bar{X} - Q_1\cdot S/\sqrt{n}]$$ or 
 $$CI_{1 - \alpha}(\mu)=[\bar{X} - t^*_{1 - \alpha/2}\cdot S/\sqrt{n}, \bar{X} - t^*_{\alpha/2}\cdot S/\sqrt{n}]$$
 
@@ -58,7 +58,7 @@ $$CI_{1 - \alpha}(\mu)=[`r thetahat` - `r TS[2]`\cdot `r SEthetahat`, `r thetaha
 
 $$CI_{1 - \alpha}(\mu)= [`r thetahat - TS[2]*SEthetahat`, `r thetahat - TS[1]*SEthetahat`]$$
 
-COmpare to a standard $t$ confidence interval:
+Compare to a standard $t$ confidence interval:
 
 ```{r}
 t.test(DF$Weight)
