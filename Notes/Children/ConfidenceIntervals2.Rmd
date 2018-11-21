@@ -833,7 +833,7 @@ mean2.boot <- function(data, i){
   return(c(M[2] - M[1], V[2] + V[1]))
 }
 set.seed(1)
-boot.out <- boot(Verizon, mean2.boot, R=10^4)
+boot.out <- boot(Verizon, mean2.boot, R=10^4, strata = Verizon[ ,2])
 boot.ci(boot.out, conf = 0.95, type = c("perc", "stud"))
 plot(boot.out)
 hist(boot.out$t[,1], col = "pink", breaks = "Scott", main = "", freq= FALSE, xlab = substitute(paste(bar(x)[1],"* - ", bar(x)[2],"*")))
