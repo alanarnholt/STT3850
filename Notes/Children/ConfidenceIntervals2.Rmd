@@ -220,8 +220,8 @@ Compare the 0.95 quantile for a $t$ distribution with 27 degrees of freedom with
 **Example 7.6** Find a 99% confidence interval for the mean weight of baby girls born in North Carolina in 2004.
 
 ```{r NCBirthsData, echo = FALSE}
-site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
-NCBirths2004 <- read.csv(file=url(site))
+library(resampledata)
+head(NCBirths2004)
 MEANS <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, mean)
 SD <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, sd)
 # OR
@@ -233,8 +233,6 @@ NCBirths2004 %>%
 **Solution** The mean and standard deviation of the weights of $n =$ `r sum(NCBirths2004$Gender == "Female")` girls is `r MEANS[1]` and `r SD[1]`g, respectively. A normal quantile plot shows that the weights are approximately normally distributed, so a $t$ interval is reasonable.
 
 ```{r QQs}
-site <- "http://www1.appstate.edu/~arnholta/Data/NCBirths2004.csv"
-NCBirths2004 <- read.csv(file=url(site))
 MEANS <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, mean)
 SD <- tapply(NCBirths2004$Weight, NCBirths2004$Gender, sd)
 MEANS
@@ -405,31 +403,27 @@ CI_{1 - \alpha}(\mu_X - \mu_Y) = \left(\bar{X} - \bar{Y} - t_{1 - \alpha/2; \nu}
 
 **Example 7.8**
 
-```{r Calculus}
-library(PASWR)  # Update 
+```{r label = "CALC"}
+# Something new
+library(PASWR2)  
 library(ggplot2)
 ```
 
-Construct a 90% confidence interval for $\mu_X - \mu_Y$ using the information in `Calculus` which provides the assessment scores for students enrolled in a biostatistics course according to whether they had completed a calculus course prior to enrolling in the biostatistics course. Before constructing a confidence interval, one should verify the assumptions needed to have a valid confidence interval.  In this case we need to check for normality of both samples.
+Construct a 90% confidence interval for $\mu_X - \mu_Y$ using the information in `CALCULUS` which provides the assessment scores for students enrolled in a biostatistics course according to whether they had completed a calculus course prior to enrolling in the biostatistics course. Before constructing a confidence interval, one should verify the assumptions needed to have a valid confidence interval.  In this case we need to check for normality of both samples.
 
 ```{r NORMALITY}
-ggplot(data = Calculus, aes(sample = No.Calculus)) + 
+ggplot(data = CALCULUS, aes(sample = score, color = calculus)) + 
   stat_qq() + 
-  ggtitle("No Calculus") + 
-  theme_bw()
-ggplot(data = Calculus, aes(sample = Yes.Calculus)) + 
-  stat_qq() + 
-  ggtitle("Yes Calculus") + 
   theme_bw()
 ```
 
-For the $n_X = 18$ students who had no calculus, the mean and standard deviation of their course scores are $\bar{x}=$ `r mean(Calculus[['No.Calculus']])`, and $s_X =$ `r sd(Calculus[['No.Calculus']])`. For the $n_Y = 18$ students who had calculus, the mean and standard deviation of their course scores are $\bar{y}=$ `r mean(Calculus[['Yes.Calculus']])`, and $s_Y =$ `r sd(Calculus[['Yes.Calculus']])`. The mean difference is $\bar{x} -\bar{y}=$ `r mean(Calculus[['No.Calculus']]) - mean(Calculus[['Yes.Calculus']])` with the standard error of the difference of `r sqrt(var(Calculus[['No.Calculus']])/18 + var(Calculus[['Yes.Calculus']])/18)` and degrees of freedom are `r t.test(Calculus[['No.Calculus']], Calculus[['Yes.Calculus']])[['parameter']]`.  The 0.95 quantile of the $t$ distribution with `r t.test(Calculus[['No.Calculus']], Calculus[['Yes.Calculus']])[['parameter']]` degrees of freedom is `r qt(0.95, 20.585)`.  Thus, the 90% confidence interval is $-24.333 \pm 1.7233 \times 3.2786 = (-29.9802, -18.6865)$.
+For the $n_X = 18$ students who had no calculus, the mean and standard deviation of their course scores are $\bar{x}=$ `r mean(CALCULUS$score[CALCULUS$calculus=="No"])`, and $s_X =$ `r sd(CALCULUS$score[CALCULUS$calculus=="No"])`. For the $n_Y = 18$ students who had calculus, the mean and standard deviation of their course scores are $\bar{y}=$ `r mean(CALCULUS$score[CALCULUS$calculus=="Yes"])`, and $s_Y =$ `r sd(CALCULUS$score[CALCULUS$calculus=="Yes"])`. The mean difference is $\bar{x} -\bar{y}=$ `r mean(CALCULUS$score[CALCULUS$calculus=="No"]) - mean(CALCULUS$score[CALCULUS$calculus=="Yes"])` with the standard error of the difference of `r sqrt(var(CALCULUS$score[CALCULUS$calculus=="No"])/18 + var(CALCULUS$score[CALCULUS$calculus=="Yes"])/18)` and degrees of freedom are `r t.test(score~calculus, data = CALCULUS)$parameter`.  The 0.95 quantile of the $t$ distribution with `r t.test(score~calculus, data = CALCULUS)$parameter` degrees of freedom is `r qt(0.95, 20.585)`.  Thus, the 90% confidence interval is $-24.333 \pm 1.7233 \times 3.2786 = (-29.9802, -18.6865)$.
 
 **R Note:**
 
 ```{r CalcTtest}
-t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.90)
-t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.90)$conf.int
+t.test(score~calculus, data = CALCULUS, conf.level = 0.90)
+t.test(score~calculus, data = CALCULUS, conf.level = 0.90)$conf.int
 ```
 
 **Remark**
@@ -440,8 +434,7 @@ t.test(Calculus$No.Calculus, Calculus$Yes.Calculus, conf.level = 0.90)$conf.int
 **Example 7.9**  Consider the weights of boy and girl babies born in Texas in 2004.  Construct a 95% $t$ confidence interval for the mean difference in weights (boys - girls).
 
 ```{r Texas}
-site <- "http://www1.appstate.edu/~arnholta/Data/TXBirths2004.csv"
-Texas <- read.csv(file=url(site))
+Texas <- TXBirths2004
 ggplot(data = Texas, aes(x = Weight)) + 
   geom_histogram(fill = "blue", color = "black") + 
   facet_grid(Gender~.) + 
@@ -694,8 +687,6 @@ The bootstrap percentile confidence interval for giving a range of plausible val
 Recall the Bangladesh arsenic levels data.  The distribution of arsenic levels was skewed right.
 
 ```{r BangladeshA}
-site <- "http://www1.appstate.edu/~arnholta/Data/Bangladesh.csv"
-Bangladesh <- read.csv(file=url(site))
 head(Bangladesh)
 ggplot(data = Bangladesh, aes(x = Arsenic)) + 
   geom_histogram(fill = "blue") + 
@@ -798,8 +789,6 @@ $$\left( (\bar{x_1} - \bar{x_2}) - Q^*_2 \times \sqrt{s_1^2/n_1 + s_2^2/n_2} , (
 Recall the Verizon example, where we considered the difference in means of two very skewed distributions of repair times for two very unbalanced samples ($n_1 = 23$ versus $n_2 = 1664$).  Let us look at the data again.  
 
 ```{r verizon}
-site <- "http://www1.appstate.edu/~arnholta/Data/Verizon.csv"
-Verizon <- read.csv(file=url(site))
 Time.ILEC <- subset(Verizon, select=Time, Group == "ILEC", drop=TRUE)
 Time.CLEC <- subset(Verizon, select=Time, Group == "CLEC", drop=TRUE)
 thetahat <- mean(Time.ILEC) - mean(Time.CLEC)

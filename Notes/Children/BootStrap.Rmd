@@ -509,7 +509,7 @@ phoneF <- function(data, i){
   m <- tapply(d$Time, d$Group, mean)
   rat <- m[2]/m[1]
   rat}
-boot.obj <- boot(data = Phone, statistic = phoneF, R = 10000)
+boot.obj <- boot(data = Phone, statistic = phoneF, R = 10000, strata = Phone[ ,2])
 plot(boot.obj)
 ans <- boot.ci(boot.obj, type = "perc")
 ans

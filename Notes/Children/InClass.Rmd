@@ -9,8 +9,7 @@ In Class Exercise
 The birth weight of a baby is of interest to health officials since many studies have shown possible links between weight and conditions later in life, such as obesity or diabetes.  The data set `Girls2004` consists of a random sample of 40 baby girls born in Alaska and 40 baby girls born in Wyoming.  These babies also had a gestation period of at least 37 weeks and were single births. 
 
 
-Import the data `Girls2004.csv` available from [http:\\www1.appstate.edu/arnholta/Data/](http:\\www1.appstate.edu/arnholta/Data/).
-
+The data `Girls2004`  is available from the `resampledata` package.
 
 
   * Perform some exploratory data analysis and obtain summary statistics on the weights of baby girls born in Wyoming and Alaska (do separate analyses for each state).
