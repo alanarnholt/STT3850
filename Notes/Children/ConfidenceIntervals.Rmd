@@ -19,7 +19,7 @@ The random interval $(\bar{X} - 3.937, \bar{X} + 3.937)$ has a probability of 0.
 
 * The trick of doing algebra on equations that are inside of probability is often handy.
 * Be careful when reading an equation such as $0.95 = P(\bar{X}  -3.937 < \mu < \bar{X} + 3.937)$. this does not mean that $\mu$ is random, with a 95% probability of falling between two values. The parameter $\mu$ is an unknown constant. Instead, it is the interval that is random, with a 95% probability of including $\mu$.
-In the previous example, we computed a confidence interval of (91.1, 98.9). We should not attribute a probability to this interval: either the true meaning is in this interval or it is not!  The statement "we are 95% confident" means that if we repeated the same process of drawing samples and computing intervals many times, then in the long run, 95% of the intervals would include $\mu$.
+In the previous example, we computed a confidence interval of (91.1, 98.9). We should not attribute a probability to this interval: either the true mean is in this interval or it is not!  The statement "we are 95% confident" means that if we repeated the same process of drawing samples and computing intervals many times, then in the long run, 95% of the intervals would include $\mu$.
 
 More generally, for a sample of size $n$ drawn from a normal distribution with unknown $\mu$ and known $\sigma$, a $(1 - \alpha)\times 100\%$ confidence interval for the mean  $\mu$ is $$ CI_{1 - \alpha}(\mu) = \left( \bar{X} + z_{\alpha/2} \sigma/\sqrt{n} ,  \bar{X} + z_{1-\alpha/2} \sigma/\sqrt{n}\right) $$
 
@@ -122,7 +122,7 @@ n
 
 In most real-life settings,  a data analyst  will not know the mean or the standard deviation of the population of interest.  How then would we get an interval estimate of the mean $\mu$?  we have used  the sample mean $\bar{X}$ as an estimate  of $\mu$, so it seems natural to consider the sample standard deviation $S$ as an estimate of $\sigma$. 
 
-However, in deriving the confidence interval for $\mu$, we used the fact that $(\bar{X} - \mu)/(\sigma/\sqrt{n})$ follows a standard normal distribution. Does changing $\sigma$ to $S$, the sample standard deviation, change  the distribution? Who uses simulation to investigate the distribution of $(\bar{X} - \mu)/(\sigma/\sqrt{n})$ for random samples drawn from a $N(\mu, \sigma)$.
+However, in deriving the confidence interval for $\mu$, we used the fact that $(\bar{X} - \mu)/(\sigma/\sqrt{n})$ follows a standard normal distribution. Does changing $\sigma$ to $S$, the sample standard deviation, change  the distribution? We will use simulation to investigate the distribution of $(\bar{X} - \mu)/(\sigma/\sqrt{n})$ for random samples drawn from a $N(\mu, \sigma)$.
 
 ```{r TS, fig.height=4, fig.width=7}
 set.seed(1)
@@ -334,7 +334,7 @@ Let $X$ and $Y$ be random variables with $X \sim N(\mu_1, \sigma_1)$ and $Y \sim
 
 $$\bar{X} - \bar{Y} \sim N \left(\mu_1 - \mu_2, \sqrt{\sigma_1^2/n_1 + \sigma_2^2/n_2}\right)$$
 
-Of course, in practice we usually do not know the population variances, so we will plug in the sample variances.  As in the single-sample case, we call this a $t$ statistics:
+Of course, in practice we usually do not know the population variances, so we will plug in the sample variances.  As in the single-sample case, we call this a $t$ statistic:
 
 $$T = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{S_X^2/n_X + S_Y^2/n_Y}}$$
 
@@ -398,7 +398,7 @@ str(Texas)
 t.test(Texas$Weight~Texas$Gender)
 ```
 
-**7.4 CONFIDENCE ITERVALS FOR PROPORTIONS**
+**7.4 CONFIDENCE INTERVALS FOR PROPORTIONS**
 
 In 2010, according to an AP-Gfk Poll conducted on October 13-18, 59% of 846 likely voters responded that they felt things in this country were heading in the wrong direction [(http:www.ap-gfkpoll.com/poll.archive.html)](http:www.ap-gfkpoll.com/poll.archive.html).  Let $X$ denote the number of likely voters in a sample of size $n$ who think the country is headed in the wrong direction.  We assume $X$ is binomial, $X \sim Bin(n, p)$.  We know that the proportion of likely voters, $\hat{p} =X/n$ is an unbiased estimator of $p$ and for large $n$, $Z = (\hat{p} - p)/\sqrt{p(1-p)}$ is approximately standard normal.  Thus,
 
@@ -410,7 +410,7 @@ $$-z_{1 - \alpha/2} =\frac{\hat{p} - p}{\sqrt{p(1-p)/n}} $$
 
 and solve for $p$ (we get the same answer if we had set the right-hand side of the above to $z_{1 - \alpha/2}$).  This leads to the quadratic equation
 
-$$\left(z_{1-\alpha/2}^2 + n \right)p^2 -\left( 2n\hat{p} + z_{1-\alpha/2} \right)p +  n\hat{p}^2 $$
+$$\left(z_{1-\alpha/2}^2 + n \right)p^2 -\left( 2n\hat{p} + z_{1-\alpha/2}^2 \right)p +  n\hat{p}^2 $$
 
 Using the quadratic formula to solve for $p$ gives a $(1 - \alpha)$ 100% confidence interval ($L$, $U$), where
 

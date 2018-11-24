@@ -1,0 +1,17 @@
+base
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+lattice
+PASWR2
+resampledata
+bindrcpp
+infer
+boot
+e1071
