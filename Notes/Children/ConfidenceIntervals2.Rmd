@@ -891,6 +891,7 @@ for(i in 1:N)
     sqrt(var(bootx)/nx + var(booty)/ny)
   DM[i] <- mean(bootx) - mean(booty)
 }
+quantile(Tstar, c(.975, .025))
 CItboot <- thetahat - quantile(Tstar, c(.975, .025)) * SE
 names(CItboot) <- NULL
 CItboot

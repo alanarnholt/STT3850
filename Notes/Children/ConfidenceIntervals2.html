@@ -998,7 +998,10 @@ for(i in 1:N)
     sqrt(var(bootx)/nx + var(booty)/ny)
   DM[i] &lt;- mean(bootx) - mean(booty)
 }
-CItboot &lt;- thetahat - quantile(Tstar, c(.975, .025)) * SE
+quantile(Tstar, c(.975, .025))</code></pre>
+<pre><code>    97.5%      2.5% 
+ 3.497118 -1.439190 </code></pre>
+<pre class="r"><code>CItboot &lt;- thetahat - quantile(Tstar, c(.975, .025)) * SE
 names(CItboot) &lt;- NULL
 CItboot</code></pre>
 <pre><code>[1] -22.375169  -2.221755</code></pre>
