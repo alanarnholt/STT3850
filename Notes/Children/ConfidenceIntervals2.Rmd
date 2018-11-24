@@ -862,7 +862,8 @@ lines(density((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5), lwd = 2)
 The bootstrap intervals for a difference in means follows the same idea.
 
 **BOOTSTRAP $t$ CONFIDENCE INTERVAL FOR $\mu_1 - \mu_2$**
- For each of many resamples, calculate the bootstrap $t$ statistic
+
+For each of many resamples, calculate the bootstrap $t$ statistic
  
  $$T^* = \frac{\bar{X_1}^*- \bar{X_2}^* -(\bar{x_1} -\bar{x_2})}{\sqrt{S^{2*}_1/n_1 + S^{2*}_2/n_2}},$$
  
@@ -944,6 +945,7 @@ qqline((boot.out$t[,1] - boot.out$t0[1])/(boot.out$t[,2])^.5)
 ```
 
 **7.5.1 Comparing Bootstrap $t$ and Formula $t$ Confidence Intervals**
+
 It is useful to compare the bootstrap distribution to classical statistical inferences.  With classical $t$ intervals of the form $\bar{x} \pm t \times s/\sqrt{n},$ the confidence interval width varies substantially in small samples as the sample standard deviation $s$ varies.  Correspondingly, the classical standard error $s/\sqrt{n}$ varies as $s$ varies.  The bootstrap is no different in this regard ---bootstrap standard errors and widths of confidence intervals for the mean are proportional to $s$.
 
 Where the bootstrap does differ from classical inference is in how it handles skewness.  The bootstrap percentile interval and bootstrap $t$ interval are in general asymmetrical, with asymmetry depending on the sample.  These intervals estimate the skewness of a population from the skewness of the sample.  In contrast, classical $t$ intervals assume that the population has no underlying skewness (skewness is 0).
