@@ -232,7 +232,7 @@ t.test(girls, conf.level = 0.99)$conf
 t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = 0.99)$conf
 ```
 
-**Assumptions** With any statistical procedure, one of the first questions to ask is, How robust is it?  That is, what happens if the assumptions underlying the procedure are violated? The $t$ confidence interval assumes that the underlying populations is normal, so what happens if that is not the case?
+**Assumptions** With any statistical procedure, one of the first questions to ask is, How robust is it?  That is, what happens if the assumptions underlying the procedure are violated? The $t$ confidence interval assumes that the underlying population is normal, so what happens if that is not the case?
 
 When the population has a normal distribution, the $t$ interval is exact: a $(1 - \alpha)\times 100\%)$ interval covers $\mu$ with probability $1 - \alpha$ or, equivalently, misses $\mu$ on either side with probability $\alpha/2$; that is, the interval is completely above $\mu$ with probability $\alpha/2$ or is completely below with probability $\alpha/2$.
 

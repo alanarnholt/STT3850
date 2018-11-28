@@ -137,7 +137,7 @@ $(document).ready(function () {
 <li><p>Be careful when reading an equation such as <span class="math inline">\(0.95 = P(\bar{X} -3.937 &lt; \mu &lt; \bar{X} + 3.937)\)</span>. this does not mean that <span class="math inline">\(\mu\)</span> is random, with a 95% probability of falling between two values. The parameter <span class="math inline">\(\mu\)</span> is an unknown constant. Instead, it is the interval that is random, with a 95% probability of including <span class="math inline">\(\mu\)</span>.</p></li>
 </ul>
 <p>In the previous example, we computed a confidence interval of (91.1, 98.9). We should not attribute a probability to this interval: either the true mean is in this interval or it is not! The statement “we are 95% confident” means that if we repeated the same process of drawing samples and computing intervals many times, then in the long run, 95% of the intervals would include <span class="math inline">\(\mu\)</span>.</p>
-<p>More generally, for a sample of size <span class="math inline">\(n\)</span> drawn from a normal distribution with unknown <span class="math inline">\(\mu\)</span> and known <span class="math inline">\(\sigma\)</span>, a <span class="math inline">\((1 - \alpha)\times 100\%\)</span> confidence interval for the mean <span class="math inline">\(\mu\)</span> is <span class="math display">\[ CI_{1 - \alpha}(\mu) = \left( \bar{X} + z_{\alpha/2} \sigma/\sqrt{n} ,  \bar{X} + z_{1-\alpha/2} \sigma/\sqrt{n}\right) \]</span></p>
+<p>More generally, for a sample of size <span class="math inline">\(n\)</span> drawn from a normal distribution with unknown <span class="math inline">\(\mu\)</span> and known <span class="math inline">\(\sigma\)</span>, a <span class="math inline">\((1 - \alpha)\times 100\%\)</span> confidence interval for the mean <span class="math inline">\(\mu\)</span> is <span class="math display">\[ CI_{1 - \alpha}(\mu) = \left( \bar{X} - z_{1-\alpha/2} \sigma/\sqrt{n} ,  \bar{X} - z_{\alpha/2} \sigma/\sqrt{n}\right) \]</span></p>
 <p>If we draw thousands of random samples from a normal distribution with parameters <span class="math inline">\(\mu, \sigma\)</span> and compute the 95% confidence interval for each sample, then about 95% of the intervals would contain <span class="math inline">\(\mu\)</span>.</p>
 <p>We illustrate this with the simulation by drawing random samples of size 30 from a <span class="math inline">\(N(25, 4)\)</span>. For each sample, we construct a 95% confidence interval and check to see whether it contains <span class="math inline">\(\mu = 25\)</span>. We do this 10,000 times and keep track of the number of times that the interval contains <span class="math inline">\(\mu\)</span>. For good measure, we will graph some of the random intervals in Figure <a href="#fig:ACL">1</a>.</p>
 <pre class="r"><code>set.seed(13)
@@ -149,8 +149,8 @@ sims &lt;- 10^4
 plot(x = c(mu - 4*sigma/sqrt(n), mu + 4*sigma/sqrt(n)), y = c(1, 100), type = &quot;n&quot;, xlab = &quot;&quot;, ylab = &quot;&quot;)
 for (i in 1:sims){
  x &lt;- rnorm(n, mu, sigma)
- L &lt;- mean(x) + qnorm(.025)*sigma/sqrt(n)
- U &lt;- mean(x) + qnorm(0.975)*sigma/sqrt(n)
+ L &lt;- mean(x) - qnorm(0.975)*sigma/sqrt(n)
+ U &lt;- mean(x) - qnorm(0.025)*sigma/sqrt(n)
  if(L &lt; mu &amp;&amp; mu &lt; U){counter &lt;- counter + 1}
  if(i &lt;= 100){
  segments(L, i, U, i, col = &quot;blue&quot;)
@@ -277,7 +277,7 @@ ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
 <p><span class="math display">\[
 CI_{1 - \alpha}(\mu) = \left(\bar{X}-t_{1 - \alpha/2; n-1}\times \frac{S}{\sqrt{n}},  \bar{X} +t_{1 - \alpha/2; n-1}\times \frac{S}{\sqrt{n}}  \right)
 \]</span></p>
-<p><strong>Example 7.5</strong> The distribution of weights of boys in Sodor is normal with unknown mean <span class="math inline">\(\mu\)</span>. From a random sample of 28 boys, we find a sample mean of 110 pounds and a sample standard deviation of 7.5 pounds. To compute a 90% confidence interval, find the 0.95 quantile of the <span class="math inline">\(t\)</span> distribution with 27 degrees of freedom, which is 1.7032884 using the command <code>qt(0.95, 27)</code>. The interval is <span class="math inline">\((110 - 1.7033*7.5/\sqrt{28}, 110 + 1.7033*7.5/\sqrt{28})\)</span>; thus we are 90% confident that the true mean weight is between 107.6 and 112.4 pounds.</p>
+<p><strong>Example 7.5</strong> The distribution of weights of boys in Sodor is normal with unknown mean <span class="math inline">\(\mu\)</span>. From a random sample of 28 boys, we find a sample mean of 110 pounds and a sample standard deviation of 7.5 pounds. To compute a 90% confidence interval, find the 0.95 quantile of the <span class="math inline">\(t\)</span> distribution with 27 degrees of freedom, which is 1.7032884 using the command <code>qt(0.95, 27)</code>. The interval is <span class="math inline">\((110 - 1.7033\times7.5/\sqrt{28}, 110 + 1.7033\times7.5/\sqrt{28})\)</span>; thus we are 90% confident that the true mean weight is between 107.6 and 112.4 pounds.</p>
 <p><strong>R Note:</strong></p>
 <p>The command <code>pt</code> or <code>qt</code> give probabilities or quantiles, respectively, for the <span class="math inline">\(t\)</span> distribution. For instance, to find <span class="math inline">\(P(T_{27} &lt; 2.8)\)</span> for the random variable <span class="math inline">\(T_{27}\)</span> from a <span class="math inline">\(t\)</span> distribution with 27 degrees of freedom,</p>
 <pre class="r"><code>pt(2.8, 27)</code></pre>
@@ -381,7 +381,7 @@ for(i in 1:B){
 <pre class="r"><code>(CI_bst &lt;- c(mean(girls) - Q[2]*sd(girls)/sqrt(length(girls)), mean(girls) - Q[1]*sd(girls)/sqrt(length(girls)) ))</code></pre>
 <pre><code>   97.5%     2.5% 
 3356.580 3440.357 </code></pre>
-<p><strong>Assumptions</strong> With any statistical procedure, one of the first questions to ask is, How robust is it? That is, what happens if the assumptions underlying the procedure are violated? The <span class="math inline">\(t\)</span> confidence interval assumes that the underlying populations is normal, so what happens if that is not the case?</p>
+<p><strong>Assumptions</strong> With any statistical procedure, one of the first questions to ask is, How robust is it? That is, what happens if the assumptions underlying the procedure are violated? The <span class="math inline">\(t\)</span> confidence interval assumes that the underlying population is normal, so what happens if that is not the case?</p>
 <p>When the population has a normal distribution, the <span class="math inline">\(t\)</span> interval is exact: a <span class="math inline">\((1 - \alpha)\times 100\%)\)</span> interval covers <span class="math inline">\(\mu\)</span> with probability <span class="math inline">\(1 - \alpha\)</span> or, equivalently, misses <span class="math inline">\(\mu\)</span> on either side with probability <span class="math inline">\(\alpha/2\)</span>; that is, the interval is completely above <span class="math inline">\(\mu\)</span> with probability <span class="math inline">\(\alpha/2\)</span> or is completely below with probability <span class="math inline">\(\alpha/2\)</span>.</p>
 <p>Let us check this for a nonnormal population by running a simulation.</p>
 <p><strong>Example 7.7</strong> We draw random samples from the right-skewed gamma distribution with <span class="math inline">\(\alpha = 5\)</span> and <span class="math inline">\(\lambda = 2\)</span> and count the number of times the 95% confidence interval misses the mean <span class="math inline">\(\mu = 5/2\)</span> on each side.</p>

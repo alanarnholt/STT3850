@@ -28,7 +28,7 @@ The random interval $(\bar{X} - 3.937, \bar{X} + 3.937)$ has a probability of 0.
 
 In the previous example, we computed a confidence interval of (91.1, 98.9). We should not attribute a probability to this interval: either the true mean is in this interval or it is not!  The statement "we are 95% confident" means that if we repeated the same process of drawing samples and computing intervals many times, then in the long run, 95% of the intervals would include $\mu$.
 
-More generally, for a sample of size $n$ drawn from a normal distribution with unknown $\mu$ and known $\sigma$, a $(1 - \alpha)\times 100\%$ confidence interval for the mean  $\mu$ is $$ CI_{1 - \alpha}(\mu) = \left( \bar{X} + z_{\alpha/2} \sigma/\sqrt{n} ,  \bar{X} + z_{1-\alpha/2} \sigma/\sqrt{n}\right) $$
+More generally, for a sample of size $n$ drawn from a normal distribution with unknown $\mu$ and known $\sigma$, a $(1 - \alpha)\times 100\%$ confidence interval for the mean  $\mu$ is $$ CI_{1 - \alpha}(\mu) = \left( \bar{X} - z_{1-\alpha/2} \sigma/\sqrt{n} ,  \bar{X} - z_{\alpha/2} \sigma/\sqrt{n}\right) $$
 
 If we draw thousands of random samples from a normal distribution with parameters $\mu, \sigma$ and compute the 95% confidence interval for each sample, then about 95% of the intervals would contain $\mu$.
 
@@ -45,8 +45,8 @@ sims <- 10^4
 plot(x = c(mu - 4*sigma/sqrt(n), mu + 4*sigma/sqrt(n)), y = c(1, 100), type = "n", xlab = "", ylab = "")
 for (i in 1:sims){
  x <- rnorm(n, mu, sigma)
- L <- mean(x) + qnorm(.025)*sigma/sqrt(n)
- U <- mean(x) + qnorm(0.975)*sigma/sqrt(n)
+ L <- mean(x) - qnorm(0.975)*sigma/sqrt(n)
+ U <- mean(x) - qnorm(0.025)*sigma/sqrt(n)
  if(L < mu && mu < U){counter <- counter + 1}
  if(i <= 100){
  segments(L, i, U, i, col = "blue")
@@ -202,7 +202,7 @@ If $X_i \sim N(\mu, \sigma), i = 1, \ldots, n,$ with $\sigma$ unknown, then a $(
 CI_{1 - \alpha}(\mu) = \left(\bar{X}-t_{1 - \alpha/2; n-1}\times \frac{S}{\sqrt{n}},  \bar{X} +t_{1 - \alpha/2; n-1}\times \frac{S}{\sqrt{n}}  \right)
 \]
 
-**Example 7.5** The distribution of weights of boys in Sodor is normal with unknown mean $\mu$.  From a random sample of 28 boys, we find a sample mean of 110 pounds and a sample standard deviation of 7.5 pounds.  To compute a 90% confidence interval, find the 0.95 quantile of the $t$ distribution with 27 degrees of freedom, which is `r qt(.95, 27)` using the command `qt(0.95, 27)`. The interval is $(110 - 1.7033*7.5/\sqrt{28}, 110 + 1.7033*7.5/\sqrt{28})$; thus we are 90% confident that the true mean weight is between `r round(110 - qt(.95,27)*7.5/sqrt(28),1)` and `r round(110 + qt(.95,27)*7.5/sqrt(28),1)` pounds.
+**Example 7.5** The distribution of weights of boys in Sodor is normal with unknown mean $\mu$.  From a random sample of 28 boys, we find a sample mean of 110 pounds and a sample standard deviation of 7.5 pounds.  To compute a 90% confidence interval, find the 0.95 quantile of the $t$ distribution with 27 degrees of freedom, which is `r qt(.95, 27)` using the command `qt(0.95, 27)`. The interval is $(110 - 1.7033\times7.5/\sqrt{28}, 110 + 1.7033\times7.5/\sqrt{28})$; thus we are 90% confident that the true mean weight is between `r round(110 - qt(.95,27)*7.5/sqrt(28),1)` and `r round(110 + qt(.95,27)*7.5/sqrt(28),1)` pounds.
 
 **R Note:**
 
@@ -294,7 +294,7 @@ for(i in 1:B){
 ```
 
 
-**Assumptions** With any statistical procedure, one of the first questions to ask is, How robust is it?  That is, what happens if the assumptions underlying the procedure are violated? The $t$ confidence interval assumes that the underlying populations is normal, so what happens if that is not the case?
+**Assumptions** With any statistical procedure, one of the first questions to ask is, How robust is it?  That is, what happens if the assumptions underlying the procedure are violated? The $t$ confidence interval assumes that the underlying population is normal, so what happens if that is not the case?
 
 When the population has a normal distribution, the $t$ interval is exact: a $(1 - \alpha)\times 100\%)$ interval covers $\mu$ with probability $1 - \alpha$ or, equivalently, misses $\mu$ on either side with probability $\alpha/2$; that is, the interval is completely above $\mu$ with probability $\alpha/2$ or is completely below with probability $\alpha/2$.
 
