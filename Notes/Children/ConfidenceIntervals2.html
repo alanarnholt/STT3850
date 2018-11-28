@@ -373,14 +373,14 @@ for(i in 1:B){
 bst &lt;- numeric(B)
 for(i in 1:B){
   bss &lt;- sample(girls, size = length(girls), replace = TRUE)
-  bst[i] &lt;- (mean(girls) - mean(bss))/(sd(bss)/sqrt(length(girls)))
+  bst[i] &lt;- (mean(bss) - mean(girls))/(sd(bss)/sqrt(length(girls)))
 }
 (Q &lt;- quantile(bst, probs = c(0.025, 0.975)))</code></pre>
 <pre><code>     2.5%     97.5% 
--1.961449  1.975698 </code></pre>
+-1.975698  1.961449 </code></pre>
 <pre class="r"><code>(CI_bst &lt;- c(mean(girls) - Q[2]*sd(girls)/sqrt(length(girls)), mean(girls) - Q[1]*sd(girls)/sqrt(length(girls)) ))</code></pre>
 <pre><code>   97.5%     2.5% 
-3356.277 3440.053 </code></pre>
+3356.580 3440.357 </code></pre>
 <p><strong>Assumptions</strong> With any statistical procedure, one of the first questions to ask is, How robust is it? That is, what happens if the assumptions underlying the procedure are violated? The <span class="math inline">\(t\)</span> confidence interval assumes that the underlying populations is normal, so what happens if that is not the case?</p>
 <p>When the population has a normal distribution, the <span class="math inline">\(t\)</span> interval is exact: a <span class="math inline">\((1 - \alpha)\times 100\%)\)</span> interval covers <span class="math inline">\(\mu\)</span> with probability <span class="math inline">\(1 - \alpha\)</span> or, equivalently, misses <span class="math inline">\(\mu\)</span> on either side with probability <span class="math inline">\(\alpha/2\)</span>; that is, the interval is completely above <span class="math inline">\(\mu\)</span> with probability <span class="math inline">\(\alpha/2\)</span> or is completely below with probability <span class="math inline">\(\alpha/2\)</span>.</p>
 <p>Let us check this for a nonnormal population by running a simulation.</p>

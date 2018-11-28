@@ -287,7 +287,7 @@ for(i in 1:B){
 bst <- numeric(B)
 for(i in 1:B){
   bss <- sample(girls, size = length(girls), replace = TRUE)
-  bst[i] <- (mean(girls) - mean(bss))/(sd(bss)/sqrt(length(girls)))
+  bst[i] <- (mean(bss) - mean(girls))/(sd(bss)/sqrt(length(girls)))
 }
 (Q <- quantile(bst, probs = c(0.025, 0.975)))
 (CI_bst <- c(mean(girls) - Q[2]*sd(girls)/sqrt(length(girls)), mean(girls) - Q[1]*sd(girls)/sqrt(length(girls)) ))
