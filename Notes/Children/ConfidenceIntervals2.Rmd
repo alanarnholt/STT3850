@@ -476,7 +476,7 @@ B <- 10^3
 diffmean <- numeric(B)
 for(i in 1:B){
   bsno <- sample(NoCalc, size = length(NoCalc), replace = TRUE)
-  bsyes <- sample(YesCalc, size = length(NoCalc), replace = TRUE)
+  bsyes <- sample(YesCalc, size = length(YesCalc), replace = TRUE)
   diffmean[i] <- mean(bsno) - mean(bsyes)
 }
 (CIperc <- quantile(diffmean, probs = c(0.025, 0.975)))
@@ -485,7 +485,7 @@ B <- 10^3
 bst <- numeric(B)
 for(i in 1:B){
   bsno <- sample(NoCalc, size = length(NoCalc), replace = TRUE)
-  bsyes <- sample(YesCalc, size = length(NoCalc), replace = TRUE)
+  bsyes <- sample(YesCalc, size = length(YesCalc), replace = TRUE)
   bst[i] <- ( (mean(bsno) - mean(bsyes)) - (mean(NoCalc) - mean(YesCalc)) ) / (sqrt(var(bsno)/length(NoCalc) + var(bsyes)/length(YesCalc)))
 }
 (Q <- quantile(bst, probs = c(0.025, 0.975)))

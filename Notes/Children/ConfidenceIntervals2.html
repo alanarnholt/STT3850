@@ -548,7 +548,7 @@ B &lt;- 10^3
 diffmean &lt;- numeric(B)
 for(i in 1:B){
   bsno &lt;- sample(NoCalc, size = length(NoCalc), replace = TRUE)
-  bsyes &lt;- sample(YesCalc, size = length(NoCalc), replace = TRUE)
+  bsyes &lt;- sample(YesCalc, size = length(YesCalc), replace = TRUE)
   diffmean[i] &lt;- mean(bsno) - mean(bsyes)
 }
 (CIperc &lt;- quantile(diffmean, probs = c(0.025, 0.975)))</code></pre>
@@ -559,7 +559,7 @@ B &lt;- 10^3
 bst &lt;- numeric(B)
 for(i in 1:B){
   bsno &lt;- sample(NoCalc, size = length(NoCalc), replace = TRUE)
-  bsyes &lt;- sample(YesCalc, size = length(NoCalc), replace = TRUE)
+  bsyes &lt;- sample(YesCalc, size = length(YesCalc), replace = TRUE)
   bst[i] &lt;- ( (mean(bsno) - mean(bsyes)) - (mean(NoCalc) - mean(YesCalc)) ) / (sqrt(var(bsno)/length(NoCalc) + var(bsyes)/length(YesCalc)))
 }
 (Q &lt;- quantile(bst, probs = c(0.025, 0.975)))</code></pre>
