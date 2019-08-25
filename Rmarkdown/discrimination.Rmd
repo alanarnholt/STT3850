@@ -24,6 +24,11 @@ table(DF$Age_Cohort)
 DT::datatable(DF)
 ```
 
+```{r}
+write.csv(DF, file = "../Data/discrim.csv")
+```
+
+
 ## Together
 
 ```{r}
