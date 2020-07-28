@@ -7,9 +7,9 @@ title: "Welcome"
 
 * [Class RStudio Server](https://mathr.math.appstate.edu) (you must be registered in the course to access the server)
 
-* [Course Syllabus](./Syllabus/SyllabusSTT3850F2018.html)
+* [Course Syllabus](./Syllabus/SyllabusSTT3850F2020.html)
 
-* [Assignments and Course Pacing](./CoursePacing/CoursePacingF2018.html)
+* [Assignments and Course Pacing](./CoursePacing/CoursePacingF2020.html)
 
 
 
