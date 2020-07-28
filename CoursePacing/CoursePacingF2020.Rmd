@@ -55,7 +55,7 @@ _________
 
 * Complete [PS-01](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Aug 21---(assignment link in asulearn)
 
-* Me at [video]() here for how to accept assignments.
+* Me create and insert [video]() here for how to accept assignments.
  
 ```{block, week1optional, type='rmdoptional'}
 #### Optional {-}
