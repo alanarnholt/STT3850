@@ -43,7 +43,7 @@ _________
 ## Week 1: (Aug 18--21) {-}
 
 
-* Before the first class meeting, read chapter 1 of [MD](https://moderndive.com)---pgs 1-20
+* Before the first class meeting, read chapter 1 (Getting Started with Data in R) of [MD](https://moderndive.com)---pgs 1-20
 
 * Become familiar with the Appstate [RStudio server](https://mathr.math.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
 
@@ -54,6 +54,8 @@ _________
 * Work through chapter 2 (Introduction to R) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
 * Complete [PS-01](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Aug 21---(assignment link in asulearn)
+
+* Me at [video]() here for how to accept assignments.
  
 ```{block, week1optional, type='rmdoptional'}
 #### Optional {-}
@@ -77,9 +79,9 @@ ______________
 
 ## Week 2: (Aug 25--28) {-}
 
-* Before class read chapter 3 of [MD](https://moderndive.com) --- pgs 65-96
+* Before class read chapter 3 (Data Wrangling) of [MD](https://moderndive.com) --- pgs 65-96
 
-* Before class read chapter 4 of [MD](https://moderndive.com) --- pgs 99-117
+* Before class read chapter 4 (Data Importing and "Tidy" Data) of [MD](https://moderndive.com) --- pgs 99-117
 
 * Work through chapter 3 (Starting with Data) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
@@ -105,7 +107,7 @@ __________________
 
 ## Week 3: (Sep 1--4) {-}
 
-* Before class read chapter 2 of [MD](https://moderndive.com) --- pgs 21-62
+* Before class read chapter 2 (Data Visualization) of [MD](https://moderndive.com) --- pgs 21-62
 
 * Work through chapter 5 (Using `ggplot2`) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
@@ -136,7 +138,7 @@ ___________
 
 ## Week 4: (Sep 8--11) {-}
 
-* Before class read chapter 5 of [MD](https://moderndive.com) --- pgs 119-160
+* Before class read chapter 5 (Basic Regression) of [MD](https://moderndive.com) --- pgs 119-160
 
 * Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Sep 11
 
@@ -160,7 +162,7 @@ __________________
 
 ## Week 5: (Sep 15--18) {-}
 
-* Before class read chapter 6 of [MD](https://moderndive.com) --- pgs 161-191
+* Before class read chapter 6 (Multiple Regression) of [MD](https://moderndive.com) --- pgs 161-191
 
 * Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Sep 18
 
@@ -179,7 +181,7 @@ _______________
 
 ## Week 6: (Sep 21--25) {-}
 
-* Before class read chapter 6 of [MD](https://moderndive.com) --- pgs 161-191
+* Before class read chapter 6 (Multiple Regression) of [MD](https://moderndive.com) --- pgs 161-191
 
 * Complete the **Getting Started with R Markdown** chapter of _Reporting with R Markdown_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Sep 25
 
@@ -190,6 +192,10 @@ _______________
 
 ```{block, week6optional, type='rmdoptional'}
 #### Optional {-}
+* Read through [_Misc Regression_](../Rmarkdown/MiscRegression.html)
+
+* Answer the questions at the end of [_Misc Regression_](../Rmarkdown/MiscRegression.html) for extra credit (Turn in before Oct 2)
+
 * Work on [Is this Discrimination?](../Rmarkdown/ClassAssignment.html)
 
 * Some ideas for how to answer the [Is this Discrimination?](../Rmarkdown/discrimination.html)
@@ -197,92 +203,149 @@ _______________
 
 _____________
 
-## Week 7: (Oct 1--5) {-}
 
-* Read Chapters 6 and 7 of [MD](https://moderndive.com) --- Basic Regression and Multiple Regression
+## Week 7: (Sep 29 -- Oct 2) {-}
 
-* Work on _Modeling with Data in Tidyverse_ [(DataCamp)](https://www.datacamp.com/) --- Due Oct 12
 
-* Read through [_Misc Regression_](../Rmarkdown/MiscRegression.html)
+* Complete the **Improving the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 2
+
+* Complete the **Customizing the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 2
+
+* Complete **all chapters (1--4)** of _Foundations of Probability in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 2
+
+
 
 ```{block, week7optional, type='rmdoptional'}
 #### Optional {-}
-* Read Chapter 9 of MSWR
-* Answer the questions at the end of [_Misc Regression_](../Rmarkdown/MiscRegression.html) for extra credit (Turn in before Fall Break starts)
-```
-
-
-## Week 8: (Oct 8--10; Oct 11--12 Fall Break) {-}
-
-* Complete _Modeling with Data in Tidyverse_ [(DataCamp)](https://www.datacamp.com/) --- Due Oct 12
-
-* Review Chapters 6 and 7 of [MD](https://moderndive.com) --- Basic Regression and Multiple Regression
-
-
-
-## Week 9: (Oct 15--19) {-}
-
-* Read Chapter 8 of [MD](https://moderndive.com) --- Sampling
-
-* Read Chapter 4 of MSWR --- Sampling Distributions; [Problems 2, 5, 12-16](../Homework/Chapter4HWK.Rmd)
-
-* [Sampling Distributions](../Handouts/EVuniform.html)
 
 * [In Class Problems](../Slides/ProbabilityProblems.html)
 
-* Complete _Foundations of Probability in R_ [(DataCamp)](https://www.datacamp.com/) --- Due Oct 19
-
 * [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)
+```
 
 
 
-## Week 10: (Oct 22--26) {-}
+___________
 
-* Read Chapter 9 of [MD](https://moderndive.com) --- Confidence Intervals
 
-* Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
+## Week 8: (Oct 6--9) {-}
 
-* Start _Inference for Numerical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 2
+* Before class read chapter 7 (Sampling) of [MD](https://moderndive.com) --- pgs 195-232
+
+* Compete [Sampling Distributions Lab](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 9---(assignment link in asulearn) 
+
+* Complete [PS-07](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 9---(assignment link in asulearn) 
+
+```{block, week8optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Sampling Distributions](../Handouts/EVuniform.html)
+
+* Read Chapter 4 of MSWR --- Sampling Distributions; [Problems 2, 5, 12-16](../Homework/Chapter4HWK.Rmd)
+```
+
+_______________
+
+
+
+## Week 9: (Oct 13--16) {-}
+
+* Read Chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
+
+* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 16
+
+* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 16
+
+* Complete [PS-08](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 16---(assignment link in asulearn)
+
+```{block, week9optional, type='rmdoptional'}
+#### Optional {-}
 
 * [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
 
 * [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+```
+
+___________________________
 
 
+## Week 10: (Oct 13--16) {-}
 
-## Week 11: (Oct 29--Nov 2) {-}
+* Read Chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
 
-* Read Chapter 10 of [MD](https://moderndive.com) --- Hypothesis Testing
+* Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
-* Complete _Inference for Numerical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 2
+* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 23
+
+* Complete the **Comparing Many Means** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 23
 
 
-## Week 12: (Nov 6--9) {-}
+```{block, week10optional, type='rmdoptional'}
+#### Optional {-}
 
-* Read Chapter 3 of MSWR
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+```
+
+_______________________
+
+
+## Week 11: (Oct 27--30) {-}
+
+* Read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
+
+* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 30
+
+* Complete the **Proportions Testing and Power** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 30
+
+* Complete [PS-09](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 30---(assignment link in asulearn)
+
+
+```{block, week11optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+```
+
+__________________
+
+## Week 12: (Nov 2--6) {-}
+
+* Read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
 
 * [Goodness-Of-Fit](../Handouts/ChiGOF.html)
 
-* Start _Inference for Categorical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 16
-
 * [In class Examples](../Rmarkdown/InClassNotes.html)
 
+* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Nov 6
+
+* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Nov 6
 
 
-## Week 13: (Nov 12--16) {-}
+
+```{block, week12optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+```
+______________________
+
+
+
+## Week 13: (Nov 10--13) {-}
 
 * Read Chapter 5 of MSWR
 
 * [Chapter 5 notes](../Notes/Children/BootStrap2.html)
 
-* [Misc RMarkdown Examples](../Rmarkdown/MiscRmarkdown.html)
+* [Misc R Markdown Examples](../Rmarkdown/MiscRmarkdown.html)
 
-* Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
-
-* Complete _Inference for Categorical Data_ [(DataCamp)](https://www.datacamp.com/) --- Due Nov 16
-
-* Start preparing R Markdown `cheat sheet` for Test 2
-
+* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 10, 2020
 
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
@@ -290,34 +353,30 @@ _____________
 * Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter5HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/).
 ```
 
+_________________
 
-## Week 14: (Nov 19--20; 21--23 Thanksgiving Break) {-}
-
-```{block, TEST2, type='rmdnote'}
-* Prepare R Markdown `info sheet` for Test 2 (Written Assignment #2---5% of course grade)---The hard copy of what you turn in after the exam is limited to no more than 4 printed pages.  Send an email to `arnholtat@appstate.edu` attaching the `*.Rmd` file you used to create your info sheet.  Use a  subject heading of `STT 3850-Your section, info sheet` on the email.  Name the attached file `YourLastName_FirstName_IS2.Rmd`.  Make sure all graphs have captions and are referenced appropriately. Use inline `R` code for reporting numerical answers (especially those that change each time the document is compiled).  Use a `bookdown` output in your YAML.  For questions with respect to `bookdown` see [https://bookdown.org/yihui/bookdown/](https://bookdown.org/yihui/bookdown/). You may create an additional `info sheet` of unlimited length to use during the exam.  Upload the [`OTE2_StarterCode.R`](../Rscripts/OTE2_StarterCode.R) code to your working directory before the exam.  Study the starter code and be prepared to explain the code and extend the code to answer additional questions during the exam.
-
-* Test 2 --- Nov 20
-```
-
-
-## Week 15: (Nov 26--30) {-}
+## Week 14: (Nov 17--20) {-}
 
 * Read Chapter 7 of MSWR
 
 * [Chapter 7 notes](../Notes/Children/ConfidenceIntervals2.html)
 
-```{block, week15optional, type='rmdoptional'}
+* [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
+
+* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 10, 2020
+
+```{block, week14optional, type='rmdoptional'}
 #### Optional {-}
 * Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter7HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) 
 ```
 
+________________________
 
-## Week 16: (Dec 3--5; Dec 6 is Reading Day) {-}
 
-* [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
+## Week 15: (Nov 24) {-}
 
-### Final Exam {-}
+* Last Day! :)
 
-```{block, FINAL, type='rmdnote'}
-*  Final exam
-```
+* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 10, 2020
+
+__________________________________
