@@ -345,7 +345,7 @@ ______________________
 
 * [Misc R Markdown Examples](../Rmarkdown/MiscRmarkdown.html)
 
-* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 10, 2020
+* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
 
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
@@ -363,7 +363,7 @@ _________________
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
-* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 10, 2020
+* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
 
 ```{block, week14optional, type='rmdoptional'}
 #### Optional {-}
@@ -377,6 +377,6 @@ ________________________
 
 * Last Day! :)
 
-* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 10, 2020
+* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
 
 __________________________________
