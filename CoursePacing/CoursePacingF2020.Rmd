@@ -21,7 +21,7 @@ __________
 
 ```{block, note-text, type='rmdnote'}
 1.  Please bring a notebook and pencil to every class.
-2.  The principal doucments for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR)
+2.  The principal documents for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR)
 3.  Assignments are generally due on Fridays by 5:00 pm 
 ```
 
@@ -31,7 +31,7 @@ ___________
 
 Field | Excellent (3) | Competent (2)  | Needs Work (1)
 ------|---------------|----------------|---------------
-Reproducible | All graphs, code, and answers are created from text files.  Answers are never hardcoded but instead are inserted using inline R code.  An automatically generated references section with properly formatted citations when appropriate and `sessionInfo()` are provided at the end of the document. | All graphs, code, and answers are created from text files.  Answers are  hardcoded. No `sessionInfo()` is provided at the end of the document. References are present but not cited properly or not automatically generated. | Document uses copy and paste with graphs or code.  Answers are hardcoded; and references, when appropriate are hardcoded.
+Reproducible | All graphs, code, and answers are created from text files.  Answers are never hard-coded but instead are inserted using inline R code.  An automatically generated references section with properly formatted citations when appropriate and `sessionInfo()` are provided at the end of the document. | All graphs, code, and answers are created from text files.  Answers are  hard coded. No `sessionInfo()` is provided at the end of the document. References are present but not cited properly or not automatically generated. | Document uses copy and paste with graphs or code.  Answers are hard coded; and references, when appropriate are hard coded.
 Statistical Understanding | Answers to questions demonstrate clear statistical understanding by comparing theoretical answers to simulated answers.  When hypotheses are tested, classical methods are compared and contrasted to randomization methods.  When confidence intervals are constructed, classical approaches are compared and contrasted with bootstrap procedures.  The scope of inferential conclusions made is appropriate for the sampling method. | Theoretical and simulated answers are computed but no discussion is present comparing and contrasting the results.  When hypotheses are tested, results for classical and randomization methods are presented but are not compared and contrasted.  When confidence intervals are constructed, classical and bootstrap approaches are computed but the results are not compared and contrasted.  The scope of inferential conclusions made is appropriate for the sampling method. | Theoretical and simulated answers are not computed correctly.  No comparison between classical and randomization approaches is present when testing hypotheses.  When confidence intervals are constructed, there is no comparison between classical and bootstrap confidence intervals .
 Graphics | Graphs for categorical data (barplot, mosaic plot, etc.) have appropriately labeled axes and titles.  Graphs for quantitative data (histograms, density plots, violin plots, etc.) have appropriately labeled axes and titles.  Multivariate graphs use appropriate legends and labels.  Computer variable names are replaced with descriptive variable names. | Appropriate graphs for the type of data are used.  Not all axes have appropriate labels or computer variable names are used in the graphs. | Inappropriate graphs are used for the type of data.  Axes are not labeled and computer variable names appear in the graphs.
 Coding  | Code (primarily R) produces correct answers.  Non-standard or complex functions are commented.  Code is formatted using a consistent standard. | Code produces correct answers.  Commenting is not used with non-standard and complex functions.  No consistent code formatting is used. | Code does not produce correct answers.  Code has no comments and is not formatted.
@@ -142,7 +142,7 @@ ___________
 
 * Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Sep 11
 
-* Complete the **Modling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Sep 11
+* Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Sep 11
 
 * Complete [PS-04](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Sep 11---(assignment link in asulearn) 
 
