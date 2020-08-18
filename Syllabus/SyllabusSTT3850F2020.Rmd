@@ -3,11 +3,11 @@ title: "STT 3850 Syllabus - Fall 2020"
 author: ''
 date: ''
 output:
+  pdf_document: default
   html_document:
     css: ../css/style.css
     highlight: textmate
     theme: yeti
-  pdf_document: default
 ---
 
 **Instructor:**  Dr. Alan T. Arnholt    

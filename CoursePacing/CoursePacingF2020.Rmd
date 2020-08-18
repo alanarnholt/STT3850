@@ -7,6 +7,7 @@ output:
     css: ../css/style.css
     highlight: textmate
     theme: yeti
+  pdf_document: default
 ---
 
 <script type="text/x-mathjax-config">
