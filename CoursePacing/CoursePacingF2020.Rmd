@@ -111,6 +111,8 @@ __________________
 
 * Before class read chapter 2 (Data Visualization) of [MD](https://moderndive.com) --- pgs 21-62
 
+* * [Partial Lecture Slides](../Handouts/short_pre_lecture.pdf)
+
 * Work through chapter 5 (Using `ggplot2`) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
 * Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Sep 4
