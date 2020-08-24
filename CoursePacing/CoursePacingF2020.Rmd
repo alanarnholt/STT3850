@@ -84,10 +84,11 @@ ______________
 
 * Before class read chapter 4 (Data Importing and "Tidy" Data) of [MD](https://moderndive.com) --- pgs 99-117
 
+* [Partial Lecture Slides](../Handouts/pre_lecture.pdf)
+
 * Work through chapter 3 (Starting with Data) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
 * Work through chapter 4 (Data Manipulation) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
-
 
 * Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Aug 28
 
