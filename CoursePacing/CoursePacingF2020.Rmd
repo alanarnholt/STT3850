@@ -111,7 +111,7 @@ __________________
 
 * Before class read chapter 2 (Data Visualization) of [MD](https://moderndive.com) --- pgs 21-62
 
-* * [Partial Lecture Slides](../Handouts/short_pre_lecture.pdf)
+* [Partial Lecture Slides](../Handouts/short_pre_lecture.pdf)
 
 * Work through chapter 5 (Using `ggplot2`) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
