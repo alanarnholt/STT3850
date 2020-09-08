@@ -1,0 +1,44 @@
+---
+title: "Mathematics Practice"
+author: "Alan T. Arnholt"
+date: "9/8/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Sample Mean ($\bar{x}$)
+
+  $$\bar{x} = \sum_{i=1}^{n}\frac{x_i}{n} = \frac{x_1 + x_2 + \cdots + x_n}{n}$$
+  
+## Sample Variance ($s^2$) 
+
+$$s^2 = \sum_{i=1}^{n}\frac{(x_i - \bar{x})^2}{n-1}$$
+
+```{r}
+set.seed(13)
+x <- 1:5
+x
+xbar <- sum(x)/length(x)
+xbar
+S2 <- sum((x - xbar)^2)/(length(x)-1)
+S2
+#
+(xbarbi <- mean(x))
+(S2bi <- var(x))
+```
+
+## Sample Standard Deviation ($s$)
+
+$$s = \sqrt{\sum_{i=1}^{n}\frac{(x_i - \bar{x})^2}{n-1}}$$
+```{r}
+S <- sqrt(sum((x - xbar)^2)/(length(x)-1))
+S
+Sbi <- sd(x)
+Sbi
+```
+
+The mean $\bar{x} = `r round(xbar,2)`$ and the standard deviation $s = `r round(S, 2)`$.
+

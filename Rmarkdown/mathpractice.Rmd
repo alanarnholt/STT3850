@@ -35,3 +35,4 @@ The sample mean $\bar{x} = `r xbar`$ and the sample variance $s^2 = `r S2`$.
 
 $$s = \sqrt{\sum_{i=1}^{n}\frac{(x_i - \bar{x})^2}{n-1}}$$
 
+
