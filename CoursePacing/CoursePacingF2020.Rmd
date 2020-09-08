@@ -144,6 +144,8 @@ ___________
 
 * Before class read chapter 5 (Basic Regression) of [MD](https://moderndive.com) --- pgs 119-160
 
+* In class go over this [document](https://alanarnholt.github.io/STT3851/Handouts/regression.html)
+
 * Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Sep 11
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Sep 11
