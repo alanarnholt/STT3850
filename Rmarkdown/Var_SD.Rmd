@@ -1,0 +1,19 @@
+---
+title: "Practice"
+author: "Alan T. Arnholt"
+date: "9/8/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Sample Variance ($s^2$)
+
+$$s^2 = \frac{1}{n-1}\sum_{i=1}^n(x_i - \bar{x})^2$$
+
+## Sample Standard Deviation ($s$)
+
+$$s = \sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i - \bar{x})^2}$$
+
