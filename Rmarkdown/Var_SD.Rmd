@@ -6,8 +6,12 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, comment = NA, message = FALSE, warning = FALSE)
 ```
+
+## Sample Mean ($\bar{x}$)
+
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i = \sum_{i=1}^{n}\frac{x_i}{n}$$
 
 ## Sample Variance ($s^2$)
 
@@ -16,4 +20,18 @@ $$s^2 = \frac{1}{n-1}\sum_{i=1}^n(x_i - \bar{x})^2$$
 ## Sample Standard Deviation ($s$)
 
 $$s = \sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i - \bar{x})^2}$$
+
+## Practice
+
+```{r}
+x <- 1:5
+xbar <- mean(x)
+x_xbar <- x - xbar
+x_xbar2 <- x_xbar^2
+DF <- data.frame(x, x_xbar, x_xbar2)
+DF
+VAR <- sum(x_xbar2)/4
+VAR
+var(x) # built-in function
+```
 
