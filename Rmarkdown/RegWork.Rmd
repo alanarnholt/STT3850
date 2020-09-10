@@ -1,0 +1,150 @@
+---
+title: "In-Class Regression Work"
+author: "Alan T. Arnholt"
+date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+library(tidyverse)
+library(PASWR2)
+library(moderndive)
+```
+
+# Apartments in Vitoria
+
+Making a new factor variable for elevators named `elevatorF`.
+
+```{r}
+VIT2005 <- VIT2005 %>% 
+  mutate(elevatorF = as.factor(elevator)) %>% 
+  glimpse()
+```
+
+## Exercise
+
+* Create a scatterplot of `totalprice` versus `area`.
+
+```{r}
+ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
+  geom_point() + 
+  theme_bw() +
+  labs(x = "Area in square meters", y = "Price in Euros")
+```
+
+
+* Compute r using the formula and verify your answer using the built-in R function `cor()`.
+
+```{r}
+values <- VIT2005 %>% 
+  mutate(x_xbar = area - mean(area), y_ybar = totalprice - mean(totalprice),
+         zx = x_xbar/sd(area), zy  = y_ybar/sd(totalprice)) %>% 
+  select(area, x_xbar, zx, totalprice, y_ybar, zy)
+head(values)
+values %>% 
+  summarize(r = sum(zx*zy)/(length(zx) - 1))
+#
+#  Built In Function
+VIT2005 %>% 
+  summarize(r = cor(totalprice, area))
+```
+
+
+* Create a linear model object named `mod1` by regressing 
+`totalprice` on to `area`.
+
+```{r}
+mod1 <- lm(totalprice ~ area, data = VIT2005)
+mod1
+```
+
+* Write the least squares regression equation.
+
+$$\widehat{\text{totalprice}}  = `r coef(mod1)[1]` + `r coef(mod1)[2]`\cdot \text{area}$$
+
+* Use the coefficients from `mod1` and `mutate()` to compute the $\hat{y}$ and $e_i$ values.
+
+```{r}
+values <- VIT2005 %>%
+  mutate(yhat = coef(mod1)[1] + coef(mod1)[2]*area,
+         e = totalprice - yhat) %>% 
+  select(totalprice, yhat, area, e)
+head(values)
+# Or
+values <- VIT2005 %>% 
+  mutate(yhat = predict(mod1), e = resid(mod1)) %>% 
+  select(totalprice, yhat, area, e)
+head(values)
+
+```
+* Find the least squares coeffients for regressing `totalprice` on to `area` using the formulas below.  
+
+$$b_1 = r\cdot\frac{s_y}{s_x}$$
+$$b_0 = \bar{y} - b_1\cdot\bar{x}$$
+
+
+```{r}
+VIT2005 %>% 
+  summarize(r = cor(totalprice, area), 
+            b1 = r*sd(totalprice)/sd(area), 
+            b0 = mean(totalprice) - b1*mean(area))
+```
+
+* Print the least squares coefficients for `mod1` using `get_regression_table()`.
+
+```{r}
+CT <- get_regression_table(mod1)
+CT
+CT[1, 2]
+CT[2, 2]
+```
+
+## Exercise
+
+* Create the linear model object `mod2` by 
+regressing `totalprice` on to `elevatorF`.
+
+```{r}
+
+```
+
+
+* What `totalprice` do you predict for an apartment without an elevator and with an elevator (use the output from `mod2` only).
+
+```{r}
+
+```
+
+
+* Answer the previous question using `group_by()` and `mean`.
+
+```{r}
+
+```
+
+
+## Exercise
+
+* Use the `evals` data set to create a parallel slopes model by regressing `score` on `byt_avg` and `rank`.  Store the result in `mod4`.
+
+```{r}
+
+```
+
+* Write out the least squares regression lines for the three ranks.
+
+
+
+
+* Graph `mod4` with `ggplot` (parallel slopes model).
+
+```{r}
+
+```
+
+
+
+
+
+
