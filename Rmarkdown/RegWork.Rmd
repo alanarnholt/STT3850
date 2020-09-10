@@ -26,15 +26,21 @@ VIT2005 <- VIT2005 %>%
 
 * Create a scatterplot of `totalprice` versus `area`.
 
-```{r}
+```{r, label = "vit", fig.cap = "This is where you type the figure caption"}
 ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
   geom_point() + 
   theme_bw() +
   labs(x = "Area in square meters", y = "Price in Euros")
 ```
 
+To refer to the Figure \@ref(fig:vit), use the syntax `\@ref(fig:label)`.
 
-* Compute r using the formula and verify your answer using the built-in R function `cor()`.
+* Compute $r$ using the formula given in \@ref(eq:pearson) and verify your answer using the built-in R function `cor()`.
+
+\begin{equation}
+r = \frac{1}{n-1}\sum_{i=1}^{n}\left(\frac{x_i - \bar{x}}{s_x}\right)\cdot\left(\frac{y_i - \bar{y}}{s_y}\right)
+(\#eq:pearson)
+\end{equation}
 
 ```{r}
 values <- VIT2005 %>% 
