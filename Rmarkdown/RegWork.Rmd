@@ -26,7 +26,7 @@ VIT2005 <- VIT2005 %>%
 
 * Create a scatterplot of `totalprice` versus `area`.
 
-```{r, label = "vit", fig.cap = "This is where you type the figure caption"}
+```{r, label = "vit", fig.cap = "No this is Boo playing a joke"}
 ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
   geom_point() + 
   theme_bw() +
@@ -132,14 +132,14 @@ regressing `totalprice` on to `elevatorF`.
 
 ## Exercise
 
-* Use the `evals` data set to create a parallel slopes model by regressing `score` on `byt_avg` and `rank`.  Store the result in `mod4`.
+* Use the `evals` data set to create a parallel slopes model by regressing `score` on `bty_avg` and `rank`.  Store the result in `mod4`.
 
 ```{r}
-
+mod4 <- lm(score ~ bty_avg + rank, data = evals)
+mod4
 ```
 
 * Write out the least squares regression lines for the three ranks.
-
 
 
 
