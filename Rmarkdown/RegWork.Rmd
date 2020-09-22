@@ -6,7 +6,7 @@ output: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = NA)
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE)
 library(tidyverse)
 library(PASWR2)
 library(moderndive)
@@ -149,8 +149,50 @@ mod4
 
 ```
 
+________________
 
+```{r}
+library(ISLR)
+Ad <- read.csv("../Data/Advertising.csv")
+head(Ad)
+# Want to create a 3D scatterplot of sales ~ TV + Radio
+library(plotly)
+p <- plot_ly(data = Ad, z = ~sales, x = ~TV, y = ~radio, opacity = 0.6) %>%
+  add_markers(marker = list(size = 5)) 
+p
+```
 
+Next we want to add the best fit plane to the 3D scatterplot.  Consider the best fit plane `sales_mod`:
+
+```{r}
+sales_mod <- lm(sales ~TV + radio, data = Ad)
+summary(sales_mod)
+```
+
+```{r}
+x <- seq(0, 300, length = 70)
+y <- seq(0, 50, length = 70)
+plane <- outer(x, y, function(a, b){summary(sales_mod)$coef[1,1] + 
+    summary(sales_mod)$coef[2,1]*a + summary(sales_mod)$coef[3,1]*b})
+# draw the plane
+p %>%
+  add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE)
+```
+
+Consider a model with interaction:
+
+```{r}
+int_mod <- lm(sales ~ TV + radio + TV:radio, data = Ad)
+summary(int_mod)
+```
+
+```{r}
+plane_int <- outer(x, y, function(a, b){summary(int_mod)$coef[1,1] + 
+    summary(int_mod)$coef[2,1]*a + summary(int_mod)$coef[3,1]*b +
+    summary(int_mod)$coef[4,1]*a*b})
+p %>% 
+  add_surface(x = ~x, y = ~y, z = ~plane_int, showscale = FALSE)
+```
 
 
 
