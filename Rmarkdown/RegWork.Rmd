@@ -152,7 +152,9 @@ mod4
 ________________
 
 ```{r}
-library(ISLR)
+url <- "http://faculty.marshall.usc.edu/gareth-james/ISL/Advertising.csv"
+if(!file.exists("../Data/Advertising.csv")){
+    download.file(url, destfile = "../Data/Advertising.csv")}
 Ad <- read.csv("../Data/Advertising.csv")
 head(Ad)
 # Want to create a 3D scatterplot of sales ~ TV + Radio
