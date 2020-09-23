@@ -205,6 +205,11 @@ p %>%
   add_surface(x = ~x, y = ~y, z = ~plane_int, showscale = FALSE)
 ```
 
+
+## Exercise
+
+Create a 3D representation of the best fit plane for the `debt_model` in Section 6.2.2 of [Modern Dive](https://moderndive.com/6-multiple-regression.html#model3).
+
 ```{r}
 library(ISLR)
 head(Credit)
@@ -224,4 +229,6 @@ plane <- outer(x, y, function(a, b){summary(mod)$coef[1,1] +
 p %>%
   add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE)
 ```
+
+
 
