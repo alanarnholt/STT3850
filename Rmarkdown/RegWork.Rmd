@@ -151,8 +151,17 @@ mod4
 
 ________________
 
+# Plotly and Directories
+
+## Creating a Directory
+
 ```{r}
 url <- "http://faculty.marshall.usc.edu/gareth-james/ISL/Advertising.csv"
+
+if(!dir.exists("../Data/")){
+dir.create("../Data/")
+}
+
 if(!file.exists("../Data/Advertising.csv")){
     download.file(url, destfile = "../Data/Advertising.csv")}
 Ad <- read.csv("../Data/Advertising.csv")
@@ -196,5 +205,23 @@ p %>%
   add_surface(x = ~x, y = ~y, z = ~plane_int, showscale = FALSE)
 ```
 
+```{r}
+library(ISLR)
+head(Credit)
+mod <- lm(Balance ~ Limit + Income, data = Credit)
+summary(mod)
+p <- plot_ly(data = Credit, z = ~Balance, x = ~Limit, y = ~Income, opacity = 0.6) %>%
+  add_markers(marker = list(size = 5)) 
+p
+```
 
+```{r}
+x <- seq(855, 13913, length = 70)
+y <- seq(10, 187, length = 70)
+plane <- outer(x, y, function(a, b){summary(mod)$coef[1,1] + 
+    summary(mod)$coef[2,1]*a + summary(mod)$coef[3,1]*b})
+# draw the plane
+p %>%
+  add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE)
+```
 
