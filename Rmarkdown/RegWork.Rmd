@@ -263,6 +263,10 @@ ggplot(data = credit_ch6, aes(x = income, y = debt, color = credit_limit_cat)) +
 ```{r}
 mod <- lm(debt ~ credit_limit + income, data = credit_ch6)
 summary(mod)
+```
+
+
+```{r}
 p <- plot_ly(data = credit_ch6, z = ~debt, x = ~credit_limit, y = ~income, opacity = 0.8) %>%
   add_markers(marker = list(size = 8)) 
 p
@@ -278,5 +282,19 @@ p %>%
   add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE)
 ```
 
+## Interaction Model?
 
+```{r}
+int_mod2 <- lm(debt ~ credit_limit + income + credit_limit:income, data = credit_ch6)
+summary(int_mod2)
+```
+
+```{r}
+# int_plane2
+int2_plane <- outer(x, y, function(a, b){summary(int_mod2)$coef[1,1] + 
+    summary(int_mod2)$coef[2,1]*a + summary(int_mod2)$coef[3,1]*b + summary(int_mod2)$coef[4,1]*a*b})
+# draw the plane
+p %>%
+  add_surface(x = ~x, y = ~y, z = ~int2_plane, showscale = FALSE)
+```
 
