@@ -213,10 +213,58 @@ Create a 3D representation of the best fit plane for the `debt_model` in Section
 ```{r}
 library(ISLR)
 head(Credit)
-mod <- lm(Balance ~ Limit + Income, data = Credit)
+credit_ch6 <- Credit %>% 
+  as_tibble %>% 
+  select(ID, debt = Balance, credit_limit = Limit, income = Income, credit_rating = Rating, age = Age)
+glimpse(credit_ch6)
+```
+
+```{r}
+credit_ch6 %>% 
+  select(debt, credit_limit, income) %>% 
+  cor()
+```
+
+```{r}
+p1 <- ggplot(credit_ch6, aes(x = credit_limit, y = debt)) + 
+  geom_point(color = "red") +
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw() + 
+  labs(x = "Credit limit (in $)",  y = "Credit card debt (in $)", 
+       title = "Debt and credit limit")
+p2 <- ggplot(data = credit_ch6, aes(x = income, y = debt)) + 
+  geom_point(color = "red") + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw() +
+  labs(x = "Income (in $1000)", y = "Credit card debt (in $)",
+       title = "Debt and income")
+library(gridExtra)
+grid.arrange(p1, p2, ncol = 2)
+```
+
+
+```{r}
+# Create a categorical variable with four levels for credit_limit
+credit_ch6 <- credit_ch6 %>% 
+  mutate(credit_limit_cat = cut(credit_limit, 
+                                breaks = quantile(credit_limit, probs= c(0, .25, .5, .75, 1)), names = TRUE))
+
+############
+ggplot(data = credit_ch6, aes(x = income, y = debt, color = credit_limit_cat)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw() +
+  labs(x = "Income (in $1000)", y = "Credit card debt (in $)",
+       title = "Debt and income")
+```
+
+
+
+```{r}
+mod <- lm(debt ~ credit_limit + income, data = credit_ch6)
 summary(mod)
-p <- plot_ly(data = Credit, z = ~Balance, x = ~Limit, y = ~Income, opacity = 0.6) %>%
-  add_markers(marker = list(size = 5)) 
+p <- plot_ly(data = credit_ch6, z = ~debt, x = ~credit_limit, y = ~income, opacity = 0.8) %>%
+  add_markers(marker = list(size = 8)) 
 p
 ```
 
