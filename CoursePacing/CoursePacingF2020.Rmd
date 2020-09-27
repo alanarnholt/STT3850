@@ -217,7 +217,7 @@ _____________
 
 * Complete the **Customizing the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 2
 
-* Complete **all chapters (1--4)** of _Foundations of Probability in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 2
+* Complete **all chapters (1--4)** of _Foundations of Probability in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 9
 
 
 
@@ -236,9 +236,12 @@ ___________
 
 ## Week 8: (Oct 6--9) {-}
 
+
 * Before class read chapter 7 (Sampling) of [MD](https://moderndive.com) --- pgs 195-232
 
-* Compete [Sampling Distributions Lab](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 9---(assignment link in asulearn) 
+* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 9
+
+* Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 9
 
 * Complete [PS-07](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 9---(assignment link in asulearn) 
 
@@ -256,13 +259,20 @@ _______________
 
 ## Week 9: (Oct 13--16) {-}
 
+* Read Chapter 5 of MSWR
+
+* [Chapter 5 notes](../Notes/Children/BootStrap2.html)
+
+* [Misc R Markdown Examples](../Rmarkdown/MiscRmarkdown.html)
+
 * Read Chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
 
-* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 16
+* Complete the **Confidence intervals** chapter of _Foundations of Inference_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 16
 
-* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 16
+* Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 16
 
-* Complete [PS-08](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 16---(assignment link in asulearn)
+* Compete [Sampling Distributions Lab](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 16---(assignment link in asulearn) 
+
 
 ```{block, week9optional, type='rmdoptional'}
 #### Optional {-}
@@ -275,15 +285,15 @@ _______________
 ___________________________
 
 
-## Week 10: (Oct 13--16) {-}
+## Week 10: (Oct 20--23) {-}
 
 * Read Chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
 
+* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 23
+
+* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 23
+
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
-
-* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 23
-
-* Complete the **Comparing Many Means** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 23
 
 
 ```{block, week10optional, type='rmdoptional'}
@@ -301,11 +311,11 @@ _______________________
 
 * Read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
 
-* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 30
+* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 30
 
-* Complete the **Proportions Testing and Power** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 30
+* Complete the **Comparing Many Means** chapter in _Inference for Numerical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Oct 30
 
-* Complete [PS-09](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 30---(assignment link in asulearn)
+* Complete [PS-08](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Oct 30---(assignment link in asulearn)
 
 
 ```{block, week11optional, type='rmdoptional'}
@@ -322,13 +332,13 @@ __________________
 
 * Read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
 
+* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Nov 6
+
+* Complete the **Proportions Testing and Power** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Nov 6
+
 * [Goodness-Of-Fit](../Handouts/ChiGOF.html)
 
 * [In class Examples](../Rmarkdown/InClassNotes.html)
-
-* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Nov 6
-
-* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Nov 6
 
 
 
@@ -345,11 +355,11 @@ ______________________
 
 ## Week 13: (Nov 10--13) {-}
 
-* Read Chapter 5 of MSWR
+* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Nov 13
 
-* [Chapter 5 notes](../Notes/Children/BootStrap2.html)
+* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://www.datacamp.com/enterprise/stt3850-fall2020/assignments) --- Due NLT 5:00 pm Nov 13
 
-* [Misc R Markdown Examples](../Rmarkdown/MiscRmarkdown.html)
+* Complete [PS-09](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Nov 13---(assignment link in asulearn)
 
 * Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
 
@@ -369,7 +379,7 @@ _________________
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
-* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
+* Work on Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
 
 ```{block, week14optional, type='rmdoptional'}
 #### Optional {-}
@@ -383,6 +393,6 @@ ________________________
 
 * Last Day! :)
 
-* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
+* Work on Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
 
 __________________________________
