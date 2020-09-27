@@ -169,7 +169,7 @@ head(Ad)
 # Want to create a 3D scatterplot of sales ~ TV + Radio
 library(plotly)
 p <- plot_ly(data = Ad, z = ~sales, x = ~TV, y = ~radio, opacity = 0.6) %>%
-  add_markers(marker = list(size = 5)) 
+  add_markers() 
 p
 ```
 
