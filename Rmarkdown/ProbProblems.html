@@ -197,19 +197,19 @@ summary {
 table(S)</code></pre>
 <pre><code>S
     0     1     2     3 
-12621 37666 37477 12236 </code></pre>
+12307 37615 37631 12447 </code></pre>
 <pre class="r"><code># P(A)
 mean(S==2)</code></pre>
-<pre><code>[1] 0.37477</code></pre>
+<pre><code>[1] 0.37631</code></pre>
 <pre class="r"><code># P(B)
 mean(S==1)</code></pre>
-<pre><code>[1] 0.37666</code></pre>
+<pre><code>[1] 0.37615</code></pre>
 <pre class="r"><code># P(C)
 mean(S==3)</code></pre>
-<pre><code>[1] 0.12236</code></pre>
+<pre><code>[1] 0.12447</code></pre>
 <pre class="r"><code># P(D)
 1 - mean(S==0)</code></pre>
-<pre><code>[1] 0.87379</code></pre>
+<pre><code>[1] 0.87693</code></pre>
 <p>In the game of craps the &quot;shooter&quot; wins on the first roll of a pair of fair dice if the sum of the two dice is 7 or 11. Calculate the probability that the shooter wins on the first roll.</p>
 <p>Note there are 8 ways to get either a 7 or 11 on the first roll and 36 possible outcomes from rolling two dice. So the <span class="math inline">\(P(Win) = 8/36\)</span>.</p>
 <p>Lets simulate rolling two dice 10,000 times.</p>
@@ -218,18 +218,42 @@ roll2 &lt;- sample(1:6, 10000, replace = TRUE)
 DF &lt;- data.frame(roll1, roll2)
 head(DF)</code></pre>
 <pre><code>  roll1 roll2
-1     1     1
-2     6     6
-3     4     6
-4     3     6
-5     2     4
-6     5     5</code></pre>
+1     2     3
+2     2     3
+3     5     1
+4     5     4
+5     1     6
+6     5     3</code></pre>
 <pre class="r"><code>library(tidyverse)
 DF %&gt;% 
   mutate(SUM = roll1 + roll2) %&gt;% 
   summarize(mean(SUM ==7 | SUM ==11))</code></pre>
 <pre><code>  mean(SUM == 7 | SUM == 11)
-1                     0.2187</code></pre>
+1                     0.2192</code></pre>
+<pre class="r"><code># 10 am class
+class10 &lt;- c(&quot;Sai&quot;, &quot;Andrew&quot;, &quot;Sean&quot;, &quot;Nate&quot;, &quot;Tristan&quot;, &quot;Carly&quot;, &quot;Sam&quot;,
+             &quot;Kyle&quot;, &quot;Alex&quot;, &quot;ConnorC&quot;, &quot;Tucker&quot;, &quot;Chase&quot;, &quot;Zachary&quot;, &quot;Grace&quot;, &quot;ConnorF&quot;, &quot;Max&quot;, &quot;Issac&quot;, &quot;Kendrick&quot;,&quot;Milton&quot;)
+class10</code></pre>
+<pre><code> [1] &quot;Sai&quot;      &quot;Andrew&quot;   &quot;Sean&quot;     &quot;Nate&quot;     &quot;Tristan&quot;  &quot;Carly&quot;   
+ [7] &quot;Sam&quot;      &quot;Kyle&quot;     &quot;Alex&quot;     &quot;ConnorC&quot;  &quot;Tucker&quot;   &quot;Chase&quot;   
+[13] &quot;Zachary&quot;  &quot;Grace&quot;    &quot;ConnorF&quot;  &quot;Max&quot;      &quot;Issac&quot;    &quot;Kendrick&quot;
+[19] &quot;Milton&quot;  </code></pre>
+<pre class="r"><code>class11 &lt;- c(&quot;Thom&quot;, &quot;Caitlin&quot;, &quot;Will&quot;, &quot;Reis&quot;, &quot;Alex&quot;, &quot;Ian&quot;,
+             &quot;Taylor&quot;, &quot;Charles&quot;, &quot;Kuan&quot;, &quot;Logan&quot;, &quot;Diamond&quot;,
+             &quot;Max&quot;, &quot;Allison&quot;, &quot;Jarred&quot;, &quot;Andrew&quot;, &quot;Nick&quot;, &quot;Ashley&quot;)</code></pre>
+<pre class="r"><code>x &lt;- 0:10
+px &lt;- dbinom(x, 10, 0.2)
+
+EVX &lt;- function(x, px){
+  EX &lt;- sum(x*px)
+  VX &lt;- sum((x - EX)^2*px)
+  ans &lt;- c(EX, VX)
+  names(ans) &lt;- c(&quot;E(X)&quot;, &quot;V(X)&quot;)
+  ans
+  }
+EVX(x, px)</code></pre>
+<pre><code>E(X) V(X) 
+ 2.0  1.6 </code></pre>
 
 
 

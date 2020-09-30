@@ -54,3 +54,37 @@ DF %>%
   summarize(mean(SUM ==7 | SUM ==11))
 ```
 
+```{r}
+# 10 am class
+class10 <- c("Sai", "Andrew", "Sean", "Nate", "Tristan", "Carly", "Sam",
+             "Kyle", "Alex", "ConnorC", "Tucker", "Chase", "Zachary", "Grace", "ConnorF", "Max", "Issac", "Kendrick","Milton")
+class10
+```
+
+
+```{r}
+class11 <- c("Thom", "Caitlin", "Will", "Reis", "Alex", "Ian",
+             "Taylor", "Charles", "Kuan", "Logan", "Diamond",
+             "Max", "Allison", "Jarred", "Andrew", "Nick", "Ashley")
+```
+
+```{r}
+x <- 0:10
+px <- dbinom(x, 10, 0.2)
+
+EVX <- function(x, px){
+  EX <- sum(x*px)
+  VX <- sum((x - EX)^2*px)
+  ans <- c(EX, VX)
+  names(ans) <- c("E(X)", "V(X)")
+  ans
+  }
+EVX(x, px)
+```
+
+
+
+
+
+
+
