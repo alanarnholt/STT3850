@@ -225,6 +225,20 @@ ggplot(data = MDIFF) +
   stat_function(fun = dt, args = list(df = t.test(worms ~ group, alternative = "greater", data = ND)$parameter))
 ```
 
+## Using `infer`
+
+```{r}
+library(infer)
+INFER <- ND %>% 
+  specify(worms ~ group) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10^3, type = "permute") %>% 
+  calculate(stat = "diff in means", order = c("Control", "Treatment"))
+get_p_value(INFER, obs_stat = obs, direction = "greater")
+visualize(INFER)
+```
+
+
 ## Graphs
 
 ```{r, label = "GRnow1"}
