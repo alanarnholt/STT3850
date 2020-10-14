@@ -21,7 +21,7 @@ ggplot(NHANES, aes(x = SleepHrsNight, color = SleepTrouble)) +
   # Adjust by 2
   geom_density(adjust = 2) + 
   # Facet by HealthGen
-  facet_wrap(~ HealthGen) + 
+  facet_wrap(vars(HealthGen)) + 
   theme_bw()
 
 
