@@ -60,7 +60,11 @@ get_confidence_interval(IM, level = 0.95)
 
 
 
-#####
+###################################################
+###################################################
+###################################################
+## STuff for DataCamp
+
 library(tidyverse)
 library(infer)
 library(openintro)
@@ -68,7 +72,7 @@ manhattan <- read_csv("https://assets.datacamp.com/production/repositories/846/d
 glimpse(manhattan)
 hist(manhattan$rent)
 ggplot(data = manhattan, aes(x = rent)) +
-  geom_histogram() + 
+  geom_histogram(binwidth = 500) + 
   theme_bw()
 
 B <- 15000
@@ -87,9 +91,7 @@ CI <- rent_med_obs + c(-1, 1)*qt(.975, 19)*sd(stat)
 CI
 ###
 str(ncbirths) # from openintro package
-nc_complete <- ncbirths %>% 
-  filter(!is.na(visits))
-str(nc_complete)
+
 
 ####
 
@@ -104,6 +106,9 @@ hist(stat)
 ####
 PCI <- quantile(stat, probs = c(0.025, 0.975))
 PCI
+
+CI <- mean(nc_complete$visits) + c(-1, 1)*qt(0.975, sum(!is.na(nc_complete$visits)) -1)*sd(stat)
+CI
 
 B <- 15000
 stat <- numeric(B)
