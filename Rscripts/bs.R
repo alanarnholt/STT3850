@@ -74,7 +74,7 @@ ggplot(data = manhattan, aes(x = rent)) +
 B <- 15000
 stat <- numeric(B)
 for(i in 1:B){
-  bs <- sample(manhattan$rent, size = 20, replace = TRUE)
+  bs <- sample(manhattan$rent, size = sum(!is.na(manhattan$rent)), replace = TRUE)
   stat[i] <- median(bs)
 }
 hist(stat)
@@ -86,7 +86,7 @@ rent_med_obs
 CI <- rent_med_obs + c(-1, 1)*qt(.975, 19)*sd(stat)
 CI
 ###
-str(ncbirths). # from openintro package
+str(ncbirths) # from openintro package
 nc_complete <- ncbirths %>% 
   filter(!is.na(visits))
 str(nc_complete)
@@ -97,7 +97,7 @@ str(nc_complete)
 B <- 15000
 stat <- numeric(B)
 for(i in 1:B){
-  bs <- sample(nc_complete$visits, size = length(nc_complete$visits), replace = TRUE)
+  bs <- sample(nc_complete$visits, size = sum(!is.na(nc_complete$visits)), replace = TRUE)
   stat[i] <- mean(bs)
 }
 hist(stat)
@@ -108,7 +108,7 @@ PCI
 B <- 15000
 stat <- numeric(B)
 for(i in 1:B){
-  bs <- sample(nc_complete$visits, size = length(nc_complete$visits), replace = TRUE)
+  bs <- sample(nc_complete$visits, size = sum(!is.na(nc_complete$visits)), replace = TRUE)
   stat[i] <- sd(bs)
 }
 hist(stat)
@@ -122,7 +122,7 @@ med_rent_obs
 B <- 15000
 stat <- numeric(B)
 for(i in 1:B){
-  bs <- sample(manhattan$rent, size = length(manhattan$rent), replace = TRUE)
+  bs <- sample(manhattan$rent, size = sum(!is.na(manhattan$rent)), replace = TRUE)
   stat[i] <- median(bs) + 150
 }
 hist(stat)
@@ -136,9 +136,10 @@ obs_mean
 B <- 15000
 stat <- numeric(B)
 for(i in 1:B){
-  bs <- sample(ncbirths$weight, size = length(ncbirths$weight), replace = TRUE)
+  bs <- sample(ncbirths$weight, size = sum(!is.na(ncbirths$weight)), replace = TRUE)
   stat[i] <- mean(bs) - 0.101
 }
 hist(stat)
 pvalue <- mean(stat >= obs_mean)*2
 pvalue
+
