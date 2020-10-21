@@ -57,3 +57,88 @@ IM <- FishMercuryC %>%
 
 visualize(IM)
 get_confidence_interval(IM, level = 0.95)
+
+
+
+#####
+library(tidyverse)
+library(infer)
+library(openintro)
+manhattan <- read_csv("https://assets.datacamp.com/production/repositories/846/datasets/bd62fb71666052ffe398d85e628eae9d0339c9c4/manhattan.csv")
+glimpse(manhattan)
+hist(manhattan$rent)
+ggplot(data = manhattan, aes(x = rent)) +
+  geom_histogram() + 
+  theme_bw()
+
+B <- 15000
+stat <- numeric(B)
+for(i in 1:B){
+  bs <- sample(manhattan$rent, size = 20, replace = TRUE)
+  stat[i] <- median(bs)
+}
+hist(stat)
+PCI <- quantile(stat, probs = c(0.025, 0.975))
+PCI
+rent_med_obs <- median(manhattan$rent)
+rent_med_obs
+###
+CI <- rent_med_obs + c(-1, 1)*qt(.975, 19)*sd(stat)
+CI
+###
+str(ncbirths). # from openintro package
+nc_complete <- ncbirths %>% 
+  filter(!is.na(visits))
+str(nc_complete)
+
+####
+
+
+B <- 15000
+stat <- numeric(B)
+for(i in 1:B){
+  bs <- sample(nc_complete$visits, size = length(nc_complete$visits), replace = TRUE)
+  stat[i] <- mean(bs)
+}
+hist(stat)
+####
+PCI <- quantile(stat, probs = c(0.025, 0.975))
+PCI
+
+B <- 15000
+stat <- numeric(B)
+for(i in 1:B){
+  bs <- sample(nc_complete$visits, size = length(nc_complete$visits), replace = TRUE)
+  stat[i] <- sd(bs)
+}
+hist(stat)
+####
+PCI <- quantile(stat, probs = c(0.025, 0.975))
+PCI
+
+#### Recentering Test for median price
+med_rent_obs <- median(manhattan$rent)
+med_rent_obs
+B <- 15000
+stat <- numeric(B)
+for(i in 1:B){
+  bs <- sample(manhattan$rent, size = length(manhattan$rent), replace = TRUE)
+  stat[i] <- median(bs) + 150
+}
+hist(stat)
+pvalue <- mean(stat >= med_rent_obs)
+pvalue
+
+####
+obs_mean <- mean(ncbirths$weight)
+obs_mean
+
+B <- 15000
+stat <- numeric(B)
+for(i in 1:B){
+  bs <- sample(ncbirths$weight, size = length(ncbirths$weight), replace = TRUE)
+  stat[i] <- mean(bs) - 0.101
+}
+hist(stat)
+pvalue <- mean(stat >= obs_mean)*2
+pvalue
