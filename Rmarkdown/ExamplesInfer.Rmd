@@ -170,10 +170,10 @@ PCI <- BM %>%
 PCI
 ###
 # Visualize
-BM %>% visualize(endpoints = PCI, 
-                          direction = "between",
-                          ci_fill = "pink") + 
+BM %>% visualize() + 
+  shade_confidence_interval(endpoints = PCI, color = "red", fill = "pink") + 
   theme_bw()
+
 ####
 ggplot(data = BM, aes(x = stat, fill = stat > PCI$l & stat < PCI$u) ) +
   geom_histogram(binwidth = 0.15) + 
@@ -190,9 +190,8 @@ ggplot(data = BM, aes(x = stat, fill = stat > PCI$l & stat < PCI$u) ) +
 (CI <- mean(mtcars$qsec) + c(-1, 1)*multiplier*SEBM)
 #
 # Visualize
-BM %>% visualize(endpoints = CI, 
-                          direction = "between",
-                          ci_fill = "yellow") + 
+BM %>% visualize() + 
+  shade_confidence_interval(endpoints = CI, color = "red", fill = "pink") + 
   theme_bw()
 ```
 
@@ -233,7 +232,7 @@ mtcars %>%
 # Checks
 ggplot(data = mtcars, aes(sample = mpg)) +
   geom_qq() +
-  facet_wrap(.~cyl) + 
+  facet_wrap(vars(cyl)) + 
   theme_bw()
 # Questionable whether the assumption of constant variance across treatments
 # is satisfied
@@ -263,7 +262,7 @@ FS <- mtcars %>%
   generate(reps = SIMS, type = "permute") %>% 
   calculate(stat = "F")
 visualize(FS, method = "both")
-get_pvalue(FS, obs_stat = obs_stat, direction = "greater")
+get_p_value(FS, obs_stat = obs_stat, direction = "greater")
 ```
 
 ### `for()` loop
@@ -315,4 +314,46 @@ pvalue2
 t.test(mtcars$qsec, mu = 17, alternative = "two.sided")
 ```
 
+## Example 5.4---page 120 of MSWR
+
+Construct a 95% confidence interval for $\mu_{fp}- \mu_{mp}$ using the `infer` pipeline and 5000 bootstrap samples.
+
+```{r}
+library(resampledata)
+str(Skateboard)
+MT <- Skateboard %>% 
+  specify(Testosterone ~ Experimenter) %>% 
+  generate(reps = 5000, type = "bootstrap") %>% 
+  calculate(stat = "diff in means", order = c("Female", "Male"))
+###
+PCI <- MT %>%
+  summarize(l = quantile(stat, 0.025),
+            u = quantile(stat, 0.975)) 
+PCI
+###
+MT %>% visualize() + shade_confidence_interval(endpoints = PCI, color = "red", fill = "pink") + 
+  theme_bw()
+```
+
+* Construct a 95% confidence interval for $\mu_{fp}- \mu_{mp}$ using a `for()` loop with 5000 bootstrap samples.
+
+```{r}
+testF <- subset(Skateboard, select = Testosterone, 
+                subset = Experimenter == "Female", drop = TRUE)
+(nF <- length(testF))
+testM <- subset(Skateboard, select = Testosterone, 
+                subset = Experimenter == "Male", drop = TRUE)
+(nM <- length(testM))
+B <- 5000
+diff_means <- numeric(B)
+for(i in 1:B){
+  bss1 <- sample(testF, size = nF, replace = TRUE)
+  bss2 <- sample(testM, size = nM, replace = TRUE)
+  diff_means[i]  <- mean(bss1) - mean(bss2)
+}
+(PCI <- quantile(diff_means, probs = c(0.025, 0.975)))
+hist(diff_means, breaks = "Scott", col = "lightblue", 
+     main= "Bootstrap Distribution", xlab = expression(bar(x)[fp] - bar(x)[mp]))
+abline(v = PCI, col = "purple", lty = "dashed")
+```
 
