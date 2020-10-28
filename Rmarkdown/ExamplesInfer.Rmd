@@ -316,14 +316,14 @@ t.test(mtcars$qsec, mu = 17, alternative = "two.sided")
 
 ## Example 5.4---page 120 of MSWR
 
-Construct a 95% confidence interval for $\mu_{fp}- \mu_{mp}$ using the `infer` pipeline and 5000 bootstrap samples.
+Construct a 95% confidence interval for $\mu_{fp}- \mu_{mp}$ using the `infer` pipeline and 1000 bootstrap samples.
 
 ```{r}
 library(resampledata)
 str(Skateboard)
 MT <- Skateboard %>% 
   specify(Testosterone ~ Experimenter) %>% 
-  generate(reps = 5000, type = "bootstrap") %>% 
+  generate(reps = 1000, type = "bootstrap") %>% 
   calculate(stat = "diff in means", order = c("Female", "Male"))
 ###
 PCI <- MT %>%
@@ -335,7 +335,7 @@ MT %>% visualize() + shade_confidence_interval(endpoints = PCI, color = "red", f
   theme_bw()
 ```
 
-* Construct a 95% confidence interval for $\mu_{fp}- \mu_{mp}$ using a `for()` loop with 5000 bootstrap samples.
+* Construct a 95% confidence interval for $\mu_{fp}- \mu_{mp}$ using a `for()` loop with 1000 bootstrap samples.
 
 ```{r}
 testF <- subset(Skateboard, select = Testosterone, 
@@ -344,7 +344,7 @@ testF <- subset(Skateboard, select = Testosterone,
 testM <- subset(Skateboard, select = Testosterone, 
                 subset = Experimenter == "Male", drop = TRUE)
 (nM <- length(testM))
-B <- 5000
+B <- 1000
 diff_means <- numeric(B)
 for(i in 1:B){
   bss1 <- sample(testF, size = nF, replace = TRUE)
@@ -355,5 +355,75 @@ for(i in 1:B){
 hist(diff_means, breaks = "Scott", col = "lightblue", 
      main= "Bootstrap Distribution", xlab = expression(bar(x)[fp] - bar(x)[mp]))
 abline(v = PCI, col = "purple", lty = "dashed")
+```
+
+* Test the null hypothesis $H_0: \mu_{fp}- \mu_{mp} = 0$ versus $H_A: \mu_{fp}- \mu_{mp} > 0$ using the `infer` pipeline and 1000 replications.
+
+```{r}
+obs_MDIFF <- Skateboard %>% 
+  group_by(Experimenter) %>% 
+  summarize(MD = mean(Testosterone)) %>% 
+  mutate(MeanDiff = -diff(MD)) %>% 
+  pull()
+obs_MDIFF
+
+MD <- Skateboard %>% 
+  specify(Testosterone ~ Experimenter) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "permute") %>% 
+  calculate(stat = "diff in means", order = c("Female", "Male"))
+get_p_value(MD, obs_stat = obs_MDIFF, direction = "right")
+```
+
+* Test the null hypothesis $H_0: \mu_{fp}- \mu_{mp} = 0$ versus $H_A: \mu_{fp}- \mu_{mp} > 0$ using a `for()` loop with 1000 replications.
+
+```{r}
+(obs_mean_diff <- -diff(tapply(Skateboard$Testosterone, Skateboard$Experimenter, mean)))
+R <- 1000
+stat <- numeric(R)
+for(i in 1:R){
+  stat[i] <- -diff(tapply(Skateboard$Testosterone, sample(Skateboard$Experimenter), mean))
+}
+(pvalue <- mean(stat >= obs_mean_diff))
+```
+
+* Test the null hypothesis $H_0: \mu_{fp}- \mu_{mp} = 0$ versus $H_A: \mu_{fp}- \mu_{mp} > 0$ using the `infer` pipeline with 1000 replications and a _t-test_ statistic.
+
+```{r}
+(obs_t <- t.test(Testosterone ~ Experimenter, data = Skateboard)$stat)
+TS <- Skateboard %>% 
+  specify(Testosterone ~ Experimenter) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "permute") %>% 
+  calculate(stat = "t", order = c("Female", "Male"))
+get_p_value(TS, obs_stat = obs_t, direction = "right")
+visualize(TS, method = "both", obs_stat = obs_t, direction = "right", pvalue_fill = "purple")
+get_p_value(TS, obs_stat = obs_t, direction = "right")
+```
+* Test the null hypothesis $H_0: \mu_{fp}- \mu_{mp} = 0$ versus $H_A: \mu_{fp}- \mu_{mp} > 0$ using a `for()` loop with 1000 replications and a _t-test_ statistic.
+
+```{r}
+R <- 1000
+t_stat <- numeric(R)
+for(i in 1:R){
+t_stat[i] <- t.test(Testosterone ~ sample(Experimenter), data = Skateboard)$stat  
+}
+hist(t_stat)
+abline(v = obs_t)
+(pvalue <- mean(t_stat >= obs_t))
+```
+
+* Simulate a $t_{n-1}$ distribution where $n = 4$ with a `for()` loop
+
+```{r}
+R <- 10000
+t_stat <- numeric(R)
+for(i in 1:R){
+  rs <- rnorm(4, 0, 1)
+  t_stat[i] <- (mean(rs) - 0)/(sd(rs)/sqrt(4))
+}
+hist(t_stat, breaks = "Scott", freq = FALSE, col = "lightblue", main = "", xlim = c(-8, 8), ylim = c(0, .5))
+curve(dt(x, 4), -8, 8, add = TRUE, col = "blue")
+curve(dnorm(x), -8, 8, add = TRUE, col = "red", lty = "dashed")
 ```
 
