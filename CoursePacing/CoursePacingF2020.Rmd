@@ -361,7 +361,7 @@ ______________________
 
 * Complete [PS-09](https://classroom.github.com/classrooms/53707954-stt3850-fall2020-classroom) by 5:00 pm Nov 13---(assignment link in asulearn)
 
-* Start Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
+* Start Reproduction of _Inference for Numerical Data in R_  --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
 
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
@@ -393,6 +393,6 @@ ________________________
 
 * Last Day! :)
 
-* Work on Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
+* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
 
 __________________________________
