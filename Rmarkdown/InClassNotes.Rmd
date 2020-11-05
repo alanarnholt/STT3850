@@ -108,9 +108,23 @@ ggplot(data = null, aes(x = stat)) +
 ```
 
 ```{r}
+visualize(null, method = "both", fill = "skyblue", 
+          dens_color = "blue") + 
+  theme_bw()
+```
+
+
+```{r}
 null %>% 
   summarize(pvalue = (sum(stat >= chi_obs_stat) + 1)/(10^3)) 
 ```
+
+**Note problem below**
+
+```{r}
+get_p_value(null, obs_stat = chi_obs_stat, direction = "right")
+```
+
 
 # Consider testing $H_0:p_1 - p_2 = 0$
 
@@ -195,7 +209,7 @@ The problem then becomes one of putting the data back into a `tidy` format.
 
 ```{r}
 NT <- TDP %>% 
-  broom::tidy() %>% 
+  tibble::as_tibble() %>% 
   uncount(n)
 NT
 ```
@@ -248,7 +262,8 @@ null_hom_infer <- NT %>%
   hypothesize(null = "independence") %>% 
   generate(reps = 10^3 - 1, type = "permute") %>% 
   calculate(stat = "Chisq")
-visualize(null_hom_infer, method = "both") +
+visualize(null_hom_infer, method = "both", 
+          fill = "purple", dens_color = "blue") +
   theme_bw()
 (pval2 <- (sum(null_hom_infer$stat >= chi_obs) + 1)/(B + 1))
 ```
@@ -265,7 +280,7 @@ VEC <- rep(Sign, times = BD)
 (T2 <- table(VEC))
 
 BNT <- T2 %>% 
-  broom::tidy() %>% 
+  tibble::as_tibble() %>% 
   uncount(n)
 BNT
 ```
@@ -298,7 +313,7 @@ dimnames(MTH) <- list(Tatoo = c("Parlor", "Elsewhere", "None"), HepC = c("Yes", 
 MTH <- as.table(MTH)
 MTH
 NHT <- MTH %>% 
-  broom::tidy() %>% 
+  tibble::as_tibble() %>% 
   uncount(n)
 NHT
 ```
