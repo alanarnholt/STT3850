@@ -379,7 +379,7 @@ _________________
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
-* Work on Reproduction of either _Inference for Numerical Data in R_ or _Inference for Categorical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
+* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 4, 2020
 
 ```{block, week14optional, type='rmdoptional'}
 #### Optional {-}
