@@ -1,7 +1,7 @@
 ---
 title: "Goodness-Of-Fit"
 author: "Alan Arnholt"
-date: "11/1/2017"
+date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
 output: bookdown::html_document2
 ---
 
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALS
 
 # Goodness-Of-Fit: All Parameters Known
 
-## Example 3.8
+## Example 10.3
 
 Bansley et al. (1992) investigated the relationship between month of birth and achievement in sport.  Birth dates were collected for players in teams competing in the 1990 World Cup soccer games.
 
@@ -38,7 +38,7 @@ Given the _p-value_ of `r round(chisq.test(Observed, p = c(1/4, 1/4, 1/4, 1/4))$
 * The degrees of freedom for a goodness-of-fit test with $k$ cells and no parameters estimated from the data is $k - 1$.
 
 
-## Example 3.9 - (There are a few typos in the book for this Example - including the conclusion)
+## Example 10.4 
 
 Suppose you draw 100 numbers at random from an unknown distribution.  Thirty values fall in the interval $(0, 0.25]$, 30 fall in $(0.25, 0.75]$, 22 fall in $(0.75, 1.25]$, and the rest fall in $(1.25, \infty]$.  Your friend claims that the distribution is exponential with parameter $\lambda = 1$.  Do you believe her?
 
