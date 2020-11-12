@@ -71,7 +71,7 @@ for(i in 1:B){
 hist(X2)
 (pvalue <- (sum(X2 >= chi_obs) +1)/(B + 1))
 
-
+# ert
 
 B <- 10^4-1
 X2 <- numeric(B)
