@@ -50,6 +50,8 @@ visualize(null_dist)
 
 #### Test GOF
 
+OBS <- c(30, 30, 22, 18)
+
 p1 <- pexp(0.25, 1)
 p2 <- pexp(0.75, 1) - pexp(0.25, 1)
 p3 <- pexp(1.25, 1) - pexp(0.75, 1)
@@ -57,13 +59,26 @@ p4 <- pexp(1.25, 1, lower = FALSE)
 ps <- c(p1, p2, p3, p4)
 ps
 
-256/12
+(chi_obs <- chisq.test(OBS, p = ps)$stat)
 
 B <- 10^4-1
 X2 <- numeric(B)
 for(i in 1:B){
   rs <- sample(1:4, 100, p = ps, replace = TRUE)
   obs <- table(rs)
+  X2[i] <- chisq.test(obs, p = ps)$stat
+}
+hist(X2)
+(pvalue <- (sum(X2 >= chi_obs) +1)/(B + 1))
+
+
+
+B <- 10^4-1
+X2 <- numeric(B)
+for(i in 1:B){
+  rs <- rexp(100, 1)
+  rsv <- cut(rs, breaks = c(0, 0.25, 0.75, 1.25, Inf))
+  obs <- table(rsv)
   X2[i] <- chisq.test(obs, p = ps)$stat
 }
 hist(X2)
