@@ -1,7 +1,5 @@
 ---
 title: "Tentative STT 3850 Course Schedule - FALL 2021"
-author: "Alan T. Arnholt"
-date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
 output:
   html_document:
     css: ../css/style.css
@@ -16,7 +14,12 @@ MathJax.Hub.Config({
 });
 </script>
 
-__________
+
+_______________________________
+
+**Last Updated:** `r format(Sys.time(), "%A, %B %d, %Y - %X.")`
+
+________________________________
 
 ### General Notes: {-}
 
@@ -402,3 +405,5 @@ __________________________________
 * Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169) - Due NLT 5:00 PM Dec 7, 2020
 
 ________________________________
+
+
