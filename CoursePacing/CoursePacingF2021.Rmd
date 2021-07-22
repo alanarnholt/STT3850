@@ -1,5 +1,5 @@
 ---
-title: "Tentative STT 3850 Course Schedule"
+title: "Tentative STT 3850 Course Schedule - FALL 2021"
 author: "Alan T. Arnholt"
 date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
 output:
@@ -22,8 +22,9 @@ __________
 
 ```{block, note-text, type='rmdnote'}
 1.  Please bring a notebook and pencil to every class.
-2.  The principal documents for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR)
-3.  Problem Set (PS) corrected assignments are generally due on Fridays by 5:00 pm 
+2.  The principal documents for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR) -available inside the [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169) course page.
+3.  Problem Set (PS) corrected assignments are generally due on Fridays by 5:00 pm
+4.  The links for the problem sets, sampling distribution assignment, and starter code for _Inference for Numerical Data in R_ in this document will only work for the instructor!  To accept each of these assignments, go to [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169) and click on the appropriate link in the [GitHub Classroom Invitation Links for Assignments](https://asulearn.appstate.edu/course/view.php?id=131169) block.  
 ```
 
 ___________
@@ -54,9 +55,9 @@ _________
 
 * Work through chapter 2 (Introduction to R) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
-* Complete [PS-01](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27 (assignment link in asulearn)
+* Complete [PS-01](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27 (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
 
-* Me create and insert [video]() here for how to accept assignments.
+
  
 ```{block, week1optional, type='rmdoptional'}
 #### Optional {-}
@@ -94,7 +95,7 @@ ______________
 
 * Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Aug 26
 
-* Complete [PS-03](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 1 --- Final corrections due by 5:00 pm Sep 3 --- (assignment link in asulearn) 
+* Complete [PS-03](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 1 --- Final corrections due by 5:00 pm Sep 3 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 
 ```{block, week2optional, type='rmdoptional'}
@@ -119,7 +120,7 @@ __________________
 
 * Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 2
 
-* Complete [PS-02](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 8 --- Final corrections due by 5:00 pm Sep 10---(assignment link in asulearn) 
+* Complete [PS-02](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 8 --- Final corrections due by 5:00 pm Sep 10---(assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 
 ```{block, test3, type='rmdexercise'}
@@ -150,7 +151,7 @@ ___________
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 9
 
-* Complete [PS-04](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 15 --- Final corrections due by 5:00 pm Sep 17 --- (assignment link in asulearn) 
+* Complete [PS-04](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 15 --- Final corrections due by 5:00 pm Sep 17 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 
 ```{block, week4optional, type='rmdoptional'}
@@ -174,7 +175,7 @@ __________________
 
 * Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the TIdyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 16
 
-* Complete [PS-05](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 22 --- Final corrections due by 5:00 pm Sep 24 --- (assignment link in asulearn) 
+* Complete [PS-05](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 22 --- Final corrections due by 5:00 pm Sep 24 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 
 
@@ -193,7 +194,7 @@ _______________
 
 * Complete the **Adding Analyses and Visualizations** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 23
 
-* Complete [PS-06](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 29 --- Final corrections due by 5:00 pm Oct 1 --- (assignment link in asulearn) 
+* Complete [PS-06](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 29 --- Final corrections due by 5:00 pm Oct 1 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 
 ```{block, week6optional, type='rmdoptional'}
@@ -243,7 +244,7 @@ ___________
 
 * Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 7
 
-* Complete [PS-07](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 13 --- Final corrections due by 5:00 pm Oct 15 --- (assignment link in asulearn) 
+* Complete [PS-07](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 13 --- Final corrections due by 5:00 pm Oct 15 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 ```{block, week8optional, type='rmdoptional'}
 #### Optional {-}
@@ -271,7 +272,7 @@ _______________
 
 * Complete the **Confidence intervals** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 15
 
-* Compete [Sampling Distributions Lab](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 20 --- Final corrections due by 5:00 pm Oct 22 --- (assignment link in asulearn) 
+* Compete [Sampling Distributions Lab](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 20 --- Final corrections due by 5:00 pm Oct 22 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 
 ```{block, week9optional, type='rmdoptional'}
@@ -315,7 +316,7 @@ _______________________
 
 * Complete the **Comparing Many Means** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 28
 
-* Complete [PS-08](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 3 --- Final corrections due by 5:00 pm Nov 5 --- (assignment link in asulearn)
+* Complete [PS-08](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 3 --- Final corrections due by 5:00 pm Nov 5 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
 
 
 ```{block, week11optional, type='rmdoptional'}
@@ -360,9 +361,9 @@ ______________________
 
 * Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 11
 
-* Complete [PS-09](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 17 --- Final corrections due by 5:00 pm Nov 19 --- (assignment link in asulearn)
+* Complete [PS-09](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 17 --- Final corrections due by 5:00 pm Nov 19 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
 
-* Start Reproduction of _Inference for Numerical Data in R_  --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 7, 2020
+* Start Reproduction of _Inference for Numerical Data in R_  --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169) - Due NLT 5:00 PM Dec 7, 2020
 
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
@@ -380,7 +381,7 @@ _________________
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
-* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 7, 2020
+* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169) - Due NLT 5:00 PM Dec 7, 2020
 
 ```{block, week14optional, type='rmdoptional'}
 #### Optional {-}
@@ -392,12 +393,12 @@ ________________________
 
 ## Week 15: (Nov 22 & 23) {-}
 
-* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 7, 2020
+* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169) - Due NLT 5:00 PM Dec 7, 2020
 
 __________________________________
 
 ## Week 16: (Nov 29 & 30) {-}
 
-* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment will be in GitHub Classroom - Due NLT 5:00 PM Dec 7, 2020
+* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169) - Due NLT 5:00 PM Dec 7, 2020
 
 ________________________________
