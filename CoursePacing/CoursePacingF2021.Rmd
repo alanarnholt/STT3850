@@ -56,11 +56,11 @@ _________
 
 * Work through chapter 1 (Git and GitHub) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/).  Make sure RStudio is set up to communicate with Git by following the directions in [HappyGitWithR](https://happygitwithr.com/hello-git.html) for introducing yourself to Git.
 
+* Set cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html). 
+
 * Work through chapter 2 (Introduction to R) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
-* Complete [PS-01](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27 (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
-
-
+* Start [PS-01](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27 (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
  
 ```{block, week1optional, type='rmdoptional'}
 #### Optional {-}
@@ -84,6 +84,8 @@ ______________
 
 ## Week 2: (Aug 23--27) {-}
 
+* Complete [PS-01](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27 (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
+
 * Before class read chapter 3 (Data Wrangling) of [MD](https://moderndive.com) --- pgs 65-96
 
 * Before class read chapter 4 (Data Importing and "Tidy" Data) of [MD](https://moderndive.com) --- pgs 99-117
@@ -96,9 +98,9 @@ ______________
 
 * Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Aug 24
 
-* Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Aug 26
+* Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Aug 27
 
-* Complete [PS-03](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 1 --- Final corrections due by 5:00 pm Sep 3 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+* Start [PS-03](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 10:00 am Sep 1 --- Final corrections due by 5:00 pm Sep 3 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 
 ```{block, week2optional, type='rmdoptional'}
@@ -113,6 +115,8 @@ __________________
 
 ## Week 3: (Aug 30 -- Sep 3) {-}
 
+* Complete [PS-03](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 1 --- Final corrections due by 5:00 pm Sep 3 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+
 * Before class read chapter 2 (Data Visualization) of [MD](https://moderndive.com) --- pgs 21-62
 
 * [Partial Lecture Slides](../Handouts/short_pre_lecture.pdf)
@@ -121,9 +125,9 @@ __________________
 
 * Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Aug 31
 
-* Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 2
+* Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 3
 
-* Complete [PS-02](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 8 --- Final corrections due by 5:00 pm Sep 10---(assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+* Start [PS-02](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 10:00 am Sep 8 --- Final corrections due by 5:00 pm Sep 10---(assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 
 ```{block, test3, type='rmdexercise'}
@@ -146,15 +150,17 @@ ___________
 
 ## Week 4: (Sep 7 -- 10) {-}
 
+* Complete [PS-02](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 8 --- Final corrections due by 5:00 pm Sep 10---(assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+
 * Before class read chapter 5 (Basic Regression) of [MD](https://moderndive.com) --- pgs 119-160
 
 * In class go over this [document](https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html)
 
-* Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 7
+* Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 8
 
-* Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 9
+* Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 10
 
-* Complete [PS-04](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 15 --- Final corrections due by 5:00 pm Sep 17 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+* Start [PS-04](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 10:00 am Sep 15 --- Final corrections due by 5:00 pm Sep 17 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 
 ```{block, week4optional, type='rmdoptional'}
@@ -172,15 +178,15 @@ __________________
 
 ## Week 5: (Sep 13 -- 17) {-}
 
+* Complete [PS-04](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 15 --- Final corrections due by 5:00 pm Sep 17 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+
 * Before class read chapter 6 (Multiple Regression) of [MD](https://moderndive.com) --- pgs 161-191
 
 * Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 14
 
-* Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the TIdyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 16
+* Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the TIdyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 17
 
-* Complete [PS-05](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 22 --- Final corrections due by 5:00 pm Sep 24 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
-
-
+* Start [PS-05](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 10:00 am Sep 22 --- Final corrections due by 5:00 pm Sep 24 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 ```{block, week5optional, type='rmdoptional'}
 #### Optional {-}
@@ -191,14 +197,15 @@ _______________
 
 ## Week 6: (Sep 20 -- 24) {-}
 
+* Complete [PS-05](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 22 --- Final corrections due by 5:00 pm Sep 24 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+
 * Before class read chapter 6 (Multiple Regression) of [MD](https://moderndive.com) --- pgs 161-191
 
 * Complete the **Getting Started with R Markdown** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 21
 
-* Complete the **Adding Analyses and Visualizations** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 23
+* Complete the **Adding Analyses and Visualizations** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 24
 
-* Complete [PS-06](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 29 --- Final corrections due by 5:00 pm Oct 1 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
-
+* Start [PS-06](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 10:00 am Sep 29 --- Final corrections due by 5:00 pm Oct 1 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 ```{block, week6optional, type='rmdoptional'}
 #### Optional {-}
@@ -216,10 +223,12 @@ _____________
 
 ## Week 7: (Sep 27 -- Oct 1) {-}
 
+* Complete [PS-06](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Sep 29 --- Final corrections due by 5:00 pm Oct 1 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 * Complete (**The binomial distribution & Laws of probability**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Sep 28
 
 * Complete (**Bayesian statistics & Related distributions**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 1
+
 
 ```{block, week7optional, type='rmdoptional'}
 #### Optional {-}
@@ -245,9 +254,10 @@ ___________
 
 * Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 5
 
-* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 7
+* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 8
 
-* Complete [PS-07](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 13 --- Final corrections due by 5:00 pm Oct 15 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+* Start [PS-07](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 10:00 am Oct 13 --- Final corrections due by 5:00 pm Oct 15 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+
 
 ```{block, week8optional, type='rmdoptional'}
 #### Optional {-}
@@ -263,6 +273,8 @@ _______________
 
 ## Week 9: (Fall Break Oct 11 & 12, Class: Oct 13 -- 15) {-}
 
+* Complete [PS-07](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 13 --- Final corrections due by 5:00 pm Oct 15 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+
 * Read Chapter 5 of MSWR
 
 * [Chapter 5 notes](../Notes/Children/BootStrap2.html)
@@ -275,8 +287,7 @@ _______________
 
 * Complete the **Confidence intervals** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 15
 
-* Compete [Sampling Distributions Lab](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 20 --- Final corrections due by 5:00 pm Oct 22 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
-
+* Start [Sampling Distributions Lab](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 20 --- Final corrections due by 5:00 pm Oct 22 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 ```{block, week9optional, type='rmdoptional'}
 #### Optional {-}
@@ -290,6 +301,8 @@ ___________________________
 
 
 ## Week 10: (Oct 18 -- 22) {-}
+
+* Compete [Sampling Distributions Lab](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 20 --- Final corrections due by 5:00 pm Oct 22 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
 * Read Chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
 
@@ -319,8 +332,6 @@ _______________________
 
 * Complete the **Comparing Many Means** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 28
 
-* Complete [PS-08](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 3 --- Final corrections due by 5:00 pm Nov 5 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
-
 
 ```{block, week11optional, type='rmdoptional'}
 #### Optional {-}
@@ -334,11 +345,13 @@ __________________
 
 ## Week 12: (Nov 1 -- 5) {-}
 
+* Complete [PS-08](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 3 --- Final corrections due by 5:00 pm Nov 5 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
+
 * Read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
 
 * Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 2
 
-* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 4
+* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 5
 
 * [Goodness-Of-Fit](../Handouts/ChiGOF.html)
 
@@ -362,9 +375,7 @@ ______________________
 
 * Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 9
 
-* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 11
-
-* Complete [PS-09](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 17 --- Final corrections due by 5:00 pm Nov 19 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
+* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 12
 
 * Start Reproduction of _Inference for Numerical Data in R_  --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169) - Due NLT 5:00 PM Dec 7, 2020
 
@@ -377,6 +388,8 @@ ______________________
 _________________
 
 ## Week 14: (Nov 15--19) {-}
+
+* Complete [PS-09](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 17 --- Final corrections due by 5:00 pm Nov 19 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
 
 * Read Chapter 7 of MSWR
 
