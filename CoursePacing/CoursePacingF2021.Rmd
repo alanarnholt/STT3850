@@ -308,7 +308,7 @@ ___________________________
 
 * Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 19
 
-* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 21
+* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 22
 
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
@@ -330,7 +330,7 @@ _______________________
 
 * Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 26
 
-* Complete the **Comparing Many Means** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 28
+* Complete the **Comparing Many Means** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 29
 
 
 ```{block, week11optional, type='rmdoptional'}
