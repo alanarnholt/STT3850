@@ -1,0 +1,20 @@
+---
+title: "R Markdown"
+author: "Your Name"
+date: "8/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+* $4 + 11 = `r 4 + 11`$ 
+
+* $(6 + 143 - 151)^3 =`r (6 + 143 - 151)^3`$ 
+
+* $\left((125/5 + 25)/5\right)^2 = `r ((125/5 + 25)/5)^2`$
+
+* $\left((\sqrt{484} + 3)/5\right)^3= `r ((sqrt(484) + 3)/5)^3`$
+
+* $\frac{(24 - 122 + 10)}{11}= `r (24 -122 + 10)/11`$
