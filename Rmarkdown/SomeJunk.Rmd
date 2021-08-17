@@ -1,0 +1,42 @@
+---
+title: "Untitled One"
+author: "Alan T. Arnholt"
+date: "8/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the __Knit__ button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure, col = "pink", pch = 19, main = "You put something here", cex = 3)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+grades <- c(22, 78, 92)
+mean(grades)
+```
+
+
+$4 + 11=$
+
+$$\bar{x} = \sum_{i=1}^{n}\frac{x_i}{n} = \frac{22 + 78 + 92}{3} = `r (22+78+92)/3` = `r mean(grades)`$$
+
+
