@@ -56,11 +56,11 @@ _________
 
 * Work through chapter 1 (Git and GitHub) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/).  Make sure RStudio is set up to communicate with Git by following the directions in [HappyGitWithR](https://happygitwithr.com/hello-git.html) for introducing yourself to Git.
 
-* Set cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html). 
+* Set cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html).--- [VIDEO of the setup process](https://drive.google.com/file/d/1G9G8IeYu9QetYB1nxMmAFLgRtw5YC-c8/view?usp=sharing)
 
 * Work through chapter 2 (Introduction to R) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
-* Start [PS-01](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27 (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
+* Start [PS-01](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27 (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) ---[VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1MfDjhNb5m_45BCVD6ZQCXhgIMWwwx0oS/view?usp=sharing)
  
 ```{block, week1optional, type='rmdoptional'}
 #### Optional {-}
