@@ -8,6 +8,4 @@ title: "Welcome"
 
 * [Assignments and Course Pacing](./CoursePacing/CoursePacingF2021.html)
 
-
-
-* * *
+***
