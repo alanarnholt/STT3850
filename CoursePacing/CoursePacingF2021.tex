@@ -1,0 +1,960 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Tentative STT 3850 Course Schedule - FALL 2021},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Tentative STT 3850 Course Schedule - FALL 2021}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Last Updated:} Monday, August 23, 2021 - 09:24:14 AM.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{general-notes}{%
+\subsubsection*{General Notes:}\label{general-notes}}
+\addcontentsline{toc}{subsubsection}{General Notes:}
+
+\begin{rmdnote}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Please bring a notebook and pencil to every class.
+\item
+  The principal documents for this course are
+  \href{https://moderndive.com}{\emph{ModernDive: An Introduction to
+  Statistical and Data Sciences via R}} (MD),
+  \href{https://stat-ata-asu.github.io/R_DS_BD2020/}{\emph{Data Science
+  with R}} (DSWR), and \emph{Mathematical Statistics with Resampling and
+  R} (MSWR) -available inside the
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN}
+  course page.
+\item
+  Problem Set (PS) corrected assignments are generally due on Fridays by
+  5:00 pm
+\item
+  The links for the problem sets, sampling distribution assignment, and
+  starter code for \emph{Inference for Numerical Data in R} in this
+  document will only work for the instructor! To accept each of these
+  assignments, go to
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN}
+  and click on the appropriate link in the
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{GitHub
+  Classroom Invitation Links for Assignments} block.
+\end{enumerate}
+\end{rmdnote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{grading-rubric-for-assignments}{%
+\paragraph*{Grading Rubric for
+Assignments}\label{grading-rubric-for-assignments}}
+\addcontentsline{toc}{paragraph}{Grading Rubric for Assignments}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.29}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.31}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.29}}@{}}
+\toprule
+Field & Excellent (3) & Competent (2) & Needs Work (1) \\
+\midrule
+\endhead
+Reproducible & All graphs, code, and answers are created from text
+files. Answers are never hard-coded but instead are inserted using
+inline R code. An automatically generated references section with
+properly formatted citations when appropriate and \texttt{sessionInfo()}
+are provided at the end of the document. & All graphs, code, and answers
+are created from text files. Answers are hard coded. No
+\texttt{sessionInfo()} is provided at the end of the document.
+References are present but not cited properly or not automatically
+generated. & Document uses copy and paste with graphs or code. Answers
+are hard coded; and references, when appropriate are hard coded. \\
+Statistical Understanding & Answers to questions demonstrate clear
+statistical understanding by comparing theoretical answers to simulated
+answers. When hypotheses are tested, classical methods are compared and
+contrasted to randomization methods. When confidence intervals are
+constructed, classical approaches are compared and contrasted with
+bootstrap procedures. The scope of inferential conclusions made is
+appropriate for the sampling method. & Theoretical and simulated answers
+are computed but no discussion is present comparing and contrasting the
+results. When hypotheses are tested, results for classical and
+randomization methods are presented but are not compared and contrasted.
+When confidence intervals are constructed, classical and bootstrap
+approaches are computed but the results are not compared and contrasted.
+The scope of inferential conclusions made is appropriate for the
+sampling method. & Theoretical and simulated answers are not computed
+correctly. No comparison between classical and randomization approaches
+is present when testing hypotheses. When confidence intervals are
+constructed, there is no comparison between classical and bootstrap
+confidence intervals . \\
+Graphics & Graphs for categorical data (barplot, mosaic plot, etc.) have
+appropriately labeled axes and titles. Graphs for quantitative data
+(histograms, density plots, violin plots, etc.) have appropriately
+labeled axes and titles. Multivariate graphs use appropriate legends and
+labels. Computer variable names are replaced with descriptive variable
+names. & Appropriate graphs for the type of data are used. Not all axes
+have appropriate labels or computer variable names are used in the
+graphs. & Inappropriate graphs are used for the type of data. Axes are
+not labeled and computer variable names appear in the graphs. \\
+Coding & Code (primarily R) produces correct answers. Non-standard or
+complex functions are commented. Code is formatted using a consistent
+standard. & Code produces correct answers. Commenting is not used with
+non-standard and complex functions. No consistent code formatting is
+used. & Code does not produce correct answers. Code has no comments and
+is not formatted. \\
+Clarity & Few errors of grammar and usage; any minor errors do not
+interfere with meaning. Language style and word choice are highly
+effective and enhance meaning. Style and word choice are appropriate for
+the assignment. & Some errors of grammar and usage; errors do not
+interfere with meaning. Language style and word choice are, for the most
+part, effective and appropriate for the assignment. & Major errors of
+grammar and usage make meaning unclear. Language style and word choice
+are ineffective and/or inappropriate. \\
+\bottomrule
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-1-aug-1620}{%
+\subsection*{Week 1: (Aug 16--20)}\label{week-1-aug-1620}}
+\addcontentsline{toc}{subsection}{Week 1: (Aug 16--20)}
+
+\begin{itemize}
+\item
+  Before the first class meeting, read chapter 1 (Getting Started with
+  Data in R) of \href{https://moderndive.com}{MD}---pgs 1-20
+\item
+  Become familiar with the Appstate
+  \href{https://mathr.math.appstate.edu/}{RStudio server}. You will use
+  your Appstate user name and password to log in to the server. You must
+  be registered in the class to access the server.
+\item
+  Sign-up for a free account on \href{https://github.com}{GitHub}. When
+  you register for a free individual GitHub account, request a
+  \href{https://education.github.com}{student discount} to obtain a few
+  private repositories as well as unlimited public repositories. Please
+  use something similar to \textbf{FirstNameLastName} as your username
+  when you register with GitHub. For example, my username on GitHub is
+  \emph{alanarnholt}. If you have a popular name such as John Smith, you
+  may need to provide some other distinguishing characteristic in your
+  username.
+\item
+  Work through chapter 1 (Git and GitHub) of
+  \href{https://stat-ata-asu.github.io/R_DS_BD2020/}{DSWR}. Make sure
+  RStudio is set up to communicate with Git by following the directions
+  in \href{https://happygitwithr.com/hello-git.html}{HappyGitWithR} for
+  introducing yourself to Git.
+\item
+  Set cache your credentials and set up a personal access token (PAT) by
+  following the directions in
+  \href{https://happygitwithr.com/credential-caching.html}{HappyGitWithR}.---
+  \href{https://drive.google.com/file/d/1G9G8IeYu9QetYB1nxMmAFLgRtw5YC-c8/view?usp=sharing}{VIDEO
+  of the setup process}
+\item
+  Work through chapter 2 (Introduction to R) of
+  \href{https://stat-ata-asu.github.io/R_DS_BD2020/}{DSWR}
+\item
+  Start
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-01}
+  due by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+  ---\href{https://drive.google.com/file/d/1MfDjhNb5m_45BCVD6ZQCXhgIMWwwx0oS/view?usp=sharing}{VIDEO
+  of how to accept and clone the assignment}
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  \emph{Introduction to R}
+  \href{https://alanarnholt.github.io/GeneralStatistics/rmarkdown/IntroToR.html}{slides}
+\item
+  Watch Paul the Octopus
+  \href{https://www.youtube.com/watch?v=3ESGpRUMj9E}{clip} (61 seconds).
+\item
+  You may want to install \href{http://git-scm.com/downloads}{Git},
+  \href{http://cran.r-project.org}{R},
+  \href{http://www.rstudio.com/products/rstudio/download/}{RStudio},
+  \href{https://www.zotero.org}{zotero}, and optionally
+  \href{http://www.ctan.org/starter}{\(LaTeX\)} on your personal
+  computer. If you do, you will want to follow Jenny Bryan's excellent
+  advice for
+  \href{http://stat545-ubc.github.io/block000_r-rstudio-install.html}{installing
+  R and RStudio} and
+  \href{http://stat545-ubc.github.io/git01_git-install.html}{installing
+  Git}. Jenny's advice is also in chapters 6 and 7 of
+  \href{http://happygitwithr.com/}{Happy Git and GitHub for the useR}.
+  Note: \href{http://git-scm.com/downloads}{Git},
+  \href{http://cran.r-project.org}{R},
+  \href{http://www.rstudio.com/products/rstudio/download/}{RStudio}, and
+  \href{http://www.ctan.org/starter}{\(LaTeX\)} are installed on the
+  \href{https://mathr.math.appstate.edu/}{Appstate RStudio} server.
+\item
+  Watch the following videos as appropriate:
+\item
+  \href{https://www.youtube.com/watch?v=lJxVRgiX-ik}{Install R on Mac (2
+  min)}
+\item
+  \href{https://www.youtube.com/watch?v=LII6of-5Odw}{Install R for
+  Windows (3 min)}
+\item
+  \href{https://www.youtube.com/watch?v=eD07NznguA4}{Install R and
+  RStudio on Windows (5 min)}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-2-aug-2327}{%
+\subsection*{Week 2: (Aug 23--27)}\label{week-2-aug-2327}}
+\addcontentsline{toc}{subsection}{Week 2: (Aug 23--27)}
+
+\begin{itemize}
+\item
+  Complete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-01}
+  by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Inclass work on
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{dplyr-CH1-handout}
+  (link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Before class read chapter 3 (Data Wrangling) of
+  \href{https://moderndive.com}{MD} --- pgs 65-96
+\item
+  Before class read chapter 4 (Data Importing and ``Tidy'' Data) of
+  \href{https://moderndive.com}{MD} --- pgs 99-117
+\item
+  \href{../Handouts/pre_lecture.pdf}{Partial Lecture Slides}
+\item
+  Work through chapter 3 (Starting with Data) of
+  \href{https://stat-ata-asu.github.io/R_DS_BD2020/}{DSWR}
+\item
+  Work through chapter 4 (Data Manipulation) of
+  \href{https://stat-ata-asu.github.io/R_DS_BD2020/}{DSWR}
+\item
+  Complete the \textbf{Data Wrangling} chapter of \emph{Introduction to
+  the Tidyverse} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Aug 24
+\item
+  Complete the \textbf{Data Visualization} chapter of \emph{Introduction
+  to the Tidyverse} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Aug 27
+\item
+  Start
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-03}
+  due by 10:00 am Sep 1 --- Final corrections due by 5:00 pm Sep 3 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\tightlist
+\item
+  Read \href{https://ismayc.github.io/rbasics-book/}{Getting used to R,
+  RStudio, and R Markdown}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-3-aug-30-sep-3}{%
+\subsection*{Week 3: (Aug 30 -- Sep 3)}\label{week-3-aug-30-sep-3}}
+\addcontentsline{toc}{subsection}{Week 3: (Aug 30 -- Sep 3)}
+
+\begin{itemize}
+\item
+  Complete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-03}
+  by 10:00 am Sep 1 --- Final corrections due by 5:00 pm Sep 3 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Before class read chapter 2 (Data Visualization) of
+  \href{https://moderndive.com}{MD} --- pgs 21-62
+\item
+  \href{../Handouts/short_pre_lecture.pdf}{Partial Lecture Slides}
+\item
+  Work through chapter 5 (Using \texttt{ggplot2}) of
+  \href{https://stat-ata-asu.github.io/R_DS_BD2020/}{DSWR}
+\item
+  Complete the \textbf{Grouping and Summarizing} chapter of
+  \emph{Introduction to the Tidyverse} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Aug 31
+\item
+  Complete the \textbf{Types of Visualizations} chapter of
+  \emph{Introduction to the Tidyverse} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Sep 3
+\item
+  Start
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-02}
+  due by 10:00 am Sep 8 --- Final corrections due by 5:00 pm Sep
+  10---(assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\end{itemize}
+
+\begin{rmdexercise}
+Test yourself:
+
+\begin{enumerate}
+\def\arabic{enumi}.{\arabic{enumi}.}
+\tightlist
+\item
+  \href{RMarkdown.pdf}{R Markdown Practice}
+\item
+  \href{RMarkdownEC.pdf}{R Markdown Extra Credit}
+\item
+  \href{knitrEC.pdf}{LaTeX/knitr Extra Credit}
+\end{enumerate}
+\end{rmdexercise}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  Complete \emph{Data Visualization with \texttt{ggplot2}} (Part 1)
+  \href{https://www.datacamp.com/}{(DataCamp)}
+\item
+  Nice
+  \href{http://datacamp-community.s3.amazonaws.com/e63a8f6b-2aa3-4006-89e0-badc294b179c}{Tidyverse
+  Cheat Sheet}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-4-sep-7-10}{%
+\subsection*{Week 4: (Sep 7 -- 10)}\label{week-4-sep-7-10}}
+\addcontentsline{toc}{subsection}{Week 4: (Sep 7 -- 10)}
+
+\begin{itemize}
+\item
+  Complete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-02}
+  by 10:00 am Sep 8 --- Final corrections due by 5:00 pm Sep
+  10---(assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Before class read chapter 5 (Basic Regression) of
+  \href{https://moderndive.com}{MD} --- pgs 119-160
+\item
+  In class go over this
+  \href{https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html}{document}
+\item
+  Complete the \textbf{Introduction to Modeling} chapter of
+  \emph{Modeling with Data in the Tidyverse} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Sep 8
+\item
+  Complete the \textbf{Modeling with Basic Regression} chapter of
+  \emph{Modeling with Data in the Tidyverse} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Sep 10
+\item
+  Start
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-04}
+  due by 10:00 am Sep 15 --- Final corrections due by 5:00 pm Sep 17 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  Read the \href{http://r-pkgs.had.co.nz/git.html}{Git and GitHub}
+  chapter from Hadley Wickham's book \href{http://r-pkgs.had.co.nz/}{R
+  Packages}
+\item
+  Brian Caffo's take on
+  \href{https://www.youtube.com/watch?v=O2UFfiGdGFA}{R IDEs}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-5-sep-13-17}{%
+\subsection*{Week 5: (Sep 13 -- 17)}\label{week-5-sep-13-17}}
+\addcontentsline{toc}{subsection}{Week 5: (Sep 13 -- 17)}
+
+\begin{itemize}
+\item
+  Complete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-04}
+  by 10:00 am Sep 15 --- Final corrections due by 5:00 pm Sep 17 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Before class read chapter 6 (Multiple Regression) of
+  \href{https://moderndive.com}{MD} --- pgs 161-191
+\item
+  Complete the \textbf{Modeling with Multiple Regression} chapter of
+  \emph{Modeling with Data in the Tidyverse} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Sep 14
+\item
+  Complete the \textbf{Model Assessment and Selection} chapter of
+  \emph{Modeling with Data in the TIdyverse} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Sep 17
+\item
+  Start
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-05}
+  due by 10:00 am Sep 22 --- Final corrections due by 5:00 pm Sep 24 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\tightlist
+\item
+  Complete \emph{Data Manipulation in R with \texttt{dplyr}}
+  \href{https://www.datacamp.com/}{(DataCamp)}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-6-sep-20-24}{%
+\subsection*{Week 6: (Sep 20 -- 24)}\label{week-6-sep-20-24}}
+\addcontentsline{toc}{subsection}{Week 6: (Sep 20 -- 24)}
+
+\begin{itemize}
+\item
+  Complete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-05}
+  by 10:00 am Sep 22 --- Final corrections due by 5:00 pm Sep 24 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Before class read chapter 6 (Multiple Regression) of
+  \href{https://moderndive.com}{MD} --- pgs 161-191
+\item
+  Complete the \textbf{Getting Started with R Markdown} chapter of
+  \emph{Reporting with R Markdown} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Sep 21
+\item
+  Complete the \textbf{Adding Analyses and Visualizations} chapter of
+  \emph{Reporting with R Markdown} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Sep 24
+\item
+  Start
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-06}
+  due by 10:00 am Sep 29 --- Final corrections due by 5:00 pm Oct 1 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  Read through \href{../Rmarkdown/MiscRegression.html}{\emph{Misc
+  Regression}}
+\item
+  Answer the questions at the end of
+  \href{../Rmarkdown/MiscRegression.html}{\emph{Misc Regression}} for
+  extra credit (Turn in before Oct 1)
+\item
+  Work on \href{../Rmarkdown/ClassAssignment.html}{Is this
+  Discrimination?}
+\item
+  Some ideas for how to answer the
+  \href{../Rmarkdown/discrimination.html}{Is this Discrimination?}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-7-sep-27-oct-1}{%
+\subsection*{Week 7: (Sep 27 -- Oct 1)}\label{week-7-sep-27-oct-1}}
+\addcontentsline{toc}{subsection}{Week 7: (Sep 27 -- Oct 1)}
+
+\begin{itemize}
+\item
+  Complete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-06}
+  by 10:00 am Sep 29 --- Final corrections due by 5:00 pm Oct 1 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Complete (\textbf{The binomial distribution \& Laws of probability})
+  in \emph{Foundations of Probability in R} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Sep 28
+\item
+  Complete (\textbf{Bayesian statistics \& Related distributions}) in
+  \emph{Foundations of Probability in R} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 1
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  \href{../Slides/ProbabilityProblems.html}{In Class Problems}
+\item
+  \href{https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html}{Probability}
+\item
+  Complete the \textbf{Improving the Report} chapter of \emph{Reporting
+  with R Markdown}---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 1
+\item
+  Complete the \textbf{Customizing the Report} chapter of
+  \emph{Reporting with R Markdown} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 1
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-8-oct-4-8}{%
+\subsection*{Week 8: (Oct 4 -- 8)}\label{week-8-oct-4-8}}
+\addcontentsline{toc}{subsection}{Week 8: (Oct 4 -- 8)}
+
+\begin{itemize}
+\item
+  Before class read chapter 7 (Sampling) of
+  \href{https://moderndive.com}{MD} --- pgs 195-232
+\item
+  Complete the \textbf{Introduction to ideas of inference} chapter of
+  \emph{Foundations of Inference} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 5
+\item
+  Complete the \textbf{Completing a randomization test: gender
+  discrimination} chapter of \emph{Foundations of Inference} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 8
+\item
+  Start
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-07}
+  due by 10:00 am Oct 13 --- Final corrections due by 5:00 pm Oct 15 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  \href{../Handouts/EVuniform.html}{Sampling Distributions}
+\item
+  Read Chapter 4 of MSWR --- Sampling Distributions;
+  \href{../Homework/Chapter4HWK.Rmd}{Problems 2, 5, 12-16}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-9-fall-break-oct-11-12-class-oct-13-15}{%
+\subsection*{Week 9: (Fall Break Oct 11 \& 12, Class: Oct 13 --
+15)}\label{week-9-fall-break-oct-11-12-class-oct-13-15}}
+\addcontentsline{toc}{subsection}{Week 9: (Fall Break Oct 11 \& 12,
+Class: Oct 13 -- 15)}
+
+\begin{itemize}
+\item
+  Complete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-07}
+  by 10:00 am Oct 13 --- Final corrections due by 5:00 pm Oct 15 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Read Chapter 5 of MSWR
+\item
+  \href{../Notes/Children/BootStrap2.html}{Chapter 5 notes}
+\item
+  \href{../Rmarkdown/MiscRmarkdown.html}{Misc R Markdown Examples}
+\item
+  Read Chapter 8 (Bootstrapping and Confidence Intervals) of
+  \href{https://moderndive.com}{MD} --- pgs 233-305
+\item
+  Complete the \textbf{Hypothesis testing errors: opportunity cost}
+  chapter of \emph{Foundations of Inference} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 15
+\item
+  Complete the \textbf{Confidence intervals} chapter of
+  \emph{Foundations of Inference} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 15
+\item
+  Start
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{Sampling
+  Distributions Lab} by 10:00 am Oct 20 --- Final corrections due by
+  5:00 pm Oct 22 --- (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  \href{../Rmarkdown/ExamplesInfer.html}{Misc \texttt{infer} Examples}
+\item
+  \href{../Handouts/InferenceExamples.pdf}{Inference Examples used in
+  class}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-10-oct-18-22}{%
+\subsection*{Week 10: (Oct 18 -- 22)}\label{week-10-oct-18-22}}
+\addcontentsline{toc}{subsection}{Week 10: (Oct 18 -- 22)}
+
+\begin{itemize}
+\item
+  Compete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{Sampling
+  Distributions Lab} by 10:00 am Oct 20 --- Final corrections due by
+  5:00 pm Oct 22 --- (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Read Chapter 8 (Bootstrapping and Confidence Intervals) of
+  \href{https://moderndive.com}{MD} --- pgs 233-305
+\item
+  Complete the \textbf{Bootstrapping for Estimating a Parameter} chapter
+  in \emph{Inference for Numerical Data in R} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 19
+\item
+  Complete the \textbf{Introducing the t-distribution} chapter in
+  \emph{Inference for Numerical Data in R} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 22
+\item
+  Bootstrap
+  \href{https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html}{Example}
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  \href{../Rmarkdown/ExamplesInfer.html}{Misc \texttt{infer} Examples}
+\item
+  \href{../Handouts/InferenceExamples.pdf}{Inference Examples used in
+  class}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-11-oct-25-29}{%
+\subsection*{Week 11: (Oct 25 -- 29)}\label{week-11-oct-25-29}}
+\addcontentsline{toc}{subsection}{Week 11: (Oct 25 -- 29)}
+
+\begin{itemize}
+\item
+  Read Chapter 9 (Hypothesis Testing) of
+  \href{https://moderndive.com}{MD} --- pgs 307-360
+\item
+  Complete the \textbf{Inference for Difference in Two Parameters}
+  chapter in \emph{Inference for Numerical Data in R} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 26
+\item
+  Complete the \textbf{Comparing Many Means} chapter in \emph{Inference
+  for Numerical Data in R} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Oct 29
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  \href{../Rmarkdown/ExamplesInfer.html}{Misc \texttt{infer} Examples}
+\item
+  \href{../Handouts/InferenceExamples.pdf}{Inference Examples used in
+  class}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-12-nov-1-5}{%
+\subsection*{Week 12: (Nov 1 -- 5)}\label{week-12-nov-1-5}}
+\addcontentsline{toc}{subsection}{Week 12: (Nov 1 -- 5)}
+
+\begin{itemize}
+\item
+  Complete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-08}
+  by 10:00 am Nov 3 --- Final corrections due by 5:00 pm Nov 5 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Read Chapter 9 (Hypothesis Testing) of
+  \href{https://moderndive.com}{MD} --- pgs 307-360
+\item
+  Complete the \textbf{Inference for a Single Parameter} chapter in
+  \emph{Inference for Categorical Data in R} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Nov 2
+\item
+  Complete the \textbf{Proportions: Testing and Power} chapter in
+  \emph{Inference for Categorical Data in R} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Nov 5
+\item
+  \href{../Handouts/ChiGOF.html}{Goodness-Of-Fit}
+\item
+  \href{../Rmarkdown/InClassNotes.html}{In class Examples}
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\item
+  \href{../Rmarkdown/ExamplesInfer.html}{Misc \texttt{infer} Examples}
+\item
+  \href{../Handouts/InferenceExamples.pdf}{Inference Examples used in
+  class}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-13-nov-812}{%
+\subsection*{Week 13: (Nov 8--12)}\label{week-13-nov-812}}
+\addcontentsline{toc}{subsection}{Week 13: (Nov 8--12)}
+
+\begin{itemize}
+\item
+  Complete the \textbf{Comparing Many Parameters: Independence} chapter
+  in \emph{Inference for Categorical Data in R} ---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Nov 9
+\item
+  Complete the \textbf{Comparing Many Parameters: Goodness of Fit}
+  chapter in \emph{Inference for Categorical Data in R}---
+  \href{https://app.datacamp.com/groups/stt3850-fall2021/assignments}{DataCamp}
+  --- Due NLT 5:00 pm Nov 12
+\item
+  Start Reproduction of \emph{Inference for Numerical Data in R} ---
+  assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN}
+  - Due NLT 5:00 PM Dec 7, 2020
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\tightlist
+\item
+  Complete the problems in the
+  \href{https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter5HWK.Rmd}{R
+  Markdown file} and publish your solution to
+  \href{http://rpubs.com/}{RPubs}.
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-14-nov-1519}{%
+\subsection*{Week 14: (Nov 15--19)}\label{week-14-nov-1519}}
+\addcontentsline{toc}{subsection}{Week 14: (Nov 15--19)}
+
+\begin{itemize}
+\item
+  Complete
+  \href{https://classroom.github.com/classrooms/87543903-stt3850-fall2021}{PS-09}
+  by 10:00 am Nov 17 --- Final corrections due by 5:00 pm Nov 19 ---
+  (assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN})
+\item
+  Read Chapter 7 of MSWR
+\item
+  \href{../Notes/Children/ConfidenceIntervals2.html}{Chapter 7 notes}
+\item
+  \href{../Rmarkdown/MoreBootstrapping.html}{Bootstrap \(t\)}
+\item
+  Work on Reproduction of \emph{Inference for Numerical Data in R} ---
+  assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN}
+  - Due NLT 5:00 PM Dec 7, 2020
+\end{itemize}
+
+\begin{rmdoptional}
+\hypertarget{optional}{%
+\paragraph*{Optional}\label{optional}}
+\addcontentsline{toc}{paragraph}{Optional}
+
+\begin{itemize}
+\tightlist
+\item
+  Complete the problems in the
+  \href{https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter7HWK.Rmd}{R
+  Markdown file} and publish your solution to
+  \href{http://rpubs.com/}{RPubs}
+\end{itemize}
+\end{rmdoptional}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-15-nov-22-23}{%
+\subsection*{Week 15: (Nov 22 \& 23)}\label{week-15-nov-22-23}}
+\addcontentsline{toc}{subsection}{Week 15: (Nov 22 \& 23)}
+
+\begin{itemize}
+\tightlist
+\item
+  Work on Reproduction of \emph{Inference for Numerical Data in R} ---
+  assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN}
+  - Due NLT 5:00 PM Dec 7, 2020
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{week-16-nov-29-30}{%
+\subsection*{Week 16: (Nov 29 \& 30)}\label{week-16-nov-29-30}}
+\addcontentsline{toc}{subsection}{Week 16: (Nov 29 \& 30)}
+
+\begin{itemize}
+\tightlist
+\item
+  Work on Reproduction of \emph{Inference for Numerical Data in R} ---
+  assignment link in
+  \href{https://asulearn.appstate.edu/course/view.php?id=131169}{ASULEARN}
+  - Due NLT 5:00 PM Dec 7, 2020
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\end{document}
