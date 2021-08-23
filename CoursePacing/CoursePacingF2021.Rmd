@@ -86,6 +86,8 @@ ______________
 
 * Complete [PS-01](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Aug 25 --- Final corrections due by 5:00 pm Aug 27 (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169))
 
+* Inclass work on [dplyr-CH1-handout](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) (link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
+
 * Before class read chapter 3 (Data Wrangling) of [MD](https://moderndive.com) --- pgs 65-96
 
 * Before class read chapter 4 (Data Importing and "Tidy" Data) of [MD](https://moderndive.com) --- pgs 99-117
