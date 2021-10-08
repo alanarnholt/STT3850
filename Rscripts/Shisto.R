@@ -10,7 +10,7 @@ head(schis, n = 3)
 library(ggplot2)
 p <- ggplot(data = schis, aes(group, worms)) + 
   geom_point(position = "jitter", aes(color = group)) + 
-  facet_grid(. ~ gender) + 
+  facet_grid(cols = vars(gender)) + 
   theme_bw()
 p
 
