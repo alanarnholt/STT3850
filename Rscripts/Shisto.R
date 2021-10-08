@@ -118,6 +118,24 @@ ggplot(data = MDIFF, aes(x = MD)) +
   theme_bw() +
   labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), 
        title = "Randomization Distribution")
+#######################
+library(infer)
+
+ND %>% 
+  specify(worms ~ group) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10^3, type = "permute") %>% 
+  calculate(stat = "diff in means", order = c("Control", "Treatment")) -> some
+some
+get_p_value(some, obs_stat = 7.6, direction = "greater")
+visualize(some)
+# OR
+ggplot(data = some, aes(x = stat)) + 
+  geom_histogram(binwidth = 2, fill = "pink", color = "black") + 
+  theme_bw()
+# OR
+sum(some$stat >= 7.6)/10^3.  # p-value
+
 
 ## Theoretical Now
 
