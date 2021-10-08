@@ -22,6 +22,10 @@ ans
 # Write hypotheses:
 # Write fundamental question of inference:
 
+# “How does what we observed in our data compare 
+# to what would happen if the null hypothesis were 
+# actually true and we repeated the process many times?”
+
 ND <- schis[gender=="Female", ]
 ND
 
@@ -61,11 +65,12 @@ ggplot(data = ND, aes(sample = worms, color = group)) +
   geom_qq()
 
 # Tidy Verse
-# Need to install oilabs
-# devtools::install_github('OpenIntroOrg/oilabs-r-package')
-library(oilabs)
+
+library(moderndive)
+
 rep_sample_n(ND, size = 10, reps = 2)
 ND
+#############
 sims <- 10^4 - 1
 MDIFF <- rep_sample_n(ND, size = 10, reps = sims) %>%
           summarize(MD = mean(worms[6:10]) - mean(worms[1:5]))

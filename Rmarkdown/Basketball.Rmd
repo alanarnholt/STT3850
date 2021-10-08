@@ -1,0 +1,60 @@
+---
+title: "Binomial Problem"
+author: "Alan T. Arnholt"
+date: "9/29/2021"
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, comment = NA)
+library(tidyverse)
+```
+
+# Sample Space
+
+Consider a person shooting 10 free throws who has a constant probability of making a free throw of 0.63.
+
+```{r}
+S <- expand.grid(shot1 = 0:1, shot2 = 0:1, shot3 = 0:1, shot4 = 0:1, shot5 = 0:1,
+                 shot6 = 0:1, shot7 = 0:1, shot8 = 0:1, shot9 = 0:1, shot10 = 0:1)
+dim(S)
+S %>% 
+  mutate(ShotsMade = apply(S, 1, sum)) -> SS
+table(SS$ShotsMade)
+xtabs(~ShotsMade, data = SS) -> T1
+T1
+x <- as.numeric(names(T1))
+x
+p <- 0.63
+n <- 10
+pxi <- p^x*(1-p)^(n - x)
+pxi
+px <- pxi*T1
+px
+EX <- sum(x*px)
+EX
+n*p
+VX <- sum((x - EX)^2*px)
+VX
+n*p*(1-p)
+```
+
+
+
+
+```{r}
+DBINOM <- function(x, n, p){
+  choose(n, x)*p^x*(1-p)^(n-x)
+}
+DBINOM(0:5, 5, 0.5)
+dbinom(0:5, 5, 0.5)
+```
+
+```{r}
+x <- 0:10
+px <- dbinom(x = x, size = 10, p = 0.63)
+DF <- data.frame(x = x, px = px)
+rm(x, px)
+
+```
+
