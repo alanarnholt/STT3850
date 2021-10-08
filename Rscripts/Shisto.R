@@ -1,5 +1,5 @@
 # Alan Arnholt
-# 9/17/17
+
 
 gender <- c(rep("Female", 10), rep("Male", 10)) 
 group <- rep(rep(c("Treatment", "Control"), each = 5), 2)
