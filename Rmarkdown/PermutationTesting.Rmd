@@ -1,0 +1,284 @@
+---
+title: "Permutation Testing"
+author: "Alan T. Arnholt"
+date: "10/12/2021"
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE, fig.align = "center")
+library(tidyverse)
+```
+
+
+# Can A New Drug Reduce the Spread of Schistosomiasis?
+Schistosomiasis (skis-tuh-soh-may’-uh-sis) is a disease in humans caused by parasitic flatworms called schistosomes (skis’-tuh-sohms). Schistosomiasis affects about 200 million people worldwide and is a serious problem in sub-Saharan Africa, South America, China, and Southeast Asia. The disease can cause death, but more commonly results in chronic and debilitating symptoms, arising primarily from the body’s immune reaction to parasite eggs lodged in the liver, spleen,and intestines.
+
+Currently there is one drug, praziquantel (pray’-zee-kwan-tel), in common use for treatment of schistosomiasis; it is inexpensive and effective. However, many organizations are concerned about relying on a single drug to treat a serious disease that affects so many people worldwide. Drug resistance may have prompted an outbreak in the 1990s in Senegal, where cure rates were low. In 2007, several researchers published work on a promising drug called K11777, which, in theory, might treat schistosomiasis.
+
+```{r}
+gender <- c(rep("Female", 10), rep("Male", 10)) 
+group <- rep(rep(c("Treatment", "Control"), each = 5), 2)
+worms <- c(1, 2, 2, 10, 7, 16, 10, 10, 7, 17, 3, 5, 9, 10, 6, 31, 26, 28, 13, 47)
+schis <- data.frame(gender, group, worms)
+head(schis, n = 3)
+
+library(ggplot2)
+p <- ggplot(data = schis, aes(group, worms)) + 
+  geom_point(position = "jitter", aes(color = group)) + 
+  facet_grid(cols = vars(gender)) + 
+  theme_bw()
+p
+```
+
+1. Use the previous graph to visually compare the number of worms for the treatment and control groups for both the male and female mice. Do each of the four groups appear to have a similar center and similar spread? Are there any outliers (extreme observations that don’t fit with the rest of the data)?
+
+2. Calculate appropriate summary statistics (e.g., the median, mean, and standard deviation) for each of the four groups. For the female mice, calculate the difference between the treatment and control means. Do the same for the male mice.
+
+```{r}
+library(dplyr)
+ans <- schis %>%
+  group_by(gender, group) %>%
+  summarize(Median = median(worms), Mean = mean(worms), SD = sd(worms))
+ans
+```
+
+The descriptive analysis in Questions 1 and 2 points to a positive treatment effect: K11777 appears to have reduced the number of parasite worms in this sample. But descriptive statistics are usually only the first step in ascertaining whether an effect is real; we often conduct a significance test or create a confidence interval to determine if chance alone could explain the effect.
+
+We will introduce the basic concepts of randomization tests in a setting where units (mice in this example) are randomly allocated to a treatment or control group. Using a significance test, we will decide if an observed treatment effect (the difference between the mean responses in the treatment and control) is “real” or if “random chance alone” could plausibly explain the observed effect. The null hypothesis states that “random chance alone” is the reason for the observed effect. In this initial discussion, the alternative hypothesis will be one-sided because we want to show that the true treatment mean ($\mu_{treatment}$) is less than the true control mean ($\mu_{control}$).
+
+## Statistical Inference Through a Randomization Test
+
+Whether they take the form of significance tests or confidence intervals, inferential procedures rest on the fundamental question for inference: “What would happen if we did this many times?” Let’s unpack this question in the context of the female mice schistosomiasis. We observed a difference in means of 7.6 = 12 - 4.4 worms between the control and treatment groups. While we expect that this large difference reflects the effectiveness of the drug, it is possible that chance alone could explain this difference. This “chance alone” position is usually called the null hypothesis and includes the following assumptions:
+
+* The number of parasitic worms found in the liver naturally varies from mouse to mouse.
+* Whether or not the drug is effective, there clearly is variability in the responses of mice to the infestation of schistosomes.
+* Each group exhibits this variability, and even if the drug is not effective, some mice do better than others.
+* The only explanation for the observed difference of 7.6 worms in the means is that the random allocation randomly placed mice with larger numbers of worms in the control group and mice with smaller numbers of worms in the treatment group.
+
+In this study, the **null hypothesis** is that the treatment has no effect on the average worm count, and it is denoted as
+
+> $H_0: \mu_{control} = \mu_{treatment}$  Another way to write this hypothesis is 
+
+> $H_0:$ The treatment has no effect on average worm count. Or
+
+> $H_0: \mu_{control} - \mu_{treatment} = 0$
+
+Alternative hypotheses can be “one-sided, greater-than” (as in this investigation), “one-sided, less-than” (the treatment causes a decrease in worm count), or “two-sided” (the treatment is different, in one direction or the other, from the mean). We chose to test a one-sided hypothesis because there is a clear research interest in one direction. In other words, we will take action (start using the drug) only if we can show that K11777 reduces worm count.
+
+> $H_A: \mu_{control} - \mu_{treatment} > 0$
+
+The **fundamental question for inference**: Every statistical inference procedure is based on the question “How does what we observed in our data compare to what would happen if the null hypothesis were actually true and we repeated the process many times?”
+
+For a randomization test comparing responses for the two groups, this question becomes “How does the observed difference between groups compare to what would happen if the treatments actually had no effect on the individual responses and we repeated the random allocation of individuals to groups many times?”
+
+```{r}
+ND <- schis %>% 
+  filter(gender == "Female")
+ND
+
+ggplot(data = ND, aes(group, worms)) + 
+  geom_point(position = "jitter", aes(color = group)) + 
+  theme_bw()
+
+ggplot(data = ND, aes(group, worms)) + 
+  geom_boxplot() +
+  theme_bw()
+
+
+ND %>%
+  group_by(group) %>%
+  summarize(Mean = mean(worms), SD = sd(worms), 
+            Median = median(worms), iqr = IQR(worms)) -> ans2
+ans2
+-diff(ans2$Mean) -> obs_diff
+obs_diff
+```
+
+
+## Generating a Simulated Permutation Distribution
+
+```{r}
+Worms <- ND$worms
+sims <- 10^4-1
+sim_diff <- numeric(sims)
+for(i in 1:sims){
+  index <- sample(10, 5, replace = FALSE)
+  sim_diff[i] <- mean(Worms[index]) - mean(Worms[-index])
+}
+pvalue <- (sum(sim_diff >= obs_diff) + 1)/(sims + 1)
+pvalue
+```
+## Using `infer`
+
+```{r}
+library(infer)
+
+ND %>% 
+  specify(worms ~ group) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10^4-1, type = "permute") %>% 
+  calculate(stat = "diff in means", order = c("Control", "Treatment")) -> some
+some
+get_p_value(some, obs_stat = obs_diff, direction = "greater")
+visualize(some) + shade_p_value(obs_stat = obs_diff, direction = "greater")
+```
+
+## Theoretical Permutation Distribution
+
+```{r}
+# Given a vector of length n + m
+# Take a resample of size m without replacement.
+n <- 5
+m <- 5
+ncb <- choose(n + m, m)
+ncb
+CB <- t(combn(n + m, m))
+head(CB)
+nn <- dim(CB)[1]
+nn
+#
+ND$worms
+
+diffmeans <- numeric(nn)
+for(i in 1:nn){
+  diffmeans[i] <- mean(ND$worms[CB[i, ]]) - mean(ND$worms[-CB[i,]])
+}
+sort(diffmeans)
+sum(diffmeans >= obs_diff)
+theo_pvalue <- mean(diffmeans >= obs_diff)
+theo_pvalue
+MASS::fractions(theo_pvalue)
+#
+# Write a function!
+rdtf <- function(x, y){
+  x <- x[!is.na(x)]
+  y <- y[!is.na(y)]
+  nx <- length(x)
+  ny <- length(y)
+  cv <- c(x, y)
+  nn <- choose(nx + ny, nx)
+  CB <- t(combn(nx + ny, nx))
+  DM <- numeric(nn)
+  for(i in 1:nn){
+    DM[i] <- mean(cv[CB[i, ]]) - mean(cv[-CB[i, ]])
+  }
+  sort(DM)
+}
+#
+rdtf(c(16, 10, 10, 7, 17), c(1, 2, 2, 10, 7))
+```
+
+## More on `infer`
+
+Test whether the average age of respondents in the `gss` is the same for those who have completed a college degree versus those who have not completed a college degree.
+
+> $H_0: \mu_{college} - \mu_{college^c} = 0$
+
+> $H_A: \mu_{college} - \mu_{college^c} \neq 0$
+
+```{r}
+data(gss)
+gss %>% 
+  group_by(college) %>% 
+  summarize(Mean = mean(age), n = n()) -> ans3
+ans3
+obs_diff <- diff(ans3$Mean) # degree - no degree
+
+gss %>% 
+  specify(age ~ college) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10^4-1, type = "permute") %>% 
+  calculate(stat = "diff in means", order = c("degree", "no degree")) -> some
+some
+get_p_value(some, obs_stat = obs_diff, direction = "two-sided")
+visualize(some) + shade_p_value(obs_stat = obs_diff, direction = "two-sided")
+```
+
+## Testing with a for loop
+
+```{r}
+N <- 10^4 - 1
+stat <- numeric(N)
+for(i in 1:N){
+ stat[i] <- diff(tapply(gss$age, sample(gss$college), mean)) 
+}
+hist(stat)
+abline(v = c(obs_diff, - obs_diff), col = "red")
+pvalue <- (sum(stat >= obs_diff)*2 + 1)/(N + 1)
+pvalue
+```
+
+## Note
+
+Since there are 326 respondents with no degree and 174 respondents with a degree there are a total of $`r choose(326+174, 174)`$ possible combinations.  If the computer could enumerate 1,000,000 combinations a second, it would take $`r (choose(326+174, 174)/1000000)/(365*24*60*60)`$ years to list all of the possible combinations. That is not happening since the age of the universe is supposedly $13.82 \times 10^9$ years old.
+
+## Your Turn
+
+Test whether males and females work the same number of hours per week using the self reported data from the General Social Survey for 2018 and 1976.
+
+```{r}
+gss %>% 
+  filter(year == 2018) %>% 
+  group_by(sex) %>% 
+  summarize(Mean = mean(hours), n = n()) -> ans4
+ans4
+obs_diff <- diff(ans4$Mean) # female - male
+obs_diff
+gss %>% 
+  filter(year == 2018) %>% 
+  specify(hours ~ sex) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10^4-1, type = "permute") %>% 
+  calculate(stat = "diff in means", order = c("female", "male")) -> some
+some
+get_p_value(some, obs_stat = obs_diff, direction = "two-sided")
+visualize(some) + shade_p_value(obs_stat = obs_diff, direction = "two-sided")
+```
+
+```{r}
+gss %>% 
+  filter(year == 2018) -> gss2018
+N <- 10^4 - 1
+stat <- numeric(N)
+for(i in 1:N){
+ stat[i] <- diff(tapply(gss2018$hours, sample(gss2018$sex), mean)) 
+}
+hist(stat)
+abline(v = c(obs_diff, - obs_diff), col = "red")
+pvalue <- (sum(stat <= obs_diff)*2 + 1)/(N + 1)
+pvalue
+```
+
+```{r}
+gss %>% 
+  filter(year == 1976) %>% 
+  group_by(sex) %>% 
+  summarize(Mean = mean(hours), n = n()) -> ans5
+ans5
+obs_diff <- diff(ans5$Mean) # female - male
+obs_diff
+gss %>% 
+  filter(year == 1976) %>% 
+  specify(hours ~ sex) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10^4-1, type = "permute") %>% 
+  calculate(stat = "diff in means", order = c("female", "male")) -> some
+some
+get_p_value(some, obs_stat = obs_diff, direction = "two-sided")
+visualize(some) + shade_p_value(obs_stat = obs_diff, direction = "two-sided")
+```
+
+```{r}
+gss %>% 
+  filter(year == 1976) -> gss1976
+N <- 10^4 - 1
+stat <- numeric(N)
+for(i in 1:N){
+ stat[i] <- diff(tapply(gss1976$hours, sample(gss1976$sex), mean)) 
+}
+hist(stat)
+abline(v = c(obs_diff, - obs_diff), col = "red")
+pvalue <- (sum(stat <= obs_diff)*2 + 1)/(N + 1)
+pvalue
+```
