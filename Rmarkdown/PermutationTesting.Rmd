@@ -124,6 +124,8 @@ get_p_value(some, obs_stat = obs_diff, direction = "greater")
 visualize(some) + shade_p_value(obs_stat = obs_diff, direction = "greater")
 ```
 
+
+
 ## Theoretical Permutation Distribution
 
 ```{r}
