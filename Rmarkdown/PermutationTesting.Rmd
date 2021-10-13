@@ -111,6 +111,13 @@ pvalue
 ```
 ## Using `infer`
 
+In this section, we'll now show you how to use the `infer` package to test a hypothesis. Steps include: `specify()` , `hypothesize()`, `generate()`,  `calculate()`, and `visualize()`, as can be seen in Figure \@ref(fig:inferht).
+
+```{r inferht, echo=FALSE, fig.cap="Hypothesis testing with the infer package.", out.width="90%", out.height="90%"}
+knitr::include_graphics("https://raw.githubusercontent.com/moderndive/ModernDive_book/master/images/flowcharts/infer/ht.png")
+```
+
+
 ```{r}
 library(infer)
 
@@ -217,7 +224,7 @@ Since there are 326 respondents with no degree and 174 respondents with a degree
 
 ## Your Turn
 
-Test whether males and females work the same number of hours per week using the self reported data from the General Social Survey for 2018 and 1976.
+* Test whether males and females work the same number of hours per week using the self reported data from the General Social Survey for 2018 and 1976.
 
 ```{r}
 gss %>% 
@@ -284,3 +291,16 @@ abline(v = c(obs_diff, - obs_diff), col = "red")
 pvalue <- (sum(stat <= obs_diff)*2 + 1)/(N + 1)
 pvalue
 ```
+
+Test whether the proportion of females is 50%. 
+
+```{r}
+gss %>% 
+  specify(response = sex, success = "female") %>% 
+  hypothesize(null = "point", p = 0.5) %>% 
+  generate(reps = 1000) %>% 
+  calculate(stat = "prop") -> expP
+visualize(expP) + shade_p_value(obs_stat = 0.474, direction = "two-sided")
+expP %>% get_p_value(obs_stat = 0.474, direction = "two-sided")
+```
+
