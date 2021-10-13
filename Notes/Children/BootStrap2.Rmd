@@ -5,6 +5,7 @@ output: bookdown::html_document2
 ```{r sop, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE, fig.align = "center")
 library(tidyverse)
+library(infer)
 ```
 
 # THE BOOTSTRAP (Chapter 5)
@@ -20,6 +21,8 @@ The birth weight of a baby is of interest to health officials since many studies
 library(resampledata)
 library(xtable)
 Babies <- NCBirths2004
+Babies %>% 
+  summarize(Mean = mean(Weight), n = n())
 ```
 
 For the North Carolina data, the mean weight of the `r sum(!is.na(Babies$Weight))` babies in the sample is `r round(mean(Babies$Weight),2)` g. We are interested in $\mu$, the true birth weight mean for all North Carolina babies born in 2004; this is probably not the same as the sample mean. We have already mentioned the different samples of the same size will yield different sample means, so how can we gauge the accuracy of the `r round(mean(Babies$Weight),2)` as an estimate to $\mu$?
@@ -66,7 +69,7 @@ mean(BD[,"xbarstar"])
 mean(BD$xbarstar)
 # tidyverse
 BD %>%
-  summarize(BootMean = mean(xbarstar))
+  summarize(BootMean = mean(xbarstar), BootSD = sd(xbarstar))
 ```
 
 > The bootstrap idea: the original sample approximates the population from which it was drawn. So resamples from this sample approximates what we would get if we took many samples from the population. The bootstrap distribution of the statistic, based on many resamples, approximates the sampling distribution of the statistic, based on many samples.
@@ -107,6 +110,7 @@ ggplot(data = data.frame(x = my.boot.statB), aes(x = x)) +
   labs(x = substitute(paste(bar(X),"* (g)")), 
        title = "Bootstrap distribution of means for NC birth weights") + 
   theme_bw() 
+quantile(my.boot.statB, prob = c(0.025, 0.975))
 ```
 
 Note that the bootstrap distribution is approximately normal.  Second, with mean `r mean(my.boot.statB)`, it is centered at approximately the same location as the original mean, `r mean(Babies$Weight)`.  The difference between where the bootstrap distribution is centered and the mean of the of original sample is the bootstrap bias in this example `r boot.bias`.  In general, the *bias* of an estimate $\hat{\theta}$ is $$Bias[\hat{\theta}] = E[\hat{\theta}] - \theta .$$  The bootstrap estimate of bias is $$Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta},$$ the mean of the bootstrap distribution, minus the estimate from the original data. Third, we get a rough idea of the amount of variability.  We can quantify the variability by computing the standard deviation of the bootstrap distribution, in this case `r sd(my.boot.statB)`.  This is the bootstrap standard error.
@@ -120,6 +124,7 @@ bsd <- Babies %>%
   generate(reps = 10^4, type = "bootstrap") %>% 
   calculate(stat = "mean")
 visualize(bsd)
+get_confidence_interval(bsd, level = 0.95)
 (BSB <- mean(bsd$stat) - mean(Babies$Weight))  # Bootstrap Bias
 ```
 
@@ -328,7 +333,7 @@ bootdist <- Bang %>%
   generate(reps = 10^4, type = "bootstrap") %>% 
   calculate(stat = "mean")
 visualize(bootdist)
-get_ci(bootdist, level = 0.95)
+get_confidence_interval(bootdist, level = 0.95)
 # Or
 quantile(bootdist$stat, probs = c(0.025, 0.975))
 ```
@@ -385,6 +390,13 @@ qqline(times.diff.mean, col = "red")
 par(opar)
 CI <- quantile(times.diff.mean, prob = c(0.025, 0.975))
 CI
+# Using infer
+TV %>% 
+  specify(Times ~ Cable) %>% 
+  generate(reps = 10^4 - 1, type = "bootstrap") %>% 
+  calculate(stat = "diff in means", order = c("Basic", "Extended")) -> bootdist
+visualize(bootdist) + theme_bw()
+get_confidence_interval(bootdist, level = 0.95)
 ```
 
 Figure 8a shows the bootstrap distribution of the difference of sample means. As in the single sample case, we see that the bootstrap distribution is approximately normal and centered at the original statistics (the difference in sample means). We also get a quick idea of how much the difference in sample means varies due to random sampling. We may quantify this variation by computing the bootstrap standard error, which is `r sd(times.diff.mean)`. Again, the bootstrap standard error is the standard error of the sampling distribution.
