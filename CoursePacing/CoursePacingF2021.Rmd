@@ -277,6 +277,8 @@ _______________
 
 * Complete [PS-07](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 13 --- Final corrections due by 5:00 pm Oct 15 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=131169)) 
 
+* Read about [Permutation Testing](../Rmarkdown/PermutationTesting.html) 
+
 * Read Chapter 5 of MSWR
 
 * [Chapter 5 notes](../Notes/Children/BootStrap2.html)
