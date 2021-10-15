@@ -153,7 +153,7 @@ Adding some labels and coloring the _p-value_.
 ```{r}
 ggplot(data = DF, aes(x = sim_diff)) +
   geom_histogram(aes(fill = sim_diff >= 7.6), alpha = 0.6) + 
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   scale_fill_manual(values = c("purple", "red")) +
   labs(x = expression(bar(x)[Control] - bar(x)[Treatment]), y = "", title = "Simulation-Based Null Distribution") +
   theme_bw() 
