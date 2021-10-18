@@ -443,8 +443,8 @@ boot.bias</code></pre>
 3418.151 3477.206 </code></pre>
 <p>Note that the bootstrap distribution is approximately normal. Second, with mean 3448.1998813, it is centered at approximately the same location as the original mean, 3448.259663. The difference between where the bootstrap distribution is centered and the mean of the of original sample is the bootstrap bias in this example -0.0597818. In general, the <em>bias</em> of an estimate <span class="math inline">\(\hat{\theta}\)</span> is <span class="math display">\[Bias[\hat{\theta}] = E[\hat{\theta}] - \theta .\]</span> The bootstrap estimate of bias is <span class="math display">\[Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta},\]</span> the mean of the bootstrap distribution, minus the estimate from the original data. Third, we get a rough idea of the amount of variability. We can quantify the variability by computing the standard deviation of the bootstrap distribution, in this case 15.0452075. This is the bootstrap standard error.</p>
 </div>
-<div id="using-rep_sample_n-from-infer" class="section level4" number="1.0.0.1">
-<h4><span class="header-section-number">1.0.0.1</span> Using <code>rep_sample_n</code> from <code class="unnumbered">infer</code></h4>
+<div id="using-rep_sample_n-from-the-infer-package" class="section level4 unnumbered">
+<h4>Using <code>rep_sample_n</code> from the <code>infer</code> package</h4>
 <pre class="r"><code>Babies %&gt;% 
   rep_sample_n(size = 1009, replace = TRUE, reps = 10000) %&gt;% 
   group_by(replicate) %&gt;% 
