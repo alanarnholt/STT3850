@@ -116,7 +116,24 @@ quantile(my.boot.statB, prob = c(0.025, 0.975))
 
 Note that the bootstrap distribution is approximately normal.  Second, with mean `r mean(my.boot.statB)`, it is centered at approximately the same location as the original mean, `r mean(Babies$Weight)`.  The difference between where the bootstrap distribution is centered and the mean of the of original sample is the bootstrap bias in this example `r boot.bias`.  In general, the *bias* of an estimate $\hat{\theta}$ is $$Bias[\hat{\theta}] = E[\hat{\theta}] - \theta .$$  The bootstrap estimate of bias is $$Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta},$$ the mean of the bootstrap distribution, minus the estimate from the original data. Third, we get a rough idea of the amount of variability.  We can quantify the variability by computing the standard deviation of the bootstrap distribution, in this case `r sd(my.boot.statB)`.  This is the bootstrap standard error.
 
-#### Using the `infer` package {-}
+
+#### Using `rep_sample_n` from `infer`{-}
+
+```{r}
+Babies %>% 
+  rep_sample_n(size = 1009, replace = TRUE, reps = 10000) %>% 
+  group_by(replicate) %>% 
+  summarize(stat = mean(Weight)) -> BSD
+c(mean(BSD$stat), sd(BSD$stat))
+ggplot(data = BSD, aes(x = stat)) + 
+  geom_histogram(fill = "lightblue", color = "black") + 
+  labs(x = substitute(paste(bar(X),"* (g)")), 
+       title = "Bootstrap distribution of means for NC birth weights") + 
+  theme_bw() 
+quantile(my.boot.statB, prob = c(0.025, 0.975))
+```
+
+#### Using the `infer` pipeline {-}
 
 ```{r}
 library(infer)
