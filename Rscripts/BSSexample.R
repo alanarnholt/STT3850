@@ -102,3 +102,6 @@ visualize(BSD) + shade_confidence_interval(endpoints = CI)
 get_confidence_interval(BSD, level = 0.95, point_estimate = obs_diff, type = "se") -> CISE
 CISE
 CI
+
+############################
+
