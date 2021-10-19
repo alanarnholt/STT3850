@@ -90,6 +90,8 @@ CIPI
 
 ######## Using infer now
 
+##### Develop CI for p_seed - p_control
+
 mythbusters_yawn %>% 
   specify(yawn ~ group, success = "yes") %>% 
   generate(reps = 10000, type = "bootstrap") %>% 
