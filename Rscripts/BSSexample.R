@@ -111,7 +111,11 @@ for(i in 1:B){
   diffp[i] <- mean(bss1=="yes") - mean(bss2=="yes")
 }
 hist(diffp)
+hist(diffp, col = "lightblue", main = "Bootstrap Distribution of Differences in Proportions",
+     xlab = substitute(paste(hat(p)[s],"*", - hat(p)[c],"*")) )
 abline(v = 0, col = "blue", lwd = 3)
+
+
 CIPI_l <- quantile(diffp, probs = c(0.025, 0.975))
 CIPI_l
 
@@ -126,13 +130,20 @@ mythbusters_yawn %>%
   specify(yawn ~ group, success = "yes") %>% 
   generate(reps = 10000, type = "bootstrap") %>% 
   calculate(stat = "diff in props", order = c("seed", "control")) -> BSD
-visualize(BSD)  
+visualize(BSD)
+
+visualize(BSD) +
+  labs(x = substitute(paste(hat(p)[s],"*", - hat(p)[c],"*"))) + 
+  geom_vline(xintercept = 0, color = "blue", size = 2)
+
+
 get_confidence_interval(BSD, level = 0.95) -> CIPI
 CIPI
 CIPI_l
 
 visualize(BSD) + shade_confidence_interval(endpoints = CI) + 
-  geom_vline(xintercept = 0, color = "red", size = 2)
+  geom_vline(xintercept = 0, color = "red", size = 2) + 
+  labs(x = substitute(paste(hat(p)[s],"*", - hat(p)[c],"*")))
 
 get_confidence_interval(BSD, level = 0.95, point_estimate = obs_diff, type = "se") -> CISE
 CISE
