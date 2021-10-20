@@ -406,15 +406,18 @@ for (i in 1:B){
 }
 opar <- par(no.readonly = TRUE)
 par(mfrow=c(1, 2))
+CI <- quantile(times.diff.mean, prob = c(0.025, 0.975))
+CI
 hist(times.diff.mean, breaks = "Scott", freq=FALSE, 
      main = "Bootstrap Distribution \n (Figure 8a)", 
      xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")), 
      col = "lightblue")
+abline(v = c(0, CI), col = c("blue", "red", "red"), lwd = 2, 
+       lty = c("solid", "dashed", "dashed"))
 qqnorm(times.diff.mean, main = "Normal Q-Q Plot \n (Figure 8b)")
 qqline(times.diff.mean, col = "red")
 par(opar)
-CI <- quantile(times.diff.mean, prob = c(0.025, 0.975))
-CI
+
 # Using infer
 TV %>% 
   specify(Times ~ Cable) %>% 
@@ -426,7 +429,8 @@ get_confidence_interval(bootdist, level = 0.95) -> CI2
 ###
 visualize(bootdist) + theme_bw() +
   labs(x = substitute(paste(bar(x)[basic],"*", - bar(x)[extended],"*"))) + 
-  shade_confidence_interval(endpoints = CI2)
+  shade_confidence_interval(endpoints = CI2) + 
+  geom_vline(xintercept = 0, color = "purple", size = 2)
 ```
 
 Figure 8a shows the bootstrap distribution of the difference of sample means. As in the single sample case, we see that the bootstrap distribution is approximately normal and centered at the original statistics (the difference in sample means). We also get a quick idea of how much the difference in sample means varies due to random sampling. We may quantify this variation by computing the bootstrap standard error, which is `r sd(times.diff.mean)`. Again, the bootstrap standard error is the standard error of the sampling distribution.
@@ -453,7 +457,7 @@ hist(times.diff.meanP, breaks = "Scott", freq=FALSE,
      main = "Randomization Distribution \n (Figure 9a)", 
      xlab = substitute(paste(bar(x)[basic],"*", - bar(x)[extended],"*")), 
      col = "lightblue")
-abline(v= obsDIFF, col = "red")
+abline(v= obsDIFF, col = "blue", lty = "dashed")
 qqnorm(times.diff.meanP, main = "Normal Q-Q Plot \n (Figure 9b)")
 qqline(times.diff.meanP, col = "red")
 par(opar)
@@ -530,16 +534,18 @@ for (i in 1:B){
   CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
   diffmeans[i] <- mean(ILEC.sample) - mean(CLEC.sample)
 }
+CIdiff <- quantile(diffmeans, prob = c(0.025, 0.975))
+CIdiff
 opar <- par(no.readonly = TRUE)
 par(mfrow=c(1, 2))
 hist(diffmeans, breaks = "Scott", col = "lightblue", 
      main = "Bootstrap Distribution \n Figure 12a", 
      freq= FALSE, xlab = substitute(paste(bar(x)[ILEC],"*", - bar(x)[CLEC],"*")))
+abline(v = c(CIdiff, 0), col = c("blue", "blue", "red"), lwd = 2, 
+       lty = c("dashed", "dashed", "solid"))
 qqnorm(diffmeans, main = "Normal Q-Q Plot \n Figure 12b")
 qqline(diffmeans, col = "red")
 par(opar)
-CIdiff <- quantile(diffmeans, prob = c(0.025, 0.975))
-CIdiff
 ```
 The bootstrap distribution for the difference in means is shown in Figure 12a. Note the strong skewness in the distribution. The mean of the bootstrap distribution is `r mean(diffmeans)` with a standard error of `r sd(diffmeans)`. A 95% bootstrap percentile confidence interval for the difference in means (ILEC-CLEC) is given by (`r CIdiff[1]`, `r CIdiff[2]`) and so we would say that with 95% confidence, the repair times for ILEC customers are, on average, `r -1*CIdiff[2]` $-$ `r -1*CIdiff[1]` hours shorter than the repair times for CLEC customers.
 
@@ -596,16 +602,19 @@ for (i in 1:B){
   CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
   diffmeans.25[i] <- mean(ILEC.sample, trim = .25) - mean(CLEC.sample, trim = .25)
 }
+CIdiff.25 <- quantile(diffmeans.25, prob = c(0.025, 0.975))
+CIdiff.25
+###############
 opar <- par(no.readonly = TRUE)
 par(mfrow=c(1, 2))
 hist(diffmeans.25, breaks = "Scott", col = "lightblue", 
      main = "Bootstrap Distribution \n Figure 14a \n 0.25 Trimmed Means", 
      freq= FALSE, xlab = substitute(paste(bar(x)[1],"*", - bar(x)[2],"*")))
+abline(v = c(CIdiff.25, 0), col = c("blue", "blue", "red"), 
+       lty = c("dashed", "dashed", "solid"))
 qqnorm(diffmeans.25, main = "Normal Q-Q Plot \n Figure 14b")
 qqline(diffmeans.25, col = "red")
 par(opar)
-CIdiff.25 <- quantile(diffmeans.25, prob = c(0.025, 0.975))
-CIdiff.25
 ```
 
 Example 6: In the Verizon data, rather than looking at the difference in means, suppose we look at the ratio of means. The sample ratio is `r mean(times.ILEC)/mean(times.CLEC)`, so for ILEC customers, repair times are about half of that for CLEC customers.
@@ -622,17 +631,20 @@ for (i in 1:B){
   CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
   boot.ratio[i] <- mean(ILEC.sample)/mean(CLEC.sample)
 }
+CIratio <- quantile(boot.ratio, prob = c(0.025, 0.975))
+CIratio
+#############
 opar <- par(no.readonly = TRUE)
 par(mfrow=c(1, 2))
 hist(boot.ratio, breaks = "Scott", col = "lightblue", 
      main = "Bootstrap Distribution \n Figure 15a", 
      freq= FALSE, 
      xlab = substitute(paste(bar(x)[ILEC],"* / ", bar(x)[CLEC],"*")))
+abline(v = c(CIratio, 1), lty = c("dashed", "dashed", "solid"),
+       col = c("blue", "blue", "red"))
 qqnorm(boot.ratio, main = "Normal Q-Q Plot \n Figure 15b")
 qqline(boot.ratio, col = "red")
 par(opar)
-CIratio <- quantile(boot.ratio, prob = c(0.025, 0.975))
-CIratio
 ```
 
 As in the difference of means example, the bootstrap distribution of the ratio of means exhibits skewness (Figure 15a). The 95% bootstrap percentile confidence interval for the ratio of means (ILEC/CLEC) is (`r CIratio[1]`, `r CIratio[2]`), so with 95% confidence, the true mean repair times for ILEC customers is between `r CIratio[1]` and `r CIratio[2]` times less than that for CLEC customers.
