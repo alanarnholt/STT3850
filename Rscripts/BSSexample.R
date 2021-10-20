@@ -45,44 +45,77 @@ CISE <- p1 + c(-1,1)*2*sd(phat)
 CISE
 
 
-
-
-
-
-
-
-
-
 #######################################################################
 # 2 independent populations
 #######################################################################
 mythbusters_yawn
 mythbusters_yawn %>% 
   count(group, yawn)
+
+### Compute obs prop diff
+
+# With infer
+mythbusters_yawn %>% 
+  specify(yawn ~ group, success = "yes") %>% 
+  calculate(stat = "diff in props", order = c("seed", "control")) -> obs_diff2
+obs_diff2
+
+## Splitting out the two independent samples
+mythbusters_yawn %>% 
+  filter(group == "seed") -> gs
+mythbusters_yawn %>% 
+  filter(group == "control") -> gc
+(n1 <- length(gs$yawn))
+(n2 <- length(gc$yawn))
+
+(phatseed <- mean(gs$yawn == "yes"))
+(phatcontrol <- mean(gc$yawn == "yes"))
+(obs_diff3 <- phatseed - phatcontrol)
+
+####
+#### Using tapply
+
+tapply(mythbusters_yawn$yawn == "yes", mythbusters_yawn$group, mean)
+obs_diff4 <- diff(tapply(mythbusters_yawn$yawn == "yes", mythbusters_yawn$group, mean))
+obs_diff4
+
+#### Using xtabs
 T1 <- xtabs(~yawn+group, data = mythbusters_yawn)
 T1
 prop.table(T1, 2)
 T1
-obs_diff <- diff(prop.table(T1, 2)[2,])
+prop.table(T1, 2)[2,]
+obs_diff <- diff(prop.table(T1, 2)[2,])  # phat_seed - phat_control
 obs_diff
 
-mythbusters_yawn %>% 
-  filter(group == "seed") -> g1
-mythbusters_yawn %>% 
-  filter(group == "control") -> g2
-(n1 <- length(g1$yawn))
-(n2 <- length(g2$yawn))
+
+#####
+# Using indexing to split two sample
+
+(gss <- mythbusters_yawn$yawn[mythbusters_yawn$group == "seed"])
+(gcs <- mythbusters_yawn$yawn[mythbusters_yawn$group == "control"])
+(ps <- mean(gss == "yes"))
+(pc <- mean(gcs == "yes"))
+
+# Or using subset()
+(gss1 <- subset(mythbusters_yawn, subset = group == "seed", select = yawn, drop = TRUE))
+(gcs1 <- subset(mythbusters_yawn, subset = group == "control", select = yawn, drop = TRUE))
+
+##########################
 
 B <- 10000
 diffp <- numeric(B)
 for(i in 1:B){
-  bss1 <- sample(g1$yawn, size = n1, replace = TRUE)
-  bss2 <- sample(g2$yawn, size = n2, replace = TRUE)
+  bss1 <- sample(gss1, size = n1, replace = TRUE)
+  bss2 <- sample(gcs1, size = n2, replace = TRUE)
   diffp[i] <- mean(bss1=="yes") - mean(bss2=="yes")
 }
 hist(diffp)
-CIPI <- quantile(diffp, probs = c(0.025, 0.975))
-CIPI
+CIPI_l <- quantile(diffp, probs = c(0.025, 0.975))
+CIPI_l
+
+CISE_l <- obs_diff + c(-1,1)*qnorm(.975)*sd(diffp)
+CISE_l
 
 ######## Using infer now
 
@@ -93,13 +126,16 @@ mythbusters_yawn %>%
   generate(reps = 10000, type = "bootstrap") %>% 
   calculate(stat = "diff in props", order = c("seed", "control")) -> BSD
 visualize(BSD)  
-get_confidence_interval(BSD, level = 0.95) -> CI
-CI
+get_confidence_interval(BSD, level = 0.95) -> CIPI
+CIPI
+CIPI_l
+
 visualize(BSD) + shade_confidence_interval(endpoints = CI)
 
 get_confidence_interval(BSD, level = 0.95, point_estimate = obs_diff, type = "se") -> CISE
 CISE
-CI
+CISE_l
+
 
 ############################
 
