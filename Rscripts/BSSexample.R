@@ -148,7 +148,7 @@ get_confidence_interval(BSD, level = 0.95) -> CIPI
 CIPI
 CIPI_l
 
-visualize(BSD) + shade_confidence_interval(endpoints = CI) + 
+visualize(BSD) + shade_confidence_interval(endpoints = CIPI) + 
   geom_vline(xintercept = 0, color = "red", size = 2) + 
   labs(x = substitute(paste(hat(p)[s],"*", - hat(p)[c],"*")))
 
