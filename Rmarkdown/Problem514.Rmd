@@ -1,0 +1,197 @@
+---
+title: "Problem 5.14"
+author: "From Class"
+date: '`r format(Sys.time(), "%B %d, %Y at %X")`'
+output: bookdown::html_document2
+bibliography: PackagesUsed.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
+library(tidyverse)
+library(infer)
+library(resampledata)
+library(gridExtra)
+```
+
+
+```{r, results = "hide", echo = FALSE}
+PackagesUsed <- c("tidyverse", "infer", "resampledata", "gridExtra", "rmarkdown", "bookdown")
+# Write bib information
+knitr::write_bib(PackagesUsed, file = "./PackagesUsed.bib")
+# Load packages
+lapply(PackagesUsed, library, character.only = TRUE)
+```
+
+This document uses `tidyverse` by @R-tidyverse, `infer` by @R-infer, `resampledata` by @R-resampledata, `gridExtra` by @R-gridExtra, and `bookdown` by @R-bookdown.
+
+_________________
+
+**Directions:** 
+
+1. Add comments to the code to make sure you understand what all steps are doing.
+2. Add descriptive titles and labels to the base `R` histograms.
+3. Discuss the difference between the permutation distribution and the bootstrap distribution.  Make sure to discuss where each distribution is centered.
+
+_____________________
+
+This problem roughly follows 5.14 from page 145 of your text.  One important difference is that we are performing a two-sided test (not a directional test) as the book requests.
+
+______________________
+
+$$H_O: \mu_M - \mu_F = 0$$
+$$H_A: \mu_M - \mu_F \neq 0$$
+
+_________________
+
+
+```{r}
+head(Beerwings)
+```
+
+```{r}
+ggplot(data = Beerwings, aes(x = Gender, y = Hotwings)) + 
+  geom_boxplot() + 
+  theme_bw() -> p1
+ggplot(data = Beerwings, aes(sample = Hotwings, color = Gender)) + 
+  stat_qq() +
+  stat_qq_line() +
+  theme_bw() -> p2
+grid.arrange(p1, p2, nrow = 1)
+```
+
+```{r}
+Beerwings %>%
+  group_by(Gender) %>%
+  summarize(Means = mean(Hotwings), SD = sd(Hotwings), n = n())
+
+Beerwings %>%
+  group_by(Gender) %>%
+  summarize(Means = mean(Hotwings)) %>%
+  select(Means) %>%
+  pull() %>%
+  diff() -> obs_diff
+obs_diff
+```
+
+
+
+
+
+```{r}
+BWM <- Beerwings$Hotwings[Beerwings$Gender == "M"]
+BWF <- Beerwings$Hotwings[Beerwings$Gender == "F"]
+obs_diff <- mean(BWM) - mean(BWF)
+obs_diff
+```
+
+```{r}
+Beerwings %>%
+  filter(Gender == "M") %>%
+  select(Hotwings) %>%
+  pull() -> BWM
+BWM
+Beerwings %>%
+  filter(Gender == "F") %>%
+  select(Hotwings) %>%
+  pull() -> BWF
+BWF
+obs_diff <- mean(BWM) - mean(BWF)
+obs_diff
+```
+
+```{r}
+tapply(Beerwings$Hotwings, Beerwings$Gender, mean)
+diff(tapply(Beerwings$Hotwings, Beerwings$Gender, mean)) -> obs_diff
+obs_diff
+```
+
+```{r}
+HWM <- subset(Beerwings, select = Hotwings, subset = Gender == "M", drop = TRUE)
+HWF <- subset(Beerwings, select = Hotwings, subset = Gender == "F", drop = TRUE)
+HWM
+HWF
+c(mean(HWF), mean(HWM))
+diff(c(mean(HWF), mean(HWM))) -> obs_diff
+obs_diff
+```
+
+# Generating the permutation distribution
+## Using `infer`
+
+```{r}
+Beerwings %>%
+  specify(Hotwings ~ Gender) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("M", "F")) -> permDist
+permDist %>%
+  visualize() +
+  theme_bw() + 
+  geom_vline(xintercept = c(-obs_diff, obs_diff))
+
+pvalue <- mean(permDist$stat >= obs_diff)*2
+pvalue
+#
+get_p_value(permDist, obs_stat = obs_diff, direction = "two-sided")
+```
+## Using `for()`
+
+```{r}
+B <- 10000
+diff_means <- numeric(B)
+for(i in 1:B){
+  diff_means[i] <- diff(tapply(Beerwings$Hotwings, sample(Beerwings$Gender), mean))
+}
+hist(diff_means)
+abline(v = c(-obs_diff, obs_diff))
+pvalue <- mean(diff_means >= obs_diff)*2
+pvalue
+```
+
+Based on a _p-value_ of `r pvalue` which is less than $\alpha = 0.05$ we reject the null hypothesis and conclude that there is evidence to suggest the average wings consumed by males is not the same as the average number of wings consumed by females.
+
+__________________
+
+# Constructing 95% Bootstrap Percentile CI
+
+## Using `infer`
+
+```{r}
+Beerwings %>% 
+  specify(Hotwings ~ Gender) %>% 
+  generate(reps = 10000, type = "bootstrap") %>% 
+  calculate(stat = "diff in means", order = c("M", "F")) -> bootdist
+bootdist %>% 
+get_confidence_interval(level = 0.95, type = "percentile") -> PCI
+PCI
+visualize(bootdist) +
+  shade_confidence_interval(endpoints = PCI, fill = "yellow") + 
+  theme_bw()
+```
+
+We are 95% confident that the true difference between the mean hotwings consumed by males and the mean hotwings consumed by females fall in the interval $(`r round(PCI[1],1)` \text{ hotwings}, `r round(PCI[2],1)` \text{ hotwings})$.
+
+## Using a `for()` loop
+
+```{r}
+B <- 10000
+diff_means <- numeric(B)
+for(i in 1:B){
+  bssM <- sample(HWM, size = 15, replace = TRUE)
+  bssF <- sample(HWF, size = 15, replace = TRUE)
+  diff_means[i] <- mean(bssM) - mean(bssF)
+}
+quantile(diff_means, probs = c(0.025, 0.975)) -> PCI2
+PCI2
+hist(diff_means)
+abline(v = PCI2)
+```
+
+__________
+
+We are 95% confident that the true difference between the mean hotwings consumed by males and the mean hotwings consumed by females fall in the interval $(`r round(PCI2[1],1)` \text{ hotwings}, `r round(PCI2[2],1)` \text{ hotwings})$.
+
+_________
+
+## References

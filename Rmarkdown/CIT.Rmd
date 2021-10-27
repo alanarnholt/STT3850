@@ -1,0 +1,16 @@
+---
+title: "Untitled"
+author: "Alan T. Arnholt"
+date: "10/22/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+$$t_{n-1} = \frac{\bar{x} - \mu_0}{\tfrac{s}{\sqrt{n}}}$$
+
+$$CI_{1 - \alpha}[\mu]= \big[\bar{x} - t_{1 - \alpha/2, n-1}\cdot\frac{s}{\sqrt{n}},
+\bar{x} + t_{1 - \alpha/2, n-1}\cdot\frac{s}{\sqrt{n}}\big]$$
