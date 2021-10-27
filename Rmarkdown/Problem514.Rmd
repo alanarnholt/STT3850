@@ -35,7 +35,7 @@ _________________
 
 _____________________
 
-This document roughly follows problem 5.14 from page 145 of your text (@hesterberg_mathematical_2018).  One important difference is that we are performing a two-sided test (not a directional test) as the book requests.
+This document roughly follows problem 5.14 from page 145 of your text [@hesterberg_mathematical_2018].  One important difference is that we are performing a two-sided test, not a directional test, as the book requests.
 
 ______________________
 
