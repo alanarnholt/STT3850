@@ -3,7 +3,7 @@ title: "Problem 5.14"
 author: "From Class"
 date: '`r format(Sys.time(), "%B %d, %Y at %X")`'
 output: bookdown::html_document2
-bibliography: PackagesUsed.bib
+bibliography: [PackagesUsed.bib, book.bib]
 ---
 
 ```{r setup, include=FALSE}
@@ -23,7 +23,7 @@ knitr::write_bib(PackagesUsed, file = "./PackagesUsed.bib")
 lapply(PackagesUsed, library, character.only = TRUE)
 ```
 
-This document uses `tidyverse` by @R-tidyverse, `infer` by @R-infer, `resampledata` by @R-resampledata, `gridExtra` by @R-gridExtra, and `bookdown` by @R-bookdown.
+This document uses `tidyverse` by @R-tidyverse, `infer` by @R-infer, `resampledata` by @R-resampledata, `gridExtra` by @R-gridExtra, and `bookdown` by @R-bookdown. 
 
 _________________
 
@@ -35,7 +35,7 @@ _________________
 
 _____________________
 
-This problem roughly follows 5.14 from page 145 of your text.  One important difference is that we are performing a two-sided test (not a directional test) as the book requests.
+This problem roughly follows 5.14 from page 145 of your text (@hesterberg_mathematical_2018).  One important difference is that we are performing a two-sided test (not a directional test) as the book requests.
 
 ______________________
 
