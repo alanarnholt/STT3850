@@ -1,38 +1,22 @@
----
-title: "Chi-Square"
-author: "Notes"
-date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
-output: bookdown::html_document2
----
-
-```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+## ---- label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE----------
 library(knitr)
 knitr::opts_chunk$set(comment = NA, fig.show = 'as.is', fig.align = "center", fig.height = 4.5, fig.width = 5.5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = TRUE))
 library(tidyverse)
 library(infer)
 library(openintro)
 library(PASWR2)
-```
 
-Is there a relationship between `pclass` and `survived`?
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 TITANIC3 <- TITANIC3 %>% 
   mutate(survived = factor(survived, labels = c("Dead", "Alive")))
 ggplot(data = TITANIC3, aes(x = survived, fill = pclass)) +
   geom_bar(position = "fill") +
   theme_bw() + 
   labs(y = "percent")
-```
 
 
-# Chi-Square
-
-**Note:** $E_{ij} = \frac{R_i \times C_j}{n_T}$
-
-$$\chi^2_{obs} = \sum\frac{(O- E)^2}{E}$$
-
-```{r}
+## -----------------------------------------------------------------------------------------------
 T1 <- TITANIC3 %>% 
   select(pclass, survived) %>% 
   table() 
@@ -46,9 +30,9 @@ E31 <- (709/1309)*(809/1309)*1309
 E32 <- (709/1309)*(500/1309)*1309
 EIJ <- matrix(c(E11, E12, E21, E22, E31, E32), byrow = TRUE, nrow = 3)
 EIJ
-```
 
-```{r}
+
+## -----------------------------------------------------------------------------------------------
 X2 <- (123 - E11)^2/E11 + (200 - E12)^2/E12 + (158 - E21)^2/E21 + (119 - E22)^2/E22 +
       (528 - E31)^2/E31 + (181 - E32)^2/E32 
 X2
@@ -57,15 +41,10 @@ pvalue
 chisq.test(T1, correct = FALSE)
 # Easier fashion to get expected
 chisq.test(T1)$exp
-```
 
 
-## Same thing with permutation
-
-### Using a `for()` loop
-
-```{r}
-B <- 10^4 - 1
+## -----------------------------------------------------------------------------------------------
+B <- 10^3 - 1
 X2 <- numeric(B)
 for(i in 1:B){
   PT <- xtabs(~pclass + sample(survived), data = TITANIC3)
@@ -79,57 +58,43 @@ chi_obs_stat
 #
 pvalueSIM <- (sum(X2 >= chi_obs_stat) + 1)/(B + 1)
 pvalueSIM
-```
 
-What does the permutation distribution under the null hypothesis look like?
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 ggplot(data = data.frame(x = X2), aes(x = x)) +
   geom_density(fill = "pink") + 
   theme_bw() 
-```
 
-## Same thing with `infer`
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 null <- TITANIC3 %>% 
   specify(pclass ~ survived) %>% 
   hypothesize(null = "independence") %>% 
-  generate(reps = 10^4 - 1, type = "permute") %>% 
+  generate(reps = 10^3 - 1, type = "permute") %>% 
   calculate(stat = "Chisq")
-```
 
-### Visualize the null distribution
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 ggplot(data = null, aes(x = stat)) +
   geom_density(fill = "skyblue") +
   theme_bw()
-```
 
-```{r}
+
+## -----------------------------------------------------------------------------------------------
 visualize(null, method = "both", dens_color = "blue") + 
   theme_bw()
-```
 
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 null %>% 
-  summarize(pvalue = (sum(stat >= chi_obs_stat) + 1)/(10^4)) 
-```
+  summarize(pvalue = (sum(stat >= chi_obs_stat) + 1)/(10^3)) 
 
-**Note problem below**
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 get_p_value(null, obs_stat = chi_obs_stat, direction = "right")
-```
 
 
-# Consider testing $H_0:p_1 - p_2 = 0$
-
-
-
-```{r}
+## -----------------------------------------------------------------------------------------------
 TITANIC3 %>% 
   select(sex, survived) %>% 
   table() %>% 
@@ -138,11 +103,9 @@ TITANIC3 %>%
   select(sex, survived) %>% 
   table() %>% 
   prop.table(1)
-```
 
-Consider testing: $H_0:p_{\text{Male Alive}} - p_{\text{Female Alive}} = 0$ versus $H_A:p_{\text{Male Alive}} - p_{\text{Female Alive}} < 0$
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 prop.test(x = c(161, 339), n = c(843, 466), alternative = "less", correct = FALSE)
 obs_stat <- prop.test(x = c(161, 339), n = c(843, 466), alternative = "less", correct = FALSE)$stat^.5
 obs_stat
@@ -154,77 +117,62 @@ zobs <- (phatmale - phatfemale) / sqrt( phatp*(1 - phatp)/843 + phatp*(1 - phatp
 zobs
 pvalue <- pnorm(zobs)
 pvalue
-```
 
-Note: This can also be tested using the $\chi^2$-test of homogeneity.
 
-$H_0: p_{\text{Male Alive}} = p_{\text{Female Alive}} = p_{\text{Male Dead}} = p_{\text{Female Dead}}$ versus at least some $p_{ij} \neq p_{i+1, j}$ for some $(i,j)$.
-
-```{r}
+## -----------------------------------------------------------------------------------------------
 T1 <- TITANIC3 %>% 
   select(sex, survived) %>% 
   table()
 chisq.test(T1, correct = FALSE)
 chisq.test(T1, correct = FALSE)$stat^.5
-```
 
-```{r}
+
+## -----------------------------------------------------------------------------------------------
 null <- TITANIC3 %>% 
   specify(survived ~ sex, success = "Alive") %>% 
   hypothesize(null = "independence") %>% 
-  generate(reps = 10^4 - 1, type = "permute") %>% 
+  generate(reps = 10^3 - 1, type = "permute") %>% 
   calculate(stat = "Chisq", order = c("male", "female"))
 ggplot(data = null, aes(x  = stat)) + 
   geom_density(fill = "pink") +
   theme_bw()
 null %>%
-  summarize( (sum(stat >= obs_stat) + 1)/10^4)
-```
+  summarize( (sum(stat >= obs_stat) + 1)/10^3)
 
-```{r}
-B <- 10^4 - 1
+
+## -----------------------------------------------------------------------------------------------
+B <- 10^3 - 1
 X2 <- numeric(B)
 for(i in 1:B){
   T3 <- xtabs(~sex + sample(survived), data = TITANIC3)
   X2[i] <- chisq.test(T3, correct = FALSE)$stat 
 }
-pvalue <- (sum(X2 >= obs_stat) + 1)/10^4
+pvalue <- (sum(X2 >= obs_stat) + 1)/10^3
 pvalue
-```
 
-# Chi-Square test of Homogeneity
 
-Data will often come summarized in contingency tables.  
-
-```{r}
+## -----------------------------------------------------------------------------------------------
 DP <- c(67, 76, 57, 48, 73, 79)
 MDP <- matrix(data = DP, nrow = 2, byrow = TRUE)
 dimnames(MDP) <- list(Pop = c("Drug", "Placebo"), Status = c("Improve", "No Change", "Worse"))
 TDP <- as.table(MDP)
 TDP
-```
 
-The problem then becomes one of putting the data back into a `tidy` format.
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 NT <- TDP %>% 
   tibble::as_tibble() %>% 
   uncount(n)
 NT
-```
 
 
-## Graph
-
-```{r}
+## -----------------------------------------------------------------------------------------------
 ggplot(data = NT, aes(x = Pop, fill = Status)) +
   geom_bar(position = "fill") +
   theme_bw()
-```
 
 
-
-```{r}
+## -----------------------------------------------------------------------------------------------
 T1 <- NT %>% 
   table()
 T1
@@ -234,12 +182,10 @@ E <- chisq.test(T1)$exp
 E
 (X2 <- sum((T1 - E)^2/E))
 (pvalue <- pchisq(X2, 2, lower = FALSE))
-```
 
-## Permutation distribution
 
-```{r}
-B <- 10^4 - 1
+## -----------------------------------------------------------------------------------------------
+B <- 10^3 - 1
 X2 <- numeric(B)
 for(i in 1:B){
   TN <- xtabs(~Pop + sample(Status), data = NT)
@@ -251,25 +197,20 @@ ggplot(data = null_hom, aes(x = stat)) +
   theme_bw() + 
   stat_function(fun = dchisq, args = list(df = 2), color = "blue") 
 (pval <- (sum(null_hom$stat >= chi_obs) + 1)/(B + 1))
-```
 
-## Same approach with `infer`
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 null_hom_infer <- NT %>% 
   specify(Pop ~ Status) %>% 
   hypothesize(null = "independence") %>% 
-  generate(reps = 10^4 - 1, type = "permute") %>% 
+  generate(reps = 10^3 - 1, type = "permute") %>% 
   calculate(stat = "Chisq")
 visualize(null_hom_infer, method = "both", dens_color = "blue") +
   theme_bw()
 (pval2 <- (sum(null_hom_infer$stat >= chi_obs) + 1)/(B + 1))
-```
-## GOF test
 
-Given another table (from summarized information):
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 BD <- c(23, 20, 18, 23, 20, 19, 18, 21, 19, 22, 24, 29)
 Sign = c("Aries", "Taurus", "Gemini", "Cancer", "Leo",
          "Virgo", "Libra", "Scorpio", "Sagitarius",
@@ -281,30 +222,22 @@ BNT <- T2 %>%
   tibble::as_tibble() %>% 
   uncount(n)
 BNT
-```
 
-## Graph
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 ggplot(data = BNT, aes(x = VEC)) +
   geom_bar(fill = rainbow(12)) +
   theme_bw() + 
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
   labs(x = "Astrological Sign")
-```
 
 
-```{r}
+## -----------------------------------------------------------------------------------------------
 chisq.test(T2, p = rep(1/12, 12))
 (pv <- chisq.test(T2, p = rep(1/12, 12))$p.value)
-```
-### Conclusion
 
-There is little evidence (p-value = `r pv`) to suggest a nonuniform distribution of zodiac signs among executives.
 
-## Chi-Square Test of Independence
-
-```{r}
+## -----------------------------------------------------------------------------------------------
 TH <- c(17, 35, 8, 53, 22, 491)
 MTH <- matrix(data = TH, nrow = 3, byrow = TRUE)
 dimnames(MTH) <- list(Tatoo = c("Parlor", "Elsewhere", "None"), HepC = c("Yes", "No"))
@@ -314,28 +247,27 @@ NHT <- MTH %>%
   tibble::as_tibble() %>% 
   uncount(n)
 NHT
-```
 
-```{r}
+
+## -----------------------------------------------------------------------------------------------
 ggplot(data = NHT, aes( x = HepC, fill = Tatoo)) +
   geom_bar(position = "fill") +
   theme_bw() +
   scale_fill_manual(values = c("pink", "green", "red"))
-```
 
-```{r}
+
+## -----------------------------------------------------------------------------------------------
 (T1 <- xtabs(~HepC + Tatoo,data = NHT))
 chisq.test(T1)
 (obs_stat <- chisq.test(T1)$stat)
-```
 
-```{r, warning = FALSE}
-B <- 10^4 - 1
+
+## ---- warning = FALSE---------------------------------------------------------------------------
+B <- 10^3 - 1
 X2 <- numeric(B)
 for(i in 1:B){
   TT <- xtabs(~HepC + sample(Tatoo), data = NHT)
   X2[i] <- chisq.test(TT)$stat
 }
-(pval <- (sum(X2 >= obs_stat) + 1)/(10^4 -1 + 1))
-```
+(pval <- (sum(X2 >= obs_stat) + 1)/(10^3 -1 + 1))
 
