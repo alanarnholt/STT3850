@@ -271,3 +271,45 @@ for(i in 1:B){
 }
 (pval <- (sum(X2 >= obs_stat) + 1)/(10^3 -1 + 1))
 
+####################
+
+ggplot(data = TITANIC3, 
+       aes(x = survived, fill = sex)) +
+  geom_bar(position = "fill") +
+  theme_bw() + 
+  labs(y = "percent")
+
+
+T1 <- xtabs(~survived + sex, data = TITANIC3)
+T1
+
+chisq.test(T1, correct = FALSE)
+
+library(vcd)
+mosaic(~sex + survived + pclass, data = TITANIC3, shade = TRUE)
+
+
+B <- 10^3 - 1
+X2 <- numeric(B)
+for(i in 1:B){
+  PT <- xtabs(~survived + sample(sex), data = TITANIC3)
+  X2[i] <- chisq.test(PT, correct = FALSE)$stat
+}
+chi_obs_stat <- chisq.test(xtabs(~survived + sex, data = TITANIC3), correct = FALSE)$stat
+chi_obs_stat
+# OR
+chi_obs_stat <- chisq.test(table(TITANIC3$survived, TITANIC3$sex))$stat
+chi_obs_stat
+#
+pvalueSIM <- (sum(X2 >= chi_obs_stat) + 1)/(B + 1)
+pvalueSIM
+
+null <- TITANIC3 %>% 
+  specify(survived ~ sex) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10^3 - 1, type = "permute") %>% 
+  calculate(stat = "Chisq")
+ggplot(data = null, aes(x = stat)) + 
+  geom_histogram() +
+  theme_bw()
+visualize(null)
