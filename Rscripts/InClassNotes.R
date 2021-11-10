@@ -305,11 +305,12 @@ pvalueSIM <- (sum(X2 >= chi_obs_stat) + 1)/(B + 1)
 pvalueSIM
 
 null <- TITANIC3 %>% 
-  specify(survived ~ sex) %>% 
+  specify(survived ~ sex, success = "Alive") %>% 
   hypothesize(null = "independence") %>% 
   generate(reps = 10^3 - 1, type = "permute") %>% 
-  calculate(stat = "Chisq")
+  calculate(stat = "Chisq", order = c("female", "male"))
 ggplot(data = null, aes(x = stat)) + 
   geom_histogram() +
   theme_bw()
 visualize(null)
+
