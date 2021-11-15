@@ -25,6 +25,16 @@ BT <- c(xbar - UT*sd(Arsenic)/sqrt(n), xbar - LT*sd(Arsenic)/sqrt(n))
 names(BT) <- c("Lower", "Upper")
 BT
 
+B <- 10000
+Xbar <- numeric(B)
+n <- sum(!is.na(Arsenic))
+for(i in 1:B){
+  bss <- sample(Arsenic, size = n, replace = TRUE)
+  Xbar[i] <- mean(bss)
+}
+hist(Xbar)
+quantile(Xbar, p = c(0.05, 0.95))
+
 
 
 BootT <- function(data, level = 0.95, B = 10000){
