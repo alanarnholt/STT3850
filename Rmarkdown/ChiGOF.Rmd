@@ -27,7 +27,7 @@ $H_{0}: p_1 = \tfrac{1}{4}, p_2 = \tfrac{1}{4}, p_3 = \tfrac{1}{4}, p_4 = \tfrac
 
 $H_A: p_i \neq \tfrac{1}{4} \text{for at least one } i.$
 
-There were a total of $n = `r sum(Observed)`$ players considered for this study, so the expected count for each quarter is $`r sum(Observed)`/4 = `r sum(Observed)/4`$.
+There were a total of $n = `r sum(Observed)`$ players considered for this study, so the expected count for each quarter is $528/4 = `r 528/4`$.
 
 ```{r}
 chisq.test(Observed, p = c(1/4, 1/4, 1/4, 1/4))
@@ -42,7 +42,7 @@ Given the _p-value_ of `r round(chisq.test(Observed, p = c(1/4, 1/4, 1/4, 1/4))$
 
 Suppose you draw 100 numbers at random from an unknown distribution.  Thirty values fall in the interval $(0, 0.25]$, 30 fall in $(0.25, 0.75]$, 22 fall in $(0.75, 1.25]$, and the rest fall in $(1.25, \infty]$.  Your friend claims that the distribution is exponential with parameter $\lambda = 1$.  Do you believe her?
 
-* A random variable $X$ has the exponential distribution with parameter $\lambda > 0$ if its **pdf** is 
+* A random variable $X$ has the exponential distribution with parameter $\lambda > 0$ if its **pdf** is
 
 $$f(x) = \lambda e^{-\lambda x},\quad x \geq 0.$$
 
