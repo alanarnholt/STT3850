@@ -1,0 +1,453 @@
+---
+title: "Tentative STT 3850 Course Schedule - Spring 2022"
+output:
+  html_document:
+    css: ../css/style.css
+    highlight: textmate
+    theme: yeti
+  pdf_document: default
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+
+_______________________________
+
+**Last Updated:** `r format(Sys.time(), "%A, %B %d, %Y - %X.")`
+
+________________________________
+
+### General Notes: {-}
+
+```{block, note-text, type='rmdnote'}
+1.  Please bring a notebook and pencil to every class.
+2.  The principal documents for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR) -available inside the [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) course page.
+3.  Problem Set (PS) assignments are generally due on Thursdays by 5:00 pm
+4.  The links for the problem sets, sampling distribution assignment, and starter code for _Inference for Numerical Data in R_ in this document will only work for the instructor!  To accept each of these assignments, go to [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) and click on the appropriate link in the [GitHub Classroom Invitation Links for Assignments](https://asulearn.appstate.edu/course/view.php?id=136885) block.  
+```
+
+___________
+
+#### Grading Rubric for Assignments {-}
+
+Field | Excellent (3) | Competent (2)  | Needs Work (1)
+------|---------------|----------------|---------------
+Reproducible | All graphs, code, and answers are created from text files.  Answers are never hard-coded but instead are inserted using inline R code.  An automatically generated references section with properly formatted citations when appropriate and `sessionInfo()` are provided at the end of the document. | All graphs, code, and answers are created from text files.  Answers are  hard coded. No `sessionInfo()` is provided at the end of the document. References are present but not cited properly or not automatically generated. | Document uses copy and paste with graphs or code.  Answers are hard coded; and references, when appropriate are hard coded.
+Statistical Understanding | Answers to questions demonstrate clear statistical understanding by comparing theoretical answers to simulated answers.  When hypotheses are tested, classical methods are compared and contrasted to randomization methods.  When confidence intervals are constructed, classical approaches are compared and contrasted with bootstrap procedures.  The scope of inferential conclusions made is appropriate for the sampling method. | Theoretical and simulated answers are computed but no discussion is present comparing and contrasting the results.  When hypotheses are tested, results for classical and randomization methods are presented but are not compared and contrasted.  When confidence intervals are constructed, classical and bootstrap approaches are computed but the results are not compared and contrasted.  The scope of inferential conclusions made is appropriate for the sampling method. | Theoretical and simulated answers are not computed correctly.  No comparison between classical and randomization approaches is present when testing hypotheses.  When confidence intervals are constructed, there is no comparison between classical and bootstrap confidence intervals .
+Graphics | Graphs for categorical data (barplot, mosaic plot, etc.) have appropriately labeled axes and titles.  Graphs for quantitative data (histograms, density plots, violin plots, etc.) have appropriately labeled axes and titles.  Multivariate graphs use appropriate legends and labels.  Computer variable names are replaced with descriptive variable names. | Appropriate graphs for the type of data are used.  Not all axes have appropriate labels or computer variable names are used in the graphs. | Inappropriate graphs are used for the type of data.  Axes are not labeled and computer variable names appear in the graphs.
+Coding  | Code (primarily R) produces correct answers.  Non-standard or complex functions are commented.  Code is formatted using a consistent standard. | Code produces correct answers.  Commenting is not used with non-standard and complex functions.  No consistent code formatting is used. | Code does not produce correct answers.  Code has no comments and is not formatted.
+Clarity  | Few errors of grammar and usage; any minor errors do not interfere with meaning.  Language style and word choice are highly effective and enhance meaning.  Style and word choice are appropriate for the assignment. | Some errors of grammar and usage; errors do not interfere with meaning.  Language style and word choice are, for the most part, effective and appropriate for the assignment. | Major errors of grammar and usage make meaning unclear.  Language style and word choice are ineffective and/or inappropriate.
+
+
+_________
+
+## Week 1: (Jan 10--13) {-}
+
+
+* Before the first class meeting, read chapter 1 (Getting Started with Data in R) of [MD](https://moderndive.com)---pgs 1-20
+
+* Become familiar with the Appstate [RStudio server](https://mathr.math.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
+
+* Sign-up for a free account on [GitHub](https://github.com).  When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinguishing characteristic in your username.   
+
+* Set cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html).--- [VIDEO of the setup process](https://drive.google.com/file/d/1G9G8IeYu9QetYB1nxMmAFLgRtw5YC-c8/view?usp=sharing)
+
+* Complete [PS-01](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 5:00 pm Jan 13 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) --- [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1MfDjhNb5m_45BCVD6ZQCXhgIMWwwx0oS/view?usp=sharing)
+ 
+```{block, week1optional, type='rmdoptional'}
+#### Optional {-}
+*  _Introduction to R_ [slides](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/IntroToR.html)
+
+* Watch Paul the Octopus [clip](https://www.youtube.com/watch?v=3ESGpRUMj9E) (61 seconds).
+
+* You may want to install [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and optionally [$LaTeX$](http://www.ctan.org/starter) on your personal computer. If you do, you will want to follow Jenny Bryan's excellent advice for [installing R and RStudio](http://stat545-ubc.github.io/block000_r-rstudio-install.html) and [installing Git](http://stat545-ubc.github.io/git01_git-install.html).  Jenny's advice is also in chapters 6 and 7 of [Happy Git and GitHub for the useR](http://happygitwithr.com/).  Note: [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), and [$LaTeX$](http://www.ctan.org/starter) are installed on the [Appstate RStudio](https://mathr.math.appstate.edu/) server.
+
+* Watch the following videos as appropriate:
+
+* [Install R on Mac (2 min)](https://www.youtube.com/watch?v=lJxVRgiX-ik)    
+
+* [Install R for Windows (3 min)](https://www.youtube.com/watch?v=LII6of-5Odw)    
+
+* [Install R and RStudio on Windows (5 min)](https://www.youtube.com/watch?v=eD07NznguA4)  
+
+* Work through chapter 1 (Git and GitHub) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/).  Make sure RStudio is set up to communicate with Git by following the directions in [HappyGitWithR](https://happygitwithr.com/hello-git.html) for introducing yourself to Git.
+
+* Work through chapter 2 (Introduction to R) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
+
+```
+
+______________
+
+## Week 2: No Class Jan 17 (Jan 18--20) {-}
+
+* Before class read chapter 2 (Data Visualization) of [MD](https://moderndive.com) --- pgs 21-62
+
+* [Partial Lecture Slides](../Handouts/short_pre_lecture.pdf)
+
+* Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Jan 19
+
+* Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Jan 19
+
+* Complete [PS-02](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 5:00 pm Jan 20 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+
+
+```{block, week2optional, type='rmdoptional'}
+#### Optional {-}
+
+* Read [Getting used to R, RStudio, and R Markdown](https://ismayc.github.io/rbasics-book/)
+
+* Work through chapter 5 (Using `ggplot2`) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
+
+* Complete _Data Visualization with `ggplot2`_ (Part 1) [(DataCamp)](https://www.datacamp.com/)
+
+```
+
+__________________
+
+
+## Week 3: (Jan 24--27) {-}
+
+* Before class read chapter 3 (Data Wrangling) of [MD](https://moderndive.com) --- pgs 65-96
+
+* [Partial Lecture Slides](../Handouts/pre_lecture.pdf)
+
+* Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Jan 25
+
+* Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Jan 26
+
+* Complete [PS-03](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 5:00 pm Jan 27 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+* Inclass work on [dplyr-CH1-handout](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) (link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+
+```{block, test3, type='rmdexercise'}
+Test yourself:
+
+1. [R Markdown Practice](RMarkdown.pdf)
+2. [R Markdown Extra Credit](RMarkdownEC.pdf)
+3. [LaTeX/knitr Extra Credit](knitrEC.pdf)
+```
+
+```{block, week3optional, type='rmdoptional'}
+#### Optional {-}
+
+* Nice [Tidyverse Cheat Sheet](http://datacamp-community.s3.amazonaws.com/e63a8f6b-2aa3-4006-89e0-badc294b179c)
+
+* Work through chapter 3 (Starting with Data) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
+
+* Work through chapter 4 (Data Manipulation) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
+
+* Inclass work on [dplyr-CH2-handout](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) (link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+* Inclass work on [dplyr-CH3-handout](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) (link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+* Inclass work on [dplyr-CH4-handout](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) (link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+```
+
+___________
+
+## Week 4: (Jan 31 -- Feb 3) {-}
+
+* Before class read chapter 5 (Basic Regression) of [MD](https://moderndive.com) --- pgs 119-160
+
+* In class go over this [document](https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html)
+
+* Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Feb 1
+
+* Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Feb 2
+
+* Complete [PS-04](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) due by 5:00 pm Feb 3  --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+
+```{block, week4optional, type='rmdoptional'}
+#### Optional {-}
+
+* Read chapter 4 (Data Importing and "Tidy" Data) of [MD](https://moderndive.com) --- pgs 99-117
+
+* Read the [Git and GitHub](http://r-pkgs.had.co.nz/git.html) chapter from Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/)
+
+* Brian Caffo's take on [R IDEs](https://www.youtube.com/watch?v=O2UFfiGdGFA)
+
+```
+
+__________________
+
+
+
+## Week 5: (Feb 7 -- 10) {-}
+
+* Before class read chapter 6 (Multiple Regression) of [MD](https://moderndive.com) --- pgs 161-191
+
+* Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Feb 8
+
+* Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the TIdyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Feb 9
+
+* Complete [PS-05](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 5:00 pm Feb 10 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+
+```{block, week5optional, type='rmdoptional'}
+#### Optional {-}
+
+* Complete _Correlation and Regression in R_ [(DataCamp)](https://www.datacamp.com/)
+
+```
+
+_______________
+
+## Week 6: (Feb 14 -- 17) {-}
+
+
+* Before class read/review chapter 6 (Multiple Regression) of [MD](https://moderndive.com) --- pgs 161-191
+
+* Go over in class [_Misc Regression_](../Rmarkdown/MiscRegression.html)
+
+* Complete [PS-06](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 5:00 pm Feb 17 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+
+
+
+```{block, week6optional, type='rmdoptional'}
+#### Optional {-}
+
+* Answer the questions at the end of [_Misc Regression_](../Rmarkdown/MiscRegression.html) for extra credit (Turn in before Oct 1)
+
+* Work on [Is this Discrimination?](../Rmarkdown/ClassAssignment.html)
+
+* Some ideas for how to answer the [Is this Discrimination?](../Rmarkdown/discrimination.html)
+```
+
+_____________
+
+
+## Week 7: (Feb 21 --24) {-}
+
+* [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)
+
+* Complete (**The binomial distribution**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Feb 22
+
+* Complete (**Laws of probability**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Feb 23
+
+* Complete (**Bayesian statistics**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Feb 24
+
+
+```{block, week7optional, type='rmdoptional'}
+#### Optional {-}
+
+* [In Class Problems](../Slides/ProbabilityProblems.html)
+
+* Complete the **Improving the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments)
+
+* Complete the **Customizing the Report** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments)
+```
+
+
+
+___________
+
+
+## Week 8: (Feb 28 -- Mar 3) {-}
+
+* Complete (**Related distributions**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Feb 28
+
+* **Mid-Term Exam** Mar 3 
+
+```{block, week8optional, type='rmdoptional'}
+#### Optional {-}
+
+  * **Study**
+```
+
+_______________
+
+## Spring Break: Mar 7 -- 11
+
+_______________
+
+## Week 9: (Mar 14 -- 17) {-}
+
+* Before class read chapter 7 (Sampling) of [MD](https://moderndive.com) --- pgs 195-232
+
+* Compete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 5:00 pm Mar 16 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+* Complete [PS-07](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 5:00 pm Mar 17 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+```{block, week9optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Sampling Distributions](../Handouts/EVuniform.html)
+
+* Read Chapter 4 of MSWR --- Sampling Distributions; [Problems 2, 5, 12-16](../Homework/Chapter4HWK.Rmd)
+
+```
+
+___________________________
+
+
+## Week 10: (Mar 21 --24) {-}
+
+* Before class read chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
+
+* Read Chapter 5 of MSWR
+
+* [Chapter 5 notes](../Notes/Children/BootStrap2.html)
+
+* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Mar 22
+
+* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Mar 23
+
+* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Mar 24
+
+* Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
+
+
+```{block, week10optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+```
+
+_______________________
+
+
+## Week 11: (Mar 28 -- 31) {-}
+
+* Read Chapter 7 of MSWR
+
+* [Chapter 7 notes](../Notes/Children/ConfidenceIntervals2.html)
+
+* [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
+
+* Complete [PS-08](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 5:00 pm Mar 31 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+
+
+
+
+* Read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
+
+* Complete the **Comparing Many Means** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 29
+
+* Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 5
+
+* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 8
+
+
+* Read about [Permutation Testing](../Rmarkdown/PermutationTesting.html) 
+
+* Read Chapter 5 of MSWR
+
+* [Chapter 5 notes](../Notes/Children/BootStrap2.html)
+
+* [Misc R Markdown Examples](../Rmarkdown/MiscRmarkdown.html)
+
+* Read Chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
+
+* Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 15
+
+* Complete the **Confidence intervals** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 15
+
+* Start [Sampling Distributions Lab](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 20 --- Final corrections due by 5:00 pm Oct 22 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+
+
+* Read Chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
+
+* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 19
+
+* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 22
+
+* Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
+
+
+```{block, week11optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+```
+
+__________________
+
+## Week 12: (Nov 1 -- 5) {-}
+
+* Complete [PS-08](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 3 --- Final corrections due by 5:00 pm Nov 5 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885))
+
+* Read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
+
+* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 2
+
+* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 5
+
+* [Goodness-Of-Fit](../Handouts/ChiGOF.html)
+
+* [In class Examples](../Rmarkdown/InClassNotes.html)
+
+
+
+```{block, week12optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+```
+
+______________________
+
+
+
+## Week 13: (Nov 8--12) {-}
+
+* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 9
+
+* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 12
+
+* Start Reproduction of _Inference for Numerical Data in R_  --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) - Due NLT 5:00 PM Dec 7, 2021
+
+```{block, week13optional, type='rmdoptional'}
+#### Optional {-}
+
+* Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter5HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/).
+
+* [Misc R Markdown Examples](../Rmarkdown/MiscRmarkdown.html)
+```
+
+_________________
+
+## Week 14: (Nov 15--19) {-}
+
+* Complete [PS-09](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 17 --- Final corrections due by 5:00 pm Nov 19 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885))
+
+
+
+* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) - Due NLT 5:00 PM Dec 7, 2021
+
+```{block, week14optional, type='rmdoptional'}
+#### Optional {-}
+* Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter7HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) 
+```
+
+________________________
+
+
+## Week 15: (Nov 22 & 23) {-}
+
+* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) - Due NLT 5:00 PM Dec 7, 2021
+
+__________________________________
+
+## Week 16: (Nov 29 & 30) {-}
+
+* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) - Due NLT 5:00 PM Dec 7, 2021
+
+________________________________
+
+
