@@ -14,11 +14,6 @@ MathJax.Hub.Config({
 });
 </script>
 
-
-_______________________________
-
-**Last Updated:** `r format(Sys.time(), "%A, %B %d, %Y - %X.")`
-
 ________________________________
 
 ### General Notes: {-}
@@ -320,6 +315,8 @@ _______________________
 
 * Read Chapter 7 of MSWR
 
+* Before class review chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
+
 * [Chapter 7 notes](../Notes/Children/ConfidenceIntervals2.html)
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
@@ -327,43 +324,9 @@ _______________________
 * Complete [PS-08](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 5:00 pm Mar 31 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
 
 
+_____________________
 
 
-
-* Read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
-
-* Complete the **Comparing Many Means** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 29
-
-* Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 5
-
-* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 8
-
-
-* Read about [Permutation Testing](../Rmarkdown/PermutationTesting.html) 
-
-* Read Chapter 5 of MSWR
-
-* [Chapter 5 notes](../Notes/Children/BootStrap2.html)
-
-* [Misc R Markdown Examples](../Rmarkdown/MiscRmarkdown.html)
-
-* Read Chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
-
-* Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 15
-
-* Complete the **Confidence intervals** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 15
-
-* Start [Sampling Distributions Lab](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Oct 20 --- Final corrections due by 5:00 pm Oct 22 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
-
-
-
-* Read Chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com) --- pgs 233-305
-
-* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 19
-
-* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Oct 22
-
-* Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
 
 ```{block, week11optional, type='rmdoptional'}
@@ -376,19 +339,17 @@ _______________________
 
 __________________
 
-## Week 12: (Nov 1 -- 5) {-}
+## Week 12: (Apr 4 -- 7) {-}
 
-* Complete [PS-08](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 3 --- Final corrections due by 5:00 pm Nov 5 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885))
+* Read about [Permutation Testing](../Rmarkdown/PermutationTesting.html) 
 
 * Read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
 
-* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 2
+* Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Apr 5
 
-* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 5
+* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Apr 6
 
-* [Goodness-Of-Fit](../Handouts/ChiGOF.html)
-
-* [In class Examples](../Rmarkdown/InClassNotes.html)
+* Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Apr 7
 
 
 
@@ -404,13 +365,18 @@ ______________________
 
 
 
-## Week 13: (Nov 8--12) {-}
+## Week 13: (Apr 11 -- 14) {-}
 
-* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 9
+* Before class review Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com) --- pgs 307-360
 
-* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Nov 12
+* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Apr 12
 
-* Start Reproduction of _Inference for Numerical Data in R_  --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) - Due NLT 5:00 PM Dec 7, 2021
+* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Apr 13
+
+* Complete [PS-09](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 5:00 pm Apr 14 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885)) 
+
+
+
 
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
@@ -422,13 +388,17 @@ ______________________
 
 _________________
 
-## Week 14: (Nov 15--19) {-}
+## Week 14: (Apr 18 -- 21) {-}
 
-* Complete [PS-09](https://classroom.github.com/classrooms/87543903-stt3850-fall2021) by 10:00 am Nov 17 --- Final corrections due by 5:00 pm Nov 19 --- (assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885))
+* [Goodness-Of-Fit](../Handouts/ChiGOF.html)
+
+* [In class Examples](../Rmarkdown/InClassNotes.html)
+
+* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Apr 19
+
+* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-fall2021/assignments) --- Due NLT 5:00 pm Apr 20
 
 
-
-* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) - Due NLT 5:00 PM Dec 7, 2021
 
 ```{block, week14optional, type='rmdoptional'}
 #### Optional {-}
@@ -438,16 +408,16 @@ _________________
 ________________________
 
 
-## Week 15: (Nov 22 & 23) {-}
+## Week 15: (Apr 25 -- 27) {-}
 
-* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) - Due NLT 5:00 PM Dec 7, 2021
+* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) - Due NLT 5:00 PM Apr 29, 2021
 
 __________________________________
 
-## Week 16: (Nov 29 & 30) {-}
+## Final Exam --- April 29: 11:00am - 1:30 pm
 
-* Work on Reproduction of _Inference for Numerical Data in R_ --- assignment link in [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=136885) - Due NLT 5:00 PM Dec 7, 2021
+________________
 
-________________________________
+<center> Last Updated on: `r format(Sys.time(), "%b %d, %Y at %X")` </center>
 
-
+________________
