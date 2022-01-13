@@ -27,7 +27,7 @@ In an effort to maximize yield, researchers designed an experiment to determine 
 
 ## Base R
 
-The data from Poplar3.CSV is read into the data frame poplar using the `read.csv()` function, and the first five rows of the data frame are shown using the function `head()` with the argument `n = 5` to show the first five rows of the data frame instead of the default `n = 6` rows.
+The data from `Poplar3.CSV` is read into the data frame `poplar` using the `read.csv()` function, and the first five rows of the data frame are shown using the function `head()` with the argument `n = 5` to show the first five rows of the data frame instead of the default `n = 6` rows.
 
 
 ```{r}

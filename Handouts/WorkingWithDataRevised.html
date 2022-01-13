@@ -166,7 +166,7 @@ pre code {
 
 <h1 class="title toc-ignore">Reading In Data</h1>
 <h4 class="author">Alan T. Arnholt</h4>
-<h4 class="date">Last compiled: January 13, 2022 at 10:04:27 AM</h4>
+<h4 class="date">Last compiled: January 13, 2022 at 10:08:51 AM</h4>
 
 </div>
 
@@ -179,7 +179,7 @@ pre code {
 <pre><code>In an effort to maximize yield, researchers designed an experiment to determine how two factors, Site and Treatment, influence the Weight of four-year-old poplar clones. They planted trees on two sites: Site 1 is a moist site with rich soil, and Site 2 is a dry, sandy site. They applied four different treatments to the trees: Treatment 1 was the control (no treatment);   Treatment 2 used fertilizer; Treatment 3 used irrigation; and Treatment 4 use both fertilizer and irrigation. To account for a variety of weather conditions, the researchers replicated the data by planting half the trees in Year 1, and the other half in Year 2.</code></pre>
 <div id="base-r" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Base R</h2>
-<p>The data from Poplar3.CSV is read into the data frame poplar using the <code>read.csv()</code> function, and the first five rows of the data frame are shown using the function <code>head()</code> with the argument <code>n = 5</code> to show the first five rows of the data frame instead of the default <code>n = 6</code> rows.</p>
+<p>The data from <code>Poplar3.CSV</code> is read into the data frame <code>poplar</code> using the <code>read.csv()</code> function, and the first five rows of the data frame are shown using the function <code>head()</code> with the argument <code>n = 5</code> to show the first five rows of the data frame instead of the default <code>n = 6</code> rows.</p>
 <pre class="r"><code>site &lt;- &quot;https://raw.githubusercontent.com/alanarnholt/Data/master/POPLAR3.CSV&quot;
 poplar &lt;- read.csv(file = url(site))
 head(poplar, n = 5)  # show first five rows</code></pre>
