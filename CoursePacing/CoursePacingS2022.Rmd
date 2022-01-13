@@ -73,6 +73,8 @@ _________
 
 * Work through chapter 2 (Introduction to R) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
+* [Reading in Data](https://alanarnholt.github.io/STT3850/Handouts/WorkingWithDataRevised.html)
+
 ```
 
 ______________
