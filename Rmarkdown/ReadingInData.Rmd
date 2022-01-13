@@ -1,0 +1,78 @@
+---
+title: "Reading In Data"
+author: "Alan T. Arnholt"
+date: 'Last compiled: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This section presents a data set that shows how different data types should be read into `R` as well as several functions that are useful for working with different types of `R` objects.  Consider the data stored as a CSV file at
+
+https://raw.githubusercontent.com/alanarnholt/Data/master/POPLAR3.CSV
+
+
+The following description of the data is from `Minitab 15`:
+
+```
+In an effort to maximize yield, researchers designed an experiment to determine how two factors, Site and Treatment, influence the Weight of four-year-old poplar clones. They planted trees on two sites: Site 1 is a moist site with rich soil, and Site 2 is a dry, sandy site. They applied four different treatments to the trees: Treatment 1 was the control (no treatment);   Treatment 2 used fertilizer; Treatment 3 used irrigation; and Treatment 4 use both fertilizer and irrigation. To account for a variety of weather conditions, the researchers replicated the data by planting half the trees in Year 1, and the other half in Year 2.
+```
+
+The data from Poplar3.CSV is read into the data frame poplar using the `read.csv()` function, and the first five rows of the data frame are shown using the function `head()` with the argument `n = 5` to show the first five rows of the data frame instead of the default `n = 6` rows.
+
+
+```{r}
+site <- "https://raw.githubusercontent.com/alanarnholt/Data/master/POPLAR3.CSV"
+poplar <- read.csv(file = url(site))
+head(poplar, n = 5)  # show first five rows
+```
+
+When dealing with imported data sets, it is always good to examine their contents using functions such as `str()` and `summary()`, which show the structure and provide appropriate summaries, respectively, for different types of objects.
+
+```{r}
+str(poplar)
+summary(poplar)
+```
+
+From typing `str(poplar)` at the `R` prompt, one can see that all seven variables are either integer or numeric.  From the description, the variables `Site` and `Treatment` are factors.  Further investigation into the experiment reveals that `year` and `Age` are factors as well. Recall that factors are an extension of vectors designed for storing categorical information.   The results of `summary(poplar)` indicate the minimum values for `Diameter`, `Height`, and `Weight` are all `-99`, which does not make sense unless one is told that a value of `-99` for these variables represents a missing value.  Once one understands that the variables `Site`, `Year`, `Treatment`, and `Age` are factors and that the value `-99` has been used to represent missing values for the variables `Diameter`, `Height`, and `Weight`, appropriate arguments to `read.csv()` can be entered.  The data is now read into the object `poplarC` using `na.strings = "-99"` to store the `NA` values correctly.  The argument `colClasses=` requires a vector that indicates the desired class of each column.
+
+```{r}
+poplarC <- read.csv(file = url(site), na.strings = "-99", 
+    colClasses = c(rep("factor", 3), rep("numeric", 3), "factor"))
+str(poplarC)
+```
+
+In the event different values (999, 99, 9999) for different variables (`var1`, `var2`, `var3`) are used to represent missing values in a data set, the argument `na.strings=` will no longer be able to solve the problem directly.  Although one can pass a vector of the form `na.strings = c(999, 99, 9999)`, this will simply replace all values that are 999,  99, or 9999 with `NA`s.  If the first variable has a legitimate value of 99, then it too would be replaced with an `NA` value.  One solution for this problem in general is to read the data set into a data frame (`DF`), to assign the data frame to a different name so that the cleaned up data set is not confused with the original data, and to use filtering to assign `NA`s to values of `var1`, `var2`, and `var3` that have entries of 999, 99, and 999, respectively.
+
+```{r eval = FALSE}
+DF <- read.table(file=url(site), header=TRUE)
+df <- DF
+df[df$var1==999,  "var1"] = NA
+df[df$var2==99,   "var2"] = NA
+df[df$var3==9999, "var3"] = NA
+```
+
+Once a variable has its class changed from `int` to `factor`, labeling the levels of the factor can be accomplished without difficulties.  To facilitate analysis of the `poplarC` data, labels for the levels of the variables `Site` and `Treatment` are assigned.
+
+```{r c01LevelsSite}
+levels(poplarC$Site) <- c("Moist", "Dry")
+TreatmentLevels <- c("Control", "Fertilizer", "Irrigation", "FertIrriga")
+levels(poplarC$Treatment) <- TreatmentLevels
+str(poplarC$Treatment)
+```
+
+Another way to accomplish the previous labeling that makes clear the assignment of labels to levels is given below.  The reader should make sure to that the variable being labeled is a factor before using either the `labels=` or `levels=` argument to assign labels to levels.
+
+```{r c01PoplarLabels}
+poplarC$Site <- factor(poplarC$Site, labels = c("Moist", "Dry"))
+str(poplarC$Site)
+```
+
+If the argument `levels = c("Moist", "Dry")` is applied to a non-factor variable (as `Site` is in the original `poplar` data frame), the levels of `Site` are converted to `NA` values as seen below.
+
+```{r c01PoplarLabelsNA}
+poplar$Site <- factor(poplar$Site, levels = c("Moist", "Dry"))
+str(poplar$Site)
+```
