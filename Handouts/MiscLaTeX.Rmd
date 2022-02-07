@@ -1,0 +1,39 @@
+---
+title: "LaTex Misc"
+author: "Alan T. Arnholt"
+date: 'Last compiled: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
+```
+
+Consider defining the sample mean using display equation format:
+
+$$\bar{x} = \frac{x_1 + x_2 + \ldots + x_n}{n} = \sum_{i=1}^n\frac{x_i}{n}$$
+
+
+The code to write the above is given below:
+
+```{r, eval = FALSE}
+$$\bar{x} = \frac{x_1 + x_2 + \ldots + x_n}{n} = \sum_{i=1}^n\frac{x_i}{n}$$
+```
+
+```{r}
+random_numbers <- rnorm(1000, mean = 100, sd = 10)
+mean(random_numbers) -> xbar
+sd(random_numbers) -> SD
+c(xbar, SD)
+```
+
+The mean of the `random_numbers` is $\bar{x} =$ `r xbar`, while the variance is $s^2 =$ `r SD`.
+
+The variance using inline $\LaTeX{}$ is written $s^2 = \sum_{i=1}^n\frac{(x_i - \bar{x})^2}{(n-1)}$.
+
+```{r, eval = FALSE}
+$s^2 = \sum_{i=1}^n\frac{(x_i - \bar{x})^2}{(n-1)}$
+```
+
+
+
