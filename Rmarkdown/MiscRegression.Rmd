@@ -18,7 +18,7 @@ knitr::opts_chunk$set(comment = NA,  fig.align = 'center', fig.height = 5, fig.w
 # Read in data with `read.csv()`
 
 ```{r, label = "readin", message = FALSE}
-site <- "http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv"
+site <- "http://statlearning.com/s/Advertising.csv"
 AD <- read.csv(site)
 head(AD)
 dim(AD)
@@ -491,7 +491,7 @@ summary(nam2)
 In the `Credit` data frame there are four qualitative features/variables `Gender`, `Student`, `Married`, and `Ethnicity`.
 
 ```{r, label = "readin2"}
-Credit <- read.csv("http://www-bcf.usc.edu/~gareth/ISL/Credit.csv")
+Credit <- read.csv("http://statlearning.com/s/Credit.csv")
 datatable(Credit[, -1], rownames = FALSE)
 ```
 
@@ -509,6 +509,8 @@ Fitted Model: $\widehat{\text{Balance}}  = `r coef(modP)[1]` + `r coef(modP)[2]`
 Suppose we wish to investigate differences in credit card balance between males and females, ignoring the other variables for the moment.
 
 ```{r, label = "GGSD"}
+library(ISLR)
+data(Credit)
 modS <- lm(Balance ~ Gender, data = Credit)
 summary(modS)
 coef(modS)
