@@ -251,10 +251,10 @@ qqmath(~Weight|Gender,data = NCBirths2004, col = rgb(1,0,0,.1))
 ggplot(data = NCBirths2004, aes(sample = Weight)) + 
   stat_qq(color = rgb(1,0,0,.1)) + 
   stat_qq_line() +
-  facet_grid(.~ Gender) + 
+  facet_grid(cols = vars(Gender)) + 
   theme_bw()
 ```
-Since $1 - \alpha = 0.99$, it follows that $\alpha/2 = 0.005$.  The 0.995 quantile for the $t$ distribution with 520 degrees of freedom is $t_{0.995; 520}=$ `r qt(.995, 520)`.  Thus, the 99% confidence interval is `r MEANS[1]`$\pm$ `r qt(.995, 520)`$\times$ `r SD[1]` $/\sqrt{521} =$ (`r t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = .99)$conf[1]`, `r t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = .99)$conf[2]`) g.
+Since $1 - \alpha = 0.99$, it follows that $\alpha/2 = 0.005$.  The 0.995 quantile for the $t$ distribution with 520 degrees of freedom is $t_{0.995; 520}=$ `r qt(.995, 520)`.  Thus, the 99% confidence interval is `r MEANS[1]`$\pm$ `r qt(.995, 520)`$\times$ `r SD[1]` $/\sqrt{521} =$ (`r t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = .99)$conf[1]`g., `r t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = .99)$conf[2]`g.).
 
 **R Note:**
 
@@ -520,11 +520,11 @@ boot.ci(boot.out, conf = 0.95, type = c("perc", "stud", "norm", "basic", "bca"))
 Texas <- TXBirths2004
 ggplot(data = Texas, aes(x = Weight)) + 
   geom_histogram(fill = "blue", color = "black") + 
-  facet_grid(Gender~.) + 
+  facet_grid(rows = vars(Gender)) + 
   theme_bw()
 ggplot(data = Texas, aes(sample = Weight)) + 
   stat_qq(color = rgb(0, 0, 1, 0.15)) + 
-  facet_grid(Gender~.) + 
+  facet_grid(rows = vars(Gender)) + 
   theme_bw()
 ```
 
