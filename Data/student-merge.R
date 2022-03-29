@@ -47,3 +47,4 @@ Q
 CI <- c( (mean(fm_grades) - mean(mm_grades)) -Q[2]*sqrt(var(fm_grades)/198 + var(mm_grades)/184),
          (mean(fm_grades) - mean(mm_grades)) -Q[1]*sqrt(var(fm_grades)/198 + var(mm_grades)/184) )
 CI
+t.test(d3$g3_x ~ d3$sex)$conf
