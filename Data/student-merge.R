@@ -39,7 +39,8 @@ BST <- numeric(B)
 for(i in 1:B){
   bss1 <- sample(fm_grades, 198, replace = TRUE)
   bss2 <- sample(mm_grades, 184, replace = TRUE)
-  BST[i] <- ((mean(bss1) - mean(bss2)) - (mean(fm_grades) - mean(mm_grades))) / sqrt(var(bss1)/198 + var(bss2)/184)
+  BST[i] <- ((mean(bss1) - mean(bss2)) - (mean(fm_grades) - mean(mm_grades))) / 
+    sqrt(var(bss1)/198 + var(bss2)/184)
 }
 Q <- quantile(BST, probs = c(0.025, 0.975))
 Q

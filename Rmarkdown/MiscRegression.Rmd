@@ -1,7 +1,7 @@
 ---
 title: "Misc Regression"
 author: "Alan Arnholt"
-date: 'Last updated: `r format(Sys.time(), "%b %d, %Y")`'
+date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
 output: 
     bookdown::html_document2:
       highlight: tango
@@ -364,6 +364,29 @@ s3d$points3d(x = AD$TV, y = AD$radio,
              col = c("darkblue", "lightblue3")[i.negpos],
              pch = 20)
 ```
+
+### Using `plotly`
+
+```{r}
+library(plotly)
+# draw the 3D scatterplot
+p <- plot_ly(data = AD, z = ~sales, x = ~TV, y = ~radio, opacity = 0.5) %>% 
+  add_markers
+p
+```
+
+```{r}
+x <- seq(0, 300, length = 70)
+y <- seq(0, 50, length = 70)
+plane <- outer(x, y, function(a, b){summary(mod2)$coef[1, 1] + summary(mod2)$coef[2, 1]*a + summary(mod2)$coef[3, 1]*b})
+# draw the plane
+p %>% 
+  add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE)
+```
+
+
+
+
 
 
 
