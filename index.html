@@ -13,7 +13,7 @@
 
 <title>Welcome</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -59,6 +59,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 
@@ -83,6 +84,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -235,7 +239,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -285,9 +289,13 @@ $(document).ready(function () {
 
 
 <ul>
-<li><p><a href="https://mathr.math.appstate.edu">Class RStudio Server</a> (you must be registered in the course to access the server)</p></li>
-<li><p><a href="./Syllabus/SyllabusSTT3850S2022.html">Course Syllabus</a></p></li>
-<li><p><a href="./CoursePacing/CoursePacingS2022.html">Assignments and Course Pacing</a></p></li>
+<li><p><a href="https://mathr.math.appstate.edu">Class RStudio
+Server</a> (you must be registered in the course to access the
+server)</p></li>
+<li><p><a href="./Syllabus/SyllabusSTT3850S2022.html">Course
+Syllabus</a></p></li>
+<li><p><a href="./CoursePacing/CoursePacingS2022.html">Assignments and
+Course Pacing</a></p></li>
 </ul>
 <hr />
 
