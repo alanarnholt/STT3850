@@ -58,7 +58,7 @@ Appalachian students are expected to make intensive engagement with courses thei
 
 __________
 
-* 20% of the course grade will come from DataCamp assignments (23)
+* 20% of the course grade will come from DataCamp assignments (22)
 
 * 40% of the course grade will come from Problem Sets (9)
 
