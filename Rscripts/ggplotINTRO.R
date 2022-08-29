@@ -1,10 +1,55 @@
 library(ggplot2)
 library(nycflights13)
 summary(flights)
-sub_flights <- flights[1000:1200, ]
-ggplot(data = sub_flights, aes(x = arr_delay, y = dep_delay)) + 
+set.seed(123)
+ind <- sample(dim(flights)[1], 5000, replace = FALSE)
+sub_flights <- flights[ind, ]
+ggplot(data = sub_flights, aes(x = dep_delay, y = arr_delay)) + 
   geom_point(color = "red") + 
   labs(x = "Arrival Delay", y = "Departure Delay") + 
   theme_bw() + 
-  geom_smooth( se = FALSE)
-?geom_smooth
+  geom_smooth(se = FALSE)
+
+
+ggplot(data = sub_flights, aes(x = dep_delay, y = arr_delay)) + 
+  geom_point() + 
+  labs(x = "Arrival Delay", y = "Departure Delay") + 
+  theme_bw() + 
+  geom_smooth(se = FALSE) + 
+  facet_wrap(vars(carrier))
+
+#### Departure Delays
+
+ggplot(data = sub_flights, aes(x = dep_delay)) + 
+  geom_histogram()
+
+ggplot(data = sub_flights, aes(x = dep_delay)) + 
+  geom_histogram(binwidth = 10, fill = "pink", color = "black") + 
+  theme_bw() + 
+  labs(x = "Departure Delay in minutes")
+
+ggplot(data = sub_flights, aes(x = dep_delay)) + 
+  geom_histogram(binwidth = 10, fill = "pink", color = "black") + 
+  theme_bw() + 
+  facet_wrap(vars(carrier))
+  labs(x = "Departure Delay in minutes")
+  
+# Density Plot
+ggplot(data = sub_flights, aes(x = dep_delay)) + 
+  geom_density(fill = "pink", color = "black") + 
+  theme_bw() + 
+  labs(x = "Departure Delay in minutes")  
+
+
+ggplot(data = sub_flights, aes(x = dep_delay)) + 
+  geom_density(fill = "pink", color = "black") + 
+  theme_bw() + 
+  facet_wrap(vars(carrier))
+  labs(x = "Departure Delay in minutes")  
+  
+# Boxplots
+ggplot(data = sub_flights, aes(x = carrier, y = dep_delay)) + 
+    geom_boxplot() + 
+    theme_bw() + 
+    labs(y = "Departure Delay in minutes", x= "Airline Carrier")    
+  
