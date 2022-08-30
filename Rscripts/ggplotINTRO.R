@@ -1,9 +1,11 @@
-library(ggplot2)
+library(tidyverse)
 library(nycflights13)
 summary(flights)
 set.seed(123)
 ind <- sample(dim(flights)[1], 5000, replace = FALSE)
 sub_flights <- flights[ind, ]
+
+
 ggplot(data = sub_flights, aes(x = dep_delay, y = arr_delay)) + 
   geom_point(color = "red") + 
   labs(x = "Arrival Delay", y = "Departure Delay") + 
@@ -27,6 +29,9 @@ ggplot(data = sub_flights, aes(x = dep_delay)) +
   geom_histogram(binwidth = 10, fill = "pink", color = "black") + 
   theme_bw() + 
   labs(x = "Departure Delay in minutes")
+
+sub_flights %>% 
+  summarize(Median = median(dep_delay, na.rm = TRUE), Mean = mean(dep_delay, na.rm = TRUE))
 
 ggplot(data = sub_flights, aes(x = dep_delay)) + 
   geom_histogram(binwidth = 10, fill = "pink", color = "black") + 
