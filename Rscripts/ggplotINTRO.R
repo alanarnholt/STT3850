@@ -7,10 +7,11 @@ sub_flights <- flights[ind, ]
 
 
 ggplot(data = sub_flights, aes(x = dep_delay, y = arr_delay)) + 
-  geom_point(color = "red") + 
-  labs(x = "Arrival Delay", y = "Departure Delay") + 
+  geom_point(color = "red", alpha = 0.1) + 
+  labs(x = "Arrival Delay", y = "Departure Delay", title = "Some big long centered title goes here") + 
   theme_bw() + 
-  geom_smooth(se = FALSE)
+  geom_smooth(se = FALSE) + 
+  theme(plot.title = element_text(hjust = 0.5))
 
 
 ggplot(data = sub_flights, aes(x = dep_delay, y = arr_delay)) + 
@@ -31,7 +32,10 @@ ggplot(data = sub_flights, aes(x = dep_delay)) +
   labs(x = "Departure Delay in minutes")
 
 sub_flights %>% 
-  summarize(Median = median(dep_delay, na.rm = TRUE), Mean = mean(dep_delay, na.rm = TRUE))
+  summarize(Median = median(dep_delay, na.rm = TRUE), 
+            iqr = IQR(dep_delay, na.rm = TRUE),
+            Mean = mean(dep_delay, na.rm = TRUE),
+            SD = sd(dep_delay, na.rm = TRUE))
 
 ggplot(data = sub_flights, aes(x = dep_delay)) + 
   geom_histogram(binwidth = 10, fill = "pink", color = "black") + 
