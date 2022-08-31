@@ -29,7 +29,9 @@ ggplot(data = sub_flights, aes(x = dep_delay)) +
 ggplot(data = sub_flights, aes(x = dep_delay)) + 
   geom_histogram(binwidth = 10, fill = "pink", color = "black") + 
   theme_bw() + 
-  labs(x = "Departure Delay in minutes")
+  labs(x = "Departure Delay in minutes", title = "Some big long centered title goes here") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
 
 sub_flights %>% 
   summarize(Median = median(dep_delay, na.rm = TRUE), 
