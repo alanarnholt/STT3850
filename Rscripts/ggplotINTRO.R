@@ -21,8 +21,8 @@ ggplot(data = sub_flights, aes(x = dep_delay,
 ggplot(data = sub_flights, 
        aes(x = dep_delay, y = arr_delay)) + 
   geom_point() + 
-  labs(x = "Arrival Delay", 
-       y = "Departure Delay") + 
+  labs(y = "Arrival Delay", 
+       x = "Departure Delay") + 
   theme_bw() + 
   geom_smooth(se = FALSE) + 
   facet_wrap(vars(carrier))
@@ -76,5 +76,52 @@ ggplot(data = sub_flights,
     geom_boxplot() + 
     theme_bw() + 
     labs(y = "Departure Delay in minutes", 
-         x= "Airline Carrier")    
-  
+         x= "Airline Carrier") 
+
+
+sub_flights %>% 
+  filter(origin == "JFK" & (dest == "BTV" | dest == "SEA") & month >= 10) -> fall_flights
+fall_flights
+
+#### Using summarize
+
+weather %>% 
+  summarize(Mean = mean(temp, na.rm = TRUE),
+            SD = sd(temp, na.rm = TRUE))
+
+# By Month
+
+weather %>% 
+  group_by(month) %>% 
+  summarize(Mean = mean(temp, na.rm = TRUE),
+            SD = sd(temp, na.rm = TRUE)) -> summary_weather
+summary_weather
+
+summary_weather[summary_weather$month==6, ]
+# Or
+summary_weather %>% 
+  filter(month == 6)
+
+# Make a new variable --- mutate()
+
+weather %>% 
+  select(humid, pressure, temp) %>% 
+  mutate(temp_in_C = (temp - 32)/1.8) -> newdf
+newdf  
+
+#
+weather %>% 
+  filter(origin == "JFK" & month == 6) %>%  
+  ggplot(aes(x = temp)) +
+  geom_histogram(binwidth = 10, color = "black", fill = "lightblue")
+
+
+weather %>% 
+  filter(origin == "JFK" & month == 6) %>% 
+  select(temp) %>% 
+  summarize(Skew = e1071::skewness(temp),
+            Mean = mean(temp),
+            Median = median(temp),
+            SD = sd(temp),
+            iqr = IQR(temp))
+
