@@ -78,6 +78,7 @@ ggplot(data = sub_flights,
     labs(y = "Departure Delay in minutes", 
          x= "Airline Carrier") 
 
+###################################################################################
 
 sub_flights %>% 
   filter(origin == "JFK" & (dest == "BTV" | dest == "SEA") & month >= 10) -> fall_flights
