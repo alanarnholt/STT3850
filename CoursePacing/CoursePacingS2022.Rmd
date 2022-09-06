@@ -132,7 +132,7 @@ Test yourself:
 ```{block, week3optional, type='rmdoptional'}
 #### Optional {-}
 
-* Nice [Tidyverse Cheat Sheet](http://datacamp-community.s3.amazonaws.com/e63a8f6b-2aa3-4006-89e0-badc294b179c)
+* RStudio [Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
 
 * Work through chapter 3 (Starting with Data) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
