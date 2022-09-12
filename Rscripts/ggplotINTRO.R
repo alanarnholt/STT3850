@@ -142,6 +142,7 @@ ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
 mod_simple <- lm(totalprice ~ area, data = VIT2005)
 summary(mod_simple)
 get_regression_table(mod_simple)
+get_regression_points(mod_simple)
 ##################################################################################
 ##################################################################################
 ##################################################################################
