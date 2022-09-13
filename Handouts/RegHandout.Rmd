@@ -1,0 +1,1001 @@
+---
+title: "One Qualitative Predictor"
+author: "Most material from _Probability and Statistics with R, Second Edition_"
+date: 'Last compiled: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output: 
+  bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
+```
+
+# Qualitative Predictors
+
+The simplest situation where dummy variables might be used in a regression model is when the qualitative predictor has only two levels.  The regression model for a single quantitative predictor $(x_1)$ and a dummy variable $(D_1)$ is written
+
+\begin{equation}
+Y = \beta_0 + \beta_1 x_1 + \beta_2 D_1 + \beta_3 x_1 D_1 + \varepsilon
+(\#eq:QMeq)
+\end{equation}
+where
+\begin{equation*}
+D_1 =
+\begin{cases}
+0 &\text{for the first level}\\
+1 &\text{for the second level.}
+\end{cases}
+\end{equation*}
+
+The model in \@ref(eq:QMeq) when $D_1$ has two levels will yield one of four
+possible scenarios, as shown in Figure \@ref(fig:fourlines).  This type of model requires
+the user to answer three **basic questions**:
+
+* Are the lines the same?
+* Are the slopes the same?
+* Are the intercepts the same?
+
+
+To address whether the lines are the same, the null hypothesis $H_0: \beta_2 = \beta_3 = 0$ must be tested.  One way to perform the test is to use the general linear test statistic based on the full model found in \@ref(eq:QMeq) and the reduced model $Y = \beta_0 + \beta_1 x_1 + \varepsilon$.  If the null hypothesis is not rejected, the interpretation is that there is one line present (the intercept and the slope are the same for both levels of the dummy variable).  This is the case for graph I of Figure \@ref(fig:fourlines).  If the null hypothesis is rejected, either the slopes, the intercepts, or possibly both the slope and the intercept are different for the different levels of the dummy variable, as seen in graphs II, III, and IV of Figure \@ref(fig:fourlines), respectively.
+
+To answer whether the slopes are the same, the null hypothesis $H_0: \beta_3 = 0$ must be tested.  If the null hypothesis is not rejected, the two lines have the same slope, but different intercepts, as shown in graph II of Figure \@ref(fig:fourlines). The two parallel lines that result when $\beta_3 = 0$ are
+
+\begin{equation*}
+Y = \beta_0 + \beta_1 x_1 + \varepsilon \text{ for } (D_1 = 0)
+\quad\text{and}\quad Y = (\beta_0 +\beta_2) + \beta_1 x_1 + \varepsilon \text{
+for } (D_1 = 1).
+\end{equation*}
+
+When $H_0: \beta_3=0$ is rejected, one concludes that the two fitted lines are
+not parallel as in graphs III and IV of Figure \@ref(fig:fourlines).
+
+To answer whether the intercepts are the same, the null hypothesis $H_0: \beta_2 = 0$ for model \@ref(eq:QMeq) must be tested.  The reduced model for this test is $Y = \beta_0 + \beta_1 x_1 + \beta_3 x_1 D_1 + \varepsilon$.  If the null hypothesis is not rejected, the two fitted lines have the same intercept but different slopes:
+
+\begin{equation*}
+Y = \beta_0 + \beta_1 x_1 + \varepsilon \text{ for } (D_1 = 0)
+\quad\text{and}\quad Y = \beta_0 + (\beta_1 +\beta_3) x_1 + \varepsilon \text{
+for } (D_1 = 1).
+\end{equation*}
+
+Graph III of Figure \@ref(fig:fourlines) represents this situation.  If the null
+hypothesis is rejected, one concludes that the two lines have different
+intercepts, as in graphs II and IV of Figure \@ref(fig:fourlines).
+
+
+
+
+
+```{r, label = "fourlines", echo = FALSE, fig.cap = "Four possible results for a single dummy variable with two levels.  Graph I has the intercept and the slope the same for both levels of the dummy variable.  Graph II has the two lines with the same slope, but different intercepts.  Graph III shows the two fitted lines with the same intercept but different slopes.  Graph IV shows the two lines with different intercepts and different slopes."}
+
+opar <- par(no.readonly = TRUE) # copy of current settings
+par(mfrow=c(2, 2))
+par(mar = c(4, 4, 4, 2))
+par(las = 1)
+x <- seq(0, 10, .1)
+y <- x
+plot(x, y, type = "n",  axes = FALSE, xlab = "", ylab = "", main = "I")
+arrows(0, 0, 0, 10, code = 2, length = 0.1)
+arrows(0, 0, 10, 0, code = 2, length = 0.1)
+segments(1, 3, 9, 7)
+mtext(text = "x", side = 1, line = 0, at = 5)
+mtext(text = "Y", side = 2, line = 0, at = 5)
+plot(x, y, type = "n",  axes = FALSE, xlab = "", ylab = "", main = "II")
+arrows(0, 0, 0, 10, code = 2, length = 0.1)
+arrows(0, 0, 10, 0, code = 2, length = 0.1)
+segments(1, 3, 9, 5)
+segments(1, 5, 9, 7)
+mtext(text = "x", side = 1, line = 0, at = 5)
+mtext(text = "Y", side = 2, line = 0, at = 5)
+plot(x, y, type = "n",  axes = FALSE, xlab = "", ylab = "", main = "III")
+arrows(0, 0, 0, 10, code = 2, length = 0.1)
+arrows(0, 0, 10, 0, code = 2, length = 0.1)
+segments(0, 3, 9, 5)
+segments(0, 3, 9, 8)
+mtext(text = "x", side = 1, line = 0, at = 5)
+mtext(text = "Y", side = 2, line = 0, at = 5)
+plot(x, y, type = "n",  axes = FALSE, xlab = "", ylab = "", main = "IV")
+arrows(0, 0, 0, 10, code = 2, length = 0.1)
+arrows(0, 0, 10, 0, code = 2, length = 0.1)
+segments(1, 3, 9, 8)
+segments(1, 4, 9, 5)
+mtext(text = "x", side = 1, line = 0, at = 5)
+mtext(text = "Y", side = 2, line = 0, at = 5)
+par(opar)
+```
+
+# Example
+
+Suppose a realtor wants to model the appraised price of an apartment as a function of the predictors living area (in m$^2$) and  the presence or absence of elevators. Consider the data frame`VIT2005`, which contains data about apartments in Vitoria, Spain, including `totalprice`, `area`, and `elevator`, which are the appraised apartment value in Euros, living space in square meters, and the absence or presence of at least one elevator in the building, respectively.  The realtor first wants to know if there is any relationship between appraised price $(Y)$ and living area $(x_1)$.  Next, the realtor wants to know how adding a dummy variable for whether or not an elevator is present changes the relationship: Are the lines the same? Are the slopes the same? Are the intercepts the same?
+
+## Solution (is there a realationship between `totalprice` and `area`?):
+
+```{r, label = "sol1", fig.cap = "Scatterplot of `totalprice` versus `area` with the fitted regression line superimposed from `mod_simple`"}
+library(tidyverse)
+library(PASWR2)
+VIT2005 <- VIT2005 %>% 
+  mutate(elevator = factor(elevator, labels = c("No", "Yes")))
+mod_simple <- lm(totalprice ~ area, data = VIT2005)
+summary(mod_simple)
+ggplot(data = VIT2005, aes(x = area, y = totalprice)) + 
+  geom_point() + 
+  theme_bw() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+A linear regression model of the form 
+
+\begin{equation} 
+Y= \beta_0 +\beta_1 x_1 + \varepsilon
+(\#eq:SLMelevator)
+\end{equation}
+
+is fit yielding
+
+\begin{equation*}
+\widehat{Y}_i = `r coef(summary(mod_simple))[1]` + 
+`r coef(summary(mod_simple))[2]` x_{i1}
+\end{equation*}
+
+and a scatterplot of `totalprice` versus `area` with the fitted regression line superimposed over the scatterplot is shown in Figure \@ref(fig:sol1).
+
+Based on Figure \@ref(fig:sol1), there appears to be a linear relationship
+between appraised price and living area.  Further, this relationship is 
+statistically significant, as the p-value for testing $H_0: \beta_1=0$ versus 
+$H_1: \beta_1 \neq 0$ is less than $2.2 \times 10^{-16}$.
+
+## Solution (does adding a dummy variable (`elevator`) change the relationship?):
+
+The regression model including the dummy variable for `elevator` is written
+\begin{equation}
+Y = \beta_0 + \beta_1 x_1 + \beta_2 D_1 + \beta_3 x_1 D_1 + \varepsilon
+(\#eq:QMeqElevator)
+\end{equation}
+where
+\begin{equation*}
+D_1 =
+\begin{cases}
+0 &\text{when a building has no elevators}\\
+1 &\text{when a building has at least one elevator.}
+\end{cases}
+\end{equation*}
+
+To determine if the lines are the same (which means that the linear relationship between appraised price and living area is the same for apartments with and without elevators), the hypotheses are
+
+\begin{equation*}
+H_0: \beta_2 = \beta_3 = 0 \text{ versus } H_1: \text{at least one } \beta_i \neq 0 \text{ for } i=2, 3.
+\end{equation*}
+
+```{r}
+mod_full <- lm(totalprice ~ area + elevator + area:elevator, data = VIT2005)
+anova(mod_simple, mod_full)  # compare models
+```
+
+In this problem, one may conclude that at least one of $\beta_2$ and $\beta_3$ is not zero since the p-value = $`r anova(mod_simple, mod_full)[2, 6]`$.  In other words, the lines have either different intercepts, different slopes,  or different intercepts and slopes.
+
+To see if the lines have the same slopes (which means that the presence of an elevator adds constant value over all possible living areas), the hypotheses are
+\begin{equation*}
+H_0: \beta_3 = 0 \text{ versus } H_1: \beta_3 \neq 0.
+\end{equation*}
+
+```{r}
+anova(mod_full)
+```
+
+Based on the p-value = $`r anova(mod_full)[3, 5]`$, it may be concluded
+that $\beta_3 \neq 0$, which implies that the lines are not parallel.
+
+To test for equal intercepts (which means that appraised price with and without elevators starts at the same value), the hypotheses to be evaluated are
+\begin{equation*}
+H_0: \beta_2 = 0 \text{ versus }H_1: \beta_2 \neq 0.
+\end{equation*}
+
+```{r}
+mod_full <- lm(totalprice ~ area + elevator + area:elevator, data = VIT2005)
+mod_inter <- lm(totalprice ~ area + area:elevator, data = VIT2005)
+anova(mod_inter, mod_full)  # compare models
+```
+
+Since the p-value for testing the null hypothesis is `r anova(mod_inter, mod_full)[2, 6]`, one fails to reject $H_0$ and should conclude that the two lines have the same intercept but different slopes.
+
+```{r}
+summary(mod_inter)
+coef(mod_inter)
+b0 <- coef(mod_inter)[1]
+b1NO <- coef(mod_inter)[2]
+b1YES <- coef(mod_inter)[2] + coef(mod_inter)[3]
+c(b0, b1NO, b1YES)
+```
+
+The fitted model is $\widehat{Y}_i = `r coef(summary(mod_inter))[1,1]` + 
+`r coef(summary(mod_inter))[2,1]`x_{i1} + 
+`r coef(summary(mod_inter))[3,1]`x_{i1}D_{i1}$, and
+the fitted regression lines for the two values of $D_1$ are shown in 
+Figure \@ref(fig:DSSI).  The fitted model using the same intercept with different 
+slopes has an $R^2_a$ of `r summary(mod_inter)$adj`, a modest improvement 
+over the model without  the variable `elevator`, which
+had an $R^2_a$ value of `r summary(mod_simple)$adj`.
+
+```{r, label = "DSSI", fig.cap = "Fitted regression lines for `mod_inter`"}
+ggplot(data = VIT2005, aes(x = area, y = totalprice, color = elevator)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_abline(intercept = b0, slope = b1NO, color = "red") + 
+  geom_abline(intercept = b0, slope = b1YES, color = "blue") + 
+  scale_color_manual(values = c("red", "blue")) + 
+  xlim(0, 200) + 
+  ylim(100000, 550000) + 
+  labs(x = "Living Area is Square Meters",
+       y = "Appraised Price in Euros")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
