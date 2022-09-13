@@ -152,6 +152,8 @@ ___________
 
 * In class go over this [document](https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html)
 
+* Class [notes](../Handouts/RegHandout.html) for one quantitative and one qualitative predictor
+
 * Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f22/assignments) --- Due NLT 5:00 pm Sep 12
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f22/assignments) --- Due NLT 5:00 pm Sep 13
