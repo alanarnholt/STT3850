@@ -235,3 +235,26 @@ ggplot(data = VIT2005, aes(x = area, y = totalprice, color = elevator)) +
        y = "Appraised Price in Euros")
 ```
 
+________________________
+
+# Diagnostics
+
+```{r}
+MDF <- get_regression_points(mod_inter)
+ggplot(data = MDF, aes(x = totalprice_hat, y = residual)) +
+  geom_point() +
+  theme_bw() +
+  labs(title = "Residuals versus Fitted Values") +
+  geom_hline(yintercept = 0, lty = "dashed")
+```
+```{r}
+ggplot(data = MDF, aes(x = residual)) +
+  geom_histogram(fill = "lightblue", color = "blue") +
+  theme_bw() 
+
+ggplot(data = MDF, aes(sample = residual)) +
+  geom_qq() +
+  geom_qq_line() +
+  theme_bw() 
+```
+
