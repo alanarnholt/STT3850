@@ -10,6 +10,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
 ```
 
+_____________
+
 # Qualitative Predictors
 
 The simplest situation where dummy variables might be used in a regression model is when the qualitative predictor has only two levels.  The regression model for a single quantitative predictor $(x_1)$ and a dummy variable $(D_1)$ is written
@@ -28,42 +30,11 @@ D_1 =
 \end{equation*}
 
 The model in \@ref(eq:QMeq) when $D_1$ has two levels will yield one of four
-possible scenarios, as shown in Figure \@ref(fig:fourlines).  This type of model requires
-the user to answer three **basic questions**:
+possible scenarios, as shown in Figure \@ref(fig:fourlines).  This type of model requires the user to answer three **basic questions**:
 
 * Are the lines the same?
 * Are the slopes the same?
 * Are the intercepts the same?
-
-
-To address whether the lines are the same, the null hypothesis $H_0: \beta_2 = \beta_3 = 0$ must be tested.  One way to perform the test is to use the general linear test statistic based on the full model found in \@ref(eq:QMeq) and the reduced model $Y = \beta_0 + \beta_1 x_1 + \varepsilon$.  If the null hypothesis is not rejected, the interpretation is that there is one line present (the intercept and the slope are the same for both levels of the dummy variable).  This is the case for graph I of Figure \@ref(fig:fourlines).  If the null hypothesis is rejected, either the slopes, the intercepts, or possibly both the slope and the intercept are different for the different levels of the dummy variable, as seen in graphs II, III, and IV of Figure \@ref(fig:fourlines), respectively.
-
-To answer whether the slopes are the same, the null hypothesis $H_0: \beta_3 = 0$ must be tested.  If the null hypothesis is not rejected, the two lines have the same slope, but different intercepts, as shown in graph II of Figure \@ref(fig:fourlines). The two parallel lines that result when $\beta_3 = 0$ are
-
-\begin{equation*}
-Y = \beta_0 + \beta_1 x_1 + \varepsilon \text{ for } (D_1 = 0)
-\quad\text{and}\quad Y = (\beta_0 +\beta_2) + \beta_1 x_1 + \varepsilon \text{
-for } (D_1 = 1).
-\end{equation*}
-
-When $H_0: \beta_3=0$ is rejected, one concludes that the two fitted lines are
-not parallel as in graphs III and IV of Figure \@ref(fig:fourlines).
-
-To answer whether the intercepts are the same, the null hypothesis $H_0: \beta_2 = 0$ for model \@ref(eq:QMeq) must be tested.  The reduced model for this test is $Y = \beta_0 + \beta_1 x_1 + \beta_3 x_1 D_1 + \varepsilon$.  If the null hypothesis is not rejected, the two fitted lines have the same intercept but different slopes:
-
-\begin{equation*}
-Y = \beta_0 + \beta_1 x_1 + \varepsilon \text{ for } (D_1 = 0)
-\quad\text{and}\quad Y = \beta_0 + (\beta_1 +\beta_3) x_1 + \varepsilon \text{
-for } (D_1 = 1).
-\end{equation*}
-
-Graph III of Figure \@ref(fig:fourlines) represents this situation.  If the null
-hypothesis is rejected, one concludes that the two lines have different
-intercepts, as in graphs II and IV of Figure \@ref(fig:fourlines).
-
-
-
-
 
 ```{r, label = "fourlines", echo = FALSE, fig.cap = "Four possible results for a single dummy variable with two levels.  Graph I has the intercept and the slope the same for both levels of the dummy variable.  Graph II has the two lines with the same slope, but different intercepts.  Graph III shows the two fitted lines with the same intercept but different slopes.  Graph IV shows the two lines with different intercepts and different slopes."}
 
@@ -102,6 +73,40 @@ mtext(text = "x", side = 1, line = 0, at = 5)
 mtext(text = "Y", side = 2, line = 0, at = 5)
 par(opar)
 ```
+
+________________
+
+
+To address whether the lines are the same, the null hypothesis $H_0: \beta_2 = \beta_3 = 0$ must be tested.  One way to perform the test is to use the general linear test statistic based on the full model found in \@ref(eq:QMeq) and the reduced model $Y = \beta_0 + \beta_1 x_1 + \varepsilon$.  If the null hypothesis is not rejected, the interpretation is that there is one line present (the intercept and the slope are the same for both levels of the dummy variable).  This is the case for graph I of Figure \@ref(fig:fourlines).  If the null hypothesis is rejected, either the slopes, the intercepts, or possibly both the slope and the intercept are different for the different levels of the dummy variable, as seen in graphs II, III, and IV of Figure \@ref(fig:fourlines), respectively.
+
+To answer whether the slopes are the same, the null hypothesis $H_0: \beta_3 = 0$ must be tested.  If the null hypothesis is not rejected, the two lines have the same slope, but different intercepts, as shown in graph II of Figure \@ref(fig:fourlines). The two parallel lines that result when $\beta_3 = 0$ are
+
+\begin{equation*}
+Y = \beta_0 + \beta_1 x_1 + \varepsilon \text{ for } (D_1 = 0)
+\quad\text{and}\quad Y = (\beta_0 +\beta_2) + \beta_1 x_1 + \varepsilon \text{
+for } (D_1 = 1).
+\end{equation*}
+
+When $H_0: \beta_3=0$ is rejected, one concludes that the two fitted lines are
+not parallel as in graphs III and IV of Figure \@ref(fig:fourlines).
+
+To answer whether the intercepts are the same, the null hypothesis $H_0: \beta_2 = 0$ for model \@ref(eq:QMeq) must be tested.  The reduced model for this test is $Y = \beta_0 + \beta_1 x_1 + \beta_3 x_1 D_1 + \varepsilon$.  If the null hypothesis is not rejected, the two fitted lines have the same intercept but different slopes:
+
+\begin{equation*}
+Y = \beta_0 + \beta_1 x_1 + \varepsilon \text{ for } (D_1 = 0)
+\quad\text{and}\quad Y = \beta_0 + (\beta_1 +\beta_3) x_1 + \varepsilon \text{
+for } (D_1 = 1).
+\end{equation*}
+
+Graph III of Figure \@ref(fig:fourlines) represents this situation.  If the null
+hypothesis is rejected, one concludes that the two lines have different
+intercepts, as in graphs II and IV of Figure \@ref(fig:fourlines).
+
+
+
+
+
+
 
 # Example
 
@@ -219,13 +224,13 @@ had an $R^2_a$ value of `r summary(mod_simple)$adj`.
 
 ```{r, label = "DSSI", fig.cap = "Fitted regression lines for `mod_inter`"}
 ggplot(data = VIT2005, aes(x = area, y = totalprice, color = elevator)) + 
-  geom_point() + 
+  geom_point(alpha = 0.5) + 
   theme_bw() + 
   geom_abline(intercept = b0, slope = b1NO, color = "red") + 
   geom_abline(intercept = b0, slope = b1YES, color = "blue") + 
   scale_color_manual(values = c("red", "blue")) + 
-  xlim(0, 200) + 
-  ylim(100000, 550000) + 
+  xlim(10, 200) + 
+  ylim(50000, 500000) + 
   labs(x = "Living Area is Square Meters",
        y = "Appraised Price in Euros")
 ```
