@@ -258,3 +258,91 @@ ggplot(data = MDF, aes(sample = residual)) +
   theme_bw() 
 ```
 
+_______________
+
+# Example
+
+Consider the `MA_schools` data frame from the `moderndive` package which contains 2017 data on Massachusetts public high schools provided by the Massachusetts Department of Education.  Consider a model with SAT math scores (`average_sat_math`) modeled as a function of percentage of the high school's student body that are economically disadvantaged (`perc_disadvan`) and the a categorical variable  measuring school size (`size`).
+
+## Solution (is there a relationship between `average_sat_math` and `perc_disadvan`?):
+
+```{r}
+mod_simple <- lm(average_sat_math ~ perc_disadvan, data = MA_schools)
+summary(mod_simple)
+get_regression_table(mod_simple)
+ggplot(data = MA_schools, aes(x = perc_disadvan, y = average_sat_math)) + 
+  geom_point() +
+  theme_bw() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+You complete the rest....
+
+
+____________
+
+## Solution (does adding a dummy variable `size` change the relationship?):
+
+```{r}
+mod_full <- lm(lm(average_sat_math ~ perc_disadvan + size + perc_disadvan:size, data = MA_schools))
+anova(mod_simple, mod_full)
+anova(mod_full)
+```
+
+___________
+
+# Simpson's Paradox
+
+```{r}
+library(ISLR)
+credit_paradox <- Credit %>% 
+  select(ID, debt = Balance, credit_limit = Limit, 
+         credit_rating = Rating, income = Income, age = Age)
+ggplot(data = credit_paradox, aes(x = credit_limit, y = debt)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw() -> p1
+ggplot(data = credit_paradox, aes(x = income, y = debt)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw() -> p2
+library(patchwork)
+p1 + p2
+```
+
+```{r}
+library(plotly)
+p <- plot_ly(data = credit_paradox, z = ~debt, x = ~credit_limit, y = ~income) %>% 
+  add_markers()
+p
+mod <- lm(debt ~ credit_limit + income, data = credit_paradox)
+summary(mod)$coef
+x <- seq(0, 14000, length = 70)
+y <- seq(0, 150, length = 70) 
+plane <- outer(x, y, function(a, b){summary(mod)$coef[1,1] + summary(mod)$coef[2, 1]*a + summary(mod)$coef[3,1]*b})
+# draw the plane
+p %>% 
+  add_surface(x = ~x, y = ~y, z = ~plane)
+```
+
+```{r}
+qs <- quantile(credit_paradox$credit_limit, probs = seq(0, 1, .25))
+credit_paradox$credit_cats <- cut(credit_paradox$credit_limit, breaks = qs)
+ggplot(data = credit_paradox, aes(x = credit_limit)) +
+  geom_histogram(fill = "pink", color = "black") + 
+  geom_vline(xintercept = qs, color = "blue") + 
+  theme_bw()
+```
+
+```{r}
+p1 <- ggplot(data = credit_paradox, aes(x = income, y = debt)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw()
+p2 <- ggplot(data = credit_paradox, aes(x = income, y = debt, color = credit_cats)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw()
+p1 + p2
+```
+
