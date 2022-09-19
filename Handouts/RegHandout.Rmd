@@ -267,13 +267,13 @@ Consider the `MA_schools` data frame from the `moderndive` package which contain
 ## Solution (is there a relationship between `average_sat_math` and `perc_disadvan`?):
 
 ```{r}
-mod_simple <- lm(average_sat_math ~ perc_disadvan, data = MA_schools)
-summary(mod_simple)
-get_regression_table(mod_simple)
 ggplot(data = MA_schools, aes(x = perc_disadvan, y = average_sat_math)) + 
   geom_point() +
   theme_bw() + 
   geom_smooth(method = "lm", se = FALSE)
+mod_simple <- lm(average_sat_math ~ perc_disadvan, data = MA_schools)
+summary(mod_simple)
+get_regression_table(mod_simple)
 ```
 
 You complete the rest....
@@ -283,7 +283,17 @@ ____________
 
 ## Solution (does adding a dummy variable `size` change the relationship?):
 
-```{r}
+```{r, fig.width = 12}
+ggplot(data = MA_schools, aes(x = perc_disadvan, y = average_sat_math, color = size)) + 
+  geom_point() +
+  theme_bw() + 
+  geom_smooth(method = "lm", se = FALSE) -> p1
+ggplot(data = MA_schools, aes(x = perc_disadvan, y = average_sat_math, color = size)) + 
+  geom_point() +
+  theme_bw() + 
+  geom_parallel_slopes(se = FALSE) -> p2
+library(patchwork)
+p1 + p2
 mod_full <- lm(lm(average_sat_math ~ perc_disadvan + size + perc_disadvan:size, data = MA_schools))
 anova(mod_simple, mod_full)
 anova(mod_full)
@@ -329,12 +339,12 @@ p %>%
 qs <- quantile(credit_paradox$credit_limit, probs = seq(0, 1, .25))
 credit_paradox$credit_cats <- cut(credit_paradox$credit_limit, breaks = qs)
 ggplot(data = credit_paradox, aes(x = credit_limit)) +
-  geom_histogram(fill = "pink", color = "black") + 
+  geom_density(fill = "pink", color = "black") + 
   geom_vline(xintercept = qs, color = "blue") + 
   theme_bw()
 ```
 
-```{r}
+```{r, fig.width = 12}
 p1 <- ggplot(data = credit_paradox, aes(x = income, y = debt)) + 
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) + 
