@@ -303,7 +303,7 @@ ___________
 
 # Simpson's Paradox
 
-```{r}
+```{r, fig.width = 10}
 library(ISLR)
 credit_paradox <- Credit %>% 
   select(ID, debt = Balance, credit_limit = Limit, 
@@ -337,22 +337,37 @@ p %>%
 
 ```{r}
 qs <- quantile(credit_paradox$credit_limit, probs = seq(0, 1, .25))
-credit_paradox$credit_cats <- cut(credit_paradox$credit_limit, breaks = qs)
+# credit_paradox$credit_cats <- cut(credit_paradox$credit_limit, breaks = qs, include.lowest = TRUE)
+############### Or above
+credit_paradox <- credit_paradox %>% 
+  mutate(credit_cats = cut(credit_limit, breaks = qs, include.lowest = TRUE))
+head(credit_paradox)
+
+
 ggplot(data = credit_paradox, aes(x = credit_limit)) +
   geom_density(fill = "pink", color = "black") + 
   geom_vline(xintercept = qs, color = "blue") + 
   theme_bw()
+
+credit_paradox %>% 
+  group_by(credit_cats) %>% 
+  summarize(n())
 ```
 
-```{r, fig.width = 12}
+```{r, label = "credit", fig.width = 12, fig.cap = "Relationship between credit card debt and income by credit limit bracket"}
 p1 <- ggplot(data = credit_paradox, aes(x = income, y = debt)) + 
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) + 
-  theme_bw()
+  theme_bw() + 
+  labs(y = "Credit card debt (in $)",
+       x = "Income (in $1000)")
 p2 <- ggplot(data = credit_paradox, aes(x = income, y = debt, color = credit_cats)) + 
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) + 
-  theme_bw()
+  theme_bw() + 
+  labs(y = "Credit card debt (in $)",
+       x = "Income (in $1000)",
+       color = "Credit limit bracket")
 p1 + p2
 ```
 
