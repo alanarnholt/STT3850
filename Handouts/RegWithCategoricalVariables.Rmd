@@ -1,0 +1,101 @@
+---
+title: "One Categorical Variable - Hints"
+author: "In-class"
+date: 'Last compiled: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output:
+  bookdown::html_document2:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    df_print: kable
+    css: MyLab.css 
+---
+
+____________
+
+```{r include = FALSE}
+# Do not edit this code block/chunk!
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", comment = NA, message = FALSE,  warning = FALSE, fig.width = 16/2, fig.height = 9/2)
+library(tidyverse)
+library(moderndive)
+library(gapminder)
+library(data.table)
+```
+
+
+# Exploratory Data Analysis
+
+
+```{r}
+library(gapminder)
+gapminder1980 <- gapminder %>% 
+  filter(year == 1982) %>% 
+  mutate(lifeexp = lifeExp, gdppercap = gdpPercap) %>% 
+  select(country, lifeexp, continent, gdppercap) 
+head(gapminder1980)
+```
+
+```{r, label = "exp", fig.cap = "Worldwide life expectancies in 1980."}
+ggplot(data = gapminder1980, aes(x = lifeexp)) +
+  geom_histogram(binwidth = 3, color = "black", fill = "darkgreen") +
+  theme_bw() + 
+  labs(title = "Worldwide life expectancies in 1980",
+       x = "Life expectancy in years",
+       y = "Number of countries")
+```
+
+```{r}
+ggplot(data = gapminder1980, aes(x = lifeexp)) +
+  geom_histogram(binwidth = 3, color = "black", fill = "darkgreen") +
+  theme_bw() + 
+  labs(title = "Worldwide life expectancies in 1980",
+       x = "Life expectancy in years",
+       y = "Number of countries") + 
+  facet_wrap(vars(continent))
+```
+
+```{r}
+gapminder1980 %>% 
+  group_by(continent) %>% 
+  summarize(Mean = mean(lifeexp), SD = sd(lifeexp), 
+            Median = median(lifeexp), iqr = IQR(lifeexp)) -> results
+```
+_________________
+
+
+```{r, echo = FALSE}
+library(data.table)
+data.table(results)
+```
+
+______________________
+
+```{r}
+lifeexp_mod <- lm(lifeexp ~ continent, data = gapminder1980)
+get_regression_table(lifeexp_mod) -> T2
+T2
+```
+
+1. Report the average life expectancy for Africans in 1980 using `lifeexp_mod`.
+
+<div id="answer">
+
++ The average life expectancy for Africans in 1980 was `r T2[1,2] %>% pull()` years.
+
+</div> 
+
+2. Report the average life expectancy for Europeans in 1980 using `lifeexp_mod`.
+
+<div id="answer">
+
++ The average life expectancy for Europeans in 1980 was `r T2[1,2] %>% pull() + T2[4,2] %>% pull()` years.
+
+Note: `moderndive` wrapper functions round answers.  This is not always a good thing.  It is best to leave the rounding until the very end! Consider the following inline R code.
+
++ The average life expectancy for Europeans in 1980 was `r coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4]` years.  Which if you want to round to three decimal places would be: `r round(coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4],3)` years.  Another way to get the desired answer is with the `predict()` function.  The average life expectancy for Europeans in 1980 was `r predict(lifeexp_mod, newdata = data.frame(continent = "Europe"))` years.
+
+ 
+
+</div> 
+
