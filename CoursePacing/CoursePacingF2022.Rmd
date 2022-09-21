@@ -180,7 +180,7 @@ __________________
 
 * Before class read chapter 6 (Multiple Regression) of [MD](https://moderndive.com/6-multiple-regression.html) --- pgs 161-191
 
-* Regression with a single [categorical variable]("../Handouts/RegWithCategoricalVariables.html") handout.
+* Regression with a single [categorical variable](../Handouts/RegWithCategoricalVariables.html) handout.
 
 * Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f22/assignments) --- Due NLT 5:00 pm Sep 19
 
