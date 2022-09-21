@@ -320,16 +320,16 @@ library(patchwork)
 p1 + p2
 ```
 
-```{r}
+```{r, fig.width = 12}
 library(plotly)
 p <- plot_ly(data = credit_paradox, z = ~debt, x = ~credit_limit, y = ~income) %>% 
   add_markers()
 p
 mod <- lm(debt ~ credit_limit + income, data = credit_paradox)
 summary(mod)$coef
-x <- seq(0, 14000, length = 70)
-y <- seq(0, 150, length = 70) 
-plane <- outer(x, y, function(a, b){summary(mod)$coef[1,1] + summary(mod)$coef[2, 1]*a + summary(mod)$coef[3,1]*b})
+x <- seq(min(credit_paradox$credit_limit), max(credit_paradox$credit_limit), length = 70)
+y <- seq(min(credit_paradox$income), max(credit_paradox$income), length = 70) 
+plane <- outer(x, y, function(a, b){coef(mod)[1] + coef(mod)[2]*a + coef(mod)[3]*b})
 # draw the plane
 p %>% 
   add_surface(x = ~x, y = ~y, z = ~plane)
