@@ -81,13 +81,26 @@ T2
 
 <div id="answer">
 
-+ The average life expectancy for Africans in 1980 was `r T2[1,2] %>% pull()` years.
+```{r}
+T2[1, 2] %>% pull()
+coef(lifeexp_mod)[1]
+```
+
++ The average life expectancy for Africans in 1980 was `r T2[1,2] %>% pull()` years.  Or, one could use `coef(lifeexp_mod)[1]` to return `r  coef(lifeexp_mod)[1]` years. 
 
 </div> 
 
 2. Report the average life expectancy for Europeans in 1980 using `lifeexp_mod`.
 
 <div id="answer">
+
+```{r}
+T2[1,2] %>% pull() + T2[4,2] %>% pull()
+coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4]
+round(coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4],3)
+predict(lifeexp_mod, newdata = data.frame(continent = "Europe"))
+```
+
 
 + The average life expectancy for Europeans in 1980 was `r T2[1,2] %>% pull() + T2[4,2] %>% pull()` years.
 

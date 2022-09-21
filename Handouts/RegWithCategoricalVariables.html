@@ -1640,7 +1640,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">One Categorical Variable - Hints</h1>
 <h4 class="author">In-class</h4>
-<h4 class="date">Last compiled: September 21, 2022 at 10:03:21 AM</h4>
+<h4 class="date">Last compiled: September 21, 2022 at 12:28:40 PM</h4>
 
 </div>
 
@@ -1858,14 +1858,30 @@ T2</code></pre>
 <li>Report the average life expectancy for Africans in 1980 using <code>lifeexp_mod</code>.</li>
 </ol>
 <div id="answer">
+<pre class="r"><code>T2[1, 2] %&gt;% pull()</code></pre>
+<pre><code>[1] 51.593</code></pre>
+<pre class="r"><code>coef(lifeexp_mod)[1]</code></pre>
+<pre><code>(Intercept) 
+   51.59287 </code></pre>
 <ul>
-<li>The average life expectancy for Africans in 1980 was 51.593 years.</li>
+<li>The average life expectancy for Africans in 1980 was 51.593 years. Or, one could use <code>coef(lifeexp_mod)[1]</code> to return 51.5928654 years.</li>
 </ul>
 </div>
 <ol start="2" style="list-style-type: decimal">
 <li>Report the average life expectancy for Europeans in 1980 using <code>lifeexp_mod</code>.</li>
 </ol>
 <div id="answer">
+<pre class="r"><code>T2[1,2] %&gt;% pull() + T2[4,2] %&gt;% pull()</code></pre>
+<pre><code>[1] 72.807</code></pre>
+<pre class="r"><code>coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4]</code></pre>
+<pre><code>(Intercept) 
+    72.8064 </code></pre>
+<pre class="r"><code>round(coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4],3)</code></pre>
+<pre><code>(Intercept) 
+     72.806 </code></pre>
+<pre class="r"><code>predict(lifeexp_mod, newdata = data.frame(continent = &quot;Europe&quot;))</code></pre>
+<pre><code>      1 
+72.8064 </code></pre>
 <ul>
 <li>The average life expectancy for Europeans in 1980 was 72.807 years.</li>
 </ul>
