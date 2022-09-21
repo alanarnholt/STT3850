@@ -29,34 +29,34 @@ library(data.table)
 
 ```{r}
 library(gapminder)
-gapminder1980 <- gapminder %>% 
+gapminder1982 <- gapminder %>% 
   filter(year == 1982) %>% 
   mutate(lifeexp = lifeExp, gdppercap = gdpPercap) %>% 
   select(country, lifeexp, continent, gdppercap) 
-head(gapminder1980)
+head(gapminder1982)
 ```
 
-```{r, label = "exp", fig.cap = "Worldwide life expectancies in 1980."}
-ggplot(data = gapminder1980, aes(x = lifeexp)) +
+```{r, label = "exp", fig.cap = "Worldwide life expectancies in 1982."}
+ggplot(data = gapminder1982, aes(x = lifeexp)) +
   geom_histogram(binwidth = 3, color = "black", fill = "darkgreen") +
   theme_bw() + 
-  labs(title = "Worldwide life expectancies in 1980",
+  labs(title = "Worldwide life expectancies in 1982",
        x = "Life expectancy in years",
        y = "Number of countries")
 ```
 
 ```{r}
-ggplot(data = gapminder1980, aes(x = lifeexp)) +
+ggplot(data = gapminder1982, aes(x = lifeexp)) +
   geom_histogram(binwidth = 3, color = "black", fill = "darkgreen") +
   theme_bw() + 
-  labs(title = "Worldwide life expectancies in 1980",
+  labs(title = "Worldwide life expectancies in 1982",
        x = "Life expectancy in years",
        y = "Number of countries") + 
   facet_wrap(vars(continent))
 ```
 
 ```{r}
-gapminder1980 %>% 
+gapminder1982 %>% 
   group_by(continent) %>% 
   summarize(Mean = mean(lifeexp), SD = sd(lifeexp), 
             Median = median(lifeexp), iqr = IQR(lifeexp)) -> results
@@ -72,12 +72,12 @@ data.table(results)
 ______________________
 
 ```{r}
-lifeexp_mod <- lm(lifeexp ~ continent, data = gapminder1980)
+lifeexp_mod <- lm(lifeexp ~ continent, data = gapminder1982)
 get_regression_table(lifeexp_mod) -> T2
 T2
 ```
 
-1. Report the average life expectancy for Africans in 1980 using `lifeexp_mod`.
+1. Report the average life expectancy for Africans in 1982 using `lifeexp_mod`.
 
 <div id="answer">
 
@@ -86,11 +86,11 @@ T2[1, 2] %>% pull()
 coef(lifeexp_mod)[1]
 ```
 
-+ The average life expectancy for Africans in 1980 was `r T2[1,2] %>% pull()` years.  Or, one could use `coef(lifeexp_mod)[1]` to return `r  coef(lifeexp_mod)[1]` years. 
++ The average life expectancy for Africans in 1982 was `r T2[1,2] %>% pull()` years.  Or, one could use `coef(lifeexp_mod)[1]` to return `r  coef(lifeexp_mod)[1]` years. 
 
 </div> 
 
-2. Report the average life expectancy for Europeans in 1980 using `lifeexp_mod`.
+2. Report the average life expectancy for Europeans in 1982 using `lifeexp_mod`.
 
 <div id="answer">
 
@@ -102,11 +102,11 @@ predict(lifeexp_mod, newdata = data.frame(continent = "Europe"))
 ```
 
 
-+ The average life expectancy for Europeans in 1980 was `r T2[1,2] %>% pull() + T2[4,2] %>% pull()` years.
++ The average life expectancy for Europeans in 1982 was `r T2[1,2] %>% pull() + T2[4,2] %>% pull()` years.
 
 Note: `moderndive` wrapper functions round answers.  This is not always a good thing.  It is best to leave the rounding until the very end! Consider the following inline R code.
 
-+ The average life expectancy for Europeans in 1980 was `r coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4]` years.  Which if you want to round to three decimal places would be: `r round(coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4],3)` years.  Another way to get the desired answer is with the `predict()` function.  The average life expectancy for Europeans in 1980 was `r predict(lifeexp_mod, newdata = data.frame(continent = "Europe"))` years.
++ The average life expectancy for Europeans in 1982 was `r coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4]` years.  Which if you want to round to three decimal places would be: `r round(coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4],3)` years.  Another way to get the desired answer is with the `predict()` function.  The average life expectancy for Europeans in 1982 was `r predict(lifeexp_mod, newdata = data.frame(continent = "Europe"))` years.
 
  
 
