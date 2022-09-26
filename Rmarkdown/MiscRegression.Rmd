@@ -84,6 +84,11 @@ p3 <- ggplot(data = AD, aes(x = newspaper, y = sales)) +
 grid.arrange(p1, p2, p3, ncol = 3)
 ```
 
+```{r, fig.width = 12, fig.height = 4, fig.cap = "Using `patchwork` with `ggplot`"}
+library(patchwork)
+p1 + p2 + p3
+```
+
 ## Using `ggvis`
 
 ```{r , label = "ggvis", message = FALSE}
