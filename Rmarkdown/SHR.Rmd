@@ -1,0 +1,49 @@
+---
+title: "Scottish Hill Races"
+author: "Alan T. Arnholt"
+date: '2022-09-26'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE)
+```
+
+```{r}
+shr <- read.csv("../Data/Scottish_Hill_Races.csv")
+head(shr)
+library(janitor)
+shr <- shr %>% 
+  clean_names()
+head(shr)
+```
+
+## Tidy Data
+
+```{r}
+library(tidyverse)
+shr_tidy <- shr %>% 
+pivot_longer(c("mens_time_min", "womens_time_min"), names_to = "gender",
+values_to = "time")
+head(shr_tidy)
+```
+
+```{r}
+ggplot(data = shr_tidy, aes(x = distance_km, y = time, color = gender)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_smooth(se = FALSE)
+```
+
+```{r}
+ggplot(data = shr_tidy, aes(x = distance_km, y = time, color = gender)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+```{r}
+mod1 <- lm(time ~ distance_km + distance_km:gender, data = shr_tidy)
+summary(mod1)
+```
+
