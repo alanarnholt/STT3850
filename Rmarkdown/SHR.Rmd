@@ -40,10 +40,17 @@ ggplot(data = shr_tidy, aes(x = distance_km, y = time, color = gender)) +
   geom_point() + 
   theme_bw() + 
   geom_smooth(method = "lm", se = FALSE)
+
+ggplot(data = shr_tidy, aes(x = climb_m, y = time, color = gender)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_smooth(method = "lm", se = FALSE)
 ```
 
 ```{r}
 mod1 <- lm(time ~ distance_km + distance_km:gender, data = shr_tidy)
 summary(mod1)
+mod2 <- lm(time ~ climb_m + climb_m:gender, data = shr_tidy)
+summary(mod2)
 ```
 
