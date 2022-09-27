@@ -1,0 +1,83 @@
+---
+title: "RailTrail Regression"
+author: "Alan T. Arnholt"
+date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output: 
+    bookdown::html_document2:
+      highlight: tango
+      theme: yeti
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+set.seed(123)
+library(knitr)
+library(tidyverse)
+knitr::opts_chunk$set(comment = NA,  fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = TRUE))
+```
+
+# `RailTrail` data from `mosaicData` package
+
+```{r}
+library(mosaicData)
+?RailTrail
+```
+
+## EDA 
+
+```{r}
+library(tidyverse)
+head(RailTrail)
+# Make data tidy
+RailTrail <- RailTrail %>% 
+  mutate(season = ifelse(spring == 1, "spring", ifelse(summer == 1, "summer", "fall"))) %>% 
+  select(-spring, -summer, -fall)
+tail(RailTrail)
+```
+
+
+```{r, fig.width = 10, fig.height = 10}
+library(car)
+scatterplotMatrix(~ volume + hightemp + lowtemp + avgtemp + cloudcover + precip, data = RailTrail)
+```
+
+```{r}
+ggplot(data = RailTrail, aes(x = season, y = volume)) + 
+  geom_boxplot() + 
+  theme_bw()
+```
+
+```{r}
+ggplot(data = RailTrail, aes(x = lowtemp, y = volume)) + 
+  geom_point() +
+  geom_smooth(se = FALSE, method = "lm") +
+  theme_bw() +
+  facet_wrap(vars(season))
+```
+
+# Model Building 
+
+```{r}
+library(MASS)
+null <- lm(volume ~ 1, data = RailTrail)
+full <- lm(volume ~ ., data = RailTrail)
+stepAIC(null, scope = list(lower = null, upper = full), direction = "forward", test = "F")
+stepAIC(full, scope = list(lower = null, upper = full), direction = "backward", test = "F")
+```
+
+```{r}
+mod <- lm(volume ~ hightemp + cloudcover + precip + weekday, data = RailTrail)
+summary(mod)
+```
+
+```{r}
+residualPlots(mod)
+```
+
+```{r}
+mod2 <- lm(volume ~ poly(hightemp, 2) + cloudcover + precip + weekday, data = RailTrail)
+summary(mod2)
+```
+
+```{r}
+residualPlots(mod2)
+```
