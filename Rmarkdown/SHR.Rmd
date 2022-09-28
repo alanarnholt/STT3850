@@ -1,8 +1,8 @@
 ---
 title: "Scottish Hill Races"
 author: "Alan T. Arnholt"
-date: '2022-09-26'
-output: html_document
+date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
@@ -18,7 +18,7 @@ shr <- shr %>%
 head(shr)
 ```
 
-## Tidy Data
+# Tidy Data
 
 ```{r}
 library(tidyverse)
@@ -50,7 +50,35 @@ ggplot(data = shr_tidy, aes(x = climb_m, y = time, color = gender)) +
 ```{r}
 mod1 <- lm(time ~ distance_km + distance_km:gender, data = shr_tidy)
 summary(mod1)
-mod2 <- lm(time ~ climb_m + climb_m:gender, data = shr_tidy)
+ggplot(data = shr_tidy, aes(x = distance_km, y = time, color = gender)) + 
+  geom_point() + 
+  geom_abline(intercept = coef(mod1)[1], slope = coef(mod1)[2], color = "red") + 
+  geom_abline(intercept = coef(mod1)[1], slope = coef(mod1)[2] + coef(mod1)[3], color = "blue") + 
+  scale_color_manual(values = c("red", "blue")) + 
+  theme_bw()
+
+
+mod2 <- lm(time ~ distance_km + gender, data = shr_tidy)
 summary(mod2)
+library(moderndive)
+ggplot(data = shr_tidy, aes(x = distance_km, y = time, color = gender)) + 
+  geom_point() +
+  geom_parallel_slopes(se = FALSE) + 
+  theme_bw()
+
+mod12 <- lm(time ~ climb_m + climb_m:gender, data = shr_tidy)
+summary(mod12)
+# you add the appropriate graph
+mod22 <- lm(time ~ climb_m + gender , data = shr_tidy)
+summary(mod22)
+# you add the appropriate graph
+```
+```{r}
+mod_fullA <- lm(time ~ distance_km + gender + distance_km:gender, data = shr_tidy)
+summary(mod_fullA)
+mod_simple <- lm(time ~ distance_km, data = shr_tidy)
+anova(mod_simple, mod_fullA)
+mod_int <- lm(time ~ distance_km + distance_km:gender, data = shr_tidy)
+anova(mod_int, mod_fullA)
 ```
 
