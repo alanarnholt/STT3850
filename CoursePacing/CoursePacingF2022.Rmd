@@ -251,7 +251,7 @@ ___________
 
 * Complete (**Related distributions**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f22/assignments) --- Due NLT 5:00 pm Oct 10
 
-* **Mid-Term Exam** Oct 13 
+* **Mid-Term Exam/Opportunity To Excel** --- Due no later than 2:00 pm Oct 13 
 
 ```{block, week8optional, type='rmdoptional'}
 #### Optional {-}
