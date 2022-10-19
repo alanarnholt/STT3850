@@ -1,0 +1,21 @@
+---
+title: "Bayes Problem"
+author: "In Class Problem"
+date: '2022-10-06'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+```
+
+A pap smear is a screening procedure to detect cervical cancer.  For women with this cancer, there are about 16% _false negatives_; that is
+
+$$P(T^- = \text{test negative} | C = \text{cancer}) = 0.16; P(T^+ = \text{test positive} | C = \text{cancer}) = 0.84.$$
+For women without cancer, there are about 19% _false positives_; that is
+
+$$P(T^+ =\text{test positive} | C' = \text{not cancer}) = 0.19.$$
+What is the probability a woman who tests positive actually has cancer ($P(C | T^+)$) if there are about 8 women in 100,000 who have this cancer in the United States? ($P(C) = 0.00008$) 
+
+$$P(C | T^+) = \frac{P(C \cap T^+)}{P(T^+)} =\frac{P(C) \times P(T^+| C)}{P(T^+)} = \frac{P(C) \times P(T^+| C)}{P(C) \times P(T^+| C) + P(C') \times P(T^+| C')} = \frac{0.00008 \times 0.84}{0.00008 \times 0.84 + 0.99992 \times 0.19} = `r (0.00008*0.84)/(0.00008*0.84 + 0.9992*0.19)`$$
+

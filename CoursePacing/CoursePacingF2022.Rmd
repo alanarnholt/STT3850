@@ -269,9 +269,9 @@ _______________
 
 * Before class read chapter 7 (Sampling) of [MD](https://moderndive.com/7-sampling.html) --- pgs 195-232
 
-* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/3CFtgHMh) by 5:00 pm Oct 19 
+* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/3CFtgHMh) by 5:00 pm Oct 19 --- not graded
 
-* Complete [PS-07](https://classroom.github.com/a/XmkkyxHY) by 5:00 pm Oct 20
+* Start [PS-07](https://classroom.github.com/a/XmkkyxHY) due by 5:00 pm Oct 27
 
 ```{block, week9optional, type='rmdoptional'}
 #### Optional {-}
@@ -300,6 +300,8 @@ ___________________________
 * Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f22/assignments) --- Due NLT 5:00 pm Oct 26
 
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
+
+* Complete [PS-07](https://classroom.github.com/a/XmkkyxHY) by 5:00 pm Oct 27
 
 
 ```{block, week10optional, type='rmdoptional'}
