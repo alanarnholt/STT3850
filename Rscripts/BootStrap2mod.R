@@ -261,6 +261,22 @@ TV %>%
 times.Basic <- subset(TV, select = Times, subset = Cable == "Basic", drop = TRUE)
 times.Ext <- subset(TV, select = Times, subset = Cable == "Extended", drop = TRUE)
 # OR
+times_Basic <- TV$Times[TV$Cable == "Basic"]
+times_Basic
+times_Ext <- TV$Times[TV$Cable == "Extended"]
+times_Ext
+# Or
+TV %>% 
+  filter(Cable == "Basic") %>% 
+  select(Times) %>% 
+  pull() -> T_Basic
+T_Basic
+TV %>% 
+  filter(Cable == "Extended") %>% 
+  select(Times) %>% 
+  pull() -> T_Ext
+T_Ext
+##################################################
 
 
 
