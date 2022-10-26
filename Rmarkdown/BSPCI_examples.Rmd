@@ -1,0 +1,125 @@
+---
+title: "Bootstrap Percentile Confidence Interval Problems"
+author: "Alan T. Arnholt"
+date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output: 
+    bookdown::html_document2:
+      highlight: tango
+      theme: yeti
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+set.seed(123)
+library(knitr)
+library(tidyverse)
+library(PASWR2)
+library(infer)
+knitr::opts_chunk$set(comment = NA,  fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE)
+```
+
+1. Construct a 94% bootstrap percentile confidence interval for the mean number of obstuctive contacts (`oc`) in the `EPIDURAL` data set from the `PASWR2` package.  Use a `for` loop and the `infer` pipeline to construct your confidence intervals.  
+
+```{r}
+library(PASWR2)
+library(tidyverse)
+library(infer)
+summary(EPIDURAL)
+EPIDURALC <- na.omit(EPIDURAL) # removing the NA value
+summary(EPIDURALC)
+```
+```{r}
+B <- 10^4
+bsm <- numeric(B)
+for(i in 1:B){
+  bss <- sample(EPIDURALC$oc, size = sum(!is.na(EPIDURALC$oc)), replace = TRUE)
+  bsm[i] <- mean(bss)
+}
+(quantile(bsm, probs = c(0.03, 0.97)) -> BSPCI)
+
+```
+
+```{r}
+# Infer pipeline
+EPIDURALC %>% 
+  specify(response = oc) %>% 
+  generate(reps = B, type = "bootstrap") %>% 
+  calculate(stat = "mean") -> bsmip
+head(bsmip)
+(get_confidence_interval(bsmip, level = 0.94) -> CI1)
+# The following computes the same thing
+(quantile(bsmip$stat, probs = c(0.03, 0.97)) -> CI2)
+```
+**The 94% bootsrap percentile confidence interval for the mean number of obstructive
+ contacts is: $\text{CI}_{0.94}(\mu_{oc}) = [`r CI1$lower_ci`, `r CI1$upper_ci`]$.**
+ 
+ ___________________
+
+
+2. Create a histogram of the bootstrap distribution of the mean number of obstructive contacts.
+
+```{r}
+# Using base R with `bsm`
+hist(bsm, xlab = substitute(paste(bar(X),"*")), main = "", col = "gray")
+# Using ggplot2 with `bsm`
+ggplot(data = data.frame(bsm = bsm), aes(x = bsm)) + 
+  geom_histogram(binwidth = 0.1, fill = "gray", color = "black") + 
+  theme_bw() + 
+  labs(x = substitute(paste(bar(X),"*")))
+```
+
+```{r}
+# Using wrapper functions with bsmip (an infer object)
+visualize(bsmip)
+visualize(bsmip, fill = "purple") + 
+  labs(x = substitute(paste(bar(X),"*")), 
+       title = "Simulation-Based Bootstrap Distribution \n of the Mean Number of Obstructive Contacts") + 
+  shade_confidence_interval(CI1, color = "red", fill = "lightblue") + 
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5)) 
+```
+
+
+3. Create a 98% bootstrap percentile confidence interval for the mean `fat` of males in the `BODYFAT` data set from the `PASWR2` package.
+
+```{r}
+#Creating a vector with the Male fat values
+BODYFAT %>% 
+  filter(sex == "M") %>% 
+  select(fat) %>% 
+  pull() -> fat
+fat
+# Another approach using base R
+subset(BODYFAT, subset = sex == "M", select = fat, drop = TRUE) -> fat2
+fat2
+# One more approach
+BODYFAT$fat[BODYFAT$sex=="M"] -> fat3
+fat3
+```
+
+```{r}
+B <- 10^4
+bsmf <- numeric(B)
+for(i in 1:B){
+  bss <- sample(fat, size = sum(!is.na(fat)), replace = TRUE)
+  bsmf[i] <- mean(bss)
+}
+(quantile(bsmf, probs = c(0.01, 0.99)) -> BSPCIF)
+```
+
+```{r}
+# Using infer
+BODYFAT %>% 
+  filter(sex == "M") %>% 
+  specify(response = fat) %>% 
+  generate(reps = B, type = "bootstrap") %>% 
+  calculate(stat = "mean") -> IFM
+(get_confidence_interval(IFM, level = 0.98) -> CIF1)
+```
+
+## Visualize the bootstrap distribution 
+
+```{r}
+visualize(IFM) +
+  shade_confidence_interval(endpoints = CIF1)
+```
+
