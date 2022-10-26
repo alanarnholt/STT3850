@@ -399,8 +399,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -408,16 +408,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -1053,6 +1046,12 @@ Examples</a>
 class</a>
 </p>
 </li>
+<li>
+<p>
+<a href="../Rmarkdown/BSPCI_examples.html">Bootstrap Percentile CI
+examples</a>
+</p>
+</li>
 </ul>
 </div>
 <hr />
@@ -1206,7 +1205,7 @@ completed and I am notified NLT 5:00 pm Dec 7, 2022.</p></li>
 <h2>Final Exam — Dec 14: 11:00am - 1:30 pm</h2>
 <hr />
 <center>
-Last Updated on: Oct 19, 2022 at 04:28:32 PM
+Last Updated on: Oct 26, 2022 at 12:52:54 PM
 </center>
 <hr />
 </div>

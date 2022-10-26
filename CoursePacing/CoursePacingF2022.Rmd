@@ -310,6 +310,8 @@ ___________________________
 * [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
 
 * [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+
+* [Bootstrap Percentile CI examples](../Rmarkdown/BSPCI_examples.html)
 ```
 
 _______________________
