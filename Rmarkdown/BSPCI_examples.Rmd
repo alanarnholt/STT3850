@@ -16,7 +16,7 @@ knitr::opts_chunk$set(comment = NA,  fig.align = 'center', fig.height = 5, fig.w
 
 # Bootstrap Distributions
 
-1. Construct a 94% bootstrap percentile confidence interval for the mean number of obstuctive contacts (`oc`) in the `EPIDURAL` data set from the `PASWR2` package.  Use a `for` loop and the `infer` pipeline to construct your confidence intervals.  
+1. Construct a 94% bootstrap percentile confidence interval for the mean number of obstructive contacts (`oc`) in the `EPIDURAL` data set from the `PASWR2` package.  Use a `for` loop and the `infer` pipeline to construct your confidence intervals.  
 
 ```{r}
 library(PASWR2)
@@ -48,7 +48,7 @@ head(bsmip)
 # The following computes the same thing
 (quantile(bsmip$stat, probs = c(0.03, 0.97)) -> CI2)
 ```
-**The 94% bootsrap percentile confidence interval for the mean number of obstructive
+**The 94% bootstrap percentile confidence interval for the mean number of obstructive
  contacts is: $\text{CI}_{0.94}(\mu_{oc}) = [`r CI1$lower_ci`, `r CI1$upper_ci`]$.**
  
  ___________________
@@ -174,7 +174,7 @@ ______________
 
 # Bootstrap Percentile Confidence Interval for the Proportion
 
-5.  Construct a 95% bootsrap percentile confidence interval for the true proportion of women who have no complications while receiving an epidural. 
+5.  Construct a 95% bootstrap percentile confidence interval for the true proportion of women who have no complications while receiving an epidural. 
 
 ```{r}
 results <- EPIDURAL$complications=="None"
