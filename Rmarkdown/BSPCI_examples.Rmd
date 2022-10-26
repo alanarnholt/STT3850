@@ -2,10 +2,7 @@
 title: "Bootstrap Percentile Confidence Interval Problems"
 author: "Alan T. Arnholt"
 date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
-output: 
-    bookdown::html_document2:
-      highlight: tango
-      theme: yeti
+output: bookdown::html_document2
 ---
 
 ```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
@@ -215,7 +212,35 @@ binom.confint(x = 76, n = 85, conf.level = 0.95, methods = "all")
 ```
 ____________
 
-In Class Problem:
+In Class Problem:  Use the data `BODYFAT` from `PASWR2` to construct a 95% percentile bootstrap confidence interval for $\mu_{female\_fat} - \mu_{male\_fat}$.
+
+
+
+```{r, echo = FALSE}
+BODYFAT %>% 
+  specify(fat ~ sex) %>% 
+  generate(reps = 10^4, type = "bootstrap") %>% 
+  calculate(stat = "diff in means", order = c("F", "M")) -> SBS
+quantile(SBS$stat, probs = c(0.025, 0.975), na.rm= TRUE) -> CI1
+####
+BODYFAT %>% 
+  filter(sex == "F") %>% 
+  select(fat) %>% 
+  pull() -> ffat
+BODYFAT %>% 
+  filter(sex == "M") %>% 
+  select(fat) %>% 
+  pull() -> mfat
+B <- 10^4
+diffmeans <- numeric(B)
+for(i in 1:B){
+  bssf <- sample(ffat, size = length(ffat), replace = TRUE)
+  bssm <- sample(mfat, size = length(mfat), replace = TRUE)
+  diffmeans[i] <- mean(bssf) - mean(bssm)
+}
+quantile(diffmeans, probs = c(0.025, 0.975)) -> CI2
+```
+
 
 
 
