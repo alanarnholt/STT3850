@@ -1,7 +1,7 @@
 ---
 title: "`infer` Examples"
 author: "Notes"
-date: '`r Sys.Date()`'
+date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
 output: bookdown::html_document2
 ---
 
@@ -55,7 +55,10 @@ p4 <- ggplot(data = mtcars, aes(sample = mpg, color = am)) +
   geom_qq() + 
   theme_bw() + 
   scale_color_manual(values = c("blue", "red"))
-gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 2)
+gridExtra::grid.arrange(p1, p3, p2, p4, ncol = 2)
+# or
+library(patchwork)
+p1 + p3 + p2 + p4 + plot_layout(ncol = 2)
 ```
 
 
@@ -93,7 +96,7 @@ ggplot(data =TS, aes(x = stat, y = ..density..)) +
   theme_bw() + 
   geom_vline(xintercept = obs_stat, linetype = "dashed") 
 ####
-get_pvalue(TS, obs_stat, direction = "greater")
+get_p_value(TS, obs_stat, direction = "greater")
 ####
 pvalue <- (sum(TS$stat >= obs_stat) + 1)/(SIMS + 1)
 pvalue
@@ -127,7 +130,7 @@ obs_MDIFF <- mtcars %>%
   pull()
 obs_stat <- obs_MDIFF[1]
 obs_stat
-get_pvalue(DM, obs_stat = obs_stat, direction = "greater")
+get_p_value(DM, obs_stat = obs_stat, direction = "greater")
 pvalue <- mean(DM$stat >= obs_stat)
 pvalue
 # Better yet
@@ -153,7 +156,7 @@ pvalue
 
 ## Confidence Intervals
 
-Consturct a 92% CI for the true mean quarter mile time.
+Construct a 92% CI for the true mean quarter mile time.
 
 ```{r}
 BM <- specify(mtcars, response = qsec) %>% 
@@ -168,18 +171,18 @@ PCI <- BM %>%
   summarize(l = quantile(stat, 0.04),
             u = quantile(stat, 0.96)) 
 PCI
+### OR
+(quantile(BM$stat, probs = c(0.04, 0.96)) -> PCI1)
 ###
 # Visualize
 BM %>% visualize() + 
   shade_confidence_interval(endpoints = PCI, color = "red", fill = "pink") + 
   theme_bw()
-
 ####
 ggplot(data = BM, aes(x = stat, fill = stat > PCI$l & stat < PCI$u) ) +
   geom_histogram(binwidth = 0.15) + 
   scale_fill_manual(values = c("blue", "green")) +
   theme_bw()
-
 ```
 
 ```{r}
@@ -316,7 +319,9 @@ t.test(mtcars$qsec, mu = 17, alternative = "two.sided")
 
 ## Example 5.4---page 120 of MSWR
 
-Construct a 95% confidence interval for $\mu_{fp}- \mu_{mp}$ using the `infer` pipeline and 1000 bootstrap samples.
+Do men take more physical risks in the presence of an attractive woman?  Two psychologists in Australia conducted an experiment to explore this question (Ronay and von Hippel (2009)).  Male skateboarders between the ages of 18 and 35 years were randomly assigned to perform tricks in the presence of an attractive 18-year-old female experimenter or a male experimenter.  The two experimenters, both of whom were blind to the hypotheses, video taped the session.  At the end of the experiment, the researchers collected saliva for the participants and measured testosterone levels.  
+
+Construct a 95% confidence interval for $\mu_{fp}- \mu_{mp}$ (mean testosterone with attractive female present minus the mean testosterone with a male present) using the `infer` pipeline and 1000 bootstrap samples.
 
 ```{r}
 library(resampledata)
@@ -330,8 +335,13 @@ PCI <- MT %>%
   summarize(l = quantile(stat, 0.025),
             u = quantile(stat, 0.975)) 
 PCI
+### Or
+(quantile(MT$stat, probs = c(0.025, 0.975)) -> PCIa)
+### Or
+(get_confidence_interval(MT, level = 0.95) -> PCIb)
 ###
-MT %>% visualize() + shade_confidence_interval(endpoints = PCI, color = "red", fill = "pink") + 
+MT %>% visualize() + 
+  shade_confidence_interval(endpoints = PCI, color = "red", fill = "pink") + 
   theme_bw()
 ```
 
@@ -365,6 +375,7 @@ obs_MDIFF <- Skateboard %>%
   summarize(MD = mean(Testosterone)) %>% 
   mutate(MeanDiff = -diff(MD)) %>% 
   pull()
+obs_MDIFF <- obs_MDIFF[1]
 obs_MDIFF
 
 MD <- Skateboard %>% 
