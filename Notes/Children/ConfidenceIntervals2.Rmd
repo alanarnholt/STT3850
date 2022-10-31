@@ -47,7 +47,7 @@ for (i in 1:sims){
  x <- rnorm(n, mu, sigma)
  L <- mean(x) - qnorm(0.975)*sigma/sqrt(n)
  U <- mean(x) - qnorm(0.025)*sigma/sqrt(n)
- if(L < mu && mu < U){counter <- counter + 1}
+ if(L < mu & mu < U){counter <- counter + 1}
  if(i <= 100){
  segments(L, i, U, i, col = "blue")
  }

@@ -372,7 +372,7 @@ for (i in 1:sims){
  x &lt;- rnorm(n, mu, sigma)
  L &lt;- mean(x) - qnorm(0.975)*sigma/sqrt(n)
  U &lt;- mean(x) - qnorm(0.025)*sigma/sqrt(n)
- if(L &lt; mu &amp;&amp; mu &lt; U){counter &lt;- counter + 1}
+ if(L &lt; mu &amp; mu &lt; U){counter &lt;- counter + 1}
  if(i &lt;= 100){
  segments(L, i, U, i, col = &quot;blue&quot;)
  }
