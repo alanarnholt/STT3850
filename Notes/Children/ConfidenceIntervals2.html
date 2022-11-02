@@ -567,18 +567,18 @@ attr(,&quot;conf.level&quot;)
 <pre class="r"><code># Or
 JG &lt;- NCBirths2004 %&gt;% 
   filter(Gender == &quot;Female&quot;) 
-t.test(JG$Weight, conf = 0.99)</code></pre>
-<pre><code>
-    One Sample t-test
-
-data:  JG$Weight
-t = 159.71, df = 520, p-value &lt; 2.2e-16
-alternative hypothesis: true mean is not equal to 0
-99 percent confidence interval:
- 3343.305 3453.328
-sample estimates:
-mean of x 
- 3398.317 </code></pre>
+t.test(JG$Weight, conf = 0.99)$conf</code></pre>
+<pre><code>[1] 3343.305 3453.328
+attr(,&quot;conf.level&quot;)
+[1] 0.99</code></pre>
+<pre class="r"><code># Or
+NCBirths2004 %&gt;% 
+  filter(Gender == &quot;Female&quot;) %&gt;% 
+  select(Weight) -&gt; fw
+t.test(fw, conf = 0.99)$conf</code></pre>
+<pre><code>[1] 3343.305 3453.328
+attr(,&quot;conf.level&quot;)
+[1] 0.99</code></pre>
 <ul>
 <li><strong>Review:</strong> Construct 95% bootstrap percentile and 95% bootstrap standard error confidence intervals for the mean weight of baby girls born in North Carolina in 2004.</li>
 </ul>

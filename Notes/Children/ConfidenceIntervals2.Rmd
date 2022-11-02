@@ -268,7 +268,12 @@ t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = 0.99)$conf
 # Or
 JG <- NCBirths2004 %>% 
   filter(Gender == "Female") 
-t.test(JG$Weight, conf = 0.99)
+t.test(JG$Weight, conf = 0.99)$conf
+# Or
+NCBirths2004 %>% 
+  filter(Gender == "Female") %>% 
+  select(Weight) -> fw
+t.test(fw, conf = 0.99)$conf
 ```
 
 * **Review:** Construct 95% bootstrap percentile and 95% bootstrap standard error confidence intervals for the mean weight of baby girls born in North Carolina in 2004.
