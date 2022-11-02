@@ -61,3 +61,17 @@ QS
 CIBT <- c((mean(twoyearold_bf) - mean(mature_bf)) - QS[2]*sqrt(var(twoyearold_bf)/n_tyo + var(mature_bf)/n_mat),
           (mean(twoyearold_bf) - mean(mature_bf)) - QS[1]*sqrt(var(twoyearold_bf)/n_tyo + var(mature_bf)/n_mat)  )
 CIBT
+
+# Construct a 95% bootstrap percentile CI for mu_tyo/mu_mat
+
+set.seed(13)
+B <- 10^4
+rm <- numeric(B)
+for(i in 1:B){
+  bsstyo <- sample(twoyearold_bf, size = sum(!is.na(twoyearold_bf)), replace = TRUE)
+  bssmat <- sample(mature_bf, size = sum(!is.na(mature_bf)), replace = TRUE)
+  rm[i] <- mean(bsstyo)/mean(bssmat)
+}
+
+CI <- quantile(rm, probs = c(0.025, 0.975))
+CI
