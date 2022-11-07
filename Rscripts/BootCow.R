@@ -3,7 +3,7 @@
 
 # First Examine butterfat versus age
 library(PASWR2)
-library(tidyfverse)
+library(tidyverse)
 
 ggplot(data = COWS, aes(x = butterfat)) +
   geom_histogram(fill = "lightblue", color = "black", binwidth = 0.25) +
@@ -25,53 +25,65 @@ ggplot(data = COWS, aes(sample=butterfat)) +
 
 t.test(butterfat ~ age, data = COWS, conf = 0.95)
 
-
+library(infer)
+COWS %>%
+  specify(butterfat ~ age) %>%
+  generate(reps = 10^4, type = "bootstrap") %>%
+  calculate(stat = "diff in means", order = c("2 years old", "Mature")) -> BSD
+get_confidence_interval(BSD, level = .90)
+visualize(BSD)
 # 95% Bootstrap percentile CI for mu_2yo - mu_mature
 set.seed(13)
-COWS %>% filter(age == "2 years old") %>% select(butterfat) %>% pull() -> twoyearold_bf
-COWS %>% filter(age == "Mature") %>% select(butterfat) %>% pull() -> mature_bf
+COWS %>% filter(age == "2 years old") %>% select(butterfat) %>% pull() -> bf2yo
+COWS %>% filter(age == "Mature") %>% select(butterfat) %>% pull() -> bfmat
 B <- 10^4
 md <- numeric(B)
 for(i in 1:B){
-  bsstyo <- sample(twoyearold_bf, size = sum(!is.na(twoyearold_bf)), replace = TRUE)
-  bssmat <- sample(mature_bf, size = sum(!is.na(mature_bf)), replace = TRUE)
+  bsstyo <- sample(bf2yo, size = sum(!is.na(bf2yo)), replace = TRUE)
+  bssmat <- sample(bfmat, size = sum(!is.na(bfmat)), replace = TRUE)
   md[i] <- mean(bsstyo) - mean(bssmat)
 }
 
 CI <- quantile(md, probs = c(0.025, 0.975))
 CI
 
-# 95% Bootstrap T CI for mu_2yo - mu_mature
+# 98% Bootstrap T CI for mu_2yo - mu_mature
+
 set.seed(13)
-COWS %>% filter(age == "2 years old") %>% select(butterfat) %>% pull() -> twoyearold_bf
-n_tyo <- sum(!is.na(twoyearold_bf))
-n_mat <- sum(!is.na(mature_bf))
-c(n_tyo, n_mat)
-COWS %>% filter(age == "Mature") %>% select(butterfat) %>% pull() -> mature_bf
+COWS %>% filter(age == "2 years old") %>% select(butterfat) %>% pull() -> bf2yo
+COWS %>% filter(age == "Mature") %>% select(butterfat) %>% pull() -> bfmat
+n_2yo <- sum(!is.na(bf2yo))
+n_mat <- sum(!is.na(bfmat))
+c(n_2yo, n_mat)
 B <- 10^4
 Q <- numeric(B)
 for(i in 1:B){
-  bsstyo <- sample(twoyearold_bf, size = sum(!is.na(twoyearold_bf)), replace = TRUE)
-  bssmat <- sample(mature_bf, size = sum(!is.na(mature_bf)), replace = TRUE)
-  Q[i] <- ( (mean(bsstyo) - mean(bssmat)) - (mean(twoyearold_bf) - mean(mature_bf)) ) / sqrt(var(bsstyo)/n_tyo + var(bssmat)/n_mat) 
+  bsstyo <- sample(bf2yo, size = sum(!is.na(bf2yo)), replace = TRUE)
+  bssmat <- sample(bfmat, size = sum(!is.na(bfmat)), replace = TRUE)
+  Q[i] <- ( (mean(bsstyo) - mean(bssmat)) - (mean(bf2yo) - mean(bfmat)) ) / sqrt(var(bsstyo)/n_2yo + var(bssmat)/n_mat) 
 }
 
-QS <- quantile(Q, probs = c(0.025, 0.975))
+QS <- quantile(Q, probs = c(0.05, 0.95))
 QS
-CIBT <- c((mean(twoyearold_bf) - mean(mature_bf)) - QS[2]*sqrt(var(twoyearold_bf)/n_tyo + var(mature_bf)/n_mat),
-          (mean(twoyearold_bf) - mean(mature_bf)) - QS[1]*sqrt(var(twoyearold_bf)/n_tyo + var(mature_bf)/n_mat)  )
+CIBT <- c((mean(bf2yo) - mean(bfmat)) - QS[2]*sqrt(var(bf2yo)/n_2yo + var(bfmat)/n_mat),
+          (mean(bf2yo) - mean(bfmat)) - QS[1]*sqrt(var(bf2yo)/n_2yo + var(bfmat)/n_mat)  )
 CIBT
 
-# Construct a 95% bootstrap percentile CI for mu_tyo/mu_mat
+# Construct a 95% bootstrap percentile CI for mu_2yo/mu_mat
 
 set.seed(13)
 B <- 10^4
 rm <- numeric(B)
 for(i in 1:B){
-  bsstyo <- sample(twoyearold_bf, size = sum(!is.na(twoyearold_bf)), replace = TRUE)
-  bssmat <- sample(mature_bf, size = sum(!is.na(mature_bf)), replace = TRUE)
+  bsstyo <- sample(bf2yo, size = sum(!is.na(bf2yo)), replace = TRUE)
+  bssmat <- sample(bfmat, size = sum(!is.na(bfmat)), replace = TRUE)
   rm[i] <- mean(bsstyo)/mean(bssmat)
 }
 
 CI <- quantile(rm, probs = c(0.025, 0.975))
 CI
+
+
+##############################################
+
+
