@@ -71,17 +71,37 @@ CIBT
 
 # Construct a 95% bootstrap percentile CI for mu_2yo/mu_mat
 
-set.seed(13)
 B <- 10^4
 rm <- numeric(B)
 for(i in 1:B){
-  bsstyo <- sample(bf2yo, size = sum(!is.na(bf2yo)), replace = TRUE)
-  bssmat <- sample(bfmat, size = sum(!is.na(bfmat)), replace = TRUE)
-  rm[i] <- mean(bsstyo)/mean(bssmat)
+  bss1 <- sample(bf2yo, 50, replace = TRUE)
+  bss2 <- sample(bfmat, 50, replace = TRUE)
+  rm[i] <- mean(bss1)/mean(bss2)
 }
+quantile(rm, probs = c(0.025, 0.975))
 
-CI <- quantile(rm, probs = c(0.025, 0.975))
-CI
+
+
+
+
+
+
+B <- 10^4
+dm <- numeric(B)
+for(i in 1:B){
+  bss1 <- sample(bf2yo, 50, replace = TRUE)
+  bss2 <- sample(bfmat, 50, replace = TRUE)
+  dm[i] <- mean(bss1, trim = 0.2) - mean(bss2, trim = 0.2)
+}
+quantile(dm, probs = c(0.025, 0.975))
+
+
+
+
+
+
+
+
 
 
 ##############################################
