@@ -105,5 +105,112 @@ quantile(dm, probs = c(0.025, 0.975))
 
 
 ##############################################
+library(PASWR2)
+library(tidyverse)
+
+gender <- c(rep("Female", 10), rep("Male", 10)) 
+group <- rep(rep(c("Treatment", "Control"), each = 5), 2)
+worms <- c(1, 2, 2, 10, 7, 16, 10, 10, 7, 17, 3, 5, 9, 10, 6, 31, 26, 28, 13, 47)
+schis <- data.frame(gender, group, worms)
+head(schis, n = 3)
+ND <- schis %>% 
+  filter(gender == "Female")
+ND
+ND %>%
+  group_by(group) %>%
+  summarize(Mean = mean(worms), SD = sd(worms), 
+            Median = median(worms), iqr = IQR(worms)) -> ans2
+ans2
+
+###### Theoretical Permutation Distribution
+
+n <- 5
+m <- 5
+ncb <- choose(m + n, m)
+ncb
+#########
+# CONSIDER:
+combn(3, 2)
+choose(3, 2)
+combn(4, 2)
+choose(4, 2)
+
+CB <- t(combn(n + m, m))
+head(CB)
+
+##########
+
+nn <- dim(CB)[1]
+nn
+
+###########
+
+ND$worms
 
 
+###########
+
+diffmeans <- numeric(nn)
+for(i in 1:nn){
+  diffmeans[i] <- mean(ND$worms[CB[i, ]]) - mean(ND$worms[-CB[i,]])
+}
+sort(diffmeans)
+
+###########
+# Write a Function
+
+rdtf <- function(x, y){
+  x <- x[!is.na(x)]
+  y <- y[!is.na(y)]
+  nx <- length(x)
+  ny <- length(y)
+  cv <- c(x, y)
+  nn <- choose(nx + ny, nx)
+  CB <- t(combn(nx + ny, nx))
+  DM <- numeric(nn)
+  for(i in 1:nn){
+    DM[i] <- mean(cv[CB[i, ]]) - mean(cv[-CB[i, ]])
+  }
+  sort(DM)
+}
+
+
+rdtf(c(16, 10, 10, 7, 17), c(1, 2, 2, 10, 7))
+
+
+##############
+library(infer)
+data(gss)
+gss %>% 
+  group_by(college) %>% 
+  summarize(Mean = mean(age), n = n()) -> ans3
+ans3
+obs_diff <- diff(ans3$Mean) # degree - no degree
+obs_diff
+tapply(gss$age, gss$college, mean)
+diff(tapply(gss$age, gss$college, mean))
+obs_diff1 <- diff(tapply(gss$age, gss$college, mean))
+obs_diff1
+
+B <- 10^4
+gss %>% 
+  specify(age~college) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = B, type = "permute") %>% 
+  calculate(stat = "diff in means", order = c("degree", "no degree")) -> pd
+pd
+
+get_p_value(pd, obs_stat = obs_diff1, direction = "two-sided")
+
+visualize(pd) +
+  shade_p_value(obs_stat = obs_diff1, direction = "two-sided", color = "blue", fill = "lightblue")
+
+###################
+## Testing with a for loop
+
+dm <- numeric(B)
+for(i in 1:B){
+  dm[i] <- diff(tapply(gss$age, sample(gss$college), mean))
+}
+hist(dm)
+abline(v = c(-obs_diff, obs_diff), col = "blue")
