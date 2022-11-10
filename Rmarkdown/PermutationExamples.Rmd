@@ -14,6 +14,7 @@ opportunity <- data.frame(decision = c(rep("buyDVD", 97),
                                rep("nobuyDVD", 53)),     
                    group = c(rep("control", 56), rep("treatment", 41),
                            rep("control", 19), rep("treatment", 34)))
+save(opportunity, file = "../Data/opportunity.RData")
 ```
 
 
