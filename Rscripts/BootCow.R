@@ -230,8 +230,16 @@ dim(sleep)
 sleep <- na.omit(sleep)
 
 ggplot(data = sleep, aes(x = SleepHrsNight)) +
-  geom_density(bw = .5) + 
+  geom_density(bw = .4) + 
   facet_grid(rows = vars(SleepTrouble))
+
+sleep %>% 
+  group_by(SleepTrouble) %>% 
+  summarize(Median = median(SleepHrsNight), 
+            Mean = mean(SleepHrsNight), 
+            Skew = e1071::skewness(SleepHrsNight),
+            iqr = IQR(SleepHrsNight), 
+            n = n())
 
 
 sleep %>% 
@@ -271,7 +279,7 @@ B <- 10^4
 TS <- numeric(B)
 for(i in 1:B){
   bss <- sample(shnts, size = length(shnts), replace = TRUE)
-  TS[i] <- (mean(bss) - mean(shnts))/(sd(bss)/sqrt(length(shnts)))
+  TS[i] <- (mean(bss) - mean(shnts))/(sd(bss)/sqrt(length(bss)))
 }
 quantile(TS, probs = c(0.05, 0.95)) -> QS
 QS
