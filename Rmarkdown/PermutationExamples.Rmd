@@ -1,0 +1,221 @@
+---
+title: "Permutation Examples"
+author: "Notes"
+date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output: bookdown::html_document2
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+library(knitr)
+library(tidyverse)
+knitr::opts_chunk$set(comment = NA, fig.show = 'as.is', fig.align = "center", fig.height = 4.5, fig.width = 5.5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = TRUE))
+# Creating dataset opportunity
+opportunity <- data.frame(decision = c(rep("buyDVD", 97), 
+                               rep("nobuyDVD", 53)),     
+                   group = c(rep("control", 56), rep("treatment", 41),
+                           rep("control", 19), rep("treatment", 34)))
+```
+
+
+# Opportunity Cost
+
+As you saw in the DataCamp video, we are interested in whether the treatment and control groups were equally likely to buy a DVD after reading the experimental statments.  
+
+```{r}
+library(tidyverse)
+library(infer)
+head(opportunity)
+opportunity %>% 
+  count(decision, group)
+# or
+table(opportunity$decision, opportunity$group)
+# or
+xtabs(~decision + group, data = opportunity)
+```
+
+* For each experimental group, find the proportion who bought a DVD.
+
+```{r}
+opportunity %>% 
+  group_by(group) %>% 
+  summarize(buy_prop = mean(decision == "buyDVD")) -> propDVD
+propDVD
+# or
+prop.table(xtabs(~decision + group, data = opportunity), 2)
+prop.table(xtabs(~decision + group, data = opportunity), 2)[1, ]
+```
+
+## Plotting opportunity cost
+
+Again, interest is in whether the treatment and control groups were equally likely to buy a DVD after reading the experimental statements. Here, you’ll create a barplot to visualize the difference in proportions between the treatment and control groups.
+
+* Using the `opportunity` dataset, plot `group` `fill`ed by `decision`.
+
+* Call `geom_bar()` to add a bar plot layer, setting the position to `"fill"` to compare the relative frequencies.  Note that fill should be devined by the `decision` for each group.
+
+```{r}
+ggplot(opportunity, aes(x = group, fill = decision)) + 
+  geom_bar(position = "fill") + 
+  theme_bw()
+```
+
+## Randomizing opportunity cost
+
+As in the previous chapter, you will permute the data to generate a distribution of differences as if the null hypothesis were true.
+
+In the study, the number of individuals in each of the control and treatment groups is fixed. Additionally, when you assume that the null hypothesis is true—that is, the experiment had no effect on the outcome of buying a DVD—it is reasonable to infer that the number of individuals who would buy a DVD is also fixed. That is, 97 people were going to buy a DVD regardless of which treatment group they were in.
+
+Using the new data and the methods from the previous chapter, create a randomization distribution of the difference in proportions calculated on permuted data.
+
+* Using the `opportunity` dataset, calculate the observed difference in purchase rate.
+
+    + Group by `group`.
+
+    + Summarize to calculate the proportion deciding to buy a DVD. That is, get the `mean()` of cases of decision equalling `"buyDVD"`.
+
+    + Summarize again to calculate the `diff()`erence of `prop_buy` between groups.
+    
+```{r}
+# Calculate the observed difference in purchase rate
+diff_obs <- opportunity %>%
+  # Group by group
+  group_by(group) %>%
+  # Calculate proportion deciding to buy a DVD
+  summarize(prop_buy = mean(decision == "buyDVD")) %>%
+  # Calculate difference between groups
+  summarize(stat = diff(prop_buy)) %>% 
+  pull()
+diff_obs
+# or
+diff_obs1 <- diff(prop.table(xtabs(~decision + group, data = opportunity), 2)[1, ])
+diff_obs1
+```
+    
+* Create a data frame of permuted differences in purchase rates.
+
+    +   Specify the model `decision` vs. `group`, with the success value `"buyDVD"`.
+
+    + Hypothesise `"independence"`.
+
+    + Generate `10,000` reps of type `"permute"`.
+
+    + Calculate the summary statistic `"diff in props"`.  
+    
+```{r}
+set.seed(14)
+# Create data frame of permuted differences in purchase rates
+opp_perm <- opportunity %>%
+  # Specify decision vs. group, where success is buying a DVD
+  specify(decision ~ group, success = "buyDVD") %>%
+  # Set the null hypothesis to independence
+  hypothesize(null = "independence") %>%
+  # Generate 10,000 reps of type permute
+  generate(reps = 10000, type = "permute") %>%
+  # Calculate the summary stat difference in proportions
+  calculate(stat = "diff in props", order = c("treatment", "control"))
+    
+# Review the result
+opp_perm
+```
+    
+* Draw a histogram of permuted differences.
+
+    + Using the permutation dataset, `opp_perm`, plot `stat`.
+
+    + Add a histogram layer with `geom_histogram()`. The `binwidth` is set to `0.005`.
+
+    + Add a vertical line with `geom_vline()`. The xintercept is at `diff_obs`. 
+    
+```{r}
+# Using the permuation data, plot stat
+ggplot(opp_perm, aes(x = stat)) + 
+  # Add a histogram layer with binwidth 0.005
+  geom_histogram(binwidth = 0.005) +
+  # Add a vline layer with intercept diff_obs
+  geom_vline(aes(xintercept = diff_obs), color = "red") + 
+  theme_bw() + 
+  labs(x = expression(hat(p)[treatment] - hat(p)[control]), y = "", title = "Simulation-Based Null Distribution")
+```
+    
+## Summarizing opportunity cost
+
+Now that you’ve created the randomization distribution, you’ll use it to assess whether the observed difference in proportions is consistent with the null difference. You will measure this consistency (or lack thereof) with a p-value, or the proportion of permuted differences less than or equal to the observed difference.
+
+The permuted dataset and the original observed statistic are available in your workspace as `opp_perm` and `diff_obs` respectively.
+
+The p-value (which represents how often a null value is more extreme) is calculated by counting the number of null values which are less than the original difference.
+
+* First `visualize` the sampling distribution of the permuted statistics. Use `shade_p_value()` to indicate the place where `obs_stat = diff_obs`, and coloring in values below with the command `direction = "less"`.
+
+```{r}
+# Visualize the statistic 
+opp_perm %>%
+  visualize() +
+  shade_p_value(obs_stat = diff_obs, direction = "less") + 
+  theme_bw() + 
+  labs(x = expression(hat(p)[treatment] - hat(p)[control]))
+```
+
+* Compute the p-value.
+
+```{r}
+# Calculate the p-value using `get_p_value`
+opp_perm %>%
+  get_p_value(obs_stat = diff_obs, direction = "less")
+# or
+opp_perm %>% 
+  summarize(p_value = mean(stat <= diff_obs))
+```
+
+The small p-value indicates that the observed data are inconsistent with the null hypothesis. We should reject the null claim and conclude that financial advice does affect the likelihood of purchase.
+
+# Using a for loop
+
+```{r}
+opportunity <- opportunity %>% 
+  mutate(decisionN = ifelse(decision == "buyDVD", 1, 0))
+head(opportunity)
+```
+
+* Create the simulation based permutation distribution using a for loop.
+
+```{r}
+set.seed(16)
+reps <- 10^4
+stat <- numeric(reps)
+for(i in 1:reps){
+  stat[i] <- diff(tapply(opportunity$decisionN, 
+                         sample(opportunity$group), mean))
+}
+```
+
+* Visualize the permuted differences with the base R function `hist()`.
+
+```{r}
+hist(stat, breaks = "Scott", 
+     xlab = expression(hat(p)[treatmeant] - hat(p)[control]), 
+     col = "pink", main = "Simulation-Based Null Distribution")
+abline(v = diff_obs, col = "red")
+```
+
+* Visualize the permuted differences with `ggplot2` functions.
+
+```{r}
+DF <- data.frame(stat = stat)
+ggplot(data = DF, aes(x = stat)) + 
+  geom_histogram(aes(fill = stat >= diff_obs), binwidth = .03, alpha = 0.5, color = "black") +
+  guides(fill = "none") +
+  scale_fill_manual(values = c("purple", "red")) +
+  labs(x = expression(hat(p)[treatment] - hat(p)[control]), 
+       y = "", 
+       title = "Simulation-Based Null Distribution") +
+  theme_bw() 
+```
+
+* Compute the p-value.
+
+```{r}
+(pvalue <- mean(stat <= diff_obs))
+
+```
+

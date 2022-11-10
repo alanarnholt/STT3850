@@ -176,8 +176,9 @@ rdtf <- function(x, y){
 
 
 rdtf(c(16, 10, 10, 7, 17), c(1, 2, 2, 10, 7))
-
-
+mean(c(27, 19, 12, 19, 21, 26))
+mean(c(26, 20, 19, 22, 19, 19))
+rdtf(c(27, 19, 12, 19, 21, 26), c(26, 20, 19, 22, 19, 19))
 ##############
 library(infer)
 data(gss)
@@ -214,3 +215,93 @@ for(i in 1:B){
 }
 hist(dm)
 abline(v = c(-obs_diff, obs_diff), col = "blue")
+
+#############################################################################################
+#############################################################################################
+
+library(tidyverse)
+library(NHANES)
+colnames(NHANES)
+sleep <- NHANES %>% 
+  select(SleepTrouble, SleepHrsNight) %>%
+  filter(!is.na(SleepTrouble), !is.na(SleepHrsNight))
+dim(sleep)
+
+sleep <- na.omit(sleep)
+
+ggplot(data = sleep, aes(x = SleepHrsNight)) +
+  geom_density(bw = .5) + 
+  facet_grid(rows = vars(SleepTrouble))
+
+
+sleep %>% 
+  group_by(SleepTrouble) %>% 
+  summarize(Mean = mean(SleepHrsNight, na.rm = TRUE), n = n(), SKEW = e1071::skewness(SleepHrsNight))
+
+############
+# Construct a 90% percentile bootstrap CI for the average sleep time for Americans with 
+# and without sleep trouble.
+
+library(infer) 
+
+sleep %>% 
+  filter(SleepTrouble == "No") %>% 
+  specify(response = SleepHrsNight) %>% 
+  generate(10^4, type = "bootstrap") %>% 
+  calculate(stat = "mean") -> xbar
+get_confidence_interval(xbar, level = 0.90) -> BPCI
+BPCI
+
+### Same thing with a for loop
+sleep %>% 
+  filter(SleepTrouble == "No") %>% 
+  select(SleepHrsNight) %>% 
+  pull() -> shnts
+B <- 10^4
+ybar <- numeric(B)
+for(i in 1:B){
+  bss <- sample(shnts, size = length(shnts), replace = TRUE)
+  ybar[i] <- mean(bss)
+}
+quantile(ybar, probs = c(0.05, 0.95)) -> BPCI2
+BPCI2
+
+### Bootstrap t 90% CI
+B <- 10^4
+TS <- numeric(B)
+for(i in 1:B){
+  bss <- sample(shnts, size = length(shnts), replace = TRUE)
+  TS[i] <- (mean(bss) - mean(shnts))/(sd(bss)/sqrt(length(shnts)))
+}
+quantile(TS, probs = c(0.05, 0.95)) -> QS
+QS
+BTCI <- c(mean(shnts) - QS[2]*sd(shnts)/sqrt(length(shnts)),
+          mean(shnts) - QS[1]*sd(shnts)/sqrt(length(shnts)))
+BTCI
+
+###############################################################
+### Test H0: mu = 7.15 hours vs HA: mu < 7.15 hours for Americans with no sleep trouble.
+sleep %>% 
+  filter(SleepTrouble == "No") %>% 
+  specify(response = SleepHrsNight) %>% 
+  hypothesize(null = "point", mu = 7.15) %>% 
+  generate(10^4, type = "bootstrap") %>% 
+  calculate(stat = "mean") -> test
+hist(test$stat)
+(obs_mean <- mean(shnts))
+get_p_value(test, obs_stat = obs_mean, direction = "less")
+
+
+
+
+delta <- 7.15 - obs_mean
+B <- 10^4
+testo <- numeric(B)
+for(i in 1:B){
+  bss <- sample(shnts, size = length(shnts), replace = TRUE) + delta
+  testo[i] <- mean(bss)
+}
+hist(testo)
+pvalue <- (sum(testo <= obs_mean) + 1)/(B + 1)
+pvalue
+
