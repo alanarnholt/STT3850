@@ -416,13 +416,13 @@ ________________________
 
 ## Week 15: (Nov 28 -- Dec 1) {-}
 
-* Work on Reproduction of [_Inference for Numerical Data in R_](https://classroom.github.com/a/MN0PWqep) - Due NLT 5:00 PM Dec 14
+* Course Review
 
-* Extra Credit if _Inference for Numerical Data in R_ is completed and I am notified NLT 5:00 pm Dec 7, 2022.
 
 __________________________________
 
-## Final Exam --- Dec 14: 11:00am - 1:30 pm
+## Final Exam --- Section -103: Dec 14: 11:00am - 1:30 pm
+## Final Exam --- Section -104: Dec 9: 2:00pm - 4:30 pm
 
 
 

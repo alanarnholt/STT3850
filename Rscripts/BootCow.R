@@ -238,6 +238,7 @@ sleep %>%
   summarize(Median = median(SleepHrsNight), 
             Mean = mean(SleepHrsNight), 
             Skew = e1071::skewness(SleepHrsNight),
+            SD = sd(SleepHrsNight),
             iqr = IQR(SleepHrsNight), 
             n = n())
 
