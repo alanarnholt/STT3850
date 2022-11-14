@@ -377,6 +377,8 @@ ______________________
 
 * Before class review Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com/9-hypothesis-testing.html) --- pgs 307-360
 
+* [Permutation Examples](../Rmarkdown/PermutationExamples.html)
+
 * Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f22/assignments) --- Due NLT 5:00 pm Nov 14
 
 * Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f22/assignments) --- Due NLT 5:00 pm Nov 15
