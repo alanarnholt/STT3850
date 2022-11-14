@@ -93,7 +93,9 @@ quantile(TDIST$stat, probs = c(0.05, 0.95)) -> QS
 QS
 CIBT <- c((mean(bf2yo) - mean(bfmat)) - QS[2]*sqrt(var(bf2yo)/n_2yo + var(bfmat)/n_mat),
           (mean(bf2yo) - mean(bfmat)) - QS[1]*sqrt(var(bf2yo)/n_2yo + var(bfmat)/n_mat)  )
-CIBT   
+CIBT  
+
+#########################################################################################
 
 
 # Construct a 95% bootstrap percentile CI for mu_2yo/mu_mat
