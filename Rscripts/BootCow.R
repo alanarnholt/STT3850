@@ -69,6 +69,33 @@ CIBT <- c((mean(bf2yo) - mean(bfmat)) - QS[2]*sqrt(var(bf2yo)/n_2yo + var(bfmat)
           (mean(bf2yo) - mean(bfmat)) - QS[1]*sqrt(var(bf2yo)/n_2yo + var(bfmat)/n_mat)  )
 CIBT
 
+
+#### Another Approach
+
+B <- 10^4 
+TS <- numeric(B)
+for(i in 1:B){
+  TS[i] <- t.test(butterfat ~ sample(age), data = COWS)$stat
+}
+QS <- quantile(TS, probs = c(0.05, 0.95))
+CIBT <- c((mean(bf2yo) - mean(bfmat)) - QS[2]*sqrt(var(bf2yo)/n_2yo + var(bfmat)/n_mat),
+          (mean(bf2yo) - mean(bfmat)) - QS[1]*sqrt(var(bf2yo)/n_2yo + var(bfmat)/n_mat)  )
+CIBT 
+
+##### A third approach
+
+COWS %>% 
+  specify(butterfat ~ age) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 10^4, type = "permute") %>% 
+  calculate(stat = "t") -> TDIST
+quantile(TDIST$stat, probs = c(0.05, 0.95)) -> QS
+QS
+CIBT <- c((mean(bf2yo) - mean(bfmat)) - QS[2]*sqrt(var(bf2yo)/n_2yo + var(bfmat)/n_mat),
+          (mean(bf2yo) - mean(bfmat)) - QS[1]*sqrt(var(bf2yo)/n_2yo + var(bfmat)/n_mat)  )
+CIBT   
+
+
 # Construct a 95% bootstrap percentile CI for mu_2yo/mu_mat
 
 B <- 10^4
