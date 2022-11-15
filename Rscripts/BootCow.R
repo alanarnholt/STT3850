@@ -317,19 +317,40 @@ BTCI <- c(mean(shnts) - QS[2]*sd(shnts)/sqrt(length(shnts)),
           mean(shnts) - QS[1]*sd(shnts)/sqrt(length(shnts)))
 BTCI
 
+
 ###############################################################
+###############################################################
+###############################################################
+###############################################################
+###############################################################
+library(infer)
+library(tidyverse)
+library(NHANES)
+colnames(NHANES)
+sleep <- NHANES %>% 
+  select(SleepTrouble, SleepHrsNight) %>%
+  filter(!is.na(SleepTrouble), !is.na(SleepHrsNight))
+dim(sleep)
+sleep <- na.omit(sleep)
+sleep %>% 
+  filter(SleepTrouble == "No") %>% 
+  select(SleepHrsNight) %>% 
+  pull() -> shnts
+###
+###
 ### Test H0: mu = 7.15 hours vs HA: mu < 7.15 hours for Americans with no sleep trouble.
+###
+###
 sleep %>% 
   filter(SleepTrouble == "No") %>% 
   specify(response = SleepHrsNight) %>% 
   hypothesize(null = "point", mu = 7.15) %>% 
   generate(10^4, type = "bootstrap") %>% 
   calculate(stat = "mean") -> test
+visualize(test)
 hist(test$stat)
 (obs_mean <- mean(shnts))
 get_p_value(test, obs_stat = obs_mean, direction = "less")
-
-
 
 
 delta <- 7.15 - obs_mean
@@ -342,4 +363,19 @@ for(i in 1:B){
 hist(testo)
 pvalue <- (sum(testo <= obs_mean) + 1)/(B + 1)
 pvalue
-
+###############################################################
+###############################################################
+###############################################################
+###############################################################
+###############################################################
+t.test(shnts, mu = 7.15, alternative = "less")
+library(PASWR2)
+tsum.test(mean.x = mean(shnts), s.x = sd(shnts), n.x = length(shnts), mu = 7.15, alternative = "less")
+# P-value
+pt(-3.6292, 5795)
+t.test(shnts, mu = 7.15)
+# Critical T
+CT <- qt(.975, 5795 - 1)
+CT
+CI <- mean(shnts) + c(-1, 1)*CT*sd(shnts)/sqrt(length(shnts))
+CI
