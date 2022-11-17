@@ -32,4 +32,5 @@ for(i in 1:B){
   phat[i] <- mean(bss == "Yes")
 }
 hist(phat)
-quantile(phat, probs = c(0.03, 0.97))
+CI <- round(quantile(phat, probs = c(0.03, 0.97)),4)
+CI
