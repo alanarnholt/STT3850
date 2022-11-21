@@ -2,7 +2,9 @@
 title: "Practice"
 author: "In Class Practice"
 date: '2022-11-21'
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
