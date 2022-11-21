@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Find the indicated quantities:
 
-1. $P(t_3 \geq -1)=?$
+1. $P(t_3 \geq -1) =?$
 ```{r}
 # Your R code here
 ```
@@ -23,17 +23,17 @@ Find the indicated quantities:
 # Your R code here
 ```
 
-3. $P(Z \leq 1.75)=?$
+3. $P(Z \leq 1.75) =?$
 ```{r}
 # Your R code here
 ```
 
-4. $P(-1.5 \leq Z \leq a) \rightarrow a=?$
+4. $P(-1.5 \leq Z \leq a) = 0.90 \rightarrow a=?$
 ```{r}
 # Your R code here
 ```
 
-5. $P(t_{3} \leq a)=0.96 \rightarrow a=?$
+5. $P(t_{3} \leq a) = 0.96 \rightarrow a=?$
 ```{r}
 # Your R code here
 ```
@@ -43,12 +43,12 @@ Find the indicated quantities:
 # Your R code here
 ```
 
-7. $P(a \leq \chi^2_4 \leq b)=0.95 \rightarrow a=? b=?$
+7. $P(a \leq \chi^2_4 \leq b) = 0.95 \rightarrow a=? b=?$
 ```{r}
 # Your R code here
 ```
 
-8. Suppose $G$ represents the final grade a randomly selected student receives in ANT 3765 and it is known that $G \sim N(88, 4)$. The instructor in ANT 3765 announces the bottom 10% will fail the course. Above what grade does the student need to score to pass ANT 3765?  You are randomly inquiring about grades from your class mates and find out that the average for $n=16$ students is 90.  What is the probability $(P(\bar{G} \geq 90)=?$
+8. Suppose $G$ represents the final grade a randomly selected student receives in ANT 3765 and it is known that $G \sim N(88, 4)$. The instructor in ANT 3765 announces the bottom 10% will fail the course. Above what grade does the student need to score to pass ANT 3765?  You are randomly inquiring about grades from your class mates and find out that the average for $n=16$ students is 90.  What is the probability $(P(\bar{G} \geq 90) =?$
 ```{r}
 # Your R code here
 ```
