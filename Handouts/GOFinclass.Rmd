@@ -1,0 +1,76 @@
+---
+title: "Goodness-Of-Fit"
+author: "Alan Arnholt"
+date: 'Last compiled: `r format(Sys.time(), "%A, %B %d, %Y - %X.")`'
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE)
+library(tidyverse)
+```
+
+# Goodness-Of-Fit: All Parameters Known
+
+## In class survey
+
+```{r}
+year_group <- factor( c(rep("sophomore",1), rep("junior",8), rep("senior",3)), 
+                      levels = c("sophomore", "junior", "senior") )
+DF <- data.frame(year_group)
+table(year_group)
+chisq.test(table(year_group), p = c(1/3, 1/3, 1/3))
+```
+
+```{r}
+exp <- c(1/3,1/3,1/3)*12
+exp
+obs <- table(year_group)
+obs
+X2 <- sum((obs - exp)^2/exp)
+X2
+pvalue <- pchisq(X2, 2, lower = FALSE)
+pvalue
+```
+
+```{r}
+library(infer)
+DF %>% 
+specify(response = year_group) %>% 
+  hypothesize(null = "point",
+              p = c("sophomore" = 1/3,
+                    "junior" = 1/3,
+                    "senior" = 1/3)) %>% 
+  generate(reps = 5000, type = "draw") %>% 
+  calculate(stat = "Chisq") -> nulldist
+visualize(nulldist) + 
+  shade_p_value(obs_stat = X2, direction = "greater") +
+  theme_bw()
+get_p_value(nulldist, obs_stat = X2, direction = "greater")
+```
+
+```{r}
+DF %>% 
+specify(response = year_group) %>% 
+  hypothesize(null = "point",
+              p = c("sophomore" = 1/3,
+                    "junior" = 1/3,
+                    "senior" = 1/3)) %>% 
+  generate(reps = 5000, type = "draw") %>% 
+  calculate(stat = "Chisq") -> nulldist
+visualize(nulldist, method = "both")
+```
+
+## For loop
+
+```{r}
+B <- 10^4
+X2sim <- numeric(B)
+for(i in 1:B){
+  yg <- sample(c("sophomore", "junior", "senior"), size = 120, replace = TRUE)
+  X2sim[i] <- chisq.test(table(yg), p = c(1/3, 1/3, 1/3))$stat
+}
+plot(density(X2sim))
+mean(X2sim >= X2)
+```
+
