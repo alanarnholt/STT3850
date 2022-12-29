@@ -13,7 +13,7 @@
 
 <title>Welcome</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -144,11 +144,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -177,8 +181,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -186,16 +190,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -258,10 +255,10 @@ $(document).ready(function () {
   <a href="https://alanarnholt.github.io/for-students.html">For Students</a>
 </li>
 <li>
-  <a href="./Syllabus/SyllabusSTT3850F2022.html">Syllabus</a>
+  <a href="./Syllabus/SyllabusSTT3850SP2023.html">Syllabus</a>
 </li>
 <li>
-  <a href="./CoursePacing/CoursePacingF2022.html">Course Pacing</a>
+  <a href="./CoursePacing/CoursePacingSP2023.html">Course Pacing</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -292,9 +289,9 @@ $(document).ready(function () {
 <li><p><a href="https://mathr.math.appstate.edu">Class RStudio
 Server</a> (you must be registered in the course to access the
 server)</p></li>
-<li><p><a href="./Syllabus/SyllabusSTT3850F2022.html">Course
+<li><p><a href="./Syllabus/SyllabusSTT3850SP2023.html">Course
 Syllabus</a></p></li>
-<li><p><a href="./CoursePacing/CoursePacingF2022.html">Assignments and
+<li><p><a href="./CoursePacing/CoursePacingSP2023.html">Assignments and
 Course Pacing</a></p></li>
 </ul>
 <hr />

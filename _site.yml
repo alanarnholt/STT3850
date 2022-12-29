@@ -10,9 +10,9 @@ navbar:
     - text: "For Students"
       href: https://alanarnholt.github.io/for-students.html
     - text: "Syllabus"
-      href: ./Syllabus/SyllabusSTT3850F2022.html
+      href: ./Syllabus/SyllabusSTT3850SP2023.html
     - text: "Course Pacing"
-      href: ./CoursePacing/CoursePacingF2022.html
+      href: ./CoursePacing/CoursePacingSP2023.html
       
      
   right:
