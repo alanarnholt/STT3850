@@ -116,6 +116,6 @@ ___________
 
 **Assignments**
 
-The [CoursePacing guide](../CoursePacing/CoursePacingSP2023.html) has all course assignments and due dates.
+The [CoursePacing guide](../CoursePacing/CoursePacingS2023.html) has all course assignments and due dates.
 
 ____________

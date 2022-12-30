@@ -6,6 +6,6 @@ title: "Welcome"
 
 * [Course Syllabus](./Syllabus/SyllabusSTT3850SP2023.html)
 
-* [Assignments and Course Pacing](./CoursePacing/CoursePacingSP2023.html)
+* [Assignments and Course Pacing](./CoursePacing/CoursePacingS2023.html)
 
 ***
