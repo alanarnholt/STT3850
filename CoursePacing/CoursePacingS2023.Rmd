@@ -49,7 +49,7 @@ _________
 
 * Sign-up for a free account on [GitHub](https://github.com).  When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinguishing characteristic in your username.   
 
-* Set cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html).--- [VIDEO of the setup process](https://drive.google.com/file/d/1G9G8IeYu9QetYB1nxMmAFLgRtw5YC-c8/view?usp=sharing)
+* Cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html).--- [VIDEO of the setup process](https://drive.google.com/file/d/1G9G8IeYu9QetYB1nxMmAFLgRtw5YC-c8/view?usp=sharing)
 
 * Complete [PS-01](https://classroom.github.com/a/8N7ehY_a) due by 5:00 pm Jan 19 --- [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1MfDjhNb5m_45BCVD6ZQCXhgIMWwwx0oS/view?usp=sharing)
  
