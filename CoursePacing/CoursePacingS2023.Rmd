@@ -107,7 +107,7 @@ ______________
 __________________
 
 
-## Week 3: No Class Sep 5 (Jan 30 -- Feb 2) {-}
+## Week 3: (Jan 30 -- Feb 2) {-}
 
 * Before class read chapter 3 (Data Wrangling) of [MD](https://moderndive.com/3-wrangling.html) --- pgs 65-96
 
