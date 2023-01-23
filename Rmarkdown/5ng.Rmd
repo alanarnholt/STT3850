@@ -1,0 +1,187 @@
+---
+title: "In Class Demo"
+author: "Alan T. Arnholt"
+date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r label = "cars"}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+RN <- rnorm(10000, 2500, 8.7952)
+mean(RN)
+sd(RN)
+```
+
+The mean of `RN` is `r round(mean(RN),2)` and the standard deviation is `r round(sd(RN),2)`.
+
+
+
+```{r}
+library(tidyverse)
+ggplot(data = data.frame(x = RN), aes(x = x)) + 
+  geom_histogram(color = "black", fill = "pink") + 
+  theme_bw()
+```
+
+
+## Data
+
+```{r}
+library(nycflights13)
+# ?flights
+str(flights)
+```
+
+```{r}
+ggplot(data = flights, aes(x = air_time)) + 
+  geom_density() + 
+  facet_wrap(vars(carrier))
+```
+
+
+```{r}
+library(gapminder)
+str(gapminder)
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+  geom_point()
+#
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + 
+  geom_point()
+#
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) + 
+  geom_point()
+```
+
+
+```{r}
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) + 
+  geom_point() + 
+  theme_bw() + 
+  xlim(0, 6000) +
+  xlab("GDP per capita") +
+  ylab("Life Expectancy (in years)")
+
+```
+
+## Five named graphs 
+
+______________
+
+1. scatterplots
+2. linegraphs
+3. boxplots
+4. histograms
+5. barplots
+
+_______________
+
+```{r}
+alaska_flight <- flights %>% 
+  filter(carrier == "AS")
+ggplot(data = alaska_flight, aes(x = dep_delay, y = arr_delay)) + 
+  geom_point()
+#
+ggplot(data = alaska_flight, aes(x = dep_delay, y = arr_delay)) + 
+  geom_point(alpha = 0.2, color = "blue") + 
+  theme_bw()
+#
+ggplot(data = alaska_flight, aes(x = dep_delay, y = arr_delay)) + 
+  geom_jitter(alpha = 0.2, color = "blue") + 
+  theme_bw()
+```
+
+________________
+
+## Linegraphs via `geom_line()`
+
+```{r}
+early_january_weather <- weather %>% 
+  filter(origin == "EWR", month ==1, day <= 15)
+ggplot(data = early_january_weather, aes(x = time_hour, y = temp)) + 
+  geom_line() + 
+  theme_bw()
+```
+
+## Histograms
+
+```{r}
+ggplot(data = weather, aes(x = temp)) + 
+  geom_histogram()
+#
+ggplot(data = weather, aes(x = temp)) + 
+  geom_histogram(color = "black", fill = "lightblue") + 
+  theme_bw() + 
+  xlab("Temperature in Degrees Fahrenheit")
+#
+ggplot(data = weather, aes(x = temp)) + 
+  geom_histogram(color = "black", fill = "lightblue", binwidth = 3) + 
+  theme_bw() + 
+  xlab("Temperature in Degrees Fahrenheit")
+#
+ggplot(data = weather, aes(x = temp)) + 
+  geom_histogram(color = "black", fill = "lightblue", binwidth = 3) + 
+  theme_bw() + 
+  xlab("Temperature in Degrees Fahrenheit") + 
+  facet_wrap(vars(month))
+```
+
+## Boxplots
+
+```{r}
+ggplot(data = weather, aes(y = temp)) + 
+  geom_boxplot()
+
+#
+ggplot(data = weather, aes(y = temp, x= factor(month))) + 
+  geom_boxplot() + 
+  theme_bw()
+```
+______________________
+
+## Barplots
+
+```{r}
+ggplot(data = flights, aes(x = carrier)) + 
+  geom_bar(fill = "purple", color = "black") + 
+  theme_bw()
+```
+
+```{r}
+xtabs(~carrier, data = flights)
+# Or 
+table(flights$carrier)
+```
+
+```{r}
+ggplot(data = flights, aes(x = carrier, fill = origin)) + 
+  geom_bar(color = "black") + 
+  theme_bw()
+#
+ggplot(data = flights, aes(x = carrier, fill = origin)) + 
+  geom_bar(color = "black", position = "dodge") + 
+  theme_bw()
+```
+
