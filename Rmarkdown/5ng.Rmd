@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = NA)
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE)
 ```
 
 ## R Markdown
@@ -36,6 +36,30 @@ sd(RN)
 ```
 
 The mean of `RN` is `r round(mean(RN),2)` and the standard deviation is `r round(sd(RN),2)`.
+
+## Using $\LaTeX$
+
+* Enclose between single dollar signs ($) for inline mathematics.
+* Enclose between double dollar signs ($$) for display equations.
+
+The following code `$\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}$` produces an inline definition of the mean: $\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}$.  To get a display equation for the mean, use `$$\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}$$`
+$$\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}$$ to produce the output above.
+
+* Your turn---Use $\LaTeX$ to write the definition of the sample variance ($s^2$).
+
+$$s^2 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{(n-1)}$$
+
+```{r}
+set.seed(27)
+example <- c(5, 7, 9, 11, 13)
+example
+(xbar <- mean(example))
+(v <- var(example))
+(V <- sum((example - xbar)^2)/(length(example)-1))
+DF <- data.frame(data = example, dmm = example - xbar, dmm2 = (example - xbar)^2)
+DF
+```
+
 
 
 
