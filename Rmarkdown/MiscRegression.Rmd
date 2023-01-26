@@ -2,10 +2,7 @@
 title: "Misc Regression"
 author: "Alan Arnholt"
 date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
-output: 
-    bookdown::html_document2:
-      highlight: tango
-      theme: yeti
+output: bookdown::html_document2
 ---
 
 ```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
