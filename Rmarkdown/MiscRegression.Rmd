@@ -269,7 +269,7 @@ Not only is it desirable to create confidence intervals on the parameters of the
 $$\hat{Y_h} \sim N(Y_h = X_h\beta, \sigma^2\mathbf{X_h}(\mathbf{X'X})^{-1}\mathbf{X_h'})$$
 For a vector of given values $(\mathbf{X_h})$, a $(1 - \alpha)\cdot 100\%$ confidence interval for the mean response $E(Y_h)$ is
 
-$$CI_{1-\alpha}\left[E(Y_h)\right] = \left[\hat{Y_h} - t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y}_h}, \hat{Y_h} + t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y}_h}  \right]$$
+$$CI_{1-\alpha}\left[E(Y_h)\right] = \left[\hat{Y_h} - t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y_h}}, \hat{Y_h} + t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y_h}}  \right]$$
 The function `predict()` applied to a linear model object will compute $\hat{Y_h}$ and $s_{\hat{Y_h}}$ for a given $\mathbf{X}_h$.  `R` output has $\hat{Y_h}$ labeled `fit` and $s_{\hat{Y_h}}$ labeled `se.fit`.
 
 ```{r, label = "mola"}
