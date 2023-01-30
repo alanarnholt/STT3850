@@ -116,8 +116,9 @@ __________________
 * Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp23/assignments) --- Due NLT 5:00 pm Jan 29
 
 * Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp23/assignments) --- Due NLT 5:00 pm Jan 30
+Feb 2
 
-* Complete [PS-03](https://classroom.github.com/a/KDctYOUa) by 5:00 pm Jan 26
+* Complete [PS-03](https://classroom.github.com/a/KDctYOUa) due by 5:00 pm Feb 2
 
 * In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/nHMkTRo3)
 
