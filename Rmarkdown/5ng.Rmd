@@ -209,3 +209,69 @@ ggplot(data = flights, aes(x = carrier, fill = origin)) +
   theme_bw()
 ```
 
+## Data Wrangling
+
+```{r}
+alaska_flights <- flights %>% 
+  filter(carrier == "AS")
+portland_flights <- flights %>% 
+  filter(dest == "PDX")
+```
+
+```{r}
+many_airports <- flights %>% 
+  filter(dest == "SEA" | dest == "SFO" | dest == "PDX" |
+         dest == "BTV" | dest == "BDL")
+dim(many_airports)
+
+many_airports2 <- flights %>% 
+  filter(dest %in% c("SEA", "SFO", "PDX", "BTV", "BDL"))
+dim(many_airports2)
+```
+
+```{r}
+summary_weather <- weather %>% 
+  summarize(M = mean(temp), S = sd(temp))
+summary_weather
+```
+
+```{r}
+summary_weather <- weather %>% 
+  summarize(M = mean(temp, na.rm = TRUE), S = sd(temp, na.rm = TRUE))
+summary_weather
+```
+
+```{r}
+summary_monthly_temp <- weather %>% 
+  group_by(month) %>% 
+  summarize(M = mean(temp, na.rm = TRUE), S = sd(temp, na.rm = TRUE))
+summary_monthly_temp
+```
+
+## Mutate
+
+```{r}
+head(weather)
+weather <- weather %>% 
+  mutate(temp_in_C = (temp - 32)/1.8 )
+head(weather)
+```
+
+## Arrange
+
+```{r}
+freq_dest <- flights %>% 
+  group_by(dest) %>% 
+  summarize(num_flights = n())
+freq_dest
+```
+
+```{r}
+freq_dest %>% 
+  arrange(num_flights)
+```
+
+```{r}
+freq_dest %>% 
+  arrange(desc(num_flights))
+```
