@@ -199,7 +199,7 @@ summary(mod1)$r.squared
 ## Confidence Interval for $\beta_1$
 
 \begin{equation}
-\text{CI}_{1 - \alpha}(\beta_1) = \left[b_1 - t_{1- \alpha/2, n - p + 1}SE(b1), b_1 + t_{1- \alpha/2, n - p + 1}SE(b1) \right]
+\text{CI}_{1 - \alpha}(\beta_1) = \left[b_1 - t_{1- \alpha/2, n - p - 1}SE(b1), b_1 + t_{1- \alpha/2, n - p - 1}SE(b1) \right]
 (\#eq:ci)
 \end{equation}
 
