@@ -275,3 +275,17 @@ freq_dest %>%
 freq_dest %>% 
   arrange(desc(num_flights))
 ```
+
+```{r}
+library(PASWR2)
+head(EPIDURAL)
+```
+
+```{r}
+xtabs(~ease + treatment, data = EPIDURAL)
+table(EPIDURAL$ease, EPIDURAL$treatment)
+EPIDURAL %>% 
+  group_by(ease, treatment) %>%
+  summarize(MOC = mean(oc, na.rm = TRUE), Number = n()) 
+```
+
