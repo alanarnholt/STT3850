@@ -1,0 +1,47 @@
+---
+title: "Correlation"
+author: "Alan T. Arnholt"
+date: '2023-02-06'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE)
+```
+
+## Correlation
+
+```{r}
+set.seed(13)
+x <- 1:20
+y <- x + rnorm(20, 0, 3)
+DFP <- data.frame(x = x, y = y)
+y <- x + rnorm(20, 0, 3)
+DFN <- data.frame(x = -x, y = y)
+rm(x, y)
+library(tidyverse)
+ggplot(data = DFP, aes(x = x, y = y)) + 
+  geom_point(color = "blue") + 
+  theme_bw()
+ggplot(data = DFN, aes(x = x, y = y)) + 
+  geom_point(color = "blue") + 
+  theme_bw()
+
+```
+
+
+$$r = \dfrac{1}{n-1}\sum_{i=1}^n\frac{(x - \bar{x})}{s_x}\frac{(y - \bar{y})}{s_y}$$
+
+```{r}
+DFP %>% 
+  mutate(x_xbar = x - mean(x), y_ybar = y - mean(y), zx = x_xbar/sd(x), zy = y_ybar/sd(y), zxzy = zx*zy) -> steps
+steps
+steps %>% 
+  summarize(COR = sum(zxzy)/(length(x) -1), cor(x,y))
+```
+
+```{r}
+DFN %>% 
+  summarize(r = cor(x, y))
+```
+
