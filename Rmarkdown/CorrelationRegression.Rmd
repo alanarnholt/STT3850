@@ -1,5 +1,5 @@
 ---
-title: "Correlation"
+title: "Correlation and Regression"
 author: "Alan T. Arnholt"
 date: 'Last updated: `r format(Sys.time(), "%B %d, %Y at %X")`'
 output: bookdown::html_document2
