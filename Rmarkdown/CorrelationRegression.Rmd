@@ -6,7 +6,8 @@ output: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, 
+                      message = FALSE, fig.align = "center")
 ```
 
 # Correlation
