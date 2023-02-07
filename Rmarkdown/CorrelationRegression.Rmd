@@ -140,6 +140,6 @@ ggplot(data = DFP, aes(x = x, y = y)) +
 Use the data set `VIT2005` from the `PASWR2` package to regress `totalprice` onto `area` and store the resulting model in an object named `mod2`.  Use `mod2` to predict the price of an apartment that has 100 square meters.
 
 ```{r}
-
+# Your code here
 ```
 
