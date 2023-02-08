@@ -26,12 +26,20 @@ rm(x, y)
 library(tidyverse)
 ggplot(data = DFP, aes(x = x, y = y)) + 
   geom_point(color = "blue") + 
-  theme_bw()
+  theme_bw() -> p1
+p1
 ggplot(data = DFN, aes(x = x, y = y)) + 
   geom_point(color = "blue") + 
-  theme_bw()
-
+  theme_bw() -> p2
+p2
 ```
+
+```{r}
+library(patchwork)
+p1/p2
+p1 + p2
+```
+
 
 
 $$r = \dfrac{1}{n-1}\sum_{i=1}^n\frac{(x - \bar{x})}{s_x}\frac{(y - \bar{y})}{s_y}$$
