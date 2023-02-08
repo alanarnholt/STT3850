@@ -8,6 +8,7 @@ output: bookdown::html_document2
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, 
                       message = FALSE, fig.align = "center")
+library(scales)
 ```
 
 # Correlation
@@ -138,9 +139,91 @@ ggplot(data = DFP, aes(x = x, y = y)) +
 
 ## You try
 
-Use the data set `VIT2005` from the `PASWR2` package to regress `totalprice` onto `area` and store the resulting model in an object named `mod2`.  Use `mod2` to predict the price of an apartment that has 100 square meters.
+Use the data set `VIT2005` from the `PASWR2` package to:
+
+1. Create a scatterplot of `totalprice` versus `area`.
+
+```{r}
+library(PASWR2)
+ggplot(data = VIT2005, aes(x = area, y = totalprice)) + 
+  geom_point(color = "gold") + 
+  theme_bw() -> p1
+p1
+```
+
+___________
+
+2. Regress `totalprice` onto `area` and store the resulting model in an object named `mod2`.  
 
 ```{r}
 # Your code here
+mod2 <- lm(totalprice ~ area, data = VIT2005)
+summary(mod2)
+```
+
+_________
+
+3. Add the least squares regression line to the scatterplot created in problem 1.
+
+```{r}
+p1 + 
+  geom_smooth(method = "lm", color = "purple")
+```
+
+
+4. Use `mod2` to predict the price of an apartment that has 100 square meters.
+
+```{r}
+get_regression_table(mod2)
+get_regression_points(mod2, newdata = data.frame(area = 100))
+get_regression_points(mod2, newdata = data.frame(area = 100)) %>% 
+  pull(totalprice_hat) -> yhat
+yhat
+predict(mod2, newdata = data.frame(area = 100))
+predict(mod2, newdata = data.frame(area = 100)) -> yhat2
+yhat2
+#####
+coef(mod2)
+coef(mod2)[1] + coef(mod2)[2]*100 -> yhat3
+yhat3
+#####
+summary(mod2)$coef
+summary(mod2)$coef[1, 1] -> b0
+summary(mod2)$coef[2, 1] -> b1
+yhat4 <- b0 + b1*100
+yhat4
+c(yhat, yhat2, yhat3, yhat4)
+```
+
+------------------
+
+5.  Interpret the slope for `mod2`.
+
+For every 1 square meter increase in `area`, there is an associated increase of, on average, € `r comma(b1)` in `totalprice`.
+
+------------------
+
+6.  Create a 95% confidence interval for the mean price of apartments with 160 square meters.
+
+```{r}
+predict(mod2, newdata = data.frame(area = 160), interval = "conf", level = 0.95) -> CI
+CI
+```
+
+A 95% confidence interval for $E(Y_h)$ is from € `r comma(CI[2])` to € `r comma(CI[3])`.
+
+_________________
+
+6.  Use the `GRADES` dataframe from the `PASWR2` package to develop a model that predicts GPA based on SAT score.  Compute the expected GPA score for an SAT score of 1300.
+
+```{r}
+ggplot(data = GRADES, aes(x = sat, y = gpa)) + 
+  geom_point() +
+  theme_bw() +
+  geom_smooth(method = "lm", se = FALSE) -> p2
+p2
+mod3 <- lm(gpa ~ sat, data = GRADES)
+summary(mod3)
+predict(mod3, newdata = data.frame(sat = 1300))
 ```
 
