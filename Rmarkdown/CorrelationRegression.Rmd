@@ -235,3 +235,53 @@ summary(mod3)
 predict(mod3, newdata = data.frame(sat = 1300))
 ```
 
+___________
+
+
+```{r}
+library(moderndive)
+head(evals)
+evals %>% 
+  group_by(gender) %>% 
+  summarize(Mean = mean(score))
+# Interaction Model
+ggplot(data = evals, aes(x = age, y = score, color = gender)) + 
+  geom_point() + theme_bw() +
+  geom_smooth(method = "lm", se = FALSE) -> pINT
+pINT
+#
+modINT <- lm(score ~ age + gender + age:gender, data = evals)
+summary(modINT)
+
+b0M <- coef(modINT)[1] + coef(modINT)[3]
+b1M <- coef(modINT)[2] + coef(modINT)[4]
+b0F <- coef(modINT)[1]
+b1F <- coef(modINT)[2]
+c(b0M, b1M, b0F, b1F)
+pINT + 
+  geom_abline(intercept = b0M, slope = b1M, color = "blue") + 
+  geom_abline(intercept = b0F, slope = b1F, color = "pink")
+```
+
+## Parallel slopes model
+
+```{r}
+ggplot(data = evals, aes(x = age, y = score, color = gender)) + 
+  geom_point() + 
+  geom_parallel_slopes(se = FALSE) + 
+  theme_bw() -> pPar
+pPar
+modP <- lm(score ~ age + gender, data = evals)
+summary(modP)
+b0M <- coef(modP)[1] + coef(modP)[3]
+b0F <- coef(modP)[1]
+b1M <- coef(modP)[2]
+b1F <- coef(modP)[2]
+#
+pPar + 
+  geom_abline(intercept = b0M, slope = b1M, color = "blue") + 
+  geom_abline(intercept = b0F, slope = b1F, color = "pink")
+
+
+```
+
