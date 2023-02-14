@@ -242,7 +242,7 @@ ___________
 library(moderndive)
 head(evals)
 evals %>% 
-  group_by(gender) %>% 
+  group_by(rank) %>% 
   summarize(Mean = mean(score))
 # Interaction Model
 ggplot(data = evals, aes(x = age, y = score, color = gender)) + 
@@ -284,4 +284,52 @@ pPar +
 
 
 ```
+```{r}
+# Interaction Model
+ggplot(data = evals, aes(x = age, y = score, color = rank)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw()
+```
+
+```{r}
+# Parallel Slopes Model
+ggplot(data = evals, aes(x = age, y = score, color = rank)) + 
+  geom_point() + 
+  geom_parallel_slopes(se = FALSE) + 
+  theme_bw()
+```
+
+
+## Two approaches
+
+```{r}
+evals %>% 
+  group_by(pic_color) %>% 
+  summarize(M = mean(score))
+#
+modCP <- lm(score ~ pic_color, data = evals)
+summary(modCP)
+MBW <- coef(modCP)[1]
+MCP <- coef(modCP)[1] + coef(modCP)[2]
+c(MBW, MCP)
+```
+
+____________
+
+## Your Turn:
+
+Create a scatterplot of `score` versus `bty_avg` while mapping `gender` to color.  Would you use an interaction model or a parallel slopes model?  Add the appropriate model to your scatterplot. Write the equations for the two lines in your scatterplot. 
+
+----------------
+
+```{r}
+mod4 <- lm(score ~ bty_avg + gender, data = evals)
+mod5 <- lm(score ~ bty_avg + gender + bty_avg:gender, data = evals)
+summary(mod4)
+summary(mod5)
+```
+
+
+
 
