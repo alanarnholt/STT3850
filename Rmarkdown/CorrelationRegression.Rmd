@@ -244,6 +244,27 @@ head(evals)
 evals %>% 
   group_by(rank) %>% 
   summarize(Mean = mean(score))
+```
+
+What are the possible values for $\widehat{score}$ with this model?
+
+```{r}
+modR <- lm(score ~ rank, data = evals)
+get_regression_points(modR) 
+get_regression_points(modR) %>% 
+  select(score_hat) %>% 
+  unique() %>% 
+  pull() -> myvalues
+myvalues
+```
+The possible values for $\widehat{score}$ are `r myvalues[1:2]`, and `r myvalues[3]`.
+
+
+
+
+
+
+```{r}
 # Interaction Model
 ggplot(data = evals, aes(x = age, y = score, color = gender)) + 
   geom_point() + theme_bw() +
@@ -329,6 +350,8 @@ mod5 <- lm(score ~ bty_avg + gender + bty_avg:gender, data = evals)
 summary(mod4)
 summary(mod5)
 ```
+____________________
+
 
 
 

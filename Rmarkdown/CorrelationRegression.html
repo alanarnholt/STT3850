@@ -344,7 +344,7 @@ pre code {
 
 <h1 class="title toc-ignore">Correlation and Regression</h1>
 <h4 class="author">Alan T. Arnholt</h4>
-<h4 class="date">Last updated: February 14, 2023 at 09:09:38 AM</h4>
+<h4 class="date">Last updated: February 14, 2023 at 10:25:33 AM</h4>
 
 </div>
 
@@ -746,6 +746,30 @@ head(evals)</code></pre>
 1 teaching      4.28
 2 tenure track  4.15
 3 tenured       4.14</code></pre>
+<p>What are the possible values for <span class="math inline">\(\widehat{score}\)</span> with this model?</p>
+<pre class="r"><code>modR &lt;- lm(score ~ rank, data = evals)
+get_regression_points(modR) </code></pre>
+<pre><code># A tibble: 463 × 5
+      ID score rank         score_hat residual
+   &lt;int&gt; &lt;dbl&gt; &lt;fct&gt;            &lt;dbl&gt;    &lt;dbl&gt;
+ 1     1   4.7 tenure track      4.16    0.545
+ 2     2   4.1 tenure track      4.16   -0.055
+ 3     3   3.9 tenure track      4.16   -0.255
+ 4     4   4.8 tenure track      4.16    0.645
+ 5     5   4.6 tenured           4.14    0.461
+ 6     6   4.3 tenured           4.14    0.161
+ 7     7   2.8 tenured           4.14   -1.34 
+ 8     8   4.1 tenured           4.14   -0.039
+ 9     9   3.4 tenured           4.14   -0.739
+10    10   4.5 tenured           4.14    0.361
+# … with 453 more rows</code></pre>
+<pre class="r"><code>get_regression_points(modR) %&gt;% 
+  select(score_hat) %&gt;% 
+  unique() %&gt;% 
+  pull() -&gt; myvalues
+myvalues</code></pre>
+<pre><code>[1] 4.155 4.139 4.284</code></pre>
+<p>The possible values for <span class="math inline">\(\widehat{score}\)</span> are 4.155, 4.139, and 4.284.</p>
 <pre class="r"><code># Interaction Model
 ggplot(data = evals, aes(x = age, y = score, color = gender)) + 
   geom_point() + theme_bw() +
@@ -923,6 +947,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 0.5258 on 459 degrees of freedom
 Multiple R-squared:  0.07129,   Adjusted R-squared:  0.06522 
 F-statistic: 11.74 on 3 and 459 DF,  p-value: 1.997e-07</code></pre>
+<hr />
 </div>
 </div>
 
