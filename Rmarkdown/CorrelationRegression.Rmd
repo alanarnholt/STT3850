@@ -352,6 +352,20 @@ summary(mod5)
 ```
 ____________________
 
+```{r}
+ggplot(data = evals, aes(x = bty_avg, y= score, color = gender)) + 
+  geom_point() + 
+  geom_parallel_slopes(se = FALSE) + 
+  theme_bw()
+```
+
+```{r}
+ggplot(data = evals, aes(x = bty_avg, y= score, color = gender)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw()
+```
+
 
 
 
