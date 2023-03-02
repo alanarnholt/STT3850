@@ -1,7 +1,36 @@
 # RailTrail
-
+library(tidyverse)
 library(mosaicData)
 ?RailTrail
+
+ggplot(data = RailTrail, aes(x = hightemp, y= volume)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+
+library(moderndive)
+mod1 <- lm(volume ~ hightemp, data = RailTrail)
+summary(mod1)
+get_regression_table(mod1)
+
+ggplot(data = RailTrail, aes(x = hightemp, y = volume, color  = weekday)) + 
+  geom_point() + 
+  theme_bw()
+mod2 <- lm(volume ~ hightemp + weekday, data = RailTrail)
+summary(mod2)
+
+ggplot(data = RailTrail, aes(x = hightemp, y = volume, color  = weekday)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_parallel_slopes(se = FALSE) + 
+  labs(color = "Is it a\nweekday?") + 
+  geom_abline(intercept = coef(mod2)[1], slope = coef(mod2)[2], color = "red", size = 0.25) + 
+  geom_abline(intercept = coef(mod2)[1] + coef(mod2)[3], slope = coef(mod2)[2], color = "lightblue", size = 0.25) 
+
+
+################################################
+
+
 nullmodel <- lm(volume ~ 1, data = RailTrail)
 fullmodel <- lm(volume ~ ., data = RailTrail)
 summary(nullmodel)

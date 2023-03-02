@@ -3,6 +3,27 @@ sum(dbinom(6:0, 10, .5))  # P(X <= 6)
 choose(10, 6)*1/2^6*(1-1/2)^4  # P(X = 6)
 dbinom(4, 10, .7)  # P(Y = 4 | Y~Bin(n = 10, p = .7))
 
+xs <- rbinom(100000, 300, .03)
+hist(xs)
+mean(xs <= 12 & xs >=5)
+
+z <- 0:300
+pz <- dbinom(x, 300, .03)
+
+EVX <- function(x, px){
+  E <- sum(x*px)
+  V <- sum(((x - E)^2)*px)
+  S <- sqrt(V)
+  c(E, V, S)
+}
+
+EVX(z, pz)
+
+pnorm(116, 100, 16) - pnorm(84, 100, 16)
+
+
+
+EX(z, pz)
 
 
 
