@@ -10,7 +10,7 @@ mean(xs <= 12 & xs >=5)
 z <- 0:300
 pz <- dbinom(z, 300, .03)
 
-EVX <- function(x, px){
+EV <- function(x, px){
   if(sum(px) != 1)
     stop("sum of probabilities must be 1.")
   if(length(x) != length(px))
@@ -21,12 +21,12 @@ EVX <- function(x, px){
   c(E, V, S)
 }
 
-EVX(z, pz)
+EV(z, pz)
 
 # Expected Values #2
 x <- 1:3
 px <- c(.53, .47*.53, .47^2*.53 + .47^3)
-EVX(x, px)
+EV(x, px)
 # E(Boys)
 x <- 0:3
 px <- c(.53, .47*.53, .47^2*.53, .47^3)
@@ -34,21 +34,21 @@ EVX(x, px)
 # SD # 1
 x <- c(0, 13, 26, 41)
 px <- c(26/52, 13/52, 12/52, 1/52)
-EVX(x, px)
+EV(x, px)
 # SD # 2
 x <- 1:3
 px <- c(.46, .54*.46, 1 - .46 - .54*.46)
-EVX(x, px)
+EV(x, px)
 # E value and variance # 1
 x <- c(110 - 9000, 110 - 2000, 110)
 px <- c(1/2083, 1/495, 1 -(1/2083 + 1/495))
-EVX(x, px)
+EV(x, px)
 
 --------------------------------------------
 
 z <- 0:300
 pz <- dbinom(z, 300, .03)
-EVX(z, pz)
+EV(z, pz)
 # E(Z) = 9.0, S(X) = 2.954657
 # Y ~approx N(9, 2.954657)
 # Solve Exactly
