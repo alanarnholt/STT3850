@@ -1,7 +1,7 @@
 library(moderndive)
 library(tidyverse)
 set.seed(321)
-population <- rnorm(5000, 100, 15)
+population <- runif(5000, 0, 10)
 MU <- mean(population)
 SIGMA <- sd(population)
 c(MU, SIGMA)
@@ -61,25 +61,30 @@ DF %>%
   rep_sample_n(size = 25, replace = TRUE, reps = 10000) %>% 
   group_by(replicate) %>% 
   summarize(xbar = mean(IQ), SE = sd(IQ)) -> xbar25
-p1 <- ggplot(data = xbar25, aes(x = xbar)) + geom_histogram() + 
-  xlim(90, 110)
+p1 <- ggplot(data = xbar25, aes(x = xbar)) + 
+  geom_histogram(color = "white") + 
+  xlim(3,7)
   
 DF %>% 
   rep_sample_n(size = 50, replace = TRUE, reps = 10000) %>% 
   group_by(replicate) %>% 
   summarize(xbar = mean(IQ), SE = sd(IQ)) -> xbar50
-p2 <- ggplot(data = xbar50, aes(x = xbar)) + geom_histogram() + 
-  xlim(90, 110)
+p2 <- ggplot(data = xbar50, aes(x = xbar)) + 
+  geom_histogram(color = "white") + 
+  xlim(3,7)
 
 DF %>% 
   rep_sample_n(size = 100, replace = TRUE, reps = 10000) %>% 
   group_by(replicate) %>% 
   summarize(xbar = mean(IQ), SE = sd(IQ)) -> xbar100
-p3 <- ggplot(data = xbar100, aes(x = xbar)) + geom_histogram() + 
-  xlim(90, 110)
+p3 <- ggplot(data = xbar100, aes(x = xbar)) + 
+  geom_histogram(color = "white") + 
+  xlim(3,7)
 
 library(patchwork)
 p1/p2/p3
+#################
+#################
 #################
 ggplot(tactile_prop_red, aes(x = prop_red)) +
   geom_histogram(binwidth = 0.05, boundary = 0.4, color = "white") +
