@@ -6,10 +6,14 @@ MU <- mean(population)
 SIGMA <- sd(population)
 c(MU, SIGMA)
 hist(population)
+
+junk <- c("Sage", "Henderson", "Jai", "Blaez")
+sample(junk, 3, replace = TRUE)
 #
 sample1_n25 <- sample(population, size = 25, replace = TRUE)
 mean(sample1_n25)
 sd(sample1_n25)
+hist(sample1_n25)
 
 # 10000 samples of size n = 25
 N <- 10000
@@ -98,8 +102,11 @@ virtual_shovel <- bowl %>%
   rep_sample_n(size = 50)
 virtual_shovel
 #
-virtual_shovel %>% 
-  mutate(is_red = (color == "red"))
+virtual_shovel %>%
+  filter(color == "red")
+
+#
+
 #
 virtual_shovel %>% 
   mutate(is_red = (color == "red")) %>% 
@@ -117,6 +124,14 @@ virtual_shovel %>%
 virtual_samples <- bowl %>% 
   rep_sample_n(size = 50, reps = 33)
 virtual_samples
+#
+virtual_samples <- bowl %>% 
+  rep_sample_n(size = 50, reps = 1000)
+virtual_samples %>%
+  group_by(replicate) %>%
+  summarize(phat = mean(color == "red"))
+
+
 #
 virtual_samples %>% 
   group_by(replicate) %>% 
