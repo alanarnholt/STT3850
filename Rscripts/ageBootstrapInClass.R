@@ -31,3 +31,22 @@ DF %>%
 visualize(bsd)
 get_confidence_interval(bsd, level = .90)
 qt(.80, 34)
+
+
+
+
+
+
+
+
+agesL <- c(37, 23, 27, 31, 26, 21, 20, 18, 19, 21)
+agesR <- c(22, 18, 19, 10, 19, 20, 19, 12, 97, 35)
+B <- 50000
+stat <- numeric(B)
+for(i in 1:B){
+  bssR <- sample(agesR, 10, replace = TRUE)
+  bssL <- sample(agesL, 10, replace = TRUE)
+  stat[i] <- mean(bssR)/mean(bssL)
+}
+hist(stat)
+quantile(stat, probs = c(0.025, 0.975))
