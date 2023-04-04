@@ -41,3 +41,26 @@ bsd %>%
   summarize(lep = quantile(stat, 0.025), uep = quantile(stat, 0.975)) -> BCI
 BCI
 #####
+library(tidyverse)
+library(resampledata)
+dim(NCBirths2004)
+names(NCBirths2004)
+head(NCBirths2004)
+NCBirths2004 %>% group_by(Gender) %>% 
+  summarize(M = mean(Weight), S = sd(Weight), n = n()) -> ans
+ans
+ans$M[1] + c(-1, 1)*qt(.995, 520)*ans$S[1]/sqrt(ans$n[1])
+
+
+NCBirths2004 %>% filter(Gender == "Female") %>%
+  select(Weight) -> ans1
+ans1 %>% pull() -> femaleweight
+femaleweight
+t.test(femaleweight, conf.level = .99)
+
+
+
+NCBirths2004 %>% filter(Gender == "Female") %>%
+  select(Weight) %>% t.test(conf.level = .99)
+t.test(Weight ~ Gender, data = NCBirths2004, conf.level = .90)
+qt(.95, 1002.9)
