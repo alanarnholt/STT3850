@@ -101,3 +101,25 @@ CT
 CIT <- c(mean(femaleweight) - CT[2]*sd(femaleweight)/sqrt(length(femaleweight)), 
         mean(femaleweight) - CT[1]*sd(femaleweight)/sqrt(length(femaleweight)) )
 CIT
+
+btci1m <- function(data, B = 10^4, conf.level = 0.95){
+  alpha <- 1 - conf.level
+  bt <- numeric(B)
+  n <- length(data)
+  for(i in 1:B){
+    bss <- sample(data, size = length(data), replace = TRUE)
+    bt[i] <- (mean(bss) - mean(data))/(sd(data)/sqrt(n))
+  }
+  ct <- quantile(bt, probs = c(alpha/2, 1 - alpha/2)) 
+  CI <- c( mean(data) - ct[2]*sd(data)/sqrt(n), 
+          mean(data) - ct[1]*sd(data)/sqrt(n) )
+  names(CI) <- c("lower end point", "upper end point")
+  CI
+}
+
+library(resampledata)
+head(Bangladesh)
+cholorine <- Bangladesh %>% select(Chlorine) %>% pull()
+summary(cholorine)
+cholorine <- na.omit(cholorine)
+btci1m(cholorine)
