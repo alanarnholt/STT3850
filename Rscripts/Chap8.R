@@ -64,3 +64,40 @@ NCBirths2004 %>% filter(Gender == "Female") %>%
   select(Weight) %>% t.test(conf.level = .99)
 t.test(Weight ~ Gender, data = NCBirths2004, conf.level = .90)
 qt(.95, 1002.9)
+
+
+########################
+# Bootstrap T
+# (xbar* - xbar)/(s*/sqrt(n))
+
+library(tidyverse)
+library(resampledata)
+dim(NCBirths2004)
+NCBirths2004 %>% filter(Gender == "Female") %>%
+  select(Weight) -> ans1
+ans1 %>% pull() -> femaleweight
+femaleweight
+
+# Bootstrap Percentile CI
+B <- 10^4
+bmean <- numeric(B)
+for(i in 1:B){
+  bss <- sample(femaleweight, size = length(femaleweight), replace = TRUE)
+  bmean[i] <- mean(bss)
+}
+CIBP <- quantile(bmean, probs = c( 0.025, 0.975))
+CIBP
+
+# Bootstrap T CI
+B <- 10^4
+BT <- numeric(B)
+for(i in 1:B){
+  bss <- sample(femaleweight, size = length(femaleweight), replace = TRUE)
+  BT[i] <- (mean(bss) - mean(femaleweight))/(sd(bss)/sqrt(length(femaleweight)))
+}
+CT <- quantile(BT, probs = c(0.025, 0.975))
+CT
+
+CIT <- c(mean(femaleweight) - CT[2]*sd(femaleweight)/sqrt(length(femaleweight)), 
+        mean(femaleweight) - CT[1]*sd(femaleweight)/sqrt(length(femaleweight)) )
+CIT
