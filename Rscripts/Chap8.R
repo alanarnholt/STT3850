@@ -67,6 +67,34 @@ qt(.95, 1002.9)
 
 
 ########################
+sims <- 10^5
+ts <- numeric(sims)
+for(i in 1:sims){
+  rs <- rnorm(9, 17, 3)
+  ts[i] <- (mean(rs) - 17)/(sd(rs)/3)
+}
+quantile(ts, probs = c(.05, 0.95))
+
+
+sims <- 10^5
+ts <- numeric(sims)
+for(i in 1:sims){
+  rs <- rexp(9, .1)
+  ts[i] <- (mean(rs) - 10)/(sd(rs)/3)
+}
+quantile(ts, probs = c(.05, 0.95))
+
+rx <- rexp(10000, .1)
+hist(rx)
+mean(rx)
+sd(rx)
+
+
+
+
+
+
+
 # Bootstrap T
 # (xbar* - xbar)/(s*/sqrt(n))
 
@@ -107,19 +135,22 @@ btci1m <- function(data, B = 10^4, conf.level = 0.95){
   bt <- numeric(B)
   n <- length(data)
   for(i in 1:B){
-    bss <- sample(data, size = length(data), replace = TRUE)
+    bss <- sample(data, size = n, replace = TRUE)
     bt[i] <- (mean(bss) - mean(data))/(sd(data)/sqrt(n))
   }
   ct <- quantile(bt, probs = c(alpha/2, 1 - alpha/2)) 
   CI <- c( mean(data) - ct[2]*sd(data)/sqrt(n), 
           mean(data) - ct[1]*sd(data)/sqrt(n) )
   names(CI) <- c("lower end point", "upper end point")
+  hist(bt, main = "Bootstrap T*", breaks = "Scott")
   CI
 }
 
+library(tidyverse)
 library(resampledata)
 head(Bangladesh)
 cholorine <- Bangladesh %>% select(Chlorine) %>% pull()
 summary(cholorine)
 cholorine <- na.omit(cholorine)
-btci1m(cholorine)
+btci1m(cholorine, B = 10^3)
+
