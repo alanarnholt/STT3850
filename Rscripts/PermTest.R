@@ -8,8 +8,21 @@ ND <- schis %>%
   filter(gender == "Female")
 ND
 
-tapply(ND$worms, ND$group, mean)
+library(tidyverse)
+ND %>%
+  group_by(group) %>%
+  summarize(M = mean(worms), S = sd(worms), n = n())
+
+
+
 diff(tapply(ND$worms, ND$group, mean))
+
+tobs <- (12-4.4)/sqrt(4.3^2/5+3.91^2/5)
+tobs
+
+t.test(worms ~ group, data = ND)
+
+-diff(tapply(ND$worms, ND$group, mean))
 # xbar_Control - xbar_Treatment
 obs_diff <- -diff(tapply(ND$worms, ND$group, mean))
 obs_diff
@@ -29,3 +42,16 @@ pvalue
 pvalue <- (sum(per_mean_diff >= obs_diff) + 1) / (P + 1)
 pvalue
 
+library(infer)
+ND %>%
+  specify(worms ~ group) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10^3, type = "permute") %>%
+  calculate(stat = "t") ->  tenleft
+tenleft
+visualize(tenleft)
+sum(tenleft$stat >= 2.92)/10^3
+get_p_value(tenleft, obs_stat = 2.92, direction = "greater")
+
+library(PASWR2)
+t.test(size ~ location, data = APTSIZE, alternative = "greater")
