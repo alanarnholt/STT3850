@@ -1,0 +1,12 @@
+name: stt3850
+title: STT3850
+username: arnholtat
+account: arnholtat
+server: mathr.appstate.edu
+hostUrl: https://mathr.appstate.edu/connect/__api__
+appId: 1
+bundleId:
+url: https://mathr.appstate.edu/connect/content/b0edde07-2381-4e46-9cb1-7d0b73b9f546/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
