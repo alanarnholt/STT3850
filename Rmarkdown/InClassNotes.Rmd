@@ -98,7 +98,7 @@ ggplot(data = data.frame(x = X2), aes(x = x)) +
 null <- TITANIC3 %>% 
   specify(pclass ~ survived) %>% 
   hypothesize(null = "independence") %>% 
-  generate(reps = 10^4 - 1, type = "permute") %>% 
+  generate(reps = 10^3 - 1, type = "permute") %>% 
   calculate(stat = "Chisq")
 ```
 
@@ -118,7 +118,7 @@ visualize(null, method = "both", dens_color = "blue") +
 
 ```{r}
 null %>% 
-  summarize(pvalue = (sum(stat >= chi_obs_stat) + 1)/(10^4)) 
+  summarize(pvalue = (sum(stat >= chi_obs_stat) + 1)/(10^3)) 
 ```
 
 **Note problem below**
@@ -175,13 +175,13 @@ chisq.test(T1, correct = FALSE)$stat^.5
 null <- TITANIC3 %>% 
   specify(survived ~ sex, success = "Alive") %>% 
   hypothesize(null = "independence") %>% 
-  generate(reps = 10^4 - 1, type = "permute") %>% 
+  generate(reps = 10^3 - 1, type = "permute") %>% 
   calculate(stat = "Chisq", order = c("male", "female"))
 ggplot(data = null, aes(x  = stat)) + 
   geom_density(fill = "pink") +
   theme_bw()
 null %>%
-  summarize( (sum(stat >= obs_stat) + 1)/10^4)
+  summarize( (sum(stat >= obs_stat) + 1)/10^3)
 ```
 
 ```{r}
@@ -242,7 +242,7 @@ E
 ## Permutation distribution
 
 ```{r}
-B <- 10^4 - 1
+B <- 10^3 - 1
 X2 <- numeric(B)
 for(i in 1:B){
   TN <- xtabs(~Pop + sample(Status), data = NT)
@@ -262,7 +262,7 @@ ggplot(data = null_hom, aes(x = stat)) +
 null_hom_infer <- NT %>% 
   specify(Pop ~ Status) %>% 
   hypothesize(null = "independence") %>% 
-  generate(reps = 10^4 - 1, type = "permute") %>% 
+  generate(reps = 10^3 - 1, type = "permute") %>% 
   calculate(stat = "Chisq")
 visualize(null_hom_infer, method = "both", dens_color = "blue") +
   theme_bw()
