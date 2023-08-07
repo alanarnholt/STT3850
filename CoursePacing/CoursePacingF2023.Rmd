@@ -89,7 +89,7 @@ ______________
 
 * Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Aug 30
 
-* Complete [PS-02](https://classroom.github.com/a/cDQEnd1b) due by 5:00 pm Aug 31
+* Complete [PS-02](https://classroom.github.com/a/ya63seki) due by 5:00 pm Aug 31
 
 
 
@@ -117,9 +117,9 @@ __________________
 
 * Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Sep 6
 
-* Complete [PS-03](https://classroom.github.com/a/cDQEnd1b) by 5:00 pm Sep 7
+* Complete [PS-03](https://classroom.github.com/a/Zvfqni-u) by 5:00 pm Sep 7
 
-* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/cDQEnd1b)
+* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/NyM5bW7s)
 
 
 ```{block, test3, type='rmdexercise'}
@@ -139,9 +139,9 @@ Test yourself:
 
 * Work through chapter 4 (Data Manipulation) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
-* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/cDQEnd1b) 
-* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/cDQEnd1b) 
-* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/cDQEnd1b) 
+* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/2niw0EM8) 
+* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/YkUNrp9c) 
+* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/TN2kYM42) 
 ```
 
 ___________
@@ -158,7 +158,7 @@ ___________
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Sep 13
 
-* Complete [PS-04](https://classroom.github.com/a/cDQEnd1b) due by 5:00 pm Sep 14
+* Complete [PS-04](https://classroom.github.com/a/uuTnPphb) due by 5:00 pm Sep 14
 
 
 ```{block, week4optional, type='rmdoptional'}
