@@ -385,7 +385,7 @@ ______________________
 
 * Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Nov 15
 
-* Complete [PS-09](https://classroom.github.com/a/cDQEnd1b) by 5:00 pm Nov 16 
+* Complete [PS-09](https://classroom.github.com/a/OkAkSN2h) by 5:00 pm Nov 16 
 
 
 ```{block, week13optional, type='rmdoptional'}
