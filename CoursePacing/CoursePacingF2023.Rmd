@@ -186,7 +186,7 @@ __________________
 
 * Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Sep 20
 
-* Complete [PS-05](https://classroom.github.com/a/cDQEnd1b) by 5:00 pm Sep 21 
+* Complete [PS-05](https://classroom.github.com/a/4MMydu5I) by 5:00 pm Sep 21 
 
 
 ```{block, week5optional, type='rmdoptional'}
@@ -205,7 +205,7 @@ _______________
 
 * Go over in class [_Misc Regression_](../Rmarkdown/MiscRegression.html)
 
-* Complete [PS-06](https://classroom.github.com/a/cDQEnd1b) by 5:00 pm Sep 28 
+* Complete [PS-06](https://classroom.github.com/a/Nusd7CFc) by 5:00 pm Sep 28 
 
 
 ```{block, week6optional, type='rmdoptional'}
@@ -269,9 +269,9 @@ _______________
 
 * Before class read chapter 7 (Sampling) of [MD](https://moderndive.com/7-sampling.html) --- pgs 195-232
 
-* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/cDQEnd1b) by 5:00 pm Oct 18 --- not graded
+* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/eZq-1bTl) by 5:00 pm Oct 18 --- not graded
 
-* Start [PS-07](https://classroom.github.com/a/cDQEnd1b) due by 5:00 pm Oct 26
+* Start [PS-07](https://classroom.github.com/a/Zl9Dwml1) due by 5:00 pm Oct 26
 
 ```{block, week9optional, type='rmdoptional'}
 #### Optional {-}
