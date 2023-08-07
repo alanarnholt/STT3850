@@ -301,7 +301,7 @@ ___________________________
 
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
-* Complete [PS-07](https://classroom.github.com/a/cDQEnd1b) by 5:00 pm Oct 26
+* Complete [PS-07](https://classroom.github.com/a/Zl9Dwml1) by 5:00 pm Oct 26
 
 
 ```{block, week10optional, type='rmdoptional'}
@@ -328,7 +328,7 @@ _______________________
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
-* Complete [PS-08](https://classroom.github.com/a/cDQEnd1b) by 5:00 pm Nov 2 
+* Complete [PS-08](https://classroom.github.com/a/Z7hhTyVF) by 5:00 pm Nov 2 
 
 
 _____________________
