@@ -85,9 +85,9 @@ ______________
 
 * [Partial Lecture Slides](../Handouts/short_pre_lecture.pdf)
 
-* Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Aug 29
+* Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Aug 29
 
-* Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Aug 30
+* Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Aug 30
 
 * Complete [PS-02](https://classroom.github.com/a/ya63seki) due by 5:00 pm Aug 31
 
@@ -113,9 +113,9 @@ __________________
 
 * [Partial Lecture Slides](../Handouts/pre_lecture.pdf)
 
-* Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Sep 5
+* Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Sep 5
 
-* Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Sep 6
+* Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Sep 6
 
 * Complete [PS-03](https://classroom.github.com/a/Zvfqni-u) by 5:00 pm Sep 7
 
@@ -154,9 +154,9 @@ ___________
 
 * Class [notes](../Handouts/RegHandout.html) for one quantitative and one qualitative predictor
 
-* Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Sep 12
+* Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Sep 12
 
-* Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Sep 13
+* Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Sep 13
 
 * Complete [PS-04](https://classroom.github.com/a/uuTnPphb) due by 5:00 pm Sep 14
 
@@ -182,9 +182,9 @@ __________________
 
 * Regression with a single [categorical variable](../Handouts/RegWithCategoricalVariables.html) handout.
 
-* Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Sep 19
+* Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Sep 19
 
-* Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Sep 20
+* Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Sep 20
 
 * Complete [PS-05](https://classroom.github.com/a/4MMydu5I) by 5:00 pm Sep 21 
 
@@ -225,11 +225,11 @@ _____________
 
 * [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)
 
-* Complete (**The binomial distribution**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Oct 3
+* Complete (**The binomial distribution**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Oct 3
 
-* Complete (**Laws of probability**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Oct 4
+* Complete (**Laws of probability**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Oct 4
 
-* Complete (**Bayesian statistics**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Oct 5
+* Complete (**Bayesian statistics**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Oct 5
 
 
 ```{block, week7optional, type='rmdoptional'}
@@ -237,9 +237,9 @@ _____________
 
 * [In Class Problems](../Slides/ProbabilityProblems.html)
 
-* Complete the **Improving the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments)
+* Complete the **Improving the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments)
 
-* Complete the **Customizing the Report** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments)
+* Complete the **Customizing the Report** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments)
 ```
 
 
@@ -249,7 +249,7 @@ ___________
 
 ## Week 8: (Oct 10 -- 12) {-}
 
-* Complete (**Related distributions**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Oct 10
+* Complete (**Related distributions**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Oct 10
 
 * **Mid-Term Exam/Opportunity To Excel** --- Due no later than 2:00 pm Oct 12 
 
@@ -293,11 +293,11 @@ ___________________________
 
 * [Chapter 5 notes](../Notes/Children/BootStrap2.html)
 
-* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Oct 24
+* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Oct 24
 
-* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Oct 25
+* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Oct 25
 
-* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Oct 26
+* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Oct 26
 
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
@@ -355,11 +355,11 @@ __________________
 
 * Read about [Permutation Testing](../Rmarkdown/PermutationTesting.html) 
 
-* Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Nov 7
+* Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 7
 
-* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Nov 8
+* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 8
 
-* Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Nov 9
+* Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 9
 
 
 
@@ -381,9 +381,9 @@ ______________________
 
 * [Permutation Examples](../Rmarkdown/PermutationExamples.html)
 
-* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Nov 14
+* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 14
 
-* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Nov 15
+* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 15
 
 * Complete [PS-09](https://classroom.github.com/a/OkAkSN2h) by 5:00 pm Nov 16 
 
@@ -404,7 +404,7 @@ _________________
 
 * [In class Examples](../Rmarkdown/InClassNotes.html)
 
-* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Nov 21
+* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 21
 
 
 
@@ -424,7 +424,7 @@ ________________________
 
 * [In class Examples](../Rmarkdown/InClassNotes.html)
 
-* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-f23/assignments) --- Due NLT 5:00 pm Nov 28
+* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 28
 
 * Course Review
 
