@@ -82,18 +82,18 @@ ________
 
 **Computers and Software**
 
-This course will use the RStudio server  (https://mathr.appstate.edu/) that has the programs listed below and more installed.
+This course will use the RStudio/POSIT workbench server  (https://mathr.appstate.edu/) that has the programs listed below and more installed.
 
 * [R](https://cran.r-project.org) 
 * [Git](https://git-scm.com/downloads) 
 * [RStudio](https://www.rstudio.com/products/rstudio/download/)
 * [LaTeX](https://www.ctan.org/starter)
 
-You must have an active internet connection and be registered in the course to access the server. To access the server, point any web browser to <https://mathr.appstate.edu/>.  Use your Appstate Username and Password to access the server.  A screen shot of the RStudio server is shown below.
+You must have an active internet connection and be registered in the course to access the server. To access the server, point any web browser to <https://mathr.appstate.edu/>.  Use your Appstate Username and Password to access the server.  A screen shot of the POSIT workbench login screen is shown below.
 
 
 ```{r, echo = FALSE, fig.align="center"}
-knitr::include_graphics("RStudioLogIn.png", dpi = 128)
+knitr::include_graphics("POSITlogin.png", dpi = 128)
 ```
 
 
