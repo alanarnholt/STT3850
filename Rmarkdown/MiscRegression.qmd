@@ -1,0 +1,763 @@
+---
+title: "Misc Regression"
+author: "Alan Arnholt"
+date: last-modified
+date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
+format: 
+  html: default
+editor: visual
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+set.seed(123)
+library(knitr)
+library(tidyverse)
+knitr::opts_chunk$set(comment = NA,  fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = TRUE))
+```
+
+# Read in data with `read.csv()`
+
+```{r, label = "readin", message = FALSE}
+site <- "http://statlearning.com/s/Advertising.csv"
+AD <- read.csv(site)
+head(AD)
+dim(AD)
+library(DT)
+datatable(AD[, -1], rownames = FALSE,
+          caption = 'Table 1: This is a simple caption for the table.') 
+```
+
+## Base R Graph
+
+
+
+```{r}
+#| label: "fig-base1"
+#| fig-cap: "Base R scatterplot of `sales` versus `TV`"
+plot(sales ~ TV, data = AD, col = "red", pch = 19)
+mod1 <- lm(sales ~ TV, data = AD)
+abline(mod1, col = "blue")
+```
+```{r, fig.width = 12, fig.height = 4}
+#| label: "fig-youchange"
+#| fig-cap: "You should change this caption"
+par(mfrow = c(1, 3))
+plot(sales ~ TV, data = AD, col = "red", pch = 19)
+mod1 <- lm(sales ~ TV, data = AD)
+abline(mod1, col = "blue")
+plot(sales ~ radio, data = AD, col = "red", pch = 19)
+mod2 <- lm(sales ~ radio, data = AD)
+abline(mod2, col = "blue")
+plot(sales ~ newspaper, data = AD, col = "red", pch = 19)
+mod3 <- lm(sales ~ newspaper, data = AD)
+abline(mod3, col = "blue")
+par(mfrow=c(1, 1))
+```
+
+
+Change the caption in @fig-youchange.
+
+## Using `ggplot2`
+
+```{r}
+#| label: "fig-ggp"
+#| fig-cap: "`ggplot` graph with three superimposed lines"
+library(ggplot2)
+library(MASS)
+p <- ggplot(data = AD, aes(x = TV, y = sales)) +
+  geom_point(color = "lightblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  geom_smooth(method = "loess", color = "red", se = FALSE) + 
+  geom_smooth(method = "rlm", color = "purple", se = FALSE) +
+  theme_bw()
+p
+```
+
+```{r, fig.width = 12, fig.height = 4}
+#| label: "fig-gm"
+#| fig-cap: "Using `grid.arrange()` with `ggplot`"
+library(gridExtra)
+p1 <- ggplot(data = AD, aes(x = TV, y = sales)) +
+        geom_point(color = "lightblue") + 
+        geom_smooth(method = "lm", se = FALSE, color = "blue") +
+        theme_bw()
+p2 <- ggplot(data = AD, aes(x = radio, y = sales)) +
+        geom_point(color = "lightblue") +
+        geom_smooth(method = "lm", se = FALSE, color = "blue") +
+        theme_bw()
+p3 <- ggplot(data = AD, aes(x = newspaper, y = sales)) +
+        geom_point(color = "lightblue") +
+        geom_smooth(method = "lm", se = FALSE, color = "blue") + 
+        theme_bw()
+grid.arrange(p1, p2, p3, ncol = 3)
+```
+
+```{r, fig.width = 12, fig.height = 4}
+#| fig-cap: "Using `patchwork` with `ggplot`"
+library(patchwork)
+p1 + p2 + p3
+```
+
+## Using `ggvis`
+
+```{r , label = "ggvis", message = FALSE}
+library(ggvis)
+AD %>% 
+  ggvis(x = ~TV, y = ~sales) %>% 
+  layer_points() %>% 
+  layer_model_predictions(model = "lm", se = FALSE) %>% 
+  layer_model_predictions(model = "MASS::rlm", se = FALSE, stroke := "blue") %>%
+  layer_smooths(stroke:="red", se = FALSE)
+```
+
+## Using `plotly`
+
+```{r, label = "plotly", message = FALSE}
+library(plotly)
+p11 <- ggplotly(p)
+p11
+```
+
+
+## Scatterplot Matrices
+
+```{r, label = "SPM", fig.width = 8, fig.height = 8}
+library(car)
+scatterplotMatrix(~ sales + TV + radio + newspaper, data = AD)
+```
+
+# Basic Regression
+
+Recall `mod1`
+
+```{r, label = "regstart"}
+mod1 <- lm(sales ~ TV, data = AD)
+summary(mod1)
+```
+
+\begin{equation}
+\text{Residual}\equiv e_i = y_i - \hat{y_i}
+(\#eq:resid)
+\end{equation}
+
+To obtain the residuals for `mod1` use the function `resid` on a linear model object.
+
+```{r, label = "resids"}
+eis <- resid(mod1)
+RSS <- sum(eis^2)
+RSS
+RSE <- sqrt(RSS/(dim(AD)[1]-2))
+RSE
+# Or
+summary(mod1)$sigma
+# Or
+library(broom)
+NDF <- augment(mod1)
+sum(NDF$.resid^2)
+RSE <- sqrt(sum(NDF$.resid^2)/df.residual(mod1))
+RSE
+```
+
+```{r, label = "modern_stuff"}
+library(moderndive)
+get_regression_table(mod1)
+MDDF <- get_regression_points(mod1)
+MDDF
+library(dplyr)
+MDDF %>% 
+  summarize(RSS = sum(residual^2))
+```
+
+
+The least squares estimators of $\beta_0$ and $\beta_1$ are
+
+$$b_0 = \hat{\beta_0} = \bar{y} - b_1\bar{x}$$
+$$b_1 = \hat{\beta_1} = \frac{\sum_{i = 1}^n(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}$$
+
+```{r, label = "byhand"}
+y <- AD$sales
+x <- AD$TV
+b1 <- sum( (x - mean(x))*(y - mean(y)) ) / sum((x - mean(x))^2)
+b0 <- mean(y) - b1*mean(x)
+c(b0, b1)
+# Or using
+coef(mod1)
+summary(mod1)
+XTXI <- summary(mod1)$cov.unscaled
+MSE <- summary(mod1)$sigma^2
+var.cov.b <- MSE*XTXI
+var.cov.b
+seb0 <- sqrt(var.cov.b[1, 1])
+seb1 <- sqrt(var.cov.b[2, 2])
+c(seb0, seb1)
+coef(summary(mod1))
+coef(summary(mod1))[1, 2]
+coef(summary(mod1))[2, 2]
+tb0 <- b0/seb0
+tb1 <- b1/seb1
+c(tb0, tb1)
+pvalues <- c(pt(tb0, 198, lower = FALSE)*2, pt(tb1, 198, lower = FALSE)*2)
+pvalues
+coef(summary(mod1))
+TSS <- sum((y - mean(y))^2)
+c(RSS, TSS)
+R2 <- (TSS - RSS)/TSS
+R2
+# Or
+summary(mod1)$r.squared
+```
+
+
+## Confidence Interval for $\beta_1$
+
+\begin{equation}
+\text{CI}_{1 - \alpha}(\beta_1) = \left[b_1 - t_{1- \alpha/2, n - p - 1}SE(b1), b_1 + t_{1- \alpha/2, n - p - 1}SE(b1) \right]
+\end{equation}
+
+**Example:** Use the equation above to construct a 90% confidence interval for $\beta_1$.
+
+```{r, label = "CIBeta"}
+alpha <- 0.10
+ct <- qt(1 - alpha/2, df.residual(mod1))
+ct
+b1 + c(-1, 1)*ct*seb1
+# Or
+confint(mod1, parm = "TV", level = 0.90)
+confint(mod1)
+```
+
+### Linear Algebra
+
+**Solution of linear systems** Find the solution(s) if any to the following linear equations.
+
+$$2x + y - z = 8$$
+$$-3x - y + 2z = -11$$
+$$-2x + y + 2z = -3$$
+
+```{r, label = "linearALG"}
+A <- matrix(c(2, -3, -2, 1, -1, 1, -1, 2, 2), nrow = 3)
+b <- matrix(c(8, -11, -3), nrow = 3)
+x <- solve(A)%*%b
+x
+# Or
+solve(A, b)
+```
+
+See [wikipedia](https://en.wikipedia.org/wiki/Matrix_multiplication) for a review of matrix multiplication rules and properties.
+
+
+Consider the 2 $\times$ 2 matrix $A$.
+
+$$A = \begin{bmatrix}
+2 & 4 \\
+9 & 5 \\
+\end{bmatrix}
+$$
+
+### Linear Regression Matrix Notation
+
+\begin{equation}
+\mathbf{\hat{\beta}} = (\mathbf{X'X})^{-1}\mathbf{X'Y}
+\end{equation}
+
+\begin{equation}
+\sigma^2_{\hat{\beta}} = \sigma^2(\mathbf{X'X})^{-1}
+\end{equation}
+
+\begin{equation}
+\hat{\sigma}^2_{\hat{\beta}} = MSE(\mathbf{X'X})^{-1}
+\end{equation}
+
+$$\mathbf{\hat{\beta}} \sim N(\mathbf{\beta}, \sigma^2(\mathbf{X'X})^{-1})$$
+
+### Estimation of the Mean Response for New Values $X_h$
+
+Not only is it desirable to create confidence intervals on the parameters of the regression models, bit it is also common to estimate the mean response $\left(E(Y_h)\right)$ for a particular set of $\mathbf{X}$ values.
+
+$$\hat{Y_h} \sim N(Y_h = X_h\beta, \sigma^2\mathbf{X_h}(\mathbf{X'X})^{-1}\mathbf{X_h'})$$
+For a vector of given values $(\mathbf{X_h})$, a $(1 - \alpha)\cdot 100\%$ confidence interval for the mean response $E(Y_h)$ is
+
+$$CI_{1-\alpha}\left[E(Y_h)\right] = \left[\hat{Y_h} - t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y_h}}, \hat{Y_h} + t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y_h}}  \right]$$
+The function `predict()` applied to a linear model object will compute $\hat{Y_h}$ and $s_{\hat{Y_h}}$ for a given $\mathbf{X}_h$.  `R` output has $\hat{Y_h}$ labeled `fit` and $s_{\hat{Y_h}}$ labeled `se.fit`.
+
+```{r, label = "mola"}
+A <- matrix(c(2, 9, 4, 5), nrow = 2)
+A
+t(A)          # Transpose of A
+t(A)%*%A      # A'A
+solve(A)%*%A  # I_2
+zapsmall(solve(A)%*%A)  # What you expect I_2
+```
+
+
+
+```{r, label = "MM"}
+X <- model.matrix(mod1)
+XTX <- t(X)%*%X
+dim(XTX)
+XTXI <- solve(XTX)
+XTXI
+# But it is best to compute this quantity using
+summary(mod1)$cov.unscaled
+betahat <- XTXI%*%t(X)%*%y
+betahat
+coef(mod1)
+XTXI <- summary(mod1)$cov.unscaled
+MSE <- summary(mod1)$sigma^2
+var_cov_b <- MSE*XTXI
+var_cov_b
+```
+
+**Example** Use the `GRADES` data set and model `gpa` as a function of `sat`.  Compute the expected GPA (`gpa`) for an SAT score (`sat`) of 1300.  Construct a 90% confidence interval for the mean GPA for students scoring 1300 on the SAT.
+
+```{r, label = "mipack"}
+library(PASWR2)
+mod.lm <- lm(gpa ~ sat, data = GRADES)
+summary(mod.lm)
+betahat <- coef(mod.lm)
+betahat
+knitr::kable(tidy(mod.lm))
+#
+Xh <- matrix(c(1, 1300), nrow = 1)
+Yhath <- Xh%*%betahat
+Yhath
+predict(mod.lm, newdata = data.frame(sat = 1300))
+# Linear Algebra First
+anova(mod.lm)
+MSE <- anova(mod.lm)[2, 3]
+MSE
+XTXI <- summary(mod.lm)$cov.unscaled
+XTXI
+var_cov_b <- MSE*XTXI
+var_cov_b
+s2yhath <- Xh %*% var_cov_b %*% t(Xh)
+s2yhath
+syhath <- sqrt(s2yhath)
+syhath
+crit_t <- qt(0.95, df.residual(mod.lm))
+crit_t
+CI_EYh <- c(Yhath) + c(-1, 1)*c(crit_t*syhath)
+CI_EYh
+# Using the build in function
+predict(mod.lm, newdata = data.frame(sat = 1300), interval = "conf", level = 0.90)
+```
+
+
+
+
+## Multiple Linear Regression
+
+```{r, label = "modtwo"}
+mod2 <- lm(sales ~ TV + radio, data = AD)
+summary(mod2)
+```
+
+### Graphing the plane
+
+```{r}
+#| label: "fig-mucho"
+#| fig-cap: "3-D residuals and fitted plane"
+library(scatterplot3d)
+s3d <- scatterplot3d(x = AD$TV, y = AD$radio, 
+              z = AD$sales, xlab = "TV", 
+              ylab = "Radio", zlab = "Sales",
+              box = TRUE, pch = 20, color = "white",
+              cex.symbols = 0.75, angle = 60, grid = FALSE)
+s3d$plane3d(mod2 <- lm(sales ~ TV + radio, data = AD), 
+            lty = "dotted", lty.box = "solid")
+orig <- s3d$xyz.convert(x = AD$TV, y = AD$radio, 
+                        z = AD$sales)
+plane <- s3d$xyz.convert(x = AD$TV, y = AD$radio,  fitted(mod2))
+i.negpos <- 1 + (resid(mod2) > 0)
+segments(orig$x, orig$y, plane$x, plane$y,
+         col = c("darkblue", "lightblue3")[i.negpos])
+s3d$points3d(x = AD$TV, y = AD$radio, 
+             z = AD$sales,
+             col = c("darkblue", "lightblue3")[i.negpos],
+             pch = 20)
+```
+
+### Using `plotly`
+
+```{r}
+library(plotly)
+# draw the 3D scatterplot
+p <- plot_ly(data = AD, z = ~sales, x = ~TV, y = ~radio, opacity = 0.5) %>% 
+  add_markers
+p
+```
+
+```{r}
+x <- seq(0, 300, length = 70)
+y <- seq(0, 50, length = 70)
+plane <- outer(x, y, function(a, b){summary(mod2)$coef[1, 1] + summary(mod2)$coef[2, 1]*a + summary(mod2)$coef[3, 1]*b})
+# draw the plane
+p %>% 
+  add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE)
+```
+
+
+
+
+
+
+
+
+
+## Is There a Relationship Between the Response and Predictors?
+
+```{r, label = "modthree"}
+mod3 <- lm(sales ~ TV + radio + newspaper, data = AD)
+summary(mod3)
+```
+
+$$H_0: \beta_1 = \beta_2 = \beta_3 = 0$$
+versus the alternative
+$$H_1: \text{at least one } \beta_j \neq 0$$
+
+The test statistic is $F = \frac{(\text{TSS} - \text{RSS})/p}{\text{RSS}/(n-p-1)}$
+
+```{r, label = "ANOVA"}
+anova(mod3)
+SSR <- sum(anova(mod3)[1:3, 2])
+MSR <- SSR/3
+SSE <- anova(mod3)[4, 2]
+MSE <- SSE/(200-3-1)
+Fobs <- MSR/MSE
+Fobs
+pvalue <- pf(Fobs, 3, 196, lower = FALSE)
+pvalue
+# Or
+summary(mod3)
+summary(mod3)$fstatistic
+```
+
+Suppose we would like to test whether $\beta_2 = \beta_3 = 0$.  The reduced model with $\beta_2 = \beta_3 = 0$ is `mod1` while the full model is `mod3`.
+
+```{r, label = "MA"}
+summary(mod3)
+anova(mod1, mod3)
+```
+
+## Variable Selection
+
+* Forward selection
+
+```{r, label = "Forward"}
+mod.fs <- lm(sales ~ 1, data = AD)
+SCOPE <- (~ TV + radio + newspaper)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, .~. + TV)
+add1(mod.fs, scope = SCOPE, test = "F")
+mod.fs <- update(mod.fs, .~. + radio)
+add1(mod.fs, scope = SCOPE, test = "F")
+summary(mod.fs)
+```
+
+* Using `stepAIC`
+
+```{r, label = "step"}
+stepAIC(lm(sales ~ 1, data = AD), scope = (~TV + radio + newspaper), direction = "forward", test = "F")
+# Or
+null <- lm(sales ~ 1, data = AD)
+full <- lm(sales ~ ., data = AD)
+stepAIC(null, scope = list(lower = null, upper = full), direction = "forward", test = "F")
+```
+
+
+* Backward elimination
+
+```{r, label = "backward"}
+mod.be <- lm(sales ~ TV + radio + newspaper, data = AD)
+drop1(mod.be, test = "F")
+mod.be <- update(mod.be, .~. - newspaper)
+drop1(mod.be, test = "F")
+summary(mod.be)
+```
+
+* Using `stepAIC`
+
+```{r, label = "moSTEP"}
+stepAIC(lm(sales ~ TV + radio + newspaper, data = AD), scope = (~TV + radio + newspaper), direction = "backward", test = "F")
+# Or
+stepAIC(full, scope = list(lower = null, upper = full), direction = "backward", test = "F")
+```
+
+
+## Diagnostic Plots
+
+```{r, label = "daignos", fig.width = 7, fig.height = 7}
+residualPlots(mod2)
+qqPlot(mod2)
+influenceIndexPlot(mod2)
+```
+
+
+
+We use a _confidence interval_ to quantify the uncertainty surrounding the _average_ `sales` over a large number of cities.  For example, given that $100,000 is spent on `TV` advertising and $20,000 is spent on `Radio` advertising in each city, the 95% confidence interval is [`r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "conf")[2]`, `r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "conf")[3]`].  We interpret this to mean that 95% of intervals of this form will contain the true value of `Sales`.
+
+```{r, label = "predbe"}
+predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "conf")
+```
+
+On the other hand, a _prediction interval_ can be used to quantify the uncertainty surrounding `sales` for a _particular_ city.  Given that $100,000 is spent on `TV` advertising and $20,000 is spent on `radio` advertising in **a particular** city, the 95% prediction interval is [`r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "pred")[2]`, `r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "pred")[3]`].  We interpret this to mean that 95% of intervals of this form will contain the true value of `Sales` for this city.
+
+```{r, label = "predbe2"}
+predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "pred")
+```
+
+Note that both the intervals are centered at `r predict(mod.be, newdata = data.frame(TV = 100, radio = 20))`, but that the prediction interval is substantially wider than the confidence interval, reflecting the increased uncertainty about `Sales` for a given city in comparison to the average `sales` over many locations.
+
+## Non-Additive Models
+
+```{r, label = "noadd"}
+nam1 <- lm(sales ~ TV*radio, data = AD)
+# Same as 
+nam2 <- lm(sales ~ TV + radio + TV:radio, data = AD)
+summary(nam1)
+summary(nam2)
+```
+
+**Hierarchical Principle:** If an interaction term is included in a model, one should also include the main effects, even if the _p-values_ associated with their coefficients are not significant.
+
+
+## Qualitative Predictors
+
+In the `Credit` data frame there are four qualitative features/variables `Gender`, `Student`, `Married`, and `Ethnicity`.
+
+```{r, label = "readin2"}
+Credit <- read.csv("http://statlearning.com/s/Credit.csv")
+datatable(Credit[, -1], rownames = FALSE)
+```
+
+
+
+```{r, label = "modNOTATION"}
+modP <- lm(Balance ~ Income*Student, data = Credit)
+summary(modP)
+```
+
+Fitted Model: $\widehat{\text{Balance}}  = `r coef(modP)[1]` + `r coef(modP)[2]`\cdot \text{Income} + `r coef(modP)[3]`\cdot \text{Student} `r coef(modP)[4]`\cdot\text{Income}\times\text{Student}$
+
+### Predictors with Only Two Levels
+
+Suppose we wish to investigate differences in credit card balance between males and females, ignoring the other variables for the moment.
+
+```{r, label = "GGSD"}
+library(ISLR)
+data(Credit)
+modS <- lm(Balance ~ Gender, data = Credit)
+summary(modS)
+coef(modS)
+tapply(Credit$Balance, Credit$Gender, mean)
+library(ggplot2)
+ggplot(data = Credit, aes(x = Gender, y = Balance)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_hline(yintercept = coef(modS)[1] + coef(modS)[2], color = "purple") + 
+  geom_hline(yintercept = coef(modS)[1], color = "green")
+```
+
+Do females have a higher ratio of `Balance` to `Income` (credit utilization)? Here is an article from the [Washington Post](https://www.washingtonpost.com/news/get-there/wp/2016/02/17/how-being-a-woman-can-ding-your-credit-score/) with numbers that mirror some of the results in the `Credit` data set.
+
+```{r, label = "OT"}
+Credit$Utilization <- Credit$Balance / (Credit$Income*100)
+tapply(Credit$Utilization, Credit$Gender, mean)
+# Tidyverse approach
+Credit %>%
+  mutate(Ratio = Balance / (Income*100) ) %>%
+  group_by(Gender) %>%
+  summarize(mean(Ratio))
+```
+
+```{r, label = "UTIL"}
+modU <- lm(Utilization ~ Gender, data = Credit)
+summary(modU)
+coef(modU)
+ggplot(data = Credit, aes(x = Gender, y = Utilization)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_hline(yintercept = coef(modU)[1] + coef(modU)[2], color = "purple") + 
+  geom_hline(yintercept = coef(modU)[1], color = "green")
+```
+
+
+## Moving On Now
+
+```{r, label = "movealong"}
+modS1 <- lm(Balance ~ Limit + Student, data = Credit)
+summary(modS1)
+coef(modS1)
+# Interaction --- Non-additive Model
+modS2 <- lm(Balance ~ Limit*Student, data = Credit)
+summary(modS2)
+```
+
+### What does this look like?
+
+Several points:
+
+* Is the interaction significant?
+* Which model is `ggplot2` graphing below?
+* Is this the correct model?
+
+```{r}
+#| label: "fig-GGDWDYE"
+#| fig-cap: " Balance versus Limit"
+ggplot(data = Credit, aes(x = Limit, y = Balance, color = Student)) + 
+  geom_point() + 
+  stat_smooth(method = "lm") + 
+  theme_bw()
+```
+
+### Correct Graph
+
+```{r}
+#| label: "fig-CG"
+#| fig-cap: "Figure thisone out!"
+S2M <- lm(Balance ~ Limit + Student, data = Credit)
+#
+ggplot(data = Credit, aes(x = Limit, y = Balance, color = Student)) +
+  geom_point() + 
+  theme_bw() + 
+  geom_abline(intercept = coef(S2M)[1], slope = coef(S2M)[2], color = "red") + 
+  geom_abline(intercept = coef(S2M)[1] + coef(S2M)[3], slope = coef(S2M)[2], color = "blue") + 
+  scale_color_manual(values = c("red", "blue"))
+```
+
+### Qualitative predictors with More than Two Levels
+
+```{r, label = "TL"}
+modQ3 <- lm(Balance ~ Limit + Ethnicity, data = Credit)
+summary(modQ3)
+coef(modQ3)
+modRM <- lm(Balance ~ Limit, data = Credit)
+anova(modRM, modQ3)
+```
+
+ What follows fits three separate regression lines based on `Ethnicity`.
+ 
+```{r, label = "threesep"}
+AfAmer <- lm(Balance ~ Limit, data = subset(Credit, Ethnicity == "African American"))
+AsAmer <- lm(Balance ~ Limit, data = subset(Credit, Ethnicity == "Asian"))
+CaAmer <- lm(Balance ~ Limit, data = subset(Credit, Ethnicity == "Caucasian"))
+rbind(coef(AfAmer), coef(AsAmer), coef(CaAmer))
+ggplot(data = Credit, aes(x = Limit, y = Balance, color = Ethnicity)) +
+  geom_point() + 
+  theme_bw() +
+  stat_smooth(method = "lm", se = FALSE)
+```
+
+**Note:** `Ethnicity` is not significant, so we really should have just one line.
+
+```{r, label = "oneline"}
+ggplot(data = Credit, aes(x = Limit, y = Balance)) +
+  geom_point(aes(color = Ethnicity)) + 
+  theme_bw() +
+  stat_smooth(method = "lm")
+```
+
+## Matrix Scatterplots
+
+```{r, label = "SP23", warning = FALSE, message = FALSE, fig.width = 12, fig.height = 12}
+scatterplotMatrix(~ Balance + Income + Limit + Rating + Cards + Age + Education + Gender + Student + Married + Ethnicity,  data = Credit)
+null <- lm(Balance ~ 1, data = Credit)
+full <- lm(Balance ~ ., data = Credit)
+modC <- stepAIC(full, scope = list(lower = null, upper = full), direction = "backward", test = "F")
+modC
+modD <- stepAIC(null, scope = list(lower = null, upper = full), direction = "forward", test = "F")
+modD
+# Predict
+predict(modC, newdata = data.frame(Income = 80, Limit = 5000, Cards = 3, Age = 52, Student = "No", Rating = 800, Utilization = 0.10), interval = "pred")
+```
+
+## More Diagnostic Plots
+
+```{r, label = "DPcar"}
+residualPlots(modC)
+qqPlot(modC)
+influenceIndexPlot(modC)
+```
+
+## Non-linear Relationships
+
+```{r}
+#| label: "fig-NLR"
+#| fig-cap: "Showing non-linear relationships" 
+library(ISLR)
+car1 <- lm(mpg ~ horsepower, data = Auto)
+car2 <- lm(mpg ~ poly(horsepower, 2), data = Auto)
+car5 <- lm(mpg ~ poly(horsepower, 5), data = Auto)
+xs <- seq(min(Auto$horsepower), max(Auto$horsepower), length = 500)
+y1 <- predict(car1, newdata = data.frame(horsepower = xs))
+y2 <- predict(car2, newdata = data.frame(horsepower = xs))
+y5 <- predict(car5, newdata = data.frame(horsepower = xs))
+DF <- data.frame(x = xs, y1 = y1, y2 = y2, y5 = y5)
+ggplot(data = Auto, aes(x = horsepower, y = mpg)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_line(data = DF, aes(x = x, y = y1), color = "red") + 
+  geom_line(data = DF, aes(x = x, y = y2), color = "blue") + 
+  geom_line(data = DF, aes(x = x, y = y5), color = "green")
+```
+
+```{r, label = "smooth"}
+ggplot(data = Auto, aes(x = horsepower, y = mpg)) + 
+  geom_point(color = "lightblue") + 
+  theme_bw() + 
+  stat_smooth(method = "lm", data = Auto, color = "red", se = FALSE) + 
+  stat_smooth(method = "lm", formula = y ~ poly(x, 2), data = Auto, color = "blue", se = FALSE) + 
+  stat_smooth(method = "lm", formula = y ~ poly(x, 5), data = Auto, color = "green", se = FALSE) 
+```
+
+```{r}
+newC <- update(modC, .~. - Limit - Income - Rating + poly(Income, 2) + poly(Limit, 4))
+summary(newC)
+residualPlots(newC)
+qqPlot(newC)
+influenceIndexPlot(newC)
+```
+
+## Variance Inflation Factor (VIF)
+
+The VIF is the ratio of the variance of $\hat{\beta}_j$ when fitting the full model divided by the variance of $\hat{\beta}_j$ if it is fit on its own.  The smallest possible value for VIF is 1, which indicates the complete absence of collinearity.  The VIF for each variable can be computed using the formula:
+
+$$VIF(\hat{\beta}_j) = \frac{1}{1 - R^2_{X_j|X_{-j}}}$$
+
+where $R^2_{X_j|X_{-j}}$ is the $R^2$ from a regression of $X_j$ onto all of the other predictors.  If $R^2_{X_j|X_{-j}}$ is close to one, then collinearity is present, and so the VIF will be large.
+
+
+Compute the VIF for each $\hat{\beta}_j$ of `modC`
+
+```{r, label = "VIF"}
+modC
+R2inc <- summary(lm(Income ~ Limit + Rating + Cards + Age + Student + Utilization, data = Credit))$r.squared
+R2inc
+VIFinc <- 1/(1 - R2inc)
+VIFinc
+R2lim <- summary(lm(Limit ~ Income + Rating + Cards + Age + Student + Utilization, data = Credit))$r.squared
+R2lim
+VIFlim <- 1/(1 - R2lim)
+VIFlim
+```
+
+This is tedious is there a function to do this?  Yes!
+
+```{r}
+car::vif(modC)
+```
+
+## Exercise
+
+* Create a model that predicts an individuals credit rating (`Rating`).
+
+* Create another model that predicts rating with `Limit`, `Cards`, `Married`, `Student`, and `Education` as features. 
+
+* Use your model to predict the `Rating` for an individual that has a credit card limit of
+$6,000, has 4 credit cards, is married, is not a student, and has an undergraduate degree (`Education` = 16).
+
+* Use your model to predict the `Rating` for an individual that has a credit card limit of
+$12,000, has 2 credit cards, is married, is not a student, and has an eighth grade education (`Education` = 8).
+
+
+
