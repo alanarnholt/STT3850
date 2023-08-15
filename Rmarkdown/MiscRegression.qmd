@@ -1,6 +1,6 @@
 ---
 title: "Misc Regression"
-author: "Alan Arnholt"
+author: "Alan T. Arnholt"
 date: last-modified
 date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
 format: 
