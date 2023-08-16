@@ -1,0 +1,37 @@
+---
+title: "How To Do Well In This Class"
+format: html
+editor: visual
+---
+
+::: {.callout-note}
+**Faculty student responsibilities**
+
+* It is my (faculty) responsibility to explain and present the material you need to master for this course.  A detailed description of everything you need to do starting with day one to the Final Exam is provided in the course pacing guide which is available on day one of the course.
+
+* It is your (student) responsibility to learn the material and to seek help if you do not understand the material.  
+:::
+
+The only way to learn statistics is to **DO** statistics, which includes using statistical software. Reading the textbook, learning the language, and practicing exercises using real data are critical to your learning and success. Class activities and assessments have been structured with these principles in mind.
+
+
+You should read assigned textbook content and read/watch supplemental materials prior to coming to class.  When you read the assigned material, you should complete the problems (not just read about them) on your paper and computer. It will be easier to participate if you acquire some familiarity with the vocabulary and methods before we start to discuss and use them. You must “speak the language” (both statistics and R) to demonstrate your knowledge effectively.  If you come to class and have difficulty following the discussion, you should make sure you have read all of the assigned material and then go back and re-read the assigned material a second time.  Reading a technical book is not the same as a novel.  Most people, your instructor included, must read a technical section at least twice before understanding a topic.  If you are still having challenges after reading the assigned material twice and working the out the material on paper and the computer, it is your responsibility to seek help.  I am here to help and will be glad to assist you in your learning process.  Please make an appointment to visit with me on my [calendar](https://calendar.google.com/calendar/u/0/selfsched?sstoken=UUtZb3I1Z1pFczdjfGRlZmF1bHR8MTZjOTU5MGY0ZTFlOTA2MmExNzhlYWQ5MGIzZWQ0OGM). 
+
+For Problem Sets (PS) I will use a ***Tiered Feedback Approach*** explained below.
+
+**Level one**. Assessments are graded using the rubric on the course pacing guide.  The same rubric is used for all of the PS assignments, and you are graded on five categories with possible 3, 2, 1, or 0 points awarded per category.  Everyone who turns in an assignment will receive level 1 feedback.  
+
+**Level two**.  If you cannot determine what you could do better on future assignments based on the rubric feedback, you can request annotated (Level 2) feedback.  If you would like level 2 feedback, you should email me with a subject line “LEVEL 2 Feedback, please - STT 3850 PS #” before noon the Monday after you receive level 1 feedback (which should arrive on Fridays). 
+
+I will provide Level two feedback using Issues in Git to give additional details based on the rubric.  Anyone may ask for Level 2 feedback.  When you get your level 2 feedback (by Tuesday morning), you are expected to act on it to improve your code and mark issues as “resolved” inside the Git Issue before noon on Wednesday.
+
+**Level three**.  After you have received your level 2 feedback, if you are still unclear as to how you can improve your work, you may request to meet with me during student help/office hours Wednesday to receive in-depth feedback and guidance for how to be more successful on the next assignment and how to resolve the Level 2 feedback/Git issues before noon on Thursday.
+
+Asking for level 2 feedback is an agreement between you and me that you will revise and resubmit your document by noon on Thursday and I will look at your revisions and may revise your original rubric grade.
+
+________________________________________________
+
+
+***DataCamp*** assignments are assigned for students to practice coding and to receive immediate computerized feedback.  You should attempt to answer the DataCamp questions correctly and not simply ask the program to show you a solution.  
+
+Appalachian students are expected to make intensive engagement with courses their first priority. Practically speaking, students should spend approximately 2-3 hours on coursework outside of class for every hour they spend in class. For this four-hour course, you you should anticipate 8-12 hours per week of outside work.
