@@ -45,7 +45,9 @@ _________
 
 * Before the first class meeting, read Chapter 1 (Getting Started with Data in R) of [MD](https://moderndive.com/1-getting-started.html)---pgs 1-20
 
-* Become familiar with the Appstate [RStudio server](https://mathr.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
+* Before the first class meeting, read Chapter 1 [Why Git? Why GitHub?](https://happygitwithr.com/big-picture) of Happy Git With `R`.
+
+* Become familiar with the Appstate [RStudio/POSIT workbench](https://mathr.appstate.edu/) server. You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
 
 We will walk through everything outlined below in class.  If you want to complete the setup before class that is fine.    
 
