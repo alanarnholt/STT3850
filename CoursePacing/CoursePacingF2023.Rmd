@@ -47,13 +47,20 @@ _________
 
 * Become familiar with the Appstate [RStudio server](https://mathr.appstate.edu/). You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
 
+We will walk through everything outlined below in class.  If you want to complete the setup before class that is fine.    
+
 * Sign-up for a free account on [GitHub](https://github.com).  When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinguishing characteristic in your username.  
 
-* TL;DR [Git and GitHub setup](../Handouts/setup.html)
+* Introduce yourself to Git by following the directions in [HappyGitWithR](https://happygitwithr.com/hello-git)
 
-* Set cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html).--- [VIDEO of the setup process](https://drive.google.com/file/d/1G9G8IeYu9QetYB1nxMmAFLgRtw5YC-c8/view?usp=sharing)
+* Cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html).
 
-* Complete [PS-01](https://classroom.github.com/a/cDQEnd1b) due by 5:00 pm Aug 24 --- [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1MfDjhNb5m_45BCVD6ZQCXhgIMWwwx0oS/view?usp=sharing)
+* TL;DR the chapters in Happy Git With R --- follow this document to [Set up Git and GitHub](../Handouts/setup.html)
+
+* [VIDEO of the setup process](https://drive.google.com/file/d/1G9G8IeYu9QetYB1nxMmAFLgRtw5YC-c8/view?usp=sharing)
+
+* Complete [PS-01](https://classroom.github.com/a/cDQEnd1b) due by 5:00 pm Aug 24 
+* [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1MfDjhNb5m_45BCVD6ZQCXhgIMWwwx0oS/view?usp=sharing)
  
 ```{block, week1optional, type='rmdoptional'}
 #### Optional {-}
