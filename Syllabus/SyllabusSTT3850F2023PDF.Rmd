@@ -16,13 +16,11 @@ output:
 
 Make an appointment to see me by clicking [here](https://calendar.google.com/calendar/u/0/selfsched?sstoken=UUtZb3I1Z1pFczdjfGRlZmF1bHR8MTZjOTU5MGY0ZTFlOTA2MmExNzhlYWQ5MGIzZWQ0OGM).
 
-_________
 
 **Course Description:**  
 
 This course provides an overview of modern statistical data analysis. Programming with data, including simulations and bootstrapping, will be an integral part of the course. Techniques for parsing univariate and multivariate data sets will be examined. Coverage of probability, random variables, standard probability distributions and statistical sampling distributions will be sufficient to prepare the student for statistical inference. Inferential topics will include parameter estimation, hypothesis testing for proportions, means and medians, goodness of fit tests, and tests for independence. Standard and computationally intensive regression techniques may also be covered. (NUMERICAL DATA; COMPUTER) — Prerequisite: MAT 1110
 
-_______
 
 **Course Objectives:**
 
@@ -36,7 +34,6 @@ _______
 8. Students will learn how to work with named sampling distributions (t, F, binomial, chi-square, and normal).
 9. Students will learn the scope of inferential conclusions for numerous scenarios (experiments, observational studies, etc.).
 
-__________
 
 **Course Texts:**
 
@@ -48,7 +45,6 @@ __________
 
 * Other materials are available from the [course webpage](https://alanarnholt.github.io/STT3850/).
 
-________
 
 **Course Grading & Assessment:**
 
@@ -60,13 +56,11 @@ ________
 
 * 25% of the course grade will come from the Final exam
 
-________
 
 **University Policies**
 
 This course conforms with all Appalachian State University policies with respect to face coverings, academic integrity, disability services, class attendance, and student engagement.  The details of the policies may be found at <https://academicaffairs.appstate.edu/resources/syllabi-policy-and-statement-information>.  Please pay particular attention to the [student engagement statement](https://academicaffairs.appstate.edu/sites/academicaffairs.appstate.edu/files/gerber_resolution_student_workload_removed_approved_statement_per_mmccoughy_and_sedwards.pdf).
 
-________
 
 **Computers and Software**
 
@@ -81,12 +75,11 @@ You must have an active internet connection and be registered in the course to a
 
 
 ```{r, echo = FALSE, fig.align="center"}
-knitr::include_graphics("POSITlogin.png", dpi = 128)
+knitr::include_graphics("POSITlogin.png", dpi = 328)
 ```
 
 If you have problems with your Appstate Username or Password visit [IT Support Services](http://support.appstate.edu/) or call 262-6266.
 
-__________
 
 **Required Technology**
 
@@ -98,23 +91,18 @@ __________
 
 Note: All technology used in the class is either open source (free) or will be accessible to students enrolled in the course for no cost.
 
-___________
 
 **Assignments**
 
 The [CoursePacing guide](../CoursePacing/CoursePacingF2023.html) has all course assignments and due dates.
 
-____________
 
-```{block, note-text, type='rmdnote'}
 **Faculty student responsibilities**
 
 * It is my (faculty) responsibility to explain and present the material you need to master for this course.  A detailed description of everything you need to do starting with day one to the Final Exam is provided in the course pacing guide which is available on day one of the course.
 
 * It is your (student) responsibility to learn the material and to seek help if you do not understand the material.  
-```
 
-________________
 
 **How To Do Well In This Course**
 
@@ -135,18 +123,12 @@ I will provide Level two feedback using Issues in Git to give additional details
 
 Asking for level 2 feedback is an agreement between you and me that you will revise and resubmit your document by noon on Thursday and I will look at your revisions and may revise your original rubric grade.
 
-________________________________________________
-
 
 ***DataCamp*** assignments are assigned for students to practice coding and to receive immediate computerized feedback.  You should attempt to answer the DataCamp questions correctly and not simply ask the program to show you a solution.  
 
 Appalachian students are expected to make intensive engagement with courses their first priority. Practically speaking, students should spend approximately 2-3 hours on coursework outside of class for every hour they spend in class. For this four-hour course, you you should anticipate 8-12 hours per week of outside work.
 
 
-_____________________________________________
-
 **How To Get Unstuck**
 
 Well constructed questions will elicit answers more rapidly than poorly constructed questions.  This [video](https://www.youtube.com/watch?v=ZFaWxxzouCY&list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ&index=3) provides some background on asking questions.  This stackoverflow thread details how to create a [minimal R reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example/5963610#5963610). Please read [How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html) by Eric Raymond and Rick Moen and heed their advice.
-
-____________
