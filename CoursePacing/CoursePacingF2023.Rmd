@@ -59,10 +59,10 @@ We will walk through everything outlined below in class.  If you want to complet
 
 * TL;DR the chapters in Happy Git With R --- follow this document to [Set up Git and GitHub](../Handouts/setup.html)
 
-* [VIDEO of the setup process](https://drive.google.com/file/d/1G9G8IeYu9QetYB1nxMmAFLgRtw5YC-c8/view?usp=sharing)
+* [VIDEO of the setup process](https://drive.google.com/file/d/1L-v9qAVHWtvXOTYjY8wvedH5VyzmeQeL/view?usp=drive_link)
 
 * Complete [PS-01](https://classroom.github.com/a/cDQEnd1b) due by 5:00 pm Aug 24 
-* [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1MfDjhNb5m_45BCVD6ZQCXhgIMWwwx0oS/view?usp=sharing)
+* [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1JUag-0U-reD_JcKHvez50I_4R-CCMUMt/view?usp=drive_link)
  
 ```{block, week1optional, type='rmdoptional'}
 #### Optional {-}
