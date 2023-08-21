@@ -16,7 +16,9 @@ ggplot(data = cd, aes(x = YearGroup, fill = Major)) +
 ms <- cd %>% 
   filter(Major == "Mathematics"| Major == "Mathematics, Computation" | Major == "Mathematics, General Mathematics" | Major == "Mathematics, Life Sciences" | Major == "Mathematics, Statistics")
 ms
-
+xtabs(~YearGroup, data = cd)
+xtabs(~Major, data = cd)
+xtabs(~Major + YearGroup, data = cd)
 ```
 
 
