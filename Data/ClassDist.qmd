@@ -1,0 +1,22 @@
+---
+title: "Fall 2023 Class Distribution"
+format: html
+editor: visual
+---
+
+```{r, warning=FALSE, message=FALSE}
+cd <- read.csv("./class3850F23.csv")
+head(cd)
+library(tidyverse)
+ggplot(data = cd, aes(x = YearGroup, fill = Major)) + 
+  geom_bar()
+```
+
+```{r}
+ms <- cd %>% 
+  filter(Major == "Mathematics"| Major == "Mathematics, Computation" | Major == "Mathematics, General Mathematics" | Major == "Mathematics, Life Sciences" | Major == "Mathematics, Statistics")
+ms
+
+```
+
+
