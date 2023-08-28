@@ -9,14 +9,10 @@ format:
 editor: visual
 ---
 
-```{r include = FALSE}
+```{r label = "setup", include = FALSE}
 library(knitr) #packages
 library(DiagrammeR)
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", comment = NA, message = FALSE,  warning = FALSE)
-```
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE)
 ```
 
 ## Quarto
@@ -33,7 +29,9 @@ summary(cars)
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r, echo=FALSE}
+#| label: "fig-sp"
+#| fig-cap: "This is a scatterplot of pressure versus temperature"
 plot(pressure)
 ```
 
@@ -85,7 +83,41 @@ ggplot(data = RND, aes(x = x, y = ..density..)) +
   geom_density() +
   theme_bw() 
 ```
+## Three S's
 
+1. Shape
+2. Center
+3. Spread
+
+* Unimodal symmetric $\rightarrow$ use **mean** for center and **standard deviation** for spread.
+
+* Unimodal Skewed (either left or right) $\rightarrow$ use **median** for center and **IQR** for spread.
+
+
+```{r}
+n <- 10000
+sr <- rexp(n, .001)
+us <- rnorm(n, 100, 15)
+```
+
+* Characterize the distribution of `sr` and `us`.  Note: If you use `ggplot2` you need to pass a data frame or tibble as the first argument to your data.
+
+```{r}
+# Using Base R
+hist(sr)
+md <- median(sr)
+iqr <- IQR(sr)
+c(md, iqr)
+# Using tidyverse
+DF <- data.frame(x = sr)
+ggplot(data = DF, aes(x = x)) + 
+  geom_histogram()
+DF %>% 
+  summarize(Md = median(x), iqr = IQR(x)) -> tva
+tva
+```
+
+The distribution of `sr` is unimodal and skewed to the right with a center at the median which is `r median(sr)`, and a spread of (IQR = `r IQR(sr)`).
 
 ## Data
 
