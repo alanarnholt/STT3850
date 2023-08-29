@@ -104,20 +104,12 @@ us <- rnorm(n, 100, 15)
 
 ```{r}
 # Using Base R
-hist(sr)
-md <- median(sr)
-iqr <- IQR(sr)
-c(md, iqr)
+
 # Using tidyverse
-DF <- data.frame(x = sr)
-ggplot(data = DF, aes(x = x)) + 
-  geom_histogram()
-DF %>% 
-  summarize(Md = median(x), iqr = IQR(x)) -> tva
-tva
+
 ```
 
-The distribution of `sr` is unimodal and skewed to the right with a center at the median which is `r median(sr)`, and a spread of (IQR = `r IQR(sr)`).
+
 
 ## Data
 
