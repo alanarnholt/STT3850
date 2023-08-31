@@ -1,6 +1,6 @@
 ---
 title: "Practice"
-author: "Alan T. Arnholt"
+author: "Alan Arnholt"
 date: "9/8/2020"
 output: html_document
 ---
