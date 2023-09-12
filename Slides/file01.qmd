@@ -1,0 +1,49 @@
+---
+title: "Class Quarto Document"
+format: revealjs
+editor: visual
+---
+
+## Scatterplot Code
+
+```{r, echo = TRUE}
+library(tidyverse)
+library(PASWR2)
+ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
+  geom_point() +
+  theme_bw() -> p1
+```
+
+
+## Scatterplot Graph
+
+```{r}
+p1
+```
+
+## Linear Regression
+
+```{r, echo = TRUE}
+VIT2005 %>% 
+  summarize(b1 = cor(area, totalprice)*sd(totalprice)/sd(area),
+            b0 = mean(totalprice) - b1*mean(area))
+
+```
+
+
+
+
+## `lm()`
+
+```{r, echo = TRUE}
+mod1 <- lm(totalprice ~ area, data = VIT2005)
+names(summary(mod1))
+summary(mod1)$r.squared
+```
+## Regression Model
+
+The least squares regression model is:
+
+$$\widehat{totalprice} = `r summary(mod1)$coef[1, 1]` + `r round(summary(mod1)$coef[2, 1], 2)`\cdot area$$
+
+
