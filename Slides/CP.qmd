@@ -1,0 +1,57 @@
+---
+title: "CP"
+format: revealjs
+editor: visual
+---
+
+## Scatterplot
+
+```{r, echo = TRUE, fig.align = "center"}
+library(tidyverse)
+library(PASWR2)
+ggplot(data = VIT2005, aes(x = area, y = totalprice)) + 
+  geom_point() + 
+  theme_bw()
+```
+
+
+## Correlation
+
+Pearson's product moment correlation measures the amount of **linear** relationship between two **quantitative** variables.
+
+$$r = \frac{1}{n-1}\sum_{i=1}^{n}\left(\frac{x_i - \bar{x}}{s_x} \right)\left(\frac{y_i - \bar{y}}{s_y} \right)$$
+
+```{r, eval = FALSE, echo = TRUE}
+# R code
+cor(x_vector, y_vector)
+```
+
+
+## Code to compute r
+
+
+```{r, echo = TRUE}
+VIT2005 %>% 
+  mutate(x = area, y = totalprice, x_xbar = x - mean(x),
+         y_ybar = y -mean(y), z_x = x_xbar/sd(x), 
+         z_y = y_ybar/sd(y), z_xy = z_x*z_y) %>% 
+  select(x, x_xbar, z_x, y, y_ybar, z_y, z_xy) %>% 
+  mutate(r = sum(z_xy)/(length(z_xy) - 1)) %>%
+  select(r) %>% 
+  head(n = 1)
+cor(VIT2005$area, VIT2005$totalprice)
+```
+
+## Regression
+
+```{r, echo = FALSE}
+mod1 <- lm(totalprice ~ area, data = VIT2005)
+summary(mod1)$coef
+b0 <- summary(mod1)$coef[1, 1]
+b1 <- summary(mod1)$coef[2, 1]
+c(b0, b1)
+```
+
+The least squares line for regressing `totalprice` onto `area` is:
+
+$$\widehat{totalprice} = `r b0` + `r b1`\cdot area$$
