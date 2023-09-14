@@ -13,16 +13,13 @@ editor: visual
 knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
 ```
 
-
 # Qualitative Predictors
 
-The simplest situation where dummy variables might be used in a regression model is when the qualitative predictor has only two levels.  The regression model for a single quantitative predictor $(x_1)$ and a dummy variable $(D_1)$ is written
+The simplest situation where dummy variables might be used in a regression model is when the qualitative predictor has only two levels. The regression model for a single quantitative predictor $(x_1)$ and a dummy variable $(D_1)$ is written
 
 \begin{equation}
 Y = \beta_0 + \beta_1 x_1 + \beta_2 D_1 + \beta_3 x_1 D_1 + \varepsilon
-\end{equation}
-where
-\begin{equation*}
+\end{equation} where \begin{equation*}
 D_1 =
 \begin{cases}
 0 &\text{for the first level}\\
@@ -30,12 +27,11 @@ D_1 =
 \end{cases}
 \end{equation*}
 
-The model above when $D_1$ has two levels will yield one of four
-possible scenarios, as shown in @fig-fourlines.  This type of model requires the user to answer three **basic questions**:
+The model above when $D_1$ has two levels will yield one of four possible scenarios, as shown in @fig-fourlines. This type of model requires the user to answer three **basic questions**:
 
-* Are the lines the same?
-* Are the slopes the same?
-* Are the intercepts the same?
+-   Are the lines the same?
+-   Are the slopes the same?
+-   Are the intercepts the same?
 
 ```{r, echo = FALSE}
 #| label: "fig-fourlines"
@@ -76,43 +72,35 @@ mtext(text = "Y", side = 2, line = 0, at = 5)
 par(opar)
 ```
 
-________________
+------------------------------------------------------------------------
 
+To address whether the lines are the same, the null hypothesis $H_0: \beta_2 = \beta_3 = 0$ must be tested. One way to perform the test is to use the general linear test statistic based on the full model and the reduced model $Y = \beta_0 + \beta_1 x_1 + \varepsilon$. If the null hypothesis is not rejected, the interpretation is that there is one line present (the intercept and the slope are the same for both levels of the dummy variable). This is the case for graph I of @fig-fourlines. If the null hypothesis is rejected, either the slopes, the intercepts, or possibly both the slope and the intercept are different for the different levels of the dummy variable, as seen in graphs II, III, and IV of @fig-fourlines, respectively.
 
-To address whether the lines are the same, the null hypothesis $H_0: \beta_2 = \beta_3 = 0$ must be tested.  One way to perform the test is to use the general linear test statistic based on the full model and the reduced model $Y = \beta_0 + \beta_1 x_1 + \varepsilon$.  If the null hypothesis is not rejected, the interpretation is that there is one line present (the intercept and the slope are the same for both levels of the dummy variable).  This is the case for graph I of @fig-fourlines.  If the null hypothesis is rejected, either the slopes, the intercepts, or possibly both the slope and the intercept are different for the different levels of the dummy variable, as seen in graphs II, III, and IV of @fig-fourlines, respectively.
+To answer whether the slopes are the same, the null hypothesis $H_0: \beta_3 = 0$ must be tested. If the null hypothesis is not rejected, the two lines have the same slope, but different intercepts, as shown in graph II of @fig-fourlines. The two parallel lines that result when $\beta_3 = 0$ are
 
-To answer whether the slopes are the same, the null hypothesis $H_0: \beta_3 = 0$ must be tested.  If the null hypothesis is not rejected, the two lines have the same slope, but different intercepts, as shown in graph II of @fig-fourlines. The two parallel lines that result when $\beta_3 = 0$ are
-
+```{=tex}
 \begin{equation*}
 Y = \beta_0 + \beta_1 x_1 + \varepsilon \text{ for } (D_1 = 0)
 \quad\text{and}\quad Y = (\beta_0 +\beta_2) + \beta_1 x_1 + \varepsilon \text{
 for } (D_1 = 1).
 \end{equation*}
+```
+When $H_0: \beta_3=0$ is rejected, one concludes that the two fitted lines are not parallel as in graphs III and IV of @fig-fourlines.
 
-When $H_0: \beta_3=0$ is rejected, one concludes that the two fitted lines are
-not parallel as in graphs III and IV of @fig-fourlines.
+To answer whether the intercepts are the same, the null hypothesis $H_0: \beta_2 = 0$ for the full model must be tested. The reduced model for this test is $Y = \beta_0 + \beta_1 x_1 + \beta_3 x_1 D_1 + \varepsilon$. If the null hypothesis is not rejected, the two fitted lines have the same intercept but different slopes:
 
-To answer whether the intercepts are the same, the null hypothesis $H_0: \beta_2 = 0$ for the full model must be tested.  The reduced model for this test is $Y = \beta_0 + \beta_1 x_1 + \beta_3 x_1 D_1 + \varepsilon$.  If the null hypothesis is not rejected, the two fitted lines have the same intercept but different slopes:
-
+```{=tex}
 \begin{equation*}
 Y = \beta_0 + \beta_1 x_1 + \varepsilon \text{ for } (D_1 = 0)
 \quad\text{and}\quad Y = \beta_0 + (\beta_1 +\beta_3) x_1 + \varepsilon \text{
 for } (D_1 = 1).
 \end{equation*}
-
-Graph III of @fig-fourlines represents this situation.  If the null
-hypothesis is rejected, one concludes that the two lines have different
-intercepts, as in graphs II and IV of @fig-fourlines.
-
-
-
-
-
-
+```
+Graph III of @fig-fourlines represents this situation. If the null hypothesis is rejected, one concludes that the two lines have different intercepts, as in graphs II and IV of @fig-fourlines.
 
 # Example
 
-Suppose a realtor wants to model the appraised price of an apartment as a function of the predictors living area (in m$^2$) and  the presence or absence of elevators. Consider the data frame`VIT2005`, which contains data about apartments in Vitoria, Spain, including `totalprice`, `area`, and `elevator`, which are the appraised apartment value in Euros, living space in square meters, and the absence or presence of at least one elevator in the building, respectively.  The realtor first wants to know if there is any relationship between appraised price $(Y)$ and living area $(x_1)$.  Next, the realtor wants to know how adding a dummy variable for whether or not an elevator is present changes the relationship: Are the lines the same? Are the slopes the same? Are the intercepts the same?
+Suppose a realtor wants to model the appraised price of an apartment as a function of the predictors living area (in m$^2$) and the presence or absence of elevators. Consider the data frame`VIT2005`, which contains data about apartments in Vitoria, Spain, including `totalprice`, `area`, and `elevator`, which are the appraised apartment value in Euros, living space in square meters, and the absence or presence of at least one elevator in the building, respectively. The realtor first wants to know if there is any relationship between appraised price $(Y)$ and living area $(x_1)$. Next, the realtor wants to know how adding a dummy variable for whether or not an elevator is present changes the relationship: Are the lines the same? Are the slopes the same? Are the intercepts the same?
 
 ## Solution (is there a realationship between `totalprice` and `area`?):
 
@@ -135,34 +123,30 @@ ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
 ```
 :::
 
-A linear regression model of the form 
+A linear regression model of the form
 
+```{=tex}
 \begin{equation} 
 Y= \beta_0 +\beta_1 x_1 + \varepsilon
 \end{equation}
-
+```
 is fit yielding
 
+```{=tex}
 \begin{equation*}
 \widehat{Y}_i = `r coef(summary(mod_simple))[1]` + 
 `r coef(summary(mod_simple))[2]` x_{i1}
 \end{equation*}
-
+```
 and a scatterplot of `totalprice` versus `area` with the fitted regression line superimposed over the scatterplot is shown in @fig-sol1.
 
-Based on @fig-sol1, there appears to be a linear relationship
-between appraised price and living area.  Further, this relationship is 
-statistically significant, as the p-value for testing $H_0: \beta_1=0$ versus 
-$H_1: \beta_1 \neq 0$ is less than $2 \times 10^{-16}$.
+Based on @fig-sol1, there appears to be a linear relationship between appraised price and living area. Further, this relationship is statistically significant, as the p-value for testing $H_0: \beta_1=0$ versus $H_1: \beta_1 \neq 0$ is less than $2 \times 10^{-16}$.
 
 ## Solution (does adding a dummy variable (`elevator`) change the relationship?):
 
-The regression model including the dummy variable for `elevator` is written
-\begin{equation}
+The regression model including the dummy variable for `elevator` is written \begin{equation}
 Y = \beta_0 + \beta_1 x_1 + \beta_2 D_1 + \beta_3 x_1 D_1 + \varepsilon
-\end{equation}
-where
-\begin{equation*}
+\end{equation} where \begin{equation*}
 D_1 =
 \begin{cases}
 0 &\text{when a building has no elevators}\\
@@ -172,10 +156,11 @@ D_1 =
 
 To determine if the lines are the same (which means that the linear relationship between appraised price and living area is the same for apartments with and without elevators), the hypotheses are
 
+```{=tex}
 \begin{equation*}
 H_0: \beta_2 = \beta_3 = 0 \text{ versus } H_1: \text{at least one } \beta_i \neq 0 \text{ for } i=2, 3.
 \end{equation*}
-
+```
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r}
 mod_full <- lm(totalprice ~ area + elevator + area:elevator, data = VIT2005)
@@ -183,10 +168,9 @@ anova(mod_simple, mod_full)  # compare models
 ```
 :::
 
-In this problem, one may conclude that at least one of $\beta_2$ and $\beta_3$ is not zero since the p-value = $`r anova(mod_simple, mod_full)[2, 6]`$.  In other words, the lines have either different intercepts, different slopes,  or different intercepts and slopes.
+In this problem, one may conclude that at least one of $\beta_2$ and $\beta_3$ is not zero since the p-value = $`r anova(mod_simple, mod_full)[2, 6]`$. In other words, the lines have either different intercepts, different slopes, or different intercepts and slopes.
 
-To see if the lines have the same slopes (which means that the presence of an elevator adds constant value over all possible living areas), the hypotheses are
-\begin{equation*}
+To see if the lines have the same slopes (which means that the presence of an elevator adds constant value over all possible living areas), the hypotheses are \begin{equation*}
 H_0: \beta_3 = 0 \text{ versus } H_1: \beta_3 \neq 0.
 \end{equation*}
 
@@ -196,11 +180,9 @@ anova(mod_full)
 ```
 :::
 
-Based on the p-value = $`r anova(mod_full)[3, 5]`$, it may be concluded
-that $\beta_3 \neq 0$, which implies that the lines are not parallel.
+Based on the p-value = $`r anova(mod_full)[3, 5]`$, it may be concluded that $\beta_3 \neq 0$, which implies that the lines are not parallel.
 
-To test for equal intercepts (which means that appraised price with and without elevators starts at the same value), the hypotheses to be evaluated are
-\begin{equation*}
+To test for equal intercepts (which means that appraised price with and without elevators starts at the same value), the hypotheses to be evaluated are \begin{equation*}
 H_0: \beta_2 = 0 \text{ versus }H_1: \beta_2 \neq 0.
 \end{equation*}
 
@@ -225,13 +207,7 @@ c(b0, b1NO, b1YES)
 ```
 :::
 
-The fitted model is $\widehat{Y}_i = `r coef(summary(mod_inter))[1,1]` + 
-`r coef(summary(mod_inter))[2,1]`x_{i1} + 
-`r coef(summary(mod_inter))[3,1]`x_{i1}D_{i1}$, and
-the fitted regression lines for the two values of $D_1$ are shown in 
-@fig-DSSI.  The fitted model using the same intercept with different 
-slopes has an $R^2_a$ of `r summary(mod_inter)$adj`, a modest improvement over the model without  the variable `elevator`, which
-had an $R^2_a$ value of `r summary(mod_simple)$adj`.
+The fitted model is $\widehat{Y}_i = `r coef(summary(mod_inter))[1,1]` + `r coef(summary(mod_inter))[2,1]`x_{i1} + `r coef(summary(mod_inter))[3,1]`x_{i1}D_{i1}$, and the fitted regression lines for the two values of $D_1$ are shown in @fig-DSSI. The fitted model using the same intercept with different slopes has an $R^2_a$ of `r summary(mod_inter)$adj`, a modest improvement over the model without the variable `elevator`, which had an $R^2_a$ value of `r summary(mod_simple)$adj`.
 
 ```{r}
 #| label: "fig-DSSI"
@@ -272,11 +248,11 @@ ggplot(data = MDF, aes(sample = residual)) +
 ```
 :::
 
-_______________
+------------------------------------------------------------------------
 
 # Example
 
-Consider the `MA_schools` data frame from the `moderndive` package which contains 2017 data on Massachusetts public high schools provided by the Massachusetts Department of Education.  Consider a model with SAT math scores (`average_sat_math`) modeled as a function of percentage of the high school's student body that are economically disadvantaged (`perc_disadvan`) and the a categorical variable  measuring school size (`size`).
+Consider the `MA_schools` data frame from the `moderndive` package which contains 2017 data on Massachusetts public high schools provided by the Massachusetts Department of Education. Consider a model with SAT math scores (`average_sat_math`) modeled as a function of percentage of the high school's student body that are economically disadvantaged (`perc_disadvan`) and the a categorical variable measuring school size (`size`).
 
 ## Solution (is there a relationship between `average_sat_math` and `perc_disadvan`?):
 
@@ -296,9 +272,7 @@ get_regression_table(mod_simple)
 
 You complete the rest....
 
-
 ## Solution (does adding a dummy variable `size` change the relationship?):
-
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r, fig.width = 12}
@@ -320,9 +294,7 @@ anova(mod_full)
 ```
 :::
 
-
 # Simpson's Paradox
-
 
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r, fig.width = 10}
