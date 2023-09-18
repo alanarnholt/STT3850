@@ -1,14 +1,12 @@
 ---
 title: "One Categorical Variable - Hints"
 author: "In-class"
-date: 'Last compiled: `r format(Sys.time(), "%B %d, %Y at %X")`'
-output:
-  bookdown::html_document2:
-    theme: lumen
-    toc: yes
-    toc_float: yes
-    df_print: kable
-    css: MyLab.css 
+date: last-modified
+date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
+format: 
+  html: default
+  pdf: default
+editor: source
 ---
 
 ____________
@@ -60,13 +58,7 @@ gapminder1982 %>%
   group_by(continent) %>% 
   summarize(Mean = mean(lifeexp), SD = sd(lifeexp), 
             Median = median(lifeexp), iqr = IQR(lifeexp)) -> results
-```
-_________________
-
-
-```{r, echo = FALSE}
-library(data.table)
-data.table(results)
+knitr::kable(results)
 ```
 
 ______________________
@@ -74,12 +66,11 @@ ______________________
 ```{r}
 lifeexp_mod <- lm(lifeexp ~ continent, data = gapminder1982)
 get_regression_table(lifeexp_mod) -> T2
-T2
+knitr::kable(T2)
 ```
 
 1. Report the average life expectancy for Africans in 1982 using `lifeexp_mod`.
 
-<div id="answer">
 
 ```{r}
 T2[1, 2] %>% pull()
@@ -88,11 +79,10 @@ coef(lifeexp_mod)[1]
 
 + The average life expectancy for Africans in 1982 was `r T2[1,2] %>% pull()` years.  Or, one could use `coef(lifeexp_mod)[1]` to return `r  coef(lifeexp_mod)[1]` years. 
 
-</div> 
 
 2. Report the average life expectancy for Europeans in 1982 using `lifeexp_mod`.
 
-<div id="answer">
+
 
 ```{r}
 T2[1,2] %>% pull() + T2[4,2] %>% pull()
@@ -109,8 +99,6 @@ Note: `moderndive` wrapper functions round answers.  This is not always a good t
 + The average life expectancy for Europeans in 1982 was `r coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4]` years.  Which if you want to round to three decimal places would be: `r round(coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4],3)` years.  Another way to get the desired answer is with the `predict()` function.  The average life expectancy for Europeans in 1982 was `r predict(lifeexp_mod, newdata = data.frame(continent = "Europe"))` years.
 
  
-
-</div> 
 
 ```{r}
 names(gapminder1982)
