@@ -6,7 +6,7 @@ date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
 format: 
   html: default
   pdf: default
-editor: visual
+editor: source
 ---
 
 ```{r setup, include=FALSE}

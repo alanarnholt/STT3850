@@ -24,7 +24,7 @@ library(data.table)
 
 # Exploratory Data Analysis
 
-
+::: {.callout-caution icon="false" title="R Code"}
 ```{r}
 library(gapminder)
 gapminder1982 <- gapminder %>% 
@@ -61,13 +61,14 @@ gapminder1982 %>%
 knitr::kable(results)
 ```
 
-______________________
-
 ```{r}
 lifeexp_mod <- lm(lifeexp ~ continent, data = gapminder1982)
 get_regression_table(lifeexp_mod) -> T2
 knitr::kable(T2)
 ```
+:::
+
+
 
 1. Report the average life expectancy for Africans in 1982 using `lifeexp_mod`.
 
