@@ -1,0 +1,69 @@
+---
+title: "Quantitative and Qualitative Predictors"
+author: "In-class"
+date: last-modified
+date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
+format: 
+  html: default
+  pdf: default
+editor: source
+---
+
+
+```{r include = FALSE}
+# Do not edit this code block/chunk!
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", comment = NA, fig.width = 16/2, fig.height = 9/2)
+library(tidyverse)
+library(ISLR2)
+library(moderndive)
+```
+
+Use the data `Carseats` from the `ISLR2` package to predict the `Sales` of car seats.
+
+1.  What variable is most linearly related to `Sales`?  Use that variable to create a simple linear regression where `Sales` is regressed onto your answer.
+
+```{r}
+Carseats %>% 
+  select(-ShelveLoc, -Urban, -US) %>% 
+  cor() %>% 
+  round(2)
+Carseats %>% 
+  select(-ShelveLoc, -Urban, -US) %>% 
+  cor() %>% 
+  round(2) -> LO
+max(abs(LO[1, 2:8]))
+
+mod1 <- lm(Sales ~ Price, data = Carseats)
+get_regression_table(mod1) %>% 
+  knitr::kable()
+```
+
+
+```{r}
+ggplot(data = Carseats, aes(x = Price, y = Sales, color = ShelveLoc)) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
+
+```{r}
+mod1 <- lm(Sales ~ Price, data = Carseats)
+summary(mod1)
+modfull <- lm(Sales ~ Price + ShelveLoc + ShelveLoc:Price, data = Carseats)
+anova(mod1, modfull)
+anova(modfull)
+mod2 <- lm(Sales ~ Price + ShelveLoc, data = Carseats)
+summary(mod2)
+```
+
+```{r}
+ggplot(data = Carseats, aes(x = Price, y = Sales, color = ShelveLoc)) + 
+  geom_point() + 
+  geom_parallel_slopes(se = FALSE) +
+  theme_bw()
+```
+
+
