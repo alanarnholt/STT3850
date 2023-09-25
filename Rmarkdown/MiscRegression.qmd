@@ -29,8 +29,6 @@ datatable(AD[, -1], rownames = FALSE,
 
 ## Base R Graph
 
-
-
 ```{r}
 #| label: "fig-base1"
 #| fig-cap: "Base R scatterplot of `sales` versus `TV`"
@@ -38,6 +36,7 @@ plot(sales ~ TV, data = AD, col = "red", pch = 19)
 mod1 <- lm(sales ~ TV, data = AD)
 abline(mod1, col = "blue")
 ```
+
 ```{r, fig.width = 12, fig.height = 4}
 #| label: "fig-youchange"
 #| fig-cap: "You should change this caption"
@@ -53,7 +52,6 @@ mod3 <- lm(sales ~ newspaper, data = AD)
 abline(mod3, col = "blue")
 par(mfrow=c(1, 1))
 ```
-
 
 Change the caption in @fig-youchange.
 
@@ -118,7 +116,6 @@ p11 <- ggplotly(p)
 p11
 ```
 
-
 ## Scatterplot Matrices
 
 ```{r, label = "SPM", fig.width = 8, fig.height = 8}
@@ -135,12 +132,9 @@ mod1 <- lm(sales ~ TV, data = AD)
 summary(mod1)
 ```
 
-\begin{equation}
-\text{Residual}\equiv e_i = y_i - \hat{y_i}
-(\#eq:resid)
-\end{equation}
+$$\text{Residual}\equiv e_i = y_i - \hat{y_i}$$ {#eq-residual}
 
-To obtain the residuals for `mod1` use the function `resid` on a linear model object.
+To obtain the residuals for `mod1` use the function `resid` on a linear model object which uses the definition in @eq-residual.
 
 ```{r, label = "resids"}
 eis <- resid(mod1)
@@ -168,11 +162,10 @@ MDDF %>%
   summarize(RSS = sum(residual^2))
 ```
 
+The least squares estimators of $\beta_0$ and $\beta_1$ are given in @eq-b0 and @eq-b1, respectively.
 
-The least squares estimators of $\beta_0$ and $\beta_1$ are
-
-$$b_0 = \hat{\beta_0} = \bar{y} - b_1\bar{x}$$
-$$b_1 = \hat{\beta_1} = \frac{\sum_{i = 1}^n(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}$$
+$$b_0 = \hat{\beta_0} = \bar{y} - b_1\bar{x}$$ {#eq-b0}
+$$b_1 = \hat{\beta_1} = \frac{\sum_{i = 1}^n(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}$$ {#eq-b1}
 
 ```{r, label = "byhand"}
 y <- AD$sales
@@ -207,14 +200,14 @@ R2
 summary(mod1)$r.squared
 ```
 
-
 ## Confidence Interval for $\beta_1$
 
-\begin{equation}
+$$
 \text{CI}_{1 - \alpha}(\beta_1) = \left[b_1 - t_{1- \alpha/2, n - p - 1}SE(b1), b_1 + t_{1- \alpha/2, n - p - 1}SE(b1) \right]
-\end{equation}
+$$ {#eq-CIb1}
 
-**Example:** Use the equation above to construct a 90% confidence interval for $\beta_1$.
+
+**Example:** Use @eq-CIb1 to construct a 90% confidence interval for $\beta_1$.
 
 ```{r, label = "CIBeta"}
 alpha <- 0.10
@@ -224,15 +217,16 @@ b1 + c(-1, 1)*ct*seb1
 # Or
 confint(mod1, parm = "TV", level = 0.90)
 confint(mod1)
+# Or 
+library(moderndive)
+get_regression_table(mod1)
 ```
 
 ### Linear Algebra
 
 **Solution of linear systems** Find the solution(s) if any to the following linear equations.
 
-$$2x + y - z = 8$$
-$$-3x - y + 2z = -11$$
-$$-2x + y + 2z = -3$$
+$$2x + y - z = 8$$ $$-3x - y + 2z = -11$$ $$-2x + y + 2z = -3$$
 
 ```{r, label = "linearALG"}
 A <- matrix(c(2, -3, -2, 1, -1, 1, -1, 2, 2), nrow = 3)
@@ -245,7 +239,6 @@ solve(A, b)
 
 See [wikipedia](https://en.wikipedia.org/wiki/Matrix_multiplication) for a review of matrix multiplication rules and properties.
 
-
 Consider the 2 $\times$ 2 matrix $A$.
 
 $$A = \begin{bmatrix}
@@ -256,29 +249,30 @@ $$
 
 ### Linear Regression Matrix Notation
 
+```{=tex}
 \begin{equation}
 \mathbf{\hat{\beta}} = (\mathbf{X'X})^{-1}\mathbf{X'Y}
 \end{equation}
-
+```
+```{=tex}
 \begin{equation}
 \sigma^2_{\hat{\beta}} = \sigma^2(\mathbf{X'X})^{-1}
 \end{equation}
-
+```
+```{=tex}
 \begin{equation}
 \hat{\sigma}^2_{\hat{\beta}} = MSE(\mathbf{X'X})^{-1}
 \end{equation}
-
+```
 $$\mathbf{\hat{\beta}} \sim N(\mathbf{\beta}, \sigma^2(\mathbf{X'X})^{-1})$$
 
 ### Estimation of the Mean Response for New Values $X_h$
 
 Not only is it desirable to create confidence intervals on the parameters of the regression models, bit it is also common to estimate the mean response $\left(E(Y_h)\right)$ for a particular set of $\mathbf{X}$ values.
 
-$$\hat{Y_h} \sim N(Y_h = X_h\beta, \sigma^2\mathbf{X_h}(\mathbf{X'X})^{-1}\mathbf{X_h'})$$
-For a vector of given values $(\mathbf{X_h})$, a $(1 - \alpha)\cdot 100\%$ confidence interval for the mean response $E(Y_h)$ is
+$$\hat{Y_h} \sim N(Y_h = X_h\beta, \sigma^2\mathbf{X_h}(\mathbf{X'X})^{-1}\mathbf{X_h'})$$ For a vector of given values $(\mathbf{X_h})$, a $(1 - \alpha)\cdot 100\%$ confidence interval for the mean response $E(Y_h)$ is
 
-$$CI_{1-\alpha}\left[E(Y_h)\right] = \left[\hat{Y_h} - t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y_h}}, \hat{Y_h} + t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y_h}}  \right]$$
-The function `predict()` applied to a linear model object will compute $\hat{Y_h}$ and $s_{\hat{Y_h}}$ for a given $\mathbf{X}_h$.  `R` output has $\hat{Y_h}$ labeled `fit` and $s_{\hat{Y_h}}$ labeled `se.fit`.
+$$CI_{1-\alpha}\left[E(Y_h)\right] = \left[\hat{Y_h} - t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y_h}}, \hat{Y_h} + t_{1 - \alpha/2;n - p - 1}\cdot s_{\hat{Y_h}}  \right]$$ The function `predict()` applied to a linear model object will compute $\hat{Y_h}$ and $s_{\hat{Y_h}}$ for a given $\mathbf{X}_h$. `R` output has $\hat{Y_h}$ labeled `fit` and $s_{\hat{Y_h}}$ labeled `se.fit`.
 
 ```{r, label = "mola"}
 A <- matrix(c(2, 9, 4, 5), nrow = 2)
@@ -288,8 +282,6 @@ t(A)%*%A      # A'A
 solve(A)%*%A  # I_2
 zapsmall(solve(A)%*%A)  # What you expect I_2
 ```
-
-
 
 ```{r, label = "MM"}
 X <- model.matrix(mod1)
@@ -308,7 +300,7 @@ var_cov_b <- MSE*XTXI
 var_cov_b
 ```
 
-**Example** Use the `GRADES` data set and model `gpa` as a function of `sat`.  Compute the expected GPA (`gpa`) for an SAT score (`sat`) of 1300.  Construct a 90% confidence interval for the mean GPA for students scoring 1300 on the SAT.
+**Example** Use the `GRADES` data set and model `gpa` as a function of `sat`. Compute the expected GPA (`gpa`) for an SAT score (`sat`) of 1300. Construct a 90% confidence interval for the mean GPA for students scoring 1300 on the SAT.
 
 ```{r, label = "mipack"}
 library(PASWR2)
@@ -341,9 +333,6 @@ CI_EYh
 # Using the build in function
 predict(mod.lm, newdata = data.frame(sat = 1300), interval = "conf", level = 0.90)
 ```
-
-
-
 
 ## Multiple Linear Regression
 
@@ -396,14 +385,6 @@ p %>%
   add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE)
 ```
 
-
-
-
-
-
-
-
-
 ## Is There a Relationship Between the Response and Predictors?
 
 ```{r, label = "modthree"}
@@ -411,9 +392,7 @@ mod3 <- lm(sales ~ TV + radio + newspaper, data = AD)
 summary(mod3)
 ```
 
-$$H_0: \beta_1 = \beta_2 = \beta_3 = 0$$
-versus the alternative
-$$H_1: \text{at least one } \beta_j \neq 0$$
+$$H_0: \beta_1 = \beta_2 = \beta_3 = 0$$ versus the alternative $$H_1: \text{at least one } \beta_j \neq 0$$
 
 The test statistic is $F = \frac{(\text{TSS} - \text{RSS})/p}{\text{RSS}/(n-p-1)}$
 
@@ -432,7 +411,7 @@ summary(mod3)
 summary(mod3)$fstatistic
 ```
 
-Suppose we would like to test whether $\beta_2 = \beta_3 = 0$.  The reduced model with $\beta_2 = \beta_3 = 0$ is `mod1` while the full model is `mod3`.
+Suppose we would like to test whether $\beta_2 = \beta_3 = 0$. The reduced model with $\beta_2 = \beta_3 = 0$ is `mod1` while the full model is `mod3`.
 
 ```{r, label = "MA"}
 summary(mod3)
@@ -441,7 +420,7 @@ anova(mod1, mod3)
 
 ## Variable Selection
 
-* Forward selection
+-   Forward selection
 
 ```{r, label = "Forward"}
 mod.fs <- lm(sales ~ 1, data = AD)
@@ -454,7 +433,7 @@ add1(mod.fs, scope = SCOPE, test = "F")
 summary(mod.fs)
 ```
 
-* Using `stepAIC`
+-   Using `stepAIC`
 
 ```{r, label = "step"}
 stepAIC(lm(sales ~ 1, data = AD), scope = (~TV + radio + newspaper), direction = "forward", test = "F")
@@ -464,8 +443,7 @@ full <- lm(sales ~ ., data = AD)
 stepAIC(null, scope = list(lower = null, upper = full), direction = "forward", test = "F")
 ```
 
-
-* Backward elimination
+-   Backward elimination
 
 ```{r, label = "backward"}
 mod.be <- lm(sales ~ TV + radio + newspaper, data = AD)
@@ -475,14 +453,13 @@ drop1(mod.be, test = "F")
 summary(mod.be)
 ```
 
-* Using `stepAIC`
+-   Using `stepAIC`
 
 ```{r, label = "moSTEP"}
 stepAIC(lm(sales ~ TV + radio + newspaper, data = AD), scope = (~TV + radio + newspaper), direction = "backward", test = "F")
 # Or
 stepAIC(full, scope = list(lower = null, upper = full), direction = "backward", test = "F")
 ```
-
 
 ## Diagnostic Plots
 
@@ -492,15 +469,13 @@ qqPlot(mod2)
 influenceIndexPlot(mod2)
 ```
 
-
-
-We use a _confidence interval_ to quantify the uncertainty surrounding the _average_ `sales` over a large number of cities.  For example, given that $100,000 is spent on `TV` advertising and $20,000 is spent on `Radio` advertising in each city, the 95% confidence interval is [`r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "conf")[2]`, `r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "conf")[3]`].  We interpret this to mean that 95% of intervals of this form will contain the true value of `Sales`.
+We use a *confidence interval* to quantify the uncertainty surrounding the *average* `sales` over a large number of cities. For example, given that \$100,000 is spent on `TV` advertising and \$20,000 is spent on `Radio` advertising in each city, the 95% confidence interval is \[`r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "conf")[2]`, `r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "conf")[3]`\]. We interpret this to mean that 95% of intervals of this form will contain the true value of `Sales`.
 
 ```{r, label = "predbe"}
 predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "conf")
 ```
 
-On the other hand, a _prediction interval_ can be used to quantify the uncertainty surrounding `sales` for a _particular_ city.  Given that $100,000 is spent on `TV` advertising and $20,000 is spent on `radio` advertising in **a particular** city, the 95% prediction interval is [`r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "pred")[2]`, `r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "pred")[3]`].  We interpret this to mean that 95% of intervals of this form will contain the true value of `Sales` for this city.
+On the other hand, a *prediction interval* can be used to quantify the uncertainty surrounding `sales` for a *particular* city. Given that \$100,000 is spent on `TV` advertising and \$20,000 is spent on `radio` advertising in **a particular** city, the 95% prediction interval is \[`r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "pred")[2]`, `r predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "pred")[3]`\]. We interpret this to mean that 95% of intervals of this form will contain the true value of `Sales` for this city.
 
 ```{r, label = "predbe2"}
 predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "pred")
@@ -518,8 +493,7 @@ summary(nam1)
 summary(nam2)
 ```
 
-**Hierarchical Principle:** If an interaction term is included in a model, one should also include the main effects, even if the _p-values_ associated with their coefficients are not significant.
-
+**Hierarchical Principle:** If an interaction term is included in a model, one should also include the main effects, even if the *p-values* associated with their coefficients are not significant.
 
 ## Qualitative Predictors
 
@@ -530,14 +504,12 @@ Credit <- read.csv("http://statlearning.com/s/Credit.csv")
 datatable(Credit[, -1], rownames = FALSE)
 ```
 
-
-
 ```{r, label = "modNOTATION"}
 modP <- lm(Balance ~ Income*Student, data = Credit)
 summary(modP)
 ```
 
-Fitted Model: $\widehat{\text{Balance}}  = `r coef(modP)[1]` + `r coef(modP)[2]`\cdot \text{Income} + `r coef(modP)[3]`\cdot \text{Student} `r coef(modP)[4]`\cdot\text{Income}\times\text{Student}$
+Fitted Model: $\widehat{\text{Balance}} = `r coef(modP)[1]` + `r coef(modP)[2]`\cdot \text{Income} + `r coef(modP)[3]`\cdot \text{Student} `r coef(modP)[4]`\cdot\text{Income}\times\text{Student}$
 
 ### Predictors with Only Two Levels
 
@@ -581,7 +553,6 @@ ggplot(data = Credit, aes(x = Gender, y = Utilization)) +
   geom_hline(yintercept = coef(modU)[1], color = "green")
 ```
 
-
 ## Moving On Now
 
 ```{r, label = "movealong"}
@@ -597,9 +568,9 @@ summary(modS2)
 
 Several points:
 
-* Is the interaction significant?
-* Which model is `ggplot2` graphing below?
-* Is this the correct model?
+-   Is the interaction significant?
+-   Which model is `ggplot2` graphing below?
+-   Is this the correct model?
 
 ```{r}
 #| label: "fig-GGDWDYE"
@@ -614,7 +585,7 @@ ggplot(data = Credit, aes(x = Limit, y = Balance, color = Student)) +
 
 ```{r}
 #| label: "fig-CG"
-#| fig-cap: "Figure thisone out!"
+#| fig-cap: "Figure this one out!"
 S2M <- lm(Balance ~ Limit + Student, data = Credit)
 #
 ggplot(data = Credit, aes(x = Limit, y = Balance, color = Student)) +
@@ -635,8 +606,8 @@ modRM <- lm(Balance ~ Limit, data = Credit)
 anova(modRM, modQ3)
 ```
 
- What follows fits three separate regression lines based on `Ethnicity`.
- 
+What follows fits three separate regression lines based on `Ethnicity`.
+
 ```{r, label = "threesep"}
 AfAmer <- lm(Balance ~ Limit, data = subset(Credit, Ethnicity == "African American"))
 AsAmer <- lm(Balance ~ Limit, data = subset(Credit, Ethnicity == "Asian"))
@@ -720,12 +691,11 @@ influenceIndexPlot(newC)
 
 ## Variance Inflation Factor (VIF)
 
-The VIF is the ratio of the variance of $\hat{\beta}_j$ when fitting the full model divided by the variance of $\hat{\beta}_j$ if it is fit on its own.  The smallest possible value for VIF is 1, which indicates the complete absence of collinearity.  The VIF for each variable can be computed using the formula:
+The VIF is the ratio of the variance of $\hat{\beta}_j$ when fitting the full model divided by the variance of $\hat{\beta}_j$ if it is fit on its own. The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. The VIF for each variable can be computed using the formula:
 
 $$VIF(\hat{\beta}_j) = \frac{1}{1 - R^2_{X_j|X_{-j}}}$$
 
-where $R^2_{X_j|X_{-j}}$ is the $R^2$ from a regression of $X_j$ onto all of the other predictors.  If $R^2_{X_j|X_{-j}}$ is close to one, then collinearity is present, and so the VIF will be large.
-
+where $R^2_{X_j|X_{-j}}$ is the $R^2$ from a regression of $X_j$ onto all of the other predictors. If $R^2_{X_j|X_{-j}}$ is close to one, then collinearity is present, and so the VIF will be large.
 
 Compute the VIF for each $\hat{\beta}_j$ of `modC`
 
@@ -741,7 +711,7 @@ VIFlim <- 1/(1 - R2lim)
 VIFlim
 ```
 
-This is tedious is there a function to do this?  Yes!
+This is tedious is there a function to do this? Yes!
 
 ```{r}
 car::vif(modC)
@@ -749,15 +719,10 @@ car::vif(modC)
 
 ## Exercise
 
-* Create a model that predicts an individuals credit rating (`Rating`).
+-   Create a model that predicts an individuals credit rating (`Rating`).
 
-* Create another model that predicts rating with `Limit`, `Cards`, `Married`, `Student`, and `Education` as features. 
+-   Create another model that predicts rating with `Limit`, `Cards`, `Married`, `Student`, and `Education` as features.
 
-* Use your model to predict the `Rating` for an individual that has a credit card limit of
-$6,000, has 4 credit cards, is married, is not a student, and has an undergraduate degree (`Education` = 16).
+-   Use your model to predict the `Rating` for an individual that has a credit card limit of \$6,000, has 4 credit cards, is married, is not a student, and has an undergraduate degree (`Education` = 16).
 
-* Use your model to predict the `Rating` for an individual that has a credit card limit of
-$12,000, has 2 credit cards, is married, is not a student, and has an eighth grade education (`Education` = 8).
-
-
-
+-   Use your model to predict the `Rating` for an individual that has a credit card limit of \$12,000, has 2 credit cards, is married, is not a student, and has an eighth grade education (`Education` = 8).
