@@ -19,3 +19,18 @@ modBACK
 modFORW <- stepAIC(null, scope = list(lower = null, upper = full), direction = "forward", test = "F")
 modFORW
 modBACK
+
+modpl <- lm(Sales ~ Price + ShelveLoc, data = Carseats)
+summary(modpl)
+library(moderndive)
+library(tidyverse)
+ggplot(data = Carseats, aes(x = Price, y = Sales, color = ShelveLoc)) + 
+  geom_point() + 
+  geom_parallel_slopes(se = FALSE)
+
+ggplot(data = Carseats, aes(x = Price, y = Sales, color = ShelveLoc)) + 
+  geom_point() + 
+  geom_smooth(method= "lm", se = FALSE)
+
+modds <- lm(Sales ~ Price + ShelveLoc + Price:ShelveLoc, data = Carseats)
+summary(modds)
