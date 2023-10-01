@@ -1,4 +1,4 @@
-
+# Name
 library(ISLR)
 library(ISLR2)
 null <- lm(Balance ~ 1, data = Credit)
