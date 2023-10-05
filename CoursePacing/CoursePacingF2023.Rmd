@@ -248,6 +248,8 @@ _____________
 
 * [In Class Problems](../Slides/ProbabilityProblems.html)
 
+* [Foundations of Probability with some Extras](https://mathr.appstate.edu/connect/content/4c81be04-9184-4aa6-84bd-a9a1858365f9)
+
 * Complete the **Improving the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments)
 
 * Complete the **Customizing the Report** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments)
