@@ -283,6 +283,7 @@ _______________
 * Before class read chapter 7 (Sampling) of [MD](https://moderndive.com/7-sampling.html) --- pgs 195-232
 
 * Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/eZq-1bTl) by 5:00 pm Oct 18 --- not graded
+[Partial Solution](https://mathr.appstate.edu/connect/content/2d388531-2e05-485b-9f58-83855a1437e3)
 
 * Start [PS-07](https://classroom.github.com/a/Zl9Dwml1) due by 5:00 pm Oct 26
 
