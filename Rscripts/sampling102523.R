@@ -1,5 +1,7 @@
 age <- c(37, 98, 9, 1, 42, 5, 57)
 
+hist(age)
+
 B <- 10000
 bsm <- numeric(B)
 for(i in 1:B){
