@@ -1,4 +1,13 @@
 age <- c(37, 98, 9, 1, 42, 5, 57)
+xbar <- mean(age)
+xbar
+S <- sd(age)
+S
+n <- 7
+CT <- qt(.975, 6)
+CT
+t.test(age)
+CI <- xbar + c(-1, 1)*CT*S/sqrt(n)
 
 hist(age)
 
