@@ -235,6 +235,12 @@ par(opar)
 
 The previous code shows the distributions of two such random samples with sample means $\bar{x}_1 =$ `r mean(rs1)`, $\bar{x}_2 =$ `r mean(rs2)` and standard deviations $s_1 =$ `r sd(rs1)`, $s_2 =$ `r sd(rs2)`, respectively.  Based on the graphs above, we can see that the bootstrap distribution has roughly the same spread and shape as the theoretical sampling distribution, but the centers are different.  This example illustrates some important features of the bootstrap that hold for other statistics besides the mean:  the bootstrap distribution of a particular statistic $\hat{\theta}$ has approximately the same spread and shape as the sampling distribution of the statistic $\hat{\theta}$, but the center of the bootstrap distribution is at the center of the original sample.  Hence we do not use the center of the bootstrap distribution in its own right, but we do compare the center of the bootstrap distribution with the observed statistic; if they differ, it indicates bias.
 
+Recall that the bootstrap estimate of bias is the mean of the bootstrap distribution minus the statistic for the original data, $Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta}$.  
+
+* For the second row, $Bias_{boot}[\hat{\theta}^*] = `r mean(my.boot.stat1)` - `r mean(rs1)` = `r mean(my.boot.stat1) - mean(rs1)`$.  
+
+* For the third row, $Bias_{boot}[\hat{\theta}^*] = `r mean(my.boot.stat2)` - `r mean(rs2)` = `r mean(my.boot.stat2) - mean(rs2)`$.
+
 #### BOOTSTRAP DISTRIBUTIONS AND SAMPLING DISTRIBUTIONS {-}
 
 > For most statistics, bootstrap distributions aproximate the spread, bias, and shape of the actual sampling distribution.
@@ -274,6 +280,12 @@ par(opar)
 ```
 
 The first graph in the second and third rows shows the distribution of a random sample with sample means and standard deviations $\bar{x}_1 =$ `r mean(rsg1)`, $\bar{x}_2 =$ `r mean(rsg2)`, $s_1 =$ `r sd(rsg1)`, and  $s_2 =$ `r sd(rsg2)`,  respectively.  Based on the graphs above, we can see that the bootstrap distribution has roughly the same spread and shape as the theoretical sampling distribution, but the centers are different. 
+
+Recall that the bootstrap estimate of bias is the mean of the bootstrap distribution minus the statistic for the original data, $Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta}$. 
+
+* For the second row, $Bias_{boot}[\hat{\theta}^*] = `r mean(my.boot.statg1)` - `r mean(rsg1)` = `r mean(my.boot.statg1) - mean(rsg1)`$.  
+
+* For the third row, $Bias_{boot}[\hat{\theta}^*] = `r mean(my.boot.statg2)` - `r mean(rsg2)` = `r mean(my.boot.statg2) - mean(rsg2)`$.
 
 #### For most common estimators and under fairly general distribution assumptions, the following need to be noted: {-}
 
