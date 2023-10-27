@@ -203,7 +203,7 @@ To highlight some key features of the bootstrap distribution, we begin with two 
 
 ```{r COOLpic, fig.height=7, fig.width=7}
 opar <- par(no.readonly = TRUE)
-set.seed(11)
+set.seed(19)
 par(mfrow = c(3, 2))
 curve(dnorm(x, 25, 7), from = 25 - 2.5*7, 25 + 2.5*7, col = "blue", main = "N(25, 7)", ylab = "", xlab = "")
 abline(v = 25, col = "red")
@@ -243,7 +243,7 @@ The previous code shows the distributions of two such random samples with sample
 
 ```{r cool2, fig.height=7, fig.width=7}
 opar <- par(no.readonly = TRUE)
-set.seed(18)
+set.seed(281)
 par(mfrow = c(3, 2))
 curve(dgamma(x, 1, 1/2), from = 0, to = 8, col = "blue", main = "Gamma(1, 1/2)", ylab = "", xlab = "")
 abline(v = 2, col = "red")
@@ -251,7 +251,7 @@ curve(dgamma(x, 16, 8), from = 0, 8, col = "blue", main = "Gamma(16, 8)", ylab =
 abline(v = 2, col = "red")
 rsg1 <- rgamma(16, 1, 1/2)
 rsg2 <- rgamma(16, 1, 1/2)
-hist(rsg1, xlab = "", main = "n = 16", xlim = c(0, 8))
+hist(rsg1, xlab = "", main = "n = 16", xlim = c(0, 8), breaks = 10)
 abline(v = mean(rsg1), col = "red")
 B <- 10000
 my.boot.statg1 <- numeric(B)
@@ -265,7 +265,7 @@ for (i in 1:B){
 hist(my.boot.statg1, breaks = "Scott",  main ="Bootstrap Distribution", freq= FALSE, xlab = "", 
 xlim = c(0, 8))
 abline(v = mean(rsg1), col = "red")
-hist(rsg2, xlab = "", main = "n = 16", xlim = c(0, 8))
+hist(rsg2, xlab = "", main = "n = 16", xlim = c(0, 8), breaks = 10)
 abline(v = mean(rsg2), col = "red")
 hist(my.boot.statg2, breaks = "Scott",  main ="Bootstrap Distribution", freq= FALSE, xlab = "", 
 xlim = c(0, 8))
