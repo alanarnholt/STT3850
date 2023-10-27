@@ -68,15 +68,23 @@ get_ci(IBPV, level = 0.90, type = "se", point_estimate = xbar)
 ## Bootstrap t method----2nd order accurate!
 B <- 10000
 bt <- numeric(B)
+xbarstar <- numeric(B)
 for(i in 1:B){
   bss <- sample(Fweight, size = sum(!is.na(Fweight)), replace = TRUE)
+  xbarstar[i] <- mean(bss)
   bt[i] <- (mean(bss) - mean(Fweight))/(sd(bss)/sqrt(n))
 }
+BT <- (xbarstar - mean(Fweight))/sd(xbarstar)
+QT <- quantile(BT, probs = c(0.05, 0.95))  
+QT
 Q <- quantile(bt, probs = c(0.05, 0.95))
 Q
-BSTCI <- c(xbar - Q[2]*sd(Fweight)/sqrt(n),
-           xbar - Q[1]*sd(Fweight)/sqrt(n))
-BSTCI
+BSTCI_1 <- c(xbar - Q[2]*sd(Fweight)/sqrt(n),
+             xbar - Q[1]*sd(Fweight)/sqrt(n))
+BSTCI_1
+BSTCI_2 <- c(xbar - QT[2]*sd(Fweight)/sqrt(n),
+             xbar - QT[1]*sd(Fweight)/sqrt(n))
+BSTCI_2
 #################################################
 ## Comparing the answers of the 4 CIs
 ## Formula
@@ -95,14 +103,21 @@ CVhat = S/xbar
 CVhat
 ######
 B <- 10000
-CV <- numeric(B)
+CVstar <- numeric(B)
 for(i in 1:B){
   bss <- sample(Fweight, size = sum(!is.na(Fweight)), replace = TRUE)
-  CV[i] <- sd(bss)/mean(bss)
+  CVstar[i] <- sd(bss)/mean(bss)
 }
-hist(CV)
+BT <- (CVstar - sd(Fweight)/mean(Fweight)) / sd(CVstar)
+QT <- quantile(BT, probs = c(0.05, 0.95))
+QT
+hist(CVstar)
 # 90% CI for CV
-quantile(CV, probs = c(0.05, 0.95))
+quantile(CVstar, probs = c(0.05, 0.95))
+# 90% BTCI
+c(sd(Fweight)/mean(Fweight) - QT[2]*sd(CVstar), 
+  sd(Fweight)/mean(Fweight) - QT[1]*sd(CVstar))
+
 ####################################
 ## Construct a bootstrap percentile CI for the ratio of 
 ## Female variance over Male variance
@@ -116,12 +131,17 @@ births %>%
 birthsM$Weight -> Mweight
 
 B <- 10000
-VFVM <- numeric(B)
+VFVMstar <- numeric(B)
 for(i in 1:B){
   bssF <- sample(Fweight, size = sum(!is.na(Fweight)), replace = TRUE)
   bssM <- sample(Mweight, size = sum(!is.na(Mweight)), replace = TRUE)
-  VFVM[i] <- var(bssF)/var(bssM)
+  VFVMstar[i] <- var(bssF)/var(bssM)
 }
-hist(VFVM)
-quantile(VFVM, probs = c(0.05, 0.95))
+###
+hist(VFVMstar)
+quantile(VFVMstar, probs = c(0.05, 0.95)) # BPCI
+#####
+## BSECI----this one is a stretch for the class?
+## stat -+ t_{1-alpha/2, df}*\hat{SE}_B{stat}
+var(Fweight)/var(Mweight) +c(-1,1)*qt(.95, 487)*sd(VFVMstar)
 #####
