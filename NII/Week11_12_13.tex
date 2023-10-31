@@ -336,7 +336,7 @@ Compare to bootstrap CI: \tiny
 # A tibble: 1 x 2
   lower_ci upper_ci
      <dbl>    <dbl>
-1    -30.0    -19.3
+1    -30.0    -19.2
 \end{verbatim}
 
 \begin{Shaded}
@@ -1167,6 +1167,17 @@ Instead
 [1] -2.654657  1.655932
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(BPCI }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(Xbarstar, }\AttributeTok{probs =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.025}\NormalTok{, }\FloatTok{0.975}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    2.5%    97.5% 
+ 92.3708 163.1075 
+\end{verbatim}
+
 \normalsize
 \end{frame}
 
@@ -1333,8 +1344,8 @@ Instead
 \begin{itemize}
 \item
   The \(95\%\) bootstrap percentile interval is
-  \((95.346365, 173.371137)\) while the formula \(t\) confidence
-  interval is \((89.6834234, 160.956429)\)
+  \((92.3708026, 163.1074815)\) while the formula \(t\) confidence
+  interval is \((89.6834234, 89.6834234)\)
 \item
   The bootstrap \(t\) interval is stretched further to the right,
   reflecting the right-skewed distribution of the data.

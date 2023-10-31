@@ -771,6 +771,7 @@ Tstar <- (Xbarstar - xbar)/(Sstar / sqrt(n))
 CIt <- quantile(Tstar, c(0.025, 0.975))
 names(CIt) <- NULL
 CIt
+(BPCI <- quantile(Xbarstar, probs = c(0.025, 0.975)))
 ```
 \normalsize
 
@@ -866,7 +867,7 @@ UL <- xbar - CIt[1]*S/sqrt(n)
 ```
 \normalsize
 
-- The $95\%$ bootstrap percentile interval is $(`r LL`, `r UL`)$ while the formula $t$ confidence interval is $(89.6834234, 160.956429)$
+- The $95\%$ bootstrap percentile interval is $(`r BPCI[1]`, `r BPCI[2]`)$ while the formula $t$ confidence interval is $(`r t.test(Arsenic)$conf[1]`, `r t.test(Arsenic)$conf[1]`)$
 
 - The bootstrap $t$ interval is stretched further to the right, reflecting the right-skewed distribution of the data. 
 
