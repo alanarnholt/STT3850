@@ -197,7 +197,7 @@ intervals}\label{theory-based-confidence-intervals}}
 \protect\hypertarget{confidence-intervals-for-a-difference-in-means}{}
 Let \(X\) and \(Y\) be random variables with
 \(X\sim N(\mu_1, \sigma_1)\) and \(Y\sim N(\mu_2, \sigma_2)\). Then:
-\[X-Y\sim N\left(\mu_1-\mu_2, \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}\right)\]
+\[\bar{X}-\bar{Y}\sim N\left(\mu_1-\mu_2, \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}\right)\]
 
 Of course, in practice we usually do not know the population variances,
 so we will plug in the sample variances. As in the single-sample case,
@@ -336,7 +336,7 @@ Compare to bootstrap CI: \tiny
 # A tibble: 1 x 2
   lower_ci upper_ci
      <dbl>    <dbl>
-1    -29.3    -18.8
+1    -29.5    -18.8
 \end{verbatim}
 
 \begin{Shaded}
@@ -496,7 +496,7 @@ In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 l
 Thus:
 \[P\left(-z_{1-\alpha/2}<\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}<z_{1-\alpha/2}\right)\approx 1-\alpha \]
 This gives:
-\[\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}=\pm z_{\alpha/2}\]
+\[\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}=\pm z_{1-\alpha/2}\]
 
 At this point the different methods diverge.
 \end{frame}
@@ -506,13 +506,13 @@ At this point the different methods diverge.
 The traditional Wald method completes the algebra to the following step
 before making an approximation:
 
-\[CI_{1 - \alpha}(p) = \hat{p}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}\]
+\[CI_{1 - \alpha}(p) = \hat{p}\pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}\]
 
 At this point the Wald method replaces the population values \(p\) and
 \(q\) in the right side of the equation with their approximations
 \(\hat{p}\) and \(\hat{q}\) to obtain the traditional Wald confidence
 interval formula for a proportion:
-\[CI_{1 - \alpha}(p)=\hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]
+\[CI_{1 - \alpha}(p)=\hat{p}\pm z_{1-\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]
 \end{frame}
 
 \begin{frame}{The Wald method}
@@ -522,7 +522,7 @@ In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 l
 \end{tcolorbox}
 
 \begin{tcolorbox}
-For a $95\%$ confidence interval using $\hat{p}=0.59$, $n=846$ and $z_{\alpha/2}=1.96$ , we have
+For a $95\%$ confidence interval using $\hat{p}=0.59$, $n=846$ and $z_{1-\alpha/2}=1.96$ , we have
 $$0.59\pm 1.96\sqrt{\frac{0.59(0.41)}{846}}=(0.5569,0.6231)$$
 \end{tcolorbox}
 \end{frame}
@@ -574,7 +574,7 @@ which the 0.975 quantile is \(z_{0.975}\approx1.96\), and hence
 \end{itemize}
 
 Then the \((1-\alpha)\times 100\) confidence interval is given by:
-\[CI_{1 - \alpha}(p) = \tilde{p}\pm z_{\alpha/2}\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}\]
+\[CI_{1 - \alpha}(p) = \tilde{p}\pm z_{1-\alpha/2}\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}\]
 \end{frame}
 
 \begin{frame}{The Agresti-Coull Interval for a Proportion}
@@ -584,7 +584,7 @@ In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 l
 \end{tcolorbox}
 
 \begin{tcolorbox}
-For a $95\%$ confidence interval using $\hat{p}=0.59$, $n=846$ and $z_{\alpha/2}=1.96$ , we have $\tilde{X}=0.59(846)+2=501.14$, $\tilde{n}=846+4=850$ and $\tilde{p}=0.5896$
+For a $95\%$ confidence interval using $\hat{p}=0.59$, $n=846$ and $z_{1-\alpha/2}=1.96$ , we have $\tilde{X}=0.59(846)+2=501.14$, $\tilde{n}=846+4=850$ and $\tilde{p}=0.5896$
 $$CI_{1 - \alpha}(p)=0.5896\pm 1.96\sqrt{\frac{0.5896(0.4104)}{850}}=(0.5565,0.6226)$$
 \end{tcolorbox}
 \end{frame}
@@ -625,7 +625,7 @@ $$CI_{1 - \alpha}(p)=0.5896\pm 1.96\sqrt{\frac{0.5896(0.4104)}{850}}=(0.5565,0.6
 \protect\hypertarget{wilson-score-method}{}
 The Wilson Score method does not make the approximation to the equation
 below
-\[CI_{1 - \alpha}(p)=\hat{p}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}\]
+\[CI_{1 - \alpha}(p)=\hat{p}\pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}\]
 
 The result is more involved algebra (which involves solving a quadratic
 equation), and a more complicated solution.
@@ -634,7 +634,7 @@ equation), and a more complicated solution.
 \tightlist
 \item
   The result is the Wilson Score confidence interval for a proportion:
-  \[CI_{1-\alpha}(p)=\frac{\hat{p}+\frac{z^2_{\alpha/2}}{2n}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z^2_{\alpha/2}}{4n^2}}}{1+\frac{z^2_{\alpha/2}}{n}}\]
+  \[CI_{1-\alpha}(p)=\frac{\hat{p}+\frac{z^2_{1-\alpha/2}}{2n}\pm z_{1-\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z^2_{1-\alpha/2}}{4n^2}}}{1+\frac{z^2_{1-\alpha/2}}{n}}\]
 \end{itemize}
 \end{frame}
 
@@ -696,8 +696,7 @@ A political candidate prepares to conduct a survey to gauge voter support for hi
 \end{tcolorbox}
 
 \begin{tcolorbox}
-Solution:  Since the Agresti-Coull interval is symmetric, the margin of error is $1.96\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}$. Thus, we want to solve for $\tilde{n}$ in 
-$$1.96\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}\leq 0.04$$
+Solution:  Since the Agresti-Coull interval is symmetric, the margin of error is $1.96\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}$. Thus, we want to solve for $\tilde{n}$ in $$1.96\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}\leq 0.04$$
 Unfortunately, we do not know $\tilde{p}$. If we did, the candidate would not need to conduct the survey! We will use $\tilde{p}=0.5$ since this will maximize the expression under the radical sign. 
 
 \end{tcolorbox}
@@ -766,7 +765,7 @@ Then \[n\geq 596.25\] \tiny
 \item
   Wondering how near \(\hat{p}\) might be to \(p\), the investigators
   use the Wald CI method:
-  \[CI_{1 - \alpha}(p) =\hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]
+  \[CI_{1 - \alpha}(p) =\hat{p}\pm z_{1-\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]
 \end{itemize}
 
 to obtain the approximate \(95\%\) confidence interval
@@ -908,8 +907,8 @@ Now use \(p=0.79\) \tiny
 \end{frame}
 
 \begin{frame}[fragile]{Coverage Probabilities of Binomial Confidence
-Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-5}{}
+Intervals - Wald}
+\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---wald}{}
 We step through two thousand values of \(p\) from near 0 to near 1.
 Subsequently plot coverage probability versus \(p\).
 
@@ -947,8 +946,9 @@ Subsequently plot coverage probability versus \(p\).
 \normalsize
 \end{frame}
 
-\begin{frame}{Coverage Probabilities of Binomial Confidence Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-6}{}
+\begin{frame}{Coverage Probabilities of Binomial Confidence Intervals -
+Wald}
+\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---wald-1}{}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.8\textheight]{Week11_12_13_files/figure-beamer/unnamed-chunk-17-1} \end{center}
@@ -956,8 +956,8 @@ Subsequently plot coverage probability versus \(p\).
 \end{frame}
 
 \begin{frame}[fragile]{Coverage Probabilities of Binomial Confidence
-Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-7}{}
+Intervals - Agresti-Coull}
+\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---agresti-coull}{}
 Next consider the Agresti-Coull confidence intervals.
 
 \tiny
@@ -994,8 +994,9 @@ Next consider the Agresti-Coull confidence intervals.
 \normalsize
 \end{frame}
 
-\begin{frame}{Coverage Probabilities of Binomial Confidence Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-8}{}
+\begin{frame}{Coverage Probabilities of Binomial Confidence Intervals -
+Agresti-Coull}
+\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---agresti-coull-1}{}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.8\textheight]{Week11_12_13_files/figure-beamer/unnamed-chunk-19-1} \end{center}
@@ -1003,8 +1004,8 @@ Next consider the Agresti-Coull confidence intervals.
 \end{frame}
 
 \begin{frame}[fragile]{Coverage Probabilities of Binomial Confidence
-Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-9}{}
+Intervals - Wilson}
+\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---wilson}{}
 Next we use Wilson score intervals to do the same thing.
 
 \tiny
@@ -1041,8 +1042,9 @@ Next we use Wilson score intervals to do the same thing.
 \normalsize
 \end{frame}
 
-\begin{frame}{Coverage Probabilities of Binomial Confidence Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-10}{}
+\begin{frame}{Coverage Probabilities of Binomial Confidence Intervals -
+Wilson}
+\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---wilson-1}{}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.8\textheight]{Week11_12_13_files/figure-beamer/unnamed-chunk-21-1} \end{center}

@@ -78,7 +78,7 @@ library(PASWR2)
 ## Confidence Intervals for a Difference in Means
 
 Let $X$ and $Y$ be random variables with $X\sim N(\mu_1, \sigma_1)$ and $Y\sim N(\mu_2, \sigma_2)$. Then:
-$$X-Y\sim N\left(\mu_1-\mu_2, \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}\right)$$
+$$\bar{X}-\bar{Y}\sim N\left(\mu_1-\mu_2, \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}\right)$$
 
 Of course, in practice we usually do not know the population variances, so we will plug in the sample variances. As in the single-sample case, we call this a $t$ statistic:
  $$T=\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{\sqrt{\frac{S^2_X}{n_X}+\frac{S^2_Y}{n_Y}}}$$
@@ -242,7 +242,7 @@ is approximately standard normal.
 Thus: 
 $$P\left(-z_{1-\alpha/2}<\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}<z_{1-\alpha/2}\right)\approx 1-\alpha $$
 This gives:
-$$\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}=\pm z_{\alpha/2}$$
+$$\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}=\pm z_{1-\alpha/2}$$
 
 At this point the different methods diverge. 
 
@@ -250,11 +250,11 @@ At this point the different methods diverge.
 
 The traditional Wald method completes the algebra to the following step before making an approximation:
 
-$$CI_{1 - \alpha}(p) = \hat{p}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$
+$$CI_{1 - \alpha}(p) = \hat{p}\pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$
 
 
 At this point the Wald method replaces the population values $p$ and $q$ in the right side of the equation with their approximations $\hat{p}$ and $\hat{q}$ to obtain the traditional Wald confidence interval formula for a proportion:
-$$CI_{1 - \alpha}(p)=\hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+$$CI_{1 - \alpha}(p)=\hat{p}\pm z_{1-\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
 
 
 ## The Wald method 
@@ -264,7 +264,7 @@ In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 l
 \end{tcolorbox}
 
 \begin{tcolorbox}
-For a $95\%$ confidence interval using $\hat{p}=0.59$, $n=846$ and $z_{\alpha/2}=1.96$ , we have
+For a $95\%$ confidence interval using $\hat{p}=0.59$, $n=846$ and $z_{1-\alpha/2}=1.96$ , we have
 $$0.59\pm 1.96\sqrt{\frac{0.59(0.41)}{846}}=(0.5569,0.6231)$$
 \end{tcolorbox}
 
@@ -289,7 +289,7 @@ Agresti and Coull (1998) considered the $95\%$ confidence interval for which the
 - If $X$ denotes the number of successes in a sample of size $n$, let $\tilde{X}=X+2$, $\tilde{n}=n+4$, and $\tilde{p}=\frac{\tilde{X}}{\tilde{n}}$. 
 
 Then the $(1-\alpha)\times 100$ confidence interval is given by:
-$$CI_{1 - \alpha}(p) = \tilde{p}\pm z_{\alpha/2}\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}$$
+$$CI_{1 - \alpha}(p) = \tilde{p}\pm z_{1-\alpha/2}\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}$$
 
 
 ## The Agresti-Coull Interval for a Proportion
@@ -299,7 +299,7 @@ In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 l
 \end{tcolorbox}
 
 \begin{tcolorbox}
-For a $95\%$ confidence interval using $\hat{p}=0.59$, $n=846$ and $z_{\alpha/2}=1.96$ , we have $\tilde{X}=0.59(846)+2=501.14$, $\tilde{n}=846+4=850$ and $\tilde{p}=0.5896$
+For a $95\%$ confidence interval using $\hat{p}=0.59$, $n=846$ and $z_{1-\alpha/2}=1.96$ , we have $\tilde{X}=0.59(846)+2=501.14$, $\tilde{n}=846+4=850$ and $\tilde{p}=0.5896$
 $$CI_{1 - \alpha}(p)=0.5896\pm 1.96\sqrt{\frac{0.5896(0.4104)}{850}}=(0.5565,0.6226)$$
 \end{tcolorbox}
 
@@ -322,12 +322,14 @@ binom.confint(x = .59*846, n = 846, methods = "ac")
 ## Wilson Score method
 
 The Wilson Score method does not make the approximation to the equation below
-$$CI_{1 - \alpha}(p)=\hat{p}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$
+$$CI_{1 - \alpha}(p)=\hat{p}\pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$
+
 
 The result is more involved algebra (which involves solving a quadratic equation), and a more complicated solution.
 
 - The result is the Wilson Score confidence interval for a proportion:
-$$CI_{1-\alpha}(p)=\frac{\hat{p}+\frac{z^2_{\alpha/2}}{2n}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z^2_{\alpha/2}}{4n^2}}}{1+\frac{z^2_{\alpha/2}}{n}}$$
+$$CI_{1-\alpha}(p)=\frac{\hat{p}+\frac{z^2_{1-\alpha/2}}{2n}\pm z_{1-\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z^2_{1-\alpha/2}}{4n^2}}}{1+\frac{z^2_{1-\alpha/2}}{n}}$$
+
 
 
 ## Wilson Score method
@@ -365,8 +367,7 @@ A political candidate prepares to conduct a survey to gauge voter support for hi
 
 
 \begin{tcolorbox}
-Solution:  Since the Agresti-Coull interval is symmetric, the margin of error is $1.96\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}$. Thus, we want to solve for $\tilde{n}$ in 
-$$1.96\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}\leq 0.04$$
+Solution:  Since the Agresti-Coull interval is symmetric, the margin of error is $1.96\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}$. Thus, we want to solve for $\tilde{n}$ in $$1.96\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}\leq 0.04$$
 Unfortunately, we do not know $\tilde{p}$. If we did, the candidate would not need to conduct the survey! We will use $\tilde{p}=0.5$ since this will maximize the expression under the radical sign. 
 
 \end{tcolorbox}
@@ -411,7 +412,7 @@ n
     - Then $\hat{p}=24/30=0.8$ estimates the population proportion $p=P(Success)$ of satisfactory batches with the current version of the process. 
     
 - Wondering how near $\hat{p}$ might be to $p$, the investigators use the Wald CI method:
-$$CI_{1 - \alpha}(p) =\hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+$$CI_{1 - \alpha}(p) =\hat{p}\pm z_{1-\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
 
 to obtain the approximate $95\%$ confidence interval $0.8 \pm 0.1431355$ or $(0.6568645, 0.9431355)$
 
@@ -482,7 +483,7 @@ sum(dbinom(x[cover], n, pp))  # total coverage prob at pp
 \normalsize
 
 
-## Coverage Probabilities of Binomial Confidence Intervals
+## Coverage Probabilities of Binomial Confidence Intervals - Wald
 
 We step through two thousand values of $p$ from near 0 to near 1. Subsequently plot coverage probability versus $p$. 
 
@@ -518,7 +519,7 @@ lines(c(1/n, 1- 1/n), c(1 - alpha, 1- alpha), col = "red", lty = "dashed")
 
 
 
-## Coverage Probabilities of Binomial Confidence Intervals
+## Coverage Probabilities of Binomial Confidence Intervals - Wald
 
 
 
@@ -555,7 +556,7 @@ lines(c(1/n, 1- 1/n), c(1 - alpha, 1- alpha), col = "red", lty = "dashed")
 
 
 
-## Coverage Probabilities of Binomial Confidence Intervals
+## Coverage Probabilities of Binomial Confidence Intervals - Agresti-Coull
 
 Next consider the Agresti-Coull confidence intervals.
 
@@ -591,7 +592,7 @@ lines(c(1/n, 1- 1/n), c(1 - alpha, 1- alpha), col = "red", lty = "dashed")
 
 
 
-## Coverage Probabilities of Binomial Confidence Intervals
+## Coverage Probabilities of Binomial Confidence Intervals - Agresti-Coull
 
 
 
@@ -627,7 +628,7 @@ lines(c(1/n, 1- 1/n), c(1 - alpha, 1- alpha), col = "red", lty = "dashed")
 
 
 
-## Coverage Probabilities of Binomial Confidence Intervals
+## Coverage Probabilities of Binomial Confidence Intervals - Wilson
 
 Next we use Wilson score intervals to do the same thing.
 
@@ -663,7 +664,7 @@ lines(c(1/n, 1- 1/n), c(1 - alpha, 1- alpha), col = "red", lty = "dashed")
 
 
 
-## Coverage Probabilities of Binomial Confidence Intervals
+## Coverage Probabilities of Binomial Confidence Intervals - Wilson
 
 
 
