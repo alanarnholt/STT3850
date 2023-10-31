@@ -1346,8 +1346,8 @@ promotions %>%
   specify(formula = decision ~ gender, success = "promoted") %>% 
   hypothesize(null = "independence") %>% 
   generate(reps = 1000, type = "permute") %>% 
-  calculate(stat = "diff in props", order = c("male", "female")) -> stuff
-get_pvalue(stuff, obs_stat= .292, direction = "right") -> pv
+  calculate(stat = "diff in props", order = c("male", "female")) -> null_distribution
+get_pvalue(null_distribution, obs_stat= .292, direction = "right") -> pv
 pv
 ```
 \normalsize
@@ -1467,7 +1467,7 @@ The null distribution from 1000 permutations is given below
 
 ```{r, echo = FALSE, out.height = '40%',out.width = '60%', fig.align='center'}
 #knitr::include_graphics("week12_6.png")
-ggplot(data = stuff, aes(x = stat)) +
+ggplot(data = null_distribution, aes(x = stat)) +
   geom_histogram(binwidth = 0.1, color = "white") + 
   xlim(-.4 ,.4) + 
   labs(x = "Difference in promotion rates (male - female)") +
@@ -1529,7 +1529,7 @@ Recall that we use the `specify()` verb to specify the response variable and, if
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '45%',out.width = '70%', fig.align='center'}
+```{r}
 promotions %>% 
   specify(formula = decision ~ gender, success = "promoted")
 ```
@@ -1633,11 +1633,11 @@ Note: the order of the subtraction does not matter, so long as you stay consiste
 \tiny
 ```{r}
 set.seed(37)
-null_distribution <- promotions %>% 
+promotions %>% 
   specify(formula = decision ~ gender, success = "promoted") %>% 
   hypothesize(null = "independence") %>% 
   generate(reps = 1000, type = "permute") %>% 
-  calculate(stat = "diff in props", order = c("male", "female"))
+  calculate(stat = "diff in props", order = c("male", "female")) -> null_distribution
 null_distribution
 ```
 \normalsize
@@ -1666,9 +1666,10 @@ The final step is to measure how surprised we are by a promotion difference of $
 - Furthermore, we’ll set the direction = "right" reflecting our alternative hypothesis $H_A: p_m-p_f>0$. Set `direction = "both"` for two-sided $H_A: p_m-p_f\neq 0$. 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '45%',out.width = '70%', fig.align='center'}
+```{r echo=TRUE, out.height = '40%',out.width = '70%', fig.align='center'}
 visualize(null_distribution, bins = 10) + 
-  shade_p_value(obs_stat = obs_diff_prop, direction = "right")
+  shade_p_value(obs_stat = obs_diff_prop, direction = "right") + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1683,9 +1684,11 @@ visualize(null_distribution, bins = 10) +
 - So judging by the shaded region in the figure,  it seems we would somewhat rarely observe differences in promotion rates of $0.292 = 29.2\%$ or more in a hypothesized universe of no gender discrimination.
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '45%',out.width = '70%', fig.align='center'}
+```{r}
 null_distribution %>% 
-  get_p_value(obs_stat = obs_diff_prop, direction = "right")
+  get_p_value(obs_stat = 0.292, direction = "right") 
+# Or
+mean(null_distribution$stat >= 0.292)
 ```
 \normalsize
 
@@ -1711,15 +1714,18 @@ Since this p-value is smaller than our pre-specified significance level $\alpha=
 
 This is the entire code  that creates the null distribution.
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '45%',out.width = '70%', fig.align='center'}
+
+```{r, eval = FALSE}
+set.seed(37)
 null_distribution <- promotions %>% 
-  specify(formula = decision ~ gender, success = "promoted") %>% 
+  specify(formula = decision ~ gender, 
+          success = "promoted") %>% 
   hypothesize(null = "independence") %>% 
   generate(reps = 1000, type = "permute") %>% 
-  calculate(stat = "diff in props", order = c("male", "female"))
+  calculate(stat = "diff in props", 
+            order = c("male", "female"))
 ```
-\normalsize
+
 
 
 
@@ -1728,17 +1734,19 @@ null_distribution <- promotions %>%
 We need to make **two changes two changes** to create the bootstrap distribution needed to construct a $95\%$ confidence interval for $p_m-p_f$. 
 
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '45%',out.width = '70%', fig.align='center'}
+
+```{r}
 bootstrap_distribution <- promotions %>% 
-  specify(formula = decision ~ gender, success = "promoted") %>% 
+  specify(formula = decision ~ gender, 
+          success = "promoted") %>% 
   # Change 1 - Remove hypothesize():
   # hypothesize(null = "independence") %>% 
   # Change 2 - Switch type from "permute" to "bootstrap":
   generate(reps = 1000, type = "bootstrap") %>% 
-  calculate(stat = "diff in props", order = c("male", "female"))
+  calculate(stat = "diff in props", 
+            order = c("male", "female"))
 ```
-\normalsize
+
 
 
 ## Comparison with confidence intervals
@@ -1749,7 +1757,8 @@ percentile_ci <- bootstrap_distribution %>%
   get_confidence_interval(level = 0.95, type = "percentile")
 percentile_ci
 visualize(bootstrap_distribution) + 
-  shade_confidence_interval(endpoints = percentile_ci)
+  shade_confidence_interval(endpoints = percentile_ci) + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1765,7 +1774,7 @@ Notice how the value 0 is not included in our confidence interval, again suggest
     - population means $\mu$
     - differences in population proportions $p_1-p_2$
     - differences in population means $\mu_1-\mu_2$
-```{r warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r, echo = FALSE, out.height = '50%',out.width = '70%'}
 knitr::include_graphics("week12_8.png")
 ```
 
@@ -1784,8 +1793,8 @@ knitr::include_graphics("week12_8.png")
 - Unfortunately, the latter result is often misinterpreted as “accepting the null hypothesis $H_0$. 
 
     - Saying that we “accept the null hypothesis $H_0$” is equivalent to stating that “we think the null hypothesis $H_0$ is true. 
-    - saying that we “fail to reject the null hypothesis $H_0$” is saying something else: “While $H_0$ might still be false, we don’t have enough evidence to say so.” There is an absence of enough proof. 
-    - However, the absence of proof is not proof of absence.
+    - Saying that we “fail to reject the null hypothesis $H_0$” is saying something else: “While $H_0$ might still be false, we don’t have enough evidence to say so.” 
+    
     
 
 
@@ -1821,14 +1830,14 @@ Let’s use the United States criminal justice system as an analogy.
 The Type I and II errors can be illustrated in the Table of TRUTH below:
 
 
-```{r warning=FALSE, message=FALSE,out.height = '30%',out.width = '60%', fig.align='center'}
+```{r, echo = FALSE, out.height = '30%',out.width = '60%'}
 knitr::include_graphics("week12_9a.png")
 ```
 
 
 We apply these terms to our criminal justice analogy
 
-```{r warning=FALSE, message=FALSE,out.height = '30%',out.width = '60%', fig.align='center'}
+```{r, echo = FALSE, out.height = '30%',out.width = '60%'}
 knitr::include_graphics("week12_9b.png")
 ```
 
