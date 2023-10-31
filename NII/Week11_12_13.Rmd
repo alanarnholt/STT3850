@@ -867,7 +867,7 @@ UL <- xbar - CIt[1]*S/sqrt(n)
 ```
 \normalsize
 
-- The $95\%$ bootstrap percentile interval is $(`r BPCI[1]`, `r BPCI[2]`)$ while the formula $t$ confidence interval is $(`r t.test(Arsenic)$conf[1]`, `r t.test(Arsenic)$conf[1]`)$
+- The $95\%$ bootstrap percentile interval is $(`r BPCI[1]`, `r BPCI[2]`)$ while the formula $t$ confidence interval is $(`r t.test(Arsenic)$conf[1]`, `r t.test(Arsenic)$conf[2]`)$
 
 - The bootstrap $t$ interval is stretched further to the right, reflecting the right-skewed distribution of the data. 
 
