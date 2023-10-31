@@ -6,6 +6,7 @@ library(resampledata)
 #
 births <- NCBirths2004
 head(births)
+names(births)
 # Select only Female babies
 births %>% 
   filter(Gender == "Female") -> birthsF
