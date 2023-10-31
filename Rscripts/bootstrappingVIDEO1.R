@@ -94,7 +94,7 @@ BPCI
 ## Bootstrap Standard Error
 BSECI
 ## Bootstrap t*
-BSTCI
+BSTCI_1
 ####################################
 ## CV = sigma/mu
 ## Construct a bootstrap percentile CI for the CV of Female weight - 
