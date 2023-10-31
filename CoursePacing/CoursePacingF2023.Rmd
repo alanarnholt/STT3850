@@ -360,7 +360,7 @@ _____________________
 
 * [Bootstrap Percentile CI examples](../Rmarkdown/BSPCI_examples.html)
 
-* [Inference for Numerical Data in R](https://mathr.appstate.edu/connect/content/985bcfd7-c8cb-47bd-822a-9af65be3820b)
+* [Inference for Numerical Data in R](https://mathr.appstate.edu/connect/content/23ecb8d9-19ee-4119-bdb6-b692132852da)
 ```
 
 __________________
