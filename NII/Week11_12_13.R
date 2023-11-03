@@ -504,6 +504,13 @@ promotions %>%
 
 
 ## ----------------------------------------------------------------------------------------------------------------------------------
+library(tidyverse)
+library(infer)
+library(moderndive)
+library(nycflights13)
+library(ggplot2movies)
+######################
+  
 set.seed(37)
 promotions %>% 
   specify(formula = decision ~ gender, success = "promoted") %>% 
