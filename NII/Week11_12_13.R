@@ -530,6 +530,9 @@ library(ggplot2movies)
 ## Doing this with a for loop
 set.seed(32)
 xtabs(~decision+gender, data = promotions)
+# Consider what the following does
+xtabs(~decision+sample(gender), data = promotions)
+##########################################################
 prop.table(xtabs(~decision+gender, data = promotions),2)
 prop.table(xtabs(~decision+gender, data = promotions), 2)[2,]
 (-diff(prop.table(xtabs(~decision+gender, data = promotions), 2)[2,]) -> obs_diff_ps)
