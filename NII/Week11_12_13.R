@@ -535,7 +535,7 @@ prop.table(xtabs(~decision+gender, data = promotions), 2)[2,]
 (-diff(prop.table(xtabs(~decision+gender, data = promotions), 2)[2,]) -> obs_diff_ps)
 -diff(prop.table(xtabs(~decision+sample(gender), data = promotions), 2)[2,]) ## Shuffle the gender
 ## Do this many times
-B <- 10^4
+B <- 10^3
 p_diff <- numeric(B) # preallocate storage
 for(i in 1:B){
   p_diff[i] <- -diff(prop.table(xtabs(~decision+sample(gender), data = promotions), 2)[2,])
