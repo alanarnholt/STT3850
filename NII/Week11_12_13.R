@@ -513,6 +513,13 @@ promotions %>%
 get_pvalue(null_distribution, obs_stat= .292, direction = "right") -> pv
 pv
 
+
+
+library(tidyverse)
+library(infer)
+library(moderndive)
+library(nycflights13)
+library(ggplot2movies)
 ## Doing this with a for loop
 set.seed(32)
 xtabs(~decision+gender, data = promotions)
