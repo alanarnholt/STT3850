@@ -513,12 +513,19 @@ library(ggplot2movies)
   
 set.seed(37)
 promotions %>% 
-  specify(formula = decision ~ gender, success = "promoted") %>% 
+  specify(formula = decision ~ gender, 
+          success = "promoted") %>% 
   hypothesize(null = "independence") %>% 
   generate(reps = 1000, type = "permute") %>% 
-  calculate(stat = "diff in props", order = c("male", "female")) -> null_distribution
+  calculate(stat = "diff in props", 
+            order = c("male", "female")) -> null_distribution
 get_pvalue(null_distribution, obs_stat= .292, direction = "right") -> pv
 pv
+visualize(null_distribution, bins = 10) +
+  shade_p_value(obs_stat = .292, 
+                direction = "right", 
+                color = "purple") +
+  theme_bw()
 
 
 
@@ -529,22 +536,30 @@ library(nycflights13)
 library(ggplot2movies)
 ## Doing this with a for loop
 set.seed(32)
-xtabs(~decision+gender, data = promotions)
+xtabs(~decision + gender, data = promotions)
 # Consider what the following does
-xtabs(~decision+sample(gender), data = promotions)
+xtabs(~decision + sample(gender), data = promotions)
 ##########################################################
-prop.table(xtabs(~decision+gender, data = promotions),2)
-prop.table(xtabs(~decision+gender, data = promotions), 2)[2,]
-(-diff(prop.table(xtabs(~decision+gender, data = promotions), 2)[2,]) -> obs_diff_ps)
--diff(prop.table(xtabs(~decision+sample(gender), data = promotions), 2)[2,]) ## Shuffle the gender
+prop.table(xtabs(~decision + gender, data = promotions),2)
+prop.table(xtabs(~decision + gender, data = promotions), 2)[2,]
+(-diff(prop.table(xtabs(~decision + gender, 
+                        data = promotions), 2)[2,]) -> obs_diff_ps)
+-diff(prop.table(xtabs(~decision + sample(gender), 
+                       data = promotions), 2)[2,]) ## Shuffle the gender
 ## Do this many times
-B <- 10^3
+B <- 10^4
 p_diff <- numeric(B) # preallocate storage
 for(i in 1:B){
-  p_diff[i] <- -diff(prop.table(xtabs(~decision+sample(gender), data = promotions), 2)[2,])
+  p_diff[i] <- -diff(prop.table(xtabs(~decision + sample(gender), 
+                                      data = promotions), 2)[2,])
 }
-hist(p_diff, breaks = "Scott")
+hist(p_diff, breaks = 10, col = "lightblue")
 (p_value <- mean(p_diff >= obs_diff_ps))
+
+
+
+
+
 
 
 ## ----echo = FALSE, out.height = '50%',out.width = '70%'----------------------------------------------------------------------------
