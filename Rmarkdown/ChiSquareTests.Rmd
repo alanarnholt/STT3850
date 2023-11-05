@@ -1,0 +1,67 @@
+---
+title: "STT 3850 : Chi-Square Tests"
+author: "Fall 2023"
+institute: "Appalachian State University"
+output: 
+#   pdf_document:
+#      toc: yes
+#      toc_depth: '3'
+ beamer_presentation:
+   #template: myTemplate.tex
+   theme: "CambridgeUS"
+   colortheme: "seagull"
+   fonttheme: "professionalfonts"
+   keep_tex: true
+# word_document:
+#   toc: yes
+#   toc_depth: '3'
+#date: "`r format(Sys.time(), '%d %B, %Y')`"
+#date: "January 22, 2020"
+number_sections: true
+fig_caption: yes
+#bibliography: Reference.bib
+biblio-style: apalike
+link-citations: yes
+header-includes:
+   - \usepackage{placeins}
+   - \usepackage{color}
+   - \usepackage{bm}
+   - \usepackage{amsmath}
+   - \usepackage{algorithm}
+   - \usepackage[]{algpseudocode}
+   - \usepackage{tabularx}
+   - \usepackage{multirow}
+   - \usepackage[most]{tcolorbox}
+   - \usepackage{tikz}
+   - \usepackage{lipsum}
+   - \usepackage{mathtools}
+   - \usepackage{actuarialangle}
+
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE, fig.align = 'center')
+```
+
+
+
+
+
+# Chi-Square Goodness of Fit Tests
+
+## Needed packages
+
+```{r}
+library(tidyverse)
+library(moderndive)
+library(infer)
+library(resampledata)
+library(PASWR2)
+```
+
+# Chi-Square Tests of Independence
+
+# Chi-Square Tests of Homogeneity
+
