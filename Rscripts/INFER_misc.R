@@ -41,3 +41,5 @@ get_ci(bt, level = .90) -> Q
 Q
 BCI <- c(xbar -Q[2]*S/sqrt(n), xbar - Q[1]*S/sqrt(n))
 BCI
+
+
