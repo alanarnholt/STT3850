@@ -62,7 +62,7 @@ get_pvalue(dist_null, obs_stat = xbar, direction = "right")
 set.seed(321)
 Year <- sample50$year
 head(Year)
-Year <- Year - 3.32 # Recenter so the null is true!
+Year <- Year - 3.245 # Recenter so the null is true!
 B <- 10^4
 bstat <- numeric(B)
 for(i in 1:B){
