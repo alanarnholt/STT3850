@@ -2,12 +2,13 @@
 library(tidyverse)
 library(moderndive)
 pennies ### This is the "population"
+(N <- dim(pennies)[1])
 (MU <- mean(pennies$year))
-(SIGMA <- sd(pennies$year)*799/800)
+(SIGMA <- sd(pennies$year)*(N-1)/N) # sigma = sqrt((x_i - mu)^2/N)
 ## Suppose we take a single sample of size n = 49 from the population
 ## We want to test H_0: mu = 1987 versus H_1: mu > 1987 
 set.seed(64)
-sample50 <- rep_sample_n(pennies, size = 50, replace = FALSE, reps = 1)
+sample50 <- rep_sample_n(pennies, size = 49, replace = FALSE, reps = 1)
 sample50
 (xbar <- mean(sample50$year))
 ggplot(data = sample50, aes(x = year)) + 
@@ -22,14 +23,14 @@ ggplot(data = sample50, aes(x = year)) +
 ## Generate the null distribution
 ## Under the assumption H_0 is true--- mu = 1987
 ## Currently the values are centered at the purple dashed line
-## which  is 1990.32---so, to make the null true we need to subtract
-## 1990.32 - 1987 = 3.32 from all values in "year"
-
+## which  is 1990.245---so, to make the null true we need to subtract
+## 1990.245 - 1987 = 3.245 from all values in "year"
+set.seed(23)
 sample50 %>% 
-  mutate(year = year - 3.32) -> recenter
+  mutate(year = year - 3.245) -> recenter
 (mean(recenter$year))
 recenter %>% 
-  rep_sample_n(size = 49, replace = TRUE, reps = 1000) %>% 
+  rep_sample_n(size = 49, replace = TRUE, reps = 10000) %>% 
   group_by(replicate) %>% 
   summarize(stat = mean(year)) -> null_distribution
 ggplot(data = null_distribution, aes(x = stat)) + 
@@ -38,7 +39,7 @@ ggplot(data = null_distribution, aes(x = stat)) +
   geom_vline(xintercept = xbar, color = "purple", linetype = "dashed") + 
   geom_vline(xintercept = 1987, color = "red") + 
   labs(title = "Null Distribution")
-(pv <- mean(null_distribution >= xbar))
+(pv <- mean(null_distribution$stat >= xbar))
 
 #########
 #########
@@ -48,7 +49,7 @@ set.seed(32)
 sample50 %>% 
   specify(response = year) %>% 
   hypothesize(null = "point", mu = 1987) %>% 
-  generate(reps = 1000, type = "bootstrap") %>% # Note that for one sample - bootstrap
+  generate(reps = 10000, type = "bootstrap") %>% # Note that for one sample - bootstrap
   calculate(stat = "mean") -> dist_null
 visualize(dist_null)
 get_pvalue(dist_null, obs_stat = xbar, direction = "right")
