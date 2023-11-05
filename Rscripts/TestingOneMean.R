@@ -78,4 +78,3 @@ abline(v = xbar, col = "blue", lt = "dashed")
 SIGMA/sqrt(49) # SE(xbar)
 sd(bstat)      # as an approximation
 t.test(sample50$year, mu = 1987, alternative = "greater")
-
