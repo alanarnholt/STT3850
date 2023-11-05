@@ -3,6 +3,7 @@ library(tidyverse)
 library(moderndive)
 pennies ### This is the "population"
 (MU <- mean(pennies$year))
+(SIGMA <- sd(pennies$year)*799/800)
 ## Suppose we take a single sample of size n = 49 from the population
 ## We want to test H_0: mu = 1987 versus H_1: mu > 1987 
 set.seed(64)
@@ -57,18 +58,23 @@ get_pvalue(dist_null, obs_stat = xbar, direction = "right")
 ### took care of re-centering the null distribution.
 
 ### Same thing with a for loop now
-
+set.seed(321)
 Year <- sample50$year
 head(Year)
 Year <- Year - 3.32 # Recenter so the null is true!
-B <- 10^3
+B <- 10^4
 bstat <- numeric(B)
 for(i in 1:B){
   bss <- sample(Year, size = 49, replace = TRUE)
   bstat[i] <- mean(bss)
 }
-hist(bstat)
+hist(bstat, col = "lightblue", 
+     breaks = "Scott", main = "Null Distribution")
+abline(v = xbar, col = "blue", lt = "dashed")
 (pv <- mean(bstat >= xbar))
 ######
+# Note
+SIGMA/sqrt(49) # SE(xbar)
+sd(bstat)      # as an approximation
 t.test(sample50$year, mu = 1987, alternative = "greater")
 
