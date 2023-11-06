@@ -35,7 +35,7 @@ ggplot(data = sample49, aes(x = year)) +
   geom_vline(xintercept = xbar, 
              color = "purple", 
              linetype = "dashed") + 
-  geom_vline(xintercept = 1987, 
+   (xintercept = 1987, 
              color = "red") +
   labs(title = "Histogram of sample of n = 49 values",
        subtitle = "Red line is at the hypothesized mean of 1987\nPurple dashed line is at the mean of the observed sample (1990.245)")
