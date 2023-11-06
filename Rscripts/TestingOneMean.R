@@ -8,10 +8,10 @@ pennies ### This is the "population"
 ## Suppose we take a single sample of size n = 49 from the population
 ## We want to test H_0: mu = 1987 versus H_1: mu > 1987 
 set.seed(64)
-sample50 <- rep_sample_n(pennies, size = 49, replace = FALSE, reps = 1)
-sample50
-(xbar <- mean(sample50$year))
-ggplot(data = sample50, aes(x = year)) + 
+sample49 <- rep_sample_n(pennies, size = 49, replace = FALSE, reps = 1)
+sample49
+(xbar <- mean(sample49$year))
+ggplot(data = sample49, aes(x = year)) + 
   geom_histogram(binwidth = 5, fill = "lightblue", color = "black") + 
   theme_bw() + 
   geom_vline(xintercept = xbar, color = "purple", linetype = "dashed") + 
@@ -26,7 +26,7 @@ ggplot(data = sample50, aes(x = year)) +
 ## which  is 1990.245---so, to make the null true we need to subtract
 ## 1990.245 - 1987 = 3.245 from all values in "year"
 set.seed(23)
-sample50 %>% 
+sample49 %>% 
   mutate(year = year - 3.245) -> recenter
 (mean(recenter$year))
 recenter %>% 
@@ -45,13 +45,17 @@ ggplot(data = null_distribution, aes(x = stat)) +
 #########
 ## Doing the same thing with the infer pipeline
 ##
+library(infer)
 set.seed(32)
-sample50 %>% 
+sample49 %>% 
   specify(response = year) %>% 
   hypothesize(null = "point", mu = 1987) %>% 
   generate(reps = 10000, type = "bootstrap") %>% # Note that for one sample - bootstrap
   calculate(stat = "mean") -> dist_null
-visualize(dist_null)
+visualize(dist_null) + 
+  shade_pvalue(obs_stat = xbar, direction = "right", 
+               color = "purple", fill = "blue") + 
+  theme_bw()
 get_pvalue(dist_null, obs_stat = xbar, direction = "right")
 
 
@@ -60,7 +64,7 @@ get_pvalue(dist_null, obs_stat = xbar, direction = "right")
 
 ### Same thing with a for loop now
 set.seed(321)
-Year <- sample50$year
+Year <- sample49$year
 head(Year)
 Year <- Year - 3.245 # Recenter so the null is true!
 B <- 10^4
@@ -77,4 +81,5 @@ abline(v = xbar, col = "blue", lt = "dashed")
 # Note
 SIGMA/sqrt(49) # SE(xbar)
 sd(bstat)      # as an approximation
-t.test(sample50$year, mu = 1987, alternative = "greater")
+t.test(sample49$year, mu = 1987, alternative = "greater")
+
