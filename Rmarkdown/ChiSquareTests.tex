@@ -157,28 +157,396 @@
 \frame{\titlepage}
 
 \hypertarget{chi-square-goodness-of-fit-tests}{%
-\section{Chi-Square Goodness of Fit
+\section{Chi-Square Goodness-of-Fit
 Tests}\label{chi-square-goodness-of-fit-tests}}
 
-\begin{frame}[fragile]{Needed packages}
-\protect\hypertarget{needed-packages}{}
+\begin{frame}[fragile]{All Parameters Known}
+\protect\hypertarget{all-parameters-known}{}
+\begin{itemize}
+\tightlist
+\item
+  Bansley et al.~(1992) investigated the relationship between month of
+  birth and achievement in sport. Birth dates were collected for players
+  in teams competing in the 1990 World Cup soccer games.
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)}
-\FunctionTok{library}\NormalTok{(moderndive)}
-\FunctionTok{library}\NormalTok{(infer)}
-\FunctionTok{library}\NormalTok{(resampledata)}
-\FunctionTok{library}\NormalTok{(PASWR2)}
+\NormalTok{Observed }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{150}\NormalTok{, }\DecValTok{138}\NormalTok{, }\DecValTok{140}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(Observed) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Aug{-}Oct"}\NormalTok{, }\StringTok{"Nov{-}Jan"}\NormalTok{, }
+                     \StringTok{"Feb{-}April"}\NormalTok{, }\StringTok{"May{-}July"}\NormalTok{)}
+\NormalTok{Observed}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+  Aug-Oct   Nov-Jan Feb-April  May-July 
+      150       138       140       100 
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{All Parameters Known}
+\protect\hypertarget{all-parameters-known-1}{}
+We wish to test whether these data are consistent with the hypothesis
+that birthdays of soccer players are uniformly distributed across the
+four quarters of the year. Let \(P_i\) denote the probability of a birth
+occurring in the \(i^{th}\) quarter; the hypotheses are as follows:
+
+\(H_0: p_1=\frac{1}{4}, p_2=\frac{1}{4}, p_3=\frac{1}{4}, p_4=\frac{1}{4}\)
+versus \(H_A: p_i \neq \frac{1}{4}\) for at least one \(i\).
+
+There were a total of \(n = 528\) players considered for this study, so
+the expected count for each quarter is \(528/4 = 132\).
+\end{frame}
+
+\begin{frame}[fragile]{All Parameters Known}
+\protect\hypertarget{all-parameters-known-2}{}
+\(\chi^2_{obs} = \sum_{i=1}^k\frac{(O_i - E_i)^2}{E_i} = \frac{(150 - 132)^2}{132} + \frac{(138 - 132)^2}{132} + \frac{(140 - 132)^2}{132} + \frac{(100 - 132)^2}{132} = 10.97\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(chi\_obs }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((Observed }\SpecialCharTok{{-}} \DecValTok{132}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\DecValTok{132}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 10.9697
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Or}
+\FunctionTok{chisq.test}\NormalTok{(Observed, }\AttributeTok{p =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{))}\SpecialCharTok{$}\NormalTok{stat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+X-squared 
+  10.9697 
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{All Parameters Known}
+\protect\hypertarget{all-parameters-known-3}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(Observed, }\AttributeTok{p =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ CST}
+\NormalTok{CST}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Chi-squared test for given probabilities
+
+data:  Observed
+X-squared = 10.97, df = 3, p-value = 0.01189
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CST}\SpecialCharTok{$}\NormalTok{observed}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  Aug-Oct   Nov-Jan Feb-April  May-July 
+      150       138       140       100 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CST}\SpecialCharTok{$}\NormalTok{expected}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  Aug-Oct   Nov-Jan Feb-April  May-July 
+      132       132       132       132 
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{All Parameters Known}
+\protect\hypertarget{all-parameters-known-4}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(pvalue }\OtherTok{\textless{}{-}} \FunctionTok{pchisq}\NormalTok{(CST}\SpecialCharTok{$}\NormalTok{stat, }\DecValTok{3}\NormalTok{, }\AttributeTok{lower =} \ConstantTok{FALSE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ X-squared 
+0.01189087 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Or}
+\NormalTok{CST}\SpecialCharTok{$}\NormalTok{p.value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.01189087
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{All Parameters Known - Conclusion}
+\protect\hypertarget{all-parameters-known---conclusion}{}
+\begin{tcolorbox}
+Given the $p-value$ of $0.012$ evidence suggests birthdays for World Cup soccer players are not uniformly distributed.
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}{All Parameters Known - Example 2}
+\protect\hypertarget{all-parameters-known---example-2}{}
+Suppose you draw 100 numbers at random from an unknown distribution.
+Thirty values fall in the interval \((0, 0.25]\), 30 fall in
+\((0.25, 0.75]\), 22 fall in \((0.75, 1.25]\), and the rest fall in
+\((1.25, \infty]\). Your friend claims that the distribution is
+exponential with parameter \(\lambda = 1\). Do you believe her?
+
+\begin{itemize}
+\tightlist
+\item
+  A random variable \(X\) has the exponential distribution with
+  parameter \(\lambda > 0\) if its \textbf{pdf} is
+\end{itemize}
+
+\[f(x) = \lambda e^{-\lambda x},\quad x \geq 0.\]
+\end{frame}
+
+\begin{frame}{All Parameters Known - Example 2}
+\protect\hypertarget{all-parameters-known---example-2-1}{}
+We wish to test the following:
+
+\begin{tcolorbox}
+$H_0:$ The data are from an exponential distribution with $\lambda = 1$.
+
+$H_A:$ The data are not from an exponential distribution with $\lambda = 1$.
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}{All Parameters Known - Example 2}
+\protect\hypertarget{all-parameters-known---example-2-2}{}
+Given \(X \sim \text{Exp}(\lambda = 1)\). The probabilities for each
+interval are as follows:
+
+\(p_1 = P(0 \leq X \leq 0.25)=\int_0^{0.25}e^{-x}\,dx =0.2211992\)
+
+\(p_2 = P(0.25 \leq X \leq 0.75)=\int_{0.25}^{0.75}e^{-x}\,dx =0.3064342\)
+
+\(p_3 = P(0.75 \leq X \leq 1.25)=\int_{0.75}^{1.25}e^{-x}\,dx =0.1858618\)
+
+\(p_4 = P(1.25 \leq X \leq \infty)=\int_{1.25}^{\infty}e^{-x}\,dx =0.2865048\)
+\end{frame}
+
+\begin{frame}[fragile]{All Parameters Known - Example 2}
+\protect\hypertarget{all-parameters-known---example-2-3}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{pexp}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{pexp}\NormalTok{(}\FloatTok{0.75}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{pexp}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{p3 }\OtherTok{\textless{}{-}} \FunctionTok{pexp}\NormalTok{(}\FloatTok{1.25}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{pexp}\NormalTok{(}\FloatTok{0.75}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{p4 }\OtherTok{\textless{}{-}} \FunctionTok{pexp}\NormalTok{(}\FloatTok{1.25}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{lower =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{ps }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(p1, p2, p3, p4)}
+\NormalTok{ps}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.2211992 0.3064342 0.1858618 0.2865048
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{All Parameters Known - Example 2}
+\protect\hypertarget{all-parameters-known---example-2-4}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{EXP }\OtherTok{\textless{}{-}}\NormalTok{ ps}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{EXP}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 22.11992 30.64342 18.58618 28.65048
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{OBS }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{30}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{18}\NormalTok{)}
+\NormalTok{test\_stat }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((OBS }\SpecialCharTok{{-}}\NormalTok{ EXP)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{EXP)}
+\NormalTok{test\_stat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 7.406963
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{All Parameters Known - Example 2}
+\protect\hypertarget{all-parameters-known---example-2-5}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Another approach}
+\FunctionTok{chisq.test}\NormalTok{(OBS, }\AttributeTok{p =}\NormalTok{ ps)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Chi-squared test for given probabilities
+
+data:  OBS
+X-squared = 7.407, df = 3, p-value = 0.06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pvalue }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(OBS, }\AttributeTok{p =}\NormalTok{ ps)}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{pvalue}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.05999777
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{All Parameters Known - Example 2 - Conclusion}
+\protect\hypertarget{all-parameters-known---example-2---conclusion}{}
+\begin{tcolorbox}
+If you test using $\alpha = 0.05$, you will fail to reject the null hypothesis since the $p-value$ $= 0.0599 > \alpha = 0.05$.  There is not convincing evidence that the data do not come from an Exp($\lambda = 1$).
+\end{tcolorbox}
 \end{frame}
 
 \hypertarget{chi-square-tests-of-independence}{%
 \section{Chi-Square Tests of
 Independence}\label{chi-square-tests-of-independence}}
 
+\begin{frame}[fragile]{Example}
+\protect\hypertarget{example}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(PASWR2)}
+\NormalTok{(}\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{sex }\SpecialCharTok{+}\NormalTok{ survived, }\AttributeTok{data =}\NormalTok{ TITANIC3) }\OtherTok{{-}\textgreater{}}\NormalTok{ T1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        survived
+sex        0   1
+  female 127 339
+  male   682 161
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(T1, }\AttributeTok{correct =} \ConstantTok{FALSE}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ CST}
+\NormalTok{CST}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pearson's Chi-squared test
+
+data:  T1
+X-squared = 365.89, df = 1, p-value < 2.2e-16
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+\protect\hypertarget{example-1}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(EXP }\OtherTok{\textless{}{-}}\NormalTok{ CST}\SpecialCharTok{$}\NormalTok{expected)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        survived
+sex             0        1
+  female 288.0015 177.9985
+  male   520.9985 322.0015
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(OBS }\OtherTok{\textless{}{-}}\NormalTok{ CST}\SpecialCharTok{$}\NormalTok{observed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        survived
+sex        0   1
+  female 127 339
+  male   682 161
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(chi\_obs }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((OBS }\SpecialCharTok{{-}}\NormalTok{ EXP)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{EXP))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 365.8869
+\end{verbatim}
+\end{frame}
+
 \hypertarget{chi-square-tests-of-homogeneity}{%
 \section{Chi-Square Tests of
 Homogeneity}\label{chi-square-tests-of-homogeneity}}
+
+\begin{frame}[fragile]{Example}
+\protect\hypertarget{example-2}{}
+\begin{itemize}
+\tightlist
+\item
+  Data will often come summarized in contingency tables.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DP }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{67}\NormalTok{, }\DecValTok{76}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{73}\NormalTok{, }\DecValTok{79}\NormalTok{)}
+\NormalTok{MDP }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =}\NormalTok{ DP, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{dimnames}\NormalTok{(MDP) }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{Pop =} \FunctionTok{c}\NormalTok{(}\StringTok{"Drug"}\NormalTok{, }\StringTok{"Placebo"}\NormalTok{), }
+    \AttributeTok{Status =} \FunctionTok{c}\NormalTok{(}\StringTok{"Improve"}\NormalTok{, }\StringTok{"No Change"}\NormalTok{, }\StringTok{"Worse"}\NormalTok{))}
+\NormalTok{TDP }\OtherTok{\textless{}{-}} \FunctionTok{as.table}\NormalTok{(MDP)}
+\NormalTok{TDP}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         Status
+Pop       Improve No Change Worse
+  Drug         67        76    57
+  Placebo      48        73    79
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Putting the data back in a tidy format}
+\protect\hypertarget{putting-the-data-back-in-a-tidy-format}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\NormalTok{NT }\OtherTok{\textless{}{-}}\NormalTok{ TDP }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  tibble}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{uncount}\NormalTok{(n)}
+\FunctionTok{head}\NormalTok{(NT, }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 3 x 2
+  Pop   Status 
+  <chr> <chr>  
+1 Drug  Improve
+2 Drug  Improve
+3 Drug  Improve
+\end{verbatim}
+\end{frame}
 
 \end{document}
