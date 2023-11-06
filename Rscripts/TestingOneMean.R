@@ -1,4 +1,7 @@
 ##################
+## Alan T. Arnholt
+## 11/06/2023
+##################
 library(tidyverse)
 library(moderndive)
 pennies ### This is the "population"
