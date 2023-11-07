@@ -160,6 +160,348 @@
 \section{Chi-Square Goodness-of-Fit
 Tests}\label{chi-square-goodness-of-fit-tests}}
 
+\begin{frame}{Background}
+\protect\hypertarget{background}{}
+\begin{itemize}
+\item
+  Many statistical procedures require knowledge of the population from
+  which the sample is taken. For example, using Student's
+  \(t\)-distribution for testing a hypothesis or constructing a
+  confidence interval for \(\mu\) assumes that the parent population is
+  normal.
+\item
+  \textbf{Goodness-of-fit} (GOF) procedures are presented that will help
+  to identify the distribution of the population from which the sample
+  is drawn.
+\item
+  The null hypothesis in a goodness-of-fit test is a statement about the
+  form of the cumulative distribution. When all the parameters in the
+  null hypothesis are specified, the hypothesis is called
+  \textbf{simple}.
+\item
+  Recall that in the event the null hypothesis does not completely
+  specify all of the parameters of the distribution, the hypothesis is
+  said to be \textbf{composite}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Background}
+\protect\hypertarget{background-1}{}
+\begin{itemize}
+\item
+  Goodness-of-fit tests are typically used when the form of the
+  population is in question. In contrast to most of the statistical
+  procedures discussed so far, where the goal has been to
+  \textbf{reject} the null hypothesis, in a GOF test one hopes to
+  \textbf{retain} the null hypothesis.
+\item
+  Given a single random sample of size \(n\) from an unknown population
+  \(F_X\), one may wish to test the hypothesis that \(F_X\) has some
+  known distribution \(F_0(x)\) for all \(x\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Background}
+\protect\hypertarget{background-2}{}
+\begin{itemize}
+\item
+  For example, using the data frame \texttt{SOCCER} from the
+  \texttt{PASWR2} package, is it reasonable to assume the number of
+  goals scored during regulation time for the 232 soccer matches has a
+  Poisson distribution with \(\lambda=2.5\)?
+\item
+  Before applying the chi-square goodness-of-fit test, the data must be
+  grouped according to some scheme to form \(k\) mutually exclusive
+  categories. When the null hypothesis completely specifies the
+  population, the probability that a random observation will fall into
+  each of the chosen or fixed categories can be computed.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Background}
+\protect\hypertarget{background-3}{}
+\begin{itemize}
+\item
+  Once the probabilities for a data point to fall into each of the
+  chosen or fixed categories is computed, multiplying the probabilities
+  by \(n\) produces the expected counts for each category under the null
+  distribution.
+\item
+  If the null hypothesis is true, the differences between the counts
+  observed in the \(k\) categories and the counts expected in the \(k\)
+  categories should be small.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Background}
+\protect\hypertarget{background-4}{}
+\begin{itemize}
+\tightlist
+\item
+  The test criterion for testing
+  \(H_0: F_X(x) = F_0(x) \text{ for all } x\) against the alternative
+  \(H_1: F_X(x) \ne F_0(x) \text{ for some } x\) when the null
+  hypothesis is completely specified is
+\end{itemize}
+
+\begin{equation}
+\chi_{\text{obs}}^2=\sum_{i=1}^{k} \frac{(O_k - E_k)^2}{E_k},
+\end{equation}
+
+where \(\chi_\text{obs}^2\) is the sum of the squared deviations between
+what is observed \((O_k)\) and what is expected \((E_k)\) in each of the
+\(k\) categories divided by what is expected in each of the \(k\)
+categories. Large values of \(\chi_\text{obs}^2\) occur when the
+observed data are inconsistent with the null hypothesis and thus lead to
+rejection of the null hypothesis. The exact distribution of
+\(\chi_\text{obs}^2\) is very complicated; however, for large \(n\),
+provided all expected categories are at least 5, \(\chi_\text{obs}^2\)
+is distributed approximately \(\chi^2\) with \(k-1\) degrees of freedom.
+\end{frame}
+
+\begin{frame}{Background}
+\protect\hypertarget{background-5}{}
+\begin{itemize}
+\tightlist
+\item
+  NOTE: When the null hypothesis is composite, that is, not all of the
+  parameters are specified, the degrees of freedom for the random
+  variable \(\chi_\text{obs}^2\) are reduced by one for each parameter
+  that must be estimated.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Example}
+\protect\hypertarget{soccer-example}{}
+Test the hypothesis that the number of goals scored during regulation
+time for the 232 soccer matches stored in the data frame \texttt{SOCCER}
+has a Poisson \texttt{cdf} with \(\lambda=2.5\) with the chi-square
+goodness-of-fit test and an \(\alpha\) level of 0.05. Produce a
+histogram showing the number of observed goals scored during regulation
+time and superimpose on the histogram the number of goals that are
+expected to be made when the distribution of goals follows a Poisson
+distribution with \(\lambda=2.5\).
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Solution}
+\protect\hypertarget{soccer-solution}{}
+\begin{itemize}
+\tightlist
+\item
+  Since the number of categories for a Poisson distribution is
+  theoretically infinite, a table is first constructed of the observed
+  number of goals to get an idea of reasonable categories.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(PASWR2)}
+\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{goals, }\AttributeTok{data =}\NormalTok{ SOCCER)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+goals
+ 0  1  2  3  4  5  6  7  8 
+19 49 60 47 32 18  3  3  1 
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Solution}
+\protect\hypertarget{soccer-solution-1}{}
+Based on the table, a decision is made to create categories for 0, 1, 2,
+3, 4, 5, and 6 or more goals. Under the null hypothesis that \(F_0(x)\)
+is a Poisson distribution with \(\lambda=2.5\), the probabilities of
+scoring 0, 1, 2, 3, 4, 5, and 6 or more goals are computed with
+\texttt{R} as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PX }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{dpois}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\FloatTok{2.5}\NormalTok{), }\FunctionTok{ppois}\NormalTok{(}\DecValTok{5}\NormalTok{, }\FloatTok{2.5}\NormalTok{, }\AttributeTok{lower =} \ConstantTok{FALSE}\NormalTok{))}
+\NormalTok{PX[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{] }\CommentTok{\# Probabilities for categories 0, 1, 2, 3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.0820850 0.2052125 0.2565156 0.2137630
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PX[}\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{] }\CommentTok{\# Probabilities for categories 4, 5, and 6 or more}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.21376302 0.13360189 0.06680094
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Solution}
+\protect\hypertarget{soccer-solution-2}{}
+\begin{tcolorbox}
+Since there were a total of $n=232$ soccer games, the expected
+number of goals for the six categories is simply $232 \times
+\tt{PX}$.
+\end{tcolorbox}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{EX }\OtherTok{\textless{}{-}} \DecValTok{232}\SpecialCharTok{*}\NormalTok{PX}
+\NormalTok{OB }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{as.vector}\NormalTok{(}\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{goals, }\AttributeTok{data =}\NormalTok{ SOCCER)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{]), }
+        \FunctionTok{sum}\NormalTok{(}\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{goals, }\AttributeTok{data =}\NormalTok{ SOCCER)[}\DecValTok{7}\SpecialCharTok{:}\DecValTok{9}\NormalTok{]))}
+\NormalTok{OB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 19 49 60 47 32 18  7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ans }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(PX, EX, OB)}
+\FunctionTok{row.names}\NormalTok{(ans) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{" X=0"}\NormalTok{,}\StringTok{" X=1"}\NormalTok{,}\StringTok{" X=2"}\NormalTok{, }
+                    \StringTok{" X=3"}\NormalTok{,}\StringTok{" X=4"}\NormalTok{,}\StringTok{" X=5"}\NormalTok{,}\StringTok{"X\textgreater{}=6"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Solution}
+\protect\hypertarget{soccer-solution-3}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ans}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+             PX        EX OB
+ X=0 0.08208500 19.043720 19
+ X=1 0.20521250 47.609299 49
+ X=2 0.25651562 59.511624 60
+ X=3 0.21376302 49.593020 47
+ X=4 0.13360189 30.995638 32
+ X=5 0.06680094 15.497819 18
+X>=6 0.04202104  9.748881  7
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Solution}
+\protect\hypertarget{soccer-solution-4}{}
+The null and alternative hypotheses for using the chi-square
+goodness-of-fit test to test the hypothesis that the number of goals
+scored during regulation time for the 232 soccer matches stored in the
+data frame \texttt{SOCCER} has a Poisson \texttt{cdf} with
+\(\lambda=2.5\) are
+
+\begin{align*}
+        H_0&: F_X(x) = F_0(x) \sim Pois(\lambda=2.5)\text{ for all } x \text{ versus
+        }\\
+        H_1&:  F_X(x) \ne F_0(x) \text{ for some } x.
+\end{align*}
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Solution}
+\protect\hypertarget{soccer-solution-5}{}
+\begin{itemize}
+\item
+  The test statistic chosen is \(\chi_{\text{obs}}^2.\)
+\item
+  Reject if \(\chi^2_{\text{obs}}>\chi^2_{1-\alpha;k-1}\).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chi.obs }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((OB}\SpecialCharTok{{-}}\NormalTok{EX)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{EX)}
+\NormalTok{chi.obs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.39194
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Solution}
+\protect\hypertarget{soccer-solution-6}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(}\AttributeTok{x =}\NormalTok{ OB, }\AttributeTok{p =}\NormalTok{ PX)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Chi-squared test for given probabilities
+
+data:  OB
+X-squared = 1.3919, df = 6, p-value = 0.9663
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Solution}
+\protect\hypertarget{soccer-solution-7}{}
+\(1.3919402=\chi^2_{\text{obs}}\overset{?}{>}\chi^2_{0.95;6}=12.5915872\).
+
+The \(p\)-value is 0.9663469.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p.val }\OtherTok{\textless{}{-}} \FunctionTok{pchisq}\NormalTok{(chi.obs, }\DecValTok{7{-}1}\NormalTok{, }\AttributeTok{lower =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{p.val}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.9663469
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Soccer Solution}
+\protect\hypertarget{soccer-solution-8}{}
+\begin{itemize}
+\item
+  Since \(\chi^2_{\text{obs}}= 1.3919402\) is not greater than
+  \(\chi^2_{0.95;6}=12.5915872\), fail to reject \(H_0\).
+\item
+  Since the \(p\)-value = 0.9663469 is greater than 0.05, fail to reject
+  \(H_0\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Soccer Solution}
+\protect\hypertarget{soccer-solution-9}{}
+\begin{tcolorbox}
+\textbf{English Conclusion:} There is no evidence to suggest that the true \textbf{cdf} does not equal the Poisson 
+distribution with $\lambda=2.5$ for at least one $x$.
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}[fragile]{Soccer Solution}
+\protect\hypertarget{soccer-solution-10}{}
+The following code can be used to create a histogram with superimposed
+expected goals.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(SOCCER}\SpecialCharTok{$}\NormalTok{goals, }\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{((}\SpecialCharTok{{-}}\FloatTok{0.5} \SpecialCharTok{+} \DecValTok{0}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(}\DecValTok{8} \SpecialCharTok{+} \FloatTok{0.5}\NormalTok{)), }
+     \AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Goals scored"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{""}\NormalTok{, }
+     \AttributeTok{freq =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\DecValTok{8}
+\NormalTok{fx }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{dpois}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{8}\NormalTok{, }\AttributeTok{lambda =} \FloatTok{2.5}\NormalTok{))}\SpecialCharTok{*}\DecValTok{232}
+\FunctionTok{lines}\NormalTok{(x, fx, }\AttributeTok{type =} \StringTok{"h"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(x, fx, }\AttributeTok{type =} \StringTok{"p"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{16}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Soccer Solution}
+\protect\hypertarget{soccer-solution-11}{}
+\begin{center}\includegraphics[width=0.85\linewidth,height=0.65\textheight]{ChiSquareTests_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+\end{frame}
+
 \begin{frame}[fragile]{All Parameters Known}
 \protect\hypertarget{all-parameters-known}{}
 \begin{itemize}

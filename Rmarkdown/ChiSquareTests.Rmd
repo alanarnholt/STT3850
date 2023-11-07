@@ -48,6 +48,181 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALS
 
 # Chi-Square Goodness-of-Fit Tests
 
+## Background
+
+- Many statistical procedures require knowledge of the population from which the sample is taken. For example, using Student's $t$-distribution for testing a hypothesis or constructing a confidence interval for $\mu$ assumes that the parent population is normal. 
+
+- **Goodness-of-fit** (GOF) procedures are presented that will help to identify the distribution of the population from which the sample is drawn. 
+
+- The null hypothesis in a goodness-of-fit test is a statement about the form of the cumulative distribution.  When all the parameters in the null hypothesis are specified, the hypothesis is called **simple**. 
+
+- Recall that in the event the null hypothesis does not completely specify all of the parameters of the distribution, the hypothesis is said to be **composite**.  
+
+## Background
+
+- Goodness-of-fit tests are typically used when the form of the population is in question.  In contrast to most of the statistical procedures discussed so far, where the goal has been to **reject** the null hypothesis, in a GOF test one hopes to **retain** the null hypothesis.
+
+- Given a single random sample of size $n$ from an unknown population
+$F_X$, one may wish to test the hypothesis that $F_X$ has some known
+distribution $F_0(x)$ for all $x$.  
+
+## Background
+
+- For example, using the data frame `SOCCER` from the `PASWR2` package, is it reasonable to assume the number of goals scored during regulation time for the 232 soccer matches has a Poisson distribution with $\lambda=2.5$?
+
+- Before applying the chi-square goodness-of-fit test, the data must be grouped according to some scheme to form $k$ mutually exclusive categories.  When the null hypothesis completely specifies the population, the probability that a random observation will fall into each of the chosen or fixed categories can be computed. 
+
+## Background
+
+- Once the probabilities for a data point to fall into each of the chosen or fixed categories is computed, multiplying the probabilities by $n$ produces the expected counts for each category under the null distribution.  
+
+- If the null hypothesis is true, the differences between the counts observed in the $k$ categories and the counts
+expected in the $k$ categories should be small.  
+
+
+## Background
+
+- The test criterion for testing $H_0: F_X(x) = F_0(x) \text{ for all } x$ against the alternative $H_1: F_X(x) \ne F_0(x)  \text{ for some } x$ when the null hypothesis is completely specified is
+
+\begin{equation}
+\chi_{\text{obs}}^2=\sum_{i=1}^{k} \frac{(O_k - E_k)^2}{E_k},
+\end{equation}
+
+where $\chi_\text{obs}^2$ is the sum of the squared deviations between what is observed $(O_k)$ and what is expected $(E_k)$ in each of the $k$ categories divided by what is expected in each of the $k$ categories.  Large values of $\chi_\text{obs}^2$ occur when the observed data are inconsistent with the null hypothesis and thus lead to rejection of the null hypothesis. The exact distribution of $\chi_\text{obs}^2$ is very complicated; however, for large $n$, provided all expected categories are at least 5, $\chi_\text{obs}^2$ is distributed approximately $\chi^2$ with $k-1$ degrees of freedom.
+
+## Background
+
+- NOTE: When the null hypothesis is composite, that is, not all of the parameters  are specified, the degrees of freedom for the random variable  $\chi_\text{obs}^2$ are reduced by one for each parameter that must be estimated.
+
+## Soccer Example
+
+Test the hypothesis that the number of goals scored during regulation time for the 232 soccer matches stored in the data frame `SOCCER` has a Poisson `cdf` with $\lambda=2.5$ with the chi-square goodness-of-fit test and an $\alpha$ level of 0.05. Produce a histogram showing the number of observed goals scored during regulation time and superimpose on the histogram the number of goals that are expected to be made when the distribution of goals follows a Poisson distribution with $\lambda=2.5$.
+
+## Soccer Solution
+
+- Since the number of categories for a Poisson distribution is theoretically infinite, a table is first constructed of the observed number of goals to get an idea of reasonable categories.
+
+```{r}
+library(PASWR2)
+xtabs(~goals, data = SOCCER)
+```
+
+## Soccer Solution
+
+Based on the table, a decision is made to create categories for 0, 1, 2, 3, 4, 5, and 6 or more goals.  Under the null hypothesis that $F_0(x)$ is a Poisson distribution with $\lambda=2.5$, the probabilities of scoring 0, 1, 2, 3, 4, 5, and 6 or more goals are computed with `R` as follows:
+
+```{r}
+PX <- c(dpois(0:5, 2.5), ppois(5, 2.5, lower = FALSE))
+PX[1:4] # Probabilities for categories 0, 1, 2, 3
+PX[4:6] # Probabilities for categories 4, 5, and 6 or more
+```
+
+## Soccer Solution
+
+\begin{tcolorbox}
+Since there were a total of $n=232$ soccer games, the expected
+number of goals for the six categories is simply $232 \times
+\tt{PX}$.
+\end{tcolorbox}
+
+```{r}
+EX <- 232*PX
+OB <- c(as.vector(xtabs(~goals, data = SOCCER)[1:6]), 
+        sum(xtabs(~goals, data = SOCCER)[7:9]))
+OB
+ans <- cbind(PX, EX, OB)
+row.names(ans) <- c(" X=0"," X=1"," X=2", 
+                    " X=3"," X=4"," X=5","X>=6")
+```
+
+## Soccer Solution
+
+```{r}
+ans
+```
+
+## Soccer Solution
+
+The null and alternative hypotheses for using the chi-square goodness-of-fit test to test the hypothesis that
+the number of goals scored during regulation time for the 232 soccer matches stored in the data frame `SOCCER` has a Poisson `cdf` with $\lambda=2.5$ are
+
+\begin{align*}
+        H_0&: F_X(x) = F_0(x) \sim Pois(\lambda=2.5)\text{ for all } x \text{ versus
+        }\\
+        H_1&:  F_X(x) \ne F_0(x) \text{ for some } x.
+\end{align*}
+
+## Soccer Solution
+
+- The test statistic chosen is $\chi_{\text{obs}}^2.$
+
+- Reject if $\chi^2_{\text{obs}}>\chi^2_{1-\alpha;k-1}$.
+
+```{r}
+chi.obs <- sum((OB-EX)^2/EX)
+chi.obs
+```
+
+## Soccer Solution
+
+```{r}
+chisq.test(x = OB, p = PX)
+```
+
+
+## Soccer Solution
+
+$`r chi.obs`=\chi^2_{\text{obs}}\overset{?}{>}\chi^2_{0.95;6}=`r qchisq(0.95, 6)`$.
+
+The $p$-value is `r pchisq(chi.obs,6, lower = FALSE)`.
+
+```{r}
+p.val <- pchisq(chi.obs, 7-1, lower = FALSE)
+p.val
+```
+
+## Soccer Solution
+
+- Since $\chi^2_{\text{obs}}= `r chi.obs`$ is not greater than $\chi^2_{0.95;6}=`r qchisq(0.95, 6)`$, fail to reject $H_0$.
+
+- Since the $p$-value = `r p.val` is greater than 0.05, fail to reject $H_0$.
+
+## Soccer Solution
+
+\begin{tcolorbox}
+\textbf{English Conclusion:} There is no evidence to suggest that the true \textbf{cdf} does not equal the Poisson 
+distribution with $\lambda=2.5$ for at least one $x$.
+\end{tcolorbox}
+
+## Soccer Solution
+
+The following code can be used to create a histogram with superimposed expected goals.
+
+```{r, eval = FALSE}
+hist(SOCCER$goals, breaks = c((-0.5 + 0):(8 + 0.5)), 
+     col = "lightblue", 
+     xlab = "Goals scored", ylab = "", 
+     freq = TRUE, main = "")
+x <- 0:8
+fx <- (dpois(0:8, lambda = 2.5))*232
+lines(x, fx, type = "h")
+lines(x, fx, type = "p", pch = 16)
+```
+
+## Soccer Solution
+
+```{r, echo = FALSE, out.height = '65%', out.width = '85%'}
+hist(SOCCER$goals, breaks = c((-0.5 + 0):(8 + 0.5)), 
+     col = "lightblue", 
+     xlab = "Goals scored", ylab = "", 
+     freq = TRUE, main = "")
+x <- 0:8
+fx <- (dpois(0:8, lambda = 2.5))*232
+lines(x, fx, type = "h")
+lines(x, fx, type = "p", pch = 16)
+```
+
+
 
 ## All Parameters Known
 
