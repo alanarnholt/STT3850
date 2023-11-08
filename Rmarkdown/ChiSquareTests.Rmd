@@ -36,6 +36,13 @@ header-includes:
    - \usepackage{lipsum}
    - \usepackage{mathtools}
    - \usepackage{actuarialangle}
+   - \usepackage{multirow, longtable, array, dcolumn}
+   - \usepackage{tabu}
+   - \newcommand{\sdt}{\bullet}
+   - \newcommand{\tss}{\textsuperscript}
+   - \newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
+   - \newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
+   - \newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
 
 ---
 
@@ -341,6 +348,84 @@ pvalue
 \begin{tcolorbox}
 If you test using $\alpha = 0.05$, you will fail to reject the null hypothesis since the $p-value$ $= 0.0599 > \alpha = 0.05$.  There is not convincing evidence that the data do not come from an Exp($\lambda = 1$).
 \end{tcolorbox}
+
+
+# Categorical Data
+
+## Different Scenarios
+
+The $2 \times 2$ contingency table can be generalized for $I$ rows and $J$
+columns and is referred to as an $I \times J$ contingency table. The sampling
+scheme employed to acquire the information in the table will determine the type
+of hypothesis that can be tested.  Consider the following two scenarios:
+
+## Scenario One:
+
+SCENARIO ONE:  Is there an association between gender and a person's happiness? To investigate whether happiness depends on gender, one might use information collected from the General Social Survey (GSS) (\href{http://sda.berkeley.edu/GSS}{http://sda.berkeley.edu/GSS}). In each survey, the GSS asks, ``Taken all together, how would you say things are these days --- would you say that you are very happy, pretty happy, or not too happy?'' Respondents to each survey are coded as either male or female. The information in the next slide shows how a subset of respondents (26-year-olds) were classified with respect to the variables HAPPY and SEX.
+
+## Scenario One:
+
+```{r}
+HA <- c(110, 277, 50, 163, 302, 63)
+HAT <- matrix(data = HA, nrow = 2, byrow = TRUE)
+dimnames(HAT) <- list(SEX = c("Male", "Female"),
+ Category = c("Very Happy", "Pretty Happy", "Not To Happy"))
+HAT
+```
+
+## Scenario One - Expected Values
+
+```{r}
+E <- outer(rowSums(HAT), colSums(HAT), "*")/sum(HAT)
+E
+# OR
+chisq.test(HAT)$expected
+```
+
+## Scenario Two
+
+SCENARIO TWO:  In a double blind randomized drug trial (neither the patient nor the physician evaluating the patient knows the treatment, drug or placebo, the patient receives), 400 male patients with mild dementia were randomly divided into two groups of 200.  One group was given a placebo over three months while the second group received an experimental drug for three months.  At the end of the three months, the physicians (all  psychiatrists) classified the 400 patients into one of three categories: improved, no change,  or worse.   The information on the next slide shows how the pschiatrists classified the patients.  Are the proportions in the three status categories  the same for the two treatments?
+
+## Scenario Two
+
+```{r}
+DT <- c(67, 76, 57, 48, 73, 79)
+DTT <- matrix(data = DT, nrow = 2, byrow = TRUE)
+dimnames(DTT) <- list(Treatment = c("Drug", "Placebo"),
+   Category = c("Improve", "No Change", "Worse"))
+DTT
+```
+
+## Scenario Two - Expected Values
+
+```{r}
+E <- chisq.test(DTT)$expected
+E
+```
+
+## Categorical Data
+
+The two scenarios illustrate two different sampling schemes that both result in $I \times J$ contingency tables.  In the first scenario, there is a single population (Americans) and individuals are sampled from this single population and classified into one of the $IJ$ cells of the $I\times J$ contingency table based on the $I=2$ SEX categories and the $J=3$  HAPPY categories.  The format of an $I \times J$ contingency table when sampling from a single population is shown in Table \ref{CTtable}.  The number of observations from the $i$\tss{th} row classified into the $j$\tss{th} column is denoted by $n_{ij}$. It follows that the number of observations in the $j$\tss{th} column $(1 \le j \le J)$ is $n_{\sdt j}=n_{1j}+n_{2j}+\dots+n_{Ij}$, while the number of observations in the $i$\tss{th} row $(1 \le i \le I)$ is $n_{i\sdt}=n_{i1}+n_{i2}+\dots+n_{iJ}$.
+
+## Categorical Data
+
+\begin{table}[!ht]
+\caption{Contingency table when sampling from a single population\label{CTtable}}
+\medskip
+\centerline{$\morearraysp
+\begin{array}{|l|*{4}{c}|c|}
+\hline
+&    \text{Col } 1 &  \text{Col }2&   \cdots &  \text{Col }J&   Totals\\
+\hline
+\text{Row }1  & n_{11} & n_{12}  &\cdots&        n_{1J} & n_{1\sdt}\\
+\text{Row }2  & n_{21} & n_{22}  &\cdots&        n_{2J} & n_{2\sdt}\\
+\vdots &       \vdots &  \vdots &     &          \vdots &\vdots\\
+\text{Row }I  & n_{I1} & n_{I2} &\cdots&         n_{IJ} & n_{I\sdt}\\ \hline
+\text{Totals }& n_{\sdt 1}  & n_{\sdt 2}  &\cdots&         n_{\sdt J}  & n\\
+\hline
+\end{array}$\oldarraysp}
+\end{table}
+
 
 # Chi-Square Tests of Independence
 

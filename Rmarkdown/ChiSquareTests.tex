@@ -136,6 +136,13 @@
 \usepackage{lipsum}
 \usepackage{mathtools}
 \usepackage{actuarialangle}
+\usepackage{multirow, longtable, array, dcolumn}
+\usepackage{tabu}
+\newcommand{\sdt}{\bullet}
+\newcommand{\tss}{\textsuperscript}
+\newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
+\newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
+\newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -761,6 +768,172 @@ X-squared = 7.407, df = 3, p-value = 0.06
 \begin{tcolorbox}
 If you test using $\alpha = 0.05$, you will fail to reject the null hypothesis since the $p-value$ $= 0.0599 > \alpha = 0.05$.  There is not convincing evidence that the data do not come from an Exp($\lambda = 1$).
 \end{tcolorbox}
+\end{frame}
+
+\hypertarget{categorical-data}{%
+\section{Categorical Data}\label{categorical-data}}
+
+\begin{frame}{Different Scenarios}
+\protect\hypertarget{different-scenarios}{}
+The \(2 \times 2\) contingency table can be generalized for \(I\) rows
+and \(J\) columns and is referred to as an \(I \times J\) contingency
+table. The sampling scheme employed to acquire the information in the
+table will determine the type of hypothesis that can be tested. Consider
+the following two scenarios:
+\end{frame}
+
+\begin{frame}{Scenario One:}
+\protect\hypertarget{scenario-one}{}
+SCENARIO ONE: Is there an association between gender and a person's
+happiness? To investigate whether happiness depends on gender, one might
+use information collected from the General Social Survey (GSS)
+(\href{http://sda.berkeley.edu/GSS}{http://sda.berkeley.edu/GSS}). In
+each survey, the GSS asks, ``Taken all together, how would you say
+things are these days --- would you say that you are very happy, pretty
+happy, or not too happy?'\,' Respondents to each survey are coded as
+either male or female. The information in the next slide shows how a
+subset of respondents (26-year-olds) were classified with respect to the
+variables HAPPY and SEX.
+\end{frame}
+
+\begin{frame}[fragile]{Scenario One:}
+\protect\hypertarget{scenario-one-1}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{HA }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{110}\NormalTok{, }\DecValTok{277}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{163}\NormalTok{, }\DecValTok{302}\NormalTok{, }\DecValTok{63}\NormalTok{)}
+\NormalTok{HAT }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =}\NormalTok{ HA, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{dimnames}\NormalTok{(HAT) }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{SEX =} \FunctionTok{c}\NormalTok{(}\StringTok{"Male"}\NormalTok{, }\StringTok{"Female"}\NormalTok{),}
+ \AttributeTok{Category =} \FunctionTok{c}\NormalTok{(}\StringTok{"Very Happy"}\NormalTok{, }\StringTok{"Pretty Happy"}\NormalTok{, }\StringTok{"Not To Happy"}\NormalTok{))}
+\NormalTok{HAT}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        Category
+SEX      Very Happy Pretty Happy Not To Happy
+  Male          110          277           50
+  Female        163          302           63
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Scenario One - Expected Values}
+\protect\hypertarget{scenario-one---expected-values}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{E }\OtherTok{\textless{}{-}} \FunctionTok{outer}\NormalTok{(}\FunctionTok{rowSums}\NormalTok{(HAT), }\FunctionTok{colSums}\NormalTok{(HAT), }\StringTok{"*"}\NormalTok{)}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(HAT)}
+\NormalTok{E}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       Very Happy Pretty Happy Not To Happy
+Male      123.628        262.2     51.17202
+Female    149.372        316.8     61.82798
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# OR}
+\FunctionTok{chisq.test}\NormalTok{(HAT)}\SpecialCharTok{$}\NormalTok{expected}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        Category
+SEX      Very Happy Pretty Happy Not To Happy
+  Male      123.628        262.2     51.17202
+  Female    149.372        316.8     61.82798
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Scenario Two}
+\protect\hypertarget{scenario-two}{}
+SCENARIO TWO: In a double blind randomized drug trial (neither the
+patient nor the physician evaluating the patient knows the treatment,
+drug or placebo, the patient receives), 400 male patients with mild
+dementia were randomly divided into two groups of 200. One group was
+given a placebo over three months while the second group received an
+experimental drug for three months. At the end of the three months, the
+physicians (all psychiatrists) classified the 400 patients into one of
+three categories: improved, no change, or worse. The information on the
+next slide shows how the pschiatrists classified the patients. Are the
+proportions in the three status categories the same for the two
+treatments?
+\end{frame}
+
+\begin{frame}[fragile]{Scenario Two}
+\protect\hypertarget{scenario-two-1}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DT }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{67}\NormalTok{, }\DecValTok{76}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{73}\NormalTok{, }\DecValTok{79}\NormalTok{)}
+\NormalTok{DTT }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =}\NormalTok{ DT, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{dimnames}\NormalTok{(DTT) }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{Treatment =} \FunctionTok{c}\NormalTok{(}\StringTok{"Drug"}\NormalTok{, }\StringTok{"Placebo"}\NormalTok{),}
+   \AttributeTok{Category =} \FunctionTok{c}\NormalTok{(}\StringTok{"Improve"}\NormalTok{, }\StringTok{"No Change"}\NormalTok{, }\StringTok{"Worse"}\NormalTok{))}
+\NormalTok{DTT}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         Category
+Treatment Improve No Change Worse
+  Drug         67        76    57
+  Placebo      48        73    79
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Scenario Two - Expected Values}
+\protect\hypertarget{scenario-two---expected-values}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{E }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(DTT)}\SpecialCharTok{$}\NormalTok{expected}
+\NormalTok{E}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         Category
+Treatment Improve No Change Worse
+  Drug       57.5      74.5    68
+  Placebo    57.5      74.5    68
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Categorical Data}
+\protect\hypertarget{categorical-data-1}{}
+The two scenarios illustrate two different sampling schemes that both
+result in \(I \times J\) contingency tables. In the first scenario,
+there is a single population (Americans) and individuals are sampled
+from this single population and classified into one of the \(IJ\) cells
+of the \(I\times J\) contingency table based on the \(I=2\) SEX
+categories and the \(J=3\) HAPPY categories. The format of an
+\(I \times J\) contingency table when sampling from a single population
+is shown in Table \ref{CTtable}. The number of observations from the
+\(i\)\textsuperscript{th} row classified into the
+\(j\)\textsuperscript{th} column is denoted by \(n_{ij}\). It follows
+that the number of observations in the \(j\)\textsuperscript{th} column
+\((1 \le j \le J)\) is \(n_{\bullet j}=n_{1j}+n_{2j}+\dots+n_{Ij}\),
+while the number of observations in the \(i\)\textsuperscript{th} row
+\((1 \le i \le I)\) is \(n_{i\bullet}=n_{i1}+n_{i2}+\dots+n_{iJ}\).
+\end{frame}
+
+\begin{frame}{Categorical Data}
+\protect\hypertarget{categorical-data-2}{}
+\begin{table}[!ht]
+\caption{Contingency table when sampling from a single population\label{CTtable}}
+\medskip
+\centerline{$\setlength{\arraycolsep}{2mm}
+\begin{array}{|l|*{4}{c}|c|}
+\hline
+&    \text{Col } 1 &  \text{Col }2&   \cdots &  \text{Col }J&   Totals\\
+\hline
+\text{Row }1  & n_{11} & n_{12}  &\cdots&        n_{1J} & n_{1\bullet}\\
+\text{Row }2  & n_{21} & n_{22}  &\cdots&        n_{2J} & n_{2\bullet}\\
+\vdots &       \vdots &  \vdots &     &          \vdots &\vdots\\
+\text{Row }I  & n_{I1} & n_{I2} &\cdots&         n_{IJ} & n_{I\bullet}\\ \hline
+\text{Totals }& n_{\bullet 1}  & n_{\bullet 2}  &\cdots&         n_{\bullet J}  & n\\
+\hline
+\end{array}$\setlength{\arraycolsep}{1.5pt}}
+\end{table}
 \end{frame}
 
 \hypertarget{chi-square-tests-of-independence}{%
