@@ -145,6 +145,10 @@
 \newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
 \newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
 \newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
+\newcommand{\gil}[1]{\textrm{\gilfont{#1}}\normalfont }
+\newfont{\gilfont}{msbm10 scaled 1000}
+\newcommand{\DOT}{\usebox{\biggercirc}}
+\newcommand{\pv}{\wp\text{-value}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -1026,6 +1030,188 @@ $}\setlength{\extrarowheight}{0pt}\setlength{\arraycolsep}{1.5pt}
 \section{Chi-Square Tests of
 Independence}\label{chi-square-tests-of-independence}}
 
+\begin{frame}{Scenario One}
+\protect\hypertarget{scenario-one-2}{}
+Scenario one asks if there is an association between gender and a
+person's happiness. Recall that two events, \(A\) and \(B\), were
+defined as independent when
+\(\textrm{\gilfont{P}}\normalfont (A \cap B)=\textrm{\gilfont{P}}\normalfont (A)\times \textrm{\gilfont{P}}\normalfont (B)\)
+or, equivalently, when
+\(\textrm{\gilfont{P}}\normalfont (A|B)=\textrm{\gilfont{P}}\normalfont (A)\).
+If, instead of having a random sample from a single population, an
+\(I \times J\) contingency table consisted of entries from the
+population, association could be mathematically verified by showing that
+\(\textrm{\gilfont{P}}\normalfont (n_{ij}) \ne \textrm{\gilfont{P}}\normalfont (n_{i\bullet}) \times \textrm{\gilfont{P}}\normalfont (n_{\bullet j})\)
+for some \(i\) and \(j\). If by chance
+\(\textrm{\gilfont{P}}\normalfont (n_{ij}) = \textrm{\gilfont{P}}\normalfont (n_{i\bullet}) \times \textrm{\gilfont{P}}\normalfont (n_{\bullet j})\)
+for all \(i\) and \(j\), then one would conclude there is no association
+between gender and a person's happiness.
+\end{frame}
+
+\begin{frame}{Scenario One}
+\protect\hypertarget{scenario-one-3}{}
+That is, the variables gender and happiness would be considered
+mathematically independent. Since the entire population is not given but
+rather a sample from a population, the values in the \(I \times J\)
+contingency table can be expected to change from sample to sample. The
+question is, ``By how much can the variables deviate from the
+mathematical definition of independence and still be
+consideredstatistically independent?'\,'
+\end{frame}
+
+\begin{frame}{Scenario One}
+\protect\hypertarget{scenario-one-4}{}
+The null and alternative hypotheses to test for independence between row
+and column variables is written
+\(H_0: \pi_{ij}=\pi_{i\bullet}\pi_{\bullet j}\) versus
+\(H_1:\pi_{ij} \ne \pi_{i\bullet}\pi_{\bullet j}\). The test statistic
+is \begin{equation}\label{ChiSqStatIndep} \chi_{\text{obs}}^2
+=\sum_{i=1}^I\sum_{j=1}^J \frac{(O_{ij} - E_{ij})^2}{E_{ij}}.
+\end{equation}
+\end{frame}
+
+\begin{frame}{Scenario One}
+\protect\hypertarget{scenario-one-5}{}
+It compares the observed frequencies in the table with the expected
+frequencies when \(H_0\) is true. Under the assumption of independence,
+and when the observations in the cells are sufficiently large (usually
+greater than 5),
+\(\chi_{\text{obs}}^2 =\sum_{i=1}^{I}\sum_{j=1}^J \frac{(n_{ij}-\hat{\mu}_{ij})^2}{\hat{\mu}_{ij}} \overset{\bullet}{\sim} \chi^2_{(I-1)(J-1)},\)
+where \(\hat{\mu}_{ij}=\frac{n_{i\bullet}n_{\bullet j}}{n} = E_{ij}\)
+and \(n_{ij} = O_{ij}\). The null hypothesis of independence is rejected
+when \(\chi_{\text{obs}}^2 > \chi^2_{1-\alpha; (I-1)(J-1)}\).
+\end{frame}
+
+\begin{frame}{Scenario One}
+\protect\hypertarget{scenario-one-6}{}
+The chi-squared approximation is generally satisfactory if the
+\(E_{ij}\)s (\(\hat{\mu}_{ij}\)s) in the test statistic are not too
+small. Various rules of thumb exist for what might be considered too
+small. A very conservative rule is to require all \(E_{ij}\)s to be 5 or
+more. This can be accomplished by combining cells with small \(E_{ij}\)s
+and reducing the overall degrees of freedom. At times, it may be
+permissible to let the \(E_{ij}\) of a cell be as low as 0.5.
+\end{frame}
+
+\begin{frame}{Test for Scenario One}
+\protect\hypertarget{test-for-scenario-one}{}
+\textbf{Hypotheses}--- \(H_0: \pi_{ij} = \pi_{i\bullet}\pi_{\bullet j}\)
+(Row and column variables are independent.) versus
+\(H_1: \pi_{ij} \ne \pi_{i\bullet}\pi_{\bullet j}\) for at least one
+\(i, j\) (Row and column variables are dependent.)
+\end{frame}
+
+\begin{frame}{Test for Scenario One}
+\protect\hypertarget{test-for-scenario-one-1}{}
+\textbf{Test Statistic} --- The test statistic is
+\[\chi_{\text{obs}}^2=\sum_{i=1}^I \sum_{j=1}^J \frac{(O_{ij}-E_{ij})^2}{E_{ij}} \overset{\bullet}{\sim} \chi^2_{(I-1)(J-1)}=\chi^2_{(2-1)(3-1)}=\chi^2_2\]
+under the assumption of independence. The \(\chi^2_{\text{obs}}\) value
+is \(4.3215\).
+\end{frame}
+
+\begin{frame}{Test for Scenario One}
+\protect\hypertarget{test-for-scenario-one-2}{}
+\textbf{Rejection Region Calculations} --- The rejection region is
+\[\chi_{\text{obs}}^2 > \chi^2_{1-\alpha; (I-1)(J-1)}=\chi^2_{0.95;2}=
+        5.9914645.\] Before the statistic
+\(\chi^2_{\text{obs}}= \sum_{i=1}^I\sum_{j=1}^J  \frac{(O_{ij} - E_{ij})^2}{E_{ij}}\)
+can be computed, the expected counts for each of the \(ij\) cells must
+be calculated.\\
+Note that \(O_{ij}=n_{ij}\) and
+\(E_{ij}=\frac{n_{i\bullet}n_{\bullet j}}{n}\).
+\end{frame}
+
+\begin{frame}[fragile]{Test for Scenario One}
+\protect\hypertarget{test-for-scenario-one-3}{}
+\textbf{Rejection Region Calculations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(E }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(HAT)}\SpecialCharTok{$}\NormalTok{expected)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        Category
+SEX      Very Happy Pretty Happy Not To Happy
+  Male      123.628        262.2     51.17202
+  Female    149.372        316.8     61.82798
+\end{verbatim}
+
+\[\chi^2_{\text{obs}}=\frac{(110 - 123.6280)^2}{123.6280} +
+\frac{(277-262.2)^2}{262.2}+ \dots +\frac{(63-61.828)^2}{61.828}=4.3215.\]
+\end{frame}
+
+\begin{frame}[fragile]{Test for Scenario One}
+\protect\hypertarget{test-for-scenario-one-4}{}
+The value of the test statistic is \(\chi^2_{obs}=4.3215\). This can be
+done with code by entering
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chi.obs }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((HAT }\SpecialCharTok{{-}}\NormalTok{ E)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{E )}
+\NormalTok{chi.obs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 4.321482
+\end{verbatim}
+
+\(4.3215 = \chi^2_{\text{obs}} \overset{?}{>} \chi^2_{0.95,2}= 5.9914645\).
+\end{frame}
+
+\begin{frame}[fragile]{Test for Scenario One}
+\protect\hypertarget{test-for-scenario-one-5}{}
+\textbf{Statistical Conclusion}---The \(\wp\text{-value}\) is 0.1152.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p.val }\OtherTok{\textless{}{-}} \FunctionTok{pchisq}\NormalTok{(chi.obs, }\DecValTok{2}\NormalTok{, }\AttributeTok{lower =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{p.val}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.1152397
+\end{verbatim}
+
+\begin{itemize}
+\item
+  From the rejection region, since
+  \(\chi_{\text{obs}}^2=4.3215 < \chi^2_{0.95;2}=5.9914645\), fail to
+  reject the null hypothesis of independence.
+\item
+  Since the \(\wp\text{-value}= 0.1152397\) is greater than 0.05, fail
+  to reject the null hypothesis of independence.
+\item
+  Fail to reject \({\bf H_0}\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Test for Scenario One}
+\protect\hypertarget{test-for-scenario-one-6}{}
+\textbf{English Conclusion}---There is not sufficient evidence to
+suggest the variables gender and happiness are statistically dependent.
+
+The function \texttt{chisq.test()} can also be used to test the null
+hypothesis of independence.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(HAT)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pearson's Chi-squared test
+
+data:  HAT
+X-squared = 4.3215, df = 2, p-value = 0.1152
+\end{verbatim}
+\end{frame}
+
 \begin{frame}[fragile]{Example}
 \protect\hypertarget{example}{}
 \begin{Shaded}
@@ -1101,8 +1287,100 @@ sex        0   1
 \section{Chi-Square Tests of
 Homogeneity}\label{chi-square-tests-of-homogeneity}}
 
-\begin{frame}[fragile]{Example}
-\protect\hypertarget{example-2}{}
+\begin{frame}{Question}
+\protect\hypertarget{question}{}
+The question of interest in scenario two is whether the proportions in
+each of the \(j=3\) categories for the \(i=2\) populations are
+equivalent. Specifically, is \(\pi_{1j} = \pi_{2j}\) for all \(j\)? This
+question is answered with a test of homogeneity. In general, the null
+hypothesis for a test of homogeneity with \(i=I\) populations is written
+\begin{equation}
+ H_0: \pi_{1j}=\pi_{2j} = \dots = \pi_{Ij}\text{ for all } j \text{ versus } H_1:
+\pi_{ij} \ne \pi_{i+1, j} \: \text{ for some } (i, j).
+\end{equation}
+\end{frame}
+
+\begin{frame}{Expressed in Words}
+\protect\hypertarget{expressed-in-words}{}
+\begin{itemize}
+\tightlist
+\item
+  Expressed in words, the null hypothesis is that the \(I\) populations
+  are homogeneous with respect to the \(J\) categories versus the \(I\)
+  populations are not homogeneous with respect to the \(J\) categories.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Equivalent Formulation}
+\protect\hypertarget{equivalent-formulation}{}
+\begin{tcolorbox}
+An equivalent interpretation is that for each population $i=1,2,\dots, I$, the
+proportion of people in the $j\textsuperscript{th}$ category is the same.  When $H_0$ is
+true, $\pi_{1j}=\pi_{2j}=\dots=\pi_{Ij}$ for all $j$.
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Theory}
+\protect\hypertarget{theory}{}
+Under the null hypothesis, \(\mu_{ij}= n_{i\bullet} \pi_{ij}\),
+\(\hat\pi_{ij}=p_{ij}= \frac{n_{\bullet j}}{n_{\bullet\bullet}}\), and
+\(\hat{\mu}_{ij}= \frac{n_{i\bullet} n_{\bullet j}}{n_{\bullet\bullet}}=E_{ij}\).
+When \(H_0\) is true, all the probabilities in the
+\(j\)\textsuperscript{th} column are equal, and a pooled estimate of
+\(\pi_{ij}\) is obtained by adding all the frequencies in the
+\(j\)\textsuperscript{th} column \((n_{\bullet j})\) and dividing the
+total by \(n_{\bullet\bullet}\). The statistic used in this type of
+problem has the same form as the one used for the test of independence
+in \eqref{ChiSqStatIndep}.
+
+Substituting the homogeneity expressions for \(O_{ij}\) and \(E_{ij}\),
+the statistic is expressed as
+
+\[\chi_{\text{obs}}^2=\sum_{i=1}^I\sum_{j=1}^J \frac{(n_{ij} - n_{i\bullet} n_{\bullet
+j}/n_{\bullet\bullet})^2}{n_{i\bullet} n_{\bullet j}/n_{\bullet\bullet}} \overset{\bullet}{\sim}
+\chi^2_{(I-1)(J-1)}.\]
+
+The null hypothesis of homogeneity is rejected when
+\(\chi_{\text{obs}}^2 > \chi^2_{1-\alpha; (I-1)(J-1)}\).
+\end{frame}
+
+\begin{frame}{Test for Scenario Two}
+\protect\hypertarget{test-for-scenario-two}{}
+\textbf{Hypotheses} --- \(H_0: \pi_{1j}=\pi_{2j} \text{ for all } j\)
+versus \(H_1: \pi_{i,\, j} \ne \pi_{i+1,\, j}\text{ for some }(i, j)\).
+That is, all the probabilities in the same column are equal to each
+other versus at least two of the probabilities in the same column are
+not equal to each other.
+\end{frame}
+
+\begin{frame}{Test for Scenario Two}
+\protect\hypertarget{test-for-scenario-two-1}{}
+\textbf{Test Statistic}---The test statistic is
+\[\chi_{\text{obs}}^2=\sum_{i=1}^I \sum_{j=1}^J 
+        \frac{(O_{ij}-E_{ij})^2}{E_{ij}} \sim \chi^2_{(I-1)(J-1)}=
+        \chi^2_{(2-1)(3-1)}=\chi^2_2\] under the null hypothesis. The
+\(\chi^2_{\text{obs}}\) value is \(6.7584\).
+\end{frame}
+
+\begin{frame}{Test for Scenario Two}
+\protect\hypertarget{test-for-scenario-two-2}{}
+\textbf{Rejection Region Calculations}---The rejection region is
+\[\chi_{\text{obs}}^2 > \chi^2_{1-\alpha; (I-1)\cdot(J-1)} = \chi^2_{0.95;2}=5.9914645.\]
+
+\begin{itemize}
+\item
+  Before the statistic
+  \(\chi^2_{\text{obs}}= \sum_{i=1}^I\sum_{j=1}^J \frac{(O_{ij} - E_{ij})^2}{E_{ij}}\)
+  can be computed, the expected counts for each of the \(ij\) cells must
+  be determined.
+\item
+  Recall that \(O_{ij}=n_{ij}\) and
+  \(E_{ij}=\frac{n_{i\bullet}n_{\bullet j}}{n_{\bullet\bullet}}.\)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{The Data}
+\protect\hypertarget{the-data}{}
 \begin{itemize}
 \tightlist
 \item
@@ -1147,6 +1425,94 @@ Pop       Improve No Change Worse
 1 Drug  Improve
 2 Drug  Improve
 3 Drug  Improve
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{More Output for Scenario Two}
+\protect\hypertarget{more-output-for-scenario-two}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{E }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(TDP)}\SpecialCharTok{$}\NormalTok{expected}
+\NormalTok{E}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         Status
+Pop       Improve No Change Worse
+  Drug       57.5      74.5    68
+  Placebo    57.5      74.5    68
+\end{verbatim}
+
+\[\chi^2_{\text{obs}}=\frac{(67 - 57.5)^2}{57.5} + \frac{(76 - 74.5)^2}{74.5}+
+\dots +\frac{(79-68)^2}{68}=6.7584.\]
+\end{frame}
+
+\begin{frame}[fragile]{Test for Scenario Two}
+\protect\hypertarget{test-for-scenario-two-3}{}
+The value of the test statistic is \(\chi^2_{obs}=6.7584.\). This can be
+done with code by entering
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chi.obs }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((TDP }\SpecialCharTok{{-}}\NormalTok{ E)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{E )}
+\NormalTok{chi.obs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6.758357
+\end{verbatim}
+
+\(6.7584 = \chi^2_{\text{obs}}\overset{?}{>} \chi^2_{.95,2}= 5.9914645.\)
+\end{frame}
+
+\begin{frame}[fragile]{Test for Scenario Two}
+\protect\hypertarget{test-for-scenario-two-4}{}
+\textbf{Statistical Conclusion}---The \(\wp\text{-value}\) is 0.03408.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p.val }\OtherTok{\textless{}{-}} \FunctionTok{pchisq}\NormalTok{(chi.obs, }\DecValTok{2}\NormalTok{, }\AttributeTok{lower =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{p.val}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.03407544
+\end{verbatim}
+
+\begin{itemize}
+\item
+  From the rejection region, since
+  \(\chi_{\text{obs}}^2=6.7583566 > \chi_{0.95;2} = 5.9914645\), reject
+  the null hypothesis of homogeneity.
+\item
+  Since the \(\wp\text{-value}= 0.0340754\) is less than 0.05, reject
+  the null hypothesis of homogeneity.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Test for Scenario Two}
+\protect\hypertarget{test-for-scenario-two-5}{}
+\textbf{English Conclusion}---There is sufficient evidence to suggest
+that not all of the probabilities for the \(i=2\) populations with
+respect to each of the \(J\) categories are equal.
+
+Using \texttt{chisq.test()} directly produces the same results.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(TDP)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pearson's Chi-squared test
+
+data:  TDP
+X-squared = 6.7584, df = 2, p-value = 0.03408
 \end{verbatim}
 \end{frame}
 
