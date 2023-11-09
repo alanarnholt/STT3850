@@ -143,6 +143,8 @@
 \newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
 \newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
 \newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
+\newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
+\newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -933,6 +935,90 @@ while the number of observations in the \(i\)\textsuperscript{th} row
 \text{Totals }& n_{\bullet 1}  & n_{\bullet 2}  &\cdots&         n_{\bullet J}  & n\\
 \hline
 \end{array}$\setlength{\arraycolsep}{1.5pt}}
+\end{table}
+\end{frame}
+
+\begin{frame}{Categorial Data}
+\protect\hypertarget{categorial-data}{}
+The true population proportion of individuals in cell \((i, j)\) will be
+denoted \(\pi_{ij}\). Under the assumption of independence between row
+and column variables (SEX and HAPPY in this example),
+\(\pi_{ij}=\pi_{i\bullet} \times \pi_{\bullet j}\), where
+\(\pi_{i\bullet}=\sum_{j=1}^{J} \pi_{ij}\) and
+\(\pi_{\bullet j}=\sum_{i=1}^{I} \pi_{ij}\). That is, \(\pi_{i\bullet}\)
+is the proportion of observations in the population classified in
+category \(i\) of the row variable and \(\pi_{\bullet j}\) is the
+proportion of observations in the population classified in category
+\(j\) of the column variable. Since \(\pi_{i\bullet}\) and
+\(\pi_{\bullet j}\) are marginal population proportions, it follows that
+\(\hat\pi_{i\bullet}=p_{i\bullet}=\frac{n_{i\bullet}}{n}\) and
+\(\hat\pi_{\bullet j}=p_{\bullet j}=\frac{n_{\bullet j}}{n}\), where
+\(n\) is the sample size. Under the assumption of independence the
+expected count for cell \((i, j)\) is
+\(\mu_{ij}= n \pi_{ij}=n \pi_{i\bullet}\pi_{\bullet j}\) and
+\(\hat\mu_{ij}=n\hat\pi_{ij} = n\hat\pi_{i\bullet} \hat\pi_{\bullet j} = n \frac{n_{i\bullet}}{n}\frac{n_{\bullet j}}{n} = \frac{n_{i\bullet}n_{\bullet j}}{n}.\)
+\end{frame}
+
+\begin{frame}{Categorical Data}
+\protect\hypertarget{categorical-data-3}{}
+In the second scenario, there are two distinct populations from which
+samples are taken. The first population is the group of all patients
+receiving the experimental drug while the second population is the group
+of all patients receiving a placebo. In this scenario, there are \(I=2\)
+separate populations and \(J=3\) categories for the \(I=2\) populations.
+Individuals sampled from the \(I=2\) distinct populations are classified
+into one of the \(J=3\) status categories. This scenario has fixed row
+totals whereas the first scenario does not. In the first scenario, only
+the total sample size, \(n\), is fixed. That is, neither the row nor the
+column totals are fixed. This is in contrast to scenario two, where the
+number of patients in each treatment group (row) was fixed. The notation
+used for an \(I \times J\) contingency table when \(I\) samples from
+\(I\) distinct populations differs slightly from the notation used in
+Table \ref{CTtable} with a contingency table from a single sample.
+\end{frame}
+
+\begin{frame}{Categorical Data}
+\protect\hypertarget{categorical-data-4}{}
+Since the sample sizes of the \(I\) distinct populations are denoted
+\(n_{i\bullet}\), the total for all \(I\) samples is denoted by
+\(n_{\bullet\bullet}\) rather than the notation \(n\) used for a single
+sample in Table \ref{CTtable}. Table \ref{CTRP} shows the general form
+and notation used for an \(I \times J\) contingency table when sampling
+from \(I\) distinct populations. Each observation in each sample is
+classified into one of \(J\) categories. If \(n_{i\bullet}\) denotes the
+number of observations in the \(i\)\textsuperscript{th} sample
+\((1 \le i \le I)\) and \(n_{ij}\) denotes the number of observations
+from the \(i\)\textsuperscript{th} sample classified into the
+\(j\)\textsuperscript{th} category \((1 \le j \le J)\), it follows that
+the number of observations in the \(j\)\textsuperscript{th} column is
+\(n_{\bullet j}=n_{1j}+n_{2j}+\dots+n_{Ij}\), while the number of
+observations in the \(i\)\textsuperscript{th} row is
+\(n_{i\bullet}=n_{i1}+n_{i2}+\dots+n_{iJ}\).
+\end{frame}
+
+\begin{frame}{Categorical Data}
+\protect\hypertarget{categorical-data-5}{}
+\begin{table}[!ht]\caption{General form and
+notation used for an $I \times J$ contingency table when sampling from $I$
+distinct populations\label{CTRP}}
+\medskip
+\setlength{\extrarowheight}{4pt}
+\setlength{\arraycolsep}{2mm}
+% \vspace{2ex}
+\centerline{
+$
+\begin{array}{|l|*{4}{c}|c|}
+\hline
+&\text{Category }1&\text{Category }2&\cdots&\text{Category }J&\text{Totals}\\ \hline
+\text{Population }1&n_{11}&n_{12}&\cdots&n_{1J}&n_{1\bullet}\\
+\text{Population } 2&n_{21}&n_{22}&\cdots&n_{2J}&n_{2\bullet}\\
+\hfill\vdots\hfill&\vdots&\vdots&&\vdots&\vdots\\
+\text{Population } I&n_{I1}&n_{I2}&\dotsc&n_{IJ}&n_{I\bullet}\\
+\hline
+\text{Totals}&n_{\bullet 1}&n_{\bullet 2}&\dotsc&n_{\bullet J}&n_{\bullet\bullet}\\
+\hline
+\end{array}
+$}\setlength{\extrarowheight}{0pt}\setlength{\arraycolsep}{1.5pt}
 \end{table}
 \end{frame}
 

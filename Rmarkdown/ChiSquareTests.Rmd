@@ -43,9 +43,17 @@ header-includes:
    - \newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
    - \newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
    - \newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
+   - \newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
+   - \newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
 
 ---
 
+```{r, MEDskip, echo = FALSE}
+library(knitr)
+knit_hooks$set(document = function(x){
+gsub("\\begin{tabular}", "\\medskip{}\\begin{tabular}", x, fixed = TRUE)
+})
+```
 
 
 ```{r setup, include=FALSE}
@@ -424,6 +432,44 @@ The two scenarios illustrate two different sampling schemes that both result in 
 \text{Totals }& n_{\sdt 1}  & n_{\sdt 2}  &\cdots&         n_{\sdt J}  & n\\
 \hline
 \end{array}$\oldarraysp}
+\end{table}
+
+## Categorial Data
+
+The true population proportion of individuals in cell $(i, j)$ will be denoted $\pi_{ij}$. Under the assumption of independence between row and column variables (SEX and HAPPY in this example), $\pi_{ij}=\pi_{i\sdt} \times \pi_{\sdt j}$, where $\pi_{i\sdt}=\sum_{j=1}^{J} \pi_{ij}$ and $\pi_{\sdt j}=\sum_{i=1}^{I} \pi_{ij}$.  That is,  $\pi_{i\sdt}$ is the proportion of observations in the population classified in category $i$ of the row variable and $\pi_{\sdt j}$ is the proportion of observations in the population classified in category $j$ of the column variable.  Since $\pi_{i\sdt}$ and $\pi_{\sdt j}$ are marginal population proportions, it follows that $\hat\pi_{i\sdt}=p_{i\sdt}=\frac{n_{i\sdt}}{n}$ and  $\hat\pi_{\sdt j}=p_{\sdt j}=\frac{n_{\sdt j}}{n}$, where $n$ is the sample size.  Under the assumption of independence the expected count for cell $(i, j)$ is $\mu_{ij}= n \pi_{ij}=n \pi_{i\sdt}\pi_{\sdt j}$ and $\hat\mu_{ij}=n\hat\pi_{ij} = n\hat\pi_{i\sdt} \hat\pi_{\sdt j} = n \frac{n_{i\sdt}}{n}\frac{n_{\sdt j}}{n} = \frac{n_{i\sdt}n_{\sdt j}}{n}.$
+
+## Categorical Data
+
+In the second scenario, there are two distinct populations from which samples are taken.  The first population is the group of all patients receiving the experimental drug while the second population is the group of all patients receiving a placebo.  In this scenario, there are $I=2$ separate populations and $J=3$ categories for the $I=2$ populations.  Individuals sampled from the $I=2$ distinct populations are classified into one of the $J=3$ status categories.  This scenario has fixed row totals whereas the first scenario does not.  In the first scenario, only the total sample size, $n$, is fixed.  That is, neither the row nor the column totals are fixed.  This is in contrast to scenario two, where the number of patients in each treatment group (row) was fixed.  The notation used for an $I \times J$ contingency table when $I$ samples from $I$ distinct populations differs slightly from the notation used in  Table \ref{CTtable} with a contingency table from a single sample.
+
+## Categorical Data
+
+Since the sample sizes of the $I$ distinct populations are denoted $n_{i\sdt}$, the total for all $I$ samples is denoted by $n_{\sdt\sdt}$ rather than the notation $n$ used for a single sample in Table \ref{CTtable}.   Table \ref{CTRP} shows the general form and notation used for an $I \times J$ contingency table when sampling from $I$ distinct populations.  Each observation in each sample is classified into one of $J$ categories.  If $n_{i\sdt}$ denotes the number of observations in the $i$\tss{th} sample $(1 \le i \le I)$ and $n_{ij}$ denotes the number of observations from the $i$\tss{th} sample classified into the $j$\tss{th} category $(1 \le j \le J)$, it follows that the number of observations in the $j$\tss{th} column is $n_{\sdt j}=n_{1j}+n_{2j}+\dots+n_{Ij}$, while the number of observations in the $i$\tss{th} row is 
+$n_{i\sdt}=n_{i1}+n_{i2}+\dots+n_{iJ}$.
+
+## Categorical Data
+
+\begin{table}[!ht]\caption{General form and
+notation used for an $I \times J$ contingency table when sampling from $I$
+distinct populations\label{CTRP}}
+\medskip
+\matrixstretch
+\morearraysp
+% \vspace{2ex}
+\centerline{
+$
+\begin{array}{|l|*{4}{c}|c|}
+\hline
+&\text{Category }1&\text{Category }2&\cdots&\text{Category }J&\text{Totals}\\ \hline
+\text{Population }1&n_{11}&n_{12}&\cdots&n_{1J}&n_{1\sdt}\\
+\text{Population } 2&n_{21}&n_{22}&\cdots&n_{2J}&n_{2\sdt}\\
+\hfill\vdots\hfill&\vdots&\vdots&&\vdots&\vdots\\
+\text{Population } I&n_{I1}&n_{I2}&\dotsc&n_{IJ}&n_{I\sdt}\\
+\hline
+\text{Totals}&n_{\sdt 1}&n_{\sdt 2}&\dotsc&n_{\sdt J}&n_{\sdt\sdt}\\
+\hline
+\end{array}
+$}\matrixnostretch\oldarraysp
 \end{table}
 
 
