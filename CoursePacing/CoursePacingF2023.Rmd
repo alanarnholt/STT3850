@@ -404,7 +404,7 @@ ______________________
 
 * Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 15
 
-* Complete [PS-09](https://classroom.github.com/a/OkAkSN2h) by 5:00 pm Nov 16 
+* Complete [PS-09](https://classroom.github.com/a/OkAkSN2h) by 5:00 pm ~~Nov 16~~ Nov 22 
 
 * [Slides for weeks 11, 12, and 13](../Slides/Weeks11_12_13.pdf)
 
@@ -420,11 +420,19 @@ _________________
 
 ## Week 14: (Nov 21) {-}
 
+* [Reading material for weeks 14 and 15](../Rmarkdown/ChiSquareReading.pdf)
+
+* Watch Goodness-Of-Fit video on ASULEARN
+
 * [Goodness-Of-Fit](../Handouts/ChiGOF.html)
 
 * [In class Examples](../Rmarkdown/InClassNotes.html)
 
 * Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 21
+
+* Complete [PS-09](https://classroom.github.com/a/OkAkSN2h) by 5:00 pm Nov 22 
+
+* [Slides for weeks 14 and 15](../Rmarkdown/ChiSquareTests.pdf)
 
 
 
@@ -440,13 +448,19 @@ ________________________
 
 ## Week 15: (Nov 28 -- 30) {-}
 
+* [Reading material for weeks 14 and 15](../Rmarkdown/ChiSquareReading.pdf)
+
+* Watch Chi-Square Test of Independence video on ASULEARN
+
+* Watch Chi-Square Test of Homogeneity video on ASULEARN
+
 * [Goodness-Of-Fit](../Handouts/ChiGOF.html)
 
 * [In class Examples](../Rmarkdown/InClassNotes.html)
 
 * Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt-3850-fall23/assignments) --- Due NLT 5:00 pm Nov 28
 
-* Course Review
+* [Slides for weeks 14 and 15](../Rmarkdown/ChiSquareTests.pdf)
 
 _________________________________
 
