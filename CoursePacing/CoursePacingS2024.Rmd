@@ -1,0 +1,475 @@
+---
+title: "Tentative STT 3850 Course Schedule - Spring 2024"
+output:
+  html_document:
+    css: ../css/style.css
+    highlight: textmate
+    theme: yeti
+  pdf_document: default
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+________________________________
+
+### General Notes: {-}
+
+```{block, note-text, type='rmdnote'}
+1.  Please bring a notebook and pencil to every class.
+2.  The principal documents for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR) -available inside the [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=159655) course page.
+3.  Problem Set (PS) assignments are generally due on Thursdays by 5:00 pm
+4.  The links for the problem sets and the sampling distribution assignment in this document will only work for the instructor!  To accept each of these assignments, go to [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=159655) and click on the appropriate link in the [GitHub Classroom Invitation Links for Assignments](https://asulearn.appstate.edu/course/view.php?id=159655) block.  
+```
+
+___________
+
+#### Grading Rubric for Assignments {-}
+
+Field | Excellent (3) | Competent (2)  | Needs Work (1)
+------|---------------|----------------|---------------
+Reproducible | All graphs, code, and answers are created from text files.  Answers are never hard-coded but instead are inserted using inline R code.  An automatically generated references section with properly formatted citations when appropriate and `sessionInfo()` are provided at the end of the document. | All graphs, code, and answers are created from text files.  Answers are  hard coded. No `sessionInfo()` is provided at the end of the document. References are present but not cited properly or not automatically generated. | Document uses copy and paste with graphs or code.  Answers are hard coded; and references, when appropriate are hard coded.
+Graphics | Graphs for categorical data (barplot, mosaic plot, etc.) have appropriately labeled axes and titles.  Graphs for quantitative data (histograms, density plots, violin plots, etc.) have appropriately labeled axes and titles.  Multivariate graphs use appropriate legends and labels.  Computer variable names are replaced with descriptive variable names. | Appropriate graphs for the type of data are used.  Not all axes have appropriate labels or computer variable names are used in the graphs. | Inappropriate graphs are used for the type of data.  Axes are not labeled and computer variable names appear in the graphs.
+Coding  | Code (primarily R) produces correct answers.  Non-standard or complex functions are commented.  Code is formatted using a consistent standard. | Code produces correct answers.  Commenting is not used with non-standard and complex functions.  No consistent code formatting is used. | Code does not produce correct answers.  Code has no comments and is not formatted.
+Clarity  | Few errors of grammar and usage; any minor errors do not interfere with meaning.  Language style and word choice are highly effective and enhance meaning.  Style and word choice are appropriate for the assignment.  Complete sentences are used to report all answers. | Some errors of grammar and usage; errors do not interfere with meaning.  Language style and word choice are, for the most part, effective and appropriate for the assignment. Incomplete sentences and inconsistent punctuation are used to answer questions. | Major errors of grammar and usage make meaning unclear.  Language style and word choice are ineffective and/or inappropriate.  Only numeric values are reported for answers to questions.
+Completeness| All questions are answered correctly. Answers to questions demonstrate clear statistical understanding by comparing theoretical answers to simulated answers.  When hypotheses are tested, classical methods are compared and contrasted to randomization methods.  When confidence intervals are constructed, classical approaches are compared and contrasted with bootstrap procedures.  The scope of inferential conclusions made is appropriate for the sampling method. | A question or two is incorrect or unanswered.  Theoretical and simulated answers are computed but no discussion is present comparing and contrasting the results.  When hypotheses are tested, results for classical and randomization methods are presented but are not compared and contrasted.  When confidence intervals are constructed, classical and bootstrap approaches are computed but the results are not compared and contrasted.  The scope of inferential conclusions made is appropriate for the sampling method. | More than two questions are incorrect or unanswered. Theoretical and simulated answers are not computed correctly.  No comparison between classical and randomization approaches is present when testing hypotheses.  When confidence intervals are constructed, there is no comparison between classical and bootstrap confidence intervals . 
+
+
+_________
+
+## Week 1: (Jan 16 -- 18) {-}
+
+
+* Before the first class meeting, read Chapter 1 (Getting Started with Data in R) of [MD](https://moderndive.com/1-getting-started.html)---pgs 1-20
+
+* Before the first class meeting, read Chapter 1 [Why Git? Why GitHub?](https://happygitwithr.com/big-picture) of Happy Git With `R`.
+
+* Become familiar with the Appstate [RStudio/POSIT workbench](https://mathr.appstate.edu/) server. You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
+
+We will walk through everything outlined below in class.  If you want to complete the setup before class that is fine.    
+
+* Sign-up for a free account on [GitHub](https://github.com).  When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinguishing characteristic in your username.  
+
+* Introduce yourself to Git by following the directions in [HappyGitWithR](https://happygitwithr.com/hello-git)
+
+* Cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html).
+
+* TL;DR the chapters in Happy Git With R --- follow this document to [Set up Git and GitHub](../Handouts/setup.html)
+
+* [VIDEO of the setup process](https://drive.google.com/file/d/1L-v9qAVHWtvXOTYjY8wvedH5VyzmeQeL/view?usp=drive_link)
+
+* Complete [PS-01](https://classroom.github.com/a/xKESmfBx) due by 5:00 pm Jan 18 
+* [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1JUag-0U-reD_JcKHvez50I_4R-CCMUMt/view?usp=drive_link)
+ 
+```{block, week1optional, type='rmdoptional'}
+#### Optional {-}
+*  _Introduction to R_ [slides](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/IntroToR.html)
+
+* Watch Paul the Octopus [clip](https://www.youtube.com/watch?v=3ESGpRUMj9E) (61 seconds).
+
+* You may want to install [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), [zotero](https://www.zotero.org), and optionally [$LaTeX$](http://www.ctan.org/starter) on your personal computer. If you do, you will want to follow Jenny Bryan's excellent advice for [installing R and RStudio](http://stat545-ubc.github.io/block000_r-rstudio-install.html) and [installing Git](http://stat545-ubc.github.io/git01_git-install.html).  Jenny's advice is also in chapters 6 and 7 of [Happy Git and GitHub for the useR](http://happygitwithr.com/).  Note: [Git](http://git-scm.com/downloads), [R](http://cran.r-project.org), [RStudio](http://www.rstudio.com/products/rstudio/download/), and [$LaTeX$](http://www.ctan.org/starter) are installed on the [Appstate RStudio](https://mathr.appstate.edu/) server.
+
+* Watch the following videos as appropriate:
+
+* [Install R on Mac (2 min)](https://www.youtube.com/watch?v=lJxVRgiX-ik)    
+
+* [Install R for Windows (3 min)](https://www.youtube.com/watch?v=LII6of-5Odw)    
+
+* [Install R and RStudio on Windows (5 min)](https://www.youtube.com/watch?v=eD07NznguA4)  
+
+* Work through chapter 1 (Git and GitHub) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/).  Make sure RStudio is set up to communicate with Git by following the directions in [HappyGitWithR](https://happygitwithr.com/hello-git.html) for introducing yourself to Git.
+
+* Work through chapter 2 (Introduction to R) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
+
+* [Reading in Data](https://alanarnholt.github.io/STT3850/Handouts/WorkingWithDataRevised.html)
+
+```
+
+______________
+
+## Week 2: (Jan 23 -- 25) {-}
+
+* Before class read chapter 2 (Data Visualization) of [MD](https://moderndive.com/2-viz.html) --- pgs 21-62
+
+* [Partial Lecture Slides](../Handouts/short_pre_lecture.pdf)
+
+* Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Jan 23
+
+* Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Jan 24
+
+* Complete [PS-02](https://classroom.github.com/a/xKESmfBx) due by 5:00 pm Jan 25
+
+
+
+```{block, week2optional, type='rmdoptional'}
+#### Optional {-}
+
+* Read [Getting used to R, RStudio, and R Markdown](https://ismayc.github.io/rbasics-book/)
+
+* Work through chapter 5 (Using `ggplot2`) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
+
+* Complete _Data Visualization with `ggplot2`_ (Part 1) [(DataCamp)](https://www.datacamp.com/)
+
+```
+
+__________________
+
+
+## Week 3: (Jan 30 -- Feb 1) {-}
+
+* Before class read chapter 3 (Data Wrangling) of [MD](https://moderndive.com/3-wrangling.html) --- pgs 65-96
+
+* [Partial Lecture Slides](../Handouts/pre_lecture.pdf)
+
+* Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Jan 30
+
+* Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Jan 31
+
+* Complete [PS-03](https://classroom.github.com/a/kfv7V-Qo) by 5:00 pm Feb 1
+
+* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/WPIu32zo)
+
+
+```{block, test3, type='rmdexercise'}
+Test yourself:
+
+1. [R Markdown Practice](RMarkdown.pdf)
+2. [R Markdown Extra Credit](RMarkdownEC.pdf)
+3. [LaTeX/knitr Extra Credit](knitrEC.pdf)
+```
+
+```{block, week3optional, type='rmdoptional'}
+#### Optional {-}
+
+* Posit [Cheat Sheets](https://posit.co/resources/cheatsheets/)
+
+* Work through chapter 3 (Starting with Data) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
+
+* Work through chapter 4 (Data Manipulation) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
+
+* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/YW9dgi52) 
+* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/fxImDS6N) 
+* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/3LKaLXgk) 
+```
+
+___________
+
+## Week 4: (Feb 6 -- 8) {-}
+
+* Before class read chapter 5 (Basic Regression) of [MD](https://moderndive.com/5-regression.html) --- pgs 119-160
+
+* In class go over this [document](https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html)
+
+* Class [notes](../Handouts/RegHandout.html) for one quantitative and one qualitative predictor
+
+* Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Feb 6
+
+* Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Feb 7
+
+* Complete [PS-04](https://classroom.github.com/a/YdZmikBr) due by 5:00 pm Feb 8
+
+
+```{block, week4optional, type='rmdoptional'}
+#### Optional {-}
+
+* Read chapter 4 (Data Importing and "Tidy" Data) of [MD](https://moderndive.com/4-tidy.html) --- pgs 99-117
+
+* Read the [Git and GitHub](http://r-pkgs.had.co.nz/git.html) chapter from Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/)
+
+* Brian Caffo's take on [R IDEs](https://www.youtube.com/watch?v=O2UFfiGdGFA)
+
+```
+
+__________________
+
+
+
+## Week 5: (Feb 13 -- 15) {-}
+
+* Before class read chapter 6 (Multiple Regression) of [MD](https://moderndive.com/6-multiple-regression.html) --- pgs 161-191
+
+* Regression with a single [categorical variable](../Handouts/RegWithCategoricalVariables.html) handout.
+
+* Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Feb 13
+
+* Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Feb 14
+
+* Complete [PS-05](https://classroom.github.com/a/auci0dhf) by 5:00 pm Feb 15 
+
+
+```{block, week5optional, type='rmdoptional'}
+#### Optional {-}
+
+* Complete _Correlation and Regression in R_ [(DataCamp)](https://www.datacamp.com/)
+
+```
+
+_______________
+
+## Week 6: (Feb 20 -- 22) {-}
+
+
+* Before class read/review chapter 6 (Multiple Regression) of [MD](https://moderndive.com/6-multiple-regression.html) --- pgs 161-191
+
+* Go over in class [_Misc Regression_](../Rmarkdown/MiscRegression.html)
+
+* Complete [PS-06](https://classroom.github.com/a/HQDWUjOz) by 5:00 pm Feb 22 
+
+
+```{block, week6optional, type='rmdoptional'}
+#### Optional {-}
+
+* Answer the questions at the end of [_Misc Regression_](../Rmarkdown/MiscRegression.html) for extra credit 
+
+* Work on [Is this Discrimination?](../Rmarkdown/ClassAssignment.html)
+
+* Some ideas for how to answer the [Is this Discrimination?](../Rmarkdown/discrimination.html)
+```
+
+_____________
+
+
+## Week 7: (Feb 27 -- 29) {-}
+
+* [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)
+
+* Complete (**The binomial distribution**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Feb 27
+
+* Complete (**Laws of probability**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Feb 28
+
+* Complete (**Bayesian statistics**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Feb 29
+
+
+```{block, week7optional, type='rmdoptional'}
+#### Optional {-}
+
+* [In Class Problems](../Slides/ProbabilityProblems.html)
+
+* [Foundations of Probability with some Extras](https://mathr.appstate.edu/connect/content/4c81be04-9184-4aa6-84bd-a9a1858365f9)
+
+* Complete the **Improving the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments)
+
+* Complete the **Customizing the Report** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments)
+```
+
+
+
+___________
+
+
+## Week 8: (Mar 5 -- 7) {-}
+
+* Complete (**Related distributions**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Mar 5
+
+* **Mid-Term Exam/Opportunity To Excel** --- Due no later than 2:00 pm Mar 7 
+
+```{block, week8optional, type='rmdoptional'}
+#### Optional {-}
+
+  * **Study**
+```
+
+_______________
+
+## Spring Break: Mar 11 -- 15
+
+_______________
+
+## Week 9: (Mar 19 -- 21) {-}
+
+* Before class read chapter 7 (Sampling) of [MD](https://moderndive.com/7-sampling.html) --- pgs 195-232
+
+* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/_TstctSt) by 5:00 pm Mar 19 --- not graded
+[Partial Solution](https://mathr.appstate.edu/connect/content/2d388531-2e05-485b-9f58-83855a1437e3)
+
+* Start [PS-07](https://classroom.github.com/a/yIB8MndN) due by 5:00 pm Mar 21
+
+```{block, week9optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Sampling Distributions](../Handouts/EVuniform.html)
+
+* Read Chapter 4 of MSWR --- Sampling Distributions; [Problems 2, 5, 12-16](../Homework/Chapter4HWK.Rmd)
+
+```
+
+___________________________
+
+
+## Week 10: (Mar 26 -- 28) {-}
+
+* Before class read chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com/8-confidence-intervals.html) --- pgs 233-305
+
+* Read Chapter 5 of MSWR
+
+* [Chapter 5 notes](../Notes/Children/BootStrap2.html)
+
+* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Mar 26
+
+* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Mar 27
+
+* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Mar 28
+
+* Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
+
+
+```{block, week10optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+
+* [Bootstrap Percentile CI examples](../Rmarkdown/BSPCI_examples.html)
+```
+
+_______________________
+
+
+## Week 11: (Apr 2 -- 4) {-}
+
+
+* Before class review chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com/8-confidence-intervals.html) --- pgs 233-305
+
+* Read Chapter 7 of MSWR
+
+* [Chapter 7 notes](../Notes/Children/ConfidenceIntervals2.html)
+
+* [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
+
+* Complete [PS-08](https://classroom.github.com/a/Gwp5evxM) by 5:00 pm Apr 4 
+
+* [Slides for weeks 11, 12, and 13](../Slides/Weeks11_12_13.pdf)
+
+_____________________
+
+
+
+
+```{block, week11optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+
+* [Bootstrap Percentile CI examples](../Rmarkdown/BSPCI_examples.html)
+
+* [Inference for Numerical Data in R](https://mathr.appstate.edu/connect/content/23ecb8d9-19ee-4119-bdb6-b692132852da)
+```
+
+__________________
+
+## Week 12: (Apr 9 -- 11) {-}
+
+
+* Before class read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com/9-hypothesis-testing.html) --- pgs 307-360
+
+* Read about [Permutation Testing](../Rmarkdown/PermutationTesting.html) 
+
+* Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 9
+
+* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 10
+
+* Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 11
+
+* Complete [PS-08](https://classroom.github.com/a/Gwp5evxM) by 5:00 pm Apr 11 
+
+* [Slides for weeks 11, 12, and 13](../Slides/Weeks11_12_13.pdf)
+
+```{block, week12optional, type='rmdoptional'}
+#### Optional {-}
+
+* [Misc `infer` Examples](../Rmarkdown/ExamplesInfer.html)
+
+* [Inference Examples used in class](../Handouts/InferenceExamples.pdf)
+```
+
+______________________
+
+
+
+## Week 13: (Apr 16 -- 18) {-}
+
+* Before class review Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com/9-hypothesis-testing.html) --- pgs 307-360
+
+* [Permutation Examples](../Rmarkdown/PermutationExamples.html)
+
+* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 16
+
+* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 17
+
+* Complete [PS-09](https://classroom.github.com/a/CVGT845f) by 5:00 pm Apr 18 
+
+* [Slides for weeks 11, 12, and 13](../Slides/Weeks11_12_13.pdf)
+
+```{block, week13optional, type='rmdoptional'}
+#### Optional {-}
+
+* Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter5HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/).
+
+* [Misc R Markdown Examples](../Rmarkdown/MiscRmarkdown.html)
+```
+
+_________________
+
+## Week 14: (Apr 23 -- 25) {-}
+
+* [Reading material for weeks 14 and 15](../Rmarkdown/ChiSquareReading.pdf)
+
+* Watch Goodness-Of-Fit video on ASULEARN
+
+* [Goodness-Of-Fit](../Handouts/ChiGOF.html)
+
+* [In class Examples](../Rmarkdown/InClassNotes.html)
+
+* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 23
+
+* [Slides for weeks 14 and 15](../Rmarkdown/ChiSquareTests.pdf)
+
+
+
+
+
+```{block, week14optional, type='rmdoptional'}
+#### Optional {-}
+* Complete the problems in the [R Markdown file](https://raw.githubusercontent.com/alanarnholt/STT3850/gh-pages/Homework/Chapter7HWK.Rmd) and publish your solution to [RPubs](http://rpubs.com/) 
+```
+
+________________________
+
+
+## Week 15: (Apr 30 -- May 1) {-}
+
+* [Reading material for weeks 14 and 15](../Rmarkdown/ChiSquareReading.pdf)
+
+* Watch Chi-Square Test of Independence video on ASULEARN
+
+* Watch Chi-Square Test of Homogeneity video on ASULEARN
+
+* [Goodness-Of-Fit](../Handouts/ChiGOF.html)
+
+* [In class Examples](../Rmarkdown/InClassNotes.html)
+
+* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 30
+
+* [Slides for weeks 14 and 15](../Rmarkdown/ChiSquareTests.pdf)
+
+* Course Review
+
+_____________________________________
+
+
+## Final Exam --- Section -101 (9:30 am Class): May 9: 8:00am - 10:30 am
+## Final Exam --- Section -102 (11:00 am Class): May 7: 11:00am - 1:30 pm
+
+
+
+________________
+
+<center> Last Updated on: `r format(Sys.time(), "%b %d, %Y at %X")` </center>
+
+________________
