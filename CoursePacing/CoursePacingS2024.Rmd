@@ -20,9 +20,9 @@ ________________________________
 
 ```{block, note-text, type='rmdnote'}
 1.  Please bring a notebook and pencil to every class.
-2.  The principal documents for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR) -available inside the [ASULEARN]https://asulearn.appstate.edu/course/view.php?id=167073) course page.
+2.  The principal documents for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR) -available inside the [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=167073) course page.
 3.  Problem Set (PS) assignments are generally due on Thursdays by 5:00 pm
-4.  The links for the problem sets and the sampling distribution assignment in this document will only work for the instructor!  To accept each of these assignments, go to [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=159655) and click on the appropriate link in the [GitHub Classroom Invitation Links for Assignments](https://asulearn.appstate.edu/course/view.php?id=167073) block.  
+4.  The links for the problem sets and the sampling distribution assignment in this document may only work for the instructor!  To accept each of these assignments, go to [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=159655) and click on the appropriate link in the [GitHub Classroom Invitation Links for Assignments](https://asulearn.appstate.edu/course/view.php?id=167073) block.  
 ```
 
 ___________
@@ -37,6 +37,22 @@ Coding  | Code (primarily R) produces correct answers.  Non-standard or complex 
 Clarity  | Few errors of grammar and usage; any minor errors do not interfere with meaning.  Language style and word choice are highly effective and enhance meaning.  Style and word choice are appropriate for the assignment.  Complete sentences are used to report all answers. | Some errors of grammar and usage; errors do not interfere with meaning.  Language style and word choice are, for the most part, effective and appropriate for the assignment. Incomplete sentences and inconsistent punctuation are used to answer questions. | Major errors of grammar and usage make meaning unclear.  Language style and word choice are ineffective and/or inappropriate.  Only numeric values are reported for answers to questions.
 Completeness| All questions are answered correctly. Answers to questions demonstrate clear statistical understanding by comparing theoretical answers to simulated answers.  When hypotheses are tested, classical methods are compared and contrasted to randomization methods.  When confidence intervals are constructed, classical approaches are compared and contrasted with bootstrap procedures.  The scope of inferential conclusions made is appropriate for the sampling method. | A question or two is incorrect or unanswered.  Theoretical and simulated answers are computed but no discussion is present comparing and contrasting the results.  When hypotheses are tested, results for classical and randomization methods are presented but are not compared and contrasted.  When confidence intervals are constructed, classical and bootstrap approaches are computed but the results are not compared and contrasted.  The scope of inferential conclusions made is appropriate for the sampling method. | More than two questions are incorrect or unanswered. Theoretical and simulated answers are not computed correctly.  No comparison between classical and randomization approaches is present when testing hypotheses.  When confidence intervals are constructed, there is no comparison between classical and bootstrap confidence intervals . 
 
+_____
+
+
+```{block, tiered, type='rmdnote'}
+**Tiered Feedback Explanation**
+
+**Level one**. Problem Sets are graded using the rubric on the course pacing guide.  The same rubric is used for all of the PS assignments, and you are graded on five categories with possible 3, 2, 1, or 0 points awarded per category.  Everyone who accepts a Problem Set will receive level 1 feedback in their repository **Issues**.  
+
+**Level two**.  If you cannot determine what you could do better on future assignments based on the rubric feedback, you can request annotated (Level 2) feedback.  If you would like level 2 feedback, you should respond to me in the **Issues** (@alanarnholt) before noon the **Monday** after you receive level 1 feedback (which should arrive on **Fridays**) requesting Level 2 feedback. 
+
+I will provide Level two feedback using **Issues** in your repository to give additional details based on the rubric.  Anyone may ask for Level 2 feedback.  When you get your level 2 feedback (by **Tuesday** morning), you are expected to act on it to improve your code and mark the issues as “resolved” and message me in the **Issues** using (@alanarnholt) before noon on **Wednesday**.
+
+**Level three**.  After you have received your level 2 feedback, if you are still unclear as to how you can improve your work, you may request to meet with me during student help/office hours Wednesday to receive in-depth feedback and guidance for how to be more successful on the next assignment and how to resolve the Level 2 feedback/Git issues before noon on **Thursday**.
+
+Asking for level 2 feedback is an agreement between you and me that you will revise and resubmit your document by noon on **Thursday** and I will look at your revisions and may revise your original rubric grade.  If you ask for level 2 feedback and do not revise your document by noon of Thursday I may revise your original grade. After the **Thursday** following the **Thursday** when your PS is due, I will not review any further updates or corrections you push to your repository.
+```
 
 _________
 

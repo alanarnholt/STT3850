@@ -9,20 +9,20 @@ format:
 editor: visual
 ---
 
-* Sign-up for a free account on [GitHub](https://github.com). When you register for a free individual GitHub account, request a [student discount](https://education.github.com/pack) to obtain a few private repositories as well as unlimited public repositories. Please use something similar to **FirstNameLastName** as your username when you register with GitHub. For example, my username on GitHub is **alanarnholt** (all lowercase without spaces between the first and last name). If you have a popular name such as John Smith, you may need to provide some other distinguishing characteristic in your username.  You will need to use your Appalachian State email when you register with GitHub both to be verified as a student and to have access to push your completed assignments to the class repository at <https://github.com/STT3850-Fall23>.
+-   Sign-up for a free account on [GitHub](https://github.com). When you register for a free individual GitHub account, request a [student discount](https://education.github.com/pack) to obtain a few private repositories as well as unlimited public repositories. Please use something similar to **FirstNameLastName** as your username when you register with GitHub. For example, my username on GitHub is **alanarnholt** (all lowercase without spaces between the first and last name). If you have a popular name such as John Smith, you may need to provide some other distinguishing characteristic in your username. You will need to use your Appalachian State email when you register with GitHub both to be verified as a student and to have access to push your completed assignments to the class repository at <https://github.com/STT3850-Sp24>.
 
-* **Introduce yourself to Git using the RStudio Terminal**.  First, sign in to the RStudio/POSIT workbench at <https://mathr.appstate.edu> using your ASU credentials (the same username and password you use to login to your ASU email and other ASU accounts). Click on the **Terminal** tab located in the top of the bottom left pane of the workbench.  Type the code below replacing 'Jane Doe' with your first and last name (middle initial is optional), and 'doej@appstate.edu' with your ASU email after the dollar prompts.
+-   **Introduce yourself to Git using the RStudio Terminal**. First, sign in to the RStudio/POSIT workbench at <https://mathr.appstate.edu> using your ASU credentials (the same username and password you use to login to your ASU email and other ASU accounts). Click on the **Terminal** tab located in the top of the bottom left pane of the workbench. Type the code below replacing 'Jane Doe' with your first and last name (middle initial is optional), and 'doej\@appstate.edu' with your ASU email after the dollar prompts.
 
-```
+```         
 $ git config --global user.name 'Jane Doe'
 $ git config --global user.email 'doej@appstate.edu'
 $ git config --global credential.helper 'cache --timeout=10000000'
 $ git config --global --list
 ```
 
-Your `user.name` is not necessarily your GitHub `username` although it can be.  It should be a name so that other GitHub users recognize who it is that made commits, pushes, pull requests, etc.  My `user.name` is my actual name (Alan T. Arnholt).  The last command `git config --global --list` shows the values in your Git configuration file.  Below is what mine looks like.
+Your `user.name` is not necessarily your GitHub `username` although it can be. It should be a name so that other GitHub users recognize who it is that made commits, pushes, pull requests, etc. My `user.name` is my actual name (Alan T. Arnholt). The last command `git config --global --list` shows the values in your Git configuration file. Below is what mine looks like.
 
-```
+```         
 [arnholtat@new-mathr STT3850]$ git config --global --list
 credential.helper=cache --timeout=10000000
 user.email=arnholtat@appstate.edu
@@ -31,18 +31,16 @@ user.name=Alan T. Arnholt
 
 When you type `git config --global --list` in the Terminal now, it should display the values you entered for the `credential.helper`, `user.email`, and `user.name`.
 
-* **Create a personal access token (PAT)**.  Click on the **Console** tab in the bottom left pane of the POSIT workbench.  Enter `usethis::create_github_token()` at the `R` prompt.
+-   **Create a personal access token (PAT)**. Click on the **Console** tab in the bottom left pane of the POSIT workbench. Enter `usethis::create_github_token()` at the `R` prompt.
 
 ```{r, eval = FALSE}
 > usethis::create_github_token()
 ```
 
-If you are not logged into GitHub, you will be prompted to login to your account.  Then, a "New personal access token (classic)" window will open where you need to enter a word in the **Note** box (example: **PositPAT**) and change the value in the **Expiration** box.  Scroll all the way to the bottom of the window after changing the values in the **Note** and **Expiration** boxes and click on the green **Generate token**.  You should leave all other values in the "New personal access token (classic)" window at their default values.  Place the token on the clipboard.  Go back to the **Console** in the POSIT workbench and type:
+If you are not logged into GitHub, you will be prompted to login to your account. Then, a "New personal access token (classic)" window will open where you need to enter a word in the **Note** box (example: **PositPAT**) and change the value in the **Expiration** box. Scroll all the way to the bottom of the window after changing the values in the **Note** and **Expiration** boxes and click on the green **Generate token**. You should leave all other values in the "New personal access token (classic)" window at their default values. Place the token on the clipboard. Go back to the **Console** in the POSIT workbench and type:
 
 ```{r, eval = FALSE}
 gitcreds::gitcreds_set()
 ```
 
-At the prompt, paste your token from the clipboard in the **Console** after the `R` prompt.  You should be able to work with GitHub now, i.e. push and pull. 
-
-
+At the prompt, paste your token from the clipboard in the **Console** after the `R` prompt. You should be able to work with GitHub now, i.e. push and pull.
