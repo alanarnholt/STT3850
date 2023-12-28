@@ -22,7 +22,8 @@ ________________________________
 1.  Please bring a notebook and pencil to every class.
 2.  The principal documents for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR) -available inside the [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=167073) course page.
 3.  Problem Set (PS) assignments are generally due on Thursdays by 5:00 pm
-4.  The links for the problem sets and the sampling distribution assignment in this document may only work for the instructor!  To accept each of these assignments, go to [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=159655) and click on the appropriate link in the [GitHub Classroom Invitation Links for Assignments](https://asulearn.appstate.edu/course/view.php?id=167073) block.  
+4.  The links for the problem sets and the sampling distribution assignment in this document may only work for the instructor!  To accept each of these assignments, go to [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=159655) and click on the appropriate link in the [GitHub Classroom Invitation Links for Assignments](https://asulearn.appstate.edu/course/view.php?id=167073) block. 
+5. [QUARTO cheat sheet](https://images.datacamp.com/image/upload/v1676540721/Marketing/Blog/Quarto_Cheat_Sheet.pdf)
 ```
 
 ___________
