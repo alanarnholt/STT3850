@@ -393,8 +393,6 @@ __________________
 
 * Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 11
 
-* Complete [PS-08](https://classroom.github.com/a/Gwp5evxM) by 5:00 pm Apr 11 
-
 * [Slides for weeks 11, 12, and 13](../Slides/Weeks11_12_13.pdf)
 
 ```{block, week12optional, type='rmdoptional'}
