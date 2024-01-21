@@ -1,0 +1,68 @@
+---
+title: "Getting to Know RStudio."
+author: "Nii Okine"
+output: html_document
+---
+
+## For Loop Statement
+
+- The following code will display the contents of the vector z in reverse
+order.
+    
+    i. Note that the first statement is needed so R will recognize that you are creating a numeric object within the loop.
+
+    ii. Without the revers.z<-numeric() command, R will display an error message saying object reverse.z not found.
+    
+```{r}
+reverse.z<-numeric()
+z<-1:10
+for (k in 1:10)
+{reverse.z[k]<-z[10-k+1]
+}
+reverse.z
+```
+
+## R Markdown
+
+
+**R Markdown** provides an easy way to produce rich, fully-documented, reproducible analyses.
+
+
+1. It allows users to share a single file containing
+
+    - all of the comments,
+    - R code, and
+    - metadata needed to reproduce the analysis from beginning to end.
+
+2. R Markdown allows you to
+
+    - combine chunks of R code with Markdown text and produce a nicely formatted HTML, PDF, or Word file,
+    
+    - without having to know any HTML or LaTeX code or fuss with getting the formatting just right in a Microsoft Word DOCX file.
+
+I think you’ll be pleasantly surprised at how easy it is to write an R
+Markdown document once you get the hang of it.
+
+
+### Create New R Markdown File
+
+To *open* a new file, click on the little green plus on the upper left hand
+and select R Markdown; see Figure below.
+
+```{r `echo`=FALSE}
+knitr::include_graphics("how.to.open.rmd.png")
+```
+
+
+## Link 
+
+This is the link to R Studio download page. Here is the [Link](https://www.rstudio.com/products/rstudio/download/#download).
+
+
+
+## Equations 
+
+$y = mx + b$
+
+
+Multiply 7 by 14 gives us the result `r 7*14`.
