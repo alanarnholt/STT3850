@@ -119,7 +119,7 @@ ______________
 
 * Complete [PS-02](https://classroom.github.com/a/xKESmfBx) due by 5:00 pm Jan 25
 
-
+* [Lecture Slides](../Rmarkdown/Week02/Week2_Lect.pdf)
 
 ```{block, week2optional, type='rmdoptional'}
 #### Optional {-}
