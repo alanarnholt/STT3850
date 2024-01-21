@@ -1,0 +1,48 @@
+---
+title: "Getting to Know RStudio"
+author: "Alan T. Arnholt"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to _weave_ together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+### Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+## Ordered Lists
+
+  i. This is the first item.
+  ii. This is the second item.
+  
+  1. Different number.
+  2. Another number.
+  
+## Equations
+
+$$y = mx + b$$
+
+Multiplying 7 by 14 gives us the result `r 7*14`.
+
+## Code Chunks
+
+```{r, echo = FALSE}
+5 + 15 > 19
+```
+

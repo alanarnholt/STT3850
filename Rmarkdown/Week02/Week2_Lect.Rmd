@@ -21,7 +21,7 @@ number_sections: true
 fig_caption: yes
 #bibliography: Reference.bib
 biblio-style: apalike
-link-citations: yes
+link-citations: TRUE
 header-includes:
    - \usepackage{placeins}
    - \usepackage{color}
@@ -270,7 +270,7 @@ The other variant of the if statement is the **if else if** structure which has 
 As an example, the following code will display the sum of the elements of `y` since the 1st condition is FALSE and 2nd condition is TRUE. It will not evaluate the 3rd condition.
 
 
-\tiny
+\small
 ```{r}
 if (x[1] != y[1]){
    sumx <- sum(x)
@@ -337,10 +337,11 @@ for (i in 1:5){
 
 Similarly, the following code will do the same thing:
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
-for (j in 2:11)
-{print("HELLO")}
+\small
+```{r}
+for (j in 6:10){
+  print("HELLO")
+}
 ```
 \normalsize
 
@@ -351,15 +352,15 @@ The for loop is useful when you want to repeat a command and you know exactly ho
 
 - The following code will display the contents of the vector $z$ in reverse order. 
 
-    - Note that the first statement is needed so R will recognize that you are creating a numeric object within the loop. 
-    - Without the revers.z<-numeric() command, R will display an error message saying object reverse.z not found.
+  - Note that the first statement creates a vector of length 10. 
+  - Without the `reverse.z <- numeric(10)` command, R will display an error message saying object `reverse.z` not found.
 
 \small
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
-reverse.z<-numeric()
-z<-1:10
-for (k in 1:10)
-{reverse.z[k]<-z[10-k+1]
+```{r}
+reverse.z <- numeric(10)
+z <- 1:10
+for (k in 1:10){
+  reverse.z[k]<- z[10 -k + 1]
 }
 reverse.z
 ```
@@ -367,77 +368,75 @@ reverse.z
 
 
 
-# R Markdown
+# Quarto
 
-## R Markdown
+## Quarto
 
 
-**R Markdown** provides an easy way to produce rich, fully-documented, reproducible analyses. 
+**Quarto** provides an easy way to produce rich, fully-documented, reproducible analyses. 
 
 - It allows users to share a single file containing 
 
-    - all of the comments, 
-    - R code, and 
-    - metadata needed to reproduce the analysis from beginning to end. 
+  - all of the comments, 
+  - R code, and 
+  - metadata needed to reproduce the analysis from beginning to end. 
     
-- R Markdown allows you to 
+- Quarto allows you to 
 
-    - combine chunks of R code with Markdown text and produce a nicely formatted HTML, PDF, or Word file, 
-    - without having to know any HTML or LaTeX code or fuss with getting the formatting just right in a Microsoft Word DOCX file.
+  - combine chunks of R code with Markdown text and produce a nicely formatted HTML, PDF, or Word file, 
+  - without having to know any HTML or LaTeX code or fuss with getting the formatting just right in a Microsoft Word DOCX file.
 
-I think you’ll be pleasantly surprised at how easy it is to write an R Markdown document once you get the hang of it.
-
-
-## Create New R Markdown File 
+I think you’ll be pleasantly surprised at how easy it is to write a Quarto document once you get the hang of it.
 
 
-To open a new file, click on the little green plus on the upper left hand and select R Markdown; see Figure below. 
+## Create New Quarto File 
+
+
+To open/create a new (Quarto) file, click on the little green plus on the upper left hand and select Quarto Document; see Figure \ref{fig:open_qmd}. 
 
 
 \small
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
-knitr::include_graphics("how_to_open_rmd.png")
+```{r label = "open_qmd", fig.cap = "How to open a *.qmd file", echo = FALSE, out.height = '50%',out.width = '50%'}
+knitr::include_graphics("how_to_open_qmd.png")
 ```
 \normalsize
 
 
 
-## Create New R Markdown File 
+## Create New Quarto File 
 
-Let's make some changes to the R Markdown file you just opened
+Let's make some changes to the Quarto file you just opened
 
 - First, change the title of the lab at the top to "Getting to Know RStudio."
 - Second, add an author line, and insert your name. You need quotation marks!
-- Third, delete everything in the document after line 6.
-- Forth, let's save this as **first_rmarkdown.Rmd**. 
-- Edit the file to recreate the last three pages of this lecture slides. Note: Use ## for headers. 
+- Third, name and save the file as **first_quarto.qmd**. 
 
-After editing the file you **Knit** to your desired output format (HTML, PDF, or Word file).  
+After editing the file you **Render** to your desired output format (HTML, PDF, or Word file).  
 
 
-## The Components of an R Markdown File: YAML 
+## The Components of a Quarto File: YAML 
 
 The top part of the file is called the YAML header. 
 
 - YAML is a recursive acronym that stands for “YAML Ain’t Markup Language”
 
-- It is defined on its official website at http://yaml.org as: a human friendly data serialization standard for all programming languages.
+- YAML is defined on its official website at <http://yaml.org> as: a human friendly data serialization standard for all programming languages.
 
-- Essentially, the YAML header stores the metadata needed for the document
+- The YAML header stores the metadata needed for the document.
 
-- You can see an example of a YAML header from our **first_rmarkdown.Rmd** file
+- You can see an example of a YAML header from our **`first_quarto.qmd`** file below.
 
-```{r warning=FALSE, message=FALSE,out.height = '20%',out.width = '80%', fig.align='center'}
+```{r echo = FALSE, out.height = '20%',out.width = '50%'}
 knitr::include_graphics("yaml.png")
 ```
 
 
-## The Components of an R Markdown File: Headers
+## The Components of a Quarto File: Headers
 
 
 You can create many different sized headers by simply adding one or more # in front of the text you’d like to denote the header.
 
-
+\begin{tcolorbox}
 \text{\# Top level header}
 
 \text{\#\# Second level header}
@@ -445,82 +444,76 @@ You can create many different sized headers by simply adding one or more # in fr
 \text{\#\#\# Third level header}
 
 \text{\#\#\#\# Fourth level header}
+\end{tcolorbox}
+
+- Now let us change the last header (Running Code) in our **`first_quarto.qmd`** file to ###.
 
 
-- Now let us change the last header in our **first_rmarkdown.Rmd** file to ###
-
-
-## The Components of an R Markdown File: Empasis 
+## The Components of Quarto File: Emphasis 
 
 - We can add italics by surrounding the word by 
 
-    - a single underscore or 
-    - a single asterisk.
+  - a single underscore or 
+  - a single asterisk.
     
-- As we have seen from our **first_rmarkdown.Rmd** file we can can bold a word by surrounding the word by 
+- As we saw in our **`first_quarto.qmd`** file we can can bold a word by surrounding the word by 
   
-    - two underscores or
-    - two asterisks.
+  - two underscores or
+  - two asterisks.
     
-
-- Now let us italicize one word in our **first_rmarkdown.Rmd**. 
-
+- Now let us italicize the first time weave appears in our **`first_quarto.qmd`**. 
 
 
-## The Components of an R Markdown File: Links
+
+## The Components of a Quarto File: Links
 
 
 - To add a link to a URL, 
 
-    - you simply enclose the text you’d like displayed in the resulting HTML file inside [ ] and 
-    - then the link itself inside ( ) right next to each other with no space in between.
-
-
-- Now let us do the following in our **first_rmarkdown.Rmd** file. 
-    
-    - Add another second level header: Links 
-    - Type: `This is the link to R Studio download page. Here is the`
-    - Type: `Link` and put it inside [ ]
-    - Put: https://www.rstudio.com/products/rstudio/download/#download inside ( ) right next to `[Link]` with no space in between
+  - you simply enclose the text you’d like displayed in the resulting HTML file inside `[ ]` and 
+  - then the link itself inside `( )` right next to each other with no space in between.
 
 
 
-## The Components of an R Markdown File: Lists
-
-- As we saw in our **first_rmarkdown.Rmd** file, you create an unordered list by using `-` in front of the lists. 
-
-- But we can also create ordered list by using numbers, letters or roman numerals. 
-
-- Now let us do the following in our **first_rmarkdown.Rmd** file. 
-
-  - Under the `For Loop Statement` header, let us change the sub-list to letters (i, ii).
-  - Under the `R Markdown` header, let us change main lists to numbers (1, 2)
 
 
-## Equations 
+## The Components of a Quarto File: Lists
+
+- To create an unordered list, use `-` in front of each item. 
+
+- We can also create ordered list by using numbers, letters or roman numerals. 
+
+- Create the following in our **`first_quarto.qmd`** file. 
+
+  - Create a new second level header with the name "Ordered Lists".
+  - Under the "Ordered Lists" header, create a sub-list using letters (i, ii).
+  - Under the "Ordered Lists" header, create a sub-list using numbers (1, 2).
+
+
+## The Components of a Quarto File: Equations 
 
 - If you’d like nice mathematical formulas in your document, you can add them between **two dollar signs**. 
 
-- Now let us do the following in our **first_rmarkdown.Rmd** file. 
+- Now let us do the following in our **`first_quarto.qmd`** file. 
     
-    - Add another second level header: Equations 
-    - Type: \$y = mx + b\$
+  - Add another second level header: Equations 
+  - Type: $y = mx + b$
 
 
-## Inline R code
+## The Components of a Quarto File: Inline R code
 
 - We’ve seen that we can add R code and have that run in an R chunk of code enclosed by three backticks. 
 
-- However, what if we wanted to include the results of a simple calculation directly in the text of our document? R Markdown can do that as well:
+- However, what if we wanted to include the results of a simple calculation directly in the text of our document? Quarto can do that as well:
 
-- Now let us do the following in our **first_rmarkdown.Rmd** file.
+- Now let us do the following in our **`first_quarto.qmd** file.
 
    - Under the Equations header
-   - Type: Multiply 7 by 14 gives us the result r 7*14 (enclosed by one backtick). 
+   - Type: Multiplying 7 by 14 gives us the result `r 7*14` (using inline R code). 
 
 
 
-## R Markdown Chunk Options
+## The Components of a Quarto File: Chunk Options
 
 You can set many options on a chunk by chunk basis. The most common R chunk options are `echo`, `eval`, and `include`. By default, all three of these options are set to TRUE,
 
@@ -528,25 +521,28 @@ You can set many options on a chunk by chunk basis. The most common R chunk opti
 - `echo` dictates whether the code that produces the result should be printed before the corresponding R output.
 - `eval` specifies whether the code should be evaluated or just displayed without its output.
 
-- `include` specifies whether the code AND its output should be included in the resulting knitted document. If it is set to FALSE the code is run, but neither the code or its output are included in the resulting document.
+- `include` specifies whether the code AND its output should be included in the resulting rendered document. If it is set to FALSE the code is run, but neither the code or its output are included in the resulting document.
 
+## The Components of a Quarto File: Chunk Options
 
-- Now let us do the following in our **first_rmarkdown.Rmd** file. 
+- Do the following in your **`first_quarto.qmd** document. 
 
-    - Create New R Markdown File header, in the R chunk, set `echo`=FALSE,
+  - Create a second level header named "Code Chunks" at the end of your document.
+  - Create an R code chunk and set `echo = FALSE`.
+  - Inside the code chunk type 5 + 15 > 19.  
     
     
     
 ## Spell Check 
 
-- Near the top of your R Markdown editor window sits one of the more useful tools for writing documents: 
+- Near the top of your editor window sits one of the more useful tools for writing documents: 
 
-    - the spell-check button. 
-    - It is the green check-mark with “ABC” above it:
+  - The spell-check button. 
+  - The spell-check button is the green check-mark with “ABC” above it.
 
-- Before you submit a document or share it with someone else, you should spell check your document. 
+- Before you submit a document or share it with someone else, please spell check your document! 
 
-- Finally let us spell check our **first_rmarkdown.Rmd** file
+- Spell check your **`first_quarto.qmd** document.  Did you have an typos?
 
 
 
@@ -554,16 +550,16 @@ You can set many options on a chunk by chunk basis. The most common R chunk opti
 
 ## Data Visualization
 
-We begin the development of your data science toolbox with **data visualization**
+We begin the development of your data science toolbox with **data visualization**.
 
 
-- By visualizing data, we gain valuable insights we couldn’t initially obtain from just looking at the raw data values
+- By visualizing data, we gain valuable insights we couldn’t initially obtain from just looking at the raw data values.
 
 - At their most basic, graphics/plots/charts (we use these terms interchangeably) provide a nice way to explore the patterns in data, such as 
 
     - the presence of outliers, 
     - distributions of individual variables, and 
-    - relationships between groups of variables
+    - relationships between groups of variables.
     
 - Graphics are designed to emphasize the findings and insights you want your audience to understand.
 
@@ -573,7 +569,7 @@ We begin the development of your data science toolbox with **data visualization*
 Let’s load all the packages needed for this chapter. You need to install them if you haven't already. 
 
 \small
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+```{r}
 library(nycflights13)
 library(ggplot2)
 library(moderndive)
@@ -589,8 +585,8 @@ We start with a discussion of a theoretical framework for data visualization kno
 
 - Think of how we construct and form sentences in English by combining different elements, like nouns, verbs, articles, subjects, objects, etc. 
 
-    - We can’t just combine these elements in any arbitrary order; 
-    - we must do so following a set of rules known as a linguistic grammar. 
+  - We can’t just combine these elements in any arbitrary order; 
+  - we must do so following a set of rules known as a linguistic grammar. 
 
 - Similarly to a linguistic grammar, “the grammar of graphics” defines a set of rules for constructing statistical graphics by combining different types of layers. 
 
@@ -601,7 +597,6 @@ In short, the grammar tells us that
 
 \begin{tcolorbox}
 A statistical graphic is a mapping of data variables to aesthetic attributes of geometric objects.
-
 \end{tcolorbox}
 
 Specifically, we can break a graphic into the following three essential components:
@@ -618,9 +613,9 @@ Specifically, we can break a graphic into the following three essential componen
 
 There are other components of the grammar of graphics we can control as well. In this class, we’ll keep things simple and only work with these two additional components:
 
-- `facet`ing breaks up a plot into several plots split by the values of another variable
+  - `facet`ing breaks up a plot into several plots split by the values of another variable
 
-- `position` adjustments for barplots.
+  - `position` adjustments for barplots.
 
 
 ## Five named graphs - the 5NG
@@ -638,13 +633,13 @@ We will only focus on five different types of graphics, each with a commonly giv
 - We’ll also present some variations of these plots
 - Note that: 
 
-    - certain plots are only appropriate for categorical variables, 
-    - while others are only appropriate for numerical variables.
+  - certain plots are only appropriate for categorical variables, 
+  - while others are only appropriate for numerical variables.
     
 
 ## 5NG#1: Scatterplots
 
-The simplest of the 5NG are **scatterplots**, also called bivariate plots. They allow you to visualize the relationship between two numerical variables. 
+The simplest of the 5NG are **scatterplots**, also called bivariate plots. They allow you to visualize the relationship between two **numerical** variables. 
 
 - Let’s view them through the lens of the grammar of graphics we presented earlier. 
 
@@ -655,17 +650,17 @@ The simplest of the 5NG are **scatterplots**, also called bivariate plots. They 
 2. `arr_delay`: arrival delay on the vertical “y” axis
 
 
-
 ## Scatterplots via `geom_point`
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%',out.width = '70%'}
 ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + 
-  geom_point()
+  geom_point() + 
+  theme_bw()
 ```
 \normalsize
 
-We observe that a **positive** relationship exists between `dep_delay` and `arr_delay`: as departure delays increase, arrival delays tend to also increase. 
+We observe that a **positive** relationship exists between `arr_delay` and `dep_delay`: as departure delays increase, arrival delays tend to also increase. 
 
 
 ## Scatterplots via `geom_point`
@@ -686,7 +681,7 @@ We observe that a **positive** relationship exists between `dep_delay` and `arr_
 ## Scatterplots via `geom_point`
 
 \tiny
-```{r warning=FALSE, message=FALSE,out.height = '40%',out.width = '80%', fig.align='center'}
+```{r echo = FALSE, out.height = '40%',out.width = '80%'}
 knitr::include_graphics("Week2_1.png")
 ```
 \normalsize
@@ -700,14 +695,14 @@ From the scatterplot from the `alaska_flights`, the large mass of points near $(
 
 - This is the result of a phenomenon called **overplotting**. 
 
-   - This corresponds to points being plotted on top of each other over and over again. 
-   - When this occurs, it is difficult to know the number of points being plotted. 
+  - This corresponds to points being plotted on top of each other over and over again. 
+  - When this occurs, it is difficult to know the number of points being plotted. 
    
    
 - There are two methods to address the issue of overplotting. Either by
 
-    - Adjusting the transparency of the points or
-    - Adding a little random “jitter”, or random “nudges”, to each of the points.
+  - Adjusting the transparency of the points or
+  - adding a little random “jitter”, or random “nudges”, to each of the points.
 
 
 ## Method 1: Changing the transparency
@@ -716,21 +711,22 @@ From the scatterplot from the `alaska_flights`, the large mass of points near $(
 
 - We can change the `alpha` argument to be any value between `0` and `1`, 
 
-    - where `0` sets the points to be 100% transparent and 
-    - `1` sets the points to be 100% opaque. 
+  - where `0` sets the points to be 100% transparent and 
+  - `1` sets the points to be 100% opaque. 
 
 - By default, `alpha` is set to 1. In other words, if we don’t explicitly set an alpha value, R will use `alpha = 1`.
 
 
-Note how the following code is identical to the earlier code that created the scatterplot with overplotting, but with `alpha = 0.2` added to the geom_point() function. 
+Note how the following code is identical to the earlier code that created the scatterplot with overplotting, but with `alpha = 0.2` added to the `geom_point()` function. 
 
 
 ## Method 1: Changing the transparency
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%',out.width = '70%'}
 ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + 
-  geom_point(alpha = 0.2)
+  geom_point(alpha = 0.2) + 
+  theme_bw()
 ```
 \normalsize
 
@@ -744,15 +740,17 @@ The second way of addressing overplotting is by **jittering** all the points.
 
 - This means giving each point a small “nudge” in a random direction. 
 
-    - You can think of “jittering” as shaking the points around a bit on the plot.
-    
+  - You can think of “jittering” as shaking the points around a bit on the plot.
+  
+## Method 2: Jittering the points
+
 -  Example: Say we have a data frame with 4 identical rows of x and y values: (0,0), (0,0), (0,0), and (0,0)
 
    - scatterplot of these 4 points (on the left)
    - and its jittered counterpart (on the right)
    
 \tiny
-```{r warning=FALSE, message=FALSE,out.height = '30%',out.width = '70%', fig.align='center'}
+```{r, echo = FALSE, out.height = '30%',out.width = '70%'}
 knitr::include_graphics("Week2_2.png")
 ```
 \normalsize
@@ -762,9 +760,10 @@ knitr::include_graphics("Week2_2.png")
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%',out.width = '70%'}
 ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + 
-  geom_jitter(width = 30, height = 30)
+  geom_jitter(width = 30, height = 30) + 
+  theme_bw()
 ```
 \normalsize
 
@@ -775,24 +774,23 @@ Which method was better?
 
 ## 5NG#2: Linegraphs
 
-The next of the five named graphs are **linegraphs**.
-
 - Linegraphs show the relationship between two numerical variables when the variable on the x-axis, also called the explanatory variable, is of a **sequential nature**. In other words, there is an inherent ordering to the variable.
 
 - The most common examples of linegraphs have some notion of time on the x-axis: hours, days, weeks, years, etc.
 
-    - Since time is sequential, we connect consecutive observations of the variable on the y-axis with a **line**. 
-    - Linegraphs that have some notion of time on the x-axis are also called **time series plots**. 
+  - Since time is sequential, we connect consecutive observations of the variable on the y-axis with a **line**. 
+  - Linegraphs that have some notion of time on the x-axis are also called **time series plots**. 
     
 Lets explore the `early_january_weather` data frame included in the `moderndive` package, which contains hourly weather observations. 
 
 ## Linegraphs via `geom_line`
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%',out.width = '70%'}
 ggplot(data = early_january_weather, 
        mapping = aes(x = time_hour, y = temp)) +
-  geom_line()
+  geom_line() + 
+  theme_bw()
 ```
 \normalsize
 
@@ -816,10 +814,7 @@ Let’s consider the `temp` variable in the `weather` data frame from the `nycfl
 ## 5NG#3: Histograms
 
 
-One way to do that is by producing a **histogram**. 
-
-- A histogram is a plot that visualizes the distribution of a numerical value as follows:
-
+One way to do that is by producing a **histogram**. A histogram is a plot that visualizes the distribution of a numerical value as follows:
 
 1. We first cut up the x-axis into a series of **bins**, where each bin represents a range of values.
 
@@ -833,9 +828,10 @@ One way to do that is by producing a **histogram**.
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%',out.width = '70%'}
 ggplot(data = weather, mapping = aes(x = temp)) +
-  geom_histogram()
+  geom_histogram() +
+  theme_bw()
 ```
 \normalsize
 
@@ -864,7 +860,8 @@ Now let’s unpack the resulting histogram
 \tiny
 ```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
 ggplot(data = weather, mapping = aes(x = temp)) +
-  geom_histogram(color = "white")
+  geom_histogram(color = "white") + 
+  theme_bw()
 ```
 \normalsize
 
@@ -878,9 +875,10 @@ ggplot(data = weather, mapping = aes(x = temp)) +
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%',out.width = '70%'}
 ggplot(data = weather, mapping = aes(x = temp)) +
-  geom_histogram(color = "white", fill = "steelblue")
+  geom_histogram(color = "black", fill = "purple") + 
+  theme_bw()
 ```
 \normalsize
 
@@ -893,9 +891,10 @@ ggplot(data = weather, mapping = aes(x = temp)) +
 **Method 1**: By adjusting the number of bins via the bins argument to `geom_histogram()`.
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%', out.width = '70%'}
 ggplot(data = weather, mapping = aes(x = temp)) +
-  geom_histogram(bins = 40, color = "white")
+  geom_histogram(bins = 40, color = "black", fill = "purple") + 
+  theme_bw()
 ```
 \normalsize
 
@@ -906,9 +905,10 @@ ggplot(data = weather, mapping = aes(x = temp)) +
 **Method 2**: By adjusting the width of the bins via the binwidth argument to `geom_histogram()`
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%', out.width = '70%'}
 ggplot(data = weather, mapping = aes(x = temp)) +
-  geom_histogram(binwidth = 10, color = "white")
+  geom_histogram(binwidth = 10, color = "black", fill = "purple") + 
+  theme_bw()
 ```
 \normalsize
 
@@ -927,10 +927,11 @@ Example: lets Looking at how the histogram of hourly **temperature** recordings 
 ## Facets
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '70%',out.width = '70%', fig.align='center'}
+```{r out.height = '70%', out.width = '70%'}
 ggplot(data = weather, mapping = aes(x = temp)) +
-  geom_histogram(binwidth = 5, color = "white") +
-  facet_wrap(~ month)
+  geom_histogram(binwidth = 5, color = "black", fill = "lightblue") +
+  facet_wrap(vars(month)) + 
+  theme_bw()
 ```
 \normalsize
 
@@ -944,10 +945,11 @@ We can also specify the number of rows and columns in the grid by using the `nro
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '60%',out.width = '70%', fig.align='center'}
+```{r out.height = '60%', out.width = '70%'}
 ggplot(data = weather, mapping = aes(x = temp)) +
-  geom_histogram(binwidth = 5, color = "white") +
-  facet_wrap(~ month, nrow = 4)
+  geom_histogram(binwidth = 5, color = "black", fill = "lightblue") +
+  facet_wrap(vars(month), nrow = 4) +
+  theme_bw()
 ```
 \normalsize
 
@@ -983,7 +985,7 @@ Another type of visualization that can be used to compare the distribution of a 
 
    
 \tiny
-```{r warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r echo = FALSE, out.height = '50%', out.width = '70%'}
 knitr::include_graphics("Week2_3.png")
 ```
 \normalsize
@@ -1001,23 +1003,25 @@ From the Boxplot:
 
 - 25% of observations were above 52$^{\circ}$F.
 
-- The middle 50% of points lie within the interquartile range (IQR) between the first and third quartile. 
+- The middle 50% of points lie within the interquartile range (IQR) between the first and third quartile. IQR for this example is 52 - 36 = 16$^{\circ}$F.
+    
+## 5NG#4: Boxplots
 
-    - IQR for this example is 52 - 36 = 16$^{\circ}$F.
-    
-    
+From the Boxplot:
+
 - The whiskers stick out from either end of the box all the way to the **minimum**(21$^{\circ}$F) and **maximum** observed temperatures (71$^{\circ}$F).
 
-    - However, extend no more than $1.5 \times$ IQR from either end of the box. 
+    - However, the whiskers extend no more than $1.5 \times$ IQR from either end of the box. 
     - Any observed values outside this range get marked with points called **outliers**. 
 
 
 ## Boxplots via `geom_boxplot`: Invalid specification
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '40%', fig.align='center'}
+```{r out.height = '50%', out.width = '40%'}
 ggplot(data = weather, mapping = aes(x = month, y = temp)) +
-  geom_boxplot()
+  geom_boxplot() + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1031,9 +1035,10 @@ ggplot(data = weather, mapping = aes(x = month, y = temp)) +
 ## Boxplots via `geom_boxplot` 
    
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r out.height = '50%', out.width = '90%'}
 ggplot(data = weather, mapping = aes(x = factor(month), y = temp)) +
-  geom_boxplot()
+  geom_boxplot() + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1062,7 +1067,7 @@ Thus the 12 separate boxplots are shown “side-by-side.”
 - For example, run the following code that manually creates two data frames representing a collection of fruit: 3 apples and 2 oranges.
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r}
 library(dplyr)
 fruits <- tibble(
   fruit = c("apple", "apple", "orange", "apple", "orange")
@@ -1078,7 +1083,7 @@ fruits_counted <- tibble(
 ## 5NG#5: Barplots
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r}
 fruits 
 fruits_counted 
 ```
@@ -1090,9 +1095,10 @@ Depending on how your categorical data is represented, you’ll need to add a di
 ## Barplots via `geom_bar`
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r out.height = '50%', out.width = '90%'}
 ggplot(data = fruits, mapping = aes(x = fruit)) +
-  geom_bar()
+  geom_bar(fill = c("red", "orange")) + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1102,9 +1108,10 @@ When the categorical variable whose distribution you want to visualize **is not 
 ## Barplots via `geom_col`
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r out.height = '50%', out.width = '90%'}
 ggplot(data = fruits_counted, mapping = aes(x = fruit, y = number)) +
-  geom_col()
+  geom_col(fill = c("red", "orange")) + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1123,9 +1130,10 @@ Let’s now go back to the `flights` data frame in the `nycflights13` package an
 ## Barplots for `flights` data
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r out.height = '50%', out.width = '90%'}
 ggplot(data = flights, mapping = aes(x = carrier)) +
-  geom_bar()
+  geom_bar(fill = "lightblue") + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1147,7 +1155,7 @@ ggplot(data = flights, mapping = aes(x = carrier)) +
 ## Cases Were Barplots are Preferred
 
 
-```{r  echo=FALSE, out.height = '70%',out.width = '80%', fig.pos="h", fig.align='center'}
+```{r  echo=FALSE, out.height = '70%', out.width = '80%', fig.pos="h"}
 knitr::include_graphics("week2_4.png")
 ```
 
@@ -1171,9 +1179,10 @@ Let’s examine the joint distribution of outgoing domestic flights from NYC by 
 ## Two categorical variables: Stacked barplot
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r out.height = '50%', out.width = '90%'}
 ggplot(data = flights, mapping = aes(x = carrier, fill = origin)) +
-  geom_bar()
+  geom_bar() + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1183,9 +1192,10 @@ ggplot(data = flights, mapping = aes(x = carrier, fill = origin)) +
 ## Two categorical variables: Stacked barplot
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r out.height = '50%', out.width = '90%'}
 ggplot(data = flights, mapping = aes(x = carrier, color = origin)) +
-  geom_bar()
+  geom_bar() + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1211,9 +1221,10 @@ While simple to make, in certain aspects it is not ideal.
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r out.height = '50%', out.width = '90%'}
 ggplot(data = flights, mapping = aes(x = carrier, fill = origin)) +
-  geom_bar(position = "dodge")
+  geom_bar(position = "dodge") + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1226,16 +1237,12 @@ ggplot(data = flights, mapping = aes(x = carrier, fill = origin)) +
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
+```{r out.height = '50%', out.width = '90%'}
 ggplot(data = flights, mapping = aes(x = carrier, fill = origin)) +
-  geom_bar(position = position_dodge(preserve = "single"))
+  geom_bar(position = position_dodge(preserve = "single")) + 
+  theme_bw()
 ```
 \normalsize
-
-
-
-
-
 
 
 ## Two categorical variables: side-by-side barplots
@@ -1243,15 +1250,14 @@ ggplot(data = flights, mapping = aes(x = carrier, fill = origin)) +
 Change order: 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '90%', fig.align='center'}
-
-flights1<-flights
+```{r out.height = '50%', out.width = '90%'}
+flights1 <- flights
 flights1$origin1 <- factor(flights1$origin, ordered = TRUE,
-levels = c("JFK", "EWR","LGA"))
+levels = c("JFK", "EWR", "LGA"))
 
 ggplot(data = flights1, mapping = aes(x = carrier, fill = origin1)) +
-  geom_bar(position = position_dodge(preserve = "single"))
-
+  geom_bar(position = position_dodge(preserve = "single")) + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1260,10 +1266,11 @@ ggplot(data = flights1, mapping = aes(x = carrier, fill = origin1)) +
 ## Two categorical variables:  faceted barplot
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '60%',out.width = '70%', fig.align='center'}
+```{r out.height = '60%', out.width = '70%'}
 ggplot(data = flights, mapping = aes(x = carrier)) +
-  geom_bar() +
-  facet_wrap(~ origin, ncol = 1)
+  geom_bar(fill = "pink") +
+  facet_wrap(vars(origin), ncol = 1) + 
+  theme_bw()
 ```
 \normalsize
 
@@ -1271,6 +1278,6 @@ ggplot(data = flights, mapping = aes(x = carrier)) +
 ## Summary table
 
 
-```{r  echo=FALSE, out.height = '70%',out.width = '80%', fig.pos="h", fig.align='center', fig.cap="Summary of Five Named Graphs"}
+```{r, label = "5NG",  echo = FALSE, out.height = '70%', out.width = '80%', fig.pos="h", fig.cap="Summary of Five Named Graphs"}
 knitr::include_graphics("week2_5.png")
 ```

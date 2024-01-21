@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Spring 2024">
+
+<title>MAT 3850 : Week 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Week2_Lect_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Week2_Lect_files/libs/quarto-html/quarto.js"></script>
+<script src="Week2_Lect_files/libs/quarto-html/popper.min.js"></script>
+<script src="Week2_Lect_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Week2_Lect_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Week2_Lect_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Week2_Lect_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Week2_Lect_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Week2_Lect_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Week2_Lect_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+</head><body class="fullcontent">\usepackage{placeins}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[]{algpseudocode}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage{lipsum}
+\usepackage{mathtools}
+\usepackage{actuarialangle}
+
+\usepackage{multirow, longtable, array, dcolumn}
+\usepackage{tabu}
+\newcommand{\sdt}{\bullet}
+\newcommand{\tss}{\textsuperscript}
+\newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
+\newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
+\newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
+\newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
+\newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
+\newcommand{\gil}[1]{\textrm{\gilfont{#1}}\normalfont }
+\newfont{\gilfont}{msbm10 scaled 1000}
+\newcommand{\DOT}{\usebox{\biggercirc}}
+\newcommand{\pv}{\wp\text{-value}}
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+
+
+
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">MAT 3850 : Week 2</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Spring 2024 </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Appalachian State University
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="outline-for-the-week" class="level1">
+<h1>Outline for the week</h1>
+<section id="by-the-end-of-the-week" class="level2">
+<h2 class="anchored" data-anchor-id="by-the-end-of-the-week">By the end of the week:</h2>
+<ul>
+<li>Control Structures in R</li>
+<li><a href="https://quarto.org/">Quarto</a></li>
+<li>Data Visualization</li>
+</ul>
+</section>
+</section>
+<section id="control-structures-in-r" class="level1">
+<h1>Control Structures in R</h1>
+<section id="control-structures-in-r-1" class="level2">
+<h2 class="anchored" data-anchor-id="control-structures-in-r-1">Control Structures in R</h2>
+<p><code>R</code> executes statements/commands sequentially. If you want to control the flow of statement execution, you need to use <strong>control structures</strong>.</p>
+<ul>
+<li><p>The basic component of most control structures is the <strong>conditional statement</strong>.</p></li>
+<li><p>A conditional statement is an <code>R</code> statement that is evaluated as either TRUE or FALSE. They use relational operators such as</p>
+<ul>
+<li><p><code>==</code> for testing equality of R objects,</p></li>
+<li><p><code>!=</code> for testing if two <code>R</code> objects are not equal, &lt;,&gt; ,&lt;= and &gt;=.</p></li>
+</ul></li>
+</ul>
+<p>As an example, look at the following R commands:</p>
+</section>
+<section id="conditional-statement" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-statement">Conditional Statement</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># creates a vector named x</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="sc">==</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE  TRUE FALSE</code></pre>
+</div>
+</div>
+<ul>
+<li>The result of executing the last command is a vector containing the logical values TRUE, TRUE and FALSE since the only elements of the vectors <code>x</code> and <code>y</code> that are not equal are the 3rd elements.</li>
+</ul>
+<p>Similarly,</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">!=</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE FALSE  TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="conditional-statement-and-logical-operators" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-statement-and-logical-operators">Conditional Statement and Logical Operators</h2>
+<ul>
+<li><p>Conditional statements can be combined using logical operators <code>&amp;</code>, <code>|</code> and <code>!</code>.</p>
+<ul>
+<li>The operator <code>&amp;</code> means AND.</li>
+<li>The operator <code>|</code> means OR</li>
+<li>and the operator <code>!</code> means NOT.</li>
+</ul></li>
+</ul>
+<p>As an example of the use of <code>&amp;</code>, the following will yield TRUE since both conditions are TRUE.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(x[<span class="dv">1</span>] <span class="sc">==</span> y[<span class="dv">1</span>]) <span class="sc">&amp;</span> (x[<span class="dv">2</span>] <span class="sc">==</span> y[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>On the other hand, </p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(x[<span class="dv">1</span>] <span class="sc">==</span> y[<span class="dv">1</span>]) <span class="sc">&amp;</span> (x[<span class="dv">3</span>] <span class="sc">==</span> y[<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="conditional-statement-and-logical-operators-1" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-statement-and-logical-operators-1">Conditional Statement and Logical Operators</h2>
+<p>However, the following will yield TRUE since at least one condition is TRUE. That is, the <code>|</code> operator will yield TRUE if at least one of the conditions is TRUE.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(x[<span class="dv">1</span>] <span class="sc">==</span> y[<span class="dv">1</span>]) <span class="sc">|</span> (x[<span class="dv">3</span>] <span class="sc">==</span> y[<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>To negate the truth value of the above statement, use <code>!</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>((x[<span class="dv">1</span>] <span class="sc">==</span> y[<span class="dv">1</span>]) <span class="sc">|</span> (x[<span class="dv">3</span>] <span class="sc">==</span> y[<span class="dv">3</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>Note the use of parentheses.</p>
+</section>
+<section id="conditional-statement-and-logical-operators-2" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-statement-and-logical-operators-2">Conditional Statement and Logical Operators</h2>
+<p>To see the effect of parentheses, let’s remove the parentheses in the previous statement. </p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(x[<span class="dv">3</span>] <span class="sc">==</span> y[<span class="dv">3</span>]) <span class="sc">|</span> (x[<span class="dv">1</span>]<span class="sc">==</span>y[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>A control structure that uses conditional statement(s) is the <strong>if statement</strong> and its variant <strong>if else</strong> and <strong>if else if</strong>.</p>
+<ul>
+<li>The if statement will perform an R command or a series of R commands only if the conditional statement is TRUE.</li>
+</ul>
+<p>Lets see an example.</p>
+</section>
+<section id="if-statement" class="level2">
+<h2 class="anchored" data-anchor-id="if-statement">If Statement</h2>
+<p>The following will display the value of the sum of the first two elements of the vector <code>x</code> since the conditional statement is TRUE.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x[<span class="dv">1</span>] <span class="sc">==</span> y[<span class="dv">1</span>]){</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  sumx <span class="ot">&lt;-</span> x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  sumx</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>Similarly, the following code will not display anything since the conditional statement is FALSE and hence R will not execute the R statements within the square brackets.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x[<span class="dv">1</span>] <span class="sc">!=</span> y[<span class="dv">1</span>]){</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  sumy <span class="ot">&lt;-</span> y[<span class="dv">1</span>] <span class="sc">+</span> y[<span class="dv">2</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  sumy</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="if-statement-1" class="level2">
+<h2 class="anchored" data-anchor-id="if-statement-1">If Statement</h2>
+<p>Note that the syntax of an if statement is as follows</p>
+<ul>
+<li><p>if (conditional statement) {R statements}</p>
+<ul>
+<li>brackets are optional if there is only one R statement</li>
+</ul></li>
+<li><p>If you want R to perform either a series of R statements</p>
+<ul>
+<li>(say A) when the conditional statement is TRUE or</li>
+<li>another series of R statements (say B) when the conditional statement is FALSE</li>
+<li>use the <strong>if else</strong> structure which is as follows:</li>
+</ul></li>
+<li><p>if (condition) {R statements A }else{ R statements B}</p></li>
+</ul>
+</section>
+<section id="if-else-statement" class="level2">
+<h2 class="anchored" data-anchor-id="if-else-statement">If Else Statement</h2>
+<p>As an example, the following will display the sum of the elements of <code>x</code> since the conditional statement is TRUE:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x[<span class="dv">1</span>] <span class="sc">==</span> y[<span class="dv">1</span>]){</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  sumx <span class="ot">&lt;-</span> <span class="fu">sum</span>(x)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  sumx</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  sumy <span class="ot">&lt;-</span> <span class="fu">sum</span>(y)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  sumy</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+</section>
+<section id="if-else-statement-1" class="level2">
+<h2 class="anchored" data-anchor-id="if-else-statement-1">If Else Statement</h2>
+<p>On the other hand, the following will display the sum of the elements of <code>y</code> since the conditional statement is FALSE:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x[<span class="dv">1</span>] <span class="sc">!=</span> y[<span class="dv">1</span>]){</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  sumx <span class="ot">&lt;-</span> <span class="fu">sum</span>(x)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  sumx</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  sumy <span class="ot">&lt;-</span> <span class="fu">sum</span>(y)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  sumy</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+</div>
+</section>
+<section id="if-else-if-statement" class="level2">
+<h2 class="anchored" data-anchor-id="if-else-if-statement">If Else If Statement</h2>
+<p>The other variant of the if statement is the <strong>if else if</strong> structure which has the following syntax:</p>
+<ul>
+<li><p>if (condition 1) {R statements A } else if (condition 2) {R statement B } else if (condition 3) {R statement C } else { R statement D}</p></li>
+<li><p>You can have more than 3 conditions to test so the structure could be longer.</p></li>
+</ul>
+</section>
+<section id="if-else-if-statement-1" class="level2">
+<h2 class="anchored" data-anchor-id="if-else-if-statement-1">If Else If Statement</h2>
+<p>As an example, the following code will display the sum of the elements of <code>y</code> since the 1st condition is FALSE and 2nd condition is TRUE. It will not evaluate the 3rd condition.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x[<span class="dv">1</span>] <span class="sc">!=</span> y[<span class="dv">1</span>]){</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>   sumx <span class="ot">&lt;-</span> <span class="fu">sum</span>(x)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>   sumx</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (x[<span class="dv">2</span>] <span class="sc">==</span> y[<span class="dv">2</span>]) {</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>   sumy <span class="ot">&lt;-</span> <span class="fu">sum</span>(y)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>   sumy</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>   } <span class="cf">else</span> <span class="cf">if</span> (x[<span class="dv">3</span>]<span class="sc">!=</span>y[<span class="dv">3</span>]) {</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>   prodx <span class="ot">&lt;-</span> x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">3</span>]</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>   prodx</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>   } <span class="cf">else</span> {</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>   prody <span class="ot">&lt;-</span> y[<span class="dv">1</span>]<span class="sc">*</span>y[<span class="dv">2</span>]<span class="sc">*</span>y[<span class="dv">3</span>]</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>   prody</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+</div>
+</section>
+<section id="if-else-if-statement-2" class="level2">
+<h2 class="anchored" data-anchor-id="if-else-if-statement-2">If Else If Statement</h2>
+<p>On the other hand, the following will display the product of the elements of y (the content of the object <code>prody</code>) since the 3 conditions are FALSE:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x[<span class="dv">1</span>]<span class="sc">!=</span>y[<span class="dv">1</span>]){</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  sumx <span class="ot">&lt;-</span> <span class="fu">sum</span>(x)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  sumx</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (x[<span class="dv">2</span>]<span class="sc">!=</span>y[<span class="dv">2</span>]) {</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  sumy <span class="ot">&lt;-</span> <span class="fu">sum</span>(y)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  sumy</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>   } <span class="cf">else</span> <span class="cf">if</span> (x[<span class="dv">3</span>]<span class="sc">==</span>y[<span class="dv">3</span>]) {</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>     prodx <span class="ot">&lt;-</span> x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">*</span>x[<span class="dv">3</span>]</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>     prodx</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>   } <span class="cf">else</span> {</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>   prody <span class="ot">&lt;-</span> y[<span class="dv">1</span>]<span class="sc">*</span>y[<span class="dv">2</span>]<span class="sc">*</span>y[<span class="dv">3</span>]</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>   prody</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+</section>
+<section id="for-loop-statement" class="level2">
+<h2 class="anchored" data-anchor-id="for-loop-statement">For Loop Statement</h2>
+<p>The for loop is one of the most useful control structures in R. Its syntax is as follows</p>
+<ul>
+<li>for (index variable in sequence) {R statements}</li>
+</ul>
+<p>The index variable is usually a dummy integer variable (can have any name) but <span class="math inline">\(i, j, k,\)</span> etc are often used. For example, the following code will display the text “HELLO” five times.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){ </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"HELLO"</span>) </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "HELLO"
+[1] "HELLO"
+[1] "HELLO"
+[1] "HELLO"
+[1] "HELLO"</code></pre>
+</div>
+</div>
+</section>
+<section id="for-loop-statement-1" class="level2">
+<h2 class="anchored" data-anchor-id="for-loop-statement-1">For Loop Statement</h2>
+<p>Similarly, the following code will do the same thing:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"HELLO"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "HELLO"
+[1] "HELLO"
+[1] "HELLO"
+[1] "HELLO"
+[1] "HELLO"</code></pre>
+</div>
+</div>
+<p>The for loop is useful when you want to repeat a command and you know exactly how many times you want the command repeated.</p>
+</section>
+<section id="for-loop-statement-2" class="level2">
+<h2 class="anchored" data-anchor-id="for-loop-statement-2">For Loop Statement</h2>
+<ul>
+<li><p>The following code will display the contents of the vector <span class="math inline">\(z\)</span> in reverse order.</p>
+<ul>
+<li>Note that the first statement creates a vector of length 10.</li>
+<li>Without the <code>reverse.z &lt;- numeric(10)</code> command, R will display an error message saying object <code>reverse.z</code> not found.</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>reverse.z <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">10</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  reverse.z[k]<span class="ot">&lt;-</span> z[<span class="dv">10</span> <span class="sc">-</span>k <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>reverse.z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 10  9  8  7  6  5  4  3  2  1</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="quarto" class="level1">
+<h1>Quarto</h1>
+<section id="quarto-1" class="level2">
+<h2 class="anchored" data-anchor-id="quarto-1">Quarto</h2>
+<p><strong>Quarto</strong> provides an easy way to produce rich, fully-documented, reproducible analyses.</p>
+<ul>
+<li><p>It allows users to share a single file containing</p>
+<ul>
+<li>all of the comments,</li>
+<li>R code, and</li>
+<li>metadata needed to reproduce the analysis from beginning to end.</li>
+</ul></li>
+<li><p>Quarto allows you to</p>
+<ul>
+<li>combine chunks of R code with Markdown text and produce a nicely formatted HTML, PDF, or Word file,</li>
+<li>without having to know any HTML or LaTeX code or fuss with getting the formatting just right in a Microsoft Word DOCX file.</li>
+</ul></li>
+</ul>
+<p>I think you’ll be pleasantly surprised at how easy it is to write a Quarto document once you get the hang of it.</p>
+</section>
+<section id="create-new-quarto-file" class="level2">
+<h2 class="anchored" data-anchor-id="create-new-quarto-file">Create New Quarto File</h2>
+<p>To open/create a new (Quarto) file, click on the little green plus on the upper left hand and select Quarto Document; see Figure <span class="math inline">\(\ref{fig:open_qmd}\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="how_to_open_qmd.png" style="width:50.0%;height:50.0%" class="figure-img"></p>
+<figcaption class="figure-caption">How to open a *.qmd file</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="create-new-r-markdown-file" class="level2">
+<h2 class="anchored" data-anchor-id="create-new-r-markdown-file">Create New R Markdown File</h2>
+<p>Let’s make some changes to the R Markdown file you just opened</p>
+<ul>
+<li>First, change the title of the lab at the top to “Getting to Know RStudio.”</li>
+<li>Second, add an author line, and insert your name. You need quotation marks!</li>
+<li>Third, delete everything in the document after line 6.</li>
+<li>Forth, let’s save this as <strong>first_rmarkdown.Rmd</strong>.</li>
+<li>Edit the file to recreate the last three pages of this lecture slides. Note: Use ## for headers.</li>
+</ul>
+<p>After editing the file you <strong>Knit</strong> to your desired output format (HTML, PDF, or Word file).</p>
+</section>
+<section id="the-components-of-an-r-markdown-file-yaml" class="level2">
+<h2 class="anchored" data-anchor-id="the-components-of-an-r-markdown-file-yaml">The Components of an R Markdown File: YAML</h2>
+<p>The top part of the file is called the YAML header.</p>
+<ul>
+<li><p>YAML is a recursive acronym that stands for “YAML Ain’t Markup Language”</p></li>
+<li><p>It is defined on its official website at http://yaml.org as: a human friendly data serialization standard for all programming languages.</p></li>
+<li><p>Essentially, the YAML header stores the metadata needed for the document</p></li>
+<li><p>You can see an example of a YAML header from our <strong>first_rmarkdown.Rmd</strong> file</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"yaml.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="yaml.png" style="width:80.0%;height:20.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-components-of-an-r-markdown-file-headers" class="level2">
+<h2 class="anchored" data-anchor-id="the-components-of-an-r-markdown-file-headers">The Components of an R Markdown File: Headers</h2>
+<p>You can create many different sized headers by simply adding one or more # in front of the text you’d like to denote the header.</p>
+<ul>
+<li>Now let us change the last header in our <strong>first_rmarkdown.Rmd</strong> file to ###</li>
+</ul>
+</section>
+<section id="the-components-of-an-r-markdown-file-empasis" class="level2">
+<h2 class="anchored" data-anchor-id="the-components-of-an-r-markdown-file-empasis">The Components of an R Markdown File: Empasis</h2>
+<ul>
+<li><p>We can add italics by surrounding the word by</p>
+<ul>
+<li>a single underscore or</li>
+<li>a single asterisk.</li>
+</ul></li>
+<li><p>As we have seen from our <strong>first_rmarkdown.Rmd</strong> file we can can bold a word by surrounding the word by</p>
+<ul>
+<li>two underscores or</li>
+<li>two asterisks.</li>
+</ul></li>
+<li><p>Now let us italicize one word in our <strong>first_rmarkdown.Rmd</strong>.</p></li>
+</ul>
+</section>
+<section id="the-components-of-an-r-markdown-file-links" class="level2">
+<h2 class="anchored" data-anchor-id="the-components-of-an-r-markdown-file-links">The Components of an R Markdown File: Links</h2>
+<ul>
+<li><p>To add a link to a URL,</p>
+<ul>
+<li>you simply enclose the text you’d like displayed in the resulting HTML file inside [ ] and</li>
+<li>then the link itself inside ( ) right next to each other with no space in between.</li>
+</ul></li>
+<li><p>Now let us do the following in our <strong>first_rmarkdown.Rmd</strong> file.</p>
+<ul>
+<li>Add another second level header: Links</li>
+<li>Type: <code>This is the link to R Studio download page. Here is the</code></li>
+<li>Type: <code>Link</code> and put it inside [ ]</li>
+<li>Put: https://www.rstudio.com/products/rstudio/download/#download inside ( ) right next to <code>[Link]</code> with no space in between</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-components-of-an-r-markdown-file-lists" class="level2">
+<h2 class="anchored" data-anchor-id="the-components-of-an-r-markdown-file-lists">The Components of an R Markdown File: Lists</h2>
+<ul>
+<li><p>As we saw in our <strong>first_rmarkdown.Rmd</strong> file, you create an unordered list by using <code>-</code> in front of the lists.</p></li>
+<li><p>But we can also create ordered list by using numbers, letters or roman numerals.</p></li>
+<li><p>Now let us do the following in our <strong>first_rmarkdown.Rmd</strong> file.</p>
+<ul>
+<li>Under the <code>For Loop Statement</code> header, let us change the sub-list to letters (i, ii).</li>
+<li>Under the <code>R Markdown</code> header, let us change main lists to numbers (1, 2)</li>
+</ul></li>
+</ul>
+</section>
+<section id="equations" class="level2">
+<h2 class="anchored" data-anchor-id="equations">Equations</h2>
+<ul>
+<li><p>If you’d like nice mathematical formulas in your document, you can add them between <strong>two dollar signs</strong>.</p></li>
+<li><p>Now let us do the following in our <strong>first_rmarkdown.Rmd</strong> file.</p>
+<ul>
+<li>Add another second level header: Equations</li>
+<li>Type: $y = mx + b$</li>
+</ul></li>
+</ul>
+</section>
+<section id="inline-r-code" class="level2">
+<h2 class="anchored" data-anchor-id="inline-r-code">Inline R code</h2>
+<ul>
+<li><p>We’ve seen that we can add R code and have that run in an R chunk of code enclosed by three backticks.</p></li>
+<li><p>However, what if we wanted to include the results of a simple calculation directly in the text of our document? R Markdown can do that as well:</p></li>
+<li><p>Now let us do the following in our <strong>first_rmarkdown.Rmd</strong> file.</p>
+<ul>
+<li>Under the Equations header</li>
+<li>Type: Multiply 7 by 14 gives us the result r 7*14 (enclosed by one backtick).</li>
+</ul></li>
+</ul>
+</section>
+<section id="r-markdown-chunk-options" class="level2">
+<h2 class="anchored" data-anchor-id="r-markdown-chunk-options">R Markdown Chunk Options</h2>
+<p>You can set many options on a chunk by chunk basis. The most common R chunk options are <code>echo</code>, <code>eval</code>, and <code>include</code>. By default, all three of these options are set to TRUE,</p>
+<ul>
+<li><p><code>echo</code> dictates whether the code that produces the result should be printed before the corresponding R output.</p></li>
+<li><p><code>eval</code> specifies whether the code should be evaluated or just displayed without its output.</p></li>
+<li><p><code>include</code> specifies whether the code AND its output should be included in the resulting knitted document. If it is set to FALSE the code is run, but neither the code or its output are included in the resulting document.</p></li>
+<li><p>Now let us do the following in our <strong>first_rmarkdown.Rmd</strong> file.</p>
+<ul>
+<li>Create New R Markdown File header, in the R chunk, set <code>echo</code>=FALSE,</li>
+</ul></li>
+</ul>
+</section>
+<section id="spell-check" class="level2">
+<h2 class="anchored" data-anchor-id="spell-check">Spell Check</h2>
+<ul>
+<li><p>Near the top of your R Markdown editor window sits one of the more useful tools for writing documents:</p>
+<ul>
+<li>the spell-check button.</li>
+<li>It is the green check-mark with “ABC” above it:</li>
+</ul></li>
+<li><p>Before you submit a document or share it with someone else, you should spell check your document.</p></li>
+<li><p>Finally let us spell check our <strong>first_rmarkdown.Rmd</strong> file</p></li>
+</ul>
+</section>
+</section>
+<section id="data-visualization" class="level1">
+<h1>Data Visualization</h1>
+<section id="data-visualization-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization-1">Data Visualization</h2>
+<p>We begin the development of your data science toolbox with <strong>data visualization</strong></p>
+<ul>
+<li><p>By visualizing data, we gain valuable insights we couldn’t initially obtain from just looking at the raw data values</p></li>
+<li><p>At their most basic, graphics/plots/charts (we use these terms interchangeably) provide a nice way to explore the patterns in data, such as</p>
+<ul>
+<li>the presence of outliers,</li>
+<li>distributions of individual variables, and</li>
+<li>relationships between groups of variables</li>
+</ul></li>
+<li><p>Graphics are designed to emphasize the findings and insights you want your audience to understand.</p></li>
+</ul>
+</section>
+<section id="needed-packages" class="level2">
+<h2 class="anchored" data-anchor-id="needed-packages">Needed packages</h2>
+<p>Let’s load all the packages needed for this chapter. You need to install them if you haven’t already.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moderndive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-grammar-of-graphics" class="level2">
+<h2 class="anchored" data-anchor-id="the-grammar-of-graphics">The grammar of graphics</h2>
+<p>We start with a discussion of a theoretical framework for data visualization known as “<strong>the grammar of graphics</strong>.”</p>
+<ul>
+<li><p>This framework serves as the foundation for the <code>ggplot2</code> package which we’ll use extensively in this class.</p></li>
+<li><p>Think of how we construct and form sentences in English by combining different elements, like nouns, verbs, articles, subjects, objects, etc.</p>
+<ul>
+<li>We can’t just combine these elements in any arbitrary order;</li>
+<li>we must do so following a set of rules known as a linguistic grammar.</li>
+</ul></li>
+<li><p>Similarly to a linguistic grammar, “the grammar of graphics” defines a set of rules for constructing statistical graphics by combining different types of layers.</p></li>
+</ul>
+</section>
+<section id="components-of-the-grammar" class="level2">
+<h2 class="anchored" data-anchor-id="components-of-the-grammar">Components of the grammar</h2>
+<p>In short, the grammar tells us that</p>
+<p>Specifically, we can break a graphic into the following three essential components:</p>
+<ol type="1">
+<li><p><code>data</code>: the dataset containing the variables of interest.</p></li>
+<li><p><code>geom</code>: the geometric object in question. This refers to the type of object we can observe in a plot. For example: points, lines, and bars.</p></li>
+<li><p><code>aes</code>: aesthetic attributes of the geometric object. For example, x/y position, color, shape, and size. Aesthetic attributes are mapped to variables in the dataset.</p></li>
+</ol>
+</section>
+<section id="other-components" class="level2">
+<h2 class="anchored" data-anchor-id="other-components">Other components</h2>
+<p>There are other components of the grammar of graphics we can control as well. In this class, we’ll keep things simple and only work with these two additional components:</p>
+<ul>
+<li><p><code>facet</code>ing breaks up a plot into several plots split by the values of another variable</p></li>
+<li><p><code>position</code> adjustments for barplots.</p></li>
+</ul>
+</section>
+<section id="five-named-graphs---the-5ng" class="level2">
+<h2 class="anchored" data-anchor-id="five-named-graphs---the-5ng">Five named graphs - the 5NG</h2>
+<p>We will only focus on five different types of graphics, each with a commonly given name. - We term these “five named graphs” or in abbreviated form, the 5NG:</p>
+<ol type="1">
+<li>scatterplots</li>
+<li>linegraphs</li>
+<li>histograms</li>
+<li>boxplots</li>
+<li>barplots</li>
+</ol>
+<ul>
+<li><p>We’ll also present some variations of these plots</p></li>
+<li><p>Note that:</p>
+<ul>
+<li>certain plots are only appropriate for categorical variables,</li>
+<li>while others are only appropriate for numerical variables.</li>
+</ul></li>
+</ul>
+</section>
+<section id="ng1-scatterplots" class="level2">
+<h2 class="anchored" data-anchor-id="ng1-scatterplots">5NG#1: Scatterplots</h2>
+<p>The simplest of the 5NG are <strong>scatterplots</strong>, also called bivariate plots. They allow you to visualize the relationship between two numerical variables.</p>
+<ul>
+<li><p>Let’s view them through the lens of the grammar of graphics we presented earlier.</p></li>
+<li><p>Specifically, we will visualize the relationship between the following two numerical variables in the <code>alaska_flights</code> data frame included in the <code>moderndive</code> package:</p></li>
+</ul>
+<ol type="1">
+<li><p><code>dep_delay</code>: departure delay on the horizontal “x” axis and</p></li>
+<li><p><code>arr_delay</code>: arrival delay on the vertical “y” axis</p></li>
+</ol>
+</section>
+<section id="scatterplots-via-geom_point" class="level2">
+<h2 class="anchored" data-anchor-id="scatterplots-via-geom_point">Scatterplots via <code>geom_point</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> alaska_flights, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> dep_delay, <span class="at">y =</span> arr_delay)) <span class="sc">+</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-19-1.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We observe that a <strong>positive</strong> relationship exists between <code>dep_delay</code> and <code>arr_delay</code>: as departure delays increase, arrival delays tend to also increase.</p>
+</section>
+<section id="scatterplots-via-geom_point-1" class="level2">
+<h2 class="anchored" data-anchor-id="scatterplots-via-geom_point-1">Scatterplots via <code>geom_point</code></h2>
+<ul>
+<li>Within the <code>ggplot()</code> function, we specify two of the components of the grammar of graphics as arguments (i.e., inputs):</li>
+</ul>
+<ol type="1">
+<li><p>The <code>data</code> as the <code>alaska_flights</code> data frame via <code>data = alaska_flights</code>.</p></li>
+<li><p>The <code>aes</code>thetic <code>mapping</code> by setting <code>mapping = aes(x = dep_delay, y = arr_delay)</code>.</p></li>
+</ol>
+<ul>
+<li><p>We then add a layer to the <code>ggplot()</code> function call using the <code>+</code> sign.</p>
+<ul>
+<li>The added layer in question specifies the third component of the grammar: the <code>geom</code>etric object.</li>
+<li>In this case, the geometric object is set to be points by specifying <code>geom_point()</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="scatterplots-via-geom_point-2" class="level2">
+<h2 class="anchored" data-anchor-id="scatterplots-via-geom_point-2">Scatterplots via <code>geom_point</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"Week2_1.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_1.png" style="width:80.0%;height:40.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that the <code>+</code> sign comes at the end of lines, and not at the beginning. You’ll get an error in R if you put it at the beginning of a line.</p>
+</section>
+<section id="overplotting" class="level2">
+<h2 class="anchored" data-anchor-id="overplotting">Overplotting</h2>
+<p>From the scatterplot from the <code>alaska_flights</code>, the large mass of points near <span class="math inline">\((0, 0)\)</span>, can cause some confusion since it is hard to tell the true number of points that are plotted.</p>
+<ul>
+<li><p>This is the result of a phenomenon called <strong>overplotting</strong>.</p>
+<ul>
+<li>This corresponds to points being plotted on top of each other over and over again.</li>
+<li>When this occurs, it is difficult to know the number of points being plotted.</li>
+</ul></li>
+<li><p>There are two methods to address the issue of overplotting. Either by</p>
+<ul>
+<li>Adjusting the transparency of the points or</li>
+<li>Adding a little random “jitter”, or random “nudges”, to each of the points.</li>
+</ul></li>
+</ul>
+</section>
+<section id="method-1-changing-the-transparency" class="level2">
+<h2 class="anchored" data-anchor-id="method-1-changing-the-transparency">Method 1: Changing the transparency</h2>
+<ul>
+<li><p>Change the transparency/opacity of the points by setting the <code>alpha</code> argument in <code>geom_point()</code>.</p></li>
+<li><p>We can change the <code>alpha</code> argument to be any value between <code>0</code> and <code>1</code>,</p>
+<ul>
+<li>where <code>0</code> sets the points to be 100% transparent and</li>
+<li><code>1</code> sets the points to be 100% opaque.</li>
+</ul></li>
+<li><p>By default, <code>alpha</code> is set to 1. In other words, if we don’t explicitly set an alpha value, R will use <code>alpha = 1</code>.</p></li>
+</ul>
+<p>Note how the following code is identical to the earlier code that created the scatterplot with overplotting, but with <code>alpha = 0.2</code> added to the geom_point() function.</p>
+</section>
+<section id="method-1-changing-the-transparency-1" class="level2">
+<h2 class="anchored" data-anchor-id="method-1-changing-the-transparency-1">Method 1: Changing the transparency</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> alaska_flights, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> dep_delay, <span class="at">y =</span> arr_delay)) <span class="sc">+</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-21-1.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now areas with a high-degree of overplotting are darker, whereas areas with a lower degree are less dark.</p>
+</section>
+<section id="method-2-jittering-the-points" class="level2">
+<h2 class="anchored" data-anchor-id="method-2-jittering-the-points">Method 2: Jittering the points</h2>
+<p>The second way of addressing overplotting is by <strong>jittering</strong> all the points.</p>
+<ul>
+<li><p>This means giving each point a small “nudge” in a random direction.</p>
+<ul>
+<li>You can think of “jittering” as shaking the points around a bit on the plot.</li>
+</ul></li>
+<li><p>Example: Say we have a data frame with 4 identical rows of x and y values: (0,0), (0,0), (0,0), and (0,0)</p>
+<ul>
+<li>scatterplot of these 4 points (on the left)</li>
+<li>and its jittered counterpart (on the right)</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"Week2_2.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_2.png" style="width:70.0%;height:30.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="method-2-jittering-the-points-1" class="level2">
+<h2 class="anchored" data-anchor-id="method-2-jittering-the-points-1">Method 2: Jittering the points</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> alaska_flights, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> dep_delay, <span class="at">y =</span> arr_delay)) <span class="sc">+</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="dv">30</span>, <span class="at">height =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-23-1.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Which method was better?</p>
+<ul>
+<li>Keep in mind, that jittering is strictly a visualization tool; the original values saved in the data frame remain unchanged.</li>
+</ul>
+</section>
+<section id="ng2-linegraphs" class="level2">
+<h2 class="anchored" data-anchor-id="ng2-linegraphs">5NG#2: Linegraphs</h2>
+<p>The next of the five named graphs are <strong>linegraphs</strong>.</p>
+<ul>
+<li><p>Linegraphs show the relationship between two numerical variables when the variable on the x-axis, also called the explanatory variable, is of a <strong>sequential nature</strong>. In other words, there is an inherent ordering to the variable.</p></li>
+<li><p>The most common examples of linegraphs have some notion of time on the x-axis: hours, days, weeks, years, etc.</p>
+<ul>
+<li>Since time is sequential, we connect consecutive observations of the variable on the y-axis with a <strong>line</strong>.</li>
+<li>Linegraphs that have some notion of time on the x-axis are also called <strong>time series plots</strong>.</li>
+</ul></li>
+</ul>
+<p>Lets explore the <code>early_january_weather</code> data frame included in the <code>moderndive</code> package, which contains hourly weather observations.</p>
+</section>
+<section id="linegraphs-via-geom_line" class="level2">
+<h2 class="anchored" data-anchor-id="linegraphs-via-geom_line">Linegraphs via <code>geom_line</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> early_january_weather, </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time_hour, <span class="at">y =</span> temp)) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-24-1.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We observe an upward trend and seasonality.</p>
+</section>
+<section id="ng3-histograms" class="level2">
+<h2 class="anchored" data-anchor-id="ng3-histograms">5NG#3: Histograms</h2>
+<p>Let’s consider the <code>temp</code> variable in the <code>weather</code> data frame from the <code>nycflights13</code> package.</p>
+<ul>
+<li>Here, we only care about how the values of <code>temp</code> distribute. In other words:</li>
+</ul>
+<ol type="1">
+<li>What are the smallest and largest values?</li>
+<li>What is the “center” or “most typical” value?</li>
+<li>How do the values spread out?</li>
+<li>What are frequent and infrequent values?</li>
+</ol>
+</section>
+<section id="ng3-histograms-1" class="level2">
+<h2 class="anchored" data-anchor-id="ng3-histograms-1">5NG#3: Histograms</h2>
+<p>One way to do that is by producing a <strong>histogram</strong>.</p>
+<ul>
+<li>A histogram is a plot that visualizes the distribution of a numerical value as follows:</li>
+</ul>
+<ol type="1">
+<li><p>We first cut up the x-axis into a series of <strong>bins</strong>, where each bin represents a range of values.</p></li>
+<li><p>For each bin, we count the number of observations that fall in the range corresponding to that bin.</p></li>
+<li><p>Then for each bin, we draw a bar whose height marks the corresponding count.</p></li>
+</ol>
+</section>
+<section id="histograms-via-geom_histogram" class="level2">
+<h2 class="anchored" data-anchor-id="histograms-via-geom_histogram">Histograms via <code>geom_histogram</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> weather, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> temp)) <span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-25-1.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Note that:</p>
+<ul>
+<li>The y-aesthetic of a histogram, the count of the observations in each bin, gets computed for you automatically.</li>
+<li>The histogram was constructed using <code>bins = 30</code> (Default value).</li>
+</ul></li>
+</ul>
+</section>
+<section id="histograms-via-geom_histogram-1" class="level2">
+<h2 class="anchored" data-anchor-id="histograms-via-geom_histogram-1">Histograms via <code>geom_histogram</code></h2>
+<p>Now let’s unpack the resulting histogram</p>
+<ul>
+<li><p>Observe that values less than <span class="math inline">\(25^{\circ}F\)</span> as well as values above <span class="math inline">\(80^{\circ}F\)</span> are rather rare.</p></li>
+<li><p>However, because of the large number of bins, it’s hard to get a sense for which range of temperatures is spanned by each bin</p>
+<ul>
+<li>let’s add white vertical borders demarcating the bins by adding a <code>color = "white"</code> argument to <code>geom_histogram()</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="histograms-via-geom_histogram-2" class="level2">
+<h2 class="anchored" data-anchor-id="histograms-via-geom_histogram-2">Histograms via <code>geom_histogram</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> weather, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> temp)) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-26-1.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>We now have an easier time associating ranges of temperatures to each of the bins.</p></li>
+<li><p>We can also vary the color of the bars by setting the <code>fill</code> argument.</p></li>
+</ul>
+</section>
+<section id="histograms-via-geom_histogram-3" class="level2">
+<h2 class="anchored" data-anchor-id="histograms-via-geom_histogram-3">Histograms via <code>geom_histogram</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> weather, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> temp)) <span class="sc">+</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-27-1.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Run <code>colors()</code> to see all 657 possible choice of colors in R!</li>
+<li>Note that in the 50-75<span class="math inline">\(^{\circ}\)</span>F range there appear to be roughly 8 bins. Thus each bin has width 25 divided by 8 or 3.125<span class="math inline">\(^{\circ}\)</span>F.</li>
+</ul>
+</section>
+<section id="adjusting-the-bins" class="level2">
+<h2 class="anchored" data-anchor-id="adjusting-the-bins">Adjusting the bins</h2>
+<p><strong>Method 1</strong>: By adjusting the number of bins via the bins argument to <code>geom_histogram()</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> weather, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> temp)) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-28-1.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="adjusting-the-bins-1" class="level2">
+<h2 class="anchored" data-anchor-id="adjusting-the-bins-1">Adjusting the bins</h2>
+<p><strong>Method 2</strong>: By adjusting the width of the bins via the binwidth argument to <code>geom_histogram()</code></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> weather, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> temp)) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-29-1.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="facets" class="level2">
+<h2 class="anchored" data-anchor-id="facets">Facets</h2>
+<p>Before continuing with the next of the 5NG, let’s briefly introduce a new concept called <strong>faceting</strong>.</p>
+<ul>
+<li><p>Faceting is used when we’d like to split a particular visualization by the values of another variable.</p></li>
+<li><p>This will create multiple copies of the same type of plot with matching x and y axes, but whose content will differ.</p></li>
+</ul>
+<p>Example: lets Looking at how the histogram of hourly <strong>temperature</strong> recordings at the three NYC airports we saw earlier differed in each <strong>month</strong>.</p>
+</section>
+<section id="facets-1" class="level2">
+<h2 class="anchored" data-anchor-id="facets-1">Facets</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> weather, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> temp)) <span class="sc">+</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-30-1.png" style="width:70.0%;height:70.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="facets-2" class="level2">
+<h2 class="anchored" data-anchor-id="facets-2">Facets</h2>
+<p>We can also specify the number of rows and columns in the grid by using the <code>nrow</code> and <code>ncol</code> arguments inside of <code>facet_wrap()</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> weather, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> temp)) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> month, <span class="at">nrow =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-31-1.png" style="width:70.0%;height:60.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ng4-boxplots" class="level2">
+<h2 class="anchored" data-anchor-id="ng4-boxplots">5NG#4: Boxplots</h2>
+<p>Another type of visualization that can be used to compare the distribution of a numerical variable split by the values of another variable is a <strong>side-by-side boxplot</strong>.</p>
+<ul>
+<li><p>A <strong>boxplot</strong> is constructed from the information provided in the <strong>five-number summary</strong> of a numerical variable.</p></li>
+<li><p>Let’s see an example of a boxplot using hourly temperature recordings for the month of November.</p>
+<ul>
+<li>Minimum: 21<span class="math inline">\(^{\circ}\)</span>F</li>
+<li>First quartile (25th percentile):36<span class="math inline">\(^{\circ}\)</span>F</li>
+<li>Median (second quartile, 50th percentile): 45<span class="math inline">\(^{\circ}\)</span>F</li>
+<li>Third quartile (75th percentile): 52<span class="math inline">\(^{\circ}\)</span>F</li>
+<li>Maximum: 71<span class="math inline">\(^{\circ}\)</span>F</li>
+</ul></li>
+</ul>
+</section>
+<section id="ng4-boxplots-1" class="level2">
+<h2 class="anchored" data-anchor-id="ng4-boxplots-1">5NG#4: Boxplots</h2>
+<ul>
+<li><p>From the figure below:</p>
+<ul>
+<li>In the leftmost plot let’s mark these 5 values with dashed horizontal lines on top of the 2141 points(observations).</li>
+<li>In the middle plot, let’s add the boxplot.</li>
+<li>In the rightmost plot, let’s remove the points and the dashed horizontal lines for clarity’s sake.</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"Week2_3.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_3.png" style="width:70.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ng4-boxplots-2" class="level2">
+<h2 class="anchored" data-anchor-id="ng4-boxplots-2">5NG#4: Boxplots</h2>
+<p>From the Boxplot:</p>
+<ul>
+<li><p>25% of observations were below 36<span class="math inline">\(^{\circ}\)</span>F.</p></li>
+<li><p>25% of observations were between 36<span class="math inline">\(^{\circ}\)</span>F and 45<span class="math inline">\(^{\circ}\)</span>F and 50% of observations were below 45<span class="math inline">\(^{\circ}\)</span>F.</p></li>
+<li><p>25% of observations were between 45<span class="math inline">\(^{\circ}\)</span>F and 52<span class="math inline">\(^{\circ}\)</span>F and 75% of observations were below 52<span class="math inline">\(^{\circ}\)</span>F.</p></li>
+<li><p>25% of observations were above 52<span class="math inline">\(^{\circ}\)</span>F.</p></li>
+<li><p>The middle 50% of points lie within the interquartile range (IQR) between the first and third quartile.</p>
+<ul>
+<li>IQR for this example is 52 - 36 = 16<span class="math inline">\(^{\circ}\)</span>F.</li>
+</ul></li>
+<li><p>The whiskers stick out from either end of the box all the way to the <strong>minimum</strong>(21<span class="math inline">\(^{\circ}\)</span>F) and <strong>maximum</strong> observed temperatures (71<span class="math inline">\(^{\circ}\)</span>F).</p>
+<ul>
+<li>However, extend no more than <span class="math inline">\(1.5 \times\)</span> IQR from either end of the box.</li>
+<li>Any observed values outside this range get marked with points called <strong>outliers</strong>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="boxplots-via-geom_boxplot-invalid-specification" class="level2">
+<h2 class="anchored" data-anchor-id="boxplots-via-geom_boxplot-invalid-specification">Boxplots via <code>geom_boxplot</code>: Invalid specification</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> weather, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> temp)) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-33-1.png" style="width:40.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Observe that this plot does not provide information about temperature separated by month.</p>
+<ul>
+<li>Boxplots, require a categorical variable to be mapped to the x-position aesthetic. But the <code>month</code> variable is numerical variable.</li>
+</ul></li>
+</ul>
+</section>
+<section id="boxplots-via-geom_boxplot" class="level2">
+<h2 class="anchored" data-anchor-id="boxplots-via-geom_boxplot">Boxplots via <code>geom_boxplot</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> weather, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(month), <span class="at">y =</span> temp)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-34-1.png" style="width:90.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Thus the 12 separate boxplots are shown “side-by-side.”</p>
+</section>
+<section id="ng5-barplots" class="level2">
+<h2 class="anchored" data-anchor-id="ng5-barplots">5NG#5: Barplots</h2>
+<ul>
+<li><p>Both histograms and boxplots are tools to visualize the distribution of numerical variables.</p></li>
+<li><p>Another commonly desired task is to visualize the distribution of a categorical variable.</p>
+<ul>
+<li>we are simply counting different categories within a categorical variable, also known as the levels of the categorical variable</li>
+</ul></li>
+<li><p>Often the best way to visualize these different counts, also known as <strong>frequencies</strong>, is with <strong>barplots</strong> (also called barcharts).</p></li>
+</ul>
+</section>
+<section id="ng5-barplots-1" class="level2">
+<h2 class="anchored" data-anchor-id="ng5-barplots-1">5NG#5: Barplots</h2>
+<ul>
+<li><p>One complication, however, is how your data is represented.</p>
+<ul>
+<li>Is the categorical variable of interest “pre-counted” or not?</li>
+</ul></li>
+<li><p>For example, run the following code that manually creates two data frames representing a collection of fruit: 3 apples and 2 oranges.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fruit =</span> <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"apple"</span>, <span class="st">"orange"</span>, <span class="st">"apple"</span>, <span class="st">"orange"</span>)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>fruits_counted <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fruit =</span> <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"orange"</span>),</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">number =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ng5-barplots-2" class="level2">
+<h2 class="anchored" data-anchor-id="ng5-barplots-2">5NG#5: Barplots</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>fruits </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+  fruit 
+  &lt;chr&gt; 
+1 apple 
+2 apple 
+3 orange
+4 apple 
+5 orange</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>fruits_counted </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  fruit  number
+  &lt;chr&gt;   &lt;dbl&gt;
+1 apple       3
+2 orange      2</code></pre>
+</div>
+</div>
+<p>Depending on how your categorical data is represented, you’ll need to add a different <code>geom</code>etric layer type to your ggplot() to create a barplot.</p>
+</section>
+<section id="barplots-via-geom_bar" class="level2">
+<h2 class="anchored" data-anchor-id="barplots-via-geom_bar">Barplots via <code>geom_bar</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> fruits, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> fruit)) <span class="sc">+</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-37-1.png" style="width:90.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When the categorical variable whose distribution you want to visualize <strong>is not pre-counted</strong> in your data frame, we use <strong>geom_bar()</strong>.</p>
+</section>
+<section id="barplots-via-geom_col" class="level2">
+<h2 class="anchored" data-anchor-id="barplots-via-geom_col">Barplots via <code>geom_col</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> fruits_counted, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> fruit, <span class="at">y =</span> number)) <span class="sc">+</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-38-1.png" style="width:90.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When the categorical variable whose distribution you want to visualize <strong>is pre-counted</strong> in your data frame, we use <strong>geom_col()</strong>.</p>
+</section>
+<section id="barplots-for-flights-data" class="level2">
+<h2 class="anchored" data-anchor-id="barplots-for-flights-data">Barplots for <code>flights</code> data</h2>
+<p>Let’s now go back to the <code>flights</code> data frame in the <code>nycflights13</code> package and visualize the distribution of the categorical variable <code>carrier</code>.</p>
+<ul>
+<li>Because the <code>flights</code> have <strong>not been pre-counted</strong> by <code>carrier</code>, we use <code>geom_bar()</code>.</li>
+</ul>
+</section>
+<section id="barplots-for-flights-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="barplots-for-flights-data-1">Barplots for <code>flights</code> data</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> flights, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-39-1.png" style="width:90.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pie-charts" class="level2">
+<h2 class="anchored" data-anchor-id="pie-charts">Pie charts</h2>
+<ul>
+<li><p>One of the most common plots used to visualize the distribution of categorical data is the <strong>pie chart</strong>.</p></li>
+<li><p>A pie chart presents each category as a slice of a circle so that each slice has a size that is proportional to the whole in each category.</p></li>
+<li><p>While they may seem harmless enough, pie charts actually present a problem in that humans are unable to judge angles well.</p>
+<ul>
+<li>In other words, it is difficult for us to determine the relative size of one piece of the pie compared to another.</li>
+</ul></li>
+<li><p>This makes barplots preferred in certain situations.</p></li>
+</ul>
+</section>
+<section id="cases-were-barplots-are-preferred" class="level2">
+<h2 class="anchored" data-anchor-id="cases-were-barplots-are-preferred">Cases Were Barplots are Preferred</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week2_4.png" style="width:80.0%;height:70.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It is hard to see the pattern in the pie chart but the bar chart makes it easier to compare frequencies in groups.</p>
+</section>
+<section id="two-categorical-variables" class="level2">
+<h2 class="anchored" data-anchor-id="two-categorical-variables">Two categorical variables</h2>
+<ul>
+<li><p>Barplots are a very common way to visualize the frequency of different categories, or levels, of a single categorical variable.</p></li>
+<li><p>Another use of barplots is to visualize the joint distribution of <strong>two categorical variables</strong> at the same time.</p></li>
+</ul>
+<p>Let’s examine the joint distribution of outgoing domestic flights from NYC by <code>carrier</code> as well as <code>origin</code>.</p>
+</section>
+<section id="two-categorical-variables-stacked-barplot" class="level2">
+<h2 class="anchored" data-anchor-id="two-categorical-variables-stacked-barplot">Two categorical variables: Stacked barplot</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> flights, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">fill =</span> origin)) <span class="sc">+</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-41-1.png" style="width:90.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>This is an example of a <strong>stacked</strong> barplot.</li>
+<li>The <code>fill</code> aesthetic corresponds to the color used to fill the bars</li>
+</ul>
+</section>
+<section id="two-categorical-variables-stacked-barplot-1" class="level2">
+<h2 class="anchored" data-anchor-id="two-categorical-variables-stacked-barplot-1">Two categorical variables: Stacked barplot</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> flights, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">color =</span> origin)) <span class="sc">+</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-42-1.png" style="width:90.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The <code>color</code> aesthetic corresponds to the color of the outline of the bars.</li>
+</ul>
+</section>
+<section id="two-categorical-variables-side-by-side-barplots" class="level2">
+<h2 class="anchored" data-anchor-id="two-categorical-variables-side-by-side-barplots">Two categorical variables: side-by-side barplots</h2>
+<p>While simple to make, in certain aspects it is not ideal.</p>
+<ul>
+<li><p>For example, it is difficult to compare the heights of the different colors between the bars, corresponding to comparing the number of flights from each origin airport between the carriers.</p></li>
+<li><p>An alternative to stacked barplots are <strong>side-by-side barplots</strong>, also known as <strong>dodged barplots</strong>.</p></li>
+<li><p>The code to create a side-by-side barplot is identical to the code to create a stacked barplot, but with a <code>position = "dodge"</code> argument added to <code>geom_bar()</code>.</p>
+<ul>
+<li>we are overriding the default barplot type, which is a stacked barplot.</li>
+</ul></li>
+</ul>
+</section>
+<section id="two-categorical-variables-side-by-side-barplots-1" class="level2">
+<h2 class="anchored" data-anchor-id="two-categorical-variables-side-by-side-barplots-1">Two categorical variables: side-by-side barplots</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> flights, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">fill =</span> origin)) <span class="sc">+</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-43-1.png" style="width:90.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Note the width of the bars for AS, F9, FL, HA and YV is different than the others</li>
+<li>To be the same size in terms of width as the other bars we use a more robust <code>position_dodge()</code> function.</li>
+</ul>
+</section>
+<section id="two-categorical-variables-side-by-side-barplots-2" class="level2">
+<h2 class="anchored" data-anchor-id="two-categorical-variables-side-by-side-barplots-2">Two categorical variables: side-by-side barplots</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> flights, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">fill =</span> origin)) <span class="sc">+</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">"single"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-44-1.png" style="width:90.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="two-categorical-variables-side-by-side-barplots-3" class="level2">
+<h2 class="anchored" data-anchor-id="two-categorical-variables-side-by-side-barplots-3">Two categorical variables: side-by-side barplots</h2>
+<p>Change order:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>flights1<span class="ot">&lt;-</span>flights</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>flights1<span class="sc">$</span>origin1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(flights1<span class="sc">$</span>origin, <span class="at">ordered =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"JFK"</span>, <span class="st">"EWR"</span>,<span class="st">"LGA"</span>))</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> flights1, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">fill =</span> origin1)) <span class="sc">+</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">"single"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-45-1.png" style="width:90.0%;height:50.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="two-categorical-variables-faceted-barplot" class="level2">
+<h2 class="anchored" data-anchor-id="two-categorical-variables-faceted-barplot">Two categorical variables: faceted barplot</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> flights, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> origin, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Week2_Lect_files/figure-html/unnamed-chunk-46-1.png" style="width:70.0%;height:60.0%" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="summary-table" class="level2">
+<h2 class="anchored" data-anchor-id="summary-table">Summary table</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week2_5.png" style="width:80.0%;height:70.0%" class="figure-img"></p>
+<figcaption class="figure-caption">Summary of Five Named Graphs</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

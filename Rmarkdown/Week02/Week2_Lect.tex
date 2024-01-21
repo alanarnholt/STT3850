@@ -523,7 +523,7 @@ As an example, the following code will display the sum of the elements
 of \texttt{y} since the 1st condition is FALSE and 2nd condition is
 TRUE. It will not evaluate the 3rd condition.
 
-\tiny
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -623,21 +623,17 @@ code will display the text ``HELLO'' five times.
 \protect\hypertarget{for-loop-statement-1}{}
 Similarly, the following code will do the same thing:
 
-\tiny
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\DecValTok{11}\NormalTok{)}
-\NormalTok{\{}\FunctionTok{print}\NormalTok{(}\StringTok{"HELLO"}\NormalTok{)\}}
+\ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{6}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"HELLO"}\NormalTok{)}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-[1] "HELLO"
-[1] "HELLO"
-[1] "HELLO"
-[1] "HELLO"
-[1] "HELLO"
 [1] "HELLO"
 [1] "HELLO"
 [1] "HELLO"
@@ -661,11 +657,11 @@ exactly how many times you want the command repeated.
   \begin{itemize}
   \tightlist
   \item
-    Note that the first statement is needed so R will recognize that you
-    are creating a numeric object within the loop.
+    Note that the first statement creates a vector of length 10.
   \item
-    Without the revers.z\textless-numeric() command, R will display an
-    error message saying object reverse.z not found.
+    Without the \texttt{reverse.z\ \textless{}-\ numeric(10)} command, R
+    will display an error message saying object \texttt{reverse.z} not
+    found.
   \end{itemize}
 \end{itemize}
 
@@ -673,10 +669,10 @@ exactly how many times you want the command repeated.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{reverse.z}\OtherTok{\textless{}{-}}\FunctionTok{numeric}\NormalTok{()}
-\NormalTok{z}\OtherTok{\textless{}{-}}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
-\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
-\NormalTok{\{reverse.z[k]}\OtherTok{\textless{}{-}}\NormalTok{z[}\DecValTok{10}\SpecialCharTok{{-}}\NormalTok{k}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}
+\NormalTok{reverse.z }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{z }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)\{}
+\NormalTok{  reverse.z[k]}\OtherTok{\textless{}{-}}\NormalTok{ z[}\DecValTok{10} \SpecialCharTok{{-}}\NormalTok{k }\SpecialCharTok{+} \DecValTok{1}\NormalTok{]}
 \NormalTok{\}}
 \NormalTok{reverse.z}
 \end{Highlighting}
@@ -689,13 +685,13 @@ exactly how many times you want the command repeated.
 \normalsize
 \end{frame}
 
-\hypertarget{r-markdown}{%
-\section{R Markdown}\label{r-markdown}}
+\hypertarget{quarto}{%
+\section{Quarto}\label{quarto}}
 
-\begin{frame}{R Markdown}
-\protect\hypertarget{r-markdown-1}{}
-\textbf{R Markdown} provides an easy way to produce rich,
-fully-documented, reproducible analyses.
+\begin{frame}{Quarto}
+\protect\hypertarget{quarto-1}{}
+\textbf{Quarto} provides an easy way to produce rich, fully-documented,
+reproducible analyses.
 
 \begin{itemize}
 \item
@@ -711,7 +707,7 @@ fully-documented, reproducible analyses.
     metadata needed to reproduce the analysis from beginning to end.
   \end{itemize}
 \item
-  R Markdown allows you to
+  Quarto allows you to
 
   \begin{itemize}
   \tightlist
@@ -724,30 +720,31 @@ fully-documented, reproducible analyses.
   \end{itemize}
 \end{itemize}
 
-I think you'll be pleasantly surprised at how easy it is to write an R
-Markdown document once you get the hang of it.
+I think you'll be pleasantly surprised at how easy it is to write a
+Quarto document once you get the hang of it.
 \end{frame}
 
-\begin{frame}[fragile]{Create New R Markdown File}
-\protect\hypertarget{create-new-r-markdown-file}{}
-To open a new file, click on the little green plus on the upper left
-hand and select R Markdown; see Figure below.
+\begin{frame}{Create New Quarto File}
+\protect\hypertarget{create-new-quarto-file}{}
+To open/create a new (Quarto) file, click on the little green plus on
+the upper left hand and select Quarto Document; see Figure
+\ref{fig:open_qmd}.
 
 \small
+\begin{figure}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"how\_to\_open\_rmd.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+{\centering \includegraphics[width=0.5\linewidth,height=0.5\textheight]{how_to_open_qmd} 
 
-\begin{center}\includegraphics[width=0.5\linewidth,height=0.5\textheight]{how_to_open_rmd} \end{center}
+}
+
+\caption{How to open a *.qmd file}\label{fig:open_qmd}
+\end{figure}
 \normalsize
 \end{frame}
 
-\begin{frame}{Create New R Markdown File}
-\protect\hypertarget{create-new-r-markdown-file-1}{}
-Let's make some changes to the R Markdown file you just opened
+\begin{frame}{Create New Quarto File}
+\protect\hypertarget{create-new-quarto-file-1}{}
+Let's make some changes to the Quarto file you just opened
 
 \begin{itemize}
 \tightlist
@@ -758,20 +755,15 @@ Let's make some changes to the R Markdown file you just opened
   Second, add an author line, and insert your name. You need quotation
   marks!
 \item
-  Third, delete everything in the document after line 6.
-\item
-  Forth, let's save this as \textbf{first\_rmarkdown.Rmd}.
-\item
-  Edit the file to recreate the last three pages of this lecture slides.
-  Note: Use \#\# for headers.
+  Third, name and save the file as \textbf{first\_quarto.qmd}.
 \end{itemize}
 
-After editing the file you \textbf{Knit} to your desired output format
+After editing the file you \textbf{Render} to your desired output format
 (HTML, PDF, or Word file).
 \end{frame}
 
-\begin{frame}[fragile]{The Components of an R Markdown File: YAML}
-\protect\hypertarget{the-components-of-an-r-markdown-file-yaml}{}
+\begin{frame}[fragile]{The Components of a Quarto File: YAML}
+\protect\hypertarget{the-components-of-a-quarto-file-yaml}{}
 The top part of the file is called the YAML header.
 
 \begin{itemize}
@@ -779,31 +771,25 @@ The top part of the file is called the YAML header.
   YAML is a recursive acronym that stands for ``YAML Ain't Markup
   Language''
 \item
-  It is defined on its official website at \url{http://yaml.org} as: a
+  YAML is defined on its official website at \url{http://yaml.org} as: a
   human friendly data serialization standard for all programming
   languages.
 \item
-  Essentially, the YAML header stores the metadata needed for the
-  document
+  The YAML header stores the metadata needed for the document.
 \item
   You can see an example of a YAML header from our
-  \textbf{first\_rmarkdown.Rmd} file
+  \textbf{\texttt{first\_quarto.qmd}} file below.
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"yaml.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=0.8\linewidth,height=0.2\textheight]{yaml} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth,height=0.2\textheight]{yaml} \end{center}
 \end{frame}
 
-\begin{frame}{The Components of an R Markdown File: Headers}
-\protect\hypertarget{the-components-of-an-r-markdown-file-headers}{}
+\begin{frame}[fragile]{The Components of a Quarto File: Headers}
+\protect\hypertarget{the-components-of-a-quarto-file-headers}{}
 You can create many different sized headers by simply adding one or more
 \# in front of the text you'd like to denote the header.
 
+\begin{tcolorbox}
 \text{\# Top level header}
 
 \text{\#\# Second level header}
@@ -811,17 +797,18 @@ You can create many different sized headers by simply adding one or more
 \text{\#\#\# Third level header}
 
 \text{\#\#\#\# Fourth level header}
+\end{tcolorbox}
 
 \begin{itemize}
 \tightlist
 \item
-  Now let us change the last header in our \textbf{first\_rmarkdown.Rmd}
-  file to \#\#\#
+  Now let us change the last header (Running Code) in our
+  \textbf{\texttt{first\_quarto.qmd}} file to \#\#\#.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{The Components of an R Markdown File: Empasis}
-\protect\hypertarget{the-components-of-an-r-markdown-file-empasis}{}
+\begin{frame}[fragile]{The Components of Quarto File: Emphasis}
+\protect\hypertarget{the-components-of-quarto-file-emphasis}{}
 \begin{itemize}
 \item
   We can add italics by surrounding the word by
@@ -834,7 +821,7 @@ You can create many different sized headers by simply adding one or more
     a single asterisk.
   \end{itemize}
 \item
-  As we have seen from our \textbf{first\_rmarkdown.Rmd} file we can can
+  As we saw in our \textbf{\texttt{first\_quarto.qmd}} file we can can
   bold a word by surrounding the word by
 
   \begin{itemize}
@@ -845,12 +832,13 @@ You can create many different sized headers by simply adding one or more
     two asterisks.
   \end{itemize}
 \item
-  Now let us italicize one word in our \textbf{first\_rmarkdown.Rmd}.
+  Now let us italicize the first time weave appears in our
+  \textbf{\texttt{first\_quarto.qmd}}.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{The Components of an R Markdown File: Links}
-\protect\hypertarget{the-components-of-an-r-markdown-file-links}{}
+\begin{frame}[fragile]{The Components of a Quarto File: Links}
+\protect\hypertarget{the-components-of-a-quarto-file-links}{}
 \begin{itemize}
 \item
   To add a link to a URL,
@@ -859,101 +847,85 @@ You can create many different sized headers by simply adding one or more
   \tightlist
   \item
     you simply enclose the text you'd like displayed in the resulting
-    HTML file inside {[} {]} and
+    HTML file inside \texttt{{[}\ {]}} and
   \item
-    then the link itself inside ( ) right next to each other with no
-    space in between.
-  \end{itemize}
-\item
-  Now let us do the following in our \textbf{first\_rmarkdown.Rmd} file.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Add another second level header: Links
-  \item
-    Type:
-    \texttt{This\ is\ the\ link\ to\ R\ Studio\ download\ page.\ Here\ is\ the}
-  \item
-    Type: \texttt{Link} and put it inside {[} {]}
-  \item
-    Put:
-    \url{https://www.rstudio.com/products/rstudio/download/\#download}
-    inside ( ) right next to \texttt{{[}Link{]}} with no space in
-    between
+    then the link itself inside \texttt{(\ )} right next to each other
+    with no space in between.
   \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{The Components of an R Markdown File: Lists}
-\protect\hypertarget{the-components-of-an-r-markdown-file-lists}{}
+\begin{frame}[fragile]{The Components of a Quarto File: Lists}
+\protect\hypertarget{the-components-of-a-quarto-file-lists}{}
 \begin{itemize}
 \item
-  As we saw in our \textbf{first\_rmarkdown.Rmd} file, you create an
-  unordered list by using \texttt{-} in front of the lists.
+  To create an unordered list, use \texttt{-} in front of each item.
 \item
-  But we can also create ordered list by using numbers, letters or roman
+  We can also create ordered list by using numbers, letters or roman
   numerals.
 \item
-  Now let us do the following in our \textbf{first\_rmarkdown.Rmd} file.
+  Create the following in our \textbf{\texttt{first\_quarto.qmd}} file.
 
   \begin{itemize}
   \tightlist
   \item
-    Under the \texttt{For\ Loop\ Statement} header, let us change the
-    sub-list to letters (i, ii).
+    Create a new second level header with the name ``Ordered Lists''.
   \item
-    Under the \texttt{R\ Markdown} header, let us change main lists to
-    numbers (1, 2)
+    Under the ``Ordered Lists'' header, create a sub-list using letters
+    (i, ii).
+  \item
+    Under the ``Ordered Lists'' header, create a sub-list using numbers
+    (1, 2).
   \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Equations}
-\protect\hypertarget{equations}{}
+\begin{frame}[fragile]{The Components of a Quarto File: Equations}
+\protect\hypertarget{the-components-of-a-quarto-file-equations}{}
 \begin{itemize}
 \item
   If you'd like nice mathematical formulas in your document, you can add
   them between \textbf{two dollar signs}.
 \item
-  Now let us do the following in our \textbf{first\_rmarkdown.Rmd} file.
+  Now let us do the following in our \textbf{\texttt{first\_quarto.qmd}}
+  file.
 
   \begin{itemize}
   \tightlist
   \item
     Add another second level header: Equations
   \item
-    Type: \$y = mx + b\$
+    Type: \(y = mx + b\)
   \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Inline R code}
-\protect\hypertarget{inline-r-code}{}
+\begin{frame}{The Components of a Quarto File: Inline R code}
+\protect\hypertarget{the-components-of-a-quarto-file-inline-r-code}{}
 \begin{itemize}
 \item
   We've seen that we can add R code and have that run in an R chunk of
   code enclosed by three backticks.
 \item
   However, what if we wanted to include the results of a simple
-  calculation directly in the text of our document? R Markdown can do
-  that as well:
+  calculation directly in the text of our document? Quarto can do that
+  as well:
 \item
-  Now let us do the following in our \textbf{first\_rmarkdown.Rmd} file.
+  Now let us do the following in our \textbf{`first\_quarto.qmd} file.
 
   \begin{itemize}
   \tightlist
   \item
     Under the Equations header
   \item
-    Type: Multiply 7 by 14 gives us the result r 7*14 (enclosed by one
-    backtick).
+    Type: Multiplying 7 by 14 gives us the result 98 (using inline R
+    code).
   \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{R Markdown Chunk Options}
-\protect\hypertarget{r-markdown-chunk-options}{}
+\begin{frame}[fragile]{The Components of a Quarto File: Chunk Options}
+\protect\hypertarget{the-components-of-a-quarto-file-chunk-options}{}
 You can set many options on a chunk by chunk basis. The most common R
 chunk options are \texttt{echo}, \texttt{eval}, and \texttt{include}. By
 default, all three of these options are set to TRUE,
@@ -967,17 +939,27 @@ default, all three of these options are set to TRUE,
   displayed without its output.
 \item
   \texttt{include} specifies whether the code AND its output should be
-  included in the resulting knitted document. If it is set to FALSE the
+  included in the resulting rendered document. If it is set to FALSE the
   code is run, but neither the code or its output are included in the
   resulting document.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{The Components of a Quarto File: Chunk Options}
+\protect\hypertarget{the-components-of-a-quarto-file-chunk-options-1}{}
+\begin{itemize}
 \item
-  Now let us do the following in our \textbf{first\_rmarkdown.Rmd} file.
+  Do the following in your \textbf{`first\_quarto.qmd} document.
 
   \begin{itemize}
   \tightlist
   \item
-    Create New R Markdown File header, in the R chunk, set
-    \texttt{echo}=FALSE,
+    Create a second level header named ``Code Chunks'' at the end of
+    your document.
+  \item
+    Create an R code chunk and set \texttt{echo\ =\ FALSE}.
+  \item
+    Inside the code chunk type 5 + 15 \textgreater{} 19.
   \end{itemize}
 \end{itemize}
 \end{frame}
@@ -986,21 +968,23 @@ default, all three of these options are set to TRUE,
 \protect\hypertarget{spell-check}{}
 \begin{itemize}
 \item
-  Near the top of your R Markdown editor window sits one of the more
-  useful tools for writing documents:
+  Near the top of your editor window sits one of the more useful tools
+  for writing documents:
 
   \begin{itemize}
   \tightlist
   \item
-    the spell-check button.
+    The spell-check button.
   \item
-    It is the green check-mark with ``ABC'' above it:
+    The spell-check button is the green check-mark with ``ABC'' above
+    it.
   \end{itemize}
 \item
-  Before you submit a document or share it with someone else, you should
-  spell check your document.
+  Before you submit a document or share it with someone else, please
+  spell check your document!
 \item
-  Finally let us spell check our \textbf{first\_rmarkdown.Rmd} file
+  Spell check your \textbf{`first\_quarto.qmd} document. Did you have an
+  typos?
 \end{itemize}
 \end{frame}
 
@@ -1010,12 +994,12 @@ default, all three of these options are set to TRUE,
 \begin{frame}{Data Visualization}
 \protect\hypertarget{data-visualization-1}{}
 We begin the development of your data science toolbox with \textbf{data
-visualization}
+visualization}.
 
 \begin{itemize}
 \item
   By visualizing data, we gain valuable insights we couldn't initially
-  obtain from just looking at the raw data values
+  obtain from just looking at the raw data values.
 \item
   At their most basic, graphics/plots/charts (we use these terms
   interchangeably) provide a nice way to explore the patterns in data,
@@ -1028,7 +1012,7 @@ visualization}
   \item
     distributions of individual variables, and
   \item
-    relationships between groups of variables
+    relationships between groups of variables.
   \end{itemize}
 \item
   Graphics are designed to emphasize the findings and insights you want
@@ -1089,7 +1073,6 @@ In short, the grammar tells us that
 
 \begin{tcolorbox}
 A statistical graphic is a mapping of data variables to aesthetic attributes of geometric objects.
-
 \end{tcolorbox}
 
 Specifically, we can break a graphic into the following three essential
@@ -1164,7 +1147,7 @@ abbreviated form, the 5NG:
 \protect\hypertarget{ng1-scatterplots}{}
 The simplest of the 5NG are \textbf{scatterplots}, also called bivariate
 plots. They allow you to visualize the relationship between two
-numerical variables.
+\textbf{numerical} variables.
 
 \begin{itemize}
 \item
@@ -1191,15 +1174,16 @@ numerical variables.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ alaska\_flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dep\_delay, }\AttributeTok{y =}\NormalTok{ arr\_delay)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_point}\NormalTok{()}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-19-1} \end{center}
 \normalsize
 
 We observe that a \textbf{positive} relationship exists between
-\texttt{dep\_delay} and \texttt{arr\_delay}: as departure delays
+\texttt{arr\_delay} and \texttt{dep\_delay}: as departure delays
 increase, arrival delays tend to also increase.
 \end{frame}
 
@@ -1242,12 +1226,6 @@ increase, arrival delays tend to also increase.
 \protect\hypertarget{scatterplots-via-geom_point-2}{}
 \tiny
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Week2\_1.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.4\textheight]{Week2_1} \end{center}
 \normalsize
 
@@ -1283,7 +1261,7 @@ tell the true number of points that are plotted.
   \item
     Adjusting the transparency of the points or
   \item
-    Adding a little random ``jitter'', or random ``nudges'', to each of
+    adding a little random ``jitter'', or random ``nudges'', to each of
     the points.
   \end{itemize}
 \end{itemize}
@@ -1313,7 +1291,7 @@ tell the true number of points that are plotted.
 
 Note how the following code is identical to the earlier code that
 created the scatterplot with overplotting, but with
-\texttt{alpha\ =\ 0.2} added to the geom\_point() function.
+\texttt{alpha\ =\ 0.2} added to the \texttt{geom\_point()} function.
 \end{frame}
 
 \begin{frame}[fragile]{Method 1: Changing the transparency}
@@ -1323,18 +1301,19 @@ created the scatterplot with overplotting, but with
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ alaska\_flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dep\_delay, }\AttributeTok{y =}\NormalTok{ arr\_delay)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{)}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-22-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-21-1} \end{center}
 \normalsize
 
 Now areas with a high-degree of overplotting are darker, whereas areas
 with a lower degree are less dark.
 \end{frame}
 
-\begin{frame}[fragile]{Method 2: Jittering the points}
+\begin{frame}{Method 2: Jittering the points}
 \protect\hypertarget{method-2-jittering-the-points}{}
 The second way of addressing overplotting is by \textbf{jittering} all
 the points.
@@ -1349,6 +1328,12 @@ the points.
     You can think of ``jittering'' as shaking the points around a bit on
     the plot.
   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Method 2: Jittering the points}
+\protect\hypertarget{method-2-jittering-the-points-1}{}
+\begin{itemize}
 \item
   Example: Say we have a data frame with 4 identical rows of x and y
   values: (0,0), (0,0), (0,0), and (0,0)
@@ -1364,28 +1349,23 @@ the points.
 
 \tiny
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Week2\_2.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.3\textheight]{Week2_2} \end{center}
 \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Method 2: Jittering the points}
-\protect\hypertarget{method-2-jittering-the-points-1}{}
+\protect\hypertarget{method-2-jittering-the-points-2}{}
 \tiny
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ alaska\_flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dep\_delay, }\AttributeTok{y =}\NormalTok{ arr\_delay)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =} \DecValTok{30}\NormalTok{, }\AttributeTok{height =} \DecValTok{30}\NormalTok{)}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =} \DecValTok{30}\NormalTok{, }\AttributeTok{height =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-24-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-23-1} \end{center}
 \normalsize
 
 Which method was better?
@@ -1400,8 +1380,6 @@ Which method was better?
 
 \begin{frame}[fragile]{5NG\#2: Linegraphs}
 \protect\hypertarget{ng2-linegraphs}{}
-The next of the five named graphs are \textbf{linegraphs}.
-
 \begin{itemize}
 \item
   Linegraphs show the relationship between two numerical variables when
@@ -1436,11 +1414,12 @@ observations.
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ early\_january\_weather, }
        \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ time\_hour, }\AttributeTok{y =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{()}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-25-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-24-1} \end{center}
 \normalsize
 
 We observe an upward trend and seasonality.
@@ -1473,14 +1452,8 @@ frame from the \texttt{nycflights13} package.
 
 \begin{frame}{5NG\#3: Histograms}
 \protect\hypertarget{ng3-histograms-1}{}
-One way to do that is by producing a \textbf{histogram}.
-
-\begin{itemize}
-\tightlist
-\item
-  A histogram is a plot that visualizes the distribution of a numerical
-  value as follows:
-\end{itemize}
+One way to do that is by producing a \textbf{histogram}. A histogram is
+a plot that visualizes the distribution of a numerical value as follows:
 
 \begin{enumerate}
 \item
@@ -1502,11 +1475,12 @@ One way to do that is by producing a \textbf{histogram}.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ weather, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{()}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-26-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-25-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -1553,11 +1527,12 @@ Now let's unpack the resulting histogram
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ weather, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{)}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-27-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-26-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -1577,11 +1552,12 @@ Now let's unpack the resulting histogram
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ weather, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{)}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"purple"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-28-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-27-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -1604,11 +1580,12 @@ to \texttt{geom\_histogram()}.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ weather, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{40}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{)}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{40}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"purple"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-28-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1622,11 +1599,12 @@ argument to \texttt{geom\_histogram()}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ weather, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{10}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{)}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{10}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"purple"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-30-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-29-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1656,12 +1634,13 @@ differed in each \textbf{month}.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ weather, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ month)}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\FunctionTok{vars}\NormalTok{(month)) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.7\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-31-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.7\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-30-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1676,12 +1655,13 @@ the \texttt{nrow} and \texttt{ncol} arguments inside of
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ weather, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ month, }\AttributeTok{nrow =} \DecValTok{4}\NormalTok{)}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\FunctionTok{vars}\NormalTok{(month), }\AttributeTok{nrow =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.6\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-32-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.6\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-31-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1715,7 +1695,7 @@ variable is a \textbf{side-by-side boxplot}.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{5NG\#4: Boxplots}
+\begin{frame}{5NG\#4: Boxplots}
 \protect\hypertarget{ng4-boxplots-1}{}
 \begin{itemize}
 \item
@@ -1735,12 +1715,6 @@ variable is a \textbf{side-by-side boxplot}.
 \end{itemize}
 
 \tiny
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Week2\_3.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week2_3} \end{center}
 \normalsize
@@ -1763,13 +1737,16 @@ From the Boxplot:
   25\% of observations were above 52\(^{\circ}\)F.
 \item
   The middle 50\% of points lie within the interquartile range (IQR)
-  between the first and third quartile.
+  between the first and third quartile. IQR for this example is 52 - 36
+  = 16\(^{\circ}\)F.
+\end{itemize}
+\end{frame}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    IQR for this example is 52 - 36 = 16\(^{\circ}\)F.
-  \end{itemize}
+\begin{frame}{5NG\#4: Boxplots}
+\protect\hypertarget{ng4-boxplots-3}{}
+From the Boxplot:
+
+\begin{itemize}
 \item
   The whiskers stick out from either end of the box all the way to the
   \textbf{minimum}(21\(^{\circ}\)F) and \textbf{maximum} observed
@@ -1778,8 +1755,8 @@ From the Boxplot:
   \begin{itemize}
   \tightlist
   \item
-    However, extend no more than \(1.5 \times\) IQR from either end of
-    the box.
+    However, the whiskers extend no more than \(1.5 \times\) IQR from
+    either end of the box.
   \item
     Any observed values outside this range get marked with points called
     \textbf{outliers}.
@@ -1795,11 +1772,12 @@ specification}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ weather, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ month, }\AttributeTok{y =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_boxplot}\NormalTok{()}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.4\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-34-1} \end{center}
+\begin{center}\includegraphics[width=0.4\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-33-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -1824,11 +1802,12 @@ specification}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ weather, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{factor}\NormalTok{(month), }\AttributeTok{y =}\NormalTok{ temp)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_boxplot}\NormalTok{()}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-35-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-34-1} \end{center}
 \normalsize
 
 Thus the 12 separate boxplots are shown ``side-by-side.''
@@ -1940,11 +1919,12 @@ a barplot.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ fruits, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ fruit)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{()}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"orange"}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-38-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-37-1} \end{center}
 \normalsize
 
 When the categorical variable whose distribution you want to visualize
@@ -1959,11 +1939,12 @@ When the categorical variable whose distribution you want to visualize
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ fruits\_counted, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ fruit, }\AttributeTok{y =}\NormalTok{ number)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_col}\NormalTok{()}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"orange"}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-39-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-38-1} \end{center}
 \normalsize
 
 When the categorical variable whose distribution you want to visualize
@@ -1991,11 +1972,12 @@ categorical variable \texttt{carrier}.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carrier)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{()}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-40-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-39-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2053,11 +2035,12 @@ NYC by \texttt{carrier} as well as \texttt{origin}.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carrier, }\AttributeTok{fill =}\NormalTok{ origin)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{()}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-42-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-41-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -2077,11 +2060,12 @@ NYC by \texttt{carrier} as well as \texttt{origin}.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carrier, }\AttributeTok{color =}\NormalTok{ origin)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{()}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-43-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-42-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -2125,11 +2109,12 @@ While simple to make, in certain aspects it is not ideal.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carrier, }\AttributeTok{fill =}\NormalTok{ origin)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{)}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-44-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-43-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -2150,11 +2135,12 @@ While simple to make, in certain aspects it is not ideal.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carrier, }\AttributeTok{fill =}\NormalTok{ origin)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{preserve =} \StringTok{"single"}\NormalTok{))}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{preserve =} \StringTok{"single"}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-45-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-44-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2166,16 +2152,17 @@ Change order:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights1}\OtherTok{\textless{}{-}}\NormalTok{flights}
+\NormalTok{flights1 }\OtherTok{\textless{}{-}}\NormalTok{ flights}
 \NormalTok{flights1}\SpecialCharTok{$}\NormalTok{origin1 }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(flights1}\SpecialCharTok{$}\NormalTok{origin, }\AttributeTok{ordered =} \ConstantTok{TRUE}\NormalTok{,}
-\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"JFK"}\NormalTok{, }\StringTok{"EWR"}\NormalTok{,}\StringTok{"LGA"}\NormalTok{))}
+\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"JFK"}\NormalTok{, }\StringTok{"EWR"}\NormalTok{, }\StringTok{"LGA"}\NormalTok{))}
 
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ flights1, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carrier, }\AttributeTok{fill =}\NormalTok{ origin1)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{preserve =} \StringTok{"single"}\NormalTok{))}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{preserve =} \StringTok{"single"}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-46-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.5\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-45-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2186,12 +2173,13 @@ Change order:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carrier)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ origin, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{)}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\FunctionTok{vars}\NormalTok{(origin), }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.6\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-47-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.6\textheight]{Week2_Lect_files/figure-beamer/unnamed-chunk-46-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2203,7 +2191,7 @@ Change order:
 
 }
 
-\caption{Summary of Five Named Graphs}\label{fig:unnamed-chunk-48}
+\caption{Summary of Five Named Graphs}\label{fig:5NG}
 \end{figure}
 \end{frame}
 
