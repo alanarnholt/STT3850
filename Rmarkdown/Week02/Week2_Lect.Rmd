@@ -1,25 +1,15 @@
 ---
-title: "MAT 3850 : Week 2"
+title: "STT 3850 : Week 2"
 author: "Spring 2024"
 institute: "Appalachian State University"
 output: 
-#   pdf_document:
-#      toc: yes
-#      toc_depth: '3'
  beamer_presentation:
-   #template: myTemplate.tex
-   theme: "CambridgeUS"
-   colortheme: "seagull"
+   theme: "Madrid"
+   colortheme: "orchid"
    fonttheme: "professionalfonts"
    keep_tex: true
-# word_document:
-#   toc: yes
-#   toc_depth: '3'
-#date: "`r format(Sys.time(), '%d %B, %Y')`"
-#date: "January 22, 2020"
 number_sections: true
 fig_caption: yes
-#bibliography: Reference.bib
 biblio-style: apalike
 link-citations: TRUE
 header-includes:
@@ -789,7 +779,7 @@ Lets explore the `early_january_weather` data frame included in the `moderndive`
 ```{r out.height = '50%',out.width = '70%'}
 ggplot(data = early_january_weather, 
        mapping = aes(x = time_hour, y = temp)) +
-  geom_line() + 
+  geom_line(color = "blue") + 
   theme_bw()
 ```
 \normalsize
@@ -1037,7 +1027,7 @@ ggplot(data = weather, mapping = aes(x = month, y = temp)) +
 \tiny
 ```{r out.height = '50%', out.width = '90%'}
 ggplot(data = weather, mapping = aes(x = factor(month), y = temp)) +
-  geom_boxplot() + 
+  geom_boxplot(fill = "lightblue") + 
   theme_bw()
 ```
 \normalsize
