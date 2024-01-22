@@ -514,7 +514,7 @@ assumptions, the following need to be noted:
 \begin{frame}{Key features of the Bootstrap: Example 3}
 \protect\hypertarget{key-features-of-the-bootstrap-example-3}{}
 \begin{tcolorbox}
-Arsenic is a naturally occurring element in the groundwater of Bangladesh. However, much of this groundwater is used for drinking water by rural populations, so arsenic poisoning is a serious health issue. Figure 1a displays the distribution of arsenic concentrations from 271 wells in Bangladesh. The sample mean and standard deviation are $\bar{x}=125.32$ and $s = 297.98$, respectively (measured in micrograms per liter). We draw resamples of size 271 with replacement from the data and compute the mean for each resample.
+Arsenic is a naturally occurring element in the groundwater of Bangladesh. However, much of this groundwater is used for drinking water by rural populations, so arsenic poisoning is a serious health issue. Figure 1a displays the distribution of arsenic concentrations from 271 wells in Bangladesh. The sample mean and standard deviation are $\bar{x}=125.32$ and $s =297.98$, respectively (measured in micrograms per liter). We draw resamples of size 271 with replacement from the data and compute the mean for each resample.
 \end{tcolorbox}
 \end{frame}
 
@@ -524,7 +524,7 @@ Arsenic is a naturally occurring element in the groundwater of Bangladesh. Howev
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
 \NormalTok{Bang }\OtherTok{\textless{}{-}}\NormalTok{ Bangladesh}
 \NormalTok{Arsenic }\OtherTok{\textless{}{-}}\NormalTok{ Bang}\SpecialCharTok{$}\NormalTok{Arsenic}
 \FunctionTok{hist}\NormalTok{(Arsenic, }\AttributeTok{breaks =} \StringTok{"Scott"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Figure 1a"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
@@ -602,14 +602,15 @@ intervals}\label{understanding-confidence-intervals}}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Understanding confidence intervals}
+\begin{frame}[fragile]{Understanding confidence intervals}
 \protect\hypertarget{understanding-confidence-intervals-2}{}
 \begin{itemize}
 \item
   On the one hand, we could use the appropriate point estimate/sample
   statistic to estimate \(\mu\), with the sample mean \(\bar{x}\).
 \item
-  Based on our sample of 50 pennies from the bank, the sample mean was
+  Based on our sample of 50 pennies from the bank (using the tibble
+  \texttt{pennies\_sample}), the sample mean of \texttt{year} was
   1995.44.
 
   \begin{itemize}
@@ -639,7 +640,7 @@ intervals}\label{understanding-confidence-intervals}}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Understanding confidence intervals}
+\begin{frame}{Understanding confidence intervals}
 \protect\hypertarget{understanding-confidence-intervals-3}{}
 \begin{itemize}
 \item
@@ -653,20 +654,66 @@ intervals}\label{understanding-confidence-intervals}}
   as nets.
 \end{itemize}
 
-\tiny
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week10\_7.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.4\textheight]{week10_7} \end{center}
-\normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Percentile method}
 \protect\hypertarget{percentile-method}{}
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pennies\_sample }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{specify}\NormalTok{(}\AttributeTok{response =}\NormalTok{ year) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"mean"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ bs\_dist}
+\NormalTok{bs\_dist }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{lci =} \FunctionTok{quantile}\NormalTok{(stat, }\AttributeTok{probs =} \FloatTok{0.025}\NormalTok{), }
+            \AttributeTok{uci =} \FunctionTok{quantile}\NormalTok{(stat, }\AttributeTok{probs =} \FloatTok{0.975}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ CI}
+\NormalTok{CI}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 2
+    lci   uci
+  <dbl> <dbl>
+1 1991. 2000.
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Percentile method}
+\protect\hypertarget{percentile-method-1}{}
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{get\_confidence\_interval}\NormalTok{(bs\_dist, }\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 2
+  lower_ci upper_ci
+     <dbl>    <dbl>
+1    1991.    2000.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{visualize}\NormalTok{(bs\_dist) }\SpecialCharTok{+} 
+  \FunctionTok{shade\_confidence\_interval}\NormalTok{(}\AttributeTok{endpoints =}\NormalTok{ CI)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-10-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Percentile method}
+\protect\hypertarget{percentile-method-2}{}
 One method to construct a confidence interval
 
 \begin{itemize}
@@ -678,7 +725,7 @@ One method to construct a confidence interval
   \item
     We can do this by computing the 2.5th and 97.5th percentiles,
   \item
-    which are 1991.059 and 1999.283, respectively.
+    which are 1991.4 and 1999.5605, respectively.
   \item
     This is known as the percentile method for constructing confidence
     intervals.
@@ -698,6 +745,10 @@ One method to construct a confidence interval
 
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{week10_8} \end{center}
 \normalsize
+\end{frame}
+
+\begin{frame}{Percentile Method}
+\protect\hypertarget{percentile-method-3}{}
 \end{frame}
 
 \begin{frame}[fragile]{Standard error method}
@@ -822,7 +873,7 @@ Using \texttt{rep\_sample\_n} from the \texttt{infer} package.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-14-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -863,7 +914,7 @@ Using the \texttt{infer} pipeline
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-16-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -895,7 +946,7 @@ Using the \texttt{infer} pipeline
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-17-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -928,7 +979,7 @@ Using the \texttt{infer} pipeline
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-16-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-18-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -952,7 +1003,7 @@ Using the \texttt{infer} pipeline
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.45\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-17-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.45\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-19-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -985,7 +1036,7 @@ Using the \texttt{infer} pipeline
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.45\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-18-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.45\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-20-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1018,7 +1069,7 @@ Using the \texttt{infer} pipeline
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-19-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-21-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1194,7 +1245,7 @@ Using the \texttt{infer} pipeline
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.45\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-23-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.45\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-25-1} \end{center}
 \normalsize
 
 In this case the \(95\%\) confidence interval for \(p\), (0.3,0.56),
@@ -1481,7 +1532,7 @@ Lets use the \texttt{TV} dataset from the \texttt{resampledata} package.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.43\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.43\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-31-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1553,7 +1604,7 @@ Using the \texttt{infer} pipeline
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.45\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-30-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.45\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-32-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1587,7 +1638,7 @@ Using the \texttt{infer} pipeline
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.38\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-31-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.38\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-33-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1659,7 +1710,7 @@ Verizon is the primary local telephone company (incumbent local exchange carrier
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-33-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-35-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1739,7 +1790,7 @@ The bootstrap distribution for the smaller CLEC data set (n=23)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.35\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-35-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.35\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-37-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1841,7 +1892,7 @@ Distribution of the difference:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-38-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-40-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1969,7 +2020,7 @@ Distribution of the difference:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-40-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-42-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2054,7 +2105,7 @@ Here, we are interested in \(p_{seed}-p_{control}\). Let's use
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-42-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-44-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2156,7 +2207,7 @@ Explanatory: group (factor)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-45-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-47-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -2318,7 +2369,7 @@ known}
 \protect\hypertarget{confidence-intervals-for-a-mean-sigma-known-6}{}
 \tiny
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.7\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-47-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.7\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-49-1} \end{center}
 \normalsize
 
 \tiny
@@ -2350,7 +2401,7 @@ known}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-49-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-51-1} \end{center}
 
 \begin{verbatim}
 
@@ -2571,7 +2622,7 @@ unknown}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-52-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-54-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2592,7 +2643,7 @@ Consider qq plot for \(t_{24}\)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-53-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-55-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -2647,7 +2698,7 @@ unknown}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-54-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-56-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2672,7 +2723,7 @@ with ggplot2
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-55-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-57-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2815,7 +2866,7 @@ distributed, so \(t\) interval is reasonable. \tiny
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-59-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-61-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2833,7 +2884,7 @@ distributed, so \(t\) interval is reasonable. \tiny
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-60-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-62-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -2993,7 +3044,7 @@ We draw random samples from the right-skewed gamma distribution with $\alpha=5$ 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-64-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-66-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -3117,7 +3168,7 @@ statistic is to having a \(t\) distribution.
 \protect\hypertarget{assumptions-underlying-t-confidence-interval-6}{}
 \tiny
 
-\begin{center}\includegraphics[width=0.8\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-67-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-69-1} \end{center}
 \normalsize
 
 \begin{itemize}
@@ -3177,7 +3228,7 @@ statistic is to having a \(t\) distribution.
 \protect\hypertarget{assumptions-underlying-t-confidence-interval-8}{}
 \tiny
 
-\begin{center}\includegraphics[width=0.8\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-69-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-71-1} \end{center}
 \normalsize
 
 \begin{itemize}

@@ -347,7 +347,7 @@ For most common estimators and under fairly general distribution assumptions, th
 
 
 \begin{tcolorbox}
-Arsenic is a naturally occurring element in the groundwater of Bangladesh. However, much of this groundwater is used for drinking water by rural populations, so arsenic poisoning is a serious health issue. Figure 1a displays the distribution of arsenic concentrations from 271 wells in Bangladesh. The sample mean and standard deviation are $\bar{x}=125.32$ and $s = 297.98$, respectively (measured in micrograms per liter). We draw resamples of size 271 with replacement from the data and compute the mean for each resample.
+Arsenic is a naturally occurring element in the groundwater of Bangladesh. However, much of this groundwater is used for drinking water by rural populations, so arsenic poisoning is a serious health issue. Figure 1a displays the distribution of arsenic concentrations from 271 wells in Bangladesh. The sample mean and standard deviation are $\bar{x}=`r round(mean(Bangladesh$Arsenic),2)`$ and $s =`r round(sd(Bangladesh$Arsenic), 2)`$, respectively (measured in micrograms per liter). We draw resamples of size 271 with replacement from the data and compute the mean for each resample.
 \end{tcolorbox}
 
 
@@ -355,9 +355,8 @@ Arsenic is a naturally occurring element in the groundwater of Bangladesh. Howev
 
 
 \tiny
-```{r echo=TRUE, eval=FALSE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '70%', fig.align='center'}
-
-par(mfrow=c(2, 2))
+```{r eval=FALSE}
+par(mfrow = c(2, 2))
 Bang <- Bangladesh
 Arsenic <- Bang$Arsenic
 hist(Arsenic, breaks = "Scott", main = "Figure 1a", col = "lightblue")
@@ -383,8 +382,8 @@ qqline(arsenic.mean, col = "red")
 
 
 \tiny
-```{r echo=FALSE, warning=FALSE, message=FALSE,out.height = '85%',out.width = '90%', fig.align='center'}
-par(mfrow=c(2, 2))
+```{r echo = FALSE, out.height = '85%',out.width = '90%'}
+par(mfrow = c(2, 2))
 Bang <- Bangladesh
 Arsenic <- Bang$Arsenic
 hist(Arsenic, breaks = "Scott", main = "Figure 1a", col = "lightblue")
@@ -421,33 +420,30 @@ qqline(arsenic.mean, col = "red")
 
 - Let’s start this section with an analogy involving fishing. Say you are trying to catch a fish. 
 
-    - On one hand, you could use a spear, while on the other 
-    - you could use a net. Using the net will probably allow you to catch more fish!
+  - On one hand, you could use a spear, while on the other 
+  - you could use a net. Using the net will probably allow you to catch more fish!
 
 
 - Now think back to our pennies exercise where you are trying to estimate the true population mean year $\mu$ of all US pennies. 
 
-    - Think of the value of $\mu$ as a fish.
+  - Think of the value of $\mu$ as a fish.
     
 
 ## Understanding confidence intervals
 
-
-
 - On the one hand, we could use the appropriate point estimate/sample statistic to estimate $\mu$, with the sample mean $\bar{x}$.
 
 
-- Based on our sample of 50 pennies from the bank, the sample mean was 1995.44. 
+- Based on our sample of 50 pennies from the bank (using the tibble `pennies_sample`), the sample mean of `year` was `r mean(pennies_sample$year)`. 
 
-    - Think of using this value as “fishing with a spear.”
-
+  - Think of using this value as “fishing with a spear.”
 
 - What would “fishing with a net” correspond to?
 
-    - The bootstrap distribution. 
-    - Between which two years would you say that “most” sample means lie? 
-    - While this question is somewhat subjective, saying that most sample means lie between 1992 and 2000 would not be unreasonable. 
-    - Think of this interval as the “net.”
+  - The bootstrap distribution. 
+  - Between which two years would you say that “most” sample means lie? 
+  - While this question is somewhat subjective, saying that most sample means lie between 1992 and 2000 would not be unreasonable. 
+  - Think of this interval as the “net.”
  
  
  - What we’ve just illustrated is the concept of a confidence interval, which we’ll abbreviate with “CI”.
@@ -458,12 +454,36 @@ qqline(arsenic.mean, col = "red")
  
 - As opposed to a point estimate/sample statistic that estimates the value of an unknown population parameter with a single value, a **confidence interval** gives what can be interpreted as a range of plausible values. 
 
-
 - Going back to our analogy, point estimates/sample statistics can be thought of as spears, whereas confidence intervals can be thought of as nets.
  
- \tiny
-```{r warning=FALSE, message=FALSE,out.height = '40%',out.width = '70%', fig.align='center'}
+
+```{r echo = FALSE, out.height = '40%',out.width = '70%'}
 knitr::include_graphics("week10_7.png")
+```
+
+
+
+## Percentile method
+
+\small
+```{r}
+pennies_sample %>% 
+  specify(response = year) %>% 
+  generate(reps = 1000, type = "bootstrap") %>% 
+  calculate(stat = "mean") -> bs_dist
+bs_dist %>% 
+  summarize(lci = quantile(stat, probs = 0.025), 
+            uci = quantile(stat, probs = 0.975)) -> CI
+CI
+```
+\normalsize
+
+## Percentile method
+\small
+```{r, out.height = '40%', out.width = '70%'}
+get_confidence_interval(bs_dist, level = 0.95)
+visualize(bs_dist) + 
+  shade_confidence_interval(endpoints = CI)
 ```
 \normalsize
 
@@ -477,7 +497,7 @@ One method to construct a confidence interval
 - To get the middle $95\%$ of values of the bootstrap distribution: 
     
     - We can do this by computing the 2.5th and 97.5th percentiles, 
-    - which are 1991.059 and 1999.283, respectively. 
+    - which are `r CI$lci` and `r CI$uci`, respectively. 
     - This is known as the percentile method for constructing confidence intervals.
 
 
@@ -488,6 +508,8 @@ One method to construct a confidence interval
 knitr::include_graphics("week10_8.png")
 ```
 \normalsize
+
+## Percentile Method
 
 
 
