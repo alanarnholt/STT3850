@@ -306,8 +306,8 @@ abline(v = mean(rsg2), col = "red")
 
 - Based on the graphs above, we can see that the bootstrap distribution:
 
-    - has roughly the same spread and shape as the theoretical sampling distribution,
-    - but the centers are different compared to the theoretical sampling distribution. 
+  - has roughly the same spread and shape as the theoretical sampling distribution,
+  - but the centers are different compared to the theoretical sampling distribution. 
 
 
 
