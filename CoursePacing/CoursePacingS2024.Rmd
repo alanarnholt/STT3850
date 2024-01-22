@@ -111,8 +111,6 @@ ______________
 
 * Before class read chapter 2 (Data Visualization) of [MD](https://moderndive.com/2-viz.html) --- pgs 21-62
 
-* [Partial Lecture Slides](../Handouts/short_pre_lecture.pdf)
-
 * Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Jan 23
 
 * Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Jan 24
