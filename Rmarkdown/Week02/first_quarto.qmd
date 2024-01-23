@@ -46,3 +46,22 @@ Multiplying 7 by 14 gives us the result `r 7*14`.
 5 + 15 > 19
 ```
 
+## Some Wrangling
+
+
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(moderndive)
+glimpse(house_prices)
+house_prices %>% 
+  filter(bedrooms >=4 & bedrooms <=6) %>% 
+  group_by(waterfront) %>% 
+  summarize(avg_price = mean(price), min_price = min(price), max_price = max(price), n = n())
+house_prices %>% 
+  filter(bedrooms >=4 & bedrooms <= 6) %>% 
+  ggplot(aes(x = price)) + 
+  geom_histogram(color = "black", fill = "purple") + 
+  facet_wrap(vars(waterfront)) + 
+  theme_bw()
+```
+
