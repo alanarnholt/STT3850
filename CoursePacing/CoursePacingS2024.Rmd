@@ -115,7 +115,7 @@ ______________
 
 * Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Jan 24
 
-* Complete [PS-02](https://classroom.github.com/a/xKESmfBx) due by 5:00 pm Jan 25
+* Complete [PS-02](https://classroom.github.com/a/uGeKnKvo) due by 5:00 pm Jan 25
 
 * [Lecture Slides](../Rmarkdown/Week02/Week2_Lect.pdf)
 
