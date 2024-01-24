@@ -436,7 +436,7 @@ qqline(arsenic.mean, col = "red")
 
 - Based on our sample of 50 pennies from the bank (using the tibble `pennies_sample`), the sample mean of `year` was `r mean(pennies_sample$year)`. 
 
-  - Think of using this value as “fishing with a spear.”
+- Think of using this value as “fishing with a spear.”
 
 - What would “fishing with a net” correspond to?
 
@@ -508,11 +508,11 @@ One method to construct a confidence interval
 
   - let’s use this fact about normal distributions to construct a confidence interval in a different way.
 
-- First, note that the bootstrap distribution has a mean equal to `r round(mean(bs_dist$stat),2)`. 
+  - First, note that the bootstrap distribution has a mean equal to `r round(mean(bs_dist$stat),2)`. 
 
-    - This value almost coincides exactly with the value of the sample mean $\bar{x}$  of our original 50 pennies of 1995.44.
+  - This value almost coincides exactly with the value of the sample mean $\bar{x}$  of our original 50 pennies of `r mean(pennies_sample$year)`.
 
-- Second, let’s compute the standard deviation of the bootstrap distribution using the values of `mean_year` in the `virtual_resampled_means` data frame:
+ - Second, let’s compute the standard deviation of the bootstrap distribution using the values of `mean_year` in the `virtual_resampled_means` data frame:
 
 
 ## Standard error method
@@ -524,7 +524,9 @@ virtual_resampled_means <- pennies_sample %>%
   rep_sample_n(size = 50, replace = TRUE, reps = 1000) %>% 
   group_by(replicate) %>% 
   summarize(mean_year = mean(year))
-virtual_resampled_means %>% summarize(SE = sd(mean_year))
+virtual_resampled_means %>% 
+  summarize(SE = sd(mean_year)) -> ans
+ans
 ```
 
 
@@ -541,6 +543,11 @@ $$\begin{array}{ll}
 &=(1995.44-1.96\cdot 2.14, 1995.44+1.96\cdot2.14)\\
 &=(1991.25,1999.63)
 \end{array}$$
+
+```{r}
+mean(pennies_sample$year) +c(-1, 1)*qnorm(.975)*ans$SE
+```
+
 
 
 ## Standard error method vs. Percentile method
@@ -561,7 +568,7 @@ $$\begin{array}{ll}
 Using `rep_sample_n` from the `infer` package. 
 
 \tiny
-```{r echo = TRUE, out.height = '40%',out.width = '60%'}
+```{r out.height = '40%', out.width = '60%'}
 set.seed(10)
 virtual_resampled_means <- pennies_sample %>% 
   rep_sample_n(size = 50, replace = TRUE, reps = 1000) %>% 
@@ -581,7 +588,8 @@ Using `rep_sample_n` from the `infer` package.
 
 
 ```{r}
-quantile(virtual_resampled_means$mean_year, prob = c(0.025, 0.975))
+quantile(virtual_resampled_means$mean_year, 
+         prob = c(0.025, 0.975))
 ```
 
 
@@ -592,11 +600,11 @@ quantile(virtual_resampled_means$mean_year, prob = c(0.025, 0.975))
 Using the `infer` pipeline
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%', out.width = '70%'}
 set.seed(10)
 bootstrap_distribution <- pennies_sample %>% 
   specify(response = year) %>% 
-  generate(reps = 1000) %>% 
+  generate(reps = 1000, type = "bootstrap") %>% 
   calculate(stat = "mean")
 visualize(bootstrap_distribution)
 ```
@@ -609,7 +617,7 @@ visualize(bootstrap_distribution)
 Using the `infer` pipeline
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '70%', fig.align='center'}
+```{r out.height = '40%',out.width = '70%'}
 percentile_ci <- bootstrap_distribution %>% 
   get_confidence_interval(level = 0.95, type = "percentile")
 percentile_ci
@@ -682,8 +690,8 @@ visualize(bsd) +
 Using the `infer` pipeline
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '70%', fig.align='center'}
-x_bar_babies<-Babies %>% summarize(Mean = mean(Weight))
+```{r out.height = '40%', out.width = '70%'}
+x_bar_babies <- Babies %>% summarize(Mean = mean(Weight))
 standard_error_ci <- bsd %>% 
   get_confidence_interval(type = "se", point_estimate = x_bar_babies, level = 0.95)
 standard_error_ci
@@ -704,7 +712,7 @@ visualize(bsd) +
 
 - Going back to our fishing analogy, this is like asking, “Did our net capture the fish?”.
 
-  - So, for example, does our percentile-based confidence interval of (1991.24, 1999.42) "capture” the true mean year $\mu$ of all US pennies? 
+  - So, for example, does our percentile-based confidence interval of (`r CI$lci`, `r CI$uci`) "capture” the true mean year $\mu$ of all US pennies? 
   - Alas, we’ll never know, because we don’t know what the true value of $\mu$ is. 
   - After all, we’re sampling to estimate it!
 
@@ -734,8 +742,10 @@ In this case we know that the population proportion $p$ is 0.375. In other words
   - Let's use the `bowl_sample_1` data frame in the `moderndive` package
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '70%', fig.align='center'}
-bowl_sample_1
+```{r}
+head(bowl_sample_1)
+bowl_sample_1 %>% 
+  summarize(p_hat = mean(color == "red"))
 ```
 \normalsize
 
@@ -776,7 +786,7 @@ sample_1_bootstrap %>%
 ```
 \normalsize
 
-In this case the $95\%$ confidence interval for $p$, (0.3,0.56),  contains the true value of 0.375. 
+In this case the $95\%$ confidence interval for $p$, (`r percentile_ci_1$lower_ci`, `r percentile_ci_1$upper_ci`),  contains the true value of 0.375. 
 
 
 ## Interpreting confidence intervals: Sampling bowl example
@@ -901,9 +911,9 @@ TV %>%
 ```
 \normalsize
 
-- The means of the basic and extended channel commercial times are 9.21 and 6.87 min.
+- The means of the basic and extended channel commercial times are `r ct[1]` and `r ct[2]` min.
 
-  - Is this difference of 2.34 min. statistically significant?
+- Is this difference of `r ct[1] - ct[2]` min. statistically significant?
 
 
 
@@ -945,7 +955,7 @@ CI
 ## TV example
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '43%',out.width = '70%', fig.align='center'}
+```{r out.height = '43%', out.width = '70%'}
 par(mfrow = c(1, 2))
 hist(times.diff.mean, breaks = "Scott", freq=FALSE, 
      main = "Bootstrap Distribution \n (Figure a)", 
@@ -955,7 +965,8 @@ abline(v = c(0, CI), col = c("blue", "red", "red"), lwd = 2,
        lty = c("solid", "dashed", "dashed"))
 qqnorm(times.diff.mean, main = "Normal Q-Q Plot \n (Figure b)")
 qqline(times.diff.mean, col = "red")
-sd(times.diff.mean)
+sd(times.diff.mean) -> SEbdm
+SEbdm
 ```
 \normalsize
 
@@ -966,14 +977,14 @@ sd(times.diff.mean)
 
     - As in the single sample case, we see that the bootstrap distribution is approximately normal and centered at the original statistics (the difference in sample means). 
     - We also get a quick idea of how much the difference in sample means varies due to random sampling. 
-    - We may quantify this variation by computing the bootstrap standard error, which is 0.7552861. Again, the bootstrap standard error is the standard error of the sampling distribution.
+    - We may quantify this variation by computing the bootstrap standard error, which is `r SEbdm`. Again, the bootstrap standard error is the standard error of the sampling distribution.
 
 - The right panel of Figure b shows a normal-quantile plot for the bootstrap distribution: the distribution is very close to normal.
 
 
-- The $95\%$ bootstrap percentile confidence interval for the difference in means (basic- extended) is (0.9, 3.86). 
+- The $95\%$ bootstrap percentile confidence interval for the difference in means (basic- extended) is (`r CI[1]`, `r CI[2]`). 
 
-    - Thus, we are $95\%$ confident that commercial times on basic channels are, on average, between 0.9 and 3.86 min. 
+    - Thus, we are $95\%$ confident that commercial times on basic channels are, on average, between `r CI[1]` and `r CI[2]` min. 
     - longer than on extended channels (per half-hour time periods).
 
 
@@ -1027,8 +1038,8 @@ Verizon is the primary local telephone company (incumbent local exchange carrier
 
 ## Verizon example
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '38%',out.width = '60%', fig.align='center'}
+\normalsize
+```{r}
 Phone <- Verizon
 rt <- tapply(Phone$Time, Phone$Group, mean)
 rt
@@ -1043,7 +1054,7 @@ Phone %>%
 ## Verizon example
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r out.height = '40%', out.width = '60%'}
 par(mfrow = c(1, 2))
 times.ILEC <- subset(Phone, select = Time, subset = Group == "ILEC", drop = TRUE)
 B <- 10^4
@@ -1073,8 +1084,8 @@ qqline(ILECmean, col = "red")
     - a $95\%$ bootstrap percentile interval of (7.725662, 9.1467858). 
     - The distribution is roughly symmetric, with little skewness.
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\small
+```{r}
 sd(ILECmean)
 CI <- quantile(ILECmean, prob = c(0.025, 0.975))
 CI
@@ -1087,7 +1098,7 @@ CI
 The bootstrap distribution for the smaller CLEC data set (n=23) 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '35%',out.width = '60%', fig.align='center'}
+```{r out.height = '35%', out.width = '60%'}
 par(mfrow = c(1, 2))
 times.CLEC <- subset(Phone, select = Time, subset = Group == "CLEC", drop = TRUE)
 B <- 10^4
@@ -1113,19 +1124,18 @@ qqline(CLECmean, col = "red")
 
 - The bootstrap distribution for the smaller CLEC data set (n=23) is shown in Figure a. 
 
-    - The distribution is centered around the sample mean of 16.5726391, 
-    - has a much larger spread due to the small sample size, 
-    - with the bootstrap standard error of 4.022913 and 
-    - a $95\%$ bootstrap percentile interval of (10.1947717, 25.4882826). 
-    - The distribution is very skewed.
-
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
-sd(CLECmean)
+\small
+```{r}
+c(sd(CLECmean), mean(CLECmean))
 CIC <- quantile(CLECmean, prob = c(0.025, 0.975))
 CIC
 ```
 \normalsize
+
+- The distribution is centered around the sample mean of `r mean(CLECmean)`, has a much larger spread due to the small sample size,  with the bootstrap standard error of `r sd(CLECmean)` and a $95\%$ bootstrap percentile interval of (`r CIC[1]`, `r CIC[2]`). 
+- The distribution is very skewed.
+
+
 
 
 
@@ -1133,14 +1143,16 @@ CIC
 
 Distribution of the difference: 
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\small
+```{r}
 B <- 10^4
 diffmeans <- numeric(B)
 set.seed(1)
 for (i in 1:B){
-  ILEC.sample <- sample(times.ILEC, size = length(times.ILEC), replace = TRUE)
-  CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), replace = TRUE)
+  ILEC.sample <- sample(times.ILEC, size = length(times.ILEC), 
+                        replace = TRUE)
+  CLEC.sample <- sample(times.CLEC, size = length(times.CLEC), 
+                        replace = TRUE)
   diffmeans[i] <- mean(ILEC.sample) - mean(CLEC.sample)
 }
 CIdiff <- quantile(diffmeans, prob = c(0.025, 0.975))
@@ -1156,7 +1168,7 @@ CIdiff
 Distribution of the difference: 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r out.height = '40%', out.width = '60%'}
 par(mfrow=c(1, 2))
 hist(diffmeans, breaks = "Scott", col = "lightblue", 
      main = "Bootstrap Distribution \n Figure a", 
@@ -1165,7 +1177,7 @@ abline(v = c(CIdiff, 0), col = c("blue", "blue", "red"), lwd = 2,
        lty = c("dashed", "dashed", "solid"))
 qqnorm(diffmeans, main = "Normal Q-Q Plot \n Figure b")
 qqline(diffmeans, col = "red")
-sd(diffmeans)
+c(mean(diffmeans), sd(diffmeans))
 ```
 \normalsize
 
@@ -1176,8 +1188,8 @@ sd(diffmeans)
 - The bootstrap distribution for the difference in means is shown in Figure a. 
 
     - Note the strong skewness in the distribution. 
-    - The mean of the bootstrap distribution is -8.0760517 with a standard error of 4.016385. 
-    - A $95\%$ bootstrap percentile confidence interval for the difference in means (ILEC-CLEC) is given by (-17.1817594, -1.6712775).
+    - The mean of the bootstrap distribution is `r mean(diffmeans)` with a standard error of `r sd(diffmeans)`. 
+    - A $95\%$ bootstrap percentile confidence interval for the difference in means (ILEC-CLEC) is given by (`r CIdiff[1]`, `r CIdiff[2]`).
     - and so we would say that with $95\%$ confidence, the repair times for ILEC customers are, on average, 1.6712775 to 17.1817594 hours shorter than the repair times for CLEC customers.
     
     
@@ -1199,11 +1211,11 @@ sd(diffmeans)
 
 - Figure below shows the bootstrap distribution for the difference in trimmed means, in this case $25\%$ trimmed means, also known as the mid-mean, the mean of the middle $50\%$ of observations. 
 
-- Compared to the bootstrap difference in ordinary means (Figure above), this distribution has a much smaller spread. 
+- Compared to the bootstrap difference in ordinary means, this distribution has a much smaller spread. 
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r}
 B <- 10^4
 diffmeans.25 <- numeric(B)
 set.seed(3)
@@ -1222,7 +1234,7 @@ CIdiff.25
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r out.height = '40%', out.width = '60%'}
 par(mfrow=c(1, 2))
 hist(diffmeans.25, breaks = "Scott", col = "lightblue", 
      main = "Bootstrap Distribution \n Figure 14a \n 0.25 Trimmed Means", 
@@ -1251,8 +1263,8 @@ Fifty adult participants who thought they were being considered for an appearanc
 
 ## Mythbusters example 
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\small
+```{r}
 library(moderndive)
 library(tidyverse)
 library(infer)
@@ -1268,7 +1280,7 @@ mythbusters_yawn %>%
 Here, we are interested in $p_{seed}-p_{control}$. Let's use `infer` pipeline to obtain the bootstrap distribution. 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r out.height = '40%', out.width = '60%'}
 set.seed(10)
 bootstrap_distribution_yawning <- mythbusters_yawn %>% 
   specify(formula = yawn ~ group, success = "yes") %>% 
@@ -1282,20 +1294,20 @@ visualize(bootstrap_distribution_yawning) +
 
 ## Mythbusters example 
 
-Let’s compute the $95\%$ confidence interval for $p_{seed}-p_{control}$ using percentile method. 
+Compute a $95\%$ confidence interval for $p_{seed}-p_{control}$ using the percentile method. 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r}
 percentile_ci<-bootstrap_distribution_yawning %>% 
   get_confidence_interval(type = "percentile", level = 0.95)
 percentile_ci
 obs_diff_in_props <- mythbusters_yawn %>% 
   specify(formula = yawn ~ group, success = "yes") %>% 
-  # generate(reps = 1000, type = "bootstrap") %>% 
   calculate(stat = "diff in props", order = c("seed", "control"))
 obs_diff_in_props
 myth_ci_se <- bootstrap_distribution_yawning %>% 
   get_confidence_interval(type = "se", point_estimate = obs_diff_in_props,level = 0.95)
+myth_ci_se
 ```
 \normalsize
 
@@ -1303,17 +1315,15 @@ myth_ci_se <- bootstrap_distribution_yawning %>%
 
 ## Mythbusters example 
 
-Let’s compute the $95\%$ confidence interval for $p_{seed}-p_{control}$ using standard error method. 
+Compute a $95\%$ confidence interval for $p_{seed}-p_{control}$ using the standard error method. 
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
-obs_diff_in_props <- mythbusters_yawn %>% 
-  specify(formula = yawn ~ group, success = "yes") %>% 
-  # generate(reps = 1000, type = "bootstrap") %>% 
-  calculate(stat = "diff in props", order = c("seed", "control"))
-obs_diff_in_props
+\normalsize
+```{r}
 myth_ci_se <- bootstrap_distribution_yawning %>% 
-  get_confidence_interval(type = "se", point_estimate = obs_diff_in_props,level = 0.95)
+  get_confidence_interval(type = "se", 
+                          point_estimate = obs_diff_in_props,
+                          level = 0.95)
+myth_ci_se
 ```
 \normalsize
 
@@ -1323,7 +1333,7 @@ myth_ci_se <- bootstrap_distribution_yawning %>%
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r out.height = '40%', out.width = '60%'}
 visualize(bootstrap_distribution_yawning) +
 shade_confidence_interval(endpoints = percentile_ci)
 ```
@@ -1331,8 +1341,8 @@ shade_confidence_interval(endpoints = percentile_ci)
 
 - We’re $95\%$ “confident” that the true difference in proportions $p_{seed}-p_{control}$ is between (-0.235, 0.276).
 
-    - Since the interval includes 0, we cannot conclusively say if either proportion is larger.
-    - This would suggest that there is no associated effect of being exposed to a yawning recruiter on whether you yawn yourself.
+  - Since the interval includes 0, we cannot conclusively say if either proportion is larger.
+  - This would suggest that there is no associated effect of being exposed to a yawning recruiter on whether you yawn yourself.
 
 
 
@@ -1343,13 +1353,13 @@ shade_confidence_interval(endpoints = percentile_ci)
 
 - So far, we’ve constructed confidence intervals using two methods: 
 
-    - the percentile method and the standard error method.
+  - the percentile method and the standard error method.
     
-- Recall also we can only use the standard-error method if the bootstrap distribution is bell-shaped (i.e., normally distributed).
+- We can only use the standard-error method if the bootstrap distribution is bell-shaped (i.e., normally distributed).
 
-- In a similar vein, if the sampling distribution is normally shaped, there is another method for constructing confidence intervals that does not involve using your computer.
+- If the sampling distribution is normally shaped, there is another method for constructing confidence intervals that does not involve using your computer.
 
-    - You can use a theory-based method involving mathematical formulas!
+  - You can use a theory-based method involving mathematical formulas!
     
     
 ## Confidence intervals for a Mean, $\sigma$ known
@@ -1367,7 +1377,7 @@ The Centers for Disease Control maintains growth charts for infants and children
 We assume the 150 sample values are from a normal distribution, $N(\mu, 24.6)$. 
 
 - Then the sampling distribution of mean weights is 
-$$N(\mu,\frac{24.6}{\sqrt{150}})$$
+$$N\left(\mu,\frac{24.6}{\sqrt{150}}\right)$$
 
 
 - Let $\bar{X}$ denote the mean of the 150 weights, so standardizing gives
@@ -1379,9 +1389,9 @@ $$Z=\frac{\bar{X}-\mu}{\frac{24.6}{\sqrt{150}}}\sim N(0,1)$$
 -  For a standard normal random variable $Z$, we have:
 $$1-\alpha=P(z_{\alpha/2}<Z<z_{1-\alpha/2})$$
 Then:
-$$0.95=P(z_{0.025}<\frac{\bar{X}-\mu}{\frac{24.6}{\sqrt{150}}}<z_{0.975})$$
-$$0.95=P(\bar{X}+z_{0.025}*\frac{24.6}{\sqrt{150}}<\mu<\bar{X}+z_{0.975}*\frac{24.6}{\sqrt{150}})$$
-$$0.95=P(\bar{X}-1.96*\frac{24.6}{\sqrt{150}}<\mu<\bar{X}+1.96*\frac{24.6}{\sqrt{150}})$$
+$$0.95=P\left(z_{0.025}<\frac{\bar{X}-\mu}{\frac{24.6}{\sqrt{150}}}<z_{0.975}\right)$$
+$$0.95=P\left(\bar{X}+z_{0.025}\times\frac{24.6}{\sqrt{150}}<\mu<\bar{X}+z_{0.975}\times\frac{24.6}{\sqrt{150}}\right)$$
+$$0.95=P\left(\bar{X}-1.96\times\frac{24.6}{\sqrt{150}}<\mu<\bar{X}+1.96\times\frac{24.6}{\sqrt{150}}\right)$$
 $$0.95=P(\bar{X}-3.937<\mu<\bar{X}+3.937)$$
 
 This means that, the random interval $\bar{X}-3.937<\mu<\bar{X}+3.937$ has a probability of 0.95 of containing the mean $\mu$. 
@@ -1404,7 +1414,7 @@ Which is no longer a random interval.
 
 More generally, for a sample of size $n$ drawn from a normal distribution with unknown $\mu$, and known $\sigma$, a $(1-\alpha)\times 100\%$ confidence interval for the mean of $\mu$ is:
 
-$$CI_{1-\alpha}(\mu)=(\bar{X}-z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}},\bar{X}+z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}})$$
+$$CI_{1-\alpha}(\mu)=\left(\bar{X}-z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}},\bar{X}+z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}\right)$$
 
 If we draw thousands of random samples from a normal distribution with parameters $\mu$, $\sigma$ and compute the $95\%$ confidence interval for each sample, then about $95\%$ of the intervals would contain $\mu$. 
 
@@ -1412,15 +1422,16 @@ If we draw thousands of random samples from a normal distribution with parameter
 
 ## Confidence intervals for a Mean, $\sigma$ known
 
-\tiny
-```{r echo=TRUE, eval=FALSE,warning=FALSE, message=FALSE,out.height = '30%',out.width = '40%', fig.align='center'}
+\normalsize
+```{r echo=TRUE, eval=FALSE}
 set.seed(13)
 counter <- 0 # set counter to 0
 mu <- 25
 sigma <- 4
 n <- 30
 sims <- 10^4
-plot(x = c(mu - 4*sigma/sqrt(n), mu + 4*sigma/sqrt(n)), y = c(1, 100), type = "n", xlab = "", ylab = "")
+plot(x = c(mu - 4*sigma/sqrt(n), mu + 4*sigma/sqrt(n)), 
+     y = c(1, 100), type = "n", xlab = "", ylab = "")
 for (i in 1:sims){
  x <- rnorm(n, mu, sigma)
  L <- mean(x) - qnorm(0.975)*sigma/sqrt(n)
@@ -1437,8 +1448,8 @@ abline(v = mu, col = "red")
 
 ## Confidence intervals for a Mean, $\sigma$ known
 
-\tiny
-```{r echo=FALSE, warning=FALSE, message=FALSE,out.height = '70%',out.width = '60%', fig.align='center'}
+
+```{r echo=FALSE, out.height = '70%',out.width = '60%'}
 set.seed(13)
 counter <- 0 # set counter to 0
 mu <- 25
@@ -1470,11 +1481,12 @@ ACL
 
 ## Confidence intervals for a Mean, $\sigma$ known
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\normalsize
+```{r out.height = '40%',out.width = '60%'}
 library(PASWR2)
 set.seed(11)
-cisim(samples = 100, n = 30, parameter = 25, sigma = 4, type = "Mean")
+cisim(samples = 100, n = 30, parameter = 25, sigma = 4, 
+      type = "Mean")
 ```
 \normalsize
 
@@ -1485,12 +1497,13 @@ cisim(samples = 100, n = 30, parameter = 25, sigma = 4, type = "Mean")
 
 \begin{tcolorbox}
 An engineer test the gas mileage of a random sample of $n=30$ of his company cars ready to be sold. The $95\%$ confidence interval for the mean mileage of all the cars is $(29.5, 33.4)$ miles per gallon. Evaluate the following statements:
+\begin{itemize}
+\item We are $95\%$ confident that the gas mileage for cars in this company is between 29.5 and 33.4 mpg.
 
-1. We are $95\%$ confident that the gas mileage for cars in this company is between 29.5 and 33.4 mpg.
+\item $95\%$ of all samples will give an average mileage between 29.5 and 33.4 mpg.
 
-2. $95\%$ of all samples will give an average mileage between 29.5 and 33.4 mpg.
-
-3. There is a $95\%$ chance that the true mean is between 29.5 and 33.4 mpg.
+\item There is a $95\%$ chance that the true mean is between 29.5 and 33.4 mpg.
+\end{itemize}
 \end{tcolorbox}
 
 
@@ -1523,8 +1536,8 @@ Solution:
 
 ## Example 3
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\small
+```{r}
 xs <- c(3.4, 2.9, 2.8, 5.1, 6.3, 3.9)
 n <- length(xs)
 SIGMA <- 2.5
@@ -1560,8 +1573,8 @@ Suppose researchers want to estimate the mean weight of girls in Sodor. They ass
 
 ## Example 4
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\normalsize
+```{r}
 n <- ceiling((qnorm(.975)*24.6/5)^2)
 n
 # Using nsize from PASWR2
@@ -1586,22 +1599,18 @@ In most real-life settings, a data analyst will not know the mean or the standar
     - so it seems natural to consider the sample standard deviation $S$  as an estimate of $\sigma$. 
 
 
-- However, in deriving the confidence interval for $\mu$, we used the fact that 
-$$\frac{(\bar{X}-\mu)}{\sigma/\sqrt{n}}$$
-
-follows a standard normal distribution. 
-
+- However, in deriving the confidence interval for $\mu$, we used the fact that $\frac{(\bar{X}-\mu)}{\sigma/\sqrt{n}}$ follows a standard normal distribution. 
 
 - Does changing $\sigma$ to $S$, the sample standard deviation, change the distribution?
 
-    - We will use simulation to investigate the distribution of $\frac{(\bar{X}-\mu)}{\sigma/\sqrt{n}}$ for random samples drawn from a $N(\mu, \sigma)$. 
+  - We will use simulation to investigate the distribution of $\frac{(\bar{X}-\mu)}{\sigma/\sqrt{n}}$ for random samples drawn from a $N(\mu, \sigma)$. 
 
 ## Confidence intervals for a Mean, $\sigma$ unknown
 
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r out.height = '40%',out.width = '60%'}
 set.seed(1)
 N <- 10^4
 TS <- numeric(N)
@@ -1628,7 +1637,7 @@ abline(a = 0, b = 1)
 Consider qq plot for $t_{24}$
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r out.height = '40%', out.width = '60%'}
 # Consider qq plot for t_24
 ggplot(data = data.frame(x = TS), aes(sample = x)) + 
   geom_qq(distribution = stats::qt, dparams = list(df = 24), size = 0.1, color = "blue") + 
@@ -1660,14 +1669,16 @@ has a Students $t$ distribution with $n-1$ degrees of freedom.
 ## Confidence intervals for a Mean, $\sigma$ unknown
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r out.height = '40%', out.width = '60%'}
 curve(dnorm(x, 0, 1), -4, 4, col = "black", ylab = "", xlab = "")
 curve(dt(x, 1), add = TRUE, lty = 2, col = "green")
 curve(dt(x, 4), add = TRUE, lty = 3, col = "pink")
 curve(dt(x, 9), add = TRUE, lty = 4, col = "red")
 curve(dt(x, 36), add = TRUE, lty = 5, col = "blue")
 abline(h = 0, lwd=2)
-legend("topright", legend = c("N(0, 1)", "t_1", "t_4", "t_9", "t_36"), lty = c(1, 2, 3, 4, 5), col =c("black", "green", "pink", "red", "blue"), lwd = 1.5)
+legend("topright", legend = c("N(0, 1)", "t_1", "t_4", "t_9", "t_36"), 
+       lty = c(1, 2, 3, 4, 5), col =c("black", "green", "pink", "red", "blue"), 
+       lwd = 1.5)
 ```
 \normalsize
 
@@ -1675,10 +1686,10 @@ legend("topright", legend = c("N(0, 1)", "t_1", "t_4", "t_9", "t_36"), lty = c(1
 
 ## Confidence intervals for a Mean, $\sigma$ unknown
 
-with ggplot2
+with `ggplot2`
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r out.height = '40%', out.width = '60%'}
 ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) + 
   theme_bw() +
   labs(x = "", y = "") +
@@ -1725,8 +1736,8 @@ The distribution of weights of boys in Sodor is normal with unknown mean $\mu$. 
 
 To compute a $90\%$ confidence interval, find the 0.95 quantile of the $t$ distribution with 27 degrees of freedom. That is quantile $t_{0.95;27}$ satisfying $P(T_{27}<t_{0.95;27})$
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\normalsize
+```{r}
 qt(.95, 27)
 ```
 \normalsize
@@ -1739,10 +1750,11 @@ $$\begin{array}{ll}
 \end{array}$$
 
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\normalsize
+```{r}
 # Using function from PASWR2
-tsum.test(mean.x = 110, s.x = 7.5, n.x = 28, conf.level = 0.90)$conf
+tsum.test(mean.x = 110, s.x = 7.5, n.x = 28, 
+          conf.level = 0.90)$conf
 ```
 \normalsize
 
@@ -1758,13 +1770,13 @@ We will use the `NCBirths2004` data from the `resampledata` package.
 
 ## Example 5: Birth weight of a baby
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 library(resampledata)
-head(NCBirths2004)
+head(NCBirths2004, n = 2)
 NCBirths2004 %>%group_by(Gender)%>% 
-  summarize(Mean = mean(Weight),SD=sd(Weight), n = n())
-
+  summarize(Mean = mean(Weight),SD=sd(Weight), n = n()) -> BW
+BW
 ```
 \normalsize
 
@@ -1773,10 +1785,10 @@ NCBirths2004 %>%group_by(Gender)%>%
 ## Example 5: Birth weight of a baby
 
 A normal quantile plot shows that the weights are approximately normally distributed, so $t$ interval is reasonable.
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r out.height = '50%', out.width = '70%'}
 # Using lattice
-qqmath(~Weight|Gender,data = NCBirths2004, col = rgb(1,0,0,.1))
+qqmath(~Weight|Gender, data = NCBirths2004, col = rgb(1, 0, 0, 0.1))
 ```
 \normalsize
 
@@ -1785,9 +1797,9 @@ qqmath(~Weight|Gender,data = NCBirths2004, col = rgb(1,0,0,.1))
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r out.height = '50%', out.width = '70%'}
 ggplot(data = NCBirths2004, aes(sample = Weight)) + 
-  stat_qq(color = rgb(1,0,0,.1)) + 
+  stat_qq(color = rgb(1, 0, 0, 0.1)) + 
   stat_qq_line() +
   facet_grid(cols = vars(Gender)) + 
   theme_bw()
@@ -1799,9 +1811,9 @@ ggplot(data = NCBirths2004, aes(sample = Weight)) +
 
 Since $1-\alpha=0.99$, then $\alpha/2=0.005$. The 0.995 quantile for the $t$ distribution with 520 df, $t_{0.995;520}$ is
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
-qt(.995, 520)
+\normalsize
+```{r}
+qt(0.995, 520)
 ```
 \normalsize
 
@@ -1816,14 +1828,15 @@ $$\begin{array}{ll}
 
 ## Example 5: Birth weight of a baby
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\normalsize
+```{r}
 # t.test() to find confidence intervals.
-t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], conf = 0.99)$conf
+t.test(NCBirths2004$Weight[NCBirths2004$Gender=="Female"], 
+       conf = 0.99)$conf
 # Or
 JG <- NCBirths2004 %>% 
   filter(Gender == "Female") 
-t.test(JG$Weight, conf = 0.99)
+t.test(JG$Weight, conf = 0.99)$conf
 ```
 \normalsize
 
@@ -1831,18 +1844,18 @@ t.test(JG$Weight, conf = 0.99)
 ## Example 5: Birth weight of a baby
 
 Compare to $99\%$ bootstrap standard error confidence intervals
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
-girls <- subset(NCBirths2004, select = Weight, subset = Gender =="Female", drop = TRUE)
+\normalsize
+```{r}
+girls <- subset(NCBirths2004, select = Weight, 
+                subset = Gender =="Female", drop = TRUE)
 B <- 10^4
 bsmean <- numeric(B)
 for(i in 1:B){
   bss <- sample(girls, size = length(girls), replace = TRUE)
-  bsmean[i] <- mean(bss)
-}
+  bsmean[i] <- mean(bss)}
 (CIperc <- quantile(bsmean, probs = c(0.005, 0.995)))
-#
-(CIse <- c(mean(girls) + c(-1, 1)*qt(.995, length(girls) - 1)*sd(bsmean)))
+(CIse <- c(mean(girls) + 
+    c(-1, 1)*qt(.995, length(girls) - 1)*sd(bsmean)))
 ```
 \normalsize
 
@@ -1875,8 +1888,8 @@ The $t$ confidence interval assumes that the underlying population is normal, so
 We draw random samples from the right-skewed gamma distribution with $\alpha=5$ and $\lambda=2$ and count the number of times the $95\%$ confidence interval misses the mean $\mu=5/2$ on each side.
 \end{tcolorbox}
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+\normalsize
+```{r, out.height = '40%', out.width = '60%'}
 set.seed(13)
 x <- rgamma(n=1000, shape=5, rate=2)
 #create histogram to view distribution of values
@@ -1891,7 +1904,7 @@ hist(x, main="")
 
 
 \tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r}
 set.seed(13)
 tooLow <- 0       # set counter to 0
 tooHigh <- 0      # set counter to 0
@@ -1939,7 +1952,7 @@ since accuracy of $t$ intervals depends on how close the $t$ statistic is to hav
 ## Assumptions underlying $t$-confidence interval
 
 \tiny
-```{r echo=TRUE, eval=FALSE,warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r echo = TRUE, eval = FALSE}
 set.seed(13); library(gridExtra)
 n <- 10           # sample size
 q <- qt(0.975, n - 1)
@@ -1959,12 +1972,12 @@ for(i in 1:N){
   TSE10[i] <- (xbar - 1)/(s/sqrt(n))
 }
 n <- 10
-p1<-qqmath(~TSU, col = "red", xlim = c(-3,3), ylim = c(-3,3), distribution = function(p){qt(p, df = n - 1)}, 
+p1 <- qqmath(~TSU, col = "red", xlim = c(-3,3), ylim = c(-3,3), distribution = function(p){qt(p, df = n - 1)}, 
        xlab = "Theoretical t quantiles", ylab = "Sample quantiles", main = "Uniform, n = 10", 
        panel = function(x,...){
   panel.qqmath(x, pch = ".", ...)
   panel.abline(a = 0, b =1, ...)})
-p2<-qqmath(~TSE10, col = "red", xlim = c(-3,3), ylim = c(-3,3), distribution = function(p){qt(p, df = n - 1)}, 
+p2 <- qqmath(~TSE10, col = "red", xlim = c(-3,3), ylim = c(-3,3), distribution = function(p){qt(p, df = n - 1)}, 
        xlab = "Theoretical t quantiles", ylab = "Sample quantiles", main = "Exponential, n = 10", 
        panel = function(x,...){
   panel.qqmath(x, pch = ".", ...)
@@ -1978,7 +1991,7 @@ gridExtra::grid.arrange(p1, p2, ncol = 2)
 ## Assumptions underlying $t$-confidence interval
 
 \tiny
-```{r echo=FALSE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+```{r echo = FALSE, out.height = '50%',out.width = '80%'}
 set.seed(13); library(gridExtra)
 n <- 10           # sample size
 q <- qt(0.975, n - 1)
@@ -2021,7 +2034,7 @@ gridExtra::grid.arrange(p1, p2, ncol = 2)
 ## Assumptions underlying $t$-confidence interval
 
 \tiny
-```{r echo=TRUE,eval=FALSE,warning=FALSE, message=FALSE,out.height = '35%',out.width = '40%', fig.align='center'}
+```{r echo = TRUE, eval = FALSE}
 set.seed(13); library(gridExtra)
 n <- 10           # sample size
 q <- qt(0.975, n - 1)
@@ -2061,7 +2074,7 @@ gridExtra::grid.arrange(p1, p2, ncol = 2)
 ## Assumptions underlying $t$-confidence interval
 
 \tiny
-```{r echo=FALSE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+```{r echo = FALSE, out.height = '50%', out.width = '80%'}
 set.seed(13); library(gridExtra)
 n <- 10           # sample size
 q <- qt(0.975, n - 1)
