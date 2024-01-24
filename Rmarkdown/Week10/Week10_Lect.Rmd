@@ -741,9 +741,9 @@ In this case we know that the population proportion $p$ is 0.375. In other words
 
   - Let's use the `bowl_sample_1` data frame in the `moderndive` package
 
-\tiny
+\small
 ```{r}
-head(bowl_sample_1)
+head(bowl_sample_1, n = 3)
 bowl_sample_1 %>% 
   summarize(p_hat = mean(color == "red"))
 ```
