@@ -790,16 +790,10 @@ The second \texttt{group\_by(month)} overwrote
 \texttt{group\_by(origin)}.
 \end{frame}
 
-\begin{frame}[fragile]{\texttt{mutate} existing variables}
+\begin{frame}{\texttt{mutate} existing variables}
 \protect\hypertarget{mutate-existing-variables}{}
 Another common transformation of data is to create/compute new variables
 based on existing ones.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week3\_4.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.4\textheight]{week3_4} \end{center}
 
@@ -813,12 +807,12 @@ from \(^\circ\)F to \(^\circ\)C using the formula
 We can apply this formula to the \texttt{temp} variable using the
 \texttt{mutate()} function from the \texttt{dplyr} package.
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{weather }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{temp\_in\_C =}\NormalTok{ (temp }\SpecialCharTok{{-}} \DecValTok{32}\NormalTok{) }\SpecialCharTok{/} \FloatTok{1.8}\NormalTok{)}
+\NormalTok{weather }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{temp\_in\_C =}\NormalTok{ (temp }\SpecialCharTok{{-}} \DecValTok{32}\NormalTok{) }\SpecialCharTok{/} \FloatTok{1.8}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ weather}
 \end{Highlighting}
 \end{Shaded}
 
@@ -841,37 +835,31 @@ We can apply this formula to the \texttt{temp} variable using the
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
 \protect\hypertarget{mutate-existing-variables-2}{}
-Let's now compute monthly average temperatures in both \(^\circ\)F and
+Let's compute monthly average temperatures in both \(^\circ\)F and
 \(^\circ\)C.
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{summary\_monthly\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_temp\_in\_F =} \FunctionTok{mean}\NormalTok{(temp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
-            \AttributeTok{mean\_temp\_in\_C =} \FunctionTok{mean}\NormalTok{(temp\_in\_C, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
-\NormalTok{summary\_monthly\_temp}
+            \AttributeTok{mean\_temp\_in\_C =} \FunctionTok{mean}\NormalTok{(temp\_in\_C, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }
+\NormalTok{summary\_monthly\_temp }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 12 x 3
-   month mean_temp_in_F mean_temp_in_C
-   <int>          <dbl>          <dbl>
- 1     1           35.6           2.02
- 2     2           34.3           1.26
- 3     3           39.9           4.38
- 4     4           51.7          11.0 
- 5     5           61.8          16.6 
- 6     6           72.2          22.3 
- 7     7           80.1          26.7 
- 8     8           74.5          23.6 
- 9     9           67.4          19.7 
-10    10           60.1          15.6 
-11    11           45.0           7.22
-12    12           38.4           3.58
+# A tibble: 5 x 3
+  month mean_temp_in_F mean_temp_in_C
+  <int>          <dbl>          <dbl>
+1     1           35.6           2.02
+2     2           34.3           1.26
+3     3           39.9           4.38
+4     4           51.7          11.0 
+5     5           61.8          16.6 
 \end{verbatim}
 
 \normalsize
@@ -891,49 +879,64 @@ Let's consider another example.
   create this variable using the \texttt{mutate()} function:
 \end{itemize}
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{flights }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{gain =}\NormalTok{ dep\_delay }\SpecialCharTok{{-}}\NormalTok{ arr\_delay)}
-\NormalTok{flights  }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(dep\_delay, arr\_delay, gain)}\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{()}
+\NormalTok{flights  }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(dep\_delay, arr\_delay, gain) }\OtherTok{{-}\textgreater{}}\NormalTok{ flights\_gain}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-# A tibble: 6 x 3
-  dep_delay arr_delay  gain
-      <dbl>     <dbl> <dbl>
-1         2        11    -9
-2         4        20   -16
-3         2        33   -31
-4        -1       -18    17
-5        -6       -25    19
-6        -4        12   -16
-\end{verbatim}
 
 \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
 \protect\hypertarget{mutate-existing-variables-4}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_gain}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 336,776 x 3
+   dep_delay arr_delay  gain
+       <dbl>     <dbl> <dbl>
+ 1         2        11    -9
+ 2         4        20   -16
+ 3         2        33   -31
+ 4        -1       -18    17
+ 5        -6       -25    19
+ 6        -4        12   -16
+ 7        -5        19   -24
+ 8        -3       -14    11
+ 9        -3        -8     5
+10        -2         8   -10
+# i 336,766 more rows
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{mutate} existing variables}
+\protect\hypertarget{mutate-existing-variables-5}{}
 Let's look at some summary statistics of the \texttt{gain} variable
 
-\tiny
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{gain\_summary }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}
-    \AttributeTok{min =} \FunctionTok{min}\NormalTok{(gain, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
-    \AttributeTok{q1 =} \FunctionTok{quantile}\NormalTok{(gain, }\FloatTok{0.25}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
-    \AttributeTok{median =} \FunctionTok{quantile}\NormalTok{(gain, }\FloatTok{0.5}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
-    \AttributeTok{q3 =} \FunctionTok{quantile}\NormalTok{(gain, }\FloatTok{0.75}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
-    \AttributeTok{max =} \FunctionTok{max}\NormalTok{(gain, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
-    \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(gain, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
-    \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(gain, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
-    \AttributeTok{missing =} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(gain))}
+    \AttributeTok{Min =} \FunctionTok{min}\NormalTok{(gain, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{Q1 =} \FunctionTok{quantile}\NormalTok{(gain, }\FloatTok{0.25}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{Median =} \FunctionTok{quantile}\NormalTok{(gain, }\FloatTok{0.5}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{Q3 =} \FunctionTok{quantile}\NormalTok{(gain, }\FloatTok{0.75}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{Max =} \FunctionTok{max}\NormalTok{(gain, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(gain, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{SD =} \FunctionTok{sd}\NormalTok{(gain, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{Missing =} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(gain))}
 \NormalTok{  )}
 \NormalTok{gain\_summary}
 \end{Highlighting}
@@ -941,7 +944,7 @@ Let's look at some summary statistics of the \texttt{gain} variable
 
 \begin{verbatim}
 # A tibble: 1 x 8
-    min    q1 median    q3   max  mean    sd missing
+    Min    Q1 Median    Q3   Max  Mean    SD Missing
   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>   <int>
 1  -196    -3      7    17   109  5.66  18.0    9430
 \end{verbatim}
@@ -950,20 +953,23 @@ Let's look at some summary statistics of the \texttt{gain} variable
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-5}{}
+\protect\hypertarget{mutate-existing-variables-6}{}
 Since \texttt{gain} is a numerical variable, we can visualize its
 distribution using a histogram.
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ flights, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gain)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{bins =} \DecValTok{20}\NormalTok{)}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }
+                 \AttributeTok{bins =} \DecValTok{20}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution of Gain"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{Week3_Lect_files/figure-beamer/unnamed-chunk-26-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week3_Lect_files/figure-beamer/unnamed-chunk-27-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -972,10 +978,11 @@ distribution using a histogram.
 \begin{itemize}
 \item
   One of the most commonly performed data wrangling tasks is to sort a
-  data frame's rows in the alphanumeric order of one of the variables.
+  data frame's rows in alphanumeric order by one of the variables in the
+  data frame/tibble.
 \item
   The \texttt{dplyr} package's \texttt{arrange()} function allows us to
-  sort/reorder a data frame's rows according to the values of the
+  sort/reorder a data frame's rows according to the values of a
   specified variable.
 \end{itemize}
 \end{frame}
@@ -985,32 +992,26 @@ distribution using a histogram.
 Suppose we are interested in determining the most frequent destination
 airports for all domestic flights departing from New York City in 2013.
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{freq\_dest }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{num\_flights =} \FunctionTok{n}\NormalTok{())}
-\NormalTok{freq\_dest}
+\NormalTok{freq\_dest }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 105 x 2
-   dest  num_flights
-   <chr>       <int>
- 1 ABQ           254
- 2 ACK           265
- 3 ALB           439
- 4 ANC             8
- 5 ATL         17215
- 6 AUS          2439
- 7 AVL           275
- 8 BDL           443
- 9 BGR           375
-10 BHM           297
-# i 95 more rows
+# A tibble: 5 x 2
+  dest  num_flights
+  <chr>       <int>
+1 ABQ           254
+2 ACK           265
+3 ALB           439
+4 ANC             8
+5 ATL         17215
 \end{verbatim}
 
 \normalsize
@@ -1024,30 +1025,25 @@ data frame are sorted in alphabetical order of destination.
 Say instead we would like to see the same data, but sorted from the most
 to the least number of flights (\texttt{num\_flights}) instead
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{freq\_dest }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{arrange}\NormalTok{(num\_flights)}
+  \FunctionTok{arrange}\NormalTok{(num\_flights) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 105 x 2
-   dest  num_flights
-   <chr>       <int>
- 1 LEX             1
- 2 LGA             1
- 3 ANC             8
- 4 SBN            10
- 5 HDN            15
- 6 MTJ            15
- 7 EYW            17
- 8 PSP            19
- 9 JAC            25
-10 BZN            36
-# i 95 more rows
+# A tibble: 5 x 2
+  dest  num_flights
+  <chr>       <int>
+1 LEX             1
+2 LGA             1
+3 ANC             8
+4 SBN            10
+5 HDN            15
 \end{verbatim}
 
 \normalsize
@@ -1059,32 +1055,27 @@ the least frequent destination airports displayed first.
 \begin{frame}[fragile]{\texttt{arrange} and sort rows}
 \protect\hypertarget{arrange-and-sort-rows-3}{}
 To switch the ordering to be in ``descending'' order instead, we use the
-\texttt{desc()} function as so:
+\texttt{desc()} function.
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{freq\_dest }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(num\_flights))}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(num\_flights)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 105 x 2
-   dest  num_flights
-   <chr>       <int>
- 1 ORD         17283
- 2 ATL         17215
- 3 LAX         16174
- 4 BOS         15508
- 5 MCO         14082
- 6 CLT         14064
- 7 SFO         13331
- 8 FLL         12055
- 9 MIA         11728
-10 DCA          9705
-# i 95 more rows
+# A tibble: 5 x 2
+  dest  num_flights
+  <chr>       <int>
+1 ORD         17283
+2 ATL         17215
+3 LAX         16174
+4 BOS         15508
+5 MCO         14082
 \end{verbatim}
 
 \normalsize
@@ -1113,13 +1104,7 @@ two different datasets.
 \protect\hypertarget{join-data-frames-1}{}
 Lets see the data relationships from the \texttt{nycflights13} package.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week3\_5.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{week3_5} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth,height=0.6\textheight]{week3_5} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Matching ``key'' variable names}
@@ -1136,14 +1121,14 @@ variable we want to join/merge/match the rows by has the same name:
   then compare the resulting data frames:
 \end{itemize}
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{flights\_joined }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{inner\_join}\NormalTok{(airlines, }\AttributeTok{by =} \StringTok{"carrier"}\NormalTok{)}
-\CommentTok{\#View(flights)}
-\CommentTok{\#View(flights\_joined)}
+\CommentTok{\# View(flights)}
+\CommentTok{\# View(flights\_joined)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1151,20 +1136,14 @@ variable we want to join/merge/match the rows by has the same name:
 
 Observe that the \texttt{flights} and \texttt{flights\_joined} data
 frames are identical except that \texttt{flights\_joined} has an
-additional variable name.
+additional variable \texttt{name}.
 \end{frame}
 
 \begin{frame}[fragile]{Matching ``key'' variable names}
 \protect\hypertarget{matching-key-variable-names-1}{}
 A visual representation of the \texttt{inner\_join()} is shown below
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week3\_6.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{week3_6} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.3\textheight]{week3_6} \end{center}
 
 \begin{itemize}
 \item
@@ -1173,11 +1152,11 @@ A visual representation of the \texttt{inner\_join()} is shown below
   \begin{itemize}
   \tightlist
   \item
-    such as left\_join(), right\_join(), outer\_join(), and
-    anti\_join()),
+    such as \texttt{left\_join()}, \texttt{right\_join()},
+    \texttt{outer\_join()}, and \texttt{anti\_join()},
   \item
-    but the inner\_join() will solve nearly all of the problems you'll
-    encounter in this class.
+    but the \texttt{inner\_join()} will solve nearly all of the problems
+    you'll encounter in this class.
   \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1200,11 +1179,11 @@ A visual representation of the \texttt{inner\_join()} is shown below
   airport:
 \end{itemize}
 
-\small
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#View(airports)}
+\CommentTok{\# View(airports)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1236,13 +1215,13 @@ In order to join these two data frames by airport code, our
 \texttt{inner\_join()} operation will use the
 \texttt{by\ =\ c("dest"\ =\ "faa")} argument:
 
-\small
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{flights\_with\_airport\_names }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{inner\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"dest"} \OtherTok{=} \StringTok{"faa"}\NormalTok{))}
-\CommentTok{\#View(flights\_with\_airport\_names)}
+\CommentTok{\# View(flights\_with\_airport\_names)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1255,7 +1234,7 @@ Let's construct the chain of pipe operators \texttt{\%\textgreater{}\%}
 that computes the number of flights from NYC to each destination, but
 also includes information about each destination airport:
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1265,25 +1244,16 @@ also includes information about each destination airport:
   \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(num\_flights)) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{inner\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"dest"} \OtherTok{=} \StringTok{"faa"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{airport\_name =}\NormalTok{ name)}
-\NormalTok{named\_dests}
+\NormalTok{named\_dests[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 101 x 9
-   dest  num_flights airport_name             lat    lon   alt    tz dst   tzone
-   <chr>       <int> <chr>                  <dbl>  <dbl> <dbl> <dbl> <chr> <chr>
- 1 ORD         17283 Chicago Ohare Intl      42.0  -87.9   668    -6 A     Amer~
- 2 ATL         17215 Hartsfield Jackson At~  33.6  -84.4  1026    -5 A     Amer~
- 3 LAX         16174 Los Angeles Intl        33.9 -118.    126    -8 A     Amer~
- 4 BOS         15508 General Edward Lawren~  42.4  -71.0    19    -5 A     Amer~
- 5 MCO         14082 Orlando Intl            28.4  -81.3    96    -5 A     Amer~
- 6 CLT         14064 Charlotte Douglas Intl  35.2  -80.9   748    -5 A     Amer~
- 7 SFO         13331 San Francisco Intl      37.6 -122.     13    -8 A     Amer~
- 8 FLL         12055 Fort Lauderdale Holly~  26.1  -80.2     9    -5 A     Amer~
- 9 MIA         11728 Miami Intl              25.8  -80.3     8    -5 A     Amer~
-10 DCA          9705 Ronald Reagan Washing~  38.9  -77.0    15    -5 A     Amer~
-# i 91 more rows
+# A tibble: 2 x 3
+  dest  num_flights airport_name                   
+  <chr>       <int> <chr>                          
+1 ORD         17283 Chicago Ohare Intl             
+2 ATL         17215 Hartsfield Jackson Atlanta Intl
 \end{verbatim}
 
 \normalsize
@@ -1317,21 +1287,38 @@ also includes information about each destination airport:
   \begin{itemize}
   \tightlist
   \item
-    Recall, this function is is short for ``combine'' or
-    ``concatenate.''
+    Recall, this function is short for ``combine'' or ``concatenate.''
   \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Multiple ``key'' variables}
 \protect\hypertarget{multiple-key-variables-1}{}
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{flights\_weather\_joined }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{inner\_join}\NormalTok{(weather, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"month"}\NormalTok{, }\StringTok{"day"}\NormalTok{, }\StringTok{"hour"}\NormalTok{, }\StringTok{"origin"}\NormalTok{))}
-\CommentTok{\#View(flights\_weather\_joined)}
+  \FunctionTok{inner\_join}\NormalTok{(weather, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"month"}\NormalTok{, }\StringTok{"day"}\NormalTok{, }
+                             \StringTok{"hour"}\NormalTok{, }\StringTok{"origin"}\NormalTok{))}
+\NormalTok{flights\_weather\_joined[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 5 x 6
+   year month   day dep_time sched_dep_time dep_delay
+  <int> <int> <int>    <int>          <int>     <dbl>
+1  2013     1     1      517            515         2
+2  2013     1     1      533            529         4
+3  2013     1     1      542            540         2
+4  2013     1     1      544            545        -1
+5  2013     1     1      554            600        -6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# View(flights\_weather\_joined)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1340,18 +1327,12 @@ also includes information about each destination airport:
 
 \begin{frame}[fragile]{\texttt{select} variables}
 \protect\hypertarget{select-variables}{}
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week3\_8.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{week3_8} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{week3_8} \end{center}
 
 We've seen that the \texttt{flights} data frame in the
 \texttt{nycflights13} package contains 19 different variables.
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1368,7 +1349,7 @@ However, say you only need two of these 19 variables, say
 \texttt{carrier} and \texttt{flight}. You can \texttt{select()} these
 two variables:
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1384,7 +1365,7 @@ example, lets say we want to remove the \texttt{year} in the
 \texttt{flights} data frame. We can deselect year by using the
 \texttt{-} sign:
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1400,11 +1381,26 @@ example, lets say we want to remove the \texttt{year} in the
 Another way of selecting columns/variables is by specifying a range of
 columns:
 
-\tiny
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flight\_arr\_times }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(month}\SpecialCharTok{:}\NormalTok{day, arr\_time}\SpecialCharTok{:}\NormalTok{sched\_arr\_time)}
+\FunctionTok{names}\NormalTok{(flights)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] "year"           "month"          "day"            "dep_time"      
+ [5] "sched_dep_time" "dep_delay"      "arr_time"       "sched_arr_time"
+ [9] "arr_delay"      "carrier"        "flight"         "tailnum"       
+[13] "origin"         "dest"           "air_time"       "distance"      
+[17] "hour"           "minute"         "time_hour"      "gain"          
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flight\_arr\_times }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(month}\SpecialCharTok{:}\NormalTok{day, arr\_time}\SpecialCharTok{:}\NormalTok{sched\_arr\_time)}
 \CommentTok{\#flight\_arr\_times}
 \end{Highlighting}
 \end{Shaded}
@@ -1432,13 +1428,14 @@ used with the \texttt{everything()} helper function.
   remaining variables:
 \end{itemize}
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{flights\_reorder }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(year, month, day, hour, minute, time\_hour, }\FunctionTok{everything}\NormalTok{())}
-\CommentTok{\#glimpse(flights\_reorder)}
+  \FunctionTok{select}\NormalTok{(year, month, day, hour, minute, time\_hour, }
+         \FunctionTok{everything}\NormalTok{())}
+\CommentTok{\# glimpse(flights\_reorder)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1451,27 +1448,21 @@ Lastly, the helper functions \texttt{starts\_with()},
 \texttt{ends\_with()}, and \texttt{contains(}) can be used to select
 variables/columns that match those conditions. As examples,
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights\_sub1}\OtherTok{\textless{}{-}}\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"a"}\NormalTok{))}
-\NormalTok{flights\_sub2}\OtherTok{\textless{}{-}}\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"delay"}\NormalTok{))}
-\NormalTok{flights\_sub3}\OtherTok{\textless{}{-}}\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{contains}\NormalTok{(}\StringTok{"time"}\NormalTok{))}
+\NormalTok{flights\_sub1 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"a"}\NormalTok{))}
+\NormalTok{flights\_sub2 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"delay"}\NormalTok{))}
+\NormalTok{flights\_sub3 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{contains}\NormalTok{(}\StringTok{"time"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{Summary table}
+\begin{frame}{Summary table}
 \protect\hypertarget{summary-table}{}
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week3\_7.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.6\textheight]{week3_7} \end{center}
 \end{frame}
 
@@ -1482,22 +1473,17 @@ variables/columns that match those conditions. As examples,
 \protect\hypertarget{tidy-data-1}{}
 Let's now learn about the concept of \textbf{``tidy''} data format.
 
-\begin{itemize}
-\tightlist
-\item
-  We focus on the \texttt{drinks} data frame in the
-  \texttt{fivethirtyeight} package.
-\end{itemize}
-
-\tiny
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(fivethirtyeight)}
 \NormalTok{drinks\_smaller }\OtherTok{\textless{}{-}}\NormalTok{ drinks }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(country }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"USA"}\NormalTok{, }\StringTok{"China"}\NormalTok{, }\StringTok{"Italy"}\NormalTok{, }\StringTok{"Saudi Arabia"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(country }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"USA"}\NormalTok{, }\StringTok{"China"}\NormalTok{, }\StringTok{"Italy"}\NormalTok{, }
+                        \StringTok{"Saudi Arabia"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{total\_litres\_of\_pure\_alcohol) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{rename}\NormalTok{(}\AttributeTok{beer =}\NormalTok{ beer\_servings, }\AttributeTok{spirit =}\NormalTok{ spirit\_servings, }\AttributeTok{wine =}\NormalTok{ wine\_servings)}
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{beer =}\NormalTok{ beer\_servings, }\AttributeTok{spirit =}\NormalTok{ spirit\_servings, }
+         \AttributeTok{wine =}\NormalTok{ wine\_servings)}
 \NormalTok{drinks\_smaller}
 \end{Highlighting}
 \end{Shaded}
@@ -1520,10 +1506,7 @@ Let's now learn about the concept of \textbf{``tidy''} data format.
 The \texttt{drinks\_smaller} data frame, cannot be used to create the
 side-by-side barplot show below.
 
-\small
-
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{week3new1} \end{center}
-\normalsize
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{week3new1} \end{center}
 
 why?
 \end{frame}
@@ -1577,25 +1560,18 @@ standardized format.
   \end{itemize}
 \end{itemize}
 
-\small
-
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.25\textheight]{week3new2} \end{center}
-\normalsize
 \end{frame}
 
 \begin{frame}{``Tidy'' data: Definition}
 \protect\hypertarget{tidy-data-definition-1}{}
-Stock prices (non-tidy format): \small
+Stock prices (non-tidy format):
 
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.25\textheight]{week3new3} \end{center}
-\normalsize
 
 Stock prices (tidy format):
 
-\small
-
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{week3new4} \end{center}
-\normalsize
 \end{frame}
 
 \begin{frame}{``Tidy'' data: Definition}
@@ -1628,7 +1604,7 @@ Stock prices (tidy format):
 We convert the \texttt{drinks\_smaller} data to ``tidy'' format by using
 the \texttt{pivot\_longer()} function from the \texttt{tidyr} package:
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1637,6 +1613,16 @@ the \texttt{pivot\_longer()} function from the \texttt{tidyr} package:
   \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"type"}\NormalTok{, }
                \AttributeTok{values\_to =} \StringTok{"servings"}\NormalTok{, }
                \AttributeTok{cols =} \SpecialCharTok{{-}}\NormalTok{country)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Coverting to ``Tidy'' format}
+\protect\hypertarget{coverting-to-tidy-format-1}{}
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{drinks\_smaller\_tidy}
 \end{Highlighting}
 \end{Shaded}
@@ -1658,13 +1644,14 @@ the \texttt{pivot\_longer()} function from the \texttt{tidyr} package:
 11 USA          spirit      158
 12 USA          wine         84
 \end{verbatim}
-
-\normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Coverting to ``Tidy'' format}
-\protect\hypertarget{coverting-to-tidy-format-1}{}
-These will produce same results \tiny
+\protect\hypertarget{coverting-to-tidy-format-2}{}
+Note that the two ways to specify the vector argument to \texttt{cols}
+produce the same output.
+
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1673,8 +1660,7 @@ These will produce same results \tiny
   \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"type"}\NormalTok{, }
                \AttributeTok{values\_to =} \StringTok{"servings"}\NormalTok{, }
                \AttributeTok{cols =} \FunctionTok{c}\NormalTok{(beer, spirit, wine))}
-
-
+\CommentTok{\# Or}
 \NormalTok{drinks\_smaller }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"type"}\NormalTok{, }
                \AttributeTok{values\_to =} \StringTok{"servings"}\NormalTok{, }
@@ -1686,18 +1672,20 @@ These will produce same results \tiny
 \end{frame}
 
 \begin{frame}[fragile]{Coverting to ``Tidy'' format}
-\protect\hypertarget{coverting-to-tidy-format-2}{}
-\tiny
+\protect\hypertarget{coverting-to-tidy-format-3}{}
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyr)}
-\FunctionTok{ggplot}\NormalTok{(drinks\_smaller\_tidy, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ country, }\AttributeTok{y =}\NormalTok{ servings, }\AttributeTok{fill =}\NormalTok{ type)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(drinks\_smaller\_tidy, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ country, }\AttributeTok{y =}\NormalTok{ servings, }
+                                \AttributeTok{fill =}\NormalTok{ type)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth,height=0.5\textheight]{Week3_Lect_files/figure-beamer/unnamed-chunk-52-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week3_Lect_files/figure-beamer/unnamed-chunk-54-1} \end{center}
 \normalsize
 \end{frame}
 

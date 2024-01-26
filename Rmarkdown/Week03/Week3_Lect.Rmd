@@ -423,7 +423,7 @@ Observe that there are 36 rows to `by_origin_monthly` because there are 12 month
 Why do we `group_by(origin, month)` and not `group_by(origin)` and then `group_by(month)`? Let’s investigate:
 
  \tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+```{r}
 by_origin_monthly_incorrect <- flights %>% 
   group_by(origin) %>% 
   group_by(month) %>% 
@@ -440,7 +440,7 @@ The second `group_by(month)` overwrote `group_by(origin)`.
 
 Another common transformation of data is to create/compute new variables based on existing ones. 
 
-```{r warning=FALSE, message=FALSE,out.height = '40%',out.width = '80%', fig.align='center'}
+```{r echo = FALSE, out.height = '40%', out.width = '80%'}
 knitr::include_graphics("week3_4.png")
 ```
 
@@ -452,10 +452,10 @@ $$\text{temp in C}=\frac{\text{temp in F}-32}{1.8}$$
 
 We can apply this formula to the `temp` variable using the `mutate()` function from the `dplyr` package.
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
-weather <- weather %>% 
-  mutate(temp_in_C = (temp - 32) / 1.8)
+\normalsize
+```{r}
+weather %>% 
+  mutate(temp_in_C = (temp - 32) / 1.8) -> weather
 ```
 \normalsize
 
@@ -469,16 +469,17 @@ weather <- weather %>%
 
 ## `mutate` existing variables
 
-Let’s now compute monthly average temperatures in both $^\circ$F and $^\circ$C. 
+Let’s compute monthly average temperatures in both $^\circ$F and $^\circ$C. 
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+\normalsize
+```{r}
 summary_monthly_temp <- weather %>% 
   group_by(month) %>% 
   summarize(mean_temp_in_F = mean(temp, na.rm = TRUE), 
-            mean_temp_in_C = mean(temp_in_C, na.rm = TRUE))
-summary_monthly_temp
+            mean_temp_in_C = mean(temp_in_C, na.rm = TRUE)) 
+summary_monthly_temp %>% 
+  head(n = 5)
 ```
 \normalsize
 
@@ -494,31 +495,38 @@ Let’s consider another example.
 - This is known in the airline industry as `gain`, and we will create this variable using the `mutate()` function:
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+\normalsize
+```{r}
 flights <- flights %>% 
   mutate(gain = dep_delay - arr_delay)
-flights  %>% select(dep_delay, arr_delay, gain)%>% head()
+flights  %>% 
+  select(dep_delay, arr_delay, gain) -> flights_gain
 ```
 \normalsize
 
 
 ## `mutate` existing variables
 
+```{r}
+flights_gain
+```
+
+## `mutate` existing variables
+
 Let’s look at some summary statistics of the `gain` variable
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+\small
+```{r }
 gain_summary <- flights %>% 
   summarize(
-    min = min(gain, na.rm = TRUE),
-    q1 = quantile(gain, 0.25, na.rm = TRUE),
-    median = quantile(gain, 0.5, na.rm = TRUE),
-    q3 = quantile(gain, 0.75, na.rm = TRUE),
-    max = max(gain, na.rm = TRUE),
-    mean = mean(gain, na.rm = TRUE),
-    sd = sd(gain, na.rm = TRUE),
-    missing = sum(is.na(gain))
+    Min = min(gain, na.rm = TRUE),
+    Q1 = quantile(gain, 0.25, na.rm = TRUE),
+    Median = quantile(gain, 0.5, na.rm = TRUE),
+    Q3 = quantile(gain, 0.75, na.rm = TRUE),
+    Max = max(gain, na.rm = TRUE),
+    Mean = mean(gain, na.rm = TRUE),
+    SD = sd(gain, na.rm = TRUE),
+    Missing = sum(is.na(gain))
   )
 gain_summary
 ```
@@ -529,10 +537,13 @@ gain_summary
 
 Since `gain` is a numerical variable, we can visualize its distribution using a histogram.
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r out.height = '45%', out.width = '60%'}
 ggplot(data = flights, mapping = aes(x = gain)) +
-  geom_histogram(color = "white", bins = 20)
+  geom_histogram(color = "black", fill = "lightblue", 
+                 bins = 20) + 
+  theme_bw() + 
+  labs(title = "Distribution of Gain")
 ```
 \normalsize
 
@@ -540,9 +551,9 @@ ggplot(data = flights, mapping = aes(x = gain)) +
 
 ## `arrange` and sort rows
 
-- One of the most commonly performed data wrangling tasks is to sort a data frame’s rows in the alphanumeric order of one of the variables. 
+- One of the most commonly performed data wrangling tasks is to sort a data frame’s rows in alphanumeric order by one of the variables in the data frame/tibble. 
 
-- The `dplyr` package’s `arrange()` function allows us to sort/reorder a data frame’s rows according to the values of the specified variable.
+- The `dplyr` package’s `arrange()` function allows us to sort/reorder a data frame’s rows according to the values of a specified variable.
 
 
 
@@ -552,12 +563,12 @@ ggplot(data = flights, mapping = aes(x = gain)) +
 Suppose we are interested in determining the most frequent destination airports for all domestic flights departing from New York City in 2013. 
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 freq_dest <- flights %>% 
   group_by(dest) %>% 
   summarize(num_flights = n())
-freq_dest
+freq_dest %>% head(n = 5)
 ```
 \normalsize
 
@@ -571,10 +582,11 @@ Observe that by default the rows of the resulting `freq_dest` data frame are sor
 
 Say instead we would like to see the same data, but sorted from the most to the least number of flights (`num_flights`) instead
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 freq_dest %>% 
-  arrange(num_flights)
+  arrange(num_flights) %>% 
+  head(n = 5)
 ```
 \normalsize
 
@@ -583,12 +595,13 @@ This is, however, the opposite of what we want. The rows are sorted with the lea
 
 ## `arrange` and sort rows
 
-To switch the ordering to be in “descending” order instead, we use the `desc()` function as so:
+To switch the ordering to be in “descending” order instead, we use the `desc()` function.
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r }
 freq_dest %>% 
-  arrange(desc(num_flights))
+  arrange(desc(num_flights)) %>% 
+  head(n = 5)
 ```
 \normalsize
 
@@ -611,7 +624,7 @@ Another common data transformation task is “joining” or “merging” two di
 Lets see the data relationships from the `nycflights13` package. 
 
 
-```{r warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r echo = FALSE, out.height = '60%',out.width = '80%'}
 knitr::include_graphics("week3_5.png")
 ```
 
@@ -626,16 +639,16 @@ In both the `flights` and `airlines` data frames, the key variable we want to jo
 - Let’s use the `inner_join()` function to join the two data frames, where the rows will be matched by the variable carrier, and then compare the resulting data frames:
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 flights_joined <- flights %>% 
   inner_join(airlines, by = "carrier")
-#View(flights)
-#View(flights_joined)
+# View(flights)
+# View(flights_joined)
 ```
 \normalsize
 
-Observe that the `flights` and `flights_joined` data frames are identical except that `flights_joined` has an additional variable name. 
+Observe that the `flights` and `flights_joined` data frames are identical except that `flights_joined` has an additional variable `name`. 
 
 
 ## Matching “key” variable names
@@ -643,14 +656,14 @@ Observe that the `flights` and `flights_joined` data frames are identical except
 A visual representation of the `inner_join()` is shown below
 
 
-```{r warning=FALSE, message=FALSE,out.height = '40%',out.width = '60%', fig.align='center'}
+```{r echo = FALSE, out.height = '30%',out.width = '60%'}
 knitr::include_graphics("week3_6.png")
 ```
 
 - There are other types of joins available, 
 
-   - such as left_join(), right_join(), outer_join(), and anti_join()), 
-   - but the inner_join() will solve nearly all of the problems you’ll encounter in this class. 
+   - such as `left_join()`, `right_join()`, `outer_join()`, and `anti_join()`, 
+   - but the `inner_join()` will solve nearly all of the problems you’ll encounter in this class. 
    
 
 
@@ -661,12 +674,11 @@ knitr::include_graphics("week3_6.png")
 
     - and you ask yourself questions like: “What cities are these airports in?”, or “Is "ORD" Orlando?”, or “Where is "FLL"?”
 
-
 - The `airports` data frame contains the airport codes for each airport:
 
-\small
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
-#View(airports)
+\normalsize
+```{r}
+# View(airports)
 ```
 \normalsize
 
@@ -683,11 +695,11 @@ knitr::include_graphics("week3_6.png")
 
 In order to join these two data frames by airport code, our `inner_join()` operation will use the `by = c("dest" = "faa")` argument:
 
-\small
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 flights_with_airport_names <- flights %>% 
   inner_join(airports, by = c("dest" = "faa"))
-#View(flights_with_airport_names)
+# View(flights_with_airport_names)
 ```
 \normalsize
 
@@ -697,15 +709,15 @@ flights_with_airport_names <- flights %>%
 
 Let’s construct the chain of pipe operators `%>%` that computes the number of flights from NYC to each destination, but also includes information about each destination airport:
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 named_dests <- flights %>%
   group_by(dest) %>%
   summarize(num_flights = n()) %>%
   arrange(desc(num_flights)) %>%
   inner_join(airports, by = c("dest" = "faa")) %>%
   rename(airport_name = name)
-named_dests
+named_dests[1:2, 1:3]
 ```
 \normalsize
 
@@ -723,32 +735,34 @@ named_dests
 
 - We achieve this by specifying a vector of key variables to join by using the `c()` function.
 
-    - Recall, this function is is short for “combine” or “concatenate.”
+    - Recall, this function is short for “combine” or “concatenate.”
     
 
 
 ## Multiple “key” variables
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 flights_weather_joined <- flights %>%
-  inner_join(weather, by = c("year", "month", "day", "hour", "origin"))
-#View(flights_weather_joined)
+  inner_join(weather, by = c("year", "month", "day", 
+                             "hour", "origin"))
+flights_weather_joined[1:5, 1:6]
+# View(flights_weather_joined)
 ```
 \normalsize
 
 
 ## `select` variables
 
-```{r warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+```{r echo = FALSE, out.height = '45%', out.width = '60%'}
 knitr::include_graphics("week3_8.png")
 ```
 
 We’ve seen that the `flights` data frame in the `nycflights13` package contains 19 different variables. 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 #glimpse(flights)
 ```
 \normalsize
@@ -759,8 +773,8 @@ We’ve seen that the `flights` data frame in the `nycflights13` package contain
 
 However, say you only need two of these 19 variables, say `carrier` and `flight`. You can `select()` these two variables:
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 flights_sub <-flights %>% 
   select(carrier, flight)
 ```
@@ -768,8 +782,8 @@ flights_sub <-flights %>%
 
 Let’s say instead you want to drop, or de-select, certain variables. For example, lets say we want to remove the `year` in the `flights` data frame. We can deselect year by using the `-` sign:
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 flights_no_year <- flights %>% select(-year)
 ```
 \normalsize
@@ -780,9 +794,11 @@ flights_no_year <- flights %>% select(-year)
 
 Another way of selecting columns/variables is by specifying a range of columns:
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
-flight_arr_times <- flights %>% select(month:day, arr_time:sched_arr_time)
+\small
+```{r}
+names(flights)
+flight_arr_times <- flights %>% 
+  select(month:day, arr_time:sched_arr_time)
 #flight_arr_times
 ```
 \normalsize
@@ -798,11 +814,12 @@ The `select()` function can also be used to reorder columns when used with the `
 
 - In the following code, `everything()` will pick up all remaining variables:
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
+\normalsize
+```{r}
 flights_reorder <- flights %>% 
-  select(year, month, day, hour, minute, time_hour, everything())
-#glimpse(flights_reorder)
+  select(year, month, day, hour, minute, time_hour, 
+         everything())
+# glimpse(flights_reorder)
 ```
 \normalsize
 
@@ -811,11 +828,11 @@ flights_reorder <- flights %>%
 
 Lastly, the helper functions `starts_with()`, `ends_with()`, and `contains(`) can be used to select variables/columns that match those conditions. As examples,
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'}
-flights_sub1<-flights %>% select(starts_with("a"))
-flights_sub2<-flights %>% select(ends_with("delay"))
-flights_sub3<-flights %>% select(contains("time"))
+\normalsize
+```{r, eval = FALSE}
+flights_sub1 <- flights %>% select(starts_with("a"))
+flights_sub2 <- flights %>% select(ends_with("delay"))
+flights_sub3 <- flights %>% select(contains("time"))
 ```
 \normalsize
 
@@ -824,7 +841,7 @@ flights_sub3<-flights %>% select(contains("time"))
 ## Summary table
 
 
-```{r warning=FALSE, message=FALSE,out.height = '60%',out.width = '80%', fig.align='center'}
+```{r echo = FALSE, out.height = '60%',out.width = '80%'}
 knitr::include_graphics("week3_7.png")
 ```
 
@@ -839,15 +856,15 @@ knitr::include_graphics("week3_7.png")
 Let’s now learn about the concept of **"tidy"** data format. 
 
 
-- We focus on the `drinks` data frame in the `fivethirtyeight` package. 
-
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+\small
+```{r}
 library(fivethirtyeight)
 drinks_smaller <- drinks %>% 
-  filter(country %in% c("USA", "China", "Italy", "Saudi Arabia")) %>% 
+  filter(country %in% c("USA", "China", "Italy", 
+                        "Saudi Arabia")) %>% 
   select(-total_litres_of_pure_alcohol) %>% 
-  rename(beer = beer_servings, spirit = spirit_servings, wine = wine_servings)
+  rename(beer = beer_servings, spirit = spirit_servings, 
+         wine = wine_servings)
 drinks_smaller
 ```
 \normalsize
@@ -857,11 +874,11 @@ drinks_smaller
 
 The `drinks_smaller` data frame, cannot be used to create the side-by-side barplot show below.
 
-\small
-```{r  echo=FALSE,out.height = '50%' ,out.width = '70%', fig.pos="h", fig.align='center'}
+
+```{r  echo = FALSE, out.height = '45%' ,out.width = '60%'}
 knitr::include_graphics("week3new1.png")
 ```
-\normalsize
+
 
 why? 
 
@@ -893,30 +910,29 @@ The word “tidy” in data science means that your data follows a standardized 
     - Each type of observational unit forms a table.
 
 
-\small
-```{r  echo=FALSE,out.height = '25%' ,out.width = '60%', fig.pos="h", fig.align='center'}
+
+```{r  echo = FALSE, out.height = '25%', out.width = '60%'}
 knitr::include_graphics("week3new2.png")
 ```
-\normalsize
+
 
 
 
 ## "Tidy" data: Definition
 
 Stock prices (non-tidy format):
-\small
-```{r  echo=FALSE,out.height = '25%' ,out.width = '70%', fig.pos="h", fig.align='center'}
+
+```{r  echo = FALSE, out.height = '25%' ,out.width = '70%'}
 knitr::include_graphics("week3new3.png")
 ```
-\normalsize
 
 Stock prices (tidy format):
 
-\small
-```{r  echo=FALSE,out.height = '40%' ,out.width = '60%', fig.pos="h", fig.align='center'}
+
+```{r  echo = FALSE, out.height = '40%' ,out.width = '60%'}
 knitr::include_graphics("week3new4.png")
 ```
-\normalsize
+
 
 
 ## "Tidy" data: Definition
@@ -937,30 +953,36 @@ knitr::include_graphics("week3new4.png")
 
 We convert the `drinks_smaller` data to "tidy" format by using the `pivot_longer()` function from the `tidyr` package:
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+\normalsize
+```{r}
 library(tidyr)
 drinks_smaller_tidy <- drinks_smaller %>% 
   pivot_longer(names_to = "type", 
                values_to = "servings", 
                cols = -country)
-drinks_smaller_tidy
 ```
 \normalsize
+
+## Coverting to "Tidy" format
+
+```{r}
+drinks_smaller_tidy
+```
+
 
 
 ## Coverting to "Tidy" format
 
-These will produce same results
-\tiny
-```{r echo=TRUE,eval=FALSE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+Note that the two ways to specify the vector argument to `cols` produce the same output.
+
+\normalsize
+```{r, eval = FALSE}
 library(tidyr)
 drinks_smaller %>% 
   pivot_longer(names_to = "type", 
                values_to = "servings", 
                cols = c(beer, spirit, wine))
-
-
+# Or
 drinks_smaller %>% 
   pivot_longer(names_to = "type", 
                values_to = "servings", 
@@ -973,11 +995,13 @@ drinks_smaller %>%
 
 ## Coverting to "Tidy" format
 
-\tiny
-```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+\normalsize
+```{r echo=TRUE, out.height = '45%',out.width = '60%'}
 library(tidyr)
-ggplot(drinks_smaller_tidy, aes(x = country, y = servings, fill = type)) +
-  geom_col(position = "dodge")
+ggplot(drinks_smaller_tidy, aes(x = country, y = servings, 
+                                fill = type)) +
+  geom_col(position = "dodge") + 
+  theme_bw()
 ```
 \normalsize
 
