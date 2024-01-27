@@ -137,7 +137,7 @@ __________________
 
 * Before class read chapter 3 (Data Wrangling) of [MD](https://moderndive.com/3-wrangling.html) --- pgs 65-96
 
-* [Partial Lecture Slides](../Handouts/pre_lecture.pdf)
+* [Lecture Slides](../Rmarkdown/Week03/Week3_Lect.pdf)
 
 * Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Jan 30
 
