@@ -203,3 +203,4 @@ ggplot(drinks_smaller_tidy, aes(x = country, y = servings,
                                 fill = type)) +
   geom_col(position = "dodge") + 
   theme_bw()
+

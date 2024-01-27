@@ -164,7 +164,7 @@ For example:
 flights %>% 
   filter(carrier == "AS") %>% 
   select(year, month, arr_delay, dep_delay) %>% 
-  head(n = 3)
+  slice_head(n = 3)
 ```
 \normalsize
 
@@ -395,7 +395,8 @@ summary_monthly_temp <- weather %>%
   summarize(mean = mean(temp, na.rm = TRUE), 
             std_dev = sd(temp, na.rm = TRUE),
             count = n())
-summary_monthly_temp %>% head(n = 3)
+summary_monthly_temp %>% 
+  slice_head(n = 3)
 ```
 \normalsize
 
@@ -410,7 +411,8 @@ We can also group by more than one variable
 by_origin_monthly <- flights %>% 
   group_by(origin, month) %>% 
   summarize(count = n())
-by_origin_monthly[1:5, ]
+dim(by_origin_monthly)
+by_origin_monthly %>% head(n = 2)
 ```
 \normalsize
 
@@ -422,13 +424,14 @@ Observe that there are 36 rows to `by_origin_monthly` because there are 12 month
 
 Why do we `group_by(origin, month)` and not `group_by(origin)` and then `group_by(month)`? Let’s investigate:
 
- \tiny
+\small
 ```{r}
 by_origin_monthly_incorrect <- flights %>% 
   group_by(origin) %>% 
   group_by(month) %>% 
   summarize(count = n())
-by_origin_monthly_incorrect
+dim(by_origin_monthly_incorrect)
+by_origin_monthly_incorrect %>% head(n = 2)
 ```
 \normalsize
 
@@ -455,14 +458,20 @@ We can apply this formula to the `temp` variable using the `mutate()` function f
 \normalsize
 ```{r}
 weather %>% 
-  mutate(temp_in_C = (temp - 32) / 1.8) -> weather
+  mutate(temp_in_C = (temp - 32) / 1.8,
+         monthT = month.name[month]) -> weather
+weather %>% select(month, monthT, temp_in_C, temp) %>% 
+  head(n = 2)
 ```
 \normalsize
 
 
+## `mutate` existing variables
+
 - In this code:
 
-   - we `mutate()` the `weather` data frame by creating a new variable `temp_in_C = (temp - 32) / 1.8` and 
+   - we `mutate()` the `weather` data frame by creating a new variable `temp_in_C = (temp - 32) / 1.8`,
+   - create a new variable `monthT` that has the name of the months,
    - then overwrite the original weather data frame.
 
 
@@ -475,11 +484,11 @@ Let’s compute monthly average temperatures in both $^\circ$F and $^\circ$C.
 \normalsize
 ```{r}
 summary_monthly_temp <- weather %>% 
-  group_by(month) %>% 
+  group_by(month, monthT) %>% 
   summarize(mean_temp_in_F = mean(temp, na.rm = TRUE), 
             mean_temp_in_C = mean(temp_in_C, na.rm = TRUE)) 
-summary_monthly_temp %>% 
-  head(n = 5)
+summary_monthly_temp %>%
+  head(n = 4)
 ```
 \normalsize
 
@@ -568,7 +577,7 @@ Suppose we are interested in determining the most frequent destination airports 
 freq_dest <- flights %>% 
   group_by(dest) %>% 
   summarize(num_flights = n())
-freq_dest %>% head(n = 5)
+freq_dest %>% head(n = 3)
 ```
 \normalsize
 
@@ -672,7 +681,7 @@ knitr::include_graphics("week3_6.png")
 
 - Say instead you are interested in the destinations of all domestic flights departing NYC in 2013, 
 
-    - and you ask yourself questions like: “What cities are these airports in?”, or “Is "ORD" Orlando?”, or “Where is "FLL"?”
+    - and you ask yourself questions like: "What cities are these airports in?", or "Is `ORD` Orlando?", or "Where is `FLL`?"
 
 - The `airports` data frame contains the airport codes for each airport:
 
@@ -717,7 +726,7 @@ named_dests <- flights %>%
   arrange(desc(num_flights)) %>%
   inner_join(airports, by = c("dest" = "faa")) %>%
   rename(airport_name = name)
-named_dests[1:2, 1:3]
+named_dests[1:2, 1:4]
 ```
 \normalsize
 

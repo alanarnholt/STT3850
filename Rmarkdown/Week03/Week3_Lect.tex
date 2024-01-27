@@ -334,7 +334,7 @@ For example:
 \NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{filter}\NormalTok{(carrier }\SpecialCharTok{==} \StringTok{"AS"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{select}\NormalTok{(year, month, arr\_delay, dep\_delay) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+  \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -698,7 +698,8 @@ Other summary functions we can use inside the \texttt{summarize()}:
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(temp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
             \AttributeTok{std\_dev =} \FunctionTok{sd}\NormalTok{(temp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
             \AttributeTok{count =} \FunctionTok{n}\NormalTok{())}
-\NormalTok{summary\_monthly\_temp }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\NormalTok{summary\_monthly\_temp }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -725,20 +726,27 @@ We can also group by more than one variable
 \NormalTok{by\_origin\_monthly }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(origin, month) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count =} \FunctionTok{n}\NormalTok{())}
-\NormalTok{by\_origin\_monthly[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, ]}
+\FunctionTok{dim}\NormalTok{(by\_origin\_monthly)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 5 x 3
+[1] 36  3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{by\_origin\_monthly }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 2 x 3
 # Groups:   origin [1]
   origin month count
   <chr>  <int> <int>
 1 EWR        1  9893
 2 EWR        2  9107
-3 EWR        3 10420
-4 EWR        4 10531
-5 EWR        5 10592
 \end{verbatim}
 
 \normalsize
@@ -754,7 +762,7 @@ Why do we \texttt{group\_by(origin,\ month)} and not
 \texttt{group\_by(origin)} and then \texttt{group\_by(month)}? Let's
 investigate:
 
-\tiny
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -762,26 +770,26 @@ investigate:
   \FunctionTok{group\_by}\NormalTok{(origin) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count =} \FunctionTok{n}\NormalTok{())}
-\NormalTok{by\_origin\_monthly\_incorrect}
+\FunctionTok{dim}\NormalTok{(by\_origin\_monthly\_incorrect)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 12 x 2
-   month count
-   <int> <int>
- 1     1 27004
- 2     2 24951
- 3     3 28834
- 4     4 28330
- 5     5 28796
- 6     6 28243
- 7     7 29425
- 8     8 29327
- 9     9 27574
-10    10 28889
-11    11 27268
-12    12 28135
+[1] 12  2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{by\_origin\_monthly\_incorrect }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 2 x 2
+  month count
+  <int> <int>
+1     1 27004
+2     2 24951
 \end{verbatim}
 
 \normalsize
@@ -812,12 +820,26 @@ We can apply this formula to the \texttt{temp} variable using the
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{weather }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{temp\_in\_C =}\NormalTok{ (temp }\SpecialCharTok{{-}} \DecValTok{32}\NormalTok{) }\SpecialCharTok{/} \FloatTok{1.8}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ weather}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{temp\_in\_C =}\NormalTok{ (temp }\SpecialCharTok{{-}} \DecValTok{32}\NormalTok{) }\SpecialCharTok{/} \FloatTok{1.8}\NormalTok{,}
+         \AttributeTok{monthT =}\NormalTok{ month.name[month]) }\OtherTok{{-}\textgreater{}}\NormalTok{ weather}
+\NormalTok{weather }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(month, monthT, temp\_in\_C, temp) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\normalsize
+\begin{verbatim}
+# A tibble: 2 x 4
+  month monthT  temp_in_C  temp
+  <int> <chr>       <dbl> <dbl>
+1     1 January       3.9  39.0
+2     1 January       3.9  39.0
+\end{verbatim}
 
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{mutate} existing variables}
+\protect\hypertarget{mutate-existing-variables-2}{}
 \begin{itemize}
 \item
   In this code:
@@ -826,7 +848,10 @@ We can apply this formula to the \texttt{temp} variable using the
   \tightlist
   \item
     we \texttt{mutate()} the \texttt{weather} data frame by creating a
-    new variable \texttt{temp\_in\_C\ =\ (temp\ -\ 32)\ /\ 1.8} and
+    new variable \texttt{temp\_in\_C\ =\ (temp\ -\ 32)\ /\ 1.8},
+  \item
+    create a new variable \texttt{monthT} that has the name of the
+    months,
   \item
     then overwrite the original weather data frame.
   \end{itemize}
@@ -834,7 +859,7 @@ We can apply this formula to the \texttt{temp} variable using the
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-2}{}
+\protect\hypertarget{mutate-existing-variables-3}{}
 Let's compute monthly average temperatures in both \(^\circ\)F and
 \(^\circ\)C.
 
@@ -843,30 +868,30 @@ Let's compute monthly average temperatures in both \(^\circ\)F and
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{summary\_monthly\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(month, monthT) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_temp\_in\_F =} \FunctionTok{mean}\NormalTok{(temp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
             \AttributeTok{mean\_temp\_in\_C =} \FunctionTok{mean}\NormalTok{(temp\_in\_C, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }
-\NormalTok{summary\_monthly\_temp }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
+\NormalTok{summary\_monthly\_temp }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 5 x 3
-  month mean_temp_in_F mean_temp_in_C
-  <int>          <dbl>          <dbl>
-1     1           35.6           2.02
-2     2           34.3           1.26
-3     3           39.9           4.38
-4     4           51.7          11.0 
-5     5           61.8          16.6 
+# A tibble: 4 x 4
+# Groups:   month [4]
+  month monthT   mean_temp_in_F mean_temp_in_C
+  <int> <chr>             <dbl>          <dbl>
+1     1 January            35.6           2.02
+2     2 February           34.3           1.26
+3     3 March              39.9           4.38
+4     4 April              51.7          11.0 
 \end{verbatim}
 
 \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-3}{}
+\protect\hypertarget{mutate-existing-variables-4}{}
 Let's consider another example.
 
 \begin{itemize}
@@ -894,7 +919,7 @@ Let's consider another example.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-4}{}
+\protect\hypertarget{mutate-existing-variables-5}{}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{flights\_gain}
@@ -920,7 +945,7 @@ Let's consider another example.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-5}{}
+\protect\hypertarget{mutate-existing-variables-6}{}
 Let's look at some summary statistics of the \texttt{gain} variable
 
 \small
@@ -953,7 +978,7 @@ Let's look at some summary statistics of the \texttt{gain} variable
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-6}{}
+\protect\hypertarget{mutate-existing-variables-7}{}
 Since \texttt{gain} is a numerical variable, we can visualize its
 distribution using a histogram.
 
@@ -999,19 +1024,17 @@ airports for all domestic flights departing from New York City in 2013.
 \NormalTok{freq\_dest }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{num\_flights =} \FunctionTok{n}\NormalTok{())}
-\NormalTok{freq\_dest }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
+\NormalTok{freq\_dest }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 5 x 2
+# A tibble: 3 x 2
   dest  num_flights
   <chr>       <int>
 1 ABQ           254
 2 ACK           265
 3 ALB           439
-4 ANC             8
-5 ATL         17215
 \end{verbatim}
 
 \normalsize
@@ -1172,7 +1195,8 @@ A visual representation of the \texttt{inner\_join()} is shown below
   \tightlist
   \item
     and you ask yourself questions like: ``What cities are these
-    airports in?'', or ``Is''ORD'' Orlando?'', or ``Where is''FLL''?''
+    airports in?'', or ``Is \texttt{ORD} Orlando?'', or ``Where is
+    \texttt{FLL}?''
   \end{itemize}
 \item
   The \texttt{airports} data frame contains the airport codes for each
@@ -1244,16 +1268,16 @@ also includes information about each destination airport:
   \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(num\_flights)) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{inner\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"dest"} \OtherTok{=} \StringTok{"faa"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{airport\_name =}\NormalTok{ name)}
-\NormalTok{named\_dests[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{named\_dests[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 2 x 3
-  dest  num_flights airport_name                   
-  <chr>       <int> <chr>                          
-1 ORD         17283 Chicago Ohare Intl             
-2 ATL         17215 Hartsfield Jackson Atlanta Intl
+# A tibble: 2 x 4
+  dest  num_flights airport_name                      lat
+  <chr>       <int> <chr>                           <dbl>
+1 ORD         17283 Chicago Ohare Intl               42.0
+2 ATL         17215 Hartsfield Jackson Atlanta Intl  33.6
 \end{verbatim}
 
 \normalsize
