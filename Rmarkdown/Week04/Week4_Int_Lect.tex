@@ -1,0 +1,620 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Madrid}
+\usecolortheme{orchid}
+\usefonttheme{professionalfonts}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{placeins}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[]{algpseudocode}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage{lipsum}
+\usepackage{mathtools}
+\usepackage{actuarialangle}
+\usepackage{multirow, longtable, array, dcolumn}
+\usepackage{tabu}
+\newcommand{\sdt}{\bullet}
+\newcommand{\tss}{\textsuperscript}
+\newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
+\newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
+\newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
+\newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
+\newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
+\newcommand{\gil}[1]{\textrm{\gilfont{#1}}\normalfont }
+\newfont{\gilfont}{msbm10 scaled 1000}
+\newcommand{\DOT}{\usebox{\biggercirc}}
+\newcommand{\pv}{\wp\text{-value}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={STT 3850 : Week 4},
+  pdfauthor={Spring 2024},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{STT 3850 : Week 4}
+\author{Spring 2024}
+\date{}
+\institute{Appalachian State University}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{outline-for-the-week}{%
+\section{Outline for the week}\label{outline-for-the-week}}
+
+\begin{frame}{By the end of the week: Basic Regression}
+\protect\hypertarget{by-the-end-of-the-week-basic-regression}{}
+\begin{itemize}
+\tightlist
+\item
+  Data Modeling
+\item
+  Exploratory data analysis
+\item
+  Linear regression
+\end{itemize}
+\end{frame}
+
+\hypertarget{basic-regression}{%
+\section{Basic Regression}\label{basic-regression}}
+
+\begin{frame}{Basic Regression}
+\protect\hypertarget{basic-regression-1}{}
+\begin{itemize}
+\item
+  Now that we are equipped with
+
+  \begin{itemize}
+  \tightlist
+  \item
+    an understanding of how to import data
+  \item
+    data visualization and
+  \item
+    data wrangling skill
+  \end{itemize}
+\item
+  Let's now proceed with \textbf{data modeling}.
+\item
+  The fundamental premise of data modeling is to make explicit the
+  relationship between:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    an \textbf{outcome variable} \(y\), also called a \textbf{dependent
+    variable} or \textbf{response variable}, and
+  \item
+    an e\textbf{xplanatory/predictor} variable \(x\), also called an
+    \textbf{independent variable} or \textbf{covariate}.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data Modeling}
+\protect\hypertarget{data-modeling}{}
+Data modeling serves one of two purposes:
+
+\begin{enumerate}
+\item
+  Modeling for explanation:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Describe and quantify the relationship between the outcome variable
+    \(y\) and a set of explanatory variables \(x\).
+  \item
+    Determine the significance of any relationships.
+  \item
+    Have measures summarizing these relationships.
+  \item
+    Possibly identify any causal relationships between the variables.
+  \end{itemize}
+\item
+  Modeling for prediction:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Predict an outcome variable \(y\) based on the information contained
+    in a set of predictor variables \(x\).
+  \item
+    Here, you don't care so much about understanding how all the
+    variables relate and interact with one another.
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Data Modeling}
+\protect\hypertarget{data-modeling-1}{}
+\begin{itemize}
+\item
+  For example, say you are interested in
+
+  \begin{itemize}
+  \tightlist
+  \item
+    an outcome variable \(y\) of whether patients develop lung cancer
+    and
+  \item
+    information \(x\) on their risk factors, such as smoking habits,
+    age, and socioeconomic status.
+  \end{itemize}
+\item
+  If we are modeling for explanation,
+
+  \begin{itemize}
+  \tightlist
+  \item
+    we would be interested in both describing and quantifying the
+    effects of the different risk factors.
+  \item
+    One reason could be that you want to design an intervention to
+    reduce lung cancer incidence in a population, such as targeting
+    smokers of a specific age group with advertising for smoking
+    cessation programs.
+  \end{itemize}
+\item
+  If we are modeling for prediction,
+
+  \begin{itemize}
+  \tightlist
+  \item
+    we wouldn't care so much about understanding how all the individual
+    risk factors contribute to lung cancer,
+  \item
+    but rather only whether we can make good predictions of which people
+    will contract lung cancer.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Linear regression}
+\protect\hypertarget{linear-regression}{}
+\begin{itemize}
+\item
+  There are many techniques for modeling, such as
+
+  \begin{itemize}
+  \tightlist
+  \item
+    tree-based models and
+  \item
+    neural networks,
+  \end{itemize}
+\item
+  But in this class, we'll focus on one particular technique:
+  \textbf{linear regression}.
+\item
+  Linear regression involves a numerical outcome variable \(y\) and
+  explanatory variables \(x\) that are either numerical or categorical.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    the relationship between \(y\) and \(x\) is assumed to be linear, or
+    in other words, a line.
+  \item
+    However, we'll see that what constitutes a ``line'' will vary
+    depending on the nature of your explanatory variables \(x\).
+  \item
+    Linear regression is one of the most commonly-used and
+    easy-to-understand approaches to modeling.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Needed packages}
+\protect\hypertarget{needed-packages}{}
+Let's now load all the packages needed
+
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)    }\CommentTok{\#  for data visualization}
+\FunctionTok{library}\NormalTok{(dplyr)      }\CommentTok{\#  for data wrangling}
+\FunctionTok{library}\NormalTok{(readr)      }\CommentTok{\# for importing spreadsheet data into R}
+\FunctionTok{library}\NormalTok{(moderndive) }\CommentTok{\# package of datasets and regression functions}
+\FunctionTok{library}\NormalTok{(skimr)      }\CommentTok{\# provides simple{-}to{-}use functions }
+                    \CommentTok{\# for summary statistics}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{One numerical explanatory variable}
+\protect\hypertarget{one-numerical-explanatory-variable}{}
+\begin{itemize}
+\item
+  Researchers at the University of Texas in Austin, Texas (UT Austin)
+  tried to answer the following research question:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    what factors explain differences in instructor teaching evaluation
+    scores?
+  \end{itemize}
+\item
+  To this end, they collected instructor and course information on 463
+  courses.
+\item
+  A full description of the study can be found at
+  \url{https://openintro.org}.
+\item
+  The data on the \texttt{463} courses at UT Austin can be found in the
+  \texttt{evals} data frame included in the \texttt{moderndive} package.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{One numerical explanatory variable}
+\protect\hypertarget{one-numerical-explanatory-variable-1}{}
+Let's fully describe the 4 variables we will focus on:
+
+\begin{enumerate}
+\item
+  \texttt{ID}: An identification variable used to distinguish between
+  the 1 through 463 courses in the dataset.
+\item
+  \texttt{score}: A numerical variable of the course instructor's
+  average teaching score, where the average is computed from the
+  evaluation scores from all students in that course. Teaching scores of
+  1 are lowest and 5 are highest. This is the outcome variable \(y\) of
+  interest.
+\item
+  \texttt{bty\_avg}: A numerical variable of the course instructor's
+  average ``beauty'' score, where the average is computed from a
+  separate panel of six students. ``Beauty'' scores of 1 are lowest and
+  10 are highest. This is the explanatory variable \(x\) of interest.
+\item
+  \texttt{age}: A numerical variable of the course instructor's age.
+  This will be another explanatory variable \(x\) that we'll use later.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{One numerical explanatory variable}
+\protect\hypertarget{one-numerical-explanatory-variable-2}{}
+We'll answer these questions by modeling the relationship between
+teaching scores and ``beauty'' scores using simple linear regression
+where we have:
+
+\begin{enumerate}
+\item
+  A numerical outcome variable \(y\) (the instructor's teaching score)
+  and
+\item
+  A single numerical explanatory variable \(x\) (the instructor's
+  ``beauty'' score).
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Exploratory data analysis}
+\protect\hypertarget{exploratory-data-analysis}{}
+\begin{itemize}
+\item
+  A crucial step before doing any kind of analysis or modeling is
+  performing an exploratory data analysis, or EDA for short.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Get distributions of the individual variables in your data,
+  \item
+    Find out any potential relationships exist between variables,
+  \item
+    Find out any outliers and/or missing values, and
+  \item
+    (most importantly) helps you to decide how to build your model.
+  \end{itemize}
+\item
+  Here are three common steps in EDA:
+
+  \begin{enumerate}
+  \tightlist
+  \item
+    Examine the raw data values.
+  \item
+    Compute summary statistics, such as means, medians, and
+    interquartile ranges.
+  \item
+    Create data visualizations.
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Step 1: Examine the raw data values}
+\protect\hypertarget{step-1-examine-the-raw-data-values}{}
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{evals\_ch5 }\OtherTok{\textless{}{-}}\NormalTok{ evals }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(ID, score, bty\_avg, age)   }\CommentTok{\# take subset}
+\FunctionTok{glimpse}\NormalTok{(evals\_ch5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Rows: 463
+Columns: 4
+$ ID      <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,~
+$ score   <dbl> 4.7, 4.1, 3.9, 4.8, 4.6, 4.3, 2.8, 4.1, 3.4, 4.5, 3.8, 4.5, 4.~
+$ bty_avg <dbl> 5.000, 5.000, 5.000, 5.000, 3.000, 3.000, 3.000, 3.333, 3.333,~
+$ age     <int> 36, 36, 36, 36, 59, 59, 59, 51, 51, 40, 40, 40, 40, 40, 40, 40~
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Step 1: Examine the raw data values}
+\protect\hypertarget{step-1-examine-the-raw-data-values-1}{}
+An alternative way to look at the raw data values is by choosing a
+random sample of the rows.
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{evals\_ch5 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 5 x 4
+     ID score bty_avg   age
+  <int> <dbl>   <dbl> <int>
+1   456   4.5    6.83    32
+2   145   4.5    3.83    58
+3   227   3.3    8.17    39
+4   350   4.9    3.33    50
+5   417   4.8    6.83    54
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Step 2: summary statistics}
+\protect\hypertarget{step-2-summary-statistics}{}
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{evals\_ch5 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_bty\_avg =} \FunctionTok{mean}\NormalTok{(bty\_avg), }
+            \AttributeTok{mean\_score =} \FunctionTok{mean}\NormalTok{(score),}
+            \AttributeTok{median\_bty\_avg =} \FunctionTok{median}\NormalTok{(bty\_avg), }
+            \AttributeTok{median\_score =} \FunctionTok{median}\NormalTok{(score))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 4
+  mean_bty_avg mean_score median_bty_avg median_score
+         <dbl>      <dbl>          <dbl>        <dbl>
+1         4.42       4.17           4.33          4.3
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2: summary statistics}
+\protect\hypertarget{step-2-summary-statistics-1}{}
+The \texttt{skim()} function from the \texttt{skimr} package, ``skims''
+the data, and returns commonly used summary statistics.
+
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(skimr)}
+\NormalTok{evals\_ch5 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(score, bty\_avg) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{skim}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Data summary}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+Name & Piped data \\
+Number of rows & 463 \\
+Number of columns & 2 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Column type frequency: & \\
+numeric & 2 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Group variables & None \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\textbf{Variable type: numeric}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1795}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1282}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1795}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0513}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0769}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+sd
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p0
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p25
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p50
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p75
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p100
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+hist
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+score & 0 & 1 & 4.17 & 0.54 & 2.30 & 3.80 & 4.30 & 4.6 & 5.00 & ▁▁▅▇▇ \\
+bty\_avg & 0 & 1 & 4.42 & 1.53 & 1.67 & 3.17 & 4.33 & 5.5 & 8.17 &
+▃▇▇▃▂ \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\normalsize
+\end{frame}
+
+\end{document}

@@ -1,0 +1,258 @@
+---
+title: "STT 3850 : Week 4"
+author: "Spring 2024"
+institute: "Appalachian State University"
+output: 
+ beamer_presentation:
+   theme: "Madrid"
+   colortheme: "orchid"
+   fonttheme: "professionalfonts"
+   keep_tex: true
+number_sections: true
+fig_caption: yes
+biblio-style: apalike
+link-citations: TRUE
+header-includes:
+   - \usepackage{placeins}
+   - \usepackage{color}
+   - \usepackage{bm}
+   - \usepackage{amsmath}
+   - \usepackage{algorithm}
+   - \usepackage[]{algpseudocode}
+   - \usepackage{tabularx}
+   - \usepackage{multirow}
+   - \usepackage[most]{tcolorbox}
+   - \usepackage{tikz}
+   - \usepackage{lipsum}
+   - \usepackage{mathtools}
+   - \usepackage{actuarialangle}
+   - \usepackage{multirow, longtable, array, dcolumn}
+   - \usepackage{tabu}
+   - \newcommand{\sdt}{\bullet}
+   - \newcommand{\tss}{\textsuperscript}
+   - \newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
+   - \newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
+   - \newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
+   - \newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
+   - \newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
+   - \newcommand{\gil}[1]{\textrm{\gilfont{#1}}\normalfont }
+   - \newfont{\gilfont}{msbm10 scaled 1000}
+   - \newcommand{\DOT}{\usebox{\biggercirc}}
+   - \newcommand{\pv}{\wp\text{-value}}
+
+---
+
+```{r, MEDskip, echo = FALSE}
+library(knitr)
+knit_hooks$set(document = function(x){
+gsub("\\begin{tabular}", "\\medskip{}\\begin{tabular}", x, fixed = TRUE)
+})
+```
+
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE, fig.align = 'center')
+```
+
+
+
+
+
+# Outline for the week
+
+## By the end of the week:  Basic Regression
+
+- Data Modeling
+- Exploratory data analysis
+- Linear regression 
+
+
+# Basic Regression
+
+## Basic Regression
+
+- Now that we are equipped with 
+
+    - an understanding of how to import data
+    - data visualization and
+    - data wrangling skill
+
+-  Let’s now proceed with **data modeling**. 
+
+- The fundamental premise of data modeling is to make explicit the relationship between:
+
+    - an **outcome variable** $y$, also called a **dependent variable** or **response variable**, and
+    - an e**xplanatory/predictor** variable $x$, also called an **independent variable** or **covariate**.
+
+
+## Data Modeling
+
+Data modeling serves one of two purposes:
+
+1. Modeling for explanation:
+
+    - Describe and quantify the relationship between the outcome variable $y$ and a set of explanatory variables $x$. 
+    - Determine the significance of any relationships. 
+    - Have measures summarizing these relationships.
+    - Possibly identify any causal relationships between the variables.
+    
+2. Modeling for prediction:
+
+     - Predict an outcome variable $y$ based on the information contained in a set of predictor variables $x$. 
+     - Here, you don’t care so much about understanding how all the variables relate and interact with one another. 
+     
+
+## Data Modeling
+
+- For example, say you are interested in 
+
+    - an outcome variable $y$ of whether patients develop lung cancer and 
+    - information $x$ on their risk factors, such as smoking habits, age, and socioeconomic status. 
+    
+- If we are modeling for explanation, 
+
+    - we would be interested in both describing and quantifying the effects of the different risk factors. 
+    - One reason could be that you want to design an intervention to reduce lung cancer incidence in a population, such as targeting smokers of a specific age group with advertising for smoking cessation programs. 
+    
+- If we are modeling for prediction, 
+
+    - we wouldn’t care so much about understanding how all the individual risk factors contribute to lung cancer, 
+    - but rather only whether we can make good predictions of which people will contract lung cancer. 
+
+
+## Linear regression
+
+- There are many techniques for modeling, such as 
+
+    - tree-based models and 
+    - neural networks, 
+    
+- But in this class, we’ll focus on one particular technique: **linear regression**. 
+
+- Linear regression involves a numerical outcome variable $y$ and explanatory variables $x$ that are either numerical or categorical. 
+
+    - the relationship between $y$ and $x$ is assumed to be linear, or in other words, a line. 
+    - However, we’ll see that what constitutes a “line” will vary depending on the nature of your explanatory variables $x$. 
+    - Linear regression is one of the most commonly-used and easy-to-understand approaches to modeling.
+
+
+## Needed packages
+
+Let’s now load all the packages needed
+
+\normalsize
+```{r}
+library(ggplot2)    #  for data visualization
+library(dplyr)      #  for data wrangling
+library(readr)      # for importing spreadsheet data into R
+library(moderndive) # package of datasets and regression functions
+library(skimr)      # provides simple-to-use functions 
+                    # for summary statistics
+```
+\normalsize
+
+
+## One numerical explanatory variable
+
+- Researchers at the University of Texas in Austin, Texas (UT Austin) tried to answer the following research question: 
+
+    - what factors explain differences in instructor teaching evaluation scores?
+
+
+- To this end, they collected instructor and course information on 463 courses. 
+
+- A full description of the study can be found at <https://openintro.org>.
+
+- The data on the `463` courses at UT Austin can be found in the `evals` data frame included in the `moderndive` package. 
+
+
+## One numerical explanatory variable
+
+
+Let’s fully describe the 4 variables we will focus on: 
+
+1. `ID`: An identification variable used to distinguish between the 1 through 463 courses in the dataset.
+
+2. `score`: A numerical variable of the course instructor’s average teaching score, where the average is computed from the evaluation scores from all students in that course. Teaching scores of 1 are lowest and 5 are highest. This is the outcome variable $y$ of interest.
+
+3. `bty_avg`: A numerical variable of the course instructor’s average “beauty” score, where the average is computed from a separate panel of six students. “Beauty” scores of 1 are lowest and 10 are highest. This is the explanatory variable $x$ of interest.
+
+4. `age`: A numerical variable of the course instructor’s age. This will be another explanatory variable  $x$ that we’ll use later. 
+
+
+## One numerical explanatory variable
+
+We’ll answer these questions by modeling the relationship between teaching scores and “beauty” scores using simple linear regression where we have:
+
+1. A numerical outcome variable $y$ (the instructor’s teaching score) and
+
+2. A single numerical explanatory variable $x$ (the instructor’s “beauty” score).
+
+
+
+## Exploratory data analysis
+
+- A crucial step before doing any kind of analysis or modeling is performing an exploratory data analysis, or EDA for short. 
+
+
+    - Get distributions of the individual variables in your data, 
+    - Find out any potential relationships exist between variables, 
+    - Find out any outliers and/or missing values, and 
+    - (most importantly) helps you to decide how to build your model. 
+    
+- Here are three common steps in EDA:
+
+    1. Examine the raw data values.
+    2. Compute summary statistics, such as means, medians, and interquartile ranges.
+    3. Create data visualizations.
+
+
+## Step 1: Examine the raw data values
+
+
+\small
+```{r}
+evals_ch5 <- evals %>%
+  select(ID, score, bty_avg, age)   # take subset
+glimpse(evals_ch5)
+```
+\normalsize
+
+
+## Step 1: Examine the raw data values
+
+An alternative way to look at the raw data values is by choosing a random sample of the rows. 
+
+\small
+```{r}
+evals_ch5 %>%
+  sample_n(size = 5)
+```
+\normalsize
+
+
+## Step 2: summary statistics
+
+\small
+```{r}
+evals_ch5 %>%
+  summarize(mean_bty_avg = mean(bty_avg), 
+            mean_score = mean(score),
+            median_bty_avg = median(bty_avg), 
+            median_score = median(score))
+```
+
+
+## Step 2: summary statistics
+
+The `skim()` function from the `skimr` package, "skims" the data, and returns commonly used summary statistics.
+
+\normalsize
+```{r}
+library(skimr)
+evals_ch5 %>% 
+  select(score, bty_avg) %>% 
+  skim()
+```
+\normalsize

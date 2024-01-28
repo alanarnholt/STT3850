@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Outline for the week}{2}{0}{1}
+\beamer@sectionintoc {2}{Basic Regression}{4}{0}{2}
+\beamer@sectionintoc {3}{Simple linear regression}{27}{0}{3}
+\beamer@sectionintoc {4}{Confidence Intervals and Tests}{42}{0}{4}
+\beamer@sectionintoc {5}{Prediction intervals}{64}{0}{5}
+\beamer@sectionintoc {6}{Related topics}{72}{0}{6}
