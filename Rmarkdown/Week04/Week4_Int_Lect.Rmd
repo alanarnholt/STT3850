@@ -248,11 +248,10 @@ evals_ch5 %>%
 
 The `skim()` function from the `skimr` package, "skims" the data, and returns commonly used summary statistics.
 
-\normalsize
+
 ```{r}
 library(skimr)
 evals_ch5 %>% 
   select(score, bty_avg) %>% 
-  skim()
+  skim_without_charts()
 ```
-\normalsize

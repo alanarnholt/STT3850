@@ -119,13 +119,6 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs,array}
-\usepackage{calc} % for calculating minipage widths
-\usepackage{caption}
-% Make caption package work with longtable
-\makeatletter
-\def\fnum@table{\tablename~\thetable}
-\makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -352,10 +345,10 @@ Let's now load all the packages needed
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ggplot2)    }\CommentTok{\#  for data visualization}
 \FunctionTok{library}\NormalTok{(dplyr)      }\CommentTok{\#  for data wrangling}
-\FunctionTok{library}\NormalTok{(readr)      }\CommentTok{\# for importing spreadsheet data into R}
-\FunctionTok{library}\NormalTok{(moderndive) }\CommentTok{\# package of datasets and regression functions}
-\FunctionTok{library}\NormalTok{(skimr)      }\CommentTok{\# provides simple{-}to{-}use functions }
-                    \CommentTok{\# for summary statistics}
+\FunctionTok{library}\NormalTok{(readr)      }\CommentTok{\#  for importing spreadsheet data into R}
+\FunctionTok{library}\NormalTok{(moderndive) }\CommentTok{\#  datasets and regression functions}
+\FunctionTok{library}\NormalTok{(skimr)      }\CommentTok{\#  provides simple{-}to{-}use functions }
+                    \CommentTok{\#  for summary statistics}
 \end{Highlighting}
 \end{Shaded}
 
@@ -484,7 +477,10 @@ $ age     <int> 36, 36, 36, 36, 59, 59, 59, 51, 51, 40, 40, 40, 40, 40, 40, 40~
 \end{verbatim}
 
 \normalsize
+\end{frame}
 
+\begin{frame}[fragile]{Step 1: Examine the raw data values}
+\protect\hypertarget{step-1-examine-the-raw-data-values-1}{}
 An alternative way to look at the raw data values is by choosing a
 random sample of the rows.
 
@@ -501,11 +497,11 @@ random sample of the rows.
 # A tibble: 5 x 4
      ID score bty_avg   age
   <int> <dbl>   <dbl> <int>
-1   371   3.9    3.33    38
-2   124   3.5    4.83    52
-3    46   4.7    4.67    33
-4   451   4.4    4.33    60
-5     5   4.6    3       59
+1   218   4.4    4       42
+2   229   4.6    8.17    39
+3   207   4.7    3       62
+4    34   4.2    4.17    33
+5   170   4.9    2.67    47
 \end{verbatim}
 
 \normalsize
@@ -551,71 +547,7 @@ the data, and returns commonly used summary statistics
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable}[]{@{}ll@{}}
-\caption{Data summary}\tabularnewline
-\toprule\noalign{}
-\endfirsthead
-\endhead
-Name & Piped data \\
-Number of rows & 463 \\
-Number of columns & 2 \\
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
-Column type frequency: & \\
-numeric & 2 \\
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
-Group variables & None \\
-\bottomrule\noalign{}
-\end{longtable}
-
-\textbf{Variable type: numeric}
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1795}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1282}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1795}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0513}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0641}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0769}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-skim\_variable
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-n\_missing
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-complete\_rate
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-mean
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-sd
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-p0
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-p25
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-p50
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-p75
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-p100
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-hist
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-score & 0 & 1 & 4.17 & 0.54 & 2.30 & 3.80 & 4.30 & 4.6 & 5.00 & ▁▁▅▇▇ \\
-bty\_avg & 0 & 1 & 4.42 & 1.53 & 1.67 & 3.17 & 4.33 & 5.5 & 8.17 &
-▃▇▇▃▂ \\
-\bottomrule\noalign{}
-\end{longtable}
-
 \normalsize
-
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.3\textheight]{Week4_1} \end{center}
 \end{frame}
 
 \begin{frame}{Correlation coefficient \(r\)}
@@ -676,7 +608,7 @@ respectively.
 
 \begin{frame}{Correlation coefficient and scatterplot}
 \protect\hypertarget{correlation-coefficient-and-scatterplot}{}
-\begin{center}\includegraphics[width=0.8\linewidth,height=0.85\textheight]{week4_2} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.45\textheight]{week4_2} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Correlation coefficien: GPA Example}
@@ -717,12 +649,12 @@ set of the \texttt{BSDA} package.
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Gpa, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ hsgpa, }\AttributeTok{y =}\NormalTok{ collgpa)) }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"High School GPA"}\NormalTok{, }\AttributeTok{y =} \StringTok{"College GPA"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,height=0.5\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth,height=0.5\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-8-1} \end{center}
 \normalsize
 
 The scatterplot shows that the college GPA increases as the high school
@@ -731,12 +663,13 @@ GPA increases
 
 \begin{frame}[fragile]{Correlation coefficien: GPA Example}
 \protect\hypertarget{correlation-coefficien-gpa-example-1}{}
-\normalsize
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{values }\OtherTok{\textless{}{-}}\NormalTok{ Gpa }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{y\_ybar =}\NormalTok{ collgpa }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(collgpa), }\AttributeTok{x\_xbar =}\NormalTok{ hsgpa }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(hsgpa),}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{y\_ybar =}\NormalTok{ collgpa }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(collgpa), }
+         \AttributeTok{x\_xbar =}\NormalTok{ hsgpa }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(hsgpa),}
          \AttributeTok{zx =}\NormalTok{ x\_xbar}\SpecialCharTok{/}\FunctionTok{sd}\NormalTok{(hsgpa), }\AttributeTok{zy =}\NormalTok{ y\_ybar}\SpecialCharTok{/}\FunctionTok{sd}\NormalTok{(collgpa))}
 \NormalTok{values}
 \end{Highlighting}
@@ -802,7 +735,10 @@ Using the build in \texttt{cor()} function:
 \end{verbatim}
 
 \normalsize
+\end{frame}
 
+\begin{frame}[fragile]{Correlation coefficient: GPA Example}
+\protect\hypertarget{correlation-coefficient-gpa-example-2}{}
 Using \texttt{get\_correlation()} function in the \texttt{moderndive}
 package.
 
@@ -826,23 +762,23 @@ package.
 \end{frame}
 
 \begin{frame}[fragile]{Correlation coefficient: GPA Example}
-\protect\hypertarget{correlation-coefficient-gpa-example-2}{}
+\protect\hypertarget{correlation-coefficient-gpa-example-3}{}
 \normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Gpa, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ hsgpa, }\AttributeTok{y =}\NormalTok{ collgpa)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{theme\_bw}\NormalTok{()}
 \NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ values, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ zx, }\AttributeTok{y =}\NormalTok{ zy)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{theme\_bw}\NormalTok{()}
-\FunctionTok{library}\NormalTok{(gridExtra)}
-\FunctionTok{grid.arrange}\NormalTok{(p1, p2, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(patchwork)}
+\NormalTok{p1}\SpecialCharTok{/}\NormalTok{p2}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{Week4_Lect_files/figure-beamer/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-13-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -893,13 +829,14 @@ Example}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(evals\_ch5, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bty\_avg, }\AttributeTok{y =}\NormalTok{ score)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Beauty Score"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Teaching Score"}\NormalTok{,}
-       \AttributeTok{title =} \StringTok{"Scatterplot of relationship of teaching and beauty scores"}\NormalTok{)}
+       \AttributeTok{title =} \StringTok{"Scatterplot teaching and beauty scores"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{Week4_Lect_files/figure-beamer/unnamed-chunk-17-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-16-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -912,14 +849,15 @@ Add ``best-fitting'' line (regression line).
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(evals\_ch5, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bty\_avg, }\AttributeTok{y =}\NormalTok{ score)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{color =} \StringTok{"purple"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Beauty Score"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Teaching Score"}\NormalTok{,}
-       \AttributeTok{title =} \StringTok{"Relationship between teaching and beauty scores"}\NormalTok{) }\SpecialCharTok{+}  
-  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{)}
+       \AttributeTok{title =} \StringTok{"Teaching and Beauty Scores"}\NormalTok{) }\SpecialCharTok{+}  
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,height=0.5\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-18-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-17-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -929,13 +867,13 @@ Add ``best-fitting'' line (regression line).
 \begin{frame}{Simple linear regression}
 \protect\hypertarget{simple-linear-regression-1}{}
 You may recall from secondary/high school algebra that the equation of a
-line is: \[y=a+b\cdot x\]
+line is: \[y=m\cdot x + b\]
 
 \begin{itemize}
 \item
-  The intercept coefficient is \(a\) is the value of \(y\) when \(x=0\).
+  The intercept coefficient is \(b\) is the value of \(y\) when \(x=0\).
 \item
-  The slope coefficient \(b\) for \(x\) is the increase in \(y\) for
+  The slope coefficient \(m\) for \(x\) is the increase in \(y\) for
   every increase in \(x\).
 \end{itemize}
 
@@ -967,7 +905,7 @@ The line that best fits the data is given by, \[\hat{y}=b_0+b_1x\] where
 
 \begin{itemize}
 \item
-  Form the best fit line, we can compute the:
+  From the best fit line, we can compute the:
 
   \begin{itemize}
   \tightlist
@@ -996,10 +934,7 @@ and \[b_0=\bar{y}-b_1\bar{x}.\]
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
 \protect\hypertarget{regression-teaching-evaluations-example}{}
-\tiny
-
-\begin{center}\includegraphics[width=0.5\linewidth,height=0.5\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-19-1} \end{center}
-\normalsize
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-18-1} \end{center}
 
 \begin{itemize}
 \item
@@ -1022,13 +957,14 @@ We obtain the regression line parameters in two steps:
 \item
   We get the regression table by applying the
   \texttt{get\_regression\_table()} function from the
-  \texttt{moderndive\ package} to \texttt{score\_model}.
+  \texttt{moderndive} package to \texttt{score\_model} or using
+  \texttt{summary()} on the linear model object.
 \end{enumerate}
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
 \protect\hypertarget{regression-teaching-evaluations-example-2}{}
-\tiny
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1046,11 +982,48 @@ We obtain the regression line parameters in two steps:
 1 intercept    3.88      0.076     51.0        0    3.73     4.03 
 2 bty_avg      0.067     0.016      4.09       0    0.035    0.099
 \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Regression: Teaching Evaluations Example}
+\protect\hypertarget{regression-teaching-evaluations-example-3}{}
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Using summary()}
+\FunctionTok{summary}\NormalTok{(score\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = score ~ bty_avg, data = evals_ch5)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.9246 -0.3690  0.1420  0.3977  0.9309 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  3.88034    0.07614   50.96  < 2e-16 ***
+bty_avg      0.06664    0.01629    4.09 5.08e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5348 on 461 degrees of freedom
+Multiple R-squared:  0.03502,   Adjusted R-squared:  0.03293 
+F-statistic: 16.73 on 1 and 461 DF,  p-value: 5.083e-05
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Regression: Teaching Evaluations Example}
+\protect\hypertarget{regression-teaching-evaluations-example-4}{}
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Use formula}
-
 \NormalTok{evals\_ch5 }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{b1 =} \FunctionTok{cor}\NormalTok{(bty\_avg, score)}\SpecialCharTok{*}\FunctionTok{sd}\NormalTok{(score)}\SpecialCharTok{/}\FunctionTok{sd}\NormalTok{(bty\_avg),}
             \AttributeTok{b0 =} \FunctionTok{mean}\NormalTok{(score) }\SpecialCharTok{{-}}\NormalTok{ b1}\SpecialCharTok{*}\FunctionTok{mean}\NormalTok{(bty\_avg))}
@@ -1063,32 +1036,30 @@ We obtain the regression line parameters in two steps:
    <dbl> <dbl>
 1 0.0666  3.88
 \end{verbatim}
-
-\normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-3}{}
+\protect\hypertarget{regression-teaching-evaluations-example-5}{}
 Lets interpret the regression table. The equation of the regression
 line:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Week4\_3.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=0.4\linewidth,height=0.2\textheight]{Week4_3} \end{center}
+\[
+\begin{aligned}
+\hat{y} &= b_0 +b_1\cdot x \\
+\widehat{\text{score}} &= b_0 + b_{\text{bty\_avg}}\\
+&= 3.88 + 0.067\cdot\text{bty\_avg}
+\end{aligned}
+\]
 
 \begin{itemize}
 \item
-  The intercept \(b_0=3.88\)
+  The intercept \(b_0 = 3.88\)
 
   \begin{itemize}
   \tightlist
   \item
-    is the average teaching score \(\hat{y}=\widehat{score}\) for those
-    courses where the instructor had a ``beauty'' score
+    is the average teaching score \(\hat{y}=\widehat{\text{score}}\) for
+    those courses where the instructor had a ``beauty'' score
     \texttt{bty\_avg} of 0.
   \item
     Note however that \texttt{bty\_avg} of 0 is impossible since the
@@ -1143,15 +1114,9 @@ example, let's focus on the 21st of the 463 courses in the
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Observed/fitted values and residuals}
+\begin{frame}{Observed/fitted values and residuals}
 \protect\hypertarget{observedfitted-values-and-residuals-1}{}
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week4\_4.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics[width=0.8\linewidth,height=0.45\textheight]{week4_4} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth,height=0.4\textheight]{week4_4} \end{center}
 
 \begin{itemize}
 \tightlist
@@ -1171,7 +1136,7 @@ example, let's focus on the 21st of the 463 courses in the
 To compute both the fitted value and residual for all observations in
 the data we use the \texttt{get\_regression\_points()} function.
 
-\tiny
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1198,17 +1163,15 @@ the data we use the \texttt{get\_regression\_points()} function.
 \end{verbatim}
 
 \normalsize
-
-Let's repeat the calculations for the instructor of the 1st course.
 \end{frame}
 
 \begin{frame}{Assessing the fit}
 \protect\hypertarget{assessing-the-fit}{}
 \begin{itemize}
 \item
-  The regression model is a good model if the scatterplot of residual
-  vs.~\(x\)-values or scatterplot of residual vs.~\(\hat{y}\)-values has
-  no interesting features.
+  The regression model is a good model if the scatterplot of residuals
+  versus \(x\)-values or if the scatterplot of residuals versus
+  \(\hat{y}\)-values has no interesting features.
 
   \begin{itemize}
   \tightlist
@@ -1227,7 +1190,7 @@ Let's repeat the calculations for the instructor of the 1st course.
   \end{itemize}
 \item
   In addition, for a good model, the residuals are approximately
-  normally distributed. Check histogram of the residuals.
+  normally distributed. Check the histogram of residuals.
 \end{itemize}
 \end{frame}
 
@@ -1238,12 +1201,13 @@ Let's repeat the calculations for the instructor of the 1st course.
 
 \begin{frame}[fragile]{Assessing the fit: Teaching Evaluations Example}
 \protect\hypertarget{assessing-the-fit-teaching-evaluations-example}{}
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ggfortify)}
-\FunctionTok{autoplot}\NormalTok{(score\_model, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{1}\NormalTok{, }\AttributeTok{which =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{autoplot}\NormalTok{(score\_model, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{1}\NormalTok{, }\AttributeTok{which =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1344,7 +1308,7 @@ computed as: \[\text{P-value}=2\Pr(T>t)\] reject \(H_0\) if
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-4}{}
+\protect\hypertarget{regression-teaching-evaluations-example-6}{}
 \tiny
 
 \begin{Shaded}
@@ -1368,7 +1332,7 @@ computed as: \[\text{P-value}=2\Pr(T>t)\] reject \(H_0\) if
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-5}{}
+\protect\hypertarget{regression-teaching-evaluations-example-7}{}
 \tiny
 
 \begin{Shaded}
@@ -1402,7 +1366,7 @@ F-statistic: 16.73 on 1 and 461 DF,  p-value: 5.083e-05
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-6}{}
+\protect\hypertarget{regression-teaching-evaluations-example-8}{}
 To obtain the \texttt{residuals} for \texttt{score\_model} use the
 function \texttt{resid} on a linear model object. \tiny
 
@@ -1444,7 +1408,7 @@ function \texttt{resid} on a linear model object. \tiny
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-7}{}
+\protect\hypertarget{regression-teaching-evaluations-example-9}{}
 \tiny
 
 \begin{Shaded}
@@ -1491,7 +1455,7 @@ bty_avg     -0.001172503  0.0002654016
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-8}{}
+\protect\hypertarget{regression-teaching-evaluations-example-10}{}
 \tiny
 
 \begin{Shaded}
@@ -1548,7 +1512,7 @@ bty_avg     0.03462292 0.09865116
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-9}{}
+\protect\hypertarget{regression-teaching-evaluations-example-11}{}
 \tiny
 
 \begin{Shaded}
@@ -1652,7 +1616,7 @@ Some misunderstanding of \(R^2\):
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-10}{}
+\protect\hypertarget{regression-teaching-evaluations-example-12}{}
 \tiny
 
 \begin{Shaded}
@@ -1692,7 +1656,7 @@ Some misunderstanding of \(R^2\):
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-11}{}
+\protect\hypertarget{regression-teaching-evaluations-example-13}{}
 \tiny
 
 \begin{Shaded}
@@ -1739,7 +1703,7 @@ Some misunderstanding of \(R^2\):
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-12}{}
+\protect\hypertarget{regression-teaching-evaluations-example-14}{}
 \tiny
 
 \begin{Shaded}
@@ -1758,7 +1722,7 @@ Some misunderstanding of \(R^2\):
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-13}{}
+\protect\hypertarget{regression-teaching-evaluations-example-15}{}
 \tiny
 
 \begin{Shaded}
@@ -1909,7 +1873,7 @@ Response}
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-14}{}
+\protect\hypertarget{regression-teaching-evaluations-example-16}{}
 \tiny
 
 \begin{Shaded}

@@ -145,10 +145,10 @@ Let’s now load all the packages needed
 ```{r}
 library(ggplot2)    #  for data visualization
 library(dplyr)      #  for data wrangling
-library(readr)      # for importing spreadsheet data into R
-library(moderndive) # package of datasets and regression functions
-library(skimr)      # provides simple-to-use functions 
-                    # for summary statistics
+library(readr)      #  for importing spreadsheet data into R
+library(moderndive) #  datasets and regression functions
+library(skimr)      #  provides simple-to-use functions 
+                    #  for summary statistics
 ```
 \normalsize
 
@@ -219,6 +219,8 @@ glimpse(evals_ch5)
 ```
 \normalsize
 
+## Step 1: Examine the raw data values
+
 An alternative way to look at the raw data values is by choosing a random sample of the rows. 
 
 \normalsize
@@ -247,7 +249,7 @@ The `skim()` function from the `skimr` package, "skims" the data, and returns co
 
 
 \normalsize
-```{r}
+```{r, eval = FALSE}
 library(skimr)
 evals_ch5 %>% 
   select(score, bty_avg) %>% 
@@ -255,9 +257,7 @@ evals_ch5 %>%
 ```
 \normalsize
 
-```{r echo = FALSE, out.height = '30%',out.width = '70%'}
-knitr::include_graphics("Week4_1.png")
-```
+
 
 ## Correlation coefficient $r$
 
@@ -285,7 +285,7 @@ where $\bar{x}$ and $\bar{y}$ represents the mean of the $x$ and $y$ variables. 
 ## Correlation coefficient and scatterplot 
 
 
-```{r echo = FALSE, out.height = '85%', out.width = '80%'}
+```{r echo = FALSE, out.height = '45%', out.width = '90%'}
 knitr::include_graphics("week4_2.png")
 ```
 
@@ -309,7 +309,7 @@ head(Gpa)
 ```{r out.height = '50%',out.width = '50%'}
 ggplot(data = Gpa, aes(x = hsgpa, y = collgpa)) + 
   labs(x = "High School GPA", y = "College GPA") +
-  geom_point() + 
+  geom_point(size = 5, color = "blue") + 
   theme_bw()
 ```
 \normalsize
@@ -318,10 +318,11 @@ The scatterplot shows that the college GPA increases as the high school GPA incr
 
 ## Correlation coefficien: GPA Example
 
-\normalsize
+\small
 ```{r}
 values <- Gpa %>% 
-  mutate(y_ybar = collgpa - mean(collgpa), x_xbar = hsgpa - mean(hsgpa),
+  mutate(y_ybar = collgpa - mean(collgpa), 
+         x_xbar = hsgpa - mean(hsgpa),
          zx = x_xbar/sd(hsgpa), zy = y_ybar/sd(collgpa))
 values
 ```
@@ -349,6 +350,8 @@ Gpa %>%
 ```
 \normalsize
 
+## Correlation coefficient: GPA Example
+
 Using `get_correlation()` function in the `moderndive` package.
 
 \normalsize
@@ -364,15 +367,15 @@ Gpa %>%
 
 
 \normalsize
-```{r}
+```{r out.height = '45%', out.width = '60%'}
 p1 <- ggplot(data = Gpa, aes(x = hsgpa, y = collgpa)) + 
-  geom_point() + 
+  geom_point(size = 5, color = "red") + 
   theme_bw()
 p2 <- ggplot(data = values, aes(x = zx, y = zy)) + 
-  geom_point() + 
+  geom_point(size = 5, color = "blue") + 
   theme_bw()
-library(gridExtra)
-grid.arrange(p1, p2, ncol = 1, nrow = 2)
+library(patchwork)
+p1/p2
 ```
 \normalsize
 
@@ -398,11 +401,12 @@ evals_ch5 %>%
 
 
 \normalsize
-```{r}
+```{r out.height = '45%', out.width = '60%'}
 ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
-  geom_jitter() +
+  geom_jitter(size = 3, color = "blue") +
   labs(x = "Beauty Score", y = "Teaching Score",
-       title = "Scatterplot of relationship of teaching and beauty scores")
+       title = "Scatterplot teaching and beauty scores") +
+  theme_bw()
 ```
 \normalsize
 
@@ -412,12 +416,13 @@ ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
 Add “best-fitting” line (regression line).
 
 \tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+```{r out.height = '45%',out.width = '60%'}
 ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
-  geom_point() +
+  geom_point(size = 3, color = "purple") +
   labs(x = "Beauty Score", y = "Teaching Score",
-       title = "Relationship between teaching and beauty scores") +  
-  geom_smooth(method = "lm", se = FALSE)
+       title = "Teaching and Beauty Scores") +  
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw()
 ```
 \normalsize
 
@@ -428,11 +433,11 @@ ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
 ## Simple linear regression
 
 You may recall from secondary/high school algebra that the equation of a line is:
-$$y=a+b\cdot x$$
+$$y=m\cdot x + b$$
 
-- The intercept coefficient is $a$ is the value of $y$ when $x=0$. 
+- The intercept coefficient is $b$ is the value of $y$ when $x=0$. 
 
-- The slope coefficient $b$ for $x$ is the increase in $y$ for every increase in $x$. 
+- The slope coefficient $m$ for $x$ is the increase in $y$ for every increase in $x$. 
 
 However, when defining regression equation line, we use slightly different notation. 
 
@@ -457,7 +462,7 @@ The line that best fits the data is given by,
 $$\hat{y}=b_0+b_1x$$
 where $b_0$ and $b_1$ are estimates for the population parameters $\beta_0$ and $\beta_1$. 
 
-- Form the best fit line, we can compute the:
+- From the best fit line, we can compute the:
 
     - predicted $\hat{y}$ for each $x$ and 
     - measure the error of prediction. 
@@ -481,15 +486,16 @@ $$b_0=\bar{y}-b_1\bar{x}.$$
 
 ## Regression: Teaching Evaluations Example
 
-\tiny
-```{r echo=FALSE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+
+```{r echo = FALSE, out.height = '45%', out.width = '60%'}
 ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
-  geom_point() +
+  geom_point(size = 3, color = "purple") +
   labs(x = "Beauty Score", y = "Teaching Score",
-       title = "Relationship between teaching and beauty scores") +  
-  geom_smooth(method = "lm", se = FALSE)
+       title = "Teaching and Beauty Scores") +  
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw()
 ```
-\normalsize
+
 
 - We know that the regression line has a positive slope $b_1$ corresponding to our explanatory $x$ variable `bty_avg`. 
 
@@ -502,7 +508,7 @@ We obtain the regression line parameters in two steps:
 
 1. We "fit" the linear regression model using the `lm()` function and save it, lets call it `score_model`.
 
-2. We get the regression table by applying the `get_regression_table()` function from the `moderndive package` to `score_model`.
+2. We get the regression table by applying the `get_regression_table()` function from the `moderndive` package to `score_model` or using `summary()` on the linear model object.
 
 
 
@@ -513,21 +519,31 @@ We obtain the regression line parameters in two steps:
 ## Regression: Teaching Evaluations Example
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+\small
+```{r}
 # Fit regression model:
 score_model <- lm(score ~ bty_avg, data = evals_ch5)
 # Get regression table:
 get_regression_table(score_model)
+```
 
+## Regression: Teaching Evaluations Example
+
+\small
+```{r}
+# Using summary()
+summary(score_model)
+```
+
+## Regression: Teaching Evaluations Example
+
+\small
+```{r}
 # Use formula
-
 evals_ch5 %>% 
   summarize(b1 = cor(bty_avg, score)*sd(score)/sd(bty_avg),
             b0 = mean(score) - b1*mean(bty_avg))
-
 ```
-\normalsize
 
 
 
@@ -536,15 +552,18 @@ evals_ch5 %>%
 
 Lets interpret the regression table. The equation of the regression line:
 
-```{r warning=FALSE, message=FALSE,out.height = '20%',out.width = '40%', fig.align='center'}
-knitr::include_graphics("Week4_3.png")
-```
+$$
+\begin{aligned}
+\hat{y} &= b_0 +b_1\cdot x \\
+\widehat{\text{score}} &= b_0 + b_{\text{bty\_avg}}\\
+&= 3.88 + 0.067\cdot\text{bty\_avg}
+\end{aligned}
+$$
 
 
+- The intercept $b_0 = 3.88$ 
 
-- The intercept $b_0=3.88$ 
-
-    - is the average teaching score $\hat{y}=\widehat{score}$ for those courses where the instructor had a “beauty” score `bty_avg` of 0. 
+    - is the average teaching score $\hat{y}=\widehat{\text{score}}$ for those courses where the instructor had a “beauty” score `bty_avg` of 0. 
     - Note however that `bty_avg` of 0 is impossible since the beauty scores ranges from 1 to 10. 
     
 
@@ -570,7 +589,7 @@ evals_ch5[21,]
 ## Observed/fitted values and residuals
 
 
-```{r warning=FALSE, message=FALSE,out.height = '45%',out.width = '80%', fig.align='center'}
+```{r echo = FALSE, out.height = '40%', out.width = '80%'}
 knitr::include_graphics("week4_4.png")
 ```
 
@@ -586,23 +605,18 @@ $$e_i=y_i-\hat{y}_i=4.9-4.369=0.531.$$
 
  To compute both the fitted value and residual for all observations in the data we use the `get_regression_points()` function.
  
- \tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+ \small
+```{r}
 regression_points <- get_regression_points(score_model)
 regression_points
 ```
 \normalsize
 
-Let’s repeat the calculations for the instructor of the 1st course.
-
 
 
 ## Assessing the fit
 
-
-- The regression model is a good model if the scatterplot of residual
-vs. $x$-values or scatterplot of residual vs. $\hat{y}$-values has no interesting
-features.
+- The regression model is a good model if the scatterplot of residuals versus $x$-values or if the scatterplot of residuals versus $\hat{y}$-values has no interesting features.
 
     - No direction
     - No shape
@@ -612,32 +626,27 @@ features.
     - Equal or constant variance (homoscedasticity)
 
 
-- In addition, for a good model, the residuals are approximately normally
-distributed. Check histogram of the residuals.
+- In addition, for a good model, the residuals are approximately normally distributed. Check the histogram of residuals.
 
 
 
 ## Assessing the fit
 
-```{r echo=FALSE, out.width = '90%', fig.pos="h", fig.align='center'}
-#library(gridExtra)
+```{r echo = FALSE, out.width = '90%', fig.pos="h"}
 rl <- lapply(list("week6_3a.png", "week6_3b.png","week6_3c.png","week6_3d.png"), png::readPNG)
 gl <- lapply(rl, grid::rasterGrob)
 do.call(gridExtra::grid.arrange, gl)
-#par(mfrow=c(2,2))
-
-
-#grid.arrange(p1,p2, nrow=1,ncol=2)
 ```
 
 
 
 ## Assessing the fit: Teaching Evaluations Example
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+\normalsize
+```{r out.height = '50%', out.width = '80%'}
 library(ggfortify)
-autoplot(score_model, ncol = 2, nrow = 1, which = 1:2) + theme_bw()
+autoplot(score_model, ncol = 2, nrow = 1, which = 1:2) +
+  theme_bw()
 ```
 \normalsize
 
