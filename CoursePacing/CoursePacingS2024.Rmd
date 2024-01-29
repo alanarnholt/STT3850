@@ -176,6 +176,8 @@ ___________
 
 * Before class read chapter 5 (Basic Regression) of [MD](https://moderndive.com/5-regression.html) --- pgs 119-160
 
+* [Lecture Slides](../Rmarkdown/Week04/Week4_Lect.pdf)
+
 * In class go over this [document](https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html)
 
 * Class [notes](../Handouts/RegHandout.html) for one quantitative and one qualitative predictor
