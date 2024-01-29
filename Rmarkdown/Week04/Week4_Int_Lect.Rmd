@@ -447,9 +447,11 @@ However, when defining regression equation line, we use slightly different notat
 The regression equation is given by:
 $$y=\beta_0+\beta_1x+\epsilon$$
 
-- where $\beta_0$ is the intercept 
+- where $\beta_0$ is the intercept, 
 
-- $\beta_1$ is the slope. 
+- $\beta_1$ is the slope,
+
+- and $\epsilon$ is random error.
 
 - For the $i$th trial, we have:
 
@@ -563,14 +565,15 @@ $$
 
 - The intercept $b_0 = 3.88$ 
 
-    - is the average teaching score $\hat{y}=\widehat{\text{score}}$ for those courses where the instructor had a “beauty” score `bty_avg` of 0. 
+    - is the average teaching score $\hat{y}=\widehat{\text{score}}$ for those courses where the instructor had a “beauty” score (`bty_avg`) of 0. 
     - Note however that `bty_avg` of 0 is impossible since the beauty scores ranges from 1 to 10. 
-    
+
+## Regression: Teaching Evaluations Example    
 
 - The slope $b_1$ of `bty_avg` is 0.067. 
 
-    - The sign is positive, suggesting a positive relationship between these two variables, meaning teachers with higher “beauty” scores also tend to have higher teaching scores.
-    - For every increase of 1 unit in `bty_avg`, there is an associated increase of, on average, 0.067 units of `score`.
+  - The sign is positive, suggesting a positive relationship between these two variables, meaning teachers with higher “beauty” scores also tend to have higher teaching scores.
+  - For every increase of 1 unit in `bty_avg`, there is an associated increase of, on average, 0.067 units of `score`.
 
 
 ## Observed/fitted values and residuals
@@ -581,6 +584,7 @@ Now we are interested in information on individual observations.  For example, l
 ```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
 # Fit regression model:
 evals_ch5[21,]
+evals_ch5[21,]$bty_avg
 ```
 \normalsize
 
@@ -921,38 +925,18 @@ summary(score_model)$r.squared
 \normalsize
 ```{r}
 get_regression_points(score_model) 
-Summarytable <- get_regression_points(score_model) %>% 
+```
+
+## Regression: Teaching Evaluations Example
+
+\small
+```{r}
+get_regression_points(score_model) %>% 
   summarize(var_y = var(score), 
-                      var_y_hat = var(score_hat), 
-                      var_residual = var(residual))
-Summarytable
+            var_y_hat = var(score_hat), 
+            var_residual = var(residual)) %>% 
+  mutate(R2 = var_y_hat/var_y)
 ```
-\normalsize
-
-
-
-## Regression: Teaching Evaluations Example
-
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
-
-## Calculate R2
-Summarytable[2]/Summarytable[1]
-```
-\normalsize
-
-
-
-## Regression: Teaching Evaluations Example
-
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
-get_regression_table(score_model)
-summary(score_model)
-```
-\normalsize
-
-
 
 
 
@@ -971,6 +955,7 @@ summary(score_model)
 **Example**: The power company want to predict power consumption on a single day for a given temperature. 
 
 - They might know a hot day is coming up the next day and have good idea of what the high temperature will be, so what to predict the power consumption.
+
 - We want to be $99.99\%$ confident that they have enough access to power to cover demand. 
 
 
@@ -980,20 +965,20 @@ Let $x_h$ denote the level of $x$ for which we wish to estimate the mean respons
 $$E(y_h|x_h)=\hat{y}_h=b_0+b_1x_h$$
 Variance: 
 
-$$Var(\hat{y}_h)=\sigma^2\left[\frac{1}{n}+\frac{(x_h-\bar{x})^2}{\Sigma(x_i-\bar{x})^2}\right].$$
+$$Var(\hat{y}_h)=\sigma^2\left[\frac{1}{n}+\frac{(x_h-\bar{x})^2}{\Sigma(x_i-\bar{x})^2}\right]$$
 
 Estimated Variance: 
-$$S^2(\hat{y}_h)=MSE\left[\frac{1}{n}+\frac{(x_h-\bar{x})^2}{\Sigma(x_i-\bar{x})^2}\right].$$
+$$S^2(\hat{y}_h)=MSE\left[\frac{1}{n}+\frac{(x_h-\bar{x})^2}{\Sigma(x_i-\bar{x})^2}\right]$$
 
 ## Interval Estimation of Mean Response
 
 
-- t-distribution
+- $t-$distribution
 
-$$\frac{y_h-\hat{y}_h}{S(\hat{y}_h)}\sim t_{n-2}.$$
+$$\frac{y_h-\hat{y}_h}{S(\hat{y}_h)}\sim t_{n-2}$$
 
-So, the $100(1-\alpha)\%$ confidence interval is:
-$$\hat{y}_h\pm t_{\alpha/2, n-2}S(\hat{y}_h).$$
+So, the $100(1-\alpha)\%$ confidence interval for the mean response is:
+$$\hat{y}_h\pm t_{1 -\alpha/2; n-2}S(\hat{y}_h).$$
 
 ## Prediction Intervals for a Single Response
 
@@ -1018,28 +1003,56 @@ Hence,
 $$\frac{y_*-\hat{y}_*}{S(pred)}\sim t_{n-2}.$$
 
 So, the prediction interval for $y_*$ is:
-$$\hat{y}_*\pm t_{\alpha/2, n-2}S(pred).$$
+$$\hat{y}_*\pm t_{1 - \alpha/2; n-2}S(pred).$$
 
 
-## Interval Estimation for Mean Response and a Single Response
+## Confidence Regions and Prediction Bands
 
-\small
-```{r  echo=FALSE, out.width = '80%',out.height = '60%', fig.pos="h", fig.align='center'}
-knitr::include_graphics("CI_PI.png")
+
+```{r eval = FALSE}
+PIM <- predict(score_model, interval = "pred")
+df1 <- cbind(evals_ch5, PIM)
+ggplot(data = df1, aes(x = bty_avg, y = score)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  geom_line(aes(y = upr), color = "purple", 
+            linetype = "dashed") + 
+  geom_line(aes(y = lwr), color = "purple", 
+            linetype = "dashed") + 
+  theme_bw() -> p1
+p1
 ```
-\normalsize
+
+## Confidence Regions and Prediction Bands
 
 
+```{r echo = FALSE, out.height = '70%', out.width = '70%'}
+PIM <- predict(score_model, interval = "pred")
+df1 <- cbind(evals_ch5, PIM)
+ggplot(data = df1, aes(x = bty_avg, y = score)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  geom_line(aes(y = upr), color = "purple", 
+            linetype = "dashed") + 
+  geom_line(aes(y = lwr), color = "purple", 
+            linetype = "dashed") + 
+  theme_bw() -> p1
+p1
+```
 
 
 ## Regression: Teaching Evaluations Example
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+\normalsize
+```{r}
 # Using the build in function
 predict(score_model, newdata = data.frame(bty_avg = 7.333))
-predict(score_model, newdata = data.frame(bty_avg = 7.333), interval = "conf", level = 0.90)
-predict(score_model, newdata = data.frame(bty_avg = 7.333), interval = "pred", level = 0.90)
+# 90% Confidence Interval for E(Y_7.333)
+predict(score_model, newdata = data.frame(bty_avg = 7.333), 
+        interval = "conf", level = 0.90)
+# 90% Prediction Interval for Y_hat_7.333
+predict(score_model, newdata = data.frame(bty_avg = 7.333), 
+        interval = "pred", level = 0.90)
 ```
 \normalsize
 
@@ -1059,9 +1072,9 @@ predict(score_model, newdata = data.frame(bty_avg = 7.333), interval = "pred", l
 
 - For example when we looked at the teaching score and "beauty" example:
 
-    - For every increase of 1 unit in `bty_avg` there is an associated increase of on average 0.067 units of `score`. 
+    - For every increase of 1 unit in `bty_avg` there is an associated increase of on average 0.067 units for the variable `score`. 
     
-    - while "beauty" score of `bty_avg` is positively correlated with teaching score, we can’t necessarily make any statements about "beauty" scores' direct causal effect on teaching score without more information on how this study was conducted. 
+    - while `bty_avg` is positively correlated with `score`, we can’t necessarily make any statements about "beauty" scores' direct causal effect on teaching score without more information on how this study was conducted. 
     
 
 ## Correlation is not necessarily causation
@@ -1072,7 +1085,7 @@ Here is another example:
 
   - So this doctor declares, "Sleeping with shoes on causes headaches!"
 
-```{r warning=FALSE, message=FALSE,out.height = '35%',out.width = '80%', fig.align='center'}
+```{r echo = FALSE, out.height = '35%', out.width = '80%'}
 knitr::include_graphics("week4_7.png")
 ```
 
@@ -1086,7 +1099,7 @@ knitr::include_graphics("week4_7.png")
     -  It "lurks" behind the scenes, confounding the causal relationship (if any) of "sleeping with shoes on" with "waking up with a headache". 
 
 
-```{r warning=FALSE, message=FALSE,out.height = '30%',out.width = '60%', fig.align='center'}
+```{r echo = FALSE, out.height = '30%',out.width = '60%'}
 knitr::include_graphics("week4_8.png")
 ```
 
@@ -1095,12 +1108,15 @@ $Z$ is a confounding variable.
 
 ## Correlation is not necessarily causation
 
-- Establishing **causation** is a tricky problem
+- Establishing **causation** is a tricky problem which requires:
 
-    - frequently takes either carefully designed experiments or methods to control for the effects of confounding variables. 
-    - Both these approaches attempt, as best they can, either to take all possible confounding variables into account or negate their impact. 
-    - This allows researchers to focus only on the relationship of interest: the relationship between the outcome variable $Y$ and the treatment variable $X$.
+  1. carefully designed experiments or
+  2. methods to control for the effects of confounding variables
 
+
+- Both these approaches attempt, as best they can, either to take all possible confounding variables into account or negate their impact. 
+
+- This allows researchers to focus only on the relationship of interest: the relationship between the outcome variable $Y$ and the treatment variable $X$.
 
 - As you read news stories, be careful not to fall into the trap of thinking that correlation necessarily implies causation. 
 
@@ -1114,12 +1130,12 @@ Regression lines are also known as “best-fitting” lines. But what do we mean
 - Lets use the Teaching Evaluations Example. 
 
 
-```{r warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+```{r echo = FALSE, out.height = '50%', out.width = '80%'}
 knitr::include_graphics("week4_9.png")
 ```
 
 
-we mark the observed value $y$ with a circle, the fitted value $\hat{y}$ with a square and the residual $y-\hat{y}$. 
+we mark the observed value $y$ with a circle, the fitted value $\hat{y}$ with a square and the residuals $y-\hat{y}$ with a vertical blue line. 
 
 
 ## Best-fitting line
@@ -1128,12 +1144,12 @@ we mark the observed value $y$ with a circle, the fitted value $\hat{y}$ with a 
 
     - then we squared all the residuals, and 
     - then we summed them. 
-    - We call this quantity the sum of squared residuals; 
+    - We call this quantity the sum of squared residuals. 
     
 - The **sum of squared residuals** is a measure of the lack of fit of a model. 
 
-    - Larger values of the sum of squared residuals indicate a bigger lack of fit. This corresponds to a worse fitting model.
-    - If the regression line fits all the points perfectly, then the sum of squared residuals is 0
+  - Larger values of the sum of squared residuals indicate a bigger lack of fit. This corresponds to a worse fitting model.
+  - If the regression line fits all the points perfectly, then the sum of squared residuals is 0.
 
 - The regression line minimizes the sum of the squared residuals:
 $$\sum_{i=1}^n(y_i-\hat{y}_i)^2$$
@@ -1141,15 +1157,13 @@ $$\sum_{i=1}^n(y_i-\hat{y}_i)^2$$
 
 ## Best-fitting line
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+\normalsize
+```{r}
 # Fit regression model:
-score_model <- lm(score ~ bty_avg, 
-                  data = evals_ch5)
-
+score_model <- lm(score ~ bty_avg, data = evals_ch5)
 # Get regression points:
 regression_points <- get_regression_points(score_model)
-regression_points
+head(regression_points)
 ```
 \normalsize
 
@@ -1158,8 +1172,8 @@ regression_points
 
 Any other straight line drawn in the figure would yield a sum of squared residuals greater than 132. 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+\normalsize
+```{r}
 # Compute sum of squared residuals
 regression_points %>%
   mutate(squared_residuals = residual^2) %>%
@@ -1168,15 +1182,18 @@ regression_points %>%
 \normalsize
 
 
+## Best-fitting line
 
 You can also get the residuals using the function `resid` on a linear model object.
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '80%', fig.align='center'}
+\normalsize
+```{r}
 # Compute sum of squared residuals
 eis <- resid(score_model)
 RSS <- sum(eis^2)
 RSS
+# or
+anova(score_model)[2, 2]
 ```
 \normalsize
 

@@ -1,32 +1,9 @@
 \frametitle{Best-fitting line}
-\protect\hypertarget{best-fitting-line-3}{}
-Any other straight line drawn in the figure would yield a sum of squared
-residuals greater than 132.
-
-\tiny
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Compute sum of squared residuals}
-\NormalTok{regression\_points }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{squared\_residuals =}\NormalTok{ residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{sum\_of\_squared\_residuals =} \FunctionTok{sum}\NormalTok{(squared\_residuals))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-# A tibble: 1 x 1
-  sum_of_squared_residuals
-                     <dbl>
-1                     132.
-\end{verbatim}
-
-\normalsize
-
+\protect\hypertarget{best-fitting-line-4}{}
 You can also get the residuals using the function \texttt{resid} on a
 linear model object.
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -34,6 +11,17 @@ linear model object.
 \NormalTok{eis }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(score\_model)}
 \NormalTok{RSS }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(eis}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
 \NormalTok{RSS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 131.8684
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# or}
+\FunctionTok{anova}\NormalTok{(score\_model)[}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 

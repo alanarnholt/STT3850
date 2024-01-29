@@ -497,11 +497,11 @@ random sample of the rows.
 # A tibble: 5 x 4
      ID score bty_avg   age
   <int> <dbl>   <dbl> <int>
-1   385   4.1    4.33    43
-2   352   4.8    3.33    50
-3   215   4.7    3.67    60
-4   196   4      6.5     44
-5   119   3.9    4.33    57
+1    64   4.2    4.33    37
+2   169   3.4    4.33    63
+3    77   3.5    4       49
+4   361   3.9    5.83    52
+5   400   4.4    2.83    57
 \end{verbatim}
 
 \normalsize
@@ -887,9 +887,11 @@ The regression equation is given by: \[y=\beta_0+\beta_1x+\epsilon\]
 
 \begin{itemize}
 \item
-  where \(\beta_0\) is the intercept
+  where \(\beta_0\) is the intercept,
 \item
-  \(\beta_1\) is the slope.
+  \(\beta_1\) is the slope,
+\item
+  and \(\epsilon\) is random error.
 \item
   For the \(i\)th trial, we have:
 \end{itemize}
@@ -1060,11 +1062,17 @@ line:
   \item
     is the average teaching score \(\hat{y}=\widehat{\text{score}}\) for
     those courses where the instructor had a ``beauty'' score
-    \texttt{bty\_avg} of 0.
+    (\texttt{bty\_avg}) of 0.
   \item
     Note however that \texttt{bty\_avg} of 0 is impossible since the
     beauty scores ranges from 1 to 10.
   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Regression: Teaching Evaluations Example}
+\protect\hypertarget{regression-teaching-evaluations-example-6}{}
+\begin{itemize}
 \item
   The slope \(b_1\) of \texttt{bty\_avg} is 0.067.
 
@@ -1101,6 +1109,16 @@ example, let's focus on the 21st of the 463 courses in the
      ID score bty_avg   age
   <int> <dbl>   <dbl> <int>
 1    21   4.9    7.33    31
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{evals\_ch5[}\DecValTok{21}\NormalTok{,]}\SpecialCharTok{$}\NormalTok{bty\_avg}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 7.333
 \end{verbatim}
 
 \normalsize
@@ -1308,7 +1326,7 @@ reject \(H_0\) if \(\wp\text{-value}<\alpha\).
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-6}{}
+\protect\hypertarget{regression-teaching-evaluations-example-7}{}
 \small
 
 \begin{Shaded}
@@ -1338,7 +1356,7 @@ reject \(H_0\) if \(\wp\text{-value}<\alpha\).
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-7}{}
+\protect\hypertarget{regression-teaching-evaluations-example-8}{}
 \small
 
 \begin{Shaded}
@@ -1372,7 +1390,7 @@ F-statistic: 16.73 on 1 and 461 DF,  p-value: 5.083e-05
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-8}{}
+\protect\hypertarget{regression-teaching-evaluations-example-9}{}
 To obtain the \texttt{residuals} for \texttt{score\_model} use the
 function \texttt{resid} on a linear model object.
 
@@ -1416,7 +1434,7 @@ function \texttt{resid} on a linear model object.
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-9}{}
+\protect\hypertarget{regression-teaching-evaluations-example-10}{}
 \normalsize
 
 \begin{Shaded}
@@ -1450,7 +1468,7 @@ bty_avg     -0.001172503  0.0002654016
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-10}{}
+\protect\hypertarget{regression-teaching-evaluations-example-11}{}
 \normalsize
 
 \begin{Shaded}
@@ -1493,7 +1511,7 @@ bty_avg     -0.001172503  0.0002654016
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-11}{}
+\protect\hypertarget{regression-teaching-evaluations-example-12}{}
 \normalsize
 
 \begin{Shaded}
@@ -1533,7 +1551,7 @@ bty_avg     0.03462292 0.09865116
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-12}{}
+\protect\hypertarget{regression-teaching-evaluations-example-13}{}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{c}\NormalTok{(tb0, tb1)}
@@ -1638,7 +1656,7 @@ Some common misunderstandings of \(R^2\):
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-13}{}
+\protect\hypertarget{regression-teaching-evaluations-example-14}{}
 \normalsize
 
 \begin{Shaded}
@@ -1678,7 +1696,7 @@ Some common misunderstandings of \(R^2\):
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-14}{}
+\protect\hypertarget{regression-teaching-evaluations-example-15}{}
 \normalsize
 
 \begin{Shaded}
@@ -1703,92 +1721,28 @@ Some common misunderstandings of \(R^2\):
 10    10   4.5    3.17      4.09    0.409
 # i 453 more rows
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Summarytable }\OtherTok{\textless{}{-}} \FunctionTok{get\_regression\_points}\NormalTok{(score\_model) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{var\_y =} \FunctionTok{var}\NormalTok{(score), }
-                      \AttributeTok{var\_y\_hat =} \FunctionTok{var}\NormalTok{(score\_hat), }
-                      \AttributeTok{var\_residual =} \FunctionTok{var}\NormalTok{(residual))}
-\NormalTok{Summarytable}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-# A tibble: 1 x 3
-  var_y var_y_hat var_residual
-  <dbl>     <dbl>        <dbl>
-1 0.296    0.0104        0.285
-\end{verbatim}
-
-\normalsize
-\end{frame}
-
-\begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-15}{}
-\tiny
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\# Calculate R2}
-\NormalTok{Summarytable[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{/}\NormalTok{Summarytable[}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-   var_y_hat
-1 0.03502954
-\end{verbatim}
-
-\normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
 \protect\hypertarget{regression-teaching-evaluations-example-16}{}
-\tiny
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{get\_regression\_table}\NormalTok{(score\_model)}
+\FunctionTok{get\_regression\_points}\NormalTok{(score\_model) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{var\_y =} \FunctionTok{var}\NormalTok{(score), }
+            \AttributeTok{var\_y\_hat =} \FunctionTok{var}\NormalTok{(score\_hat), }
+            \AttributeTok{var\_residual =} \FunctionTok{var}\NormalTok{(residual)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{R2 =}\NormalTok{ var\_y\_hat}\SpecialCharTok{/}\NormalTok{var\_y)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 2 x 7
-  term      estimate std_error statistic p_value lower_ci upper_ci
-  <chr>        <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-1 intercept    3.88      0.076     51.0        0    3.73     4.03 
-2 bty_avg      0.067     0.016      4.09       0    0.035    0.099
+# A tibble: 1 x 4
+  var_y var_y_hat var_residual     R2
+  <dbl>     <dbl>        <dbl>  <dbl>
+1 0.296    0.0104        0.285 0.0350
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(score\_model)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-
-Call:
-lm(formula = score ~ bty_avg, data = evals_ch5)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.9246 -0.3690  0.1420  0.3977  0.9309 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  3.88034    0.07614   50.96  < 2e-16 ***
-bty_avg      0.06664    0.01629    4.09 5.08e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.5348 on 461 degrees of freedom
-Multiple R-squared:  0.03502,   Adjusted R-squared:  0.03293 
-F-statistic: 16.73 on 1 and 461 DF,  p-value: 5.083e-05
-\end{verbatim}
-
-\normalsize
 \end{frame}
 
 \hypertarget{prediction-intervals}{%
@@ -1819,7 +1773,6 @@ report.
 a single day for a given temperature.
 
 \begin{itemize}
-\tightlist
 \item
   They might know a hot day is coming up the next day and have good idea
   of what the high temperature will be, so what to predict the power
@@ -1836,10 +1789,10 @@ Let \(x_h\) denote the level of \(x\) for which we wish to estimate the
 mean response. Then, by the regression equation we have:
 \[E(y_h|x_h)=\hat{y}_h=b_0+b_1x_h\] Variance:
 
-\[Var(\hat{y}_h)=\sigma^2\left[\frac{1}{n}+\frac{(x_h-\bar{x})^2}{\Sigma(x_i-\bar{x})^2}\right].\]
+\[Var(\hat{y}_h)=\sigma^2\left[\frac{1}{n}+\frac{(x_h-\bar{x})^2}{\Sigma(x_i-\bar{x})^2}\right]\]
 
 Estimated Variance:
-\[S^2(\hat{y}_h)=MSE\left[\frac{1}{n}+\frac{(x_h-\bar{x})^2}{\Sigma(x_i-\bar{x})^2}\right].\]
+\[S^2(\hat{y}_h)=MSE\left[\frac{1}{n}+\frac{(x_h-\bar{x})^2}{\Sigma(x_i-\bar{x})^2}\right]\]
 \end{frame}
 
 \begin{frame}{Interval Estimation of Mean Response}
@@ -1847,13 +1800,13 @@ Estimated Variance:
 \begin{itemize}
 \tightlist
 \item
-  t-distribution
+  \(t-\)distribution
 \end{itemize}
 
-\[\frac{y_h-\hat{y}_h}{S(\hat{y}_h)}\sim t_{n-2}.\]
+\[\frac{y_h-\hat{y}_h}{S(\hat{y}_h)}\sim t_{n-2}\]
 
-So, the \(100(1-\alpha)\%\) confidence interval is:
-\[\hat{y}_h\pm t_{\alpha/2, n-2}S(\hat{y}_h).\]
+So, the \(100(1-\alpha)\%\) confidence interval for the mean response
+is: \[\hat{y}_h\pm t_{1 -\alpha/2; n-2}S(\hat{y}_h).\]
 \end{frame}
 
 \begin{frame}{Prediction Intervals for a Single Response}
@@ -1882,21 +1835,36 @@ Hence,
 \[\frac{y_*-\hat{y}_*}{S(pred)}\sim t_{n-2}.\]
 
 So, the prediction interval for \(y_*\) is:
-\[\hat{y}_*\pm t_{\alpha/2, n-2}S(pred).\]
+\[\hat{y}_*\pm t_{1 - \alpha/2; n-2}S(pred).\]
 \end{frame}
 
-\begin{frame}{Interval Estimation for Mean Response and a Single
-Response}
-\protect\hypertarget{interval-estimation-for-mean-response-and-a-single-response-1}{}
-\small
+\begin{frame}[fragile]{Confidence Regions and Prediction Bands}
+\protect\hypertarget{confidence-regions-and-prediction-bands}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PIM }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(score\_model, }\AttributeTok{interval =} \StringTok{"pred"}\NormalTok{)}
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(evals\_ch5, PIM)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bty\_avg, }\AttributeTok{y =}\NormalTok{ score)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ upr), }\AttributeTok{color =} \StringTok{"purple"}\NormalTok{, }
+            \AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ lwr), }\AttributeTok{color =} \StringTok{"purple"}\NormalTok{, }
+            \AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ p1}
+\NormalTok{p1}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
 
-\begin{center}\includegraphics[width=0.8\linewidth,height=0.6\textheight]{CI_PI} \end{center}
-\normalsize
+\begin{frame}{Confidence Regions and Prediction Bands}
+\protect\hypertarget{confidence-regions-and-prediction-bands-1}{}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.7\textheight]{Week4_Int_Lect_files/figure-beamer/unnamed-chunk-40-1} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
 \protect\hypertarget{regression-teaching-evaluations-example-17}{}
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1912,7 +1880,9 @@ Response}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{predict}\NormalTok{(score\_model, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{bty\_avg =} \FloatTok{7.333}\NormalTok{), }\AttributeTok{interval =} \StringTok{"conf"}\NormalTok{, }\AttributeTok{level =} \FloatTok{0.90}\NormalTok{)}
+\CommentTok{\# 90\% Confidence Interval for E(Y\_7.333)}
+\FunctionTok{predict}\NormalTok{(score\_model, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{bty\_avg =} \FloatTok{7.333}\NormalTok{), }
+        \AttributeTok{interval =} \StringTok{"conf"}\NormalTok{, }\AttributeTok{level =} \FloatTok{0.90}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1923,7 +1893,9 @@ Response}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{predict}\NormalTok{(score\_model, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{bty\_avg =} \FloatTok{7.333}\NormalTok{), }\AttributeTok{interval =} \StringTok{"pred"}\NormalTok{, }\AttributeTok{level =} \FloatTok{0.90}\NormalTok{)}
+\CommentTok{\# 90\% Prediction Interval for Y\_hat\_7.333}
+\FunctionTok{predict}\NormalTok{(score\_model, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{bty\_avg =} \FloatTok{7.333}\NormalTok{), }
+        \AttributeTok{interval =} \StringTok{"pred"}\NormalTok{, }\AttributeTok{level =} \FloatTok{0.90}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1961,17 +1933,18 @@ Response}
   \begin{itemize}
   \item
     For every increase of 1 unit in \texttt{bty\_avg} there is an
-    associated increase of on average 0.067 units of \texttt{score}.
+    associated increase of on average 0.067 units for the variable
+    \texttt{score}.
   \item
-    while ``beauty'' score of \texttt{bty\_avg} is positively correlated
-    with teaching score, we can't necessarily make any statements about
+    while \texttt{bty\_avg} is positively correlated with
+    \texttt{score}, we can't necessarily make any statements about
     ``beauty'' scores' direct causal effect on teaching score without
     more information on how this study was conducted.
   \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Correlation is not necessarily causation}
+\begin{frame}{Correlation is not necessarily causation}
 \protect\hypertarget{correlation-is-not-necessarily-causation-1}{}
 Here is another example:
 
@@ -1989,16 +1962,10 @@ Here is another example:
   \end{itemize}
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week4\_7.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.35\textheight]{week4_7} \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Correlation is not necessarily causation}
+\begin{frame}{Correlation is not necessarily causation}
 \protect\hypertarget{correlation-is-not-necessarily-causation-2}{}
 \begin{itemize}
 \item
@@ -2020,12 +1987,6 @@ Here is another example:
   \end{itemize}
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week4\_8.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.3\textheight]{week4_8} \end{center}
 
 \(Z\) is a confounding variable.
@@ -2035,28 +1996,29 @@ Here is another example:
 \protect\hypertarget{correlation-is-not-necessarily-causation-3}{}
 \begin{itemize}
 \item
-  Establishing \textbf{causation} is a tricky problem
+  Establishing \textbf{causation} is a tricky problem which requires:
 
-  \begin{itemize}
+  \begin{enumerate}
   \tightlist
   \item
-    frequently takes either carefully designed experiments or methods to
-    control for the effects of confounding variables.
+    carefully designed experiments or
   \item
-    Both these approaches attempt, as best they can, either to take all
-    possible confounding variables into account or negate their impact.
-  \item
-    This allows researchers to focus only on the relationship of
-    interest: the relationship between the outcome variable \(Y\) and
-    the treatment variable \(X\).
-  \end{itemize}
+    methods to control for the effects of confounding variables
+  \end{enumerate}
+\item
+  Both these approaches attempt, as best they can, either to take all
+  possible confounding variables into account or negate their impact.
+\item
+  This allows researchers to focus only on the relationship of interest:
+  the relationship between the outcome variable \(Y\) and the treatment
+  variable \(X\).
 \item
   As you read news stories, be careful not to fall into the trap of
   thinking that correlation necessarily implies causation.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Best-fitting line}
+\begin{frame}{Best-fitting line}
 \protect\hypertarget{best-fitting-line}{}
 Regression lines are also known as ``best-fitting'' lines. But what do
 we mean by ``best''?
@@ -2067,16 +2029,11 @@ we mean by ``best''?
   Lets use the Teaching Evaluations Example.
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"week4\_9.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.5\textheight]{week4_9} \end{center}
 
 we mark the observed value \(y\) with a circle, the fitted value
-\(\hat{y}\) with a square and the residual \(y-\hat{y}\).
+\(\hat{y}\) with a square and the residuals \(y-\hat{y}\) with a
+vertical blue line.
 \end{frame}
 
 \begin{frame}{Best-fitting line}
@@ -2093,7 +2050,7 @@ we mark the observed value \(y\) with a circle, the fitted value
   \item
     then we summed them.
   \item
-    We call this quantity the sum of squared residuals;
+    We call this quantity the sum of squared residuals.
   \end{itemize}
 \item
   The \textbf{sum of squared residuals} is a measure of the lack of fit
@@ -2106,7 +2063,7 @@ we mark the observed value \(y\) with a circle, the fitted value
     of fit. This corresponds to a worse fitting model.
   \item
     If the regression line fits all the points perfectly, then the sum
-    of squared residuals is 0
+    of squared residuals is 0.
   \end{itemize}
 \item
   The regression line minimizes the sum of the squared residuals:
@@ -2116,35 +2073,28 @@ we mark the observed value \(y\) with a circle, the fitted value
 
 \begin{frame}[fragile]{Best-fitting line}
 \protect\hypertarget{best-fitting-line-2}{}
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Fit regression model:}
-\NormalTok{score\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ bty\_avg, }
-                  \AttributeTok{data =}\NormalTok{ evals\_ch5)}
-
+\NormalTok{score\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ bty\_avg, }\AttributeTok{data =}\NormalTok{ evals\_ch5)}
 \CommentTok{\# Get regression points:}
 \NormalTok{regression\_points }\OtherTok{\textless{}{-}} \FunctionTok{get\_regression\_points}\NormalTok{(score\_model)}
-\NormalTok{regression\_points}
+\FunctionTok{head}\NormalTok{(regression\_points)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 463 x 5
-      ID score bty_avg score_hat residual
-   <int> <dbl>   <dbl>     <dbl>    <dbl>
- 1     1   4.7    5         4.21    0.486
- 2     2   4.1    5         4.21   -0.114
- 3     3   3.9    5         4.21   -0.314
- 4     4   4.8    5         4.21    0.586
- 5     5   4.6    3         4.08    0.52 
- 6     6   4.3    3         4.08    0.22 
- 7     7   2.8    3         4.08   -1.28 
- 8     8   4.1    3.33      4.10   -0.002
- 9     9   3.4    3.33      4.10   -0.702
-10    10   4.5    3.17      4.09    0.409
-# i 453 more rows
+# A tibble: 6 x 5
+     ID score bty_avg score_hat residual
+  <int> <dbl>   <dbl>     <dbl>    <dbl>
+1     1   4.7       5      4.21    0.486
+2     2   4.1       5      4.21   -0.114
+3     3   3.9       5      4.21   -0.314
+4     4   4.8       5      4.21    0.586
+5     5   4.6       3      4.08    0.52 
+6     6   4.3       3      4.08    0.22 
 \end{verbatim}
 
 \normalsize
@@ -2155,7 +2105,7 @@ we mark the observed value \(y\) with a circle, the fitted value
 Any other straight line drawn in the figure would yield a sum of squared
 residuals greater than 132.
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2174,11 +2124,14 @@ residuals greater than 132.
 \end{verbatim}
 
 \normalsize
+\end{frame}
 
+\begin{frame}[fragile]{Best-fitting line}
+\protect\hypertarget{best-fitting-line-4}{}
 You can also get the residuals using the function \texttt{resid} on a
 linear model object.
 
-\tiny
+\normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2186,6 +2139,17 @@ linear model object.
 \NormalTok{eis }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(score\_model)}
 \NormalTok{RSS }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(eis}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
 \NormalTok{RSS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 131.8684
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# or}
+\FunctionTok{anova}\NormalTok{(score\_model)[}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
