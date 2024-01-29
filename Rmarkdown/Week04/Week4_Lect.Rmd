@@ -643,7 +643,7 @@ do.call(gridExtra::grid.arrange, gl)
 ## Assessing the fit: Teaching Evaluations Example
 
 \normalsize
-```{r out.height = '50%', out.width = '80%'}
+```{r out.height = '60%', out.width = '80%'}
 library(ggfortify)
 autoplot(score_model, ncol = 2, nrow = 1, which = 1:2) +
   theme_bw()
@@ -660,17 +660,16 @@ The regression equations give the mean of the group. What is the standard deviat
 $$ y_i=\beta_0+\beta_1x_i+\epsilon_i, \quad \quad Var(\epsilon_i)=\sigma^2.$$
 A natural estimator for $\sigma^2$ is: 
 $$\frac{1}{n}\sum_{i=1}^n(\epsilon_i-E(\epsilon))^2=\frac{1}{n}\sum_{i=1}^n(\epsilon_i)^2=\frac{1}{n}\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2.$$
-Since, $\beta_0$ and $\beta_1$ are unknown, we use the estimates: 
+Since, $\beta_0$ and $\beta_1$ are unknown, we use the estimators: 
 $$ \frac{1}{n}\sum_{i=1}^ne_i^2=\frac{1}{n}\sum_{i=1}^n(y_i-b_0-b_1x_i)^2=\frac{SSE}{n}$$
 
 ## Estimating $\sigma^2$
 
 
 
-Since $b_0$, $b_1$ are estimated, $\hat{e}_i^2$ are no longer independent, we use the following estimator:
+Since $b_0$, $b_1$ are estimators, the $\hat{e}_i^2$ are not independent. We use the following estimator of $\sigma^2$:
 $$ s^2=\frac{SSE}{n-2}=MSE,$$
-where $n-2$ is the degree of freedom (df) (why?), and MSE stands for error mean
-square or residual mean square. Generally, $df=\text{number of cases - number of parameters}$. 
+where $n-2$ is the degree of freedom (df) (why?), and MSE stands for error mean square or residual mean square. Generally, $df=\text{number of cases - number of parameters}$. 
 
 
 - The residual standard error, $s=\sqrt{MSE}$, gives the average error the model predicts. 
@@ -689,8 +688,7 @@ square or residual mean square. Generally, $df=\text{number of cases - number of
 If we assume that $\epsilon_i \sim N(0, \sigma^2)$, then the OLS estimates are also maximum likelihood estimates (MLE). Under the normal assumption,
 $$b_1\sim N\left(\beta_1 , \frac{\sigma^2}{\sum(x_i-\bar{x})^2}\right),$$
 $$b_0\sim N\left(\beta_0 , \sigma^2\left(\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}\right)\right),$$
-These quantities will be used to construct confidence intervals, testing, and other
-statistical inferences.
+These quantities will be used to construct confidence intervals, to perform hypothesis testing, and to make other statistical inferences.
 
 
 
@@ -703,9 +701,9 @@ Under this model:
 $$\frac{b_0-\beta_0}{S(b_0)}\sim t_{n-2}, \quad \quad \frac{b_1-\beta_1}{S(b_1)}\sim t_{n-2}$$
 
 - Hence, $100(1-\alpha)\%$ confidence interval for $\beta_0$ is 
-$$b_0\pm t_{n-2, \alpha/2}S(b_0);$$
+$$b_0\pm t_{1 -\alpha/2; n- 2}S(b_0);$$
 - $100(1-\alpha)\%$ confidence interval for $\beta_1$ is 
-$$b_1\pm t_{n-2, \alpha/2}S(b_1);$$
+$$b_1\pm t_{1 - \alpha/2; n - 2}S(b_1);$$
 
 
 ## Hypothesis Tests
@@ -715,9 +713,9 @@ $$b_1\pm t_{n-2, \alpha/2}S(b_1);$$
 is obtained  by computing
 $$ t=\frac{b_0-0}{S(b_0)}=\frac{b_0}{S(b_0)}\sim t_{n-2}, \quad \text{under } H_0$$
 
-Then, reject $H_0$ if $|t|>t_{n-2, \alpha/2}$. P-values can be computed as:
-$$\text{P-value}=2\Pr(T>t)$$
-reject $H_0$ if $\text{P-value}<\alpha$. 
+Then, reject $H_0$ if $|t|>t_{1-\alpha/2, n-2}$. $\pv$s can be computed as:
+$$\pv=2\Pr(T>t)$$
+reject $H_0$ if $\pv<\alpha$. 
 
 
 
@@ -729,20 +727,21 @@ Similarly, a hypothesis test of $H_0: \beta_1=0\quad vs \quad H_a: \beta_1\neq0$
 is obtained  by computing
 $$ t=\frac{b_1-0}{S(b_1)}=\frac{b_1}{S(b_1)}\sim t_{n-2}, \quad \text{under } H_0$$
 
-Then, reject $H_0$ if $|t|>t_{n-2, \alpha/2}$. P-values can be computed as:
-$$\text{P-value}=2\Pr(T>t)$$
-reject $H_0$ if $\text{P-value}<\alpha$. 
+Then, reject $H_0$ if $|t|>t_{1-\alpha/2, n-2}$. $\pv$s can be computed as:
+$$\pv=2\Pr(T>t)$$
+reject $H_0$ if $\pv<\alpha$. 
 
 
 ## Regression: Teaching Evaluations Example
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+\small
+```{r}
 # Fit regression model:
 score_model <- lm(score ~ bty_avg, data = evals_ch5)
 # Get regression table:
-get_regression_table(score_model,conf.level = 0.95) # conf.level = 0.95 is default
+get_regression_table(score_model, conf.level = 0.95) 
+# conf.level = 0.95 is default
 ```
 \normalsize
 
@@ -752,8 +751,8 @@ get_regression_table(score_model,conf.level = 0.95) # conf.level = 0.95 is defau
 ## Regression: Teaching Evaluations Example
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+\small
+```{r}
 summary(score_model)
 ```
 \normalsize
@@ -765,15 +764,14 @@ summary(score_model)
 
 
 To obtain the `residuals` for `score_model` use the function `resid` on a linear model object.
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+
+\normalsize
+```{r}
 eis <- resid(score_model)
 RSS <- sum(eis^2)
 RSS
-
 RSE <- sqrt(RSS/(dim(evals_ch5)[1]-2))
 RSE
-
 # Or
 summary(score_model)$sigma
 ```
@@ -784,20 +782,14 @@ summary(score_model)$sigma
 ## Regression: Teaching Evaluations Example
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
-b0<-coef(score_model)[1]
-b1<-coef(score_model)[2]
-c(b0,b1)
+\normalsize
+```{r}
+b0 <- coef(score_model)[1]
+b1 <- coef(score_model)[2]
+c(b0, b1)
 XTXI <- summary(score_model)$cov.unscaled
 MSE <- summary(score_model)$sigma^2
-var.cov.b <- MSE*XTXI
-var.cov.b
-
-seb0 <- sqrt(var.cov.b[1, 1])
-seb1 <- sqrt(var.cov.b[2, 2])
-c(seb0,seb1)
-
+(var_cov_b <- MSE*XTXI)
 ```
 \normalsize
 
@@ -806,32 +798,35 @@ c(seb0,seb1)
 ## Regression: Teaching Evaluations Example
 
 
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+\normalsize
+```{r}
+seb0 <- sqrt(var_cov_b[1, 1])
+seb1 <- sqrt(var_cov_b[2, 2])
+c(seb0, seb1)
 # confidence interval
-df<-dim(evals_ch5)[1]-2
-df
+(df <- dim(evals_ch5)[1] - 2)
 ##b0
-t_critical<-qt(0.975, df)
-c(b0-t_critical*seb0,b0+t_critical*seb0)
+t_critical <- qt(0.975, df)
+c(b0 - t_critical*seb0, b0 + t_critical*seb0)
+```
+\normalsize
+
+
+## Regression: Teaching Evaluations Example
+
+
+\normalsize
+```{r}
 ##b1
-c(b1-t_critical*seb1,b1+t_critical*seb1)
+c(b1 - t_critical*seb1, b1 + t_critical*seb1)
 # Or
 confint(score_model, level = 0.95)
-```
-\normalsize
-
-
-## Regression: Teaching Evaluations Example
-
-
-\tiny
-```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+# Testing
 tb0 <- b0/seb0
 tb1 <- b1/seb1
 c(tb0, tb1)
-
-pvalues <- c(pt(tb0, df, lower = FALSE)*2, pt(tb1, df, lower = FALSE)*2)
+pvalues <- c(pt(tb0, df, lower = FALSE)*2, 
+             pt(tb1, df, lower = FALSE)*2)
 pvalues
 ```
 \normalsize
@@ -853,6 +848,7 @@ knitr::include_graphics("week2_5.png")
 ```
 \normalsize
 
+## Partition of Total sum of squares
 
 - Total sum of squares (SST): $SST=\sum(y_i-\bar{y})^2.$
 

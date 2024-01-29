@@ -1,44 +1,57 @@
-\frametitle{Best-fitting line}
-\protect\hypertarget{best-fitting-line-3}{}
-Any other straight line drawn in the figure would yield a sum of squared
-residuals greater than 132.
-
-\tiny
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Compute sum of squared residuals}
-\NormalTok{regression\_points }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{squared\_residuals =}\NormalTok{ residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{sum\_of\_squared\_residuals =} \FunctionTok{sum}\NormalTok{(squared\_residuals))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-# A tibble: 1 x 1
-  sum_of_squared_residuals
-                     <dbl>
-1                     132.
-\end{verbatim}
-
+\frametitle{Regression: Teaching Evaluations Example}
+\protect\hypertarget{regression-teaching-evaluations-example-11}{}
 \normalsize
 
-You can also get the residuals using the function \texttt{resid} on a
-linear model object.
-
-\tiny
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Compute sum of squared residuals}
-\NormalTok{eis }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(score\_model)}
-\NormalTok{RSS }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(eis}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
-\NormalTok{RSS}
+\DocumentationTok{\#\#b1}
+\FunctionTok{c}\NormalTok{(b1 }\SpecialCharTok{{-}}\NormalTok{ t\_critical}\SpecialCharTok{*}\NormalTok{seb1, b1 }\SpecialCharTok{+}\NormalTok{ t\_critical}\SpecialCharTok{*}\NormalTok{seb1)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-[1] 131.8684
+   bty_avg    bty_avg
+0.03462292 0.09865116
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Or}
+\FunctionTok{confint}\NormalTok{(score\_model, }\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                 2.5 %     97.5 %
+(Intercept) 3.73070764 4.02996827
+bty_avg     0.03462292 0.09865116
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Testing}
+\NormalTok{tb0 }\OtherTok{\textless{}{-}}\NormalTok{ b0}\SpecialCharTok{/}\NormalTok{seb0}
+\NormalTok{tb1 }\OtherTok{\textless{}{-}}\NormalTok{ b1}\SpecialCharTok{/}\NormalTok{seb1}
+\FunctionTok{c}\NormalTok{(tb0, tb1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(Intercept)     bty_avg
+  50.961212    4.090382
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pvalues }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{pt}\NormalTok{(tb0, df, }\AttributeTok{lower =} \ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{*}\DecValTok{2}\NormalTok{, }
+             \FunctionTok{pt}\NormalTok{(tb1, df, }\AttributeTok{lower =} \ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{*}\DecValTok{2}\NormalTok{)}
+\NormalTok{pvalues}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  (Intercept)       bty_avg
+1.561043e-191  5.082731e-05
 \end{verbatim}
 
 \normalsize
