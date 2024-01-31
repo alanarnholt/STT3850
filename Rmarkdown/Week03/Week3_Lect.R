@@ -1,5 +1,5 @@
 
-
+# loading packages
 library(nycflights13)
 library(ggplot2)
 library(dplyr)
@@ -71,7 +71,10 @@ by_origin_monthly_incorrect
 
 
 weather %>% 
-  mutate(temp_in_C = (temp - 32) / 1.8) -> weather
+  mutate(temp_in_C = (temp - 32) / 1.8,
+         monthT = month.name[month]) -> weather
+weather %>% 
+  select(monthT, month)
 
 summary_monthly_temp <- weather %>% 
   group_by(month) %>% 
