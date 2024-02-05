@@ -55,8 +55,8 @@
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\usetheme[]{CambridgeUS}
-\usecolortheme{seagull}
+\usetheme[]{Madrid}
+\usecolortheme{orchid}
 \usefonttheme{professionalfonts}
 \ifPDFTeX\else
   % xetex/luatex font selection
@@ -136,6 +136,19 @@
 \usepackage{lipsum}
 \usepackage{mathtools}
 \usepackage{actuarialangle}
+\usepackage{multirow, longtable, array, dcolumn}
+\usepackage{tabu}
+\newcommand{\sdt}{\bullet}
+\newcommand{\tss}{\textsuperscript}
+\newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
+\newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
+\newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
+\newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
+\newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
+\newcommand{\gil}[1]{\textrm{\gilfont{#1}}\normalfont }
+\newfont{\gilfont}{msbm10 scaled 1000}
+\newcommand{\DOT}{\usebox{\biggercirc}}
+\newcommand{\pv}{\wp\text{-value}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -144,12 +157,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Weeks 11, 12, and 13},
-  pdfauthor={Fall 2023},
+  pdfauthor={Spring 2024},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Weeks 11, 12, and 13}
-\author{Fall 2023}
+\author{Spring 2024}
 \date{}
 \institute{Appalachian State University}
 
@@ -336,7 +349,7 @@ Compare to bootstrap CI: \tiny
 # A tibble: 1 x 2
   lower_ci upper_ci
      <dbl>    <dbl>
-1    -29.5    -18.8
+1    -29.6    -18.9
 \end{verbatim}
 
 \begin{Shaded}

@@ -1,27 +1,17 @@
 ---
 title: "STT 3850 : Weeks 11, 12, and 13"
-author: "Fall 2023"
+author: "Spring 2024"
 institute: "Appalachian State University"
 output: 
-#   pdf_document:
-#      toc: yes
-#      toc_depth: '3'
  beamer_presentation:
-   #template: myTemplate.tex
-   theme: "CambridgeUS"
-   colortheme: "seagull"
+   theme: "Madrid"
+   colortheme: "orchid"
    fonttheme: "professionalfonts"
    keep_tex: true
-# word_document:
-#   toc: yes
-#   toc_depth: '3'
-#date: "`r format(Sys.time(), '%d %B, %Y')`"
-#date: "January 22, 2020"
 number_sections: true
 fig_caption: yes
-#bibliography: Reference.bib
 biblio-style: apalike
-link-citations: yes
+link-citations: TRUE
 header-includes:
    - \usepackage{placeins}
    - \usepackage{color}
@@ -36,14 +26,35 @@ header-includes:
    - \usepackage{lipsum}
    - \usepackage{mathtools}
    - \usepackage{actuarialangle}
+   - \usepackage{multirow, longtable, array, dcolumn}
+   - \usepackage{tabu}
+   - \newcommand{\sdt}{\bullet}
+   - \newcommand{\tss}{\textsuperscript}
+   - \newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
+   - \newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
+   - \newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
+   - \newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
+   - \newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
+   - \newcommand{\gil}[1]{\textrm{\gilfont{#1}}\normalfont }
+   - \newfont{\gilfont}{msbm10 scaled 1000}
+   - \newcommand{\DOT}{\usebox{\biggercirc}}
+   - \newcommand{\pv}{\wp\text{-value}}
 
 ---
 
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE, fig.align='center')
+```{r, MEDskip, echo = FALSE}
+library(knitr)
+knit_hooks$set(document = function(x){
+gsub("\\begin{tabular}", "\\medskip{}\\begin{tabular}", x, fixed = TRUE)
+})
 ```
+
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE, fig.align = 'center')
+```
+
 
 
 
