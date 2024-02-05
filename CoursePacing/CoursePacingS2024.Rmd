@@ -447,7 +447,7 @@ _________________
 
 * Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 23
 
-* [Slides for weeks 14 and 15](../Rmarkdown/ChiSquareTests.pdf)
+* [Lecture Slides](../Rmarkdown/Week14_15/ChiSquareTests.pdf)
 
 
 
