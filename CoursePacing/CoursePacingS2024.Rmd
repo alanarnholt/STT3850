@@ -351,6 +351,7 @@ _______________________
 
 ## Week 11: (Apr 2 -- 4) {-}
 
+* [Lecture Slides for weeks 11, 12, and 13](../Rmarkdown/Week11_12_13/Week11_12_13.pdf)
 
 * Before class review chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com/8-confidence-intervals.html) --- pgs 233-305
 
@@ -361,8 +362,6 @@ _______________________
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
 * Complete [PS-08](https://classroom.github.com/a/Gwp5evxM) by 5:00 pm Apr 4 
-
-* [Slides for weeks 11, 12, and 13](../Slides/Week11_12_13.pdf)
 
 _____________________
 
@@ -385,6 +384,7 @@ __________________
 
 ## Week 12: (Apr 9 -- 11) {-}
 
+* [Lecture Slides for weeks 11, 12, and 13](../Rmarkdown/Week11_12_13/Week11_12_13.pdf)
 
 * Before class read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com/9-hypothesis-testing.html) --- pgs 307-360
 
@@ -396,7 +396,6 @@ __________________
 
 * Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 11
 
-* [Slides for weeks 11, 12, and 13](../Slides/Weeks11_12_13.pdf)
 
 ```{block, week12optional, type='rmdoptional'}
 #### Optional {-}
@@ -412,6 +411,8 @@ ______________________
 
 ## Week 13: (Apr 16 -- 18) {-}
 
+* [Lecture Slides for weeks 11, 12, and 13](../Rmarkdown/Week11_12_13/Week11_12_13.pdf)
+
 * Before class review Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com/9-hypothesis-testing.html) --- pgs 307-360
 
 * [Permutation Examples](../Rmarkdown/PermutationExamples.html)
@@ -421,8 +422,6 @@ ______________________
 * Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Apr 17
 
 * Complete [PS-09](https://classroom.github.com/a/CVGT845f) by 5:00 pm Apr 18 
-
-* [Slides for weeks 11, 12, and 13](../Slides/Weeks11_12_13.pdf)
 
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
