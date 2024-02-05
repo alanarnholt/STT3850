@@ -1,0 +1,1700 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Madrid}
+\usecolortheme{orchid}
+\usefonttheme{professionalfonts}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{placeins}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[]{algpseudocode}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage{lipsum}
+\usepackage{mathtools}
+\usepackage{actuarialangle}
+\usepackage{multirow, longtable, array, dcolumn}
+\usepackage{tabu}
+\newcommand{\sdt}{\bullet}
+\newcommand{\tss}{\textsuperscript}
+\newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
+\newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
+\newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
+\newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
+\newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
+\newcommand{\gil}[1]{\textrm{\gilfont{#1}}\normalfont }
+\newfont{\gilfont}{msbm10 scaled 1000}
+\newcommand{\DOT}{\usebox{\biggercirc}}
+\newcommand{\pv}{\wp\text{-value}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={STT 3850 : Week 6},
+  pdfauthor={Spring 2024},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{STT 3850 : Week 6}
+\author{Spring 2024}
+\date{}
+\institute{Appalachian State University}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{outline-for-the-week}{%
+\section{Outline for the week}\label{outline-for-the-week}}
+
+\begin{frame}{By the end of the week: Multiple Linear Regression}
+\protect\hypertarget{by-the-end-of-the-week-multiple-linear-regression}{}
+\begin{itemize}
+\tightlist
+\item
+  Extra Sums of Squares
+\item
+  Model selection
+\end{itemize}
+\end{frame}
+
+\hypertarget{extra-sums-of-squares}{%
+\section{Extra Sums of Squares}\label{extra-sums-of-squares}}
+
+\begin{frame}{Partition of Total sum of squares}
+\protect\hypertarget{partition-of-total-sum-of-squares}{}
+\begin{itemize}
+\item
+  For the linear regression model:
+  \[y_i=\beta_0+\beta_1x_{i,1}+\ldots + \beta_{p-1}x_{i,p-1}+\epsilon_i\]
+\item
+  We fit the line:
+  \[\hat{y}_i=b_0+b_1x_{i,1}+\ldots + b_{p-1}x_{i,p-1}\]
+\item
+  Partition of Total sum of squares:
+
+  \begin{itemize}
+  \item
+    Total sum of squares (\(SST\)): \(SST=\sum(y_i-\bar{y})^2.\)
+  \item
+    Error sum of squares (\(SSE\)): \(SSE=\sum (y_i-\hat{y}_i)^2.\)
+  \item
+    Regression sum of squares (\(SSR\)):
+    \(SSR=\sum (\hat{y}_i-\bar{y})^2\)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Extra Sums of Squares}
+\protect\hypertarget{extra-sums-of-squares-1}{}
+An extra sum of squares measures the marginal reduction in the error sum
+of squares when one or several predictor variables are added to the
+regression model, given that the other predictor variables are already
+in the model.
+\end{frame}
+
+\begin{frame}{Term Life Insurance Example}
+\protect\hypertarget{term-life-insurance-example}{}
+Like all firms, life insurance companies continually seek new ways to
+deliver products to the market. Those involved in product development
+want to know who buys insurance and how much they buy. In this example,
+we examine the Survey of Consumer Finances (SCF), that contains
+extensive information on assets, liabilities, income, and demographic
+characteristics of those sampled (potential U.S. customers). We study a
+random sample of 500 households with positive incomes that were
+interviewed in the 2004 survey.
+
+\textbf{Example: Term Life Insurance}
+
+\begin{itemize}
+\tightlist
+\item
+  \(y\): FACE amount (log scale)
+\item
+  \(x_1\): Annual Income (log scale)
+\item
+  \(x_2\): Education
+\item
+  \(x_3\): Number of household members
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Term Life Insurance Example}
+\protect\hypertarget{term-life-insurance-example-1}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(moderndive)}
+\NormalTok{Term }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"TermLife.csv"}\NormalTok{)}
+\NormalTok{Term2 }\OtherTok{\textless{}{-}}\NormalTok{ Term }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(FACE }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{LNFACE =} \FunctionTok{log}\NormalTok{(FACE), }\AttributeTok{LNINCOME =} \FunctionTok{log}\NormalTok{(INCOME))}
+\NormalTok{Term1 }\OtherTok{\textless{}{-}}\NormalTok{ Term2 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(EDUCATION, LNFACE, LNINCOME, NUMHH)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Extra Sums of Squares: \(y\) on \(x_1\)}
+\protect\hypertarget{extra-sums-of-squares-y-on-x_1}{}
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelX1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ LNINCOME, }\AttributeTok{data =}\NormalTok{ Term2)}
+\FunctionTok{summary}\NormalTok{(modelX1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = LNFACE ~ LNINCOME, data = Term2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6.1967 -0.8032 -0.0018  0.8954  6.4711 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  4.23003    0.85985   4.920  1.5e-06 ***
+LNINCOME     0.69604    0.07661   9.086  < 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.642 on 273 degrees of freedom
+Multiple R-squared:  0.2322,    Adjusted R-squared:  0.2294 
+F-statistic: 82.55 on 1 and 273 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Extra Sums of Squares: \(y\) on \(x_1\)}
+\protect\hypertarget{extra-sums-of-squares-y-on-x_1-1}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eis }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(modelX1)}
+\NormalTok{SSE }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(eis}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{SST }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((Term2}\SpecialCharTok{$}\NormalTok{LNFACE }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Term2}\SpecialCharTok{$}\NormalTok{LNFACE))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{SSR }\OtherTok{\textless{}{-}}\NormalTok{ SST}\SpecialCharTok{{-}}\NormalTok{SSE}
+\FunctionTok{c}\NormalTok{(SSE, SSR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 736.2671 222.6292
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{anova}\NormalTok{(modelX1))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule\noalign{}
+& Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
+\midrule\noalign{}
+\endhead
+LNINCOME & 1 & 222.6292 & 222.629245 & 82.54855 & 0 \\
+Residuals & 273 & 736.2671 & 2.696949 & NA & NA \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Extra Sums of Squares: \(y\) on \(x_2\)}
+\protect\hypertarget{extra-sums-of-squares-y-on-x_2}{}
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelX2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ EDUCATION, }\AttributeTok{data =}\NormalTok{ Term2)}
+\FunctionTok{summary}\NormalTok{(modelX2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = LNFACE ~ EDUCATION, data = Term2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.4395 -1.2698  0.2065  1.2194  4.5559 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  7.90986    0.60499  13.074  < 2e-16 ***
+EDUCATION    0.28095    0.04103   6.847 4.96e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.731 on 273 degrees of freedom
+Multiple R-squared:  0.1466,    Adjusted R-squared:  0.1434 
+F-statistic: 46.89 on 1 and 273 DF,  p-value: 4.964e-11
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Extra Sums of Squares: \(y\) on \(x_2\)}
+\protect\hypertarget{extra-sums-of-squares-y-on-x_2-1}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{get\_regression\_points}\NormalTok{(modelX2) }\OtherTok{{-}\textgreater{}}\NormalTok{ RT}
+\NormalTok{RT }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SSE =} \FunctionTok{sum}\NormalTok{(residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
+            \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((LNFACE }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(LNFACE))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
+            \AttributeTok{SSR =}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE) }\OtherTok{{-}\textgreater{}}\NormalTok{ ESS}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(ESS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rrr@{}}
+\toprule\noalign{}
+SSE & SST & SSR \\
+\midrule\noalign{}
+\endhead
+818.375 & 958.967 & 140.5921 \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{anova}\NormalTok{(modelX2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule\noalign{}
+& Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
+\midrule\noalign{}
+\endhead
+EDUCATION & 1 & 140.5486 & 140.548609 & 46.88688 & 0 \\
+Residuals & 273 & 818.3477 & 2.997611 & NA & NA \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Extra Sums of Squares: \(y\) on \(x_1\) and
+\(x_2\)}
+\protect\hypertarget{extra-sums-of-squares-y-on-x_1-and-x_2}{}
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelX1X2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ LNINCOME }\SpecialCharTok{+}\NormalTok{ EDUCATION, }\AttributeTok{data =}\NormalTok{ Term2)}
+\FunctionTok{summary}\NormalTok{(modelX1X2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = LNFACE ~ LNINCOME + EDUCATION, data = Term2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6.1266 -1.0284  0.1817  0.9185  5.3403 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  2.96235    0.87676   3.379 0.000835 ***
+LNINCOME     0.57392    0.07879   7.284 3.50e-12 ***
+EDUCATION    0.18103    0.04003   4.523 9.11e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.587 on 272 degrees of freedom
+Multiple R-squared:  0.2859,    Adjusted R-squared:  0.2806 
+F-statistic: 54.44 on 2 and 272 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Extra Sums of Squares: \(y\) on \(x_1\) and
+\(x_2\)}
+\protect\hypertarget{extra-sums-of-squares-y-on-x_1-and-x_2-1}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{get\_regression\_points}\NormalTok{(modelX1X2) }\OtherTok{{-}\textgreater{}}\NormalTok{ RT2}
+\NormalTok{RT2 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SSE =} \FunctionTok{sum}\NormalTok{(residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
+            \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((LNFACE }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(LNFACE))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
+            \AttributeTok{SSR =}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE) }\OtherTok{{-}\textgreater{}}\NormalTok{ ESS2}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(ESS2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rrr@{}}
+\toprule\noalign{}
+SSE & SST & SSR \\
+\midrule\noalign{}
+\endhead
+684.7941 & 958.967 & 274.1729 \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{anova}\NormalTok{(modelX1X2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule\noalign{}
+& Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
+\midrule\noalign{}
+\endhead
+LNINCOME & 1 & 222.6292 & 222.629245 & 88.43204 & 0.0e+00 \\
+EDUCATION & 1 & 51.5022 & 51.502201 & 20.45753 & 9.1e-06 \\
+Residuals & 272 & 684.7649 & 2.517518 & NA & NA \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Extra Sums of Squares: \(y\) on \(x_1\), \(x_2\)
+and \(x_3\)}
+\protect\hypertarget{extra-sums-of-squares-y-on-x_1-x_2-and-x_3}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelAll }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ LNINCOME }\SpecialCharTok{+}\NormalTok{ EDUCATION }\SpecialCharTok{+}\NormalTok{ NUMHH, }\AttributeTok{data =}\NormalTok{ Term2)}
+\FunctionTok{summary}\NormalTok{(modelAll)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = LNFACE ~ LNINCOME + EDUCATION + NUMHH, data = Term2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.7420 -0.8681  0.0549  0.9093  4.7187 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  2.58408    0.84643   3.053  0.00249 ** 
+LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
+EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
+NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.525 on 271 degrees of freedom
+Multiple R-squared:  0.3425,    Adjusted R-squared:  0.3353 
+F-statistic: 47.07 on 3 and 271 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Extra Sums of Squares: \(y\) on \(x_1\), \(x_2\)
+and \(x_3\)}
+\protect\hypertarget{extra-sums-of-squares-y-on-x_1-x_2-and-x_3-1}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{get\_regression\_points}\NormalTok{(modelAll) }\OtherTok{{-}\textgreater{}}\NormalTok{ RT3}
+\NormalTok{RT3 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SSE =} \FunctionTok{sum}\NormalTok{(residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
+            \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((LNFACE }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(LNFACE))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
+            \AttributeTok{SSR =}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE) }\OtherTok{{-}\textgreater{}}\NormalTok{ ESS3}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(ESS3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rrr@{}}
+\toprule\noalign{}
+SSE & SST & SSR \\
+\midrule\noalign{}
+\endhead
+630.458 & 958.967 & 328.509 \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{anova}\NormalTok{(modelAll))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule\noalign{}
+& Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
+\midrule\noalign{}
+\endhead
+LNINCOME & 1 & 222.62925 & 222.629245 & 95.70075 & 0.0e+00 \\
+EDUCATION & 1 & 51.50220 & 51.502201 & 22.13905 & 4.0e-06 \\
+NUMHH & 1 & 54.33593 & 54.335932 & 23.35717 & 2.3e-06 \\
+Residuals & 271 & 630.42897 & 2.326306 & NA & NA \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{Extra Sums of Squares}
+\protect\hypertarget{extra-sums-of-squares-2}{}
+\begin{table}[h]
+\centering
+\resizebox{0.7\textheight}{!}{
+    \medskip{}\begin{tabular}{lll}
+\hline
+Independent Variable      &  SSR  &  SSE  \\
+\hline
+$x_1$ & 222.63 & 736.27 \\
+$x_2$ & 140.55 & 818.35 \\
+$x_1$ and $x_2$ & 274.13 & 684.76 \\
+$x_1$, $x_2$ and $x_3$  & 328.47 & 630.43 \\
+
+\hline
+        \end{tabular}
+    }
+\end{table}
+
+Hence: \[SSR(x_2|x_1)=SSE(x_1)-SSE(x_1, x_2)=736.27-684.76=51.51\] or
+\[SSR(x_2|x_1)=SSR(x_1,x_2)-SSR(x_1)=274.13-222.63=51.51\]
+
+Question:
+
+\begin{enumerate}
+\tightlist
+\item
+  Why are they equal?
+\item
+  Find \(SSR(x_1|x_2)\)?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Extra Sums of Squares}
+\protect\hypertarget{extra-sums-of-squares-3}{}
+\begin{table}[h]
+\centering
+\resizebox{0.7\textheight}{!}{
+    \medskip{}\begin{tabular}{lll}
+\hline
+Independent Variable      &  SSR  &  SSE  \\
+\hline
+$x_1$ & 222.63 & 736.27 \\
+$x_2$ & 140.55 & 818.35 \\
+$x_1$ and $x_2$ & 274.13 & 684.76 \\
+$x_1$, $x_2$ and $x_3$  & 328.47 & 630.43 \\
+
+\hline
+        \end{tabular}
+    }
+\end{table}
+
+Similarly:
+\[\begin{array}{ll}SSR(x_3|x_1,x_2)&=SSE(x_1,x_2)-SSE(x_1, x_2, x_3)\\
+&=684.76-630.43=54.33\end{array}\] or
+\[\begin{array}{ll}SSR(x_3|x_1,x_2)&=SSR(x_1,x_2,x_3)-SSR(x_1,x_2)\\
+&=328.47-274.13=54.33\end{array}\]
+
+Problem: Find the value of \(SSR(x_2,x_3|x_1)\).
+\end{frame}
+
+\begin{frame}{Decomposition}
+\protect\hypertarget{decomposition}{}
+In multiple regression, we can obtain a variety of decompositions of the
+regression \(SSR\) into extra sum of squares. For example,
+
+\[SSR(x_1, x_2)=SSR(x_1)+SSR(x_2|x_1), \quad \text{or}\]
+\[SSR(x_1, x_2)=SSR(x_2)+SSR(x_1|x_2).\] If we have three variables,
+then:
+\[SSR(x_1, x_2,x_3)=SSR(x_1)+SSR(x_2|x_1)+SSR(x_3|x_1,x_2), \quad \text{or}\]
+\[SSR(x_1, x_2,x_3)=SSR(x_2)+SSR(x_3|x_2)+SSR(x_1|x_2,x_3), \quad \text{or}\]
+\[SSR(x_1, x_2,x_3)=SSR(x_1)+SSR(x_2,x_3|x_1).\]
+\end{frame}
+
+\begin{frame}{Analysis of Variance: ANOVA}
+\protect\hypertarget{analysis-of-variance-anova}{}
+The ANOVA table is shown below
+
+\begin{table}[h]
+\centering
+\resizebox{1.2\textheight}{!}{
+    \medskip{}\begin{tabular}{lllll}
+\hline
+     Source of       &  Degrees of  &    &               &                  \\
+     Variation       &  Freedom      &  Sum of Squares   &  Mean Square &   \\
+     (Source)        &   ($df$)      &  ($SS$)             & ($MS$)         &  $F$ \\
+\hline\hline
+$x_1$ & $1$ & $SSR(x_1)$ & $MSR(x_1)=SSR(x_1)/1$ & $F=\frac{MSR((x_1))}{MSE((x_1,x_2,x_3))}$\\
+$x_2|x_1$ & $1$ & $SSR(x_2|x_1)$ & $MSR(x_2|x_1)=SSR(x_2|x_1)/1$ & $F=\frac{MSR((x_2|x_1))}{MSE((x_1,x_2,x_3))}$\\
+$x_3|x_1,x_2$ & $1$ & $SSR(x_3|x_1,x_2)$ & $MSR(x_3|x_1,x_2)=SSR(x_3|x_1,x_2)/1$ & $F=\frac{MSR((x_3|x_1,x_2))}{MSE((x_1,x_2,x_3))}$\\
+Error & $n-4$ & $SSE(x_1,x_2,x_3)$ & $MSE=SSE(x_1,x_2,x_3)/(n-4)$ & \\
+\hline
+Total & $n-1$ & $SST(x_1,x_2,x_3)$ &  & \\
+
+\hline
+        \end{tabular}
+    }
+\end{table}
+\end{frame}
+
+\begin{frame}[fragile]{Analysis of Variance: ANOVA}
+\protect\hypertarget{analysis-of-variance-anova-1}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#For Term Life Insurance Example:}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{anova}\NormalTok{(modelAll))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrr@{}}
+\toprule\noalign{}
+& Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
+\midrule\noalign{}
+\endhead
+LNINCOME & 1 & 222.62925 & 222.629245 & 95.70075 & 0.0e+00 \\
+EDUCATION & 1 & 51.50220 & 51.502201 & 22.13905 & 4.0e-06 \\
+NUMHH & 1 & 54.33593 & 54.335932 & 23.35717 & 2.3e-06 \\
+Residuals & 271 & 630.42897 & 2.326306 & NA & NA \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\normalsize
+
+Why are extra sum of squares of interest?
+\end{frame}
+
+\begin{frame}{Tests for Regression Coefficients}
+\protect\hypertarget{tests-for-regression-coefficients}{}
+When we wish to test whether the term \(\beta_kx_k\) can be dropped from
+a multiple regression model, we are interested in:
+\[H_0:\beta_k=0, \quad vs. \quad H_a: \beta_k \neq 0.\]
+\end{frame}
+
+\begin{frame}{Tests for Regression Coefficients}
+\protect\hypertarget{tests-for-regression-coefficients-1}{}
+For example, let us consider the first-order regression model
+\[y_i=\beta_0+\beta_1 x_{i1}+\beta_2 x_{i2}+\beta_3 x_{i3}+\epsilon_i.\]
+Test: \[H_0:\beta_3=0, \quad vs. \quad H_a: \beta_3\neq 0.\] Under the
+null, we have the reduced model,
+\[y_i=\beta_0+\beta_1 x_{i1}+\beta_2 x_{i2}+\epsilon_i.\] For those two
+models, the extra sum of squares is
+\[SSR(x_3|x_1,x_2)=SSE(x_1,x_2)-SSE(x_1,x_2,x_3)\]
+\end{frame}
+
+\begin{frame}{Tests for Regression Coefficients}
+\protect\hypertarget{tests-for-regression-coefficients-2}{}
+The general linear test statistic
+\[F^*=\frac{SSE_{reduced}-SSE_{full}}{df_{reduced}-df_{full}}\div \frac{SSE_{full}}{df_{full}}\]
+becomes:
+
+\[  \begin{array}{ll}
+F^* &= \frac{SSE(x_1,x_2)-SSE(x_1,x_2,x_3)}{(n-3)-(n-4)}\div \frac{SSE(x_1,x_2,x_3)}{n-4}\\ 
+&=\frac{SSR(x_3|x_1,x_2)}{1}\div \frac{SSE(x_1,x_2,x_3)}{n-4} \\
+&=\frac{MSR(x_3|x_1,x_2)}{MSE(x_1,x_2,x_3)}
+\end{array}\]
+\end{frame}
+
+\begin{frame}[fragile]{Term Life Insurance Example}
+\protect\hypertarget{term-life-insurance-example-2}{}
+\[F^*=\frac{54.34}{1}\div \frac{630.43}{271}=23.36\] \normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Fstar }\OtherTok{\textless{}{-}} \FunctionTok{anova}\NormalTok{(modelAll)[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]}
+\NormalTok{Fstar}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 23.35717
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Get p{-}value for F{-}statistic}
+\NormalTok{pvalue }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pf}\NormalTok{(}\FloatTok{23.36}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{271}\NormalTok{)}
+\NormalTok{pvalue}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2.252657e-06
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Term Life Insurance Example}
+\protect\hypertarget{term-life-insurance-example-3}{}
+We can use the \(\wp\text{-value}\) on the variable to test
+\(H_0:\beta_3=0\).
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(modelAll)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = LNFACE ~ LNINCOME + EDUCATION + NUMHH, data = Term2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.7420 -0.8681  0.0549  0.9093  4.7187 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  2.58408    0.84643   3.053  0.00249 ** 
+LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
+EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
+NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.525 on 271 degrees of freedom
+Multiple R-squared:  0.3425,    Adjusted R-squared:  0.3353 
+F-statistic: 47.07 on 3 and 271 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Testing More Than One Coefficient}
+\protect\hypertarget{testing-more-than-one-coefficient}{}
+Consider testing:
+\[H_0:\beta_2=\beta_3=0, \text{versus} \quad H_a: \text{at least one } \beta_i \neq 0 \text{ for } i = 1, 2, \ldots, p-1.\]
+
+Under the null, we have the reduced model,
+\[y_i=\beta_0+\beta_1 x_{i1}+\epsilon_i.\] This is the \texttt{modelX1}
+we estimated earlier.
+\end{frame}
+
+\begin{frame}[fragile]{Testing More Than One Coefficient}
+\protect\hypertarget{testing-more-than-one-coefficient-1}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#For Term Life Insurance Example:}
+\FunctionTok{anova}\NormalTok{(modelX1, modelAll)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Analysis of Variance Table
+
+Model 1: LNFACE ~ LNINCOME
+Model 2: LNFACE ~ LNINCOME + EDUCATION + NUMHH
+  Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
+1    273 736.27                                  
+2    271 630.43  2    105.84 22.748 7.369e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{Is There a Relationship Between the Response and
+Predictors}
+\protect\hypertarget{is-there-a-relationship-between-the-response-and-predictors}{}
+Now, we test:
+\[H_0:\beta_1=\beta_2=\beta_3=0, \text{ versus } H_a: \text{at least one } \beta_i \neq 0 \text{ for } i = 1, 2, \ldots, p-1.\]
+Under the null, we have the reduced model, \[y_i=\beta_0+\epsilon_i.\]
+\end{frame}
+
+\begin{frame}[fragile]{Is There a Relationship Between the Response and
+Predictors}
+\protect\hypertarget{is-there-a-relationship-between-the-response-and-predictors-1}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelInt }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ Term2)}
+\FunctionTok{summary}\NormalTok{(modelInt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = LNFACE ~ 1, data = Term2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.3057 -1.1705 -0.0719  1.2974  4.4643 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  11.9903     0.1128   106.3   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.871 on 274 degrees of freedom
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Is There a Relationship Between the Response and
+Predictors}
+\protect\hypertarget{is-there-a-relationship-between-the-response-and-predictors-2}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(modelInt, modelAll)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Analysis of Variance Table
+
+Model 1: LNFACE ~ 1
+Model 2: LNFACE ~ LNINCOME + EDUCATION + NUMHH
+  Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
+1    274 958.90                                  
+2    271 630.43  3    328.47 47.066 < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Is There a Relationship Between the Response and
+Predictors}
+\protect\hypertarget{is-there-a-relationship-between-the-response-and-predictors-3}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Or}
+\FunctionTok{summary}\NormalTok{(modelAll)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = LNFACE ~ LNINCOME + EDUCATION + NUMHH, data = Term2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.7420 -0.8681  0.0549  0.9093  4.7187 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  2.58408    0.84643   3.053  0.00249 ** 
+LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
+EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
+NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.525 on 271 degrees of freedom
+Multiple R-squared:  0.3425,    Adjusted R-squared:  0.3353 
+F-statistic: 47.07 on 3 and 271 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{model-selection}{%
+\section{Model selection}\label{model-selection}}
+
+\begin{frame}{Model selection}
+\protect\hypertarget{model-selection-1}{}
+The general multiple linear regression model with response \(y\) and
+terms \(x_1, \ldots, x_{p-1}\) will have the form:
+\[y=\beta_0+\beta_1x_1+\ldots + \beta_{p-1}x_{p-1}+\epsilon.\]
+
+\begin{itemize}
+\item
+  How many alternative models:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(y=\beta_0+\epsilon\)
+  \item
+    \(y=\beta_0+\beta_1x_1+\epsilon\)
+  \item
+    \(y=\beta_0+\beta_2x_2+\epsilon\)
+  \item
+    \(\vdots\)
+  \item
+    \(y=\beta_0+\beta_{p-1}x_{p-1}+\epsilon\)
+  \item
+    \(y=\beta_0+\beta_1x_1+\beta_2x_2+\epsilon\)
+  \item
+    \(\vdots\)
+  \item
+    \(y=\beta_0+\beta_1x_1+\beta_2x_2+\ldots+\beta_{p-1}x_{p-1}\epsilon\)
+  \end{itemize}
+\end{itemize}
+
+One can construct a total of \(2^{p-1}\) models! Question: How to select
+the ``best'' model?
+\end{frame}
+
+\begin{frame}{Partition of Total sum of squares}
+\protect\hypertarget{partition-of-total-sum-of-squares-1}{}
+\begin{itemize}
+\item
+  For the linear regression model:
+  \[y_i=\beta_0+\beta_1x_{i,1}+\ldots + \beta_{p-1}x_{i,p-1}+\epsilon_i.\]
+\item
+  We have fitted the line:
+  \(\hat{y}_i=b_0+b_1x_{i,1}+\ldots + b_{p-1}x_{i,p-1}.\)
+\item
+  Partitioning the sum of squares is the same:
+
+  \begin{itemize}
+  \item
+    Total sum of squares (SST): \(SST=\sum(y_i-\bar{y})^2.\)
+  \item
+    Error sum of squares (SSE): \(SSE=\sum (y_i-\hat{y}_i)^2.\)
+  \item
+    Regression sum of squares (SSR): \(SSR=\sum (\hat{y}_i-\bar{y})^2\)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\(R^2\) and Adjusted \(R^2\) (\(R^2_{\text{adj}}\))}
+\protect\hypertarget{r2-and-adjusted-r2-r2_textadj}{}
+The coefficient of determination of the regression model, is defined as
+the proportion of the total sample variability in the \(y\)'s explained
+by the regression model, that is,
+\[R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}.\] We can also write:
+
+\[R^2=\frac{var(\hat{y})}{var(y)}\]
+\end{frame}
+
+\begin{frame}{\(R^2\) and Adjusted \(R^2\) (\(R^2_{\text{adj}}\))}
+\protect\hypertarget{r2-and-adjusted-r2-r2_textadj-1}{}
+Caution: adding irrelevant predictor variables to the regression
+equation often increases \(R^2\).
+
+Q: Why do we use it?
+
+A: The intent in using \(R^2\) criterion is to find the point where
+adding more \(x\) variables is not worthwhile because it leads to a very
+small increase in \(R^2\). Often this point is reached when only a
+limited number of \(x\) variables are included in the regression model.
+\end{frame}
+
+\begin{frame}{\(R^2\) and Adjusted \(R^2\) (\(R^2_{\text{adj}}\))}
+\protect\hypertarget{r2-and-adjusted-r2-r2_textadj-2}{}
+One can define an adjusted coefficient of determination
+\[R^2_{\text{adj}}=1-\frac{SSE/(n-p)}{SST/ (n-1)}=1-\frac{MSE}{SST/n-1}\]
+
+where \(p\) is the number of predictors in the current model. This
+coefficient takes the number of parameters in the regression model into
+account using degrees of freedom.
+
+Users of the \(R^2_{\text{adj}}\) criterion seek to find a few subsets
+for which \(R^2_{\text{adj}}\) is at the maximum or that adding more
+variable is not worthwhile.
+\end{frame}
+
+\begin{frame}[fragile]{Needed packages}
+\protect\hypertarget{needed-packages}{}
+Let's load all the packages needed for this chapter.
+
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }
+\FunctionTok{library}\NormalTok{(moderndive)}
+\FunctionTok{library}\NormalTok{(skimr)}
+\FunctionTok{library}\NormalTok{(ISLR)}
+\NormalTok{evals\_ch6 }\OtherTok{\textless{}{-}}\NormalTok{ evals }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(ID, score, age, gender)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Compare Interaction and Parallel slopes model}
+\protect\hypertarget{compare-interaction-and-parallel-slopes-model}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit interaction model:}
+\NormalTok{score\_model\_interaction }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ gender }\SpecialCharTok{+}\NormalTok{ age}\SpecialCharTok{:}\NormalTok{gender, }\AttributeTok{data =}\NormalTok{ evals\_ch6)}
+\FunctionTok{summary}\NormalTok{(score\_model\_interaction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = score ~ age + gender + age:gender, data = evals_ch6)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.86453 -0.34815  0.09863  0.40661  0.96327 
+
+Coefficients:
+                Estimate Std. Error t value Pr(>|t|)    
+(Intercept)     4.882989   0.205210  23.795  < 2e-16 ***
+age            -0.017523   0.004472  -3.919 0.000103 ***
+gendermale     -0.446044   0.265407  -1.681 0.093520 .  
+age:gendermale  0.013531   0.005531   2.446 0.014803 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5314 on 459 degrees of freedom
+Multiple R-squared:  0.05138,   Adjusted R-squared:  0.04518 
+F-statistic: 8.288 on 3 and 459 DF,  p-value: 2.227e-05
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Compare Interaction and Parallel slopes model}
+\protect\hypertarget{compare-interaction-and-parallel-slopes-model-1}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit parallel slopes model:}
+\NormalTok{score\_model\_parallel\_slopes }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ gender, }\AttributeTok{data =}\NormalTok{ evals\_ch6)}
+\FunctionTok{summary}\NormalTok{(score\_model\_parallel\_slopes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = score ~ age + gender, data = evals_ch6)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.82833 -0.33494  0.09391  0.42882  0.91506 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  4.484116   0.125284  35.792  < 2e-16 ***
+age         -0.008678   0.002646  -3.280 0.001117 ** 
+gendermale   0.190571   0.052469   3.632 0.000313 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5343 on 460 degrees of freedom
+Multiple R-squared:  0.03901,   Adjusted R-squared:  0.03484 
+F-statistic: 9.338 on 2 and 460 DF,  p-value: 0.0001059
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Compare Interaction and Parallel slopes model}
+\protect\hypertarget{compare-interaction-and-parallel-slopes-model-2}{}
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Get summaries of models:}
+\FunctionTok{get\_regression\_summaries}\NormalTok{(score\_model\_interaction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 9
+  r_squared adj_r_squared   mse  rmse sigma statistic p_value    df  nobs
+      <dbl>         <dbl> <dbl> <dbl> <dbl>     <dbl>   <dbl> <dbl> <dbl>
+1     0.051         0.045 0.280 0.529 0.531      8.29       0     3   463
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{get\_regression\_summaries}\NormalTok{(score\_model\_parallel\_slopes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 9
+  r_squared adj_r_squared   mse  rmse sigma statistic p_value    df  nobs
+      <dbl>         <dbl> <dbl> <dbl> <dbl>     <dbl>   <dbl> <dbl> <dbl>
+1     0.039         0.035 0.284 0.533 0.534      9.34       0     2   463
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{AIC: Akaike Information Criterion}
+\protect\hypertarget{aic-akaike-information-criterion}{}
+Akaike's information criterion (AIC) can be motivated in two ways. The
+most popular motivation seems to be based on balancing goodness of fit
+and a penalty for model complexity. \textbf{AIC is defined such that the
+smaller the value of AIC the better the model.}
+
+\[AIC=n\log(SSE_{m}/n)+2m.\]
+
+Recall that \(m\) is the number of parameters in your subset model. For
+example, if your model includes only \(\beta_0, \beta_1, \beta_2\), then
+\(m = 3\).
+
+\textbf{Caution}: When the sample size is small, or when the number of
+parameters estimated is a moderate to large fraction of the sample size,
+it is well-known that AIC has a tendency for over-fitting since the
+penalty for model complexity is not strong enough.
+\end{frame}
+
+\begin{frame}{BIC: Bayes Information Criterion}
+\protect\hypertarget{bic-bayes-information-criterion}{}
+BIC is defined such that the smaller the value of BIC the better the
+model. \[BIC=n\log (SSE_m/n)+m\log(n)\] BIC penalizes complex models
+more heavily than AIC, thus favoring simpler models than AIC.
+\end{frame}
+
+\begin{frame}[fragile]{Compare Interaction and Parallel slopes model}
+\protect\hypertarget{compare-interaction-and-parallel-slopes-model-3}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# AIC}
+\FunctionTok{AIC}\NormalTok{(score\_model\_interaction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 734.5273
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{AIC}\NormalTok{(score\_model\_parallel\_slopes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 738.5253
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# BIC}
+\FunctionTok{BIC}\NormalTok{(score\_model\_interaction)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 755.2159
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{BIC}\NormalTok{(score\_model\_parallel\_slopes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 755.0762
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{``Best'' Subset Algorithm}
+\protect\hypertarget{best-subset-algorithm}{}
+Time-saving algorithms have been developed in which the best subsets
+according to a specified criterion are identified without requiring the
+fitting of all of possible subset regression models.
+
+Example: For the eight predictors, we know there are \(2^8=256\)
+possible models.
+\end{frame}
+
+\begin{frame}[fragile]{Stepwise Procedures}
+\protect\hypertarget{stepwise-procedures}{}
+\textbf{Forward selection}
+
+Forward selection starts with no variables in the model and then adds
+the \(x-\)variable that produces the smallest \(\wp\text{-value}\) below
+\(\alpha_{\text{crit}}\) when included in the model. This procedure is
+continued until no new predictors can be added. The user can determine
+the variable that produces the smallest \(\wp\text{-value}\) by
+regressing the response variable on the \(x_i\)s one at a time using
+\texttt{lm()} and \texttt{summary()} or using the \texttt{add()}
+function.
+\end{frame}
+
+\begin{frame}[fragile]{Stepwise Procedures}
+\protect\hypertarget{stepwise-procedures-1}{}
+\textbf{Backward elimination}
+
+Backward elimination begins with a model contining all potential \(x-\)
+variables and identifies the one with the largest \(\wp\text{-value}\).
+This can be done by looking at the \(\wp\text{-value}\)s for the \(t-\)
+values of the \(\hat{\beta_i}, i = 1, \ldots,p-1\) using the function
+\texttt{summary()} or by using the \(\wp\text{-value}\)s from the
+function \texttt{drop1()}. If the variable with the largest
+\(\wp\text{-value}\) is a above a predetermined value,
+\(\alpha_{\text{crit}}\), that variable is dropped. A model with the
+remaining \(x-\)variables is then fit and the procedure continues until
+all the \(\wp\text{-value}\)s for the remaining variables in the model
+are below the predetermined \(\alpha_{\text{crit}}\). The
+\(\alpha_{\text{crit}}\) is sometimes referred to as the
+``\(\wp\text{-value}\)-to-remove'' and is typically set to 15 or 20\%.
+\end{frame}
+
+\begin{frame}{Term Life Insurance Example}
+\protect\hypertarget{term-life-insurance-example-4}{}
+Like all firms, life insurance companies continually seek new ways to
+deliver products to the market. Those involved in product development
+want to know who buys insurance and how much they buy. In this example,
+we examine the Survey of Consumer Finances (SCF), that contains
+extensive information on assets, liabilities, income, and demographic
+characteristics of those sampled (potential U.S. customers). We study a
+random sample of 500 households with positive incomes that were
+interviewed in the 2004 survey.
+\end{frame}
+
+\begin{frame}[fragile]{Term Life Insurance Example}
+\protect\hypertarget{term-life-insurance-example-5}{}
+\tiny
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\#forward selection based on AIC \#\#\#\#\#}
+\FunctionTok{library}\NormalTok{(MASS)}
+\NormalTok{null }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE  }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ Term1)}
+\NormalTok{full }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ Term1)}
+\NormalTok{mod\_fs }\OtherTok{\textless{}{-}} \FunctionTok{stepAIC}\NormalTok{(null, }\AttributeTok{scope =} \FunctionTok{list}\NormalTok{(}\AttributeTok{lower=}\NormalTok{ null, }\AttributeTok{upper=}\NormalTok{ full), }
+                  \AttributeTok{direction =} \StringTok{"forward"}\NormalTok{, }\AttributeTok{trace =} \DecValTok{0}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(mod\_fs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = LNFACE ~ LNINCOME + EDUCATION + NUMHH, data = Term1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.7420 -0.8681  0.0549  0.9093  4.7187 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  2.58408    0.84643   3.053  0.00249 ** 
+LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
+EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
+NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.525 on 271 degrees of freedom
+Multiple R-squared:  0.3425,    Adjusted R-squared:  0.3353 
+F-statistic: 47.07 on 3 and 271 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Term Life Insurance Example}
+\protect\hypertarget{term-life-insurance-example-6}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# backward elimination based on AIC \#\#\#\#\#}
+\NormalTok{mod\_be }\OtherTok{\textless{}{-}} \FunctionTok{stepAIC}\NormalTok{(full, }\AttributeTok{scope =} \FunctionTok{list}\NormalTok{(}\AttributeTok{lower =}\NormalTok{ null, }\AttributeTok{upper =}\NormalTok{ full), }
+                 \AttributeTok{direction =} \StringTok{"backward"}\NormalTok{, }\AttributeTok{trace =} \DecValTok{0}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(mod\_be)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = LNFACE ~ EDUCATION + LNINCOME + NUMHH, data = Term1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.7420 -0.8681  0.0549  0.9093  4.7187 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  2.58408    0.84643   3.053  0.00249 ** 
+EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
+LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
+NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.525 on 271 degrees of freedom
+Multiple R-squared:  0.3425,    Adjusted R-squared:  0.3353 
+F-statistic: 47.07 on 3 and 271 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{multicollinearity}{%
+\section{Multicollinearity}\label{multicollinearity}}
+
+\begin{frame}{Multicollinearity and its Effects}
+\protect\hypertarget{multicollinearity-and-its-effects}{}
+\begin{itemize}
+\item
+  \textbf{Multicollinearity} exists when two or more of the predictors
+  in a regression model are moderately or highly correlated with one
+  another.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Unfortunately, when it exists, it can wreak havoc on our analysis
+    and thereby limit the research conclusions we can draw.
+  \end{itemize}
+\item
+  When multicollinearity exists, any of the following outcomes can be
+  exacerbated:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The estimated regression coefficient of any one variable depends on
+    which other predictors are included in the model.
+  \item
+    The standard errors and hence the variances of the estimated
+    coefficients are inflated when multicollinearity exists.
+  \item
+    Inflated variances impact the conclusion for hypothesis tests for
+    \(\beta_k = 0\).
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Variance Inflation Factor}
+\protect\hypertarget{variance-inflation-factor}{}
+\begin{itemize}
+\item
+  The \textbf{variance inflation factors (VIF)} quantifies how much the
+  variance of the estimated coefficients are inflated.
+\item
+  Hence, the variance inflation factor for the estimated regression
+  coefficient \(b_j\), denoted \(VIF_j\) is just the factor by which the
+  variance of \(b_j\) is ``inflated'' by the existence of correlation
+  among the predictor variables in the model.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Variance Inflation Factor}
+\protect\hypertarget{variance-inflation-factor-1}{}
+In particular, the variance inflation factor for the \(j\)th predictor
+is
+
+\[VIF_j=\frac{1}{1-R^2_j}\]
+
+where \(R^2_j\) is the \(R^2\)-value obtained by regressing the \(j\)th
+predictor on the remaining predictors.
+
+\begin{itemize}
+\item
+  How do we interpret the variance inflation factors for a regression
+  model?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A VIF of 1 means that there is no correlation among the \(j\)th
+    predictor and the remaining predictor variables, and hence the
+    variance of \(b_j\) is not inflated at all.
+  \item
+    The general rule of thumb is that VIFs exceeding 4 warrant further
+    investigation, while VIFs exceeding 10 are signs of serious
+    multicollinearity requiring correction.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{High Blood Pressure Example}
+\protect\hypertarget{high-blood-pressure-example}{}
+\begin{itemize}
+\item
+  The researchers were interested in determining if a relationship
+  exists between blood pressure and age, weight, body surface area,
+  duration, pulse rate and stress level.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    blood pressure (y = BP, in mm Hg)
+  \item
+    age (x1 = Age, in years)
+  \item
+    weight (x2 = Weight, in kg)
+  \item
+    body surface area (x3 = BSA, in sq m)
+  \item
+    duration of hypertension (x4 = Dur, in years)
+  \item
+    basal pulse (x5 = Pulse, in beats per minute)
+  \item
+    stress index (x6 = Stress)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{High Blood Pressure Example}
+\protect\hypertarget{high-blood-pressure-example-1}{}
+High correlation between weight and BSA
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bloodpress }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"bloodpress.csv"}\NormalTok{)}
+\NormalTok{bloodpress }\OtherTok{\textless{}{-}}\NormalTok{ bloodpress[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+\FunctionTok{cor}\NormalTok{(bloodpress, }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+              BP       Age     Weight        BSA       Dur     Pulse     Stress
+BP     1.0000000 0.6590930 0.95006765 0.86587887 0.2928336 0.7214132 0.16390139
+Age    0.6590930 1.0000000 0.40734926 0.37845460 0.3437921 0.6187643 0.36822369
+Weight 0.9500677 0.4073493 1.00000000 0.87530481 0.2006496 0.6593399 0.03435475
+BSA    0.8658789 0.3784546 0.87530481 1.00000000 0.1305400 0.4648188 0.01844634
+Dur    0.2928336 0.3437921 0.20064959 0.13054001 1.0000000 0.4015144 0.31163982
+Pulse  0.7214132 0.6187643 0.65933987 0.46481881 0.4015144 1.0000000 0.50631008
+Stress 0.1639014 0.3682237 0.03435475 0.01844634 0.3116398 0.5063101 1.00000000
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{High Blood Pressure Example}
+\protect\hypertarget{high-blood-pressure-example-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.BP }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(BP }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ bloodpress)}
+\FunctionTok{summary}\NormalTok{(model.BP)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = BP ~ ., data = bloodpress)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.93213 -0.11314  0.03064  0.21834  0.48454 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -12.870476   2.556650  -5.034 0.000229 ***
+Age           0.703259   0.049606  14.177 2.76e-09 ***
+Weight        0.969920   0.063108  15.369 1.02e-09 ***
+BSA           3.776491   1.580151   2.390 0.032694 *  
+Dur           0.068383   0.048441   1.412 0.181534    
+Pulse        -0.084485   0.051609  -1.637 0.125594    
+Stress        0.005572   0.003412   1.633 0.126491    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4072 on 13 degrees of freedom
+Multiple R-squared:  0.9962,    Adjusted R-squared:  0.9944 
+F-statistic: 560.6 on 6 and 13 DF,  p-value: 6.395e-15
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{High Blood Pressure Example}
+\protect\hypertarget{high-blood-pressure-example-3}{}
+\normalsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(car)}
+\FunctionTok{vif}\NormalTok{(model.BP)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     Age   Weight      BSA      Dur    Pulse   Stress 
+1.762807 8.417035 5.328751 1.237309 4.413575 1.834845 
+\end{verbatim}
+
+\normalsize
+
+VIF for Weight of 8.42 tells you that the variance of the coefficient of
+Weight is \(742\%\) bigger than what you would expect if there was no
+multicollinearity.
+
+\begin{itemize}
+\tightlist
+\item
+  Regressing Weight on the remaining five predictors, gives
+  \(R^2_{Weight}=88.12\%\).
+  \[VIF_{Weight}=\frac{1}{1-R^2_{Weight}}=\frac{1}{1-0.8812}=8.42\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Variance Inflation Factor}
+\protect\hypertarget{variance-inflation-factor-2}{}
+\tiny
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(bloodpress, }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+              BP       Age     Weight        BSA       Dur     Pulse     Stress
+BP     1.0000000 0.6590930 0.95006765 0.86587887 0.2928336 0.7214132 0.16390139
+Age    0.6590930 1.0000000 0.40734926 0.37845460 0.3437921 0.6187643 0.36822369
+Weight 0.9500677 0.4073493 1.00000000 0.87530481 0.2006496 0.6593399 0.03435475
+BSA    0.8658789 0.3784546 0.87530481 1.00000000 0.1305400 0.4648188 0.01844634
+Dur    0.2928336 0.3437921 0.20064959 0.13054001 1.0000000 0.4015144 0.31163982
+Pulse  0.7214132 0.6187643 0.65933987 0.46481881 0.4015144 1.0000000 0.50631008
+Stress 0.1639014 0.3682237 0.03435475 0.01844634 0.3116398 0.5063101 1.00000000
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\item
+  We see that:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Weight and BSA are highly correlated (\(r= 0.875\)).
+  \item
+    Pulse also appears to exhibit fairly strong marginal correlations
+    with several of the predictors, including Age (\(r = 0.619\)),
+    Weight (\(r = 0.659\)) and Stress (\(r = 0.506\))
+  \end{itemize}
+\item
+  We will remove BSA and Pulse from the data.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The decision of which one to remove is often a scientific or
+    practical one.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Variance Inflation Factor}
+\protect\hypertarget{variance-inflation-factor-3}{}
+\tiny
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model\_BPnew }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(BP }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Age }\SpecialCharTok{+}\NormalTok{ Weight }\SpecialCharTok{+}\NormalTok{ Dur }\SpecialCharTok{+}\NormalTok{ Stress, }\AttributeTok{data =}\NormalTok{ bloodpress)}
+\FunctionTok{summary}\NormalTok{(model\_BPnew)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = BP ~ Age + Weight + Dur + Stress, data = bloodpress)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.11359 -0.29586  0.01515  0.27506  0.88674 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -15.869829   3.195296  -4.967 0.000169 ***
+Age           0.683741   0.061195  11.173 1.14e-08 ***
+Weight        1.034128   0.032672  31.652 3.76e-15 ***
+Dur           0.039889   0.064486   0.619 0.545485    
+Stress        0.002184   0.003794   0.576 0.573304    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5505 on 15 degrees of freedom
+Multiple R-squared:  0.9919,    Adjusted R-squared:  0.9897 
+F-statistic: 458.3 on 4 and 15 DF,  p-value: 1.764e-15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{vif}\NormalTok{(model\_BPnew)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     Age   Weight      Dur   Stress 
+1.468245 1.234653 1.200060 1.241117 
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\end{document}

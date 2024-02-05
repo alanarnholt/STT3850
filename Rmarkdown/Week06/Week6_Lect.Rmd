@@ -1,0 +1,812 @@
+---
+title: "STT 3850 : Week 6"
+author: "Spring 2024"
+institute: "Appalachian State University"
+output: 
+ beamer_presentation:
+   theme: "Madrid"
+   colortheme: "orchid"
+   fonttheme: "professionalfonts"
+   keep_tex: true
+number_sections: true
+fig_caption: yes
+biblio-style: apalike
+link-citations: TRUE
+header-includes:
+   - \usepackage{placeins}
+   - \usepackage{color}
+   - \usepackage{bm}
+   - \usepackage{amsmath}
+   - \usepackage{algorithm}
+   - \usepackage[]{algpseudocode}
+   - \usepackage{tabularx}
+   - \usepackage{multirow}
+   - \usepackage[most]{tcolorbox}
+   - \usepackage{tikz}
+   - \usepackage{lipsum}
+   - \usepackage{mathtools}
+   - \usepackage{actuarialangle}
+   - \usepackage{multirow, longtable, array, dcolumn}
+   - \usepackage{tabu}
+   - \newcommand{\sdt}{\bullet}
+   - \newcommand{\tss}{\textsuperscript}
+   - \newcommand{\morearraysp}{\setlength{\arraycolsep}{2mm}}
+   - \newcommand{\smarraysp}{\setlength{\arraycolsep}{1mm}}
+   - \newcommand{\oldarraysp}{\setlength{\arraycolsep}{1.5pt}}
+   - \newcommand{\matrixstretch}{\setlength{\extrarowheight}{4pt}}
+   - \newcommand{\matrixnostretch}{\setlength{\extrarowheight}{0pt}}
+   - \newcommand{\gil}[1]{\textrm{\gilfont{#1}}\normalfont }
+   - \newfont{\gilfont}{msbm10 scaled 1000}
+   - \newcommand{\DOT}{\usebox{\biggercirc}}
+   - \newcommand{\pv}{\wp\text{-value}}
+
+---
+
+```{r, MEDskip, echo = FALSE}
+library(knitr)
+knit_hooks$set(document = function(x){
+gsub("\\begin{tabular}", "\\medskip{}\\begin{tabular}", x, fixed = TRUE)
+})
+```
+
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE, fig.align = 'center')
+```
+
+
+
+
+# Outline for the week
+
+## By the end of the week:  Multiple Linear Regression
+
+- Extra Sums of Squares
+- Model selection
+
+# Extra Sums of Squares
+
+
+## Partition of Total sum of squares
+
+
+- For the linear regression model: $$y_i=\beta_0+\beta_1x_{i,1}+\ldots + \beta_{p-1}x_{i,p-1}+\epsilon_i$$
+
+- We fit the line: $$\hat{y}_i=b_0+b_1x_{i,1}+\ldots + b_{p-1}x_{i,p-1}$$
+
+
+- Partition of Total sum of squares: 
+
+    - Total sum of squares ($SST$): $SST=\sum(y_i-\bar{y})^2.$
+
+    - Error sum of squares ($SSE$): $SSE=\sum (y_i-\hat{y}_i)^2.$ 
+
+    - Regression sum of squares ($SSR$): $SSR=\sum (\hat{y}_i-\bar{y})^2$
+
+
+
+## Extra Sums of Squares
+
+An extra sum of squares measures the marginal reduction in the error sum of squares when one or several predictor variables are added to the regression model, given that the other predictor variables are already in the model.
+
+
+
+
+## Term Life Insurance Example
+
+Like all firms, life insurance companies continually seek new ways to deliver products to the market. Those involved in product development want to know who buys insurance and how much they buy. In this example, we examine the Survey of Consumer Finances (SCF), that contains extensive information on assets, liabilities, income, and demographic characteristics of those sampled (potential U.S. customers). We study a random sample of 500 households with positive incomes that were interviewed in the 2004 survey.
+
+
+**Example: Term Life Insurance** 
+
+- $y$: FACE amount (log scale)
+- $x_1$: Annual Income  (log scale)
+- $x_2$: Education
+- $x_3$: Number of household members
+
+
+## Term Life Insurance Example
+
+\normalsize
+```{r}
+library(tidyverse)
+library(moderndive)
+Term <- read.csv("TermLife.csv")
+Term2 <- Term %>% 
+  filter(FACE > 0) %>% 
+  mutate(LNFACE = log(FACE), LNINCOME = log(INCOME))
+Term1 <- Term2 %>% 
+  select(EDUCATION, LNFACE, LNINCOME, NUMHH)
+```
+\normalsize
+
+
+
+## Extra Sums of Squares: $y$ on $x_1$
+
+
+
+\footnotesize
+```{r}
+modelX1 <- lm(LNFACE ~ LNINCOME, data = Term2)
+summary(modelX1)
+```
+\normalsize
+
+
+## Extra Sums of Squares: $y$ on $x_1$
+
+\normalsize
+```{r}
+eis <- resid(modelX1)
+SSE <- sum(eis^2)
+SST <- sum((Term2$LNFACE - mean(Term2$LNFACE))^2)
+SSR <- SST-SSE
+c(SSE, SSR)
+knitr::kable(anova(modelX1))
+```
+\normalsize
+
+
+## Extra Sums of Squares: $y$ on $x_2$
+
+\footnotesize
+```{r}
+modelX2 <- lm(LNFACE ~ EDUCATION, data = Term2)
+summary(modelX2)
+```
+\normalsize
+
+
+
+
+
+## Extra Sums of Squares: $y$ on $x_2$
+
+\normalsize
+```{r}
+get_regression_points(modelX2) -> RT
+RT %>% 
+  summarize(SSE = sum(residual^2), 
+            SST = sum((LNFACE - mean(LNFACE))^2),
+            SSR = SST - SSE) -> ESS
+knitr::kable(ESS)
+knitr::kable(anova(modelX2))
+```
+\normalsize
+
+## Extra Sums of Squares: $y$ on $x_1$ and $x_2$
+
+\footnotesize
+```{r}
+modelX1X2 <- lm(LNFACE ~ LNINCOME + EDUCATION, data = Term2)
+summary(modelX1X2)
+```
+\normalsize
+
+
+## Extra Sums of Squares: $y$ on $x_1$ and $x_2$
+\normalsize
+```{r}
+get_regression_points(modelX1X2) -> RT2
+RT2 %>% 
+  summarize(SSE = sum(residual^2), 
+            SST = sum((LNFACE - mean(LNFACE))^2),
+            SSR = SST - SSE) -> ESS2
+knitr::kable(ESS2)
+knitr::kable(anova(modelX1X2))
+```
+\normalsize
+
+
+
+
+## Extra Sums of Squares: $y$ on $x_1$, $x_2$ and $x_3$
+
+\scriptsize
+```{r}
+modelAll <- lm(LNFACE ~ LNINCOME + EDUCATION + NUMHH, data = Term2)
+summary(modelAll)
+```
+\normalsize
+
+
+## Extra Sums of Squares: $y$ on $x_1$, $x_2$ and $x_3$
+
+\normalsize
+```{r}
+get_regression_points(modelAll) -> RT3
+RT3 %>% 
+  summarize(SSE = sum(residual^2), 
+            SST = sum((LNFACE - mean(LNFACE))^2),
+            SSR = SST - SSE) -> ESS3
+knitr::kable(ESS3)
+knitr::kable(anova(modelAll))
+```
+\normalsize
+
+
+
+## Extra Sums of Squares
+
+\begin{table}[h]
+\centering
+\resizebox{0.7\textheight}{!}{
+    \begin{tabular}{lll}
+\hline
+Independent Variable      &  SSR  &  SSE  \\
+\hline
+$x_1$ & 222.63 & 736.27 \\
+$x_2$ & 140.55 & 818.35 \\
+$x_1$ and $x_2$ & 274.13 & 684.76 \\
+$x_1$, $x_2$ and $x_3$  & 328.47 & 630.43 \\
+
+\hline
+		\end{tabular}
+    }
+\end{table}
+
+
+Hence:
+$$SSR(x_2|x_1)=SSE(x_1)-SSE(x_1, x_2)=736.27-684.76=51.51$$
+or
+$$SSR(x_2|x_1)=SSR(x_1,x_2)-SSR(x_1)=274.13-222.63=51.51$$
+
+Question: 
+
+1. Why are they equal?
+2. Find $SSR(x_1|x_2)$?
+
+
+
+## Extra Sums of Squares
+
+\begin{table}[h]
+\centering
+\resizebox{0.7\textheight}{!}{
+    \begin{tabular}{lll}
+\hline
+Independent Variable      &  SSR  &  SSE  \\
+\hline
+$x_1$ & 222.63 & 736.27 \\
+$x_2$ & 140.55 & 818.35 \\
+$x_1$ and $x_2$ & 274.13 & 684.76 \\
+$x_1$, $x_2$ and $x_3$  & 328.47 & 630.43 \\
+
+\hline
+		\end{tabular}
+    }
+\end{table}
+Similarly:
+$$\begin{array}{ll}SSR(x_3|x_1,x_2)&=SSE(x_1,x_2)-SSE(x_1, x_2, x_3)\\
+&=684.76-630.43=54.33\end{array}$$
+or
+$$\begin{array}{ll}SSR(x_3|x_1,x_2)&=SSR(x_1,x_2,x_3)-SSR(x_1,x_2)\\
+&=328.47-274.13=54.33\end{array}$$
+
+Problem: Find the value of $SSR(x_2,x_3|x_1)$.
+
+## Decomposition
+
+In multiple regression, we can obtain a variety of decompositions of the regression
+$SSR$ into extra sum of squares. For example,
+
+$$SSR(x_1, x_2)=SSR(x_1)+SSR(x_2|x_1), \quad \text{or}$$
+$$SSR(x_1, x_2)=SSR(x_2)+SSR(x_1|x_2).$$
+If we have three variables, then:
+$$SSR(x_1, x_2,x_3)=SSR(x_1)+SSR(x_2|x_1)+SSR(x_3|x_1,x_2), \quad \text{or}$$
+$$SSR(x_1, x_2,x_3)=SSR(x_2)+SSR(x_3|x_2)+SSR(x_1|x_2,x_3), \quad \text{or}$$
+$$SSR(x_1, x_2,x_3)=SSR(x_1)+SSR(x_2,x_3|x_1).$$
+
+## Analysis of Variance: ANOVA
+
+The ANOVA table is shown below
+
+\begin{table}[h]
+\centering
+\resizebox{1.2\textheight}{!}{
+    \begin{tabular}{lllll}
+\hline
+	 Source of       &  Degrees of  &    &               &                  \\
+	 Variation       &  Freedom      &  Sum of Squares   &  Mean Square &   \\
+	 (Source)        &   ($df$)      &  ($SS$)             & ($MS$)         &  $F$ \\
+\hline\hline
+$x_1$ & $1$ & $SSR(x_1)$ & $MSR(x_1)=SSR(x_1)/1$ & $F=\frac{MSR((x_1))}{MSE((x_1,x_2,x_3))}$\\
+$x_2|x_1$ & $1$ & $SSR(x_2|x_1)$ & $MSR(x_2|x_1)=SSR(x_2|x_1)/1$ & $F=\frac{MSR((x_2|x_1))}{MSE((x_1,x_2,x_3))}$\\
+$x_3|x_1,x_2$ & $1$ & $SSR(x_3|x_1,x_2)$ & $MSR(x_3|x_1,x_2)=SSR(x_3|x_1,x_2)/1$ & $F=\frac{MSR((x_3|x_1,x_2))}{MSE((x_1,x_2,x_3))}$\\
+Error & $n-4$ & $SSE(x_1,x_2,x_3)$ & $MSE=SSE(x_1,x_2,x_3)/(n-4)$ & \\
+\hline
+Total & $n-1$ & $SST(x_1,x_2,x_3)$ &  & \\
+
+\hline
+		\end{tabular}
+    }
+\end{table}
+
+
+## Analysis of Variance: ANOVA
+
+\normalsize
+```{r}
+#For Term Life Insurance Example:
+knitr::kable(anova(modelAll))
+```
+\normalsize
+
+Why are extra sum of squares of interest?
+
+
+## Tests for Regression Coefficients
+
+When we wish to test whether the term $\beta_kx_k$ can be dropped from a multiple
+regression model, we are interested in:
+$$H_0:\beta_k=0, \quad vs. \quad H_a: \beta_k \neq 0.$$
+
+## Tests for Regression Coefficients
+
+For example, let us consider the first-order regression model
+$$y_i=\beta_0+\beta_1 x_{i1}+\beta_2 x_{i2}+\beta_3 x_{i3}+\epsilon_i.$$
+Test:
+$$H_0:\beta_3=0, \quad vs. \quad H_a: \beta_3\neq 0.$$
+Under the null, we have the reduced model,
+$$y_i=\beta_0+\beta_1 x_{i1}+\beta_2 x_{i2}+\epsilon_i.$$
+For those two models, the extra sum of squares is
+$$SSR(x_3|x_1,x_2)=SSE(x_1,x_2)-SSE(x_1,x_2,x_3)$$
+
+## Tests for Regression Coefficients
+
+The general linear test statistic
+$$F^*=\frac{SSE_{reduced}-SSE_{full}}{df_{reduced}-df_{full}}\div \frac{SSE_{full}}{df_{full}}$$
+becomes: 
+
+$$  \begin{array}{ll}
+F^* &= \frac{SSE(x_1,x_2)-SSE(x_1,x_2,x_3)}{(n-3)-(n-4)}\div \frac{SSE(x_1,x_2,x_3)}{n-4}\\ 
+&=\frac{SSR(x_3|x_1,x_2)}{1}\div \frac{SSE(x_1,x_2,x_3)}{n-4} \\
+&=\frac{MSR(x_3|x_1,x_2)}{MSE(x_1,x_2,x_3)}
+\end{array}$$
+
+
+## Term Life Insurance Example
+
+
+$$F^*=\frac{54.34}{1}\div \frac{630.43}{271}=23.36$$
+\normalsize
+```{r}
+Fstar <- anova(modelAll)[3, 4]
+Fstar
+## Get p-value for F-statistic
+pvalue <- 1 - pf(23.36, 1, 271)
+pvalue
+```
+\normalsize
+
+
+## Term Life Insurance Example
+
+We can use the $\pv$ on the variable to test $H_0:\beta_3=0$.
+
+\scriptsize
+```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
+summary(modelAll)
+```
+\normalsize
+
+
+
+
+
+## Testing More Than One Coefficient
+
+Consider testing:
+$$H_0:\beta_2=\beta_3=0, \text{versus} \quad H_a: \text{at least one } \beta_i \neq 0 \text{ for } i = 1, 2, \ldots, p-1.$$
+
+Under the null, we have the reduced model,
+$$y_i=\beta_0+\beta_1 x_{i1}+\epsilon_i.$$
+This is the `modelX1` we estimated earlier. 
+
+
+## Testing More Than One Coefficient
+
+
+\normalsize
+```{r}
+#For Term Life Insurance Example:
+anova(modelX1, modelAll)
+```
+\normalsize
+
+
+
+
+## Is There a Relationship Between the Response and Predictors
+
+
+Now, we test:
+$$H_0:\beta_1=\beta_2=\beta_3=0, \text{ versus } H_a: \text{at least one } \beta_i \neq 0 \text{ for } i = 1, 2, \ldots, p-1.$$
+Under the null, we have the reduced model,
+$$y_i=\beta_0+\epsilon_i.$$
+
+## Is There a Relationship Between the Response and Predictors
+
+\normalsize
+```{r}
+modelInt <- lm(LNFACE ~ 1, data = Term2)
+summary(modelInt)
+```
+\normalsize
+
+
+
+## Is There a Relationship Between the Response and Predictors
+
+\normalsize
+```{r}
+anova(modelInt, modelAll)
+```
+\normalsize
+
+## Is There a Relationship Between the Response and Predictors
+
+\scriptsize
+```{r}
+# Or
+summary(modelAll)
+```
+\normalsize
+
+
+
+#  Model selection
+
+##  Model selection
+
+The general multiple linear regression model with response $y$ and terms $x_1, \ldots, x_{p-1}$ will have the form:
+$$y=\beta_0+\beta_1x_1+\ldots + \beta_{p-1}x_{p-1}+\epsilon.$$
+
+- How many alternative models:
+
+    - $y=\beta_0+\epsilon$
+    - $y=\beta_0+\beta_1x_1+\epsilon$
+    - $y=\beta_0+\beta_2x_2+\epsilon$
+    - $\vdots$
+    - $y=\beta_0+\beta_{p-1}x_{p-1}+\epsilon$
+    - $y=\beta_0+\beta_1x_1+\beta_2x_2+\epsilon$
+    - $\vdots$
+    - $y=\beta_0+\beta_1x_1+\beta_2x_2+\ldots+\beta_{p-1}x_{p-1}\epsilon$
+
+One can construct a total of $2^{p-1}$ models! Question: How to select the "best" model?
+
+
+
+
+## Partition of Total sum of squares
+
+
+- For the linear regression model: $$y_i=\beta_0+\beta_1x_{i,1}+\ldots + \beta_{p-1}x_{i,p-1}+\epsilon_i.$$
+
+- We have fitted the line: $\hat{y}_i=b_0+b_1x_{i,1}+\ldots + b_{p-1}x_{i,p-1}.$
+
+
+- Partitioning the sum of squares is the same: 
+
+    - Total sum of squares (SST): $SST=\sum(y_i-\bar{y})^2.$
+
+    - Error sum of squares (SSE): $SSE=\sum (y_i-\hat{y}_i)^2.$ 
+
+    - Regression sum of squares (SSR): $SSR=\sum (\hat{y}_i-\bar{y})^2$
+
+
+
+## $R^2$ and Adjusted $R^2$ ($R^2_{\text{adj}}$)
+
+The coefficient of determination of the regression model, is defined as the proportion of the total sample variability in the $y$’s explained by the regression model, that is,
+$$R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}.$$
+We can also write: 
+
+$$R^2=\frac{var(\hat{y})}{var(y)}$$
+
+
+
+## $R^2$ and Adjusted $R^2$ ($R^2_{\text{adj}}$)
+
+
+Caution: adding irrelevant predictor variables to the regression equation often
+increases $R^2$. 
+
+Q: Why do we use it?
+
+A: The intent in using $R^2$ criterion is to find the point where adding more $x$ variables is not worthwhile because it leads to a very small increase in $R^2$. Often this point is reached when only a limited number of $x$ variables are included in the regression model.
+
+
+## $R^2$ and Adjusted $R^2$ ($R^2_{\text{adj}}$)
+
+One can define an adjusted coefficient of determination
+$$R^2_{\text{adj}}=1-\frac{SSE/(n-p)}{SST/ (n-1)}=1-\frac{MSE}{SST/n-1}$$
+
+where $p$ is the number of predictors in the current model. This coefficient takes the number of parameters in the regression model into account using degrees of freedom.
+
+Users of the $R^2_{\text{adj}}$ criterion seek to find a few subsets for which $R^2_{\text{adj}}$ is at the maximum or that adding more variable is not worthwhile.
+
+
+
+
+
+
+## Needed packages 
+
+Let’s load all the packages needed for this chapter. 
+
+\normalsize
+```{r}
+library(tidyverse) 
+library(moderndive)
+library(skimr)
+library(ISLR)
+evals_ch6 <- evals %>%
+  select(ID, score, age, gender)
+```
+\normalsize
+
+
+## Compare Interaction and Parallel slopes model
+
+
+\scriptsize
+```{r}
+# Fit interaction model:
+score_model_interaction <- lm(score ~ age + gender + age:gender, data = evals_ch6)
+summary(score_model_interaction)
+
+```
+\normalsize
+
+
+## Compare Interaction and Parallel slopes model
+
+
+\scriptsize
+```{r}
+# Fit parallel slopes model:
+score_model_parallel_slopes <- lm(score ~ age + gender, data = evals_ch6)
+summary(score_model_parallel_slopes)
+```
+\normalsize
+
+
+## Compare Interaction and Parallel slopes model
+
+
+\footnotesize
+```{r}
+# Get summaries of models:
+get_regression_summaries(score_model_interaction)
+get_regression_summaries(score_model_parallel_slopes)
+
+```
+\normalsize
+
+
+
+## AIC: Akaike Information Criterion
+
+Akaike’s information criterion (AIC) can be motivated in two ways. The most popular
+motivation seems to be based on balancing goodness of fit and a penalty for model
+complexity. **AIC is defined such that the smaller the value of AIC the better the model.**
+
+
+$$AIC=n\log(SSE_{m}/n)+2m.$$
+
+
+Recall that $m$ is the number of parameters in your subset model. For example, if your model includes only $\beta_0, \beta_1, \beta_2$, then $m = 3$.
+
+**Caution**: When the sample size is small, or when the number of parameters estimated is a moderate to large fraction of the sample size, it is well-known that AIC has a tendency for over-fitting since the penalty for model complexity is not strong enough.
+
+
+
+## BIC: Bayes Information Criterion
+
+BIC is defined such that the smaller the value of BIC the better the model.
+$$BIC=n\log (SSE_m/n)+m\log(n)$$
+BIC penalizes complex models more heavily than AIC, thus favoring simpler models
+than AIC.
+
+
+
+## Compare Interaction and Parallel slopes model
+
+
+\normalsize
+```{r}
+# AIC
+AIC(score_model_interaction)
+AIC(score_model_parallel_slopes)
+# BIC
+BIC(score_model_interaction)
+BIC(score_model_parallel_slopes)
+```
+\normalsize
+
+
+
+
+## "Best" Subset Algorithm
+
+Time-saving algorithms have been developed in which the best subsets according to a
+specified criterion are identified without requiring the fitting of all of possible subset regression models.
+
+Example: For the eight predictors, we know there are $2^8=256$ possible models.
+
+## Stepwise Procedures
+
+
+**Forward selection** 
+
+Forward selection starts with no variables in the model and then adds the $x-$variable that produces the smallest $\pv$ below $\alpha_{\text{crit}}$ when included in the model.  This procedure is continued until no new predictors can be added.  The user can determine the variable that produces the smallest $\pv$ by regressing the response variable on the $x_i$s one at a time using `lm()` and `summary()` or using the `add()` function.
+
+
+## Stepwise Procedures
+
+**Backward elimination** 
+
+Backward elimination begins with a model contining all potential $x-$ variables and identifies the one with the largest $\pv$.  This can be done by looking at the $\pv$s for the $t-$ values of the $\hat{\beta_i}, i = 1, \ldots,p-1$ using the function `summary()` or by using the $\pv$s from the function `drop1()`.  If the variable with the largest $\pv$ is a above a predetermined value, $\alpha_{\text{crit}}$, that variable is dropped.  A model with the remaining $x-$variables is then fit and the procedure continues until all the $\pv$s for the remaining variables in the model are below the predetermined $\alpha_{\text{crit}}$.  The $\alpha_{\text{crit}}$ is sometimes referred to as the "$\pv$-to-remove" and is typically set to 15 or 20%.
+
+
+## Term Life Insurance Example
+
+Like all firms, life insurance companies continually seek new ways to deliver products to the market. Those involved in product development want to know who buys insurance and how much they buy. In this example, we examine the Survey of Consumer Finances (SCF), that contains extensive information on assets, liabilities, income, and demographic characteristics of those sampled (potential U.S. customers). We study a random sample of 500 households with positive incomes that were interviewed in the 2004 survey.
+
+
+## Term Life Insurance Example
+
+\tiny
+```{r}
+####forward selection based on AIC #####
+library(MASS)
+null <- lm(LNFACE  ~ 1, data = Term1)
+full <- lm(LNFACE ~ ., data = Term1)
+mod_fs <- stepAIC(null, scope = list(lower= null, upper= full), 
+                  direction = "forward", trace = 0)
+summary(mod_fs)
+```
+\normalsize
+
+
+## Term Life Insurance Example
+
+\scriptsize
+```{r}
+#### backward elimination based on AIC #####
+mod_be <- stepAIC(full, scope = list(lower = null, upper = full), 
+                 direction = "backward", trace = 0)
+summary(mod_be)
+```
+\normalsize
+
+
+
+
+# Multicollinearity
+
+
+## Multicollinearity and its Effects
+
+- **Multicollinearity** exists when two or more of the predictors in a regression model are moderately or highly correlated with one another. 
+
+    - Unfortunately, when it exists, it can wreak havoc on our analysis and thereby limit the research conclusions we can draw. 
+
+- When multicollinearity exists, any of the following outcomes can be exacerbated:
+
+    - The estimated regression coefficient of any one variable depends on which other predictors are included in the model.
+    - The standard errors and hence the variances of the estimated coefficients are inflated when multicollinearity exists. 
+    - Inflated variances impact the conclusion for hypothesis tests for $\beta_k = 0$. 
+
+
+
+## Variance Inflation Factor
+
+- The **variance inflation factors (VIF)** quantifies how much the variance of the estimated coefficients are inflated.
+    
+- Hence, the variance inflation factor for the estimated regression coefficient $b_j$, denoted $VIF_j$ is just the factor by which the variance of $b_j$ is "inflated" by the existence of correlation among the predictor variables in the model.
+
+
+
+## Variance Inflation Factor
+
+In particular, the variance inflation factor for the $j$th predictor is
+
+$$VIF_j=\frac{1}{1-R^2_j}$$
+
+where $R^2_j$ is the $R^2$-value obtained by regressing the $j$th predictor on the remaining predictors.
+
+- How do we interpret the variance inflation factors for a regression model? 
+
+    - A VIF of 1 means that there is no correlation among the $j$th predictor and the remaining predictor variables, and hence the variance of $b_j$ is not inflated at all. 
+    - The general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 are signs of serious multicollinearity requiring correction.
+
+
+## High Blood Pressure Example
+
+- The researchers were interested in determining if a relationship exists between blood pressure and age, weight, body surface area, duration, pulse rate and stress level.
+
+    - blood pressure (y = BP, in mm Hg)
+    - age (x1 = Age, in years)
+    - weight (x2 = Weight, in kg)
+    - body surface area (x3 = BSA, in sq m)
+    - duration of hypertension (x4 = Dur, in years)
+    - basal pulse (x5 = Pulse, in beats per minute)
+    - stress index (x6 = Stress)
+
+
+## High Blood Pressure Example
+
+High correlation between weight and BSA
+
+\scriptsize
+```{r}
+bloodpress <- read.csv("bloodpress.csv")
+bloodpress <- bloodpress[, -1]
+cor(bloodpress, use = "complete.obs")
+```
+\normalsize
+
+
+## High Blood Pressure Example
+
+
+\scriptsize
+```{r}
+model.BP <- lm(BP ~ ., data = bloodpress)
+summary(model.BP)
+```
+\normalsize
+
+
+
+
+## High Blood Pressure Example
+
+\normalsize
+```{r}
+library(car)
+vif(model.BP)
+```
+\normalsize
+
+VIF for Weight of 8.42 tells you that the variance of the coefficient of Weight is $742\%$ bigger than what you would expect if there was no multicollinearity. 
+
+
+- Regressing Weight on the remaining five predictors, gives $R^2_{Weight}=88.12\%$. $$VIF_{Weight}=\frac{1}{1-R^2_{Weight}}=\frac{1}{1-0.8812}=8.42$$
+
+
+
+## Variance Inflation Factor
+
+
+\tiny
+```{r}
+cor(bloodpress, use = "complete.obs")
+```
+\normalsize
+
+- We see that: 
+
+    - Weight and BSA are highly correlated ($r= 0.875$). 
+    - Pulse also appears to exhibit fairly strong marginal correlations with several of the predictors, including Age ($r = 0.619$), Weight ($r = 0.659$) and Stress ($r = 0.506$)
+
+- We will remove BSA and Pulse from the data. 
+
+    - The decision of which one to remove is often a scientific or practical one. 
+
+
+## Variance Inflation Factor
+
+\tiny
+```{r}
+model_BPnew <- lm(BP ~ Age + Weight + Dur + Stress, data = bloodpress)
+summary(model_BPnew)
+vif(model_BPnew)
+```
+\normalsize
+
+
