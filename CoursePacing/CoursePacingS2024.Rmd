@@ -362,7 +362,7 @@ _______________________
 
 * Complete [PS-08](https://classroom.github.com/a/Gwp5evxM) by 5:00 pm Apr 4 
 
-* [Slides for weeks 11, 12, and 13](../Slides/Weeks11_12_13.pdf)
+* [Slides for weeks 11, 12, and 13](../Slides/Week11_12_13.pdf)
 
 _____________________
 
