@@ -230,7 +230,7 @@ _______________
 
 ## Week 6: (Feb 20 -- 22) {-}
 
-* * [Lecture Slides](../Rmarkdown/Week06/Week6_Lect.pdf)
+* [Lecture Slides](../Rmarkdown/Week06/Week6_Lect.pdf)
 
 * Before class read/review chapter 6 (Multiple Regression) of [MD](https://moderndive.com/6-multiple-regression.html) --- pgs 161-191
 
