@@ -335,6 +335,8 @@ ___________________________
 
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
+* [Lecture Slides](../Rmarkdown/Week10/Week10_Lect.pdf)
+
 
 ```{block, week10optional, type='rmdoptional'}
 #### Optional {-}
