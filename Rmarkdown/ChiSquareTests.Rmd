@@ -1,27 +1,17 @@
 ---
-title: "STT 3850 : Chi-Square Tests"
-author: "Fall 2023"
+title: "STT 3850 : Weeks 11, 12, and 13"
+author: "Spring 2024"
 institute: "Appalachian State University"
 output: 
-#   pdf_document:
-#      toc: yes
-#      toc_depth: '3'
  beamer_presentation:
-   #template: myTemplate.tex
-   theme: "CambridgeUS"
-   colortheme: "seagull"
+   theme: "Madrid"
+   colortheme: "orchid"
    fonttheme: "professionalfonts"
    keep_tex: true
-# word_document:
-#   toc: yes
-#   toc_depth: '3'
-#date: "`r format(Sys.time(), '%d %B, %Y')`"
-#date: "January 22, 2020"
 number_sections: true
 fig_caption: yes
-#bibliography: Reference.bib
 biblio-style: apalike
-link-citations: yes
+link-citations: TRUE
 header-includes:
    - \usepackage{placeins}
    - \usepackage{color}
@@ -60,7 +50,8 @@ gsub("\\begin{tabular}", "\\medskip{}\\begin{tabular}", x, fixed = TRUE)
 ```
 
 
-```{r setup, include=FALSE}
+
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE, fig.align = 'center')
 ```
 
