@@ -557,7 +557,7 @@ Lets interpret the regression table. The equation of the regression line:
 $$
 \begin{aligned}
 \hat{y} &= b_0 +b_1\cdot x \\
-\widehat{\text{score}} &= b_0 + b_{\text{bty\_avg}}\\
+\widehat{\text{score}} &= b_0 + b_1\cdot{\text{bty\_avg}}\\
 &= 3.88 + 0.067\cdot\text{bty\_avg}
 \end{aligned}
 $$

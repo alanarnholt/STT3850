@@ -497,11 +497,11 @@ random sample of the rows.
 # A tibble: 5 x 4
      ID score bty_avg   age
   <int> <dbl>   <dbl> <int>
-1    18   4.8    7.33    31
-2   333   4.5    7.17    50
-3    85   4.3    4.17    45
-4   347   4.6    3.5     43
-5    26   4.7    5.5     62
+1   288   3.5    6.67    34
+2   272   4.4    5.67    57
+3   459   4.5    6.83    32
+4   238   4.9    7       33
+5    45   4.4    4.67    33
 \end{verbatim}
 
 \normalsize
@@ -1048,7 +1048,7 @@ line:
 \[
 \begin{aligned}
 \hat{y} &= b_0 +b_1\cdot x \\
-\widehat{\text{score}} &= b_0 + b_{\text{bty\_avg}}\\
+\widehat{\text{score}} &= b_0 + b_1\cdot{\text{bty\_avg}}\\
 &= 3.88 + 0.067\cdot\text{bty\_avg}
 \end{aligned}
 \]
