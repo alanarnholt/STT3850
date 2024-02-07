@@ -164,8 +164,7 @@ MDDF %>%
 
 The least squares estimators of $\beta_0$ and $\beta_1$ are given in @eq-b0 and @eq-b1, respectively.
 
-$$b_0 = \hat{\beta_0} = \bar{y} - b_1\bar{x}$$ {#eq-b0}
-$$b_1 = \hat{\beta_1} = \frac{\sum_{i = 1}^n(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}$$ {#eq-b1}
+$$b_0 = \hat{\beta_0} = \bar{y} - b_1\bar{x}$$ {#eq-b0} $$b_1 = \hat{\beta_1} = \frac{\sum_{i = 1}^n(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}$$ {#eq-b1}
 
 ```{r, label = "byhand"}
 y <- AD$sales
@@ -173,11 +172,24 @@ x <- AD$TV
 b1 <- sum( (x - mean(x))*(y - mean(y)) ) / sum((x - mean(x))^2)
 b0 <- mean(y) - b1*mean(x)
 c(b0, b1)
+# Design Matrix
+model.matrix(mod1) -> X
+head(X)
+t(X)%*%X -> XTX # p*n times n*p = p*p
+XTX
+XTXI <- solve(XTX)
+XTXI
+betahat <- XTXI %*%t(X)%*%y
+betahat
+anova(mod1)
+MSE <- anova(mod1)[2, 3]
+MSE
 # Or using
 coef(mod1)
 summary(mod1)
-XTXI <- summary(mod1)$cov.unscaled
+XTXI <- summary(mod1)$cov.unscaled # preferred way to compute!
 MSE <- summary(mod1)$sigma^2
+MSE
 var.cov.b <- MSE*XTXI
 var.cov.b
 seb0 <- sqrt(var.cov.b[1, 1])
@@ -205,7 +217,6 @@ summary(mod1)$r.squared
 $$
 \text{CI}_{1 - \alpha}(\beta_1) = \left[b_1 - t_{1- \alpha/2, n - p - 1}SE(b1), b_1 + t_{1- \alpha/2, n - p - 1}SE(b1) \right]
 $$ {#eq-CIb1}
-
 
 **Example:** Use @eq-CIb1 to construct a 90% confidence interval for $\beta_1$.
 
