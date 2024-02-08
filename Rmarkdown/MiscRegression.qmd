@@ -734,6 +734,6 @@ car::vif(modC)
 
 -   Create another model that predicts rating with `Limit`, `Cards`, `Married`, `Student`, and `Education` as features.
 
--   Use your model to predict the `Rating` for an individual that has a credit card limit of \$6,000, has 4 credit cards, is married, is not a student, and has an undergraduate degree (`Education` = 16).
+-   Use your model to predict the `Rating` for an individual who has a credit card limit of \$6,000, has 4 credit cards, is married, is not a student, and has an undergraduate degree (`Education` = 16).
 
--   Use your model to predict the `Rating` for an individual that has a credit card limit of \$12,000, has 2 credit cards, is married, is not a student, and has an eighth grade education (`Education` = 8).
+-   Use your model to predict the `Rating` for an individual who has a credit card limit of \$12,000, has 2 credit cards, is married, is not a student, and has an eighth grade education (`Education` = 8).
