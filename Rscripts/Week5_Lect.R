@@ -6,7 +6,8 @@ gsub("\\begin{tabular}", "\\medskip{}\\begin{tabular}", x, fixed = TRUE)
 
 
 ## ----setup, include = FALSE----------------------------------------------------------------------------
-knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALSE, fig.align = 'center')
+knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, 
+                      message = FALSE, fig.align = 'center')
 
 
 ## ------------------------------------------------------------------------------------------------------
@@ -83,7 +84,7 @@ knitr::kable(lifeExp_by_continent)
 ## ------------------------------------------------------------------------------------------------------
 lifeExp_model <- lm(lifeExp ~ continent, data = gapminder2007)
 knitr::kable(get_regression_table(lifeExp_model))
-
+summary(lifeExp_model)
 
 ## ------------------------------------------------------------------------------------------------------
 gapminder2007$continent <- relevel(gapminder2007$continent, ref='Americas')
@@ -219,6 +220,11 @@ predict(score_model_interaction,
         newdata = data.frame(age = 36, gender = "female"))
 predict(score_model_interaction, 
         newdata = data.frame(age = 59, gender = "male"))
+
+predict(score_model_interaction, 
+        newdata = data.frame(age = c(36, 59), 
+                             gender = c("female","male")),
+        interval = "pred")
 
 
 ## ----out.height = '40%', out.width = '70%'-------------------------------------------------------------
