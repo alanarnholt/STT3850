@@ -254,6 +254,9 @@ _____________
 
 ## Week 7: (Feb 27 -- 29) {-}
 
+
+* [Lecture Slides](../Rmarkdown/Week07/Week7_Lect.pdf)
+
 * [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)
 
 * Complete (**The binomial distribution**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-sp24/assignments) --- Due NLT 5:00 pm Feb 27
