@@ -259,12 +259,13 @@ interviewed in the 2004 survey.
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyverse)}
 \FunctionTok{library}\NormalTok{(moderndive)}
+\FunctionTok{library}\NormalTok{(janitor)}
 \NormalTok{Term }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"TermLife.csv"}\NormalTok{)}
-\NormalTok{Term2 }\OtherTok{\textless{}{-}}\NormalTok{ Term }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(FACE }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{LNFACE =} \FunctionTok{log}\NormalTok{(FACE), }\AttributeTok{LNINCOME =} \FunctionTok{log}\NormalTok{(INCOME))}
-\NormalTok{Term1 }\OtherTok{\textless{}{-}}\NormalTok{ Term2 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(EDUCATION, LNFACE, LNINCOME, NUMHH)}
+\NormalTok{term }\OtherTok{\textless{}{-}}\NormalTok{ Term }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{clean\_names}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(face }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{ln\_face =} \FunctionTok{log}\NormalTok{(face), }\AttributeTok{ln\_income =} \FunctionTok{log}\NormalTok{(income)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(education, ln\_face, ln\_income, numhh)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -277,7 +278,7 @@ interviewed in the 2004 survey.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelX1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ LNINCOME, }\AttributeTok{data =}\NormalTok{ Term2)}
+\NormalTok{modelX1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln\_face }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ln\_income, }\AttributeTok{data =}\NormalTok{ term)}
 \FunctionTok{summary}\NormalTok{(modelX1)}
 \end{Highlighting}
 \end{Shaded}
@@ -285,7 +286,7 @@ interviewed in the 2004 survey.
 \begin{verbatim}
 
 Call:
-lm(formula = LNFACE ~ LNINCOME, data = Term2)
+lm(formula = ln_face ~ ln_income, data = term)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -294,7 +295,7 @@ Residuals:
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  4.23003    0.85985   4.920  1.5e-06 ***
-LNINCOME     0.69604    0.07661   9.086  < 2e-16 ***
+ln_income    0.69604    0.07661   9.086  < 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -314,8 +315,8 @@ F-statistic: 82.55 on 1 and 273 DF,  p-value: < 2.2e-16
 \begin{Highlighting}[]
 \NormalTok{eis }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(modelX1)}
 \NormalTok{SSE }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(eis}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
-\NormalTok{SST }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((Term2}\SpecialCharTok{$}\NormalTok{LNFACE }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(Term2}\SpecialCharTok{$}\NormalTok{LNFACE))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
-\NormalTok{SSR }\OtherTok{\textless{}{-}}\NormalTok{ SST}\SpecialCharTok{{-}}\NormalTok{SSE}
+\NormalTok{SST }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((term}\SpecialCharTok{$}\NormalTok{ln\_face }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(term}\SpecialCharTok{$}\NormalTok{ln\_face))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{SSR }\OtherTok{\textless{}{-}}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE}
 \FunctionTok{c}\NormalTok{(SSE, SSR)}
 \end{Highlighting}
 \end{Shaded}
@@ -335,7 +336,7 @@ F-statistic: 82.55 on 1 and 273 DF,  p-value: < 2.2e-16
 & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
 \midrule\noalign{}
 \endhead
-LNINCOME & 1 & 222.6292 & 222.629245 & 82.54855 & 0 \\
+ln\_income & 1 & 222.6292 & 222.629245 & 82.54855 & 0 \\
 Residuals & 273 & 736.2671 & 2.696949 & NA & NA \\
 \bottomrule\noalign{}
 \end{longtable}
@@ -349,7 +350,7 @@ Residuals & 273 & 736.2671 & 2.696949 & NA & NA \\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelX2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ EDUCATION, }\AttributeTok{data =}\NormalTok{ Term2)}
+\NormalTok{modelX2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln\_face }\SpecialCharTok{\textasciitilde{}}\NormalTok{ education, }\AttributeTok{data =}\NormalTok{ term)}
 \FunctionTok{summary}\NormalTok{(modelX2)}
 \end{Highlighting}
 \end{Shaded}
@@ -357,7 +358,7 @@ Residuals & 273 & 736.2671 & 2.696949 & NA & NA \\
 \begin{verbatim}
 
 Call:
-lm(formula = LNFACE ~ EDUCATION, data = Term2)
+lm(formula = ln_face ~ education, data = term)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -366,7 +367,7 @@ Residuals:
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  7.90986    0.60499  13.074  < 2e-16 ***
-EDUCATION    0.28095    0.04103   6.847 4.96e-11 ***
+education    0.28095    0.04103   6.847 4.96e-11 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -387,7 +388,7 @@ F-statistic: 46.89 on 1 and 273 DF,  p-value: 4.964e-11
 \FunctionTok{get\_regression\_points}\NormalTok{(modelX2) }\OtherTok{{-}\textgreater{}}\NormalTok{ RT}
 \NormalTok{RT }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SSE =} \FunctionTok{sum}\NormalTok{(residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
-            \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((LNFACE }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(LNFACE))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
+            \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((ln\_face }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(ln\_face))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
             \AttributeTok{SSR =}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE) }\OtherTok{{-}\textgreater{}}\NormalTok{ ESS}
 \NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(ESS)}
 \end{Highlighting}
@@ -413,7 +414,7 @@ SSE & SST & SSR \\
 & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
 \midrule\noalign{}
 \endhead
-EDUCATION & 1 & 140.5486 & 140.548609 & 46.88688 & 0 \\
+education & 1 & 140.5486 & 140.548609 & 46.88688 & 0 \\
 Residuals & 273 & 818.3477 & 2.997611 & NA & NA \\
 \bottomrule\noalign{}
 \end{longtable}
@@ -428,7 +429,7 @@ Residuals & 273 & 818.3477 & 2.997611 & NA & NA \\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelX1X2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ LNINCOME }\SpecialCharTok{+}\NormalTok{ EDUCATION, }\AttributeTok{data =}\NormalTok{ Term2)}
+\NormalTok{modelX1X2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln\_face }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ln\_income }\SpecialCharTok{+}\NormalTok{ education, }\AttributeTok{data =}\NormalTok{ term)}
 \FunctionTok{summary}\NormalTok{(modelX1X2)}
 \end{Highlighting}
 \end{Shaded}
@@ -436,7 +437,7 @@ Residuals & 273 & 818.3477 & 2.997611 & NA & NA \\
 \begin{verbatim}
 
 Call:
-lm(formula = LNFACE ~ LNINCOME + EDUCATION, data = Term2)
+lm(formula = ln_face ~ ln_income + education, data = term)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -445,8 +446,8 @@ Residuals:
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  2.96235    0.87676   3.379 0.000835 ***
-LNINCOME     0.57392    0.07879   7.284 3.50e-12 ***
-EDUCATION    0.18103    0.04003   4.523 9.11e-06 ***
+ln_income    0.57392    0.07879   7.284 3.50e-12 ***
+education    0.18103    0.04003   4.523 9.11e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -468,7 +469,7 @@ F-statistic: 54.44 on 2 and 272 DF,  p-value: < 2.2e-16
 \FunctionTok{get\_regression\_points}\NormalTok{(modelX1X2) }\OtherTok{{-}\textgreater{}}\NormalTok{ RT2}
 \NormalTok{RT2 }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SSE =} \FunctionTok{sum}\NormalTok{(residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
-            \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((LNFACE }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(LNFACE))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
+            \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((ln\_face }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(ln\_face))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
             \AttributeTok{SSR =}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE) }\OtherTok{{-}\textgreater{}}\NormalTok{ ESS2}
 \NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(ESS2)}
 \end{Highlighting}
@@ -494,8 +495,8 @@ SSE & SST & SSR \\
 & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
 \midrule\noalign{}
 \endhead
-LNINCOME & 1 & 222.6292 & 222.629245 & 88.43204 & 0.0e+00 \\
-EDUCATION & 1 & 51.5022 & 51.502201 & 20.45753 & 9.1e-06 \\
+ln\_income & 1 & 222.6292 & 222.629245 & 88.43204 & 0.0e+00 \\
+education & 1 & 51.5022 & 51.502201 & 20.45753 & 9.1e-06 \\
 Residuals & 272 & 684.7649 & 2.517518 & NA & NA \\
 \bottomrule\noalign{}
 \end{longtable}
@@ -510,7 +511,7 @@ and \(x_3\)}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelAll }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ LNINCOME }\SpecialCharTok{+}\NormalTok{ EDUCATION }\SpecialCharTok{+}\NormalTok{ NUMHH, }\AttributeTok{data =}\NormalTok{ Term2)}
+\NormalTok{modelAll }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln\_face }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ln\_income }\SpecialCharTok{+}\NormalTok{ education }\SpecialCharTok{+}\NormalTok{ numhh, }\AttributeTok{data =}\NormalTok{ term)}
 \FunctionTok{summary}\NormalTok{(modelAll)}
 \end{Highlighting}
 \end{Shaded}
@@ -518,7 +519,7 @@ and \(x_3\)}
 \begin{verbatim}
 
 Call:
-lm(formula = LNFACE ~ LNINCOME + EDUCATION + NUMHH, data = Term2)
+lm(formula = ln_face ~ ln_income + education + numhh, data = term)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -527,9 +528,9 @@ Residuals:
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  2.58408    0.84643   3.053  0.00249 ** 
-LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
-EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
-NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+ln_income    0.49353    0.07754   6.365 8.32e-10 ***
+education    0.20641    0.03883   5.316 2.22e-07 ***
+numhh        0.30605    0.06333   4.833 2.26e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -551,7 +552,7 @@ and \(x_3\)}
 \FunctionTok{get\_regression\_points}\NormalTok{(modelAll) }\OtherTok{{-}\textgreater{}}\NormalTok{ RT3}
 \NormalTok{RT3 }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SSE =} \FunctionTok{sum}\NormalTok{(residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
-            \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((LNFACE }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(LNFACE))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
+            \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((ln\_face }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(ln\_face))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
             \AttributeTok{SSR =}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE) }\OtherTok{{-}\textgreater{}}\NormalTok{ ESS3}
 \NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(ESS3)}
 \end{Highlighting}
@@ -577,9 +578,9 @@ SSE & SST & SSR \\
 & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
 \midrule\noalign{}
 \endhead
-LNINCOME & 1 & 222.62925 & 222.629245 & 95.70075 & 0.0e+00 \\
-EDUCATION & 1 & 51.50220 & 51.502201 & 22.13905 & 4.0e-06 \\
-NUMHH & 1 & 54.33593 & 54.335932 & 23.35717 & 2.3e-06 \\
+ln\_income & 1 & 222.62925 & 222.629245 & 95.70075 & 0.0e+00 \\
+education & 1 & 51.50220 & 51.502201 & 22.13905 & 4.0e-06 \\
+numhh & 1 & 54.33593 & 54.335932 & 23.35717 & 2.3e-06 \\
 Residuals & 271 & 630.42897 & 2.326306 & NA & NA \\
 \bottomrule\noalign{}
 \end{longtable}
@@ -703,9 +704,9 @@ Total & $n-1$ & $SST(x_1,x_2,x_3)$ &  & \\
 & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater F) \\
 \midrule\noalign{}
 \endhead
-LNINCOME & 1 & 222.62925 & 222.629245 & 95.70075 & 0.0e+00 \\
-EDUCATION & 1 & 51.50220 & 51.502201 & 22.13905 & 4.0e-06 \\
-NUMHH & 1 & 54.33593 & 54.335932 & 23.35717 & 2.3e-06 \\
+ln\_income & 1 & 222.62925 & 222.629245 & 95.70075 & 0.0e+00 \\
+education & 1 & 51.50220 & 51.502201 & 22.13905 & 4.0e-06 \\
+numhh & 1 & 54.33593 & 54.335932 & 23.35717 & 2.3e-06 \\
 Residuals & 271 & 630.42897 & 2.326306 & NA & NA \\
 \bottomrule\noalign{}
 \end{longtable}
@@ -792,7 +793,7 @@ We can use the \(\wp\text{-value}\) on the variable to test
 \begin{verbatim}
 
 Call:
-lm(formula = LNFACE ~ LNINCOME + EDUCATION + NUMHH, data = Term2)
+lm(formula = ln_face ~ ln_income + education + numhh, data = term)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -801,9 +802,9 @@ Residuals:
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  2.58408    0.84643   3.053  0.00249 ** 
-LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
-EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
-NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+ln_income    0.49353    0.07754   6.365 8.32e-10 ***
+education    0.20641    0.03883   5.316 2.22e-07 ***
+numhh        0.30605    0.06333   4.833 2.26e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -839,8 +840,8 @@ we estimated earlier.
 \begin{verbatim}
 Analysis of Variance Table
 
-Model 1: LNFACE ~ LNINCOME
-Model 2: LNFACE ~ LNINCOME + EDUCATION + NUMHH
+Model 1: ln_face ~ ln_income
+Model 2: ln_face ~ ln_income + education + numhh
   Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
 1    273 736.27                                  
 2    271 630.43  2    105.84 22.748 7.369e-10 ***
@@ -866,7 +867,7 @@ Predictors}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{modelInt }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ Term2)}
+\NormalTok{modelInt }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln\_face }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ term)}
 \FunctionTok{summary}\NormalTok{(modelInt)}
 \end{Highlighting}
 \end{Shaded}
@@ -874,7 +875,7 @@ Predictors}
 \begin{verbatim}
 
 Call:
-lm(formula = LNFACE ~ 1, data = Term2)
+lm(formula = ln_face ~ 1, data = term)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -906,8 +907,8 @@ Predictors}
 \begin{verbatim}
 Analysis of Variance Table
 
-Model 1: LNFACE ~ 1
-Model 2: LNFACE ~ LNINCOME + EDUCATION + NUMHH
+Model 1: ln_face ~ 1
+Model 2: ln_face ~ ln_income + education + numhh
   Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
 1    274 958.90                                  
 2    271 630.43  3    328.47 47.066 < 2.2e-16 ***
@@ -933,7 +934,7 @@ Predictors}
 \begin{verbatim}
 
 Call:
-lm(formula = LNFACE ~ LNINCOME + EDUCATION + NUMHH, data = Term2)
+lm(formula = ln_face ~ ln_income + education + numhh, data = term)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -942,9 +943,9 @@ Residuals:
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  2.58408    0.84643   3.053  0.00249 ** 
-LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
-EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
-NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+ln_income    0.49353    0.07754   6.365 8.32e-10 ***
+education    0.20641    0.03883   5.316 2.22e-07 ***
+numhh        0.30605    0.06333   4.833 2.26e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1321,8 +1322,8 @@ interviewed in the 2004 survey.
 \begin{Highlighting}[]
 \DocumentationTok{\#\#\#\#forward selection based on AIC \#\#\#\#\#}
 \FunctionTok{library}\NormalTok{(MASS)}
-\NormalTok{null }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE  }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ Term1)}
-\NormalTok{full }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(LNFACE }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ Term1)}
+\NormalTok{null }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln\_face  }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ term)}
+\NormalTok{full }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln\_face }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ term)}
 \NormalTok{mod\_fs }\OtherTok{\textless{}{-}} \FunctionTok{stepAIC}\NormalTok{(null, }\AttributeTok{scope =} \FunctionTok{list}\NormalTok{(}\AttributeTok{lower=}\NormalTok{ null, }\AttributeTok{upper=}\NormalTok{ full), }
                   \AttributeTok{direction =} \StringTok{"forward"}\NormalTok{, }\AttributeTok{trace =} \DecValTok{0}\NormalTok{)}
 \FunctionTok{summary}\NormalTok{(mod\_fs)}
@@ -1332,7 +1333,7 @@ interviewed in the 2004 survey.
 \begin{verbatim}
 
 Call:
-lm(formula = LNFACE ~ LNINCOME + EDUCATION + NUMHH, data = Term1)
+lm(formula = ln_face ~ ln_income + education + numhh, data = term)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -1341,9 +1342,9 @@ Residuals:
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  2.58408    0.84643   3.053  0.00249 ** 
-LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
-EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
-NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+ln_income    0.49353    0.07754   6.365 8.32e-10 ***
+education    0.20641    0.03883   5.316 2.22e-07 ***
+numhh        0.30605    0.06333   4.833 2.26e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1371,7 +1372,7 @@ F-statistic: 47.07 on 3 and 271 DF,  p-value: < 2.2e-16
 \begin{verbatim}
 
 Call:
-lm(formula = LNFACE ~ EDUCATION + LNINCOME + NUMHH, data = Term1)
+lm(formula = ln_face ~ education + ln_income + numhh, data = term)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -1380,9 +1381,9 @@ Residuals:
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  2.58408    0.84643   3.053  0.00249 ** 
-EDUCATION    0.20641    0.03883   5.316 2.22e-07 ***
-LNINCOME     0.49353    0.07754   6.365 8.32e-10 ***
-NUMHH        0.30605    0.06333   4.833 2.26e-06 ***
+education    0.20641    0.03883   5.316 2.22e-07 ***
+ln_income    0.49353    0.07754   6.365 8.32e-10 ***
+numhh        0.30605    0.06333   4.833 2.26e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1484,46 +1485,48 @@ predictor on the remaining predictors.
   \begin{itemize}
   \tightlist
   \item
-    blood pressure (y = BP, in mm Hg)
+    blood pressure (y = bp, in mm Hg)
   \item
-    age (x1 = Age, in years)
+    age (x1 = age, in years)
   \item
-    weight (x2 = Weight, in kg)
+    weight (x2 = weight, in kg)
   \item
-    body surface area (x3 = BSA, in sq m)
+    body surface area (x3 = bsa, in sq m)
   \item
-    duration of hypertension (x4 = Dur, in years)
+    duration of hypertension (x4 = dur, in years)
   \item
-    basal pulse (x5 = Pulse, in beats per minute)
+    basal pulse (x5 = pulse, in beats per minute)
   \item
-    stress index (x6 = Stress)
+    stress index (x6 = stress)
   \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{High Blood Pressure Example}
 \protect\hypertarget{high-blood-pressure-example-1}{}
-High correlation between weight and BSA
+High correlation between \texttt{weight} and \texttt{bsa}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{bloodpress }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"bloodpress.csv"}\NormalTok{)}
+\NormalTok{bloodpress }\OtherTok{\textless{}{-}}\NormalTok{ bloodpress }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{clean\_names}\NormalTok{()}
 \NormalTok{bloodpress }\OtherTok{\textless{}{-}}\NormalTok{ bloodpress[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
 \FunctionTok{cor}\NormalTok{(bloodpress, }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-              BP       Age     Weight        BSA       Dur     Pulse     Stress
-BP     1.0000000 0.6590930 0.95006765 0.86587887 0.2928336 0.7214132 0.16390139
-Age    0.6590930 1.0000000 0.40734926 0.37845460 0.3437921 0.6187643 0.36822369
-Weight 0.9500677 0.4073493 1.00000000 0.87530481 0.2006496 0.6593399 0.03435475
-BSA    0.8658789 0.3784546 0.87530481 1.00000000 0.1305400 0.4648188 0.01844634
-Dur    0.2928336 0.3437921 0.20064959 0.13054001 1.0000000 0.4015144 0.31163982
-Pulse  0.7214132 0.6187643 0.65933987 0.46481881 0.4015144 1.0000000 0.50631008
-Stress 0.1639014 0.3682237 0.03435475 0.01844634 0.3116398 0.5063101 1.00000000
+              bp       age     weight        bsa       dur     pulse     stress
+bp     1.0000000 0.6590930 0.95006765 0.86587887 0.2928336 0.7214132 0.16390139
+age    0.6590930 1.0000000 0.40734926 0.37845460 0.3437921 0.6187643 0.36822369
+weight 0.9500677 0.4073493 1.00000000 0.87530481 0.2006496 0.6593399 0.03435475
+bsa    0.8658789 0.3784546 0.87530481 1.00000000 0.1305400 0.4648188 0.01844634
+dur    0.2928336 0.3437921 0.20064959 0.13054001 1.0000000 0.4015144 0.31163982
+pulse  0.7214132 0.6187643 0.65933987 0.46481881 0.4015144 1.0000000 0.50631008
+stress 0.1639014 0.3682237 0.03435475 0.01844634 0.3116398 0.5063101 1.00000000
 \end{verbatim}
 
 \normalsize
@@ -1535,15 +1538,15 @@ Stress 0.1639014 0.3682237 0.03435475 0.01844634 0.3116398 0.5063101 1.00000000
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{model.BP }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(BP }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ bloodpress)}
-\FunctionTok{summary}\NormalTok{(model.BP)}
+\NormalTok{model\_bp }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(bp }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ bloodpress)}
+\FunctionTok{summary}\NormalTok{(model\_bp)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 
 Call:
-lm(formula = BP ~ ., data = bloodpress)
+lm(formula = bp ~ ., data = bloodpress)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
@@ -1552,12 +1555,12 @@ Residuals:
 Coefficients:
               Estimate Std. Error t value Pr(>|t|)    
 (Intercept) -12.870476   2.556650  -5.034 0.000229 ***
-Age           0.703259   0.049606  14.177 2.76e-09 ***
-Weight        0.969920   0.063108  15.369 1.02e-09 ***
-BSA           3.776491   1.580151   2.390 0.032694 *  
-Dur           0.068383   0.048441   1.412 0.181534    
-Pulse        -0.084485   0.051609  -1.637 0.125594    
-Stress        0.005572   0.003412   1.633 0.126491    
+age           0.703259   0.049606  14.177 2.76e-09 ***
+weight        0.969920   0.063108  15.369 1.02e-09 ***
+bsa           3.776491   1.580151   2.390 0.032694 *  
+dur           0.068383   0.048441   1.412 0.181534    
+pulse        -0.084485   0.051609  -1.637 0.125594    
+stress        0.005572   0.003412   1.633 0.126491    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1576,32 +1579,82 @@ F-statistic: 560.6 on 6 and 13 DF,  p-value: 6.395e-15
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(car)}
-\FunctionTok{vif}\NormalTok{(model.BP)}
+\FunctionTok{vif}\NormalTok{(model\_bp)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-     Age   Weight      BSA      Dur    Pulse   Stress 
+     age   weight      bsa      dur    pulse   stress 
 1.762807 8.417035 5.328751 1.237309 4.413575 1.834845 
 \end{verbatim}
 
 \normalsize
 
-VIF for Weight of 8.42 tells you that the variance of the coefficient of
-Weight is \(742\%\) bigger than what you would expect if there was no
-multicollinearity.
-
 \begin{itemize}
-\tightlist
 \item
-  Regressing Weight on the remaining five predictors, gives
-  \(R^2_{Weight}=88.12\%\).
-  \[VIF_{Weight}=\frac{1}{1-R^2_{Weight}}=\frac{1}{1-0.8812}=8.42\]
+  The \(\text{VIF}_j\) for a predictor \(x_j\) can be interpreted as the
+  factor (\(\sqrt{\text{VIF}_j}\)) by which the standard error of
+  \(\hat{\beta}_j\) is increased due to the presence of
+  multicollinearity.
+\item
+  Regressing \texttt{weight} on the remaining five predictors, gives
+  \(R^2_{\text{weight}}=88.12\%\).
+  \[VIF_{\text{weight}}=\frac{1}{1-R^2_{\text{weight}}}=\frac{1}{1-0.8812}=8.42\]
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Variance Inflation Factor}
 \protect\hypertarget{variance-inflation-factor-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{r2age }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(}\FunctionTok{lm}\NormalTok{(age }\SpecialCharTok{\textasciitilde{}}\NormalTok{ weight }\SpecialCharTok{+}\NormalTok{ bsa }\SpecialCharTok{+}\NormalTok{ dur }\SpecialCharTok{+}\NormalTok{ pulse }\SpecialCharTok{+} 
+\NormalTok{                      stress, }\AttributeTok{data =}\NormalTok{ bloodpress))}\SpecialCharTok{$}\NormalTok{r.squared}
+\NormalTok{r2weight }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(}\FunctionTok{lm}\NormalTok{(weight }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ bsa }\SpecialCharTok{+}\NormalTok{ dur }\SpecialCharTok{+}\NormalTok{ pulse }\SpecialCharTok{+} 
+\NormalTok{                         stress, }\AttributeTok{data =}\NormalTok{ bloodpress))}\SpecialCharTok{$}\NormalTok{r.squared}
+\NormalTok{r2bsa }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(}\FunctionTok{lm}\NormalTok{(bsa }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ weight }\SpecialCharTok{+}\NormalTok{ dur }\SpecialCharTok{+}\NormalTok{ pulse }\SpecialCharTok{+} 
+\NormalTok{                      stress, }\AttributeTok{data =}\NormalTok{ bloodpress))}\SpecialCharTok{$}\NormalTok{r.squared}
+\NormalTok{r2dur }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(}\FunctionTok{lm}\NormalTok{(dur }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ weight }\SpecialCharTok{+}\NormalTok{ bsa }\SpecialCharTok{+}\NormalTok{ pulse }\SpecialCharTok{+} 
+\NormalTok{                      stress, }\AttributeTok{data =}\NormalTok{ bloodpress))}\SpecialCharTok{$}\NormalTok{r.squared}
+\NormalTok{r2pulse }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(}\FunctionTok{lm}\NormalTok{(pulse }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ weight }\SpecialCharTok{+}\NormalTok{ bsa }\SpecialCharTok{+}\NormalTok{ dur }\SpecialCharTok{+} 
+\NormalTok{                        stress, }\AttributeTok{data =}\NormalTok{ bloodpress))}\SpecialCharTok{$}\NormalTok{r.squared}
+\NormalTok{r2stress }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(}\FunctionTok{lm}\NormalTok{(stress }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ weight }\SpecialCharTok{+}\NormalTok{ bsa }\SpecialCharTok{+}\NormalTok{ dur }\SpecialCharTok{+} 
+\NormalTok{                         pulse, }\AttributeTok{data =}\NormalTok{ bloodpress))}\SpecialCharTok{$}\NormalTok{r.squared}
+\FunctionTok{c}\NormalTok{(r2age, r2weight, r2bsa, r2dur, r2pulse, r2stress, r2age) }\OtherTok{{-}\textgreater{}}\NormalTok{ r2s}
+\NormalTok{r2s}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.4327228 0.8811933 0.8123388 0.1917947 0.7734263 0.4549949 0.4327228
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(VIFs }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{/}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ r2s))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.762807 8.417035 5.328751 1.237309 4.413575 1.834845 1.762807
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(VIFs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.327707 2.901213 2.308409 1.112344 2.100851 1.354565 1.327707
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Variance Inflation Factor}
+\protect\hypertarget{variance-inflation-factor-3}{}
 \tiny
 
 \begin{Shaded}
@@ -1611,14 +1664,14 @@ multicollinearity.
 \end{Shaded}
 
 \begin{verbatim}
-              BP       Age     Weight        BSA       Dur     Pulse     Stress
-BP     1.0000000 0.6590930 0.95006765 0.86587887 0.2928336 0.7214132 0.16390139
-Age    0.6590930 1.0000000 0.40734926 0.37845460 0.3437921 0.6187643 0.36822369
-Weight 0.9500677 0.4073493 1.00000000 0.87530481 0.2006496 0.6593399 0.03435475
-BSA    0.8658789 0.3784546 0.87530481 1.00000000 0.1305400 0.4648188 0.01844634
-Dur    0.2928336 0.3437921 0.20064959 0.13054001 1.0000000 0.4015144 0.31163982
-Pulse  0.7214132 0.6187643 0.65933987 0.46481881 0.4015144 1.0000000 0.50631008
-Stress 0.1639014 0.3682237 0.03435475 0.01844634 0.3116398 0.5063101 1.00000000
+              bp       age     weight        bsa       dur     pulse     stress
+bp     1.0000000 0.6590930 0.95006765 0.86587887 0.2928336 0.7214132 0.16390139
+age    0.6590930 1.0000000 0.40734926 0.37845460 0.3437921 0.6187643 0.36822369
+weight 0.9500677 0.4073493 1.00000000 0.87530481 0.2006496 0.6593399 0.03435475
+bsa    0.8658789 0.3784546 0.87530481 1.00000000 0.1305400 0.4648188 0.01844634
+dur    0.2928336 0.3437921 0.20064959 0.13054001 1.0000000 0.4015144 0.31163982
+pulse  0.7214132 0.6187643 0.65933987 0.46481881 0.4015144 1.0000000 0.50631008
+stress 0.1639014 0.3682237 0.03435475 0.01844634 0.3116398 0.5063101 1.00000000
 \end{verbatim}
 
 \normalsize
@@ -1630,39 +1683,34 @@ Stress 0.1639014 0.3682237 0.03435475 0.01844634 0.3116398 0.5063101 1.00000000
   \begin{itemize}
   \tightlist
   \item
-    Weight and BSA are highly correlated (\(r= 0.875\)).
+    \texttt{weight} and \texttt{bsa} are highly correlated
+    (\(r= 0.875\)).
   \item
-    Pulse also appears to exhibit fairly strong marginal correlations
-    with several of the predictors, including Age (\(r = 0.619\)),
-    Weight (\(r = 0.659\)) and Stress (\(r = 0.506\))
+    \texttt{pulse} also appears to exhibit fairly strong marginal
+    correlations with several of the predictors, including \texttt{age}
+    (\(r = 0.619\)), \texttt{weight} (\(r = 0.659\)) and \texttt{stress}
+    (\(r = 0.506\))
   \end{itemize}
 \item
-  We will remove BSA and Pulse from the data.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    The decision of which one to remove is often a scientific or
-    practical one.
-  \end{itemize}
+  We will remove \texttt{bsa} and \texttt{pulse} from the data.
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Variance Inflation Factor}
-\protect\hypertarget{variance-inflation-factor-3}{}
+\protect\hypertarget{variance-inflation-factor-4}{}
 \tiny
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{model\_BPnew }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(BP }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Age }\SpecialCharTok{+}\NormalTok{ Weight }\SpecialCharTok{+}\NormalTok{ Dur }\SpecialCharTok{+}\NormalTok{ Stress, }\AttributeTok{data =}\NormalTok{ bloodpress)}
-\FunctionTok{summary}\NormalTok{(model\_BPnew)}
+\NormalTok{model\_bp\_new }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(bp }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ weight }\SpecialCharTok{+}\NormalTok{ dur }\SpecialCharTok{+}\NormalTok{ stress, }\AttributeTok{data =}\NormalTok{ bloodpress)}
+\FunctionTok{summary}\NormalTok{(model\_bp\_new)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 
 Call:
-lm(formula = BP ~ Age + Weight + Dur + Stress, data = bloodpress)
+lm(formula = bp ~ age + weight + dur + stress, data = bloodpress)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
@@ -1671,10 +1719,10 @@ Residuals:
 Coefficients:
               Estimate Std. Error t value Pr(>|t|)    
 (Intercept) -15.869829   3.195296  -4.967 0.000169 ***
-Age           0.683741   0.061195  11.173 1.14e-08 ***
-Weight        1.034128   0.032672  31.652 3.76e-15 ***
-Dur           0.039889   0.064486   0.619 0.545485    
-Stress        0.002184   0.003794   0.576 0.573304    
+age           0.683741   0.061195  11.173 1.14e-08 ***
+weight        1.034128   0.032672  31.652 3.76e-15 ***
+dur           0.039889   0.064486   0.619 0.545485    
+stress        0.002184   0.003794   0.576 0.573304    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1685,12 +1733,12 @@ F-statistic: 458.3 on 4 and 15 DF,  p-value: 1.764e-15
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{vif}\NormalTok{(model\_BPnew)}
+\FunctionTok{vif}\NormalTok{(model\_bp\_new)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-     Age   Weight      Dur   Stress 
+     age   weight      dur   stress 
 1.468245 1.234653 1.200060 1.241117 
 \end{verbatim}
 
