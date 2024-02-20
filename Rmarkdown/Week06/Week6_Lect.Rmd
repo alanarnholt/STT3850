@@ -385,7 +385,7 @@ pvalue
 
 ## Term Life Insurance Example
 
-We can use the $\pv$ on the variable to test $H_0:\beta_3=0$.
+We can use the $\pv$ to test $H_0:\beta_3=0$.
 
 \scriptsize
 ```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '50%',out.width = '50%', fig.align='center'}
