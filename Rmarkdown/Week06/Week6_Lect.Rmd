@@ -643,7 +643,7 @@ Example: For the eight predictors, we know there are $2^8=256$ possible models.
 
 **Forward selection** 
 
-Forward selection starts with no variables in the model and then adds the $x-$variable that produces the smallest $\pv$ below $\alpha_{\text{crit}}$ when included in the model.  This procedure is continued until no new predictors can be added.  The user can determine the variable that produces the smallest $\pv$ by regressing the response variable on the $x_i$s one at a time using `lm()` and `summary()` or using the `add()` function.
+Forward selection starts with no variables in the model and then adds the $x-$variable that produces the smallest $\pv$ below $\alpha_{\text{crit}}$ when included in the model.  This procedure is continued until no new predictors can be added.  The user can determine the variable that produces the smallest $\pv$ by regressing the response variable on the $x_i$s one at a time using `lm()` and `summary()` or using the `add1()` function.
 
 
 ## Stepwise Procedures
