@@ -111,7 +111,7 @@ We define $E^{c}$ as a complement of $E$.  $E^{c}$ is the event of $E$ not happe
 4. If E and F can not happen happen at the same time (mutually exclusive or disjoint), then
 $$P(E \cup F)=P(E \text{ or } F)=P(E) + P(F)$$
 
-In general, for any sequence of mutually exclusive events $E_1, E_2, \ldots$ (that is $E_i \cap E_j \neq 0$) for all ($i\neq j$)
+In general, for any sequence of mutually exclusive events $E_1, E_2, \ldots$ (that is $E_i \cap E_j = \emptyset$) for all ($i\neq j$)
 $$P\left(\cup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} P(E_i)$$
 
 ## Example 1
@@ -372,7 +372,7 @@ Solution.
   - The formula is easier with the tree!
   
   
-- In general: Let $F_1, F_2, \ldots F_n$ be such that $\cup_{i=1}^{\infty} F_i=\Omega$ and $F_i\cap F_j=0$ for all $i\neq j$, with $P(F_i)>0$ for all $i$. Then, for any event $E$
+- In general: Let $F_1, F_2, \ldots F_n$ be such that $\cup_{i=1}^{\infty} F_i=\Omega$ and $F_i\cap F_j=\emptyset$ for all $i\neq j$, with $P(F_i)>0$ for all $i$. Then, for any event $E$
 
 $$P(E)=\sum_{i=1}^n P(E \cap F_i)=\sum_{i=1}^n P(E|F_i)P(F_i)$$
 
