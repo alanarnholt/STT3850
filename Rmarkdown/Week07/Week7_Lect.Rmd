@@ -338,7 +338,7 @@ According to a study by the Harvard School of Public Health, $44\%$ of college s
 \begin{tcolorbox}
 Solution. 
 
-```{r  echo = FALSE, out.width = '30%',out.height = '50%'}
+```{r  echo = FALSE, out.width = '30%', out.height = '50%'}
 knitr::include_graphics("week8_7.png")
 ``` 
 
