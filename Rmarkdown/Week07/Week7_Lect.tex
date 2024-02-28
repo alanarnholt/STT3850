@@ -639,7 +639,7 @@ The television show Let's Make a Deal hosted by Monty Hall, gave contestants the
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{13}\NormalTok{)}
-\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{10000}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{100000}
 \NormalTok{actual }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\AttributeTok{size =}\NormalTok{ n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{aguess }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\AttributeTok{size =}\NormalTok{ n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{equals }\OtherTok{\textless{}{-}}\NormalTok{ (actual }\SpecialCharTok{==}\NormalTok{ aguess)}
@@ -654,7 +654,7 @@ The television show Let's Make a Deal hosted by Monty Hall, gave contestants the
 
 \begin{verbatim}
 P(Win no Switch)    P(Win Switch) 
-          0.3409           0.6591 
+          0.3276           0.6724 
 \end{verbatim}
 
 \normalsize

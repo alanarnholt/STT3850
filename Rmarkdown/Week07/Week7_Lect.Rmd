@@ -460,7 +460,7 @@ The television show Let's Make a Deal hosted by Monty Hall, gave contestants the
 \small
 ```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '40%',out.width = '70%', fig.align='center'}
 set.seed(13)
-n <- 10000
+n <- 100000
 actual <- sample(1:3, size = n, replace = TRUE)
 aguess <- sample(1:3, size = n, replace = TRUE)
 equals <- (actual == aguess)
