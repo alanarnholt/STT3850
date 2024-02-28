@@ -2,6 +2,14 @@
 S <- expand.grid(die1 = 1:6, die2 = 1:6)
 S$Sum <- apply(S, 1, sum)
 S
+
+
+
+
+
+
+
+
 S$die1 == 3
 S$Sum == 6
 S$die1 == 3 & S$Sum == 6
