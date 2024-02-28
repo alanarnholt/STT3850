@@ -89,30 +89,30 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALS
 
 - If the probability is based on repeatedly observing the event’s outcome,
 this probability is called **empirical probability** and given by:
-$$P(\text{E})=\frac{\text{Number of times E occurs}}{\text{Total number of trails}}$$
+$$\gil{P}(\text{E})=\frac{\text{Number of times E occurs}}{\text{Total number of trails}}$$
 - When the probability comes from a mathematical model and not from
 observations, it is called **theoretical probability**. This is given by:
-$$P(\text{E})=\frac{\text{Number of outcomes in E}}{\text{Number of possible outcomes}}$$
+$$\gil{P}(\text{E})=\frac{\text{Number of outcomes in E}}{\text{Number of possible outcomes}}$$
 
 ##  Axioms of probability
 
 
-1. For any event $E$: $0\leq P(E) \leq 1$
+1. For any event $E$: $0\leq \gil{P}(E) \leq 1$
       
 
-2. $P(\Omega)=1$
+2. $\gil{P}(\Omega)=1$
 
 
 
-3.  $P(E) + P(E^{c})=1$ so $P(E^c)=1-P(E)$
+3.  $\gil{P}(E) + \gil{P}(E^{c})=1$ so $\gil{P}(E^c)=1-\gil{P}(E)$
 
 We define $E^{c}$ as a complement of $E$.  $E^{c}$ is the event of $E$ not happening. 
 
 4. If E and F can not happen happen at the same time (mutually exclusive or disjoint), then
-$$P(E \cup F)=P(E \text{ or } F)=P(E) + P(F)$$
+$$\gil{P}(E \cup F)=\gil{P}(E \text{ or } F)=\gil{P}(E) + \gil{P}(F)$$
 
 In general, for any sequence of mutually exclusive events $E_1, E_2, \ldots$ (that is $E_i \cap E_j = \emptyset$) for all ($i\neq j$)
-$$P\left(\cup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} P(E_i)$$
+$$\gil{P}\left(\cup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} \gil{P}(E_i)$$
 
 ## Example 1
 
@@ -180,14 +180,14 @@ abline(v = 23, lty = 2, col = "blue")
 ##  Addition Rules for Probability
 
 - If E and F can not happen happen at the same time (mutually exclusive or disjoint), then
-$$P(E \cup F)=P(E \text{ or } F) = P(E)+ P(F)$$
+$$\gil{P}(E \cup F)=\gil{P}(E \text{ or } F) = \gil{P}(E)+ \gil{P}(F)$$
 
 In general, for any sequence of mutually exclusive events $E_1, E_2, \ldots$ (that is $E_i \cap E_j = \emptyset$) for all ($i\neq j$)
-$$P\left(\cup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} P(E_i)$$
+$$\gil{P}\left(\cup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} \gil{P}(E_i)$$
 
 
 -  For any two events $E$ and $F$,
-$$P(E \cup F)=P(E \text{ or } F)=P(E)+ P(F)-P(E\cap F)$$
+$$\gil{P}(E \cup F)=\gil{P}(E \text{ or } F)=\gil{P}(E)+ \gil{P}(F)-\gil{P}(E\cap F)$$
 
 ## Example 3
 
@@ -234,7 +234,7 @@ Solution:
 
 * If $E$ and $F$ are independent
 
-$$P(E \cap F) =P(E \text{ and } F)= P(E)\times P(F)$$
+$$\gil{P}(E \cap F) =\gil{P}(E \text{ and } F)= \gil{P}(E)\times \gil{P}(F)$$
 
 ## Example 6
 
@@ -258,15 +258,15 @@ Solution:
 
 - Another probability we want to be able to find is of the form "given $F$, what is the probability of $E$?" This is known as a **conditional probability** and is written
 
-$$P(E | F)=\frac{P( E \cap  F)}{P( F)}$$
+$$\gil{P}(E | F)=\frac{\gil{P}( E \cap  F)}{\gil{P}( F)}$$
 
 
 
 - Rearranging the conditional probability equation, we get the **General Multiplication Rule**:
-$$P( E \cap  F)=P( F)\times P( E| F)$$
+$$\gil{P}( E \cap  F)=\gil{P}( F)\times \gil{P}( E| F)$$
 
 Equivalently,
-$$P(E \cap F)=P(E)\times P(F| E)$$
+$$\gil{P}(E \cap F)=\gil{P}(E)\times \gil{P}(F| E)$$
 
 
 ## Definition of Independence
@@ -274,16 +274,16 @@ $$P(E \cap F)=P(E)\times P(F| E)$$
 - Events $E$ and $F$ are independent if knowing $E$ happened does not change the probability of $F$.  
 
 
-$$P( E \cap  F)=P( E)\times P( F)$$
+$$\gil{P}( E \cap  F)=\gil{P}( E)\times \gil{P}( F)$$
 Then: 
-$$P( E|  F)=\frac{P( E \cap  F)}{P( F)}=\frac{P( E)\times P( F)}{P( F)}=P( E)$$
+$$\gil{P}( E|  F)=\frac{\gil{P}( E \cap  F)}{\gil{P}( F)}=\frac{\gil{P}( E)\times \gil{P}( F)}{\gil{P}( F)}=\gil{P}( E)$$
 
-- If $E$ and $F$ are independent then $P( E|  F)=P( E)$
+- If $E$ and $F$ are independent then $\gil{P}( E|  F)=\gil{P}( E)$
 
 
 - Equivalently
 
-$$P(F|E)=P( F)$$
+$$\gil{P}(F|E)=\gil{P}( F)$$
 
 
 ## Example 7
@@ -323,47 +323,6 @@ Solution:
 # Law of Total Probability and Bayes' Rule
 
 
-## Example 1
-
-
-\begin{tcolorbox}
-
-According to a study by the Harvard School of Public Health, $44\%$ of college students engage in binge drinking, $37\%$ drink moderately, and $19\%$ abstain entirely. Another study, published in the American Journal of Health Behavior, finds that among binge drinkers aged 21 to 34, $17\%$ have been involved in an alcohol-related automobile accident, while among moderate drinkers of the same age, $9\%$ have been involved in such accidents. $\textbf{Use a tree diagram}$. Find (a) $P(\text{no accident|binge})$ (b) $P(\text{moderate and accident})$ (c) $P(\text{no accident})$
-(d) $P(\text{binge|accident})$
-\end{tcolorbox}
-
-
-## Example 1
-
-\begin{tcolorbox}
-Solution. 
-
-```{r  echo = FALSE, out.width = '30%', out.height = '50%'}
-knitr::include_graphics("week8_7.png")
-``` 
-
-
-\vspace{30mm}
-
-\end{tcolorbox}
-
-
-## Example 1
-
-\begin{tcolorbox}
-Solution. 
-
-\vspace{50mm}
-
-\end{tcolorbox}
-
-
-
-
-
-
-
-
 
 ## Law of Total Probability and Bayes' Rule
 
@@ -372,11 +331,97 @@ Solution.
   - The formula is easier with the tree!
   
   
-- In general: Let $F_1, F_2, \ldots F_n$ be such that $\cup_{i=1}^{\infty} F_i=\Omega$ and $F_i\cap F_j=\emptyset$ for all $i\neq j$, with $P(F_i)>0$ for all $i$. Then, for any event $E$
+- In general: Let $F_1, F_2, \ldots F_n$ be such that $\cup_{i=1}^{\infty} F_i=\Omega$ and $F_i\cap F_j=\emptyset$ for all $i\neq j$, with $\gil{P}(F_i)>0$ for all $i$. Then, for any event $E$
 
-$$P(E)=\sum_{i=1}^n P(E \cap F_i)=\sum_{i=1}^n P(E|F_i)P(F_i)$$
+$$\gil{P}(E)=\sum_{i=1}^n \gil{P}(E \cap F_i)=\sum_{i=1}^n \gil{P}(E|F_i)\gil{P}(F_i)$$
 
-$$P(F_i|E)=\frac{P(E \cap F_i)}{P(E)}=\frac{P(E|F_i)P(F_i)}{\sum_{i=1}^nP(E|F_i)P(F_i)}.$$
+$$\gil{P}(F_i|E)=\frac{\gil{P}(E \cap F_i)}{\gil{P}(E)}=\frac{\gil{P}(E|F_i)\gil{P}(F_i)}{\sum_{i=1}^n\gil{P}(E|F_i)\gil{P}(F_i)}.$$
+
+## Example 1
+
+\begin{tcolorbox}
+Suppose the prior probabilities that a document was written in Word, LaTeX, and HTML are: 0.50, 0.30, and 0.20, respectively.  From past experience it is known that 40\% of Word documents exceed 10 pages; 20\% of LaTeX documents exceed 10 pages; 20\% of HTML documents exceed 10 pages.  
+
+\begin{itemize}
+\item What is the overall proportion of documents containing more than 10 pages?
+\item If the document that was chosen at random was found to exceed 10 pages, what is the probability it was written in LaTeX?
+\item If the document that was chosen at random was found to exceed 10 pages, what is the probability it was written in Word?
+\item If the document that was chosen at random was found to exceed 10 pages, what is the probability it was written in HTML?
+\end{itemize}
+
+\end{tcolorbox}
+
+
+## Example 1 - Partial Solution
+\begin{itemize}
+\item Let $E$ be the event a document selected at random is more than 10 pages.
+\item Let $W$ be the event the document is written with Word.
+\item Let $L$ be the event the document is written with LaTeX.
+\item Let $H$ be the event the document is written with HTML.
+\end{itemize}
+
+$$E = (W \cap E) + (L \cap E) + (H \cap E)$$ 
+$$
+\begin{aligned}
+\gil{P}(E) &= \gil{P}(W \cap E) + \gil{P}(L \cap E) + \gil{P}(H \cap E)\\
+&= \gil{P}(W)\gil{P}(E|W) + \gil{P}(L)P(E|L) + \gil{P}(H)P(E|H)\\
+&=(0.5 \times 0.4) + (0.30 \times 0.20) + (0.2 \times 0.2) = 0.30
+\end{aligned}
+$$
+\begin{tcolorbox}
+The probability a randomly selected document is more than 10 pages is 0.30.
+\end{tcolorbox}
+
+
+
+
+## Example 1 - Partial Solution
+If the document that was chosen at random was found to exceed 10 pages, what is the probability it was written in LaTeX?
+$$
+\begin{aligned}
+\gil{P}(L | E) &= \frac{\gil{P}(L)\cdot \gil{P}(E|L)}{\gil{P}(E)}\\
+&=\frac{\gil{P}(L)\cdot \gil{P}(E|L)}{P(W \cap E) + \gil{P}(L\cap E) + \gil{P}(H \cap E)}\\
+&=\frac{\gil{P}(L)\cdot \gil{P}(E|L)}{\gil{P}(W)\gil{P}(E|W) + \gil{P}(L)\gil{P}(E|L) + \gil{P}(H)\gil{P}(E|H)}\\
+&=\frac{0.3 \times 0.2}{0.5 \times 0.4 + 0.3 \times 0.2 + 0.2 \times 0.2} \\
+&=\frac{0.06}{0.3}= 0.2
+\end{aligned}
+$$
+\begin{tcolorbox}
+Given a randomly selected document was found to exceed 10 pages, the probability is was written in LaTeX is 0.2.
+\end{tcolorbox}
+
+
+## Example 1 - Partial Solution
+If the document that was chosen at random was found to exceed 10 pages, what is the probability it was written in Word?
+$$
+\begin{aligned}
+\gil{P}(W | E) &= \frac{\gil{P}(W)\cdot \gil{P}(E|W)}{\gil{P}(E)}\\
+&=\frac{\gil{P}(W)\cdot \gil{P}(E|W)}{\gil{P}(W \cap E) + \gil{P}(L\cap E) + \gil{P}(H \cap E)}\\
+&=\frac{\gil{P}(W)\cdot \gil{P}(E|W)}{\gil{P}(W)P(E|W) + \gil{P}(L)\gil{P}(E|L) + \gil{P}(H)\gil{P}(E|H)}\\
+&=\frac{0.5 \times 0.4}{0.5 \times 0.4 + 0.3 \times 0.2 + 0.2 \times 0.2} \\
+&=\frac{0.2}{0.3}= \frac{2}{3}
+\end{aligned}
+$$
+\begin{tcolorbox}
+Given a randomly selected document was found to exceed 10 pages, the probability is was written in Word is 2/3.
+\end{tcolorbox}
+
+
+## Example 1 - Partial Solution
+If the document that was chosen at random was found to exceed 10 pages, what is the probability it was written in HTML?
+$$
+\begin{aligned}
+\gil{P}(H | E) &= \frac{\gil{P}(H)\cdot \gil{P}(E|H)}{\gil{P}(E)}\\
+&=\frac{\gil{P}(H)\cdot \gil{P}(E|H)}{\gil{P}(W \cap E) + \gil{P}(L\cap E) + \gil{P}P(H \cap E)}\\
+&=\frac{\gil{P}(H)\cdot \gil{P}(E|H)}{\gil{P}(W)P(E|W) + \gil{P}(L)\gil{P}(E|L) + \gil{P}(H)\gil{P}(E|H)}\\
+&=\frac{0.2 \times 0.2}{0.5 \times 0.4 + 0.3 \times 0.2 + 0.2 \times 0.2} \\
+&=\frac{0.04}{0.3}= 0.1333333
+\end{aligned}
+$$
+\begin{tcolorbox}
+Given a randomly selected document was found to exceed 10 pages, the probability is was written in HTML is 0.1333333.
+\end{tcolorbox}
+
 
 
 ## Example 2
@@ -430,36 +475,38 @@ probs
 
 
 ## Choose a Door: Solution
-
-\begin{tcolorbox}
-Solution: 
-
-
-\vspace{60mm}
-
-
-\end{tcolorbox}
-
-
-## Choose a Door: Solution
-
-\begin{tcolorbox}
-Solution: 
-
-\vspace{60mm}
-
-\end{tcolorbox}
+To solve with Bayes' Rule, start by assuming the contestant initially guesses Door 1 and that Monty opens Door 3. Let the event $D_i=$ Door $i$ conceals the prize and $O_j=$ Monty opens door $j$ after the contestant selects Door 1. When a contestant initially selects a door, $\gil{P}(D_1)=\gil{P}(D_2)=\gil{P}(D_3)=1/3$. (Similar reasoning works independent of the originally selected door.) Once Monty shows the grand prize is not behind Door 3, the probability of winning the grand prize is now one of $\gil{P}(D_1|O_3)$ or $\gil{P}(D_2|O_3)$. Note that $\gil{P}(D_1|O_3)$ corresponds to the strategy of sticking with the initial guess and $\gil{P}(D_2|O_3)$ corresponds to the strategy of switching doors. Based on how the show is designed, the following are known:
 
 
 
 ## Choose a Door: Solution
 
-\begin{tcolorbox}
-Solution: 
+\begin{itemize}
+\item $\gil{P}(O_3|D_1)=1/2$ since Monty can open one of either Door 3 or Door 2 without revealing the grand prize.
+\item $\gil{P}(O_3|D_2)=1$ since the only door Monty can open without revealing the grand prize is Door 3.
+\item $\gil{P}(O_3|D_3)=0$ since Monty will not open Door 3 if it contains the grand prize.
+\end{itemize}
 
-\vspace{60mm}
 
-\end{tcolorbox}
+
+## Choose a Door: Solution
+
+\begin{equation*}
+\begin{split}
+\gil{P}(D_1|O_3)&=\dfrac{\gil{P}(O_3|D_1)\gil{P}(D_1)}{\gil{P}(O_3|D_1)\gil{P}(D_1)+\gil{P}(O_3|D_2)\gil{P}(D_2)+\gil{P}(O_3|D_3)\gil{P}(D_3)}\\
+&=\dfrac{1/2 \times 1/3}{1/2 \times 1/3 + 1 \times 1/3 + 0 \times
+1/3}=\dfrac{1}{3}.
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+\gil{P}(D_2|O_3)&=\dfrac{\gil{P}(O_3|D_2)\gil{P}(D_2)}{\gil{P}(O_3|D_1)\gil{P}(D_1)+\gil{P}(O_3|D_2)\gil{P}(D_2)+\gil{P}(O_3|D_3)\gil{P}(D_3)}\\
+&=\dfrac{1 \times 1/3}{1/2 \times 1/3 + 1 \times 1/3 + 0 \times
+1/3}=\dfrac{2}{3}.
+\end{split}
+\end{equation*}
+Therefore, it is always to the contestant's benefit to switch doors. 
 
 
 

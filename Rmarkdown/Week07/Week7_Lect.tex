@@ -212,12 +212,12 @@
   If the probability is based on repeatedly observing the event's
   outcome, this probability is called \textbf{empirical probability} and
   given by:
-  \[P(\text{E})=\frac{\text{Number of times E occurs}}{\text{Total number of trails}}\]
+  \[\textrm{\gilfont{P}}\normalfont (\text{E})=\frac{\text{Number of times E occurs}}{\text{Total number of trails}}\]
 \item
   When the probability comes from a mathematical model and not from
   observations, it is called \textbf{theoretical probability}. This is
   given by:
-  \[P(\text{E})=\frac{\text{Number of outcomes in E}}{\text{Number of possible outcomes}}\]
+  \[\textrm{\gilfont{P}}\normalfont (\text{E})=\frac{\text{Number of outcomes in E}}{\text{Number of possible outcomes}}\]
 \end{itemize}
 \end{frame}
 
@@ -225,11 +225,14 @@
 \protect\hypertarget{axioms-of-probability}{}
 \begin{enumerate}
 \item
-  For any event \(E\): \(0\leq P(E) \leq 1\)
+  For any event \(E\):
+  \(0\leq \textrm{\gilfont{P}}\normalfont (E) \leq 1\)
 \item
-  \(P(\Omega)=1\)
+  \(\textrm{\gilfont{P}}\normalfont (\Omega)=1\)
 \item
-  \(P(E) + P(E^{c})=1\) so \(P(E^c)=1-P(E)\)
+  \(\textrm{\gilfont{P}}\normalfont (E) + \textrm{\gilfont{P}}\normalfont (E^{c})=1\)
+  so
+  \(\textrm{\gilfont{P}}\normalfont (E^c)=1-\textrm{\gilfont{P}}\normalfont (E)\)
 \end{enumerate}
 
 We define \(E^{c}\) as a complement of \(E\). \(E^{c}\) is the event of
@@ -240,13 +243,14 @@ We define \(E^{c}\) as a complement of \(E\). \(E^{c}\) is the event of
 \tightlist
 \item
   If E and F can not happen happen at the same time (mutually exclusive
-  or disjoint), then \[P(E \cup F)=P(E \text{ or } F)=P(E) + P(F)\]
+  or disjoint), then
+  \[\textrm{\gilfont{P}}\normalfont (E \cup F)=\textrm{\gilfont{P}}\normalfont (E \text{ or } F)=\textrm{\gilfont{P}}\normalfont (E) + \textrm{\gilfont{P}}\normalfont (F)\]
 \end{enumerate}
 
 In general, for any sequence of mutually exclusive events
 \(E_1, E_2, \ldots\) (that is \(E_i \cap E_j = \emptyset\)) for all
 (\(i\neq j\))
-\[P\left(\cup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} P(E_i)\]
+\[\textrm{\gilfont{P}}\normalfont \left(\cup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} \textrm{\gilfont{P}}\normalfont (E_i)\]
 \end{frame}
 
 \begin{frame}{Example 1}
@@ -319,19 +323,20 @@ Solution:
 \tightlist
 \item
   If E and F can not happen happen at the same time (mutually exclusive
-  or disjoint), then \[P(E \cup F)=P(E \text{ or } F) = P(E)+ P(F)\]
+  or disjoint), then
+  \[\textrm{\gilfont{P}}\normalfont (E \cup F)=\textrm{\gilfont{P}}\normalfont (E \text{ or } F) = \textrm{\gilfont{P}}\normalfont (E)+ \textrm{\gilfont{P}}\normalfont (F)\]
 \end{itemize}
 
 In general, for any sequence of mutually exclusive events
 \(E_1, E_2, \ldots\) (that is \(E_i \cap E_j = \emptyset\)) for all
 (\(i\neq j\))
-\[P\left(\cup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} P(E_i)\]
+\[\textrm{\gilfont{P}}\normalfont \left(\cup_{i=1}^{\infty} E_i\right)=\sum_{i=1}^{\infty} \textrm{\gilfont{P}}\normalfont (E_i)\]
 
 \begin{itemize}
 \tightlist
 \item
   For any two events \(E\) and \(F\),
-  \[P(E \cup F)=P(E \text{ or } F)=P(E)+ P(F)-P(E\cap F)\]
+  \[\textrm{\gilfont{P}}\normalfont (E \cup F)=\textrm{\gilfont{P}}\normalfont (E \text{ or } F)=\textrm{\gilfont{P}}\normalfont (E)+ \textrm{\gilfont{P}}\normalfont (F)-\textrm{\gilfont{P}}\normalfont (E\cap F)\]
 \end{itemize}
 \end{frame}
 
@@ -382,7 +387,7 @@ Solution:
   If \(E\) and \(F\) are independent
 \end{itemize}
 
-\[P(E \cap F) =P(E \text{ and } F)= P(E)\times P(F)\]
+\[\textrm{\gilfont{P}}\normalfont (E \cap F) =\textrm{\gilfont{P}}\normalfont (E \text{ and } F)= \textrm{\gilfont{P}}\normalfont (E)\times \textrm{\gilfont{P}}\normalfont (F)\]
 \end{frame}
 
 \begin{frame}{Example 6}
@@ -412,17 +417,18 @@ Rule}
   \textbf{conditional probability} and is written
 \end{itemize}
 
-\[P(E | F)=\frac{P( E \cap  F)}{P( F)}\]
+\[\textrm{\gilfont{P}}\normalfont (E | F)=\frac{\textrm{\gilfont{P}}\normalfont ( E \cap  F)}{\textrm{\gilfont{P}}\normalfont ( F)}\]
 
 \begin{itemize}
 \tightlist
 \item
   Rearranging the conditional probability equation, we get the
   \textbf{General Multiplication Rule}:
-  \[P( E \cap  F)=P( F)\times P( E| F)\]
+  \[\textrm{\gilfont{P}}\normalfont ( E \cap  F)=\textrm{\gilfont{P}}\normalfont ( F)\times \textrm{\gilfont{P}}\normalfont ( E| F)\]
 \end{itemize}
 
-Equivalently, \[P(E \cap F)=P(E)\times P(F| E)\]
+Equivalently,
+\[\textrm{\gilfont{P}}\normalfont (E \cap F)=\textrm{\gilfont{P}}\normalfont (E)\times \textrm{\gilfont{P}}\normalfont (F| E)\]
 \end{frame}
 
 \begin{frame}{Definition of Independence}
@@ -434,17 +440,19 @@ Equivalently, \[P(E \cap F)=P(E)\times P(F| E)\]
   not change the probability of \(F\).
 \end{itemize}
 
-\[P( E \cap  F)=P( E)\times P( F)\] Then:
-\[P( E|  F)=\frac{P( E \cap  F)}{P( F)}=\frac{P( E)\times P( F)}{P( F)}=P( E)\]
+\[\textrm{\gilfont{P}}\normalfont ( E \cap  F)=\textrm{\gilfont{P}}\normalfont ( E)\times \textrm{\gilfont{P}}\normalfont ( F)\]
+Then:
+\[\textrm{\gilfont{P}}\normalfont ( E|  F)=\frac{\textrm{\gilfont{P}}\normalfont ( E \cap  F)}{\textrm{\gilfont{P}}\normalfont ( F)}=\frac{\textrm{\gilfont{P}}\normalfont ( E)\times \textrm{\gilfont{P}}\normalfont ( F)}{\textrm{\gilfont{P}}\normalfont ( F)}=\textrm{\gilfont{P}}\normalfont ( E)\]
 
 \begin{itemize}
 \item
-  If \(E\) and \(F\) are independent then \(P( E| F)=P( E)\)
+  If \(E\) and \(F\) are independent then
+  \(\textrm{\gilfont{P}}\normalfont ( E| F)=\textrm{\gilfont{P}}\normalfont ( E)\)
 \item
   Equivalently
 \end{itemize}
 
-\[P(F|E)=P( F)\]
+\[\textrm{\gilfont{P}}\normalfont (F|E)=\textrm{\gilfont{P}}\normalfont ( F)\]
 \end{frame}
 
 \begin{frame}{Example 7}
@@ -481,39 +489,6 @@ Solution:
 \section{Law of Total Probability and Bayes'
 Rule}\label{law-of-total-probability-and-bayes-rule}}
 
-\begin{frame}{Example 1}
-\protect\hypertarget{example-1-1}{}
-\begin{tcolorbox}
-
-According to a study by the Harvard School of Public Health, $44\%$ of college students engage in binge drinking, $37\%$ drink moderately, and $19\%$ abstain entirely. Another study, published in the American Journal of Health Behavior, finds that among binge drinkers aged 21 to 34, $17\%$ have been involved in an alcohol-related automobile accident, while among moderate drinkers of the same age, $9\%$ have been involved in such accidents. $\textbf{Use a tree diagram}$. Find (a) $P(\text{no accident|binge})$ (b) $P(\text{moderate and accident})$ (c) $P(\text{no accident})$
-(d) $P(\text{binge|accident})$
-\end{tcolorbox}
-\end{frame}
-
-\begin{frame}{Example 1}
-\protect\hypertarget{example-1-2}{}
-\begin{tcolorbox}
-Solution. 
-
-
-\begin{center}\includegraphics[width=0.3\linewidth,height=0.5\textheight]{week8_7} \end{center}
-
-
-\vspace{30mm}
-
-\end{tcolorbox}
-\end{frame}
-
-\begin{frame}{Example 1}
-\protect\hypertarget{example-1-3}{}
-\begin{tcolorbox}
-Solution. 
-
-\vspace{50mm}
-
-\end{tcolorbox}
-\end{frame}
-
 \begin{frame}{Law of Total Probability and Bayes' Rule}
 \protect\hypertarget{law-of-total-probability-and-bayes-rule-1}{}
 \begin{itemize}
@@ -528,13 +503,104 @@ Solution.
 \item
   In general: Let \(F_1, F_2, \ldots F_n\) be such that
   \(\cup_{i=1}^{\infty} F_i=\Omega\) and \(F_i\cap F_j=\emptyset\) for
-  all \(i\neq j\), with \(P(F_i)>0\) for all \(i\). Then, for any event
-  \(E\)
+  all \(i\neq j\), with \(\textrm{\gilfont{P}}\normalfont (F_i)>0\) for
+  all \(i\). Then, for any event \(E\)
 \end{itemize}
 
-\[P(E)=\sum_{i=1}^n P(E \cap F_i)=\sum_{i=1}^n P(E|F_i)P(F_i)\]
+\[\textrm{\gilfont{P}}\normalfont (E)=\sum_{i=1}^n \textrm{\gilfont{P}}\normalfont (E \cap F_i)=\sum_{i=1}^n \textrm{\gilfont{P}}\normalfont (E|F_i)\textrm{\gilfont{P}}\normalfont (F_i)\]
 
-\[P(F_i|E)=\frac{P(E \cap F_i)}{P(E)}=\frac{P(E|F_i)P(F_i)}{\sum_{i=1}^nP(E|F_i)P(F_i)}.\]
+\[\textrm{\gilfont{P}}\normalfont (F_i|E)=\frac{\textrm{\gilfont{P}}\normalfont (E \cap F_i)}{\textrm{\gilfont{P}}\normalfont (E)}=\frac{\textrm{\gilfont{P}}\normalfont (E|F_i)\textrm{\gilfont{P}}\normalfont (F_i)}{\sum_{i=1}^n\textrm{\gilfont{P}}\normalfont (E|F_i)\textrm{\gilfont{P}}\normalfont (F_i)}.\]
+\end{frame}
+
+\begin{frame}{Example 1}
+\protect\hypertarget{example-1-1}{}
+\begin{tcolorbox}
+Suppose the prior probabilities that a document was written in Word, LaTeX, and HTML are: 0.50, 0.30, and 0.20, respectively.  From past experience it is known that 40\% of Word documents exceed 10 pages; 20\% of LaTeX documents exceed 10 pages; 20\% of HTML documents exceed 10 pages.  
+
+\begin{itemize}
+\item What is the overall proportion of documents containing more than 10 pages?
+\item If the document that was chosen at random was found to exceed 10 pages, what is the probability it was written in LaTeX?
+\item If the document that was chosen at random was found to exceed 10 pages, what is the probability it was written in Word?
+\item If the document that was chosen at random was found to exceed 10 pages, what is the probability it was written in HTML?
+\end{itemize}
+
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Example 1 - Partial Solution}
+\protect\hypertarget{example-1---partial-solution}{}
+\begin{itemize}
+\item Let $E$ be the event a document selected at random is more than 10 pages.
+\item Let $W$ be the event the document is written with Word.
+\item Let $L$ be the event the document is written with LaTeX.
+\item Let $H$ be the event the document is written with HTML.
+\end{itemize}
+
+\[E = (W \cap E) + (L \cap E) + (H \cap E)\] \[
+\begin{aligned}
+\textrm{\gilfont{P}}\normalfont (E) &= \textrm{\gilfont{P}}\normalfont (W \cap E) + \textrm{\gilfont{P}}\normalfont (L \cap E) + \textrm{\gilfont{P}}\normalfont (H \cap E)\\
+&= \textrm{\gilfont{P}}\normalfont (W)\textrm{\gilfont{P}}\normalfont (E|W) + \textrm{\gilfont{P}}\normalfont (L)P(E|L) + \textrm{\gilfont{P}}\normalfont (H)P(E|H)\\
+&=(0.5 \times 0.4) + (0.30 \times 0.20) + (0.2 \times 0.2) = 0.30
+\end{aligned}
+\]
+
+\begin{tcolorbox}
+The probability a randomly selected document is more than 10 pages is 0.30.
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Example 1 - Partial Solution}
+\protect\hypertarget{example-1---partial-solution-1}{}
+If the document that was chosen at random was found to exceed 10 pages,
+what is the probability it was written in LaTeX? \[
+\begin{aligned}
+\textrm{\gilfont{P}}\normalfont (L | E) &= \frac{\textrm{\gilfont{P}}\normalfont (L)\cdot \textrm{\gilfont{P}}\normalfont (E|L)}{\textrm{\gilfont{P}}\normalfont (E)}\\
+&=\frac{\textrm{\gilfont{P}}\normalfont (L)\cdot \textrm{\gilfont{P}}\normalfont (E|L)}{P(W \cap E) + \textrm{\gilfont{P}}\normalfont (L\cap E) + \textrm{\gilfont{P}}\normalfont (H \cap E)}\\
+&=\frac{\textrm{\gilfont{P}}\normalfont (L)\cdot \textrm{\gilfont{P}}\normalfont (E|L)}{\textrm{\gilfont{P}}\normalfont (W)\textrm{\gilfont{P}}\normalfont (E|W) + \textrm{\gilfont{P}}\normalfont (L)\textrm{\gilfont{P}}\normalfont (E|L) + \textrm{\gilfont{P}}\normalfont (H)\textrm{\gilfont{P}}\normalfont (E|H)}\\
+&=\frac{0.3 \times 0.2}{0.5 \times 0.4 + 0.3 \times 0.2 + 0.2 \times 0.2} \\
+&=\frac{0.06}{0.3}= 0.2
+\end{aligned}
+\]
+
+\begin{tcolorbox}
+Given a randomly selected document was found to exceed 10 pages, the probability is was written in LaTeX is 0.2.
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Example 1 - Partial Solution}
+\protect\hypertarget{example-1---partial-solution-2}{}
+If the document that was chosen at random was found to exceed 10 pages,
+what is the probability it was written in Word? \[
+\begin{aligned}
+\textrm{\gilfont{P}}\normalfont (W | E) &= \frac{\textrm{\gilfont{P}}\normalfont (W)\cdot \textrm{\gilfont{P}}\normalfont (E|W)}{\textrm{\gilfont{P}}\normalfont (E)}\\
+&=\frac{\textrm{\gilfont{P}}\normalfont (W)\cdot \textrm{\gilfont{P}}\normalfont (E|W)}{\textrm{\gilfont{P}}\normalfont (W \cap E) + \textrm{\gilfont{P}}\normalfont (L\cap E) + \textrm{\gilfont{P}}\normalfont (H \cap E)}\\
+&=\frac{\textrm{\gilfont{P}}\normalfont (W)\cdot \textrm{\gilfont{P}}\normalfont (E|W)}{\textrm{\gilfont{P}}\normalfont (W)P(E|W) + \textrm{\gilfont{P}}\normalfont (L)\textrm{\gilfont{P}}\normalfont (E|L) + \textrm{\gilfont{P}}\normalfont (H)\textrm{\gilfont{P}}\normalfont (E|H)}\\
+&=\frac{0.5 \times 0.4}{0.5 \times 0.4 + 0.3 \times 0.2 + 0.2 \times 0.2} \\
+&=\frac{0.2}{0.3}= \frac{2}{3}
+\end{aligned}
+\]
+
+\begin{tcolorbox}
+Given a randomly selected document was found to exceed 10 pages, the probability is was written in Word is 2/3.
+\end{tcolorbox}
+\end{frame}
+
+\begin{frame}{Example 1 - Partial Solution}
+\protect\hypertarget{example-1---partial-solution-3}{}
+If the document that was chosen at random was found to exceed 10 pages,
+what is the probability it was written in HTML? \[
+\begin{aligned}
+\textrm{\gilfont{P}}\normalfont (H | E) &= \frac{\textrm{\gilfont{P}}\normalfont (H)\cdot \textrm{\gilfont{P}}\normalfont (E|H)}{\textrm{\gilfont{P}}\normalfont (E)}\\
+&=\frac{\textrm{\gilfont{P}}\normalfont (H)\cdot \textrm{\gilfont{P}}\normalfont (E|H)}{\textrm{\gilfont{P}}\normalfont (W \cap E) + \textrm{\gilfont{P}}\normalfont (L\cap E) + \textrm{\gilfont{P}}\normalfont P(H \cap E)}\\
+&=\frac{\textrm{\gilfont{P}}\normalfont (H)\cdot \textrm{\gilfont{P}}\normalfont (E|H)}{\textrm{\gilfont{P}}\normalfont (W)P(E|W) + \textrm{\gilfont{P}}\normalfont (L)\textrm{\gilfont{P}}\normalfont (E|L) + \textrm{\gilfont{P}}\normalfont (H)\textrm{\gilfont{P}}\normalfont (E|H)}\\
+&=\frac{0.2 \times 0.2}{0.5 \times 0.4 + 0.3 \times 0.2 + 0.2 \times 0.2} \\
+&=\frac{0.04}{0.3}= 0.1333333
+\end{aligned}
+\]
+
+\begin{tcolorbox}
+Given a randomly selected document was found to exceed 10 pages, the probability is was written in HTML is 0.1333333.
+\end{tcolorbox}
 \end{frame}
 
 \begin{frame}{Example 2}
@@ -596,34 +662,50 @@ P(Win no Switch)    P(Win Switch)
 
 \begin{frame}{Choose a Door: Solution}
 \protect\hypertarget{choose-a-door-solution}{}
-\begin{tcolorbox}
-Solution: 
-
-
-\vspace{60mm}
-
-
-\end{tcolorbox}
+To solve with Bayes' Rule, start by assuming the contestant initially
+guesses Door 1 and that Monty opens Door 3. Let the event \(D_i=\) Door
+\(i\) conceals the prize and \(O_j=\) Monty opens door \(j\) after the
+contestant selects Door 1. When a contestant initially selects a door,
+\(\textrm{\gilfont{P}}\normalfont (D_1)=\textrm{\gilfont{P}}\normalfont (D_2)=\textrm{\gilfont{P}}\normalfont (D_3)=1/3\).
+(Similar reasoning works independent of the originally selected door.)
+Once Monty shows the grand prize is not behind Door 3, the probability
+of winning the grand prize is now one of
+\(\textrm{\gilfont{P}}\normalfont (D_1|O_3)\) or
+\(\textrm{\gilfont{P}}\normalfont (D_2|O_3)\). Note that
+\(\textrm{\gilfont{P}}\normalfont (D_1|O_3)\) corresponds to the
+strategy of sticking with the initial guess and
+\(\textrm{\gilfont{P}}\normalfont (D_2|O_3)\) corresponds to the
+strategy of switching doors. Based on how the show is designed, the
+following are known:
 \end{frame}
 
 \begin{frame}{Choose a Door: Solution}
 \protect\hypertarget{choose-a-door-solution-1}{}
-\begin{tcolorbox}
-Solution: 
-
-\vspace{60mm}
-
-\end{tcolorbox}
+\begin{itemize}
+\item $\textrm{\gilfont{P}}\normalfont (O_3|D_1)=1/2$ since Monty can open one of either Door 3 or Door 2 without revealing the grand prize.
+\item $\textrm{\gilfont{P}}\normalfont (O_3|D_2)=1$ since the only door Monty can open without revealing the grand prize is Door 3.
+\item $\textrm{\gilfont{P}}\normalfont (O_3|D_3)=0$ since Monty will not open Door 3 if it contains the grand prize.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Choose a Door: Solution}
 \protect\hypertarget{choose-a-door-solution-2}{}
-\begin{tcolorbox}
-Solution: 
+\begin{equation*}
+\begin{split}
+\textrm{\gilfont{P}}\normalfont (D_1|O_3)&=\dfrac{\textrm{\gilfont{P}}\normalfont (O_3|D_1)\textrm{\gilfont{P}}\normalfont (D_1)}{\textrm{\gilfont{P}}\normalfont (O_3|D_1)\textrm{\gilfont{P}}\normalfont (D_1)+\textrm{\gilfont{P}}\normalfont (O_3|D_2)\textrm{\gilfont{P}}\normalfont (D_2)+\textrm{\gilfont{P}}\normalfont (O_3|D_3)\textrm{\gilfont{P}}\normalfont (D_3)}\\
+&=\dfrac{1/2 \times 1/3}{1/2 \times 1/3 + 1 \times 1/3 + 0 \times
+1/3}=\dfrac{1}{3}.
+\end{split}
+\end{equation*}
 
-\vspace{60mm}
-
-\end{tcolorbox}
+\begin{equation*}
+\begin{split}
+\textrm{\gilfont{P}}\normalfont (D_2|O_3)&=\dfrac{\textrm{\gilfont{P}}\normalfont (O_3|D_2)\textrm{\gilfont{P}}\normalfont (D_2)}{\textrm{\gilfont{P}}\normalfont (O_3|D_1)\textrm{\gilfont{P}}\normalfont (D_1)+\textrm{\gilfont{P}}\normalfont (O_3|D_2)\textrm{\gilfont{P}}\normalfont (D_2)+\textrm{\gilfont{P}}\normalfont (O_3|D_3)\textrm{\gilfont{P}}\normalfont (D_3)}\\
+&=\dfrac{1 \times 1/3}{1/2 \times 1/3 + 1 \times 1/3 + 0 \times
+1/3}=\dfrac{2}{3}.
+\end{split}
+\end{equation*} Therefore, it is always to the contestant's benefit to
+switch doors.
 \end{frame}
 
 \begin{frame}{Monte Hall Problem with \(n\) Doors}
