@@ -38,3 +38,12 @@ VX <- sum((X - EX)^2*T1)
 VX
 SX <- sqrt(VX)
 SX
+
+#######
+
+x <- 0:4
+px <- c(1/16, 4/16, 6/16, 4/16, 1/16)
+(EX <- sum(x*px))
+(VX <- sum((x - EX)^2*px))
+# P(X >= 2) = 11/16
+MASS::fractions(sum(dbinom(2:4, 4, 0.5)))
