@@ -3,7 +3,7 @@ set.seed(123)
 area <- seq(800, 5000, length= 100) + rnorm(100, 0, 100)
 lot <- seq(.2, 5, length = 100) + abs(rnorm(100, 0, .2))
 location <- rep(c("Great", "Good", "Bad"), length = 100)
-price <- area*200 + lot*50000 + ifelse(location == "Great", 50000, ifelse(location =="Good", 0, -50000)) + rnorm(100, 0, 150000)
+price <- area*200 + lot*50000 + ifelse(location == "Great", 100000, ifelse(location =="Good", 0, -100000)) + rnorm(100, 0, 100000)
 plot(lot, price)
 plot(area, price)
 
