@@ -12,6 +12,8 @@ summary(mod)
 HDF <- data.frame(price, lot, location, area)
 rm(price, lot, location, area)
 head(HDF)
+write.csv(HDF, "./Data/HP.csv")
+
 
 library(tidyverse)
 ggplot(data = HDF, aes(x = area, y = price, color = location)) + 
