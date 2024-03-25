@@ -214,11 +214,11 @@ We now consider an example where neither the population nor the sampling distrib
 $$E[X]=\alpha/\lambda \quad \quad \text{and} \quad \quad Var[X]=\alpha/\lambda^2.$$
  
  
-- Let $X_1, \ldots, X_n\sim \Gamma(\alpha, \lambda)$. 
+- Let $X_1, \ldots, X_n\sim \Gamma(\alpha = 1, \lambda = 1/2)$. 
 
-  - It is a fact that the sampling distribution of the mean $\bar{X}$ is $\Gamma(n\alpha, n\lambda)$. 
+  - It is a fact that the sampling distribution of the mean $\bar{X}$ is $\Gamma(n\alpha = 16\cdot 1 = 16, n\lambda = 16/2 = 8)$. 
       
-- We draw a random sample of size $n=16$ from a $\Gamma(\alpha=1, \lambda=1/2)$ (population mean 2, standard deviation 0.5).
+- We draw a random sample of size $n=16$ from a $\Gamma(\alpha=1, \lambda=1/2)$ (population mean: $\alpha/\lambda= 2$, standard deviation: $\sqrt{\alpha/\lambda^2 = 1/(1/2)^2)}=2$).
 
 
 
@@ -367,8 +367,8 @@ n <- sum(!is.na(Arsenic))
 arsenic.mean <- numeric(B)
 set.seed(7)
 for (i in 1:B){
-  x <- sample(Arsenic, size = n, replace = TRUE)
-  arsenic.mean[i] <- mean(x)
+  bss <- sample(Arsenic, size = n, replace = TRUE)
+  arsenic.mean[i] <- mean(bss)
 }
 hist(arsenic.mean, main = "Figure 2a", col = "lightblue", breaks = "Scott", 
      xlab = substitute(paste(bar(X),"*")))
@@ -394,8 +394,8 @@ n <- sum(!is.na(Arsenic))
 arsenic.mean <- numeric(B)
 set.seed(7)
 for (i in 1:B){
-  x <- sample(Arsenic, size = n, replace = TRUE)
-  arsenic.mean[i] <- mean(x)
+  bss <- sample(Arsenic, size = n, replace = TRUE)
+  arsenic.mean[i] <- mean(bss)
 }
 hist(arsenic.mean, main = "Figure 2a", col = "lightblue", breaks = "Scott", xlab = substitute(paste(bar(X),"*")))
 qqnorm(arsenic.mean, main = "Figure 2b")
@@ -427,6 +427,11 @@ qqline(arsenic.mean, col = "red")
 - Now think back to our pennies exercise where you are trying to estimate the true population mean year $\mu$ of all US pennies. 
 
   - Think of the value of $\mu$ as a fish.
+ 
+```{r}
+pennies_sample %>% 
+  summarize(xbar_year = mean(year))
+```
     
 
 ## Understanding confidence intervals
@@ -499,16 +504,29 @@ One method to construct a confidence interval
     - We can do this by computing the 2.5th and 97.5th percentiles, 
     - which are `r round(CI$lci,0)` and `r round(CI$uci,0)`, respectively. 
     - This is known as the percentile method for constructing confidence intervals.
+    
+\small
+```{r}
+# Using a for loop to do the same thing
+B <- 1000
+bm <- numeric(B)
+for(i in 1:B){
+  bss <- sample(pennies_sample$year, size = 50, replace = TRUE)
+  bm[i] <- mean(bss)
+}
+quantile(bm, probs = c(0.025, 0.975))
+```
+\normalsize
 
 
 ## Standard error method
 
 
-- Given that our bootstrap distribution based on 1000 resamples with replacement in Figure \@ref(fig:bsci) is normally shaped, 
+- Given that our bootstrap distribution based on 1000 resamples with replacement in Figure 1 is normally shaped, 
 
   - let’s use this fact about normal distributions to construct a confidence interval in a different way.
 
-  - First, note that the bootstrap distribution has a mean equal to `r round(mean(bs_dist$stat),2)`. 
+  - First, note that the bootstrap distribution has a mean equal to `r round(mean(bs_dist$stat),2)` (using `infer` or `r round(mean(bm),2)` the for loop). 
 
   - This value almost coincides exactly with the value of the sample mean $\bar{x}$  of our original 50 pennies of `r mean(pennies_sample$year)`.
 
@@ -517,7 +535,7 @@ One method to construct a confidence interval
 
 ## Standard error method
 
-
+\small
 ```{r echo = TRUE}
 set.seed(10)
 virtual_resampled_means <- pennies_sample %>% 
@@ -527,6 +545,8 @@ virtual_resampled_means <- pennies_sample %>%
 virtual_resampled_means %>% 
   summarize(SE = sd(mean_year)) -> ans
 ans
+# Or
+sd(bm)
 ```
 
 
