@@ -2642,15 +2642,15 @@ unknown}
 \begin{frame}[fragile]{Confidence intervals for a Mean, \(\sigma\)
 unknown}
 \protect\hypertarget{confidence-intervals-for-a-mean-sigma-unknown-2}{}
-Consider qq plot for \(t_{24}\)
+Consider qq plot for \(t_{15}\)
 
 \tiny
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Consider qq plot for t\_24}
+\CommentTok{\# Consider qq plot for t\_15}
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =}\NormalTok{ TS), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ x)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_qq}\NormalTok{(}\AttributeTok{distribution =}\NormalTok{ stats}\SpecialCharTok{::}\NormalTok{qt, }\AttributeTok{dparams =} \FunctionTok{list}\NormalTok{(}\AttributeTok{df =} \DecValTok{24}\NormalTok{), }\AttributeTok{size =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_qq}\NormalTok{(}\AttributeTok{distribution =}\NormalTok{ stats}\SpecialCharTok{::}\NormalTok{qt, }\AttributeTok{dparams =} \FunctionTok{list}\NormalTok{(}\AttributeTok{df =} \DecValTok{15}\NormalTok{), }\AttributeTok{size =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{intercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{slope =} \DecValTok{1}\NormalTok{, }\AttributeTok{color =} \StringTok{"pink"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}

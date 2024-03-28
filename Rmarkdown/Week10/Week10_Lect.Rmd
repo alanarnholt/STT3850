@@ -1654,13 +1654,13 @@ abline(a = 0, b = 1)
 
 ## Confidence intervals for a Mean, $\sigma$ unknown
 
-Consider qq plot for $t_{24}$
+Consider qq plot for $t_{15}$
 
 \tiny
 ```{r out.height = '40%', out.width = '60%'}
-# Consider qq plot for t_24
+# Consider qq plot for t_15
 ggplot(data = data.frame(x = TS), aes(sample = x)) + 
-  geom_qq(distribution = stats::qt, dparams = list(df = 24), size = 0.1, color = "blue") + 
+  geom_qq(distribution = stats::qt, dparams = list(df = 15), size = 0.1, color = "blue") + 
   geom_abline(intercept = 0, slope = 1, color = "pink") + 
   theme_bw()
 ```
