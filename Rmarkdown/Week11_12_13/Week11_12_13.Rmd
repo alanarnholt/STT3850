@@ -60,6 +60,7 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALS
 
 
 
+
 # Topics for the next three weeks
 
 ## By the end of week 13:  
