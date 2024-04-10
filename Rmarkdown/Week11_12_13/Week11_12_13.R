@@ -520,6 +520,16 @@ promotions %>%
 get_pvalue(null_distribution, obs_stat= .292, direction = "right") -> pv
 pv
 
+### Consider doing the same thing with a for loop
+
+P <- 10^3
+pd <- numeric(P)
+for(i in 1:P){
+  pd[i] <- -diff(prop.table(table(promotions$decision, sample(promotions$gender)), 2)[2, ])
+}
+
+pvalue2 <- mean(pd >= 0.292)
+pvalue2
 
 ## ----echo = FALSE, out.height = '50%',out.width = '70%'---------------------------------
 knitr::include_graphics("week12_5.png")
