@@ -522,7 +522,7 @@ pv
 
 ### Consider doing the same thing with a for loop
 
-P <- 10^3
+P <- 10^4
 pd <- numeric(P)
 for(i in 1:P){
   pd[i] <- -diff(prop.table(table(promotions$decision, sample(promotions$gender)), 2)[2, ])
