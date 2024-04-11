@@ -58,4 +58,6 @@ pennies_sample %>%
   calculate(stat = "mean") -> null_dist
 visualize(null_dist)
 get_pvalue(null_dist, obs_stat = ob_stat, direction = "both")
-  
+# Same as
+(mean(null_dist$stat >= ob_stat)*2)
+
