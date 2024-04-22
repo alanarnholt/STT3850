@@ -1,5 +1,5 @@
 ---
-title: "STT 3850 : Weeks 11, 12, and 13"
+title: "STT 3850 : Weeks 14 and 15"
 author: "Spring 2024"
 institute: "Appalachian State University"
 output: 
