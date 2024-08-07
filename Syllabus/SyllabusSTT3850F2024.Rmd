@@ -53,7 +53,7 @@ ________
 
 * 15% of the course grade will come from DataCamp assignments (22).  **DataCamp** assignments are assigned for students to practice coding and to receive immediate computerized feedback.  You should attempt to answer the DataCamp questions correctly and not simply ask the program to show you a solution. 60% of your DataCamp grade will be a binary grade (1 or 0) for completion of the assigned DataCamp Chapter.  The remaining 40% of your DataCamp grade will be computed at the end of the course and will be based on your total XP points accumulated in DataCamp. 
 
-* 35% of the course grade will come from Problem Sets (9).  See the grading rubric on the [Course Pacing Guide](../CoursePacing/CoursePacingS2024.html) for how Problem Sets will be evaluated.
+* 35% of the course grade will come from Problem Sets (9).  See the grading rubric on the [Course Pacing Guide](../CoursePacing/CoursePacingF2024.html) for how Problem Sets will be evaluated.
 
 ```{block, tiered, type='rmdnote'}
 **Tiered Feedback Explanation**
@@ -117,7 +117,7 @@ ___________
 
 **Assignments**
 
-The [Course Pacing Guide](../CoursePacing/CoursePacingS2024.html) has all course assignments and due dates.
+The [Course Pacing Guide](../CoursePacing/CoursePacingF2024.html) has all course assignments and due dates.
 
 ____________
 
@@ -138,7 +138,7 @@ ________________
 The only way to learn statistics is to **DO** statistics, which includes using statistical software. Reading the textbook, learning the language, and practicing exercises using real data are critical to your learning and success. Class activities and assessments have been structured with these principles in mind.
 
 
-You should read assigned textbook content and read/watch supplemental materials prior to coming to class.  When you read the assigned material, you should complete the problems (not just read about them) on your paper and computer. It will be easier to participate if you acquire some familiarity with the vocabulary and methods before we start to discuss and use them. You must “speak the language” (both statistics and R) to demonstrate your knowledge effectively.  If you come to class and have difficulty following the discussion, you should make sure you have read all of the assigned material and then go back and re-read the assigned material a second time.  Reading a technical book is not the same as a novel.  Most people, your instructor included, must read a technical section at least twice before understanding a topic.  If you are still having challenges after reading the assigned material twice and working the out the material on paper and the computer, it is your responsibility to seek help.  I am here to help and will be glad to assist you in your learning process.  Please make an appointment to visit with me on my [calendar](https://calendar.google.com/calendar/u/0/selfsched?sstoken=UUtZb3I1Z1pFczdjfGRlZmF1bHR8MTZjOTU5MGY0ZTFlOTA2MmExNzhlYWQ5MGIzZWQ0OGM). 
+You should read assigned textbook content and read/watch supplemental materials prior to coming to class.  When you read the assigned material, you should complete the problems (not just read about them) on your paper and computer. It will be easier to participate if you acquire some familiarity with the vocabulary and methods before we start to discuss and use them. You must “speak the language” (both statistics and R) to demonstrate your knowledge effectively.  If you come to class and have difficulty following the discussion, you should make sure you have read all of the assigned material and then go back and re-read the assigned material a second time.  Reading a technical book is not the same as a novel.  Most people, your instructor included, must read a technical section at least twice before understanding a topic.  If you are still having challenges after reading the assigned material twice and working the out the material on paper and the computer, it is your responsibility to seek help.  I am here to help and will be glad to assist you in your learning process.  Please make an appointment to visit with me on my [calendar](https://calendar.app.google/FS1gx8qdFUkN6Z9Y8). 
 
 
 _____________________________________________

@@ -22,7 +22,7 @@ ________________________________
 1.  Please bring a notebook and pencil to every class.
 2.  The principal documents for this course are [_ModernDive: An Introduction to Statistical and Data Sciences via R_](https://moderndive.com) (MD), [_Data Science with R_](https://stat-ata-asu.github.io/R_DS_BD2020/) (DSWR), and _Mathematical Statistics with Resampling and R_ (MSWR) -available inside the [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=167073) course page.
 3.  Problem Set (PS) assignments are generally due on Thursdays by 5:00 pm
-4.  The links for the problem sets and the sampling distribution assignment in this document may only work for the instructor!  To accept each of these assignments, go to [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=159655) and click on the appropriate link in the [GitHub Classroom Invitation Links for Assignments](https://asulearn.appstate.edu/course/view.php?id=167073) block. 
+4.  The links for the problem sets and the sampling distribution assignment in this document may only work for the instructor!  To accept each of these assignments, go to [ASULEARN](https://asulearn.appstate.edu/course/view.php?id=177490) and click on the appropriate link in the [GitHub Classroom Invitation Links for Assignments](https://asulearn.appstate.edu/course/view.php?id=177490#section-3) block. 
 5. [QUARTO cheat sheet](https://images.datacamp.com/image/upload/v1676540721/Marketing/Blog/Quarto_Cheat_Sheet.pdf)
 ```
 
@@ -78,7 +78,7 @@ We will walk through everything outlined below in class.  If you want to complet
 
 * [VIDEO of the setup process](https://drive.google.com/file/d/1L-v9qAVHWtvXOTYjY8wvedH5VyzmeQeL/view?usp=drive_link)
 
-* Complete [PS-01](https://classroom.github.com/a/c8f5oI8u) due by 5:00 pm Aug 22 
+* Complete [PS-01](https://classroom.github.com/a/4fO8Rpwn) due by 5:00 pm Aug 22 
 * [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1JUag-0U-reD_JcKHvez50I_4R-CCMUMt/view?usp=drive_link)
  
 ```{block, week1optional, type='rmdoptional'}
@@ -115,7 +115,7 @@ ______________
 
 * Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Aug 27
 
-* Complete [PS-02](https://classroom.github.com/a/Wx3NOyhz) due by 5:00 pm Aug 29
+* Complete [PS-02](https://classroom.github.com/a/dd-zQZG6) due by 5:00 pm Aug 29
 
 * [Lecture Slides](../Rmarkdown/Week02/Week2_Lect.pdf)
 
@@ -143,11 +143,11 @@ __________________
 
 * Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Sep 3
 
-* Complete [PS-03](https://classroom.github.com/a/kfv7V-Qo) by 5:00 pm Sep 5
+* Complete [PS-03](https://classroom.github.com/a/sz43xpKf) by 5:00 pm Sep 5
 
 * Quiz # 1 - Sep 5
 
-* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/XKy_tVEE)
+* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/KW93xo-0)
 
 
 ```{block, test3, type='rmdexercise'}
@@ -167,9 +167,9 @@ Test yourself:
 
 * Work through chapter 4 (Data Manipulation) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
-* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/jN6h2F9G) 
-* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/gq0amqZk) 
-* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/jx_nAhKR) 
+* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/07LSd4MF) 
+* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/GwaVpLyL) 
+* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/ZOX7kXns) 
 ```
 
 ___________
@@ -188,7 +188,7 @@ ___________
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Sep 10
 
-* Complete [PS-04](https://classroom.github.com/a/L-GebW9x) due by 5:00 pm Sep 12
+* Complete [PS-04](https://classroom.github.com/a/GdoDlcKn) due by 5:00 pm Sep 12
 
 
 ```{block, week4optional, type='rmdoptional'}
@@ -218,7 +218,7 @@ __________________
 
 * Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Sep 17
 
-* Complete [PS-05](https://classroom.github.com/a/8eZWIIwy) by 5:00 pm Sep 19 
+* Complete [PS-05](https://classroom.github.com/a/xoJ3Ty7L) by 5:00 pm Sep 19 
 
 
 ```{block, week5optional, type='rmdoptional'}
@@ -240,7 +240,7 @@ _______________
 
 * Quiz # 2 - Sep 26
 
-* Complete [PS-06](https://classroom.github.com/a/Jg-a0hYg) by 5:00 pm Sep 26 
+* Complete [PS-06](https://classroom.github.com/a/p75xdu-k) by 5:00 pm Sep 26 
 
 
 ```{block, week6optional, type='rmdoptional'}
@@ -309,10 +309,10 @@ _______________
 
 * Before class read chapter 7 (Sampling) of [MD](https://moderndive.com/7-sampling.html) --- pgs 195-232
 
-* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/_TstctSt) by 5:00 pm Oct 16 --- not graded
+* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/2WKTw96G) by 5:00 pm Oct 16 --- not graded
 [Partial Solution](https://mathr.appstate.edu/connect/content/2d388531-2e05-485b-9f58-83855a1437e3)
 
-* Start [PS-07](https://classroom.github.com/a/wWQ1XYh2) due by 5:00 pm Oct 17
+* Start [PS-07](https://classroom.github.com/a/IWHzhDZc) due by 5:00 pm Oct 17
 
 ```{block, week9optional, type='rmdoptional'}
 #### Optional {-}
@@ -372,7 +372,7 @@ _______________________
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
-* Complete [PS-08](https://classroom.github.com/a/44SEP9oE) by 5:00 pm Oct 31 
+* Complete [PS-08](https://classroom.github.com/a/-spVYTn1) by 5:00 pm Oct 31 
 
 _____________________
 
@@ -434,7 +434,7 @@ ______________________
 
 * Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Nov 12
 
-* Complete [PS-09](https://classroom.github.com/a/DTgdm2su) by 5:00 pm Nov 14 
+* Complete [PS-09](https://classroom.github.com/a/9Qx4qUnL) by 5:00 pm Nov 14 
 
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
