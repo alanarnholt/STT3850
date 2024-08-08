@@ -41,7 +41,7 @@ __________
 
 * Chester Ismay and Albert Y. Kim (2020). [_Statistical Inference via Data Science: A ModernDive into R and the Tidyverse _](htpps://moderndive.com)
 
-* Chihara, L. and Hesterberg, T. (2019). _Mathematical Statistics with Resampling and R_, Second Edition. Hoboken, NJ: John Wiley & Sons, Inc.---Available on [ASULearn](https://asulearn.appstate.edu/course/view.php?id=167073)
+* Chihara, L. and Hesterberg, T. (2019). _Mathematical Statistics with Resampling and R_, Second Edition. Hoboken, NJ: John Wiley & Sons, Inc.---Available on [ASULearn](https://asulearn.appstate.edu/course/view.php?id=177490)
 
 * [_Mathematical Statistics with Resampling and R_ web site](https://sites.google.com/site/chiharahesterberg/home) contains errata, solutions, datasets, and R scripts. 
 
@@ -51,7 +51,7 @@ ________
 
 **Course Grading & Assessment:**
 
-* 15% of the course grade will come from DataCamp assignments (22).  **DataCamp** assignments are assigned for students to practice coding and to receive immediate computerized feedback.  You should attempt to answer the DataCamp questions correctly and not simply ask the program to show you a solution. 60% of your DataCamp grade will be a binary grade (1 or 0) for completion of the assigned DataCamp Chapter.  The remaining 40% of your DataCamp grade will be computed at the end of the course and will be based on your total XP points accumulated in DataCamp. 
+* 15% of the course grade will come from DataCamp assignments (22).  **DataCamp** assignments are assigned for students to practice coding and to receive immediate computerized feedback.  You should attempt to answer the DataCamp questions correctly and not simply ask the program to show you a solution. 60% of your DataCamp grade will be a binary grade (1 or 0) for completion of the assigned DataCamp Chapter.  The remaining 40% of your DataCamp grade will be computed at the end of the course and will be based on your total XP points accumulated during the semester in DataCamp.  (XP greater than 26,150 A; XP greater than 24,600 B; XP greater than 23,050 C; XP greater than 21,500 D) 
 
 * 35% of the course grade will come from Problem Sets (9).  See the grading rubric on the [Course Pacing Guide](../CoursePacing/CoursePacingF2024.html) for how Problem Sets will be evaluated.
 
