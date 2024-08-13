@@ -79,7 +79,7 @@ ________
 
 **University Policies**
 
-This course conforms with all Appalachian State University policies with respect to face coverings, academic integrity, disability services, class attendance, and student engagement.  The details of the policies may be found at <https://academicaffairs.appstate.edu/resources/syllabi-policy-and-statement-information>.  Please pay particular attention to the [student engagement statement](https://academicaffairs.appstate.edu/sites/academicaffairs.appstate.edu/files/gerber_resolution_student_workload_removed_approved_statement_per_mmccoughy_and_sedwards.pdf).
+This course conforms with all Appalachian State University policies with respect to academic integrity, disability services, class attendance, and student engagement.  The details of the policies may be found at <https://academicaffairs.appstate.edu/resources/syllabi-policy-and-statement-information>.  Please pay particular attention to the [student engagement statement](https://academicaffairs.appstate.edu/sites/academicaffairs.appstate.edu/files/gerber_resolution_student_workload_removed_approved_statement_per_mmccoughy_and_sedwards.pdf).
 
 ________
 
@@ -105,10 +105,10 @@ __________
 
 **Required Technology**
 
-* [RStudio Server](https://mathr.math.appstate.edu/)
+* [RStudio Server](https://mathr.appstate.edu/)
 * [DataCamp](https://www.datacamp.com/)
 * [GitHub](https://github.com/)
-* [Github Classroom Repository](https://github.com/STT3850-Sp24)
+* [Github Classroom Repository](https://github.com/STT3850-FALL2024)
 
 
 Note: All technology used in the class is either open source (free) or will be accessible to students enrolled in the course for no cost.
