@@ -66,9 +66,9 @@ _________
 
 * Become familiar with the Appstate [RStudio/POSIT workbench](https://mathr.appstate.edu/) server. You will use your Appstate user name and password to log in to the server.  You must be registered in the class to access the server.
 
-We will walk through everything outlined below in class.  If you want to complete the setup before class that is fine.    
+We will walk through everything outlined below in class.  If you want to complete the setup before class, that is fine.    
 
-* Sign-up for a free account on [GitHub](https://github.com).  When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **FirstNameLastName** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinguishing characteristic in your username.  
+* Sign-up for a free account on [GitHub](https://github.com).  When you register for a free individual GitHub account, request a [student discount](https://education.github.com) to obtain a few private repositories as well as unlimited public repositories.  Please use something similar to **firstnamelastname** as your username when you register with GitHub.  For example, my username on GitHub is *alanarnholt*. If you have a popular name such as John Smith, you may need to provide some other distinguishing characteristic in your username.  
 
 * Introduce yourself to Git by following the directions in [HappyGitWithR](https://happygitwithr.com/hello-git)
 
