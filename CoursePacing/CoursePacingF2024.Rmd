@@ -218,7 +218,7 @@ __________________
 
 * Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Sep 17
 
-* Complete [PS-05](https://classroom.github.com/a/xoJ3Ty7L) by 5:00 pm Sep 19 
+* Complete [PS-05](https://classroom.github.com/a/Bdwv4qK4) by 5:00 pm Sep 19 
 
 
 ```{block, week5optional, type='rmdoptional'}
