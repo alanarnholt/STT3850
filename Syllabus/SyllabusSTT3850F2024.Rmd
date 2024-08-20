@@ -3,6 +3,7 @@ title: "STT 3850 Syllabus - Fall 2024"
 author: ''
 date: ''
 output:
+  pdf_document: default
   html_document:
     css: ../css/style.css
     highlight: textmate
