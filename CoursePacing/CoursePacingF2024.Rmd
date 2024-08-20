@@ -72,7 +72,7 @@ We will walk through everything outlined below in class.  If you want to complet
 
 * Introduce yourself to Git by following the directions in [HappyGitWithR](https://happygitwithr.com/hello-git)
 
-* Cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/credential-caching.html).
+* Cache your credentials and set up a personal access token (PAT) by following the directions in [HappyGitWithR](https://happygitwithr.com/https-pat).
 
 * TL;DR the chapters in Happy Git With R --- follow this document to [Set up Git and GitHub](../Handouts/setup.html)
 

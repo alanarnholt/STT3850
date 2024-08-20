@@ -1,0 +1,38 @@
+---
+title: "First Day"
+format: html
+---
+
+## Enter the following in the terminal
+
+```{r}
+#| eval: false
+git config --global user.name "Jane Doe"
+git config --global user.email "jane@example.com"
+git config --global credential.helper 'cache --timeout=10000000'
+git config --global --list
+```
+
+```{r, engine = "sh"}
+git config --global --list
+```
+
+## The following goes in the R console
+ 
+```{r}
+#| eval: false
+usethis::create_github_token()
+```
+
+- Describe using a single name
+- Set the expiration date
+- Copy the PAT to your clipboard
+
+## Run the following in the R console and follow the directions
+
+```{r}
+#| eval: false
+gitcreds::gitcreds_set()
+```
+
+
