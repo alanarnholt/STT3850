@@ -12,6 +12,9 @@ DF <- data.frame(names = names, height = height)
 rm(names, height)
 str(DF)
 mean(DF$height) -> answer
+library(tidyverse)
+DF |> 
+  summarize(M = mean(height), S = sd(height), n = n())
 ```
 
 The average height for people in the fourth row is `r round(answer, 1)` inches.
