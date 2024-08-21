@@ -1,0 +1,20 @@
+---
+title: "Class Exercise"
+format: html
+---
+
+# First Level Header
+
+```{r}
+names <- c("Molly", "Duncan", "Cole", "Evan", "Qays", "Liv")
+height <- c(64, 70, 68, 65, 71, 66)
+DF <- data.frame(names = names, height = height)
+rm(names, height)
+str(DF)
+mean(DF$height) -> answer
+```
+
+The average height for people in the fourth row is `r round(answer, 1)` inches.
+
+
+
