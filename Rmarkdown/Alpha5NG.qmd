@@ -1,0 +1,149 @@
+---
+title: "5NG"
+format: html
+---
+
+# Scatterplots and overplotting
+
+Consider the data set `evals` from the `moderndive` package.  First load both `tidyverse` and `moderndive`.
+
+```{r}
+#| warning: false
+#| message: false
+library(tidyverse)
+library(moderndive)
+```
+
+What is `evals` measuring?
+
+```{r}
+?evals
+```
+
+The data are gathered from end of semester student evaluations for a sample of 463 courses taught by 94 professors from the University of Texas at Austin. In addition, six students rate the professors' physical appearance. The result is a data frame where each row contains a different course and each column has information on either the course or the professor.
+
+## Create a scatterplot of `score` versus `bty_avg`
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+ggplot(data = evals, aes(x = bty_avg, y = score)) -> p1
+p1 + geom_point()
+```
+
+Let's look at a few ways to fix some of the over plotting.  
+
+1. Use a different geom (`geom_jitter`).
+2. Use `alpha`
+3. Use `geom_count()` or `stat_sum()`
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+p1 + geom_jitter()
+p1 + geom_point(alpha = .25)
+p1 + geom_count()
+p1 + stat_sum()
+p1 + geom_count(alpha = .25)
+p1 + geom_count(alpha = 0.25) + scale_size(range = c(1, 10))
+p1 + stat_sum(alpha = 0.25, aes(size = after_stat(prop)))
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+p1 + 
+  geom_count(alpha = 0.25, aes(color = gender)) + 
+  scale_size(range = c(1, 10)) +
+  geom_smooth(aes(color = gender), method = "loess", se = FALSE) + 
+  labs(color = "Sex")
+```
+
+## Linegraphs via `geom_line()`
+
+
+Consider the `early_january_weather` from the `moderndive` package.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code that created that awesome table!"
+library(moderndive)
+knitr::kable(head(early_january_weather))
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+ggplot(data = early_january_weather, aes(x = time_hour, y = temp)) + 
+  geom_point(size = 0.2, color = "blue") + 
+  geom_line(color = "pink")
+
+```
+
+## Histograms via `geom_histogram()`
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+library(palmerpenguins)
+penguins |> 
+  ggplot(aes(x = bill_length_mm)) + 
+  geom_histogram()
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+penguins |> 
+  ggplot(aes(x = bill_length_mm)) + 
+  geom_histogram(binwidth = 3, color = "black", fill = "lightblue")
+
+penguins |> 
+  ggplot(aes(x = bill_length_mm, fill = species)) + 
+  geom_histogram(binwidth = 3)
+```
+
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+penguins |> 
+  ggplot(aes(x = bill_length_mm, fill = species)) + 
+  geom_histogram(binwidth = 3, color = "black") +
+  facet_wrap(vars(species), ncol = 1) + 
+  theme_bw()
+```
+
+## Boxplots via `geom_boxplot()`
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+penguins |> 
+  ggplot(aes(x = species, y = bill_length_mm, fill = species)) + 
+  geom_boxplot()
+# Note that the legend is not needed
+penguins |> 
+  ggplot(aes(x = species, y = bill_length_mm, fill = species)) + 
+  geom_boxplot() + 
+  guides(fill = "none")
+```
+
+## Barplots
+
+* `geom_bar()`
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+penguins |> 
+  ggplot(aes(x = species)) +
+  geom_bar()
+#
+penguins |> 
+  ggplot(aes(x = species, fill = species)) +
+  geom_bar() + 
+  guides(fill = "none")
+```
+
