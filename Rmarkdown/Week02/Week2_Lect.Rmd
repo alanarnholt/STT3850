@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Week 2"
-author: "Spring 2024"
+author: "Fall 2024"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:
