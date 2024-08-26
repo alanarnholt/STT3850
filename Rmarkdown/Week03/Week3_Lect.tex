@@ -157,12 +157,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 3},
-  pdfauthor={Spring 2024},
+  pdfauthor={Fall 2024},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 3}
-\author{Spring 2024}
+\author{Fall 2024}
 \date{}
 \institute{Appalachian State University}
 
@@ -251,11 +251,12 @@ Let's load all the packages needed for this chapter.
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{The pipe operator: \texttt{\%\textgreater{}\%}}
+\begin{frame}[fragile]{The pipe operator:
+\texttt{\textbar{}\textgreater{}}}
 \protect\hypertarget{the-pipe-operator}{}
 Before we start, let's first introduce a nifty tool that gets loaded
 with the \texttt{dplyr} package: \textbf{the pipe operator
-\texttt{\%\textgreater{}\%}}.
+\texttt{\textbar{}\textgreater{}}}.
 
 \begin{itemize}
 \tightlist
@@ -283,7 +284,8 @@ hypothetical data frame \texttt{x} using hypothetical functions \(f()\),
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{The pipe operator: \texttt{\%\textgreater{}\%}}
+\begin{frame}[fragile]{The pipe operator:
+\texttt{\textbar{}\textgreater{}}}
 \protect\hypertarget{the-pipe-operator-1}{}
 One way to achieve this sequence of operations is by using nesting
 parentheses as follows:
@@ -305,9 +307,9 @@ as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\SpecialCharTok{\%\textgreater{}\%}       \CommentTok{\# take x}
-  \FunctionTok{f}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}   \CommentTok{\# Use this output as the input to f() then}
-  \FunctionTok{g}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}   \CommentTok{\# Use this output as the input to g() then}
+\NormalTok{x }\SpecialCharTok{|\textgreater{}}       \CommentTok{\# take x}
+  \FunctionTok{f}\NormalTok{() }\SpecialCharTok{|\textgreater{}}   \CommentTok{\# Use this output as the input to f() then}
+  \FunctionTok{g}\NormalTok{() }\SpecialCharTok{|\textgreater{}}   \CommentTok{\# Use this output as the input to g() then}
   \FunctionTok{h}\NormalTok{()       }\CommentTok{\# Use this output as the input h()}
 \end{Highlighting}
 \end{Shaded}
@@ -318,12 +320,13 @@ This is much more human-readable because you can clearly read the
 sequence of operations line-by-line.
 \end{frame}
 
-\begin{frame}{The pipe operator: \texttt{\%\textgreater{}\%}}
+\begin{frame}{The pipe operator: \texttt{\textbar{}\textgreater{}}}
 \protect\hypertarget{the-pipe-operator-2}{}
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.6\textheight]{week3_9} \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{The pipe operator: \texttt{\%\textgreater{}\%}}
+\begin{frame}[fragile]{The pipe operator:
+\texttt{\textbar{}\textgreater{}}}
 \protect\hypertarget{the-pipe-operator-3}{}
 For example:
 
@@ -331,9 +334,9 @@ For example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(carrier }\SpecialCharTok{==} \StringTok{"AS"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(year, month, arr\_delay, dep\_delay) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{flights }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(carrier }\SpecialCharTok{==} \StringTok{"AS"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(year, month, arr\_delay, dep\_delay) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -349,8 +352,8 @@ For example:
 
 \normalsize
 
-Note that the pipe operator \%\textgreater\% has to come at the end of
-lines.
+Note that the pipe operator \textbar\textgreater{} has to come at the
+end of lines.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{filter} rows}
@@ -384,7 +387,7 @@ that match that criteria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{portland\_flights }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{portland\_flights }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(dest }\SpecialCharTok{==} \StringTok{"PDX"}\NormalTok{)}
 \CommentTok{\# View(portland\_flights)}
 \end{Highlighting}
@@ -453,7 +456,7 @@ single equal sign \texttt{=}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{btv\_sea\_flights\_fall }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{btv\_sea\_flights\_fall }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(origin }\SpecialCharTok{==} \StringTok{"JFK"} \SpecialCharTok{\&}\NormalTok{ (dest }\SpecialCharTok{==} \StringTok{"BTV"} \SpecialCharTok{|}\NormalTok{ dest }\SpecialCharTok{==} \StringTok{"SEA"}\NormalTok{) }\SpecialCharTok{\&} 
 \NormalTok{         month }\SpecialCharTok{\textgreater{}=} \DecValTok{10}\NormalTok{)}
 \CommentTok{\# View(btv\_sea\_flights\_fall)}
@@ -468,7 +471,7 @@ One may use commas in place of \&
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{btv\_sea\_flights\_fall }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{btv\_sea\_flights\_fall }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(origin }\SpecialCharTok{==} \StringTok{"JFK"}\NormalTok{, (dest }\SpecialCharTok{==} \StringTok{"BTV"} \SpecialCharTok{|}\NormalTok{ dest }\SpecialCharTok{==} \StringTok{"SEA"}\NormalTok{), }
 \NormalTok{         month }\SpecialCharTok{\textgreater{}=} \DecValTok{10}\NormalTok{)}
 \CommentTok{\# View(btv\_sea\_flights\_fall)}
@@ -487,7 +490,7 @@ VT or Seattle, WA.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{not\_BTV\_SEA }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{not\_BTV\_SEA }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{(dest }\SpecialCharTok{==} \StringTok{"BTV"} \SpecialCharTok{|}\NormalTok{ dest }\SpecialCharTok{==} \StringTok{"SEA"}\NormalTok{))}
 \CommentTok{\# View(not\_BTV\_SEA)}
 \end{Highlighting}
@@ -500,7 +503,7 @@ different results. \normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{dest }\SpecialCharTok{==} \StringTok{"BTV"} \SpecialCharTok{|}\NormalTok{ dest }\SpecialCharTok{==} \StringTok{"SEA"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -517,7 +520,7 @@ continue to use the \texttt{\textbar{}} (or) operator:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{many\_airports }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{many\_airports }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(dest }\SpecialCharTok{==} \StringTok{"SEA"} \SpecialCharTok{|}\NormalTok{ dest }\SpecialCharTok{==} \StringTok{"SFO"} \SpecialCharTok{|}\NormalTok{ dest }\SpecialCharTok{==} \StringTok{"PDX"} \SpecialCharTok{|} 
 \NormalTok{         dest }\SpecialCharTok{==} \StringTok{"BTV"} \SpecialCharTok{|}\NormalTok{ dest }\SpecialCharTok{==} \StringTok{"BDL"}\NormalTok{)}
 \end{Highlighting}
@@ -532,7 +535,7 @@ the \texttt{c()} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{many\_airports }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{many\_airports }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(dest }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"SEA"}\NormalTok{, }\StringTok{"SFO"}\NormalTok{, }\StringTok{"PDX"}\NormalTok{, }\StringTok{"BTV"}\NormalTok{, }\StringTok{"BDL"}\NormalTok{))}
 \CommentTok{\# View(many\_airports)}
 \end{Highlighting}
@@ -584,7 +587,7 @@ frame from \texttt{nycflights13} package.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{summary\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{summary\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(temp), }\AttributeTok{std\_dev =} \FunctionTok{sd}\NormalTok{(temp))}
 \NormalTok{summary\_temp}
 \end{Highlighting}
@@ -627,7 +630,7 @@ frame from \texttt{nycflights13} package.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{summary\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{summary\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_temp =} \FunctionTok{mean}\NormalTok{(temp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
             \AttributeTok{sd\_temp =} \FunctionTok{sd}\NormalTok{(temp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
 \NormalTok{summary\_temp}
@@ -693,12 +696,12 @@ Other summary functions we can use inside the \texttt{summarize()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{summary\_monthly\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{summary\_monthly\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(temp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
             \AttributeTok{std\_dev =} \FunctionTok{sd}\NormalTok{(temp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
             \AttributeTok{count =} \FunctionTok{n}\NormalTok{())}
-\NormalTok{summary\_monthly\_temp }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{summary\_monthly\_temp }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -723,8 +726,8 @@ We can also group by more than one variable
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{by\_origin\_monthly }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(origin, month) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{by\_origin\_monthly }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(origin, month) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count =} \FunctionTok{n}\NormalTok{())}
 \FunctionTok{dim}\NormalTok{(by\_origin\_monthly)}
 \end{Highlighting}
@@ -736,7 +739,7 @@ We can also group by more than one variable
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{by\_origin\_monthly }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{)}
+\NormalTok{by\_origin\_monthly }\SpecialCharTok{|\textgreater{}} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -766,9 +769,9 @@ investigate:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{by\_origin\_monthly\_incorrect }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(origin) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{by\_origin\_monthly\_incorrect }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(origin) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count =} \FunctionTok{n}\NormalTok{())}
 \FunctionTok{dim}\NormalTok{(by\_origin\_monthly\_incorrect)}
 \end{Highlighting}
@@ -780,7 +783,7 @@ investigate:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{by\_origin\_monthly\_incorrect }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{)}
+\NormalTok{by\_origin\_monthly\_incorrect }\SpecialCharTok{|\textgreater{}} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -819,10 +822,10 @@ We can apply this formula to the \texttt{temp} variable using the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{weather }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{weather }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{temp\_in\_C =}\NormalTok{ (temp }\SpecialCharTok{{-}} \DecValTok{32}\NormalTok{) }\SpecialCharTok{/} \FloatTok{1.8}\NormalTok{,}
          \AttributeTok{monthT =}\NormalTok{ month.name[month]) }\OtherTok{{-}\textgreater{}}\NormalTok{ weather}
-\NormalTok{weather }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(month, monthT, temp\_in\_C, temp) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{weather }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(month, monthT, temp\_in\_C, temp) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -867,11 +870,11 @@ Let's compute monthly average temperatures in both \(^\circ\)F and
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{summary\_monthly\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(month, monthT) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{summary\_monthly\_temp }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(month, monthT) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_temp\_in\_F =} \FunctionTok{mean}\NormalTok{(temp, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
             \AttributeTok{mean\_temp\_in\_C =} \FunctionTok{mean}\NormalTok{(temp\_in\_C, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }
-\NormalTok{summary\_monthly\_temp }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{summary\_monthly\_temp }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -908,9 +911,9 @@ Let's consider another example.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{flights }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{gain =}\NormalTok{ dep\_delay }\SpecialCharTok{{-}}\NormalTok{ arr\_delay)}
-\NormalTok{flights  }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{flights  }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{select}\NormalTok{(dep\_delay, arr\_delay, gain) }\OtherTok{{-}\textgreater{}}\NormalTok{ flights\_gain}
 \end{Highlighting}
 \end{Shaded}
@@ -952,7 +955,7 @@ Let's look at some summary statistics of the \texttt{gain} variable
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gain\_summary }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{gain\_summary }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}
     \AttributeTok{Min =} \FunctionTok{min}\NormalTok{(gain, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
     \AttributeTok{Q1 =} \FunctionTok{quantile}\NormalTok{(gain, }\FloatTok{0.25}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
@@ -1021,10 +1024,10 @@ airports for all domestic flights departing from New York City in 2013.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{freq\_dest }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{freq\_dest }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{num\_flights =} \FunctionTok{n}\NormalTok{())}
-\NormalTok{freq\_dest }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\NormalTok{freq\_dest }\SpecialCharTok{|\textgreater{}} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1052,8 +1055,8 @@ to the least number of flights (\texttt{num\_flights}) instead
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{freq\_dest }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{arrange}\NormalTok{(num\_flights) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{freq\_dest }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{arrange}\NormalTok{(num\_flights) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1084,8 +1087,8 @@ To switch the ordering to be in ``descending'' order instead, we use the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{freq\_dest }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(num\_flights)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{freq\_dest }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(num\_flights)) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1148,7 +1151,7 @@ variable we want to join/merge/match the rows by has the same name:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights\_joined }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{flights\_joined }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{inner\_join}\NormalTok{(airlines, }\AttributeTok{by =} \StringTok{"carrier"}\NormalTok{)}
 \CommentTok{\# View(flights)}
 \CommentTok{\# View(flights\_joined)}
@@ -1243,7 +1246,7 @@ In order to join these two data frames by airport code, our
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights\_with\_airport\_names }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{flights\_with\_airport\_names }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{inner\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"dest"} \OtherTok{=} \StringTok{"faa"}\NormalTok{))}
 \CommentTok{\# View(flights\_with\_airport\_names)}
 \end{Highlighting}
@@ -1254,19 +1257,20 @@ In order to join these two data frames by airport code, our
 
 \begin{frame}[fragile]{Different ``key'' variable names}
 \protect\hypertarget{different-key-variable-names-2}{}
-Let's construct the chain of pipe operators \texttt{\%\textgreater{}\%}
-that computes the number of flights from NYC to each destination, but
-also includes information about each destination airport:
+Let's construct the chain of pipe operators
+\texttt{\textbar{}\textgreater{}} that computes the number of flights
+from NYC to each destination, but also includes information about each
+destination airport:
 
 \normalsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{named\_dests }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{num\_flights =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(num\_flights)) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{inner\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"dest"} \OtherTok{=} \StringTok{"faa"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{named\_dests }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{num\_flights =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(num\_flights)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{inner\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"dest"} \OtherTok{=} \StringTok{"faa"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{airport\_name =}\NormalTok{ name)}
 \NormalTok{named\_dests[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]}
 \end{Highlighting}
@@ -1322,7 +1326,7 @@ also includes information about each destination airport:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights\_weather\_joined }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{flights\_weather\_joined }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{inner\_join}\NormalTok{(weather, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"month"}\NormalTok{, }\StringTok{"day"}\NormalTok{, }
                              \StringTok{"hour"}\NormalTok{, }\StringTok{"origin"}\NormalTok{))}
 \NormalTok{flights\_weather\_joined[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{]}
@@ -1377,7 +1381,7 @@ two variables:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights\_sub }\OtherTok{\textless{}{-}}\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{flights\_sub }\OtherTok{\textless{}{-}}\NormalTok{flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{select}\NormalTok{(carrier, flight)}
 \end{Highlighting}
 \end{Shaded}
@@ -1393,7 +1397,7 @@ example, lets say we want to remove the \texttt{year} in the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights\_no\_year }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{year)}
+\NormalTok{flights\_no\_year }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{year)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1423,7 +1427,7 @@ columns:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flight\_arr\_times }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{flight\_arr\_times }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{select}\NormalTok{(month}\SpecialCharTok{:}\NormalTok{day, arr\_time}\SpecialCharTok{:}\NormalTok{sched\_arr\_time)}
 \CommentTok{\#flight\_arr\_times}
 \end{Highlighting}
@@ -1456,7 +1460,7 @@ used with the \texttt{everything()} helper function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights\_reorder }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{flights\_reorder }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{select}\NormalTok{(year, month, day, hour, minute, time\_hour, }
          \FunctionTok{everything}\NormalTok{())}
 \CommentTok{\# glimpse(flights\_reorder)}
@@ -1476,9 +1480,9 @@ variables/columns that match those conditions. As examples,
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{flights\_sub1 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"a"}\NormalTok{))}
-\NormalTok{flights\_sub2 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"delay"}\NormalTok{))}
-\NormalTok{flights\_sub3 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{contains}\NormalTok{(}\StringTok{"time"}\NormalTok{))}
+\NormalTok{flights\_sub1 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"a"}\NormalTok{))}
+\NormalTok{flights\_sub2 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"delay"}\NormalTok{))}
+\NormalTok{flights\_sub3 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(}\FunctionTok{contains}\NormalTok{(}\StringTok{"time"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1502,10 +1506,10 @@ Let's now learn about the concept of \textbf{``tidy''} data format.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(fivethirtyeight)}
-\NormalTok{drinks\_smaller }\OtherTok{\textless{}{-}}\NormalTok{ drinks }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{drinks\_smaller }\OtherTok{\textless{}{-}}\NormalTok{ drinks }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(country }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"USA"}\NormalTok{, }\StringTok{"China"}\NormalTok{, }\StringTok{"Italy"}\NormalTok{, }
-                        \StringTok{"Saudi Arabia"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{total\_litres\_of\_pure\_alcohol) }\SpecialCharTok{\%\textgreater{}\%} 
+                        \StringTok{"Saudi Arabia"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{total\_litres\_of\_pure\_alcohol) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{beer =}\NormalTok{ beer\_servings, }\AttributeTok{spirit =}\NormalTok{ spirit\_servings, }
          \AttributeTok{wine =}\NormalTok{ wine\_servings)}
 \NormalTok{drinks\_smaller}
@@ -1633,7 +1637,7 @@ the \texttt{pivot\_longer()} function from the \texttt{tidyr} package:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyr)}
-\NormalTok{drinks\_smaller\_tidy }\OtherTok{\textless{}{-}}\NormalTok{ drinks\_smaller }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{drinks\_smaller\_tidy }\OtherTok{\textless{}{-}}\NormalTok{ drinks\_smaller }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"type"}\NormalTok{, }
                \AttributeTok{values\_to =} \StringTok{"servings"}\NormalTok{, }
                \AttributeTok{cols =} \SpecialCharTok{{-}}\NormalTok{country)}
@@ -1680,12 +1684,12 @@ produce the same output.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyr)}
-\NormalTok{drinks\_smaller }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{drinks\_smaller }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"type"}\NormalTok{, }
                \AttributeTok{values\_to =} \StringTok{"servings"}\NormalTok{, }
                \AttributeTok{cols =} \FunctionTok{c}\NormalTok{(beer, spirit, wine))}
 \CommentTok{\# Or}
-\NormalTok{drinks\_smaller }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{drinks\_smaller }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{names\_to =} \StringTok{"type"}\NormalTok{, }
                \AttributeTok{values\_to =} \StringTok{"servings"}\NormalTok{, }
                \AttributeTok{cols =}\NormalTok{ beer}\SpecialCharTok{:}\NormalTok{wine)}
