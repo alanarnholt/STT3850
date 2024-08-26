@@ -157,12 +157,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 10},
-  pdfauthor={Spring 2024},
+  pdfauthor={Fall 2024},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 10}
-\author{Spring 2024}
+\author{Fall 2024}
 \date{}
 \institute{Appalachian State University}
 
@@ -604,7 +604,7 @@ intervals}\label{understanding-confidence-intervals}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pennies\_sample }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{pennies\_sample }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{xbar\_year =} \FunctionTok{mean}\NormalTok{(year))}
 \end{Highlighting}
 \end{Shaded}
@@ -674,11 +674,11 @@ intervals}\label{understanding-confidence-intervals}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pennies\_sample }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(}\AttributeTok{response =}\NormalTok{ year) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{pennies\_sample }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(}\AttributeTok{response =}\NormalTok{ year) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"mean"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ bs\_dist}
-\NormalTok{bs\_dist }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{bs\_dist }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{lci =} \FunctionTok{quantile}\NormalTok{(stat, }\AttributeTok{probs =} \FloatTok{0.025}\NormalTok{), }
             \AttributeTok{uci =} \FunctionTok{quantile}\NormalTok{(stat, }\AttributeTok{probs =} \FloatTok{0.975}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ CI}
 \NormalTok{CI}
@@ -805,11 +805,11 @@ One method to construct a confidence interval
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\NormalTok{virtual\_resampled\_means }\OtherTok{\textless{}{-}}\NormalTok{ pennies\_sample }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{rep\_sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{50}\NormalTok{, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{reps =} \DecValTok{1000}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(replicate) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{virtual\_resampled\_means }\OtherTok{\textless{}{-}}\NormalTok{ pennies\_sample }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{rep\_sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{50}\NormalTok{, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{reps =} \DecValTok{1000}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(replicate) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_year =} \FunctionTok{mean}\NormalTok{(year))}
-\NormalTok{virtual\_resampled\_means }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{virtual\_resampled\_means }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SE =} \FunctionTok{sd}\NormalTok{(mean\_year)) }\OtherTok{{-}\textgreater{}}\NormalTok{ ans}
 \NormalTok{ans}
 \end{Highlighting}
@@ -897,9 +897,9 @@ Using \texttt{rep\_sample\_n} from the \texttt{infer} package.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\NormalTok{virtual\_resampled\_means }\OtherTok{\textless{}{-}}\NormalTok{ pennies\_sample }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{rep\_sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{50}\NormalTok{, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{reps =} \DecValTok{1000}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(replicate) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{virtual\_resampled\_means }\OtherTok{\textless{}{-}}\NormalTok{ pennies\_sample }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{rep\_sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{50}\NormalTok{, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{reps =} \DecValTok{1000}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(replicate) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_year =} \FunctionTok{mean}\NormalTok{(year))}
 \FunctionTok{ggplot}\NormalTok{(virtual\_resampled\_means, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mean\_year)) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{boundary =} \DecValTok{1990}\NormalTok{) }\SpecialCharTok{+}
@@ -938,9 +938,9 @@ Using the \texttt{infer} pipeline
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\NormalTok{bootstrap\_distribution }\OtherTok{\textless{}{-}}\NormalTok{ pennies\_sample }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(}\AttributeTok{response =}\NormalTok{ year) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{bootstrap\_distribution }\OtherTok{\textless{}{-}}\NormalTok{ pennies\_sample }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(}\AttributeTok{response =}\NormalTok{ year) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"mean"}\NormalTok{)}
 \FunctionTok{visualize}\NormalTok{(bootstrap\_distribution)}
 \end{Highlighting}
@@ -958,7 +958,7 @@ Using the \texttt{infer} pipeline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{percentile\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{percentile\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_confidence\_interval}\NormalTok{(}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{type =} \StringTok{"percentile"}\NormalTok{)}
 \NormalTok{percentile\_ci}
 \end{Highlighting}
@@ -990,8 +990,8 @@ Using the \texttt{infer} pipeline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x\_bar }\OtherTok{\textless{}{-}}\NormalTok{ pennies\_sample }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_year =} \FunctionTok{mean}\NormalTok{(year))}
-\NormalTok{standard\_error\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{x\_bar }\OtherTok{\textless{}{-}}\NormalTok{ pennies\_sample }\SpecialCharTok{|\textgreater{}} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_year =} \FunctionTok{mean}\NormalTok{(year))}
+\NormalTok{standard\_error\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_confidence\_interval}\NormalTok{(}\AttributeTok{type =} \StringTok{"se"}\NormalTok{, }\AttributeTok{point\_estimate =}\NormalTok{ x\_bar, }\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
 \NormalTok{standard\_error\_ci}
 \end{Highlighting}
@@ -1027,9 +1027,9 @@ Using the \texttt{infer} pipeline
 \FunctionTok{library}\NormalTok{(resampledata)}
 \NormalTok{Babies }\OtherTok{\textless{}{-}}\NormalTok{ NCBirths2004}
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{13}\NormalTok{)}
-\NormalTok{bsd }\OtherTok{\textless{}{-}}\NormalTok{ Babies }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(}\AttributeTok{response =}\NormalTok{ Weight) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{4}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{bsd }\OtherTok{\textless{}{-}}\NormalTok{ Babies }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(}\AttributeTok{response =}\NormalTok{ Weight) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{4}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"mean"}\NormalTok{)}
 \FunctionTok{visualize}\NormalTok{(bsd)}
 \end{Highlighting}
@@ -1048,7 +1048,7 @@ Using the \texttt{infer} pipeline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{percentile\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bsd }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{percentile\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bsd }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_confidence\_interval}\NormalTok{(}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{type =} \StringTok{"percentile"}\NormalTok{)}
 \NormalTok{percentile\_ci}
 \end{Highlighting}
@@ -1080,8 +1080,8 @@ Using the \texttt{infer} pipeline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x\_bar\_babies }\OtherTok{\textless{}{-}}\NormalTok{ Babies }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(Weight))}
-\NormalTok{standard\_error\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bsd }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{x\_bar\_babies }\OtherTok{\textless{}{-}}\NormalTok{ Babies }\SpecialCharTok{|\textgreater{}} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(Weight))}
+\NormalTok{standard\_error\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bsd }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_confidence\_interval}\NormalTok{(}\AttributeTok{type =} \StringTok{"se"}\NormalTok{, }\AttributeTok{point\_estimate =}\NormalTok{ x\_bar\_babies, }\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
 \NormalTok{standard\_error\_ci}
 \end{Highlighting}
@@ -1158,7 +1158,7 @@ intervals}\label{interpreting-confidence-intervals}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{bowl }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{p\_red =} \FunctionTok{mean}\NormalTok{(color }\SpecialCharTok{==} \StringTok{"red"}\NormalTok{))}
+\NormalTok{bowl }\SpecialCharTok{|\textgreater{}} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{p\_red =} \FunctionTok{mean}\NormalTok{(color }\SpecialCharTok{==} \StringTok{"red"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1208,7 +1208,7 @@ other words, we know that \(37.5\%\) of the bowl's balls are red.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{bowl\_sample\_1 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{bowl\_sample\_1 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{p\_hat =} \FunctionTok{mean}\NormalTok{(color }\SpecialCharTok{==} \StringTok{"red"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1242,11 +1242,11 @@ Using the \texttt{infer} pipeline
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\NormalTok{sample\_1\_bootstrap }\OtherTok{\textless{}{-}}\NormalTok{ bowl\_sample\_1 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(}\AttributeTok{response =}\NormalTok{ color, }\AttributeTok{success =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{sample\_1\_bootstrap }\OtherTok{\textless{}{-}}\NormalTok{ bowl\_sample\_1 }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(}\AttributeTok{response =}\NormalTok{ color, }\AttributeTok{success =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"prop"}\NormalTok{)}
-\NormalTok{percentile\_ci\_1 }\OtherTok{\textless{}{-}}\NormalTok{ sample\_1\_bootstrap }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{percentile\_ci\_1 }\OtherTok{\textless{}{-}}\NormalTok{ sample\_1\_bootstrap }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_confidence\_interval}\NormalTok{(}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{type =} \StringTok{"percentile"}\NormalTok{)}
 \NormalTok{percentile\_ci\_1}
 \end{Highlighting}
@@ -1268,7 +1268,7 @@ Using the \texttt{infer} pipeline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sample\_1\_bootstrap }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{sample\_1\_bootstrap }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{visualize}\NormalTok{(}\AttributeTok{bins =} \DecValTok{15}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{shade\_confidence\_interval}\NormalTok{(}\AttributeTok{endpoints =}\NormalTok{ percentile\_ci\_1) }\SpecialCharTok{+}
   \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FloatTok{0.42}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{)}
@@ -1453,8 +1453,8 @@ Lets use the \texttt{TV} dataset from the \texttt{resampledata} package.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Tidy approach}
-\NormalTok{TV }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{group\_by}\NormalTok{(Cable) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{TV }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{group\_by}\NormalTok{(Cable) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Means =} \FunctionTok{mean}\NormalTok{(Times), }\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
@@ -1614,9 +1614,9 @@ Using the \texttt{infer} pipeline
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
-\NormalTok{TV }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(Times }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Cable) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{4} \SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{TV }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(Times }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Cable) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{4} \SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in means"}\NormalTok{, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"Basic"}\NormalTok{, }\StringTok{"Extended"}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ bootdist}
 \FunctionTok{visualize}\NormalTok{(bootdist) }\SpecialCharTok{+} \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \FunctionTok{substitute}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\FunctionTok{bar}\NormalTok{(x)[basic],}\StringTok{"*"}\NormalTok{, }\SpecialCharTok{{-}} \FunctionTok{bar}\NormalTok{(x)[extended],}\StringTok{"*"}\NormalTok{)))}
@@ -1688,8 +1688,8 @@ Verizon is the primary local telephone company (incumbent local exchange carrier
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Tidy approach}
-\NormalTok{Phone }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(Group) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{Phone }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(Group) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(Time), }\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }\AttributeTok{SD =} \FunctionTok{sd}\NormalTok{(Time))}
 \end{Highlighting}
 \end{Shaded}
@@ -2084,8 +2084,8 @@ Fifty adult participants who thought they were being considered for an appearanc
 \FunctionTok{library}\NormalTok{(moderndive)}
 \FunctionTok{library}\NormalTok{(tidyverse)}
 \FunctionTok{library}\NormalTok{(infer)}
-\NormalTok{mythbusters\_yawn }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(group, yawn) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{mythbusters\_yawn }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(group, yawn) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count =} \FunctionTok{n}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
@@ -2114,9 +2114,9 @@ Here, we are interested in \(p_{seed}-p_{control}\). Let's use
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\NormalTok{bootstrap\_distribution\_yawning }\OtherTok{\textless{}{-}}\NormalTok{ mythbusters\_yawn }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ yawn }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group, }\AttributeTok{success =} \StringTok{"yes"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{bootstrap\_distribution\_yawning }\OtherTok{\textless{}{-}}\NormalTok{ mythbusters\_yawn }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ yawn }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group, }\AttributeTok{success =} \StringTok{"yes"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in props"}\NormalTok{, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"seed"}\NormalTok{, }\StringTok{"control"}\NormalTok{))}
 \FunctionTok{visualize}\NormalTok{(bootstrap\_distribution\_yawning) }\SpecialCharTok{+}
   \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \DecValTok{0}\NormalTok{)}
@@ -2136,7 +2136,7 @@ using the percentile method.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{percentile\_ci}\OtherTok{\textless{}{-}}\NormalTok{bootstrap\_distribution\_yawning }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{percentile\_ci}\OtherTok{\textless{}{-}}\NormalTok{bootstrap\_distribution\_yawning }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_confidence\_interval}\NormalTok{(}\AttributeTok{type =} \StringTok{"percentile"}\NormalTok{, }\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
 \NormalTok{percentile\_ci}
 \end{Highlighting}
@@ -2151,8 +2151,8 @@ using the percentile method.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{obs\_diff\_in\_props }\OtherTok{\textless{}{-}}\NormalTok{ mythbusters\_yawn }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ yawn }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group, }\AttributeTok{success =} \StringTok{"yes"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{obs\_diff\_in\_props }\OtherTok{\textless{}{-}}\NormalTok{ mythbusters\_yawn }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ yawn }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group, }\AttributeTok{success =} \StringTok{"yes"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in props"}\NormalTok{, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"seed"}\NormalTok{, }\StringTok{"control"}\NormalTok{))}
 \NormalTok{obs\_diff\_in\_props}
 \end{Highlighting}
@@ -2169,7 +2169,7 @@ Explanatory: group (factor)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myth\_ci\_se }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution\_yawning }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{myth\_ci\_se }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution\_yawning }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_confidence\_interval}\NormalTok{(}\AttributeTok{type =} \StringTok{"se"}\NormalTok{, }\AttributeTok{point\_estimate =}\NormalTok{ obs\_diff\_in\_props,}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
 \NormalTok{myth\_ci\_se}
 \end{Highlighting}
@@ -2194,7 +2194,7 @@ using the standard error method.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myth\_ci\_se }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution\_yawning }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{myth\_ci\_se }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution\_yawning }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_confidence\_interval}\NormalTok{(}\AttributeTok{type =} \StringTok{"se"}\NormalTok{, }
                           \AttributeTok{point\_estimate =}\NormalTok{ obs\_diff\_in\_props,}
                           \AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
@@ -2850,7 +2850,7 @@ We will use the \texttt{NCBirths2004} data from the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{NCBirths2004 }\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(Gender)}\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{NCBirths2004 }\SpecialCharTok{|\textgreater{}}\FunctionTok{group\_by}\NormalTok{(Gender)}\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(Weight),}\AttributeTok{SD=}\FunctionTok{sd}\NormalTok{(Weight), }\AttributeTok{n =} \FunctionTok{n}\NormalTok{()) }\OtherTok{{-}\textgreater{}}\NormalTok{ BW}
 \NormalTok{BW}
 \end{Highlighting}
@@ -2948,7 +2948,7 @@ attr(,"conf.level")
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Or}
-\NormalTok{JG }\OtherTok{\textless{}{-}}\NormalTok{ NCBirths2004 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{JG }\OtherTok{\textless{}{-}}\NormalTok{ NCBirths2004 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(Gender }\SpecialCharTok{==} \StringTok{"Female"}\NormalTok{) }
 \FunctionTok{t.test}\NormalTok{(JG}\SpecialCharTok{$}\NormalTok{Weight, }\AttributeTok{conf =} \FloatTok{0.99}\NormalTok{)}\SpecialCharTok{$}\NormalTok{conf}
 \end{Highlighting}
