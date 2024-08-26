@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Weeks 11, 12, and 13"
-author: "Spring 2024"
+author: "Fall 2024"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:
@@ -133,8 +133,8 @@ ggplot(data = CALCULUS, aes(sample = score, color = calculus)) +
 
 \small
 ```{r}
-CALCULUS %>% 
-  group_by(calculus) %>% 
+CALCULUS |> 
+  group_by(calculus) |> 
   summarize(Mean = mean(score), n = n(), SD = sd(score))
 ```
 \normalsize
@@ -161,9 +161,9 @@ Compare to bootstrap CI:
 \tiny
 ```{r}
 library(infer)
-CI <- CALCULUS %>% 
-  specify(score ~ calculus) %>% 
-  generate(reps = 1000, type = "bootstrap") %>% 
+CI <- CALCULUS |> 
+  specify(score ~ calculus) |> 
+  generate(reps = 1000, type = "bootstrap") |> 
   calculate(stat = "diff in means", order = c("No", "Yes"))
 get_ci(CI, level = 0.90)
 # Compare to Theoretical T CI below
@@ -1139,8 +1139,8 @@ The `moderndive` package contains the data on the 48 applicants in the `promotio
 
 \tiny
 ```{r}
-promotions %>% 
-  sample_n(size = 10) %>% 
+promotions |> 
+  sample_n(size = 10) |> 
   arrange(id)
 ```
 \normalsize
@@ -1168,8 +1168,8 @@ Let’s quantify these promotion rates
 
 \tiny
 ```{r}
-promotions %>% 
-  group_by(gender, decision) %>% 
+promotions |> 
+  group_by(gender, decision) |> 
   tally()
 ```
 \normalsize
@@ -1274,8 +1274,8 @@ Let’s also compute the proportion of résumés accepted for promotion for each
 
 \tiny
 ```{r}
-promotions_shuffled %>% 
-  group_by(gender, decision) %>% 
+promotions_shuffled |> 
+  group_by(gender, decision) |> 
   tally() # Same as summarize(n = n())
 ```
 \normalsize
@@ -1300,10 +1300,10 @@ Résumés with male names were selected for promotion at a rate $0.75 -0.708 = 0
 ```{r echo = FALSE, out.height = '40%',out.width = '70%'}
 # knitr::include_graphics("week12_4.png")
 set.seed(21)
-promotions %>% 
-  specify(formula = decision ~ gender, success = "promoted") %>% 
-  hypothesize(null = "independence") %>% 
-  generate(reps = 16, type = "permute") %>% 
+promotions |> 
+  specify(formula = decision ~ gender, success = "promoted") |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 16, type = "permute") |> 
   calculate(stat = "diff in props", order = c("male", "female")) -> ju
   ggplot(data = ju, aes(x = stat)) +
   geom_histogram(binwidth = 0.05, color = "white") + 
@@ -1356,10 +1356,10 @@ In our previous example, we tested the validity of the hypothesized universe of 
 \tiny
 ```{r}
 set.seed(37)
-promotions %>% 
-  specify(formula = decision ~ gender, success = "promoted") %>% 
-  hypothesize(null = "independence") %>% 
-  generate(reps = 1000, type = "permute") %>% 
+promotions |> 
+  specify(formula = decision ~ gender, success = "promoted") |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 1000, type = "permute") |> 
   calculate(stat = "diff in props", order = c("male", "female")) -> null_distribution
 get_pvalue(null_distribution, obs_stat= .292, direction = "right") -> pv
 pv
@@ -1544,7 +1544,7 @@ Recall that we use the `specify()` verb to specify the response variable and, if
 
 \tiny
 ```{r}
-promotions %>% 
+promotions |> 
   specify(formula = decision ~ gender, success = "promoted")
 ```
 \normalsize
@@ -1594,9 +1594,9 @@ vs&H_A: \mu\neq 1993
 
 
 ```{r, eval = FALSE}
-promotions %>% 
+promotions |> 
   specify(formula = decision ~ gender, 
-          success = "promoted") %>% 
+          success = "promoted") |> 
   hypothesize(null = "independence")
 ```
 
@@ -1615,10 +1615,10 @@ promotions %>%
 
 
 ```{r, eval = FALSE}
-promotions_generate <- promotions %>% 
+promotions_generate <- promotions |> 
   specify(formula = decision ~ gender, 
-          success = "promoted") %>% 
-  hypothesize(null = "independence") %>% 
+          success = "promoted") |> 
+  hypothesize(null = "independence") |> 
   generate(reps = 1000, type = "permute")
 ```
 
@@ -1647,10 +1647,10 @@ Note: the order of the subtraction does not matter, so long as you stay consiste
 \tiny
 ```{r}
 set.seed(37)
-promotions %>% 
-  specify(formula = decision ~ gender, success = "promoted") %>% 
-  hypothesize(null = "independence") %>% 
-  generate(reps = 1000, type = "permute") %>% 
+promotions |> 
+  specify(formula = decision ~ gender, success = "promoted") |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 1000, type = "permute") |> 
   calculate(stat = "diff in props", order = c("male", "female")) -> null_distribution
 null_distribution
 ```
@@ -1665,8 +1665,8 @@ What was the observed difference in promotion rates?
 
 
 ```{r}
-obs_diff_prop <- promotions %>% 
-  specify(decision ~ gender, success = "promoted") %>% 
+obs_diff_prop <- promotions |> 
+  specify(decision ~ gender, success = "promoted") |> 
   calculate(stat = "diff in props", 
             order = c("male", "female"))
 obs_diff_prop
@@ -1699,7 +1699,7 @@ visualize(null_distribution, bins = 10) +
 
 \tiny
 ```{r}
-null_distribution %>% 
+null_distribution |> 
   get_p_value(obs_stat = 0.292, direction = "right") 
 # Or
 mean(null_distribution$stat >= 0.292)
@@ -1731,11 +1731,11 @@ This is the entire code  that creates the null distribution.
 
 ```{r, eval = FALSE}
 set.seed(37)
-null_distribution <- promotions %>% 
+null_distribution <- promotions |> 
   specify(formula = decision ~ gender, 
-          success = "promoted") %>% 
-  hypothesize(null = "independence") %>% 
-  generate(reps = 1000, type = "permute") %>% 
+          success = "promoted") |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 1000, type = "permute") |> 
   calculate(stat = "diff in props", 
             order = c("male", "female"))
 ```
@@ -1750,13 +1750,13 @@ We need to make **two changes two changes** to create the bootstrap distribution
 
 
 ```{r}
-bootstrap_distribution <- promotions %>% 
+bootstrap_distribution <- promotions |> 
   specify(formula = decision ~ gender, 
-          success = "promoted") %>% 
+          success = "promoted") |> 
   # Change 1 - Remove hypothesize():
-  # hypothesize(null = "independence") %>% 
+  # hypothesize(null = "independence") |> 
   # Change 2 - Switch type from "permute" to "bootstrap":
-  generate(reps = 1000, type = "bootstrap") %>% 
+  generate(reps = 1000, type = "bootstrap") |> 
   calculate(stat = "diff in props", 
             order = c("male", "female"))
 ```
@@ -1767,7 +1767,7 @@ bootstrap_distribution <- promotions %>%
 
 \tiny
 ```{r echo=TRUE, warning=FALSE, message=FALSE,out.height = '35%',out.width = '70%', fig.align='center'}
-percentile_ci <- bootstrap_distribution %>% 
+percentile_ci <- bootstrap_distribution |> 
   get_confidence_interval(level = 0.95, type = "percentile")
 percentile_ci
 visualize(bootstrap_distribution) + 

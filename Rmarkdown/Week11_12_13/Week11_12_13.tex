@@ -157,12 +157,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Weeks 11, 12, and 13},
-  pdfauthor={Spring 2024},
+  pdfauthor={Fall 2024},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Weeks 11, 12, and 13}
-\author{Spring 2024}
+\author{Fall 2024}
 \date{}
 \institute{Appalachian State University}
 
@@ -270,8 +270,8 @@ Construct a $90\%$ confidence interval for $\mu_X-\mu_Y$ using the information i
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{CALCULUS }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(calculus) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{CALCULUS }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(calculus) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Mean =} \FunctionTok{mean}\NormalTok{(score), }\AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }\AttributeTok{SD =} \FunctionTok{sd}\NormalTok{(score))}
 \end{Highlighting}
 \end{Shaded}
@@ -337,9 +337,9 @@ Compare to bootstrap CI: \tiny
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(infer)}
-\NormalTok{CI }\OtherTok{\textless{}{-}}\NormalTok{ CALCULUS }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ calculus) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{CI }\OtherTok{\textless{}{-}}\NormalTok{ CALCULUS }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ calculus) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in means"}\NormalTok{, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{))}
 \FunctionTok{get\_ci}\NormalTok{(CI, }\AttributeTok{level =} \FloatTok{0.90}\NormalTok{)}
 \end{Highlighting}
@@ -349,7 +349,7 @@ Compare to bootstrap CI: \tiny
 # A tibble: 1 x 2
   lower_ci upper_ci
      <dbl>    <dbl>
-1    -29.6    -19.2
+1    -30.0    -18.9
 \end{verbatim}
 
 \begin{Shaded}
@@ -1782,8 +1782,8 @@ in the \texttt{promotions} data frame.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{promotions }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{promotions }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{arrange}\NormalTok{(id)}
 \end{Highlighting}
 \end{Shaded}
@@ -1837,8 +1837,8 @@ Let's quantify these promotion rates
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{promotions }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(gender, decision) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{promotions }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(gender, decision) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{tally}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -2007,8 +2007,8 @@ each group:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{promotions\_shuffled }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(gender, decision) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{promotions\_shuffled }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(gender, decision) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{tally}\NormalTok{() }\CommentTok{\# Same as summarize(n = n())}
 \end{Highlighting}
 \end{Shaded}
@@ -2149,10 +2149,10 @@ universe of no gender discrimination.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{37}\NormalTok{)}
-\NormalTok{promotions }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }\AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"permute"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{promotions }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }\AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"permute"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in props"}\NormalTok{, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{, }\StringTok{"female"}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ null\_distribution}
 \FunctionTok{get\_pvalue}\NormalTok{(null\_distribution, }\AttributeTok{obs\_stat=}\NormalTok{ .}\DecValTok{292}\NormalTok{, }\AttributeTok{direction =} \StringTok{"right"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ pv}
 \NormalTok{pv}
@@ -2446,7 +2446,7 @@ variable and, if needed, any explanatory variables for our study.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{promotions }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{promotions }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }\AttributeTok{success =} \StringTok{"promoted"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2554,9 +2554,9 @@ vs&H_A: \mu\neq 1993
 \protect\hypertarget{infer-package-workflow-hypothesize-the-null-3}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{promotions }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{promotions }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }
-          \AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+          \AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2588,10 +2588,10 @@ vs&H_A: \mu\neq 1993
 \protect\hypertarget{infer-package-workflow-generate-replicates-1}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{promotions\_generate }\OtherTok{\textless{}{-}}\NormalTok{ promotions }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{promotions\_generate }\OtherTok{\textless{}{-}}\NormalTok{ promotions }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }
-          \AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+          \AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"permute"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2636,10 +2636,10 @@ accordingly.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{37}\NormalTok{)}
-\NormalTok{promotions }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }\AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"permute"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{promotions }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }\AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"permute"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in props"}\NormalTok{, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{, }\StringTok{"female"}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ null\_distribution}
 \NormalTok{null\_distribution}
 \end{Highlighting}
@@ -2675,8 +2675,8 @@ What was the observed difference in promotion rates?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{obs\_diff\_prop }\OtherTok{\textless{}{-}}\NormalTok{ promotions }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{specify}\NormalTok{(decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }\AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{obs\_diff\_prop }\OtherTok{\textless{}{-}}\NormalTok{ promotions }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{specify}\NormalTok{(decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }\AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in props"}\NormalTok{, }
             \AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{, }\StringTok{"female"}\NormalTok{))}
 \NormalTok{obs\_diff\_prop}
@@ -2748,7 +2748,7 @@ discrimination
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{null\_distribution }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{null\_distribution }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_p\_value}\NormalTok{(}\AttributeTok{obs\_stat =} \FloatTok{0.292}\NormalTok{, }\AttributeTok{direction =} \StringTok{"right"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
@@ -2797,11 +2797,11 @@ This is the entire code that creates the null distribution.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{37}\NormalTok{)}
-\NormalTok{null\_distribution }\OtherTok{\textless{}{-}}\NormalTok{ promotions }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{null\_distribution }\OtherTok{\textless{}{-}}\NormalTok{ promotions }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }
-          \AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"permute"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+          \AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"permute"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in props"}\NormalTok{, }
             \AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{, }\StringTok{"female"}\NormalTok{))}
 \end{Highlighting}
@@ -2816,13 +2816,13 @@ distribution needed to construct a \(95\%\) confidence interval for
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{bootstrap\_distribution }\OtherTok{\textless{}{-}}\NormalTok{ promotions }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{bootstrap\_distribution }\OtherTok{\textless{}{-}}\NormalTok{ promotions }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{specify}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ decision }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }
-          \AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+          \AttributeTok{success =} \StringTok{"promoted"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \CommentTok{\# Change 1 {-} Remove hypothesize():}
-  \CommentTok{\# hypothesize(null = "independence") \%\textgreater{}\% }
+  \CommentTok{\# hypothesize(null = "independence") |\textgreater{} }
   \CommentTok{\# Change 2 {-} Switch type from "permute" to "bootstrap":}
-  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"bootstrap"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in props"}\NormalTok{, }
             \AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{, }\StringTok{"female"}\NormalTok{))}
 \end{Highlighting}
@@ -2835,7 +2835,7 @@ distribution needed to construct a \(95\%\) confidence interval for
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{percentile\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{percentile\_ci }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_distribution }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_confidence\_interval}\NormalTok{(}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{type =} \StringTok{"percentile"}\NormalTok{)}
 \NormalTok{percentile\_ci}
 \end{Highlighting}
