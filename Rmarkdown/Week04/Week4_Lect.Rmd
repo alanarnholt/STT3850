@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Week 4"
-author: "Spring 2024"
+author: "Fall 2024"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:
@@ -213,7 +213,7 @@ We’ll answer these questions by modeling the relationship between teaching sco
 
 \normalsize
 ```{r}
-evals_ch5 <- evals %>%
+evals_ch5 <- evals |>
   select(ID, score, bty_avg, age)   # take subset
 glimpse(evals_ch5)
 ```
@@ -225,7 +225,7 @@ An alternative way to look at the raw data values is by choosing a random sample
 
 \normalsize
 ```{r}
-evals_ch5 %>%
+evals_ch5 |>
   sample_n(size = 5)
 ```
 \normalsize
@@ -235,7 +235,7 @@ evals_ch5 %>%
 
 \normalsize
 ```{r}
-evals_ch5 %>%
+evals_ch5 |>
   summarize(mean_bty_avg = mean(bty_avg),
             mean_score = mean(score),
             median_bty_avg = median(bty_avg), 
@@ -251,8 +251,8 @@ The `skim()` function from the `skimr` package, "skims" the data, and returns co
 \normalsize
 ```{r, eval = FALSE}
 library(skimr)
-evals_ch5 %>% 
-  select(score, bty_avg) %>% 
+evals_ch5 |> 
+  select(score, bty_avg) |> 
   skim()
 ```
 \normalsize
@@ -320,7 +320,7 @@ The scatterplot shows that the college GPA increases as the high school GPA incr
 
 \small
 ```{r}
-values <- Gpa %>% 
+values <- Gpa |> 
   mutate(y_ybar = collgpa - mean(collgpa), 
          x_xbar = hsgpa - mean(hsgpa),
          zx = x_xbar/sd(hsgpa), zy = y_ybar/sd(collgpa))
@@ -335,7 +335,7 @@ $$r=\frac{1}{(n-1)}\sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\left(\frac{
 
 \normalsize
 ```{r}
-values %>% 
+values |> 
   summarize(r = (1/9)*sum(zx*zy))
 ```
 \normalsize
@@ -345,7 +345,7 @@ Using the build in `cor()` function:
 
 \normalsize
 ```{r}
-Gpa %>% 
+Gpa |> 
   summarize(r = cor(collgpa, hsgpa))
 ```
 \normalsize
@@ -356,7 +356,7 @@ Using `get_correlation()` function in the `moderndive` package.
 
 \normalsize
 ```{r}
-Gpa %>% 
+Gpa |> 
   get_correlation(formula = collgpa ~ hsgpa)
 ```
 \normalsize
@@ -384,14 +384,14 @@ p1/p2
 
 \normalsize
 ```{r}
-evals_ch5 %>% 
+evals_ch5 |> 
   get_correlation(formula = score ~ bty_avg)
 ```
 \normalsize
 
 \normalsize
 ```{r}
-evals_ch5 %>% 
+evals_ch5 |> 
   summarize(correlation = cor(score, bty_avg))
 ```
 \normalsize
@@ -542,7 +542,7 @@ summary(score_model)
 \small
 ```{r}
 # Use formula
-evals_ch5 %>% 
+evals_ch5 |> 
   summarize(b1 = cor(bty_avg, score)*sd(score)/sd(bty_avg),
             b0 = mean(score) - b1*mean(bty_avg))
 ```
@@ -931,10 +931,10 @@ get_regression_points(score_model)
 
 \small
 ```{r}
-get_regression_points(score_model) %>% 
+get_regression_points(score_model) |> 
   summarize(var_y = var(score), 
             var_y_hat = var(score_hat), 
-            var_residual = var(residual)) %>% 
+            var_residual = var(residual)) |> 
   mutate(R2 = var_y_hat/var_y)
 ```
 
@@ -1175,8 +1175,8 @@ Any other straight line drawn in the figure would yield a sum of squared residua
 \normalsize
 ```{r}
 # Compute sum of squared residuals
-regression_points %>%
-  mutate(squared_residuals = residual^2) %>%
+regression_points |>
+  mutate(squared_residuals = residual^2) |>
   summarize(sum_of_squared_residuals = sum(squared_residuals))
 ```
 \normalsize
