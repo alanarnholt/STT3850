@@ -1,6 +1,14 @@
 ---
-title: "5NG"
-format: html
+title: "5NG - Five Named Graphs"
+author: "Alan Arnholt"
+date: last-modified
+date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
+format: 
+  html:
+    code-fold: true
+    theme:
+      light: litera
+      dark: cyborg
 ---
 
 # Scatterplots and overplotting
@@ -26,9 +34,11 @@ The data are gathered from end of semester student evaluations for a sample of 4
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
-ggplot(data = evals, aes(x = bty_avg, y = score)) -> p1
-p1 + geom_point()
+#| code-summary: "I can't wait to see the code"
+ggplot(data = evals, aes(x = bty_avg, y = score)) + 
+  labs(x = "Teacher's average beauty score", 
+       y = "Teacher's average course evaluation") -> p1
+p1 +geom_point() 
 ```
 
 Let's look at a few ways to fix some of the over plotting.  
@@ -50,84 +60,89 @@ p1 + stat_sum(alpha = 0.25, aes(size = after_stat(prop)))
 ```
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
+#| warning: false
 p1 + 
   geom_count(alpha = 0.25, aes(color = gender)) + 
   scale_size(range = c(1, 10)) +
   geom_smooth(aes(color = gender), method = "loess", se = FALSE) + 
-  labs(color = "Sex")
+  labs(color = "Sex") + 
+  scale_color_manual(values = c("female" = "pink", "male" = "darkblue")) + 
+  theme_classic()
 ```
-
-## Linegraphs via `geom_line()`
 
 
 Consider the `early_january_weather` from the `moderndive` package.
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code that created that awesome table!"
+#| code-fold: false
+#| echo: false
 library(moderndive)
 knitr::kable(head(early_january_weather))
 ```
 
+## Linegraphs via `geom_line()`
+
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
 ggplot(data = early_january_weather, aes(x = time_hour, y = temp)) + 
   geom_point(size = 0.2, color = "blue") + 
-  geom_line(color = "pink")
+  geom_line(color = "pink") + 
+  labs(x = "Date and time",
+       y = "Temperature (in Fahrenheit)")
 
 ```
 
 ## Histograms via `geom_histogram()`
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
+#| warning: false
 library(palmerpenguins)
 penguins |> 
   ggplot(aes(x = bill_length_mm)) + 
-  geom_histogram()
+  geom_histogram() + 
+  labs(x = "Penguin bill length (in mm)")
 ```
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
+#| warning: false
 penguins |> 
   ggplot(aes(x = bill_length_mm)) + 
-  geom_histogram(binwidth = 3, color = "black", fill = "lightblue")
+  geom_histogram(binwidth = 3, color = "black", fill = "lightblue") + 
+  labs(x = "Penguin bill length (in mm)")
 
 penguins |> 
   ggplot(aes(x = bill_length_mm, fill = species)) + 
-  geom_histogram(binwidth = 3)
+  geom_histogram(binwidth = 3) +
+  labs(x = "Penguin bill length (in mm)")
 ```
 
 
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
+#| warning: false
 penguins |> 
   ggplot(aes(x = bill_length_mm, fill = species)) + 
   geom_histogram(binwidth = 3, color = "black") +
   facet_wrap(vars(species), ncol = 1) + 
-  theme_bw()
+  theme_bw() + 
+  labs(x = "Penguin bill length (in mm)",
+       fill = "Species")
 ```
 
 ## Boxplots via `geom_boxplot()`
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
+#| warning: false
 penguins |> 
   ggplot(aes(x = species, y = bill_length_mm, fill = species)) + 
-  geom_boxplot()
+  geom_boxplot() + 
+  labs(y = "Penguin bill length (in mm)")
 # Note that the legend is not needed
 penguins |> 
   ggplot(aes(x = species, y = bill_length_mm, fill = species)) + 
   geom_boxplot() + 
-  guides(fill = "none")
+  guides(fill = "none") + 
+  labs(y = "Penguin bill length (in mm)",
+       x = "")
 ```
 
 ## Barplots
@@ -135,15 +150,15 @@ penguins |>
 * `geom_bar()`
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
 penguins |> 
   ggplot(aes(x = species)) +
-  geom_bar()
+  geom_bar() + 
+  labs(x = "")
 #
 penguins |> 
   ggplot(aes(x = species, fill = species)) +
   geom_bar() + 
-  guides(fill = "none")
+  guides(fill = "none") + 
+  labs(x = "")
 ```
 
