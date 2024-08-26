@@ -157,12 +157,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Weeks 14 and 15},
-  pdfauthor={Spring 2024},
+  pdfauthor={Fall 2024},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Weeks 14 and 15}
-\author{Spring 2024}
+\author{Fall 2024}
 \date{}
 \institute{Appalachian State University}
 
@@ -1411,8 +1411,8 @@ Pop       Improve No Change Worse
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyverse)}
-\NormalTok{NT }\OtherTok{\textless{}{-}}\NormalTok{ TDP }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  tibble}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{NT }\OtherTok{\textless{}{-}}\NormalTok{ TDP }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{  tibble}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{uncount}\NormalTok{(n)}
 \FunctionTok{head}\NormalTok{(NT, }\DecValTok{3}\NormalTok{)}
 \end{Highlighting}

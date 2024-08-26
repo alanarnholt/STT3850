@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Weeks 14 and 15"
-author: "Spring 2024"
+author: "Fall 2024"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:
@@ -663,8 +663,8 @@ TDP
 
 ```{r}
 library(tidyverse)
-NT <- TDP %>% 
-  tibble::as_tibble() %>% 
+NT <- TDP |> 
+  tibble::as_tibble() |> 
   uncount(n)
 head(NT, 3)
 ```
