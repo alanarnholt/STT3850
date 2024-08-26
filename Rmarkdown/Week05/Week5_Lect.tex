@@ -156,6 +156,7 @@
 \newfont{\gilfont}{msbm10 scaled 1000}
 \newcommand{\DOT}{\usebox{\biggercirc}}
 \newcommand{\pv}{\wp\text{-value}}
+\newcommand{\theHtable}{\thetable}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -164,12 +165,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 5},
-  pdfauthor={Spring 2024},
+  pdfauthor={Fall 2024},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 5}
-\author{Spring 2024}
+\author{Fall 2024}
 \date{}
 \institute{Appalachian State University}
 
@@ -300,8 +301,8 @@ Loading needed packages.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder2007 }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{gapminder2007 }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{select}\NormalTok{(country, lifeExp, continent, gdpPercap)}
 \FunctionTok{glimpse}\NormalTok{(gapminder2007)}
 \end{Highlighting}
@@ -355,20 +356,20 @@ Let's look at a random sample of five out of the 142 countries
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder2007 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{gapminder2007 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 # A tibble: 5 x 4
-  country       lifeExp continent gdpPercap
-  <fct>           <dbl> <fct>         <dbl>
-1 Cote d'Ivoire    48.3 Africa        1545.
-2 Venezuela        73.7 Americas     11416.
-3 Nigeria          46.9 Africa        2014.
-4 South Africa     49.3 Africa        9270.
-5 Lesotho          42.6 Africa        1569.
+  country   lifeExp continent gdpPercap
+  <fct>       <dbl> <fct>         <dbl>
+1 Honduras     70.2 Americas      3548.
+2 Spain        80.9 Europe       28821.
+3 Algeria      72.3 Africa        6223.
+4 Italy        80.5 Europe       28570.
+5 Australia    81.2 Oceania      34435.
 \end{verbatim}
 \end{frame}
 
@@ -380,8 +381,8 @@ Let's compute the summary statistics using the \texttt{skim()} function
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder2007 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(lifeExp, continent) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{gapminder2007 }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(lifeExp, continent) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{skim}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -391,8 +392,8 @@ Let's compute the summary statistics using the \texttt{skim()} function
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Or using summary()}
-\NormalTok{gapminder2007 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(lifeExp, continent) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{gapminder2007 }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(lifeExp, continent) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{summary}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -478,10 +479,10 @@ We see that this data is skewed to the left \(\rightarrow\) mean
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lifeExp\_by\_continent }\OtherTok{\textless{}{-}}\NormalTok{ gapminder2007 }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{group\_by}\NormalTok{(continent) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{lifeExp\_by\_continent }\OtherTok{\textless{}{-}}\NormalTok{ gapminder2007 }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{group\_by}\NormalTok{(continent) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{median =} \FunctionTok{median}\NormalTok{(lifeExp), }
-            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(lifeExp)) }\SpecialCharTok{\%\textgreater{}\%} 
+            \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(lifeExp)) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Difference versus Africa}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ mean }\SpecialCharTok{{-}}\NormalTok{ mean[}\DecValTok{1}\NormalTok{])}
 \NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(lifeExp\_by\_continent)}
 \end{Highlighting}
@@ -699,7 +700,7 @@ regression table will return an intercept and \(k-1\) offsets.
 \begin{Highlighting}[]
 \NormalTok{regression\_points }\OtherTok{\textless{}{-}} \FunctionTok{get\_regression\_points}\NormalTok{(lifeExp\_model, }
                                            \AttributeTok{ID =} \StringTok{"country"}\NormalTok{) }
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(regression\_points }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{9}\NormalTok{))}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(regression\_points }\SpecialCharTok{|\textgreater{}} \FunctionTok{head}\NormalTok{(}\AttributeTok{n =} \DecValTok{9}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -820,7 +821,7 @@ in this chapter.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{evals\_ch6 }\OtherTok{\textless{}{-}}\NormalTok{ evals }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{evals\_ch6 }\OtherTok{\textless{}{-}}\NormalTok{ evals }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{select}\NormalTok{(ID, score, age, gender)}
 \end{Highlighting}
 \end{Shaded}
@@ -864,7 +865,7 @@ $ gender <fct> female, female, female, female, male, male, male, male, male, f~
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Or}
-\NormalTok{evals\_ch6 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{evals\_ch6 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -873,8 +874,8 @@ $ gender <fct> female, female, female, female, male, male, male, male, male, f~
 # A tibble: 2 x 4
      ID score   age gender
   <int> <dbl> <int> <fct> 
-1   434   2.8    62 male  
-2   208   4.4    62 male  
+1   437   3.4    62 male  
+2    99   4.3    48 male  
 \end{verbatim}
 
 \normalsize
@@ -886,8 +887,8 @@ $ gender <fct> female, female, female, female, male, male, male, male, male, f~
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{evals\_ch6 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(score, age, gender) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{evals\_ch6 }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(score, age, gender) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{skim}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -897,8 +898,8 @@ $ gender <fct> female, female, female, female, male, male, male, male, male, f~
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Or}
-\NormalTok{evals\_ch6 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(score, age, gender) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{evals\_ch6 }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(score, age, gender) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summary}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -923,7 +924,7 @@ variables: \texttt{score} and \texttt{age}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{evals\_ch6 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{evals\_ch6 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{r =} \FunctionTok{cor}\NormalTok{(score, age))}
 \end{Highlighting}
 \end{Shaded}
@@ -939,7 +940,7 @@ variables: \texttt{score} and \texttt{age}:
 \begin{Highlighting}[]
 \CommentTok{\# or using the get\_correlation wrapper}
 \CommentTok{\# from moderndive}
-\NormalTok{evals\_ch6 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{evals\_ch6 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{get\_correlation}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age)}
 \end{Highlighting}
 \end{Shaded}
@@ -1437,7 +1438,7 @@ Suppose a realtor wants to model the appraised price of an apartment as a functi
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(PASWR2)}
-\NormalTok{VIT2005 }\OtherTok{\textless{}{-}}\NormalTok{ VIT2005 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{VIT2005 }\OtherTok{\textless{}{-}}\NormalTok{ VIT2005 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{elevator =} \FunctionTok{factor}\NormalTok{(elevator, }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{)))}
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ VIT2005, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ area, }\AttributeTok{y =}\NormalTok{ totalprice)) }\SpecialCharTok{+} 
   \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
@@ -1684,8 +1685,8 @@ in this chapter.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ISLR)}
-\NormalTok{credit\_ch6 }\OtherTok{\textless{}{-}}\NormalTok{ Credit }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{credit\_ch6 }\OtherTok{\textless{}{-}}\NormalTok{ Credit }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{select}\NormalTok{(ID, }\AttributeTok{debt =}\NormalTok{ Balance, }\AttributeTok{credit\_limit =}\NormalTok{ Limit, }
          \AttributeTok{income =}\NormalTok{ Income, }\AttributeTok{credit\_rating =}\NormalTok{ Rating, }\AttributeTok{age =}\NormalTok{ Age)}
 \FunctionTok{glimpse}\NormalTok{(credit\_ch6)}
@@ -1712,7 +1713,7 @@ $ age           <int> 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, ~
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{credit\_ch6 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{credit\_ch6 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{sample\_n}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1721,11 +1722,11 @@ $ age           <int> 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, ~
 # A tibble: 5 x 6
      ID  debt credit_limit income credit_rating   age
   <int> <int>        <int>  <dbl>         <int> <int>
-1   101   298         3736   21.2           256    41
-2   236   191         2923   10.5           232    25
-3    83   503         4433   23.7           344    63
-4   357   962         6090   34.5           442    36
-5   115   271         3326   16.5           268    41
+1   168     0         2327   29.4           178    37
+2   361   712         5891   53.6           434    82
+3   371   992         6135   35.6           466    40
+4     9   279         3300   15.1           266    66
+5   218   955         5395   12.5           392    65
 \end{verbatim}
 
 \normalsize
@@ -1734,8 +1735,8 @@ $ age           <int> 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, ~
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{credit\_ch6 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(debt, credit\_limit, income) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{credit\_ch6 }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(debt, credit\_limit, income) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{skim}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -1747,8 +1748,8 @@ $ age           <int> 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, ~
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{credit\_ch6 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(debt, credit\_limit, income) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{credit\_ch6 }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(debt, credit\_limit, income) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summary}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -1775,8 +1776,8 @@ possible pairs of these variables.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{credit\_ch6 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(debt, credit\_limit, income) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{credit\_ch6 }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(debt, credit\_limit, income) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{cor}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -1884,7 +1885,7 @@ code will create a 3-dimensional scatterplot.
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(plotly)}
 \NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{plot\_ly}\NormalTok{(}\AttributeTok{data =}\NormalTok{ credit\_ch6, }\AttributeTok{z =} \SpecialCharTok{\textasciitilde{}}\NormalTok{debt, }\AttributeTok{x =} \SpecialCharTok{\textasciitilde{}}\NormalTok{credit\_limit, }
-             \AttributeTok{y =} \SpecialCharTok{\textasciitilde{}}\NormalTok{income) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{add\_markers}\NormalTok{()}
+             \AttributeTok{y =} \SpecialCharTok{\textasciitilde{}}\NormalTok{income) }\SpecialCharTok{|\textgreater{}} \FunctionTok{add\_markers}\NormalTok{()}
 \NormalTok{mod }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(debt }\SpecialCharTok{\textasciitilde{}}\NormalTok{ credit\_limit }\SpecialCharTok{+}\NormalTok{ income, }\AttributeTok{data =}\NormalTok{ credit\_ch6)}
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{min}\NormalTok{(credit\_ch6}\SpecialCharTok{$}\NormalTok{credit\_limit), }
          \FunctionTok{max}\NormalTok{(credit\_ch6}\SpecialCharTok{$}\NormalTok{credit\_limit), }\AttributeTok{length =} \DecValTok{70}\NormalTok{)}
@@ -1893,7 +1894,7 @@ code will create a 3-dimensional scatterplot.
 \NormalTok{plane }\OtherTok{\textless{}{-}} \FunctionTok{outer}\NormalTok{(x, y, }\ControlFlowTok{function}\NormalTok{(a, b)\{}\FunctionTok{coef}\NormalTok{(mod)[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+} 
                \FunctionTok{coef}\NormalTok{(mod)[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{*}\NormalTok{a }\SpecialCharTok{+} \FunctionTok{coef}\NormalTok{(mod)[}\DecValTok{3}\NormalTok{]}\SpecialCharTok{*}\NormalTok{b\})}
 \CommentTok{\# draw the plane}
-\NormalTok{p }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{p }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{add\_surface}\NormalTok{(}\AttributeTok{x =} \SpecialCharTok{\textasciitilde{}}\NormalTok{x, }\AttributeTok{y =} \SpecialCharTok{\textasciitilde{}}\NormalTok{y, }\AttributeTok{z =} \SpecialCharTok{\textasciitilde{}}\NormalTok{plane)}
 \end{Highlighting}
 \end{Shaded}
@@ -2037,7 +2038,7 @@ that gives us fitted values \(\hat{y}=\widehat{\text{debt}}\) is:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ISLR)}
-\NormalTok{credit\_paradox }\OtherTok{\textless{}{-}}\NormalTok{ Credit }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{credit\_paradox }\OtherTok{\textless{}{-}}\NormalTok{ Credit }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{select}\NormalTok{(ID, }\AttributeTok{debt =}\NormalTok{ Balance, }\AttributeTok{credit\_limit =}\NormalTok{ Limit, }
          \AttributeTok{credit\_rating =}\NormalTok{ Rating, }\AttributeTok{income =}\NormalTok{ Income, }\AttributeTok{age =}\NormalTok{ Age)}
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ credit\_paradox, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ credit\_limit, }\AttributeTok{y =}\NormalTok{ debt)) }\SpecialCharTok{+} 
@@ -2085,7 +2086,7 @@ income         -7.6633230  0.385072058 -19.90101  1.260933e-61
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{qs }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(credit\_paradox}\SpecialCharTok{$}\NormalTok{credit\_limit, }\AttributeTok{probs =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, .}\DecValTok{25}\NormalTok{))}
-\NormalTok{credit\_paradox }\OtherTok{\textless{}{-}}\NormalTok{ credit\_paradox }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{credit\_paradox }\OtherTok{\textless{}{-}}\NormalTok{ credit\_paradox }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{credit\_cats =} \FunctionTok{cut}\NormalTok{(credit\_limit, }\AttributeTok{breaks =}\NormalTok{ qs, }
                            \AttributeTok{include.lowest =} \ConstantTok{TRUE}\NormalTok{))}
 \NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(credit\_paradox))}
@@ -2154,8 +2155,8 @@ credit\_cats
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{credit\_paradox }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(credit\_cats) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{credit\_paradox }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(credit\_cats) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\FunctionTok{n}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}

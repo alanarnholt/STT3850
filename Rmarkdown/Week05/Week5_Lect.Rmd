@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Week 5"
-author: "Spring 2024"
+author: "Fall 2024"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:
@@ -39,6 +39,7 @@ header-includes:
    - \newfont{\gilfont}{msbm10 scaled 1000}
    - \newcommand{\DOT}{\usebox{\biggercirc}}
    - \newcommand{\pv}{\wp\text{-value}}
+   - \newcommand{\theHtable}{\thetable}
 
 ---
 
@@ -129,8 +130,8 @@ library(gapminder)   # datasets
 
 \small
 ```{r}
-gapminder2007 <- gapminder %>% 
-  filter(year == 2007) %>%
+gapminder2007 <- gapminder |> 
+  filter(year == 2007) |>
   select(country, lifeExp, continent, gdpPercap)
 glimpse(gapminder2007)
 ```
@@ -160,7 +161,7 @@ glimpse(gapminder2007)
 Let’s look at a random sample of five out of the 142 countries
 
 ```{r}
-gapminder2007 %>% 
+gapminder2007 |> 
   sample_n(size = 5)
 ```
 
@@ -173,16 +174,16 @@ Let's compute the summary statistics using the `skim()` function
 
 \normalsize
 ```{r, eval = FALSE}
-gapminder2007 %>% 
-  select(lifeExp, continent) %>%
+gapminder2007 |> 
+  select(lifeExp, continent) |>
   skim()
 ```
 \normalsize
 
 ```{r}
 # Or using summary()
-gapminder2007 %>% 
-  select(lifeExp, continent) %>%
+gapminder2007 |> 
+  select(lifeExp, continent) |>
   summary()
 ```
 
@@ -243,10 +244,10 @@ ggplot(gapminder2007, aes(x = continent, y = lifeExp)) +
 
 \normalsize
 ```{r}
-lifeExp_by_continent <- gapminder2007 %>%
-  group_by(continent) %>%
+lifeExp_by_continent <- gapminder2007 |>
+  group_by(continent) |>
   summarize(median = median(lifeExp), 
-            mean = mean(lifeExp)) %>% 
+            mean = mean(lifeExp)) |> 
   mutate(`Difference versus Africa` = mean - mean[1])
 knitr::kable(lifeExp_by_continent)
 ```
@@ -350,7 +351,7 @@ In general, if we fit a linear regression model using a categorical explanatory 
 ```{r}
 regression_points <- get_regression_points(lifeExp_model, 
                                            ID = "country") 
-knitr::kable(regression_points %>% head(n = 9))
+knitr::kable(regression_points |> head(n = 9))
 ```
 \normalsize
 
@@ -413,7 +414,7 @@ Let’s `select()` only the subset of the variables we’ll consider in this cha
 
 \normalsize
 ```{r}
-evals_ch6 <- evals %>%
+evals_ch6 <- evals |>
   select(ID, score, age, gender)
 ```
 \normalsize
@@ -434,7 +435,7 @@ Let’s first look at the raw data values.
 ```{r}
 glimpse(evals_ch6)
 # Or
-evals_ch6 %>% 
+evals_ch6 |> 
   sample_n(size = 2)
 ```
 \normalsize
@@ -447,16 +448,16 @@ evals_ch6 %>%
 
 \normalsize
 ```{r eval = FALSE}
-evals_ch6 %>% 
-  select(score, age, gender) %>% 
+evals_ch6 |> 
+  select(score, age, gender) |> 
   skim()
 ```
 \normalsize
 
 ```{r}
 # Or
-evals_ch6 %>% 
-  select(score, age, gender) %>% 
+evals_ch6 |> 
+  select(score, age, gender) |> 
   summary()
 ```
 
@@ -469,11 +470,11 @@ Let's compute the correlation coefficient between our two numerical variables: `
 
 \small
 ```{r}
-evals_ch6 %>% 
+evals_ch6 |> 
   summarize(r = cor(score, age))
 # or using the get_correlation wrapper
 # from moderndive
-evals_ch6 %>% 
+evals_ch6 |> 
   get_correlation(score ~ age)
 ```
 \normalsize
@@ -781,7 +782,7 @@ Suppose a realtor wants to model the appraised price of an apartment as a functi
 \normalsize
 ```{r out.height = '40%', out.width = '70%'}
 library(PASWR2)
-VIT2005 <- VIT2005 %>% 
+VIT2005 <- VIT2005 |> 
   mutate(elevator = factor(elevator, labels = c("No", "Yes")))
 ggplot(data = VIT2005, aes(x = area, y = totalprice)) + 
   geom_point() + 
@@ -881,8 +882,8 @@ Use `select()` to create a subset of the variables we’ll consider in this chap
 \small
 ```{r}
 library(ISLR)
-credit_ch6 <- Credit %>% 
-  as_tibble() %>% 
+credit_ch6 <- Credit |> 
+  as_tibble() |> 
   select(ID, debt = Balance, credit_limit = Limit, 
          income = Income, credit_rating = Rating, age = Age)
 glimpse(credit_ch6)
@@ -894,15 +895,15 @@ glimpse(credit_ch6)
 
 \normalsize
 ```{r}
-credit_ch6 %>% 
+credit_ch6 |> 
   sample_n(size = 5)
 ```
 \normalsize
 
 \normalsize
 ```{r, eval = FALSE}
-credit_ch6 %>% 
-  select(debt, credit_limit, income) %>% 
+credit_ch6 |> 
+  select(debt, credit_limit, income) |> 
   skim()
 ```
 
@@ -910,8 +911,8 @@ credit_ch6 %>%
 
 \normalsize
 ```{r}
-credit_ch6 %>% 
-  select(debt, credit_limit, income) %>% 
+credit_ch6 |> 
+  select(debt, credit_limit, income) |> 
   summary()
 ```
 \normalsize
@@ -925,8 +926,8 @@ We can compute the correlation coefficient between the different possible pairs 
 
 \normalsize
 ```{r}
-credit_ch6 %>% 
-  select(debt, credit_limit, income) %>% 
+credit_ch6 |> 
+  select(debt, credit_limit, income) |> 
   cor()
 ```
 \normalsize
@@ -1018,7 +1019,7 @@ To visualize the joint relationship of all three variables simultaneously, we ne
 ```{r eval = FALSE}
 library(plotly)
 p <- plot_ly(data = credit_ch6, z = ~debt, x = ~credit_limit, 
-             y = ~income) %>% add_markers()
+             y = ~income) |> add_markers()
 mod <- lm(debt ~ credit_limit + income, data = credit_ch6)
 x <- seq(min(credit_ch6$credit_limit), 
          max(credit_ch6$credit_limit), length = 70)
@@ -1027,7 +1028,7 @@ y <- seq(min(credit_ch6$income),
 plane <- outer(x, y, function(a, b){coef(mod)[1] + 
                coef(mod)[2]*a + coef(mod)[3]*b})
 # draw the plane
-p %>% 
+p |> 
   add_surface(x = ~x, y = ~y, z = ~plane)
 ```
 
@@ -1100,7 +1101,7 @@ autoplot(debt_model, ncol = 2, nrow = 1, which = 1:2) +
 \tiny
 ```{r echo=TRUE,warning=FALSE, message=FALSE,out.height = '40%',out.width = '80%', fig.align='center'}
 library(ISLR)
-credit_paradox <- Credit %>% 
+credit_paradox <- Credit |> 
   select(ID, debt = Balance, credit_limit = Limit, 
          credit_rating = Rating, income = Income, age = Age)
 ggplot(data = credit_paradox, aes(x = credit_limit, y = debt)) + 
@@ -1136,7 +1137,7 @@ summary(mod)$coef
 \small
 ```{r}
 qs <- quantile(credit_paradox$credit_limit, probs = seq(0, 1, .25))
-credit_paradox <- credit_paradox %>% 
+credit_paradox <- credit_paradox |> 
   mutate(credit_cats = cut(credit_limit, breaks = qs, 
                            include.lowest = TRUE))
 knitr::kable(head(credit_paradox))
@@ -1163,8 +1164,8 @@ ggplot(data = credit_paradox, aes(x = credit_limit)) +
 
 \normalsize
 ```{r}
-credit_paradox %>% 
-  group_by(credit_cats) %>% 
+credit_paradox |> 
+  group_by(credit_cats) |> 
   summarize(n())
 
 ```

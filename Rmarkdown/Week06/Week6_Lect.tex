@@ -164,12 +164,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 6},
-  pdfauthor={Spring 2024},
+  pdfauthor={Fall 2024},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 6}
-\author{Spring 2024}
+\author{Fall 2024}
 \date{}
 \institute{Appalachian State University}
 
@@ -261,10 +261,10 @@ interviewed in the 2004 survey.
 \FunctionTok{library}\NormalTok{(moderndive)}
 \FunctionTok{library}\NormalTok{(janitor)}
 \NormalTok{Term }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"TermLife.csv"}\NormalTok{)}
-\NormalTok{term }\OtherTok{\textless{}{-}}\NormalTok{ Term }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{clean\_names}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(face }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{ln\_face =} \FunctionTok{log}\NormalTok{(face), }\AttributeTok{ln\_income =} \FunctionTok{log}\NormalTok{(income)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{term }\OtherTok{\textless{}{-}}\NormalTok{ Term }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{clean\_names}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(face }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{ln\_face =} \FunctionTok{log}\NormalTok{(face), }\AttributeTok{ln\_income =} \FunctionTok{log}\NormalTok{(income)) }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{select}\NormalTok{(education, ln\_face, ln\_income, numhh)}
 \end{Highlighting}
 \end{Shaded}
@@ -386,7 +386,7 @@ F-statistic: 46.89 on 1 and 273 DF,  p-value: 4.964e-11
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{get\_regression\_points}\NormalTok{(modelX2) }\OtherTok{{-}\textgreater{}}\NormalTok{ RT}
-\NormalTok{RT }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{RT }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SSE =} \FunctionTok{sum}\NormalTok{(residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
             \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((ln\_face }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(ln\_face))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
             \AttributeTok{SSR =}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE) }\OtherTok{{-}\textgreater{}}\NormalTok{ ESS}
@@ -467,7 +467,7 @@ F-statistic: 54.44 on 2 and 272 DF,  p-value: < 2.2e-16
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{get\_regression\_points}\NormalTok{(modelX1X2) }\OtherTok{{-}\textgreater{}}\NormalTok{ RT2}
-\NormalTok{RT2 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{RT2 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SSE =} \FunctionTok{sum}\NormalTok{(residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
             \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((ln\_face }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(ln\_face))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
             \AttributeTok{SSR =}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE) }\OtherTok{{-}\textgreater{}}\NormalTok{ ESS2}
@@ -550,7 +550,7 @@ and \(x_3\)}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{get\_regression\_points}\NormalTok{(modelAll) }\OtherTok{{-}\textgreater{}}\NormalTok{ RT3}
-\NormalTok{RT3 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{RT3 }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{SSE =} \FunctionTok{sum}\NormalTok{(residual}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }
             \AttributeTok{SST =} \FunctionTok{sum}\NormalTok{((ln\_face }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(ln\_face))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),}
             \AttributeTok{SSR =}\NormalTok{ SST }\SpecialCharTok{{-}}\NormalTok{ SSE) }\OtherTok{{-}\textgreater{}}\NormalTok{ ESS3}
@@ -1066,7 +1066,7 @@ Let's load all the packages needed for this chapter.
 \FunctionTok{library}\NormalTok{(moderndive)}
 \FunctionTok{library}\NormalTok{(skimr)}
 \FunctionTok{library}\NormalTok{(ISLR)}
-\NormalTok{evals\_ch6 }\OtherTok{\textless{}{-}}\NormalTok{ evals }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{evals\_ch6 }\OtherTok{\textless{}{-}}\NormalTok{ evals }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{select}\NormalTok{(ID, score, age, gender)}
 \end{Highlighting}
 \end{Shaded}
@@ -1510,7 +1510,7 @@ High correlation between \texttt{weight} and \texttt{bsa}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{bloodpress }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"bloodpress.csv"}\NormalTok{)}
-\NormalTok{bloodpress }\OtherTok{\textless{}{-}}\NormalTok{ bloodpress }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{bloodpress }\OtherTok{\textless{}{-}}\NormalTok{ bloodpress }\SpecialCharTok{|\textgreater{}} 
   \FunctionTok{clean\_names}\NormalTok{()}
 \NormalTok{bloodpress }\OtherTok{\textless{}{-}}\NormalTok{ bloodpress[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
 \FunctionTok{cor}\NormalTok{(bloodpress, }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}

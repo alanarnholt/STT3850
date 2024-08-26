@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Week 6"
-author: "Spring 2024"
+author: "Fall 2024"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:
@@ -114,10 +114,10 @@ library(tidyverse)
 library(moderndive)
 library(janitor)
 Term <- read.csv("TermLife.csv")
-term <- Term %>% 
-  clean_names() %>% 
-  filter(face > 0) %>% 
-  mutate(ln_face = log(face), ln_income = log(income)) %>% 
+term <- Term |> 
+  clean_names() |> 
+  filter(face > 0) |> 
+  mutate(ln_face = log(face), ln_income = log(income)) |> 
   select(education, ln_face, ln_income, numhh)
 ```
 \normalsize
@@ -168,7 +168,7 @@ summary(modelX2)
 \normalsize
 ```{r}
 get_regression_points(modelX2) -> RT
-RT %>% 
+RT |> 
   summarize(SSE = sum(residual^2), 
             SST = sum((ln_face - mean(ln_face))^2),
             SSR = SST - SSE) -> ESS
@@ -191,7 +191,7 @@ summary(modelX1X2)
 \normalsize
 ```{r}
 get_regression_points(modelX1X2) -> RT2
-RT2 %>% 
+RT2 |> 
   summarize(SSE = sum(residual^2), 
             SST = sum((ln_face - mean(ln_face))^2),
             SSR = SST - SSE) -> ESS2
@@ -218,7 +218,7 @@ summary(modelAll)
 \normalsize
 ```{r}
 get_regression_points(modelAll) -> RT3
-RT3 %>% 
+RT3 |> 
   summarize(SSE = sum(residual^2), 
             SST = sum((ln_face - mean(ln_face))^2),
             SSR = SST - SSE) -> ESS3
@@ -544,7 +544,7 @@ library(tidyverse)
 library(moderndive)
 library(skimr)
 library(ISLR)
-evals_ch6 <- evals %>%
+evals_ch6 <- evals |>
   select(ID, score, age, gender)
 ```
 \normalsize
@@ -746,7 +746,7 @@ High correlation between `weight` and `bsa`
 \scriptsize
 ```{r}
 bloodpress <- read.csv("bloodpress.csv")
-bloodpress <- bloodpress %>% 
+bloodpress <- bloodpress |> 
   clean_names()
 bloodpress <- bloodpress[, -1]
 cor(bloodpress, use = "complete.obs")
