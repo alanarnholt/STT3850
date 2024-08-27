@@ -128,6 +128,8 @@ ______________
 
 * Complete _Data Visualization with `ggplot2`_ (Part 1) [(DataCamp)](https://www.datacamp.com/)
 
+* Look at [Five Named Graphs](../Rmarkdown/Alpha5NG.html)
+
 ```
 
 __________________
