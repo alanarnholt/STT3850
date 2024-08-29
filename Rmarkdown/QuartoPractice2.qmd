@@ -1,0 +1,28 @@
+---
+title: "Quarto Practice"
+author: "Your Name"
+format: html
+---
+
+# Loading packages
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+library(nycflights13)
+```
+
+## Creating some graphs
+
+```{r}
+ggplot(data = weather, aes(x = factor(month), y = temp)) +
+  geom_boxplot()
+```
+
+The average temperature is `r round(mean(weather$temp, na.rm = TRUE), 2)`$^\circ$ Fahrenheit.
+
+The sample variance 
+$$S^2 =  \sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n-1}$$
+
+$$\int_{10}^{20} f(x)dx = 0.6$$
