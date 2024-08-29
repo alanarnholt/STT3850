@@ -1,0 +1,29 @@
+---
+title: "Practice"
+format: html
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(nycflights13)
+```
+
+* Use $\LaTeX$ to write the sample variance.
+
+$$s^2 = \sum_{i=1}^{n}\frac{(x_i - \bar{x})^2}{n-1}$$
+
+* Find and report the sample variance of `temp` for the data frame `weather`.
+
+```{r}
+weather |> 
+  summarize(S2 = var(temp, na.rm = TRUE)) -> ans2
+ans2
+```
+
+The sample variance for `weather` is `r round(ans2$S2, 2)`.
+
+The mean of `temp` is ($\bar{x} = `r round(mean(weather$temp, na.rm = TRUE),1)`$).
+
+
+

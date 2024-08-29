@@ -16,9 +16,12 @@ ggplot(data = weather, aes(x = as.factor(month), y = temp)) +
 # Some better
 
 weather |> mutate(monthT = factor(month, labels = month.abb)) -> weather
-
-ggplot(data = weather, aes(x = monthT, y = temp)) + 
-  geom_boxplot()
+head(weather$monthT)
+ggplot(data = weather, aes(x = monthT, y = temp, fill = monthT)) + 
+  geom_boxplot() + coord_flip() + theme_classic() + 
+  labs(x = "", 
+       y = "Temperature in Fahrenheit",
+       title = "Temperature at NYC airports") + guides(fill = "none")
 
 # 
 
