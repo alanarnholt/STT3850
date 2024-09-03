@@ -269,7 +269,7 @@ not_BTV_SEA <- flights |>
 ```
 \normalsize
 
-Note note the careful use of parentheses. The code below will produce different results. 
+Note the careful use of parentheses. The code below will produce different results. 
 \normalsize
 ```{r, eval = FALSE}
 flights |> 
