@@ -109,7 +109,7 @@ library(dplyr)
 
 ## The pipe operator: `|>`
 
-Before we start, let’s first introduce a nifty tool that gets loaded with the `dplyr` package: **the pipe operator `|>`**. 
+Before we start, let’s first introduce a nifty tool: **the pipe operator `|>`**. 
 
 
 - The pipe operator allows us to combine multiple operations in R into a single sequential chain of actions.
