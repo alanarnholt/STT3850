@@ -163,6 +163,22 @@ Test yourself:
 ```{block, week3optional, type='rmdoptional'}
 #### Optional {-}
 
+* Watch [Selecting Variables Using `dplyr` in R](https://www.youtube.com/watch?v=vDgP7J1qMCI)
+
+* Watch [Filtering Observations Using `dplyr` in R](https://www.youtube.com/watch?v=KWs8VNeWlbE)
+
+* Watch [Arranging Your Data Using `dplyr` in R](https://www.youtube.com/watch?v=BN9-zPuM-2g)
+
+* Watch [Adding New Columns Using `dplyr` in R](https://www.youtube.com/watch?v=stNOP4B1aGE)
+
+* Watch [Creating Summary Statistics Using `dplyr` in R](https://www.youtube.com/watch?v=PAE8oaC0vtk)
+
+* Watch [Practicing your Tidyverse Skills: Advanced Filters with Dplyr](https://www.youtube.com/watch?v=w5veSzXK1jw)
+
+* Watch [Practicing Your Tidyverse Skills: `if_else()` Functions with `dplyr`](https://www.youtube.com/watch?v=-j5Hbwua0fE)
+
+* Watch [Practicing your Tidyverse Skills: `case_when()` Functions with `dplyr`](https://www.youtube.com/watch?v=22KMfxZgCqE)
+
 * Posit [Cheat Sheets](https://posit.co/resources/cheatsheets/)
 
 * Work through chapter 3 (Starting with Data) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
@@ -170,7 +186,9 @@ Test yourself:
 * Work through chapter 4 (Data Manipulation) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
 * In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/07LSd4MF) 
+
 * In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/GwaVpLyL) 
+
 * In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/ZOX7kXns) 
 ```
 
