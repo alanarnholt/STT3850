@@ -173,7 +173,7 @@ Test yourself:
 
 * Watch [Creating Summary Statistics Using `dplyr` in R](https://www.youtube.com/watch?v=PAE8oaC0vtk)
 
-* Watch [Practicing your Tidyverse Skills: Advanced Filters with Dplyr](https://www.youtube.com/watch?v=w5veSzXK1jw)
+* Watch [Practicing your Tidyverse Skills: Advanced Filters with Dplyr](https://www.youtube.com/watch?v=w5veSzXK1jw) - [Quarto Document](https://stat-ata-asu.github.io/DataScience_1/Quarto/AdvancedFilters.html)
 
 * Watch [Practicing Your Tidyverse Skills: `if_else()` Functions with `dplyr`](https://www.youtube.com/watch?v=-j5Hbwua0fE)
 
