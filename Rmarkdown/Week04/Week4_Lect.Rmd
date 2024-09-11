@@ -845,7 +845,7 @@ summary(score_model)$coef[ ,4]
 
 - For the linear regression model: $y_i=\beta_0+\beta_1x_i+\epsilon_i,$
 
-- We have fitted the line: $\hat{y}_i=\beta_0+\beta_1x_i.$
+- We have fitted the line: $\hat{y}_i=b_0+b_1x_i.$
 
 Partition of Total sum of squares: 
 
