@@ -134,7 +134,7 @@ ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
 # Fit regression model:
 score_model <- lm(score ~ bty_avg, data = evals_ch5)
 # Get regression table:
-get_regression_table(score_model)
+get_regression_table(score_model) 
 
 
 ## ---------------------------------------------------------------------------------------------------------------------------
