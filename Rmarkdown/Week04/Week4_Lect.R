@@ -145,6 +145,14 @@ score_model <- lm(score ~ bty_avg, data = evals_ch5)
 get_regression_table(score_model) -> ans3
 ans3
 
+y <- evals$score
+X <- model.matrix(score_model)
+dim(X)
+solve(t(X)%*%X)%*%t(X)%*%y -> betaest
+betaest
+
+
+
 ans3$std_error[2]
 ## ---------------------------------------------------------------------------------------------------------------------------
 # Using summary()
@@ -215,7 +223,10 @@ summary(score_model)$sigma
 b0 <- coef(score_model)[1]
 b1 <- coef(score_model)[2]
 c(b0, b1)
-XTX
+
+
+
+XTXI <- solve(t(X)%*%X)
 MSE <- summary(score_model)$sigma^2
 (var_cov_b <- MSE*XTXI)
 diag(var_cov_b)^.5
