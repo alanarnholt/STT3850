@@ -34,7 +34,8 @@ evals_ch5 |>
   summarize(mean_bty_avg = mean(bty_avg),
             mean_score = mean(score),
             median_bty_avg = median(bty_avg), 
-            median_score = median(score))
+            median_score = median(score)) -> sumans 
+sumans
 
 
 ## ----eval = FALSE-----------------------------------------------------------------------------------------------------------
@@ -43,20 +44,26 @@ evals_ch5 |>
   select(score, bty_avg) |>
   skim()
 
+ggplot(data = evals_ch5, aes(x = score)) + 
+  geom_density()
+
+evals_ch5 |> 
+  summarize(MD = median(score), 
+            iqr = IQR(score)) -> ans2
+ans2
 
 ## ----echo = FALSE, out.height = '45%', out.width = '90%'--------------------------------------------------------------------
 knitr::include_graphics("week4_2.png")
 
 
 ## ---------------------------------------------------------------------------------------------------------------------------
-library(BSDA) 
-head(Gpa)
+
 
 
 ## ----out.height = '50%',out.width = '50%'-----------------------------------------------------------------------------------
 ggplot(data = Gpa, aes(x = hsgpa, y = collgpa)) + 
   labs(x = "High School GPA", y = "College GPA") +
-  geom_point(size = 5, color = "blue") + 
+  geom_point(size = 5, color = "seashell4") + 
   theme_bw()
 
 
@@ -94,6 +101,7 @@ library(patchwork)
 p1/p2
 
 
+
 ## ---------------------------------------------------------------------------------------------------------------------------
 evals_ch5 |> 
   get_correlation(formula = score ~ bty_avg)
@@ -114,7 +122,7 @@ ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
 
 ## ----out.height = '45%',out.width = '60%'-----------------------------------------------------------------------------------
 ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
-  geom_point(size = 3, color = "purple") +
+  geom_point(size = 3, color = "violet") +
   labs(x = "Beauty Score", y = "Teaching Score",
        title = "Teaching and Beauty Scores") +  
   geom_smooth(method = "lm", se = FALSE) + 
@@ -134,12 +142,15 @@ ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
 # Fit regression model:
 score_model <- lm(score ~ bty_avg, data = evals_ch5)
 # Get regression table:
-get_regression_table(score_model) 
+get_regression_table(score_model) -> ans3
+ans3
 
-
+ans3$std_error[2]
 ## ---------------------------------------------------------------------------------------------------------------------------
 # Using summary()
-summary(score_model)
+summary(score_model) -> ans4
+ans4
+coef(ans4)[2, 2]
 
 
 ## ---------------------------------------------------------------------------------------------------------------------------
@@ -205,7 +216,13 @@ c(b0, b1)
 XTXI <- summary(score_model)$cov.unscaled
 MSE <- summary(score_model)$sigma^2
 (var_cov_b <- MSE*XTXI)
+diag(var_cov_b)^.5
 
+y <- evals$score
+X <- model.matrix(score_model)
+t(X)%*%X
+solve(t(X)%*%X)
+solve(t(X)%*%X)%*%t(X)%*%y
 
 ## ---------------------------------------------------------------------------------------------------------------------------
 seb0 <- sqrt(var_cov_b[1, 1])
