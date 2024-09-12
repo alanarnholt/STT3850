@@ -186,7 +186,9 @@ library(ggfortify)
 autoplot(score_model, ncol = 2, nrow = 1, which = 1:2) +
   theme_bw()
 
-
+ggplot(data = get_regression_points(score_model),
+  aes(x = score_hat, y = residual)) + 
+  geom_point()
 ## ---------------------------------------------------------------------------------------------------------------------------
 # Fit regression model:
 score_model <- lm(score ~ bty_avg, data = evals_ch5)
@@ -213,13 +215,14 @@ summary(score_model)$sigma
 b0 <- coef(score_model)[1]
 b1 <- coef(score_model)[2]
 c(b0, b1)
-XTXI <- summary(score_model)$cov.unscaled
+XTX
 MSE <- summary(score_model)$sigma^2
 (var_cov_b <- MSE*XTXI)
 diag(var_cov_b)^.5
 
 y <- evals$score
 X <- model.matrix(score_model)
+X
 t(X)%*%X
 solve(t(X)%*%X)
 solve(t(X)%*%X)%*%t(X)%*%y
