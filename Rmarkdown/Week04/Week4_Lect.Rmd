@@ -954,7 +954,7 @@ get_regression_points(score_model) |>
 
 **Example**: The power company want to predict power consumption on a single day for a given temperature. 
 
-- They might know a hot day is coming up the next day and have good idea of what the high temperature will be, so what to predict the power consumption.
+- They might know a hot day is coming up the next day and have good idea of what the high temperature will be, so they want to predict the power consumption.
 
 - We want to be $99.99\%$ confident that they have enough access to power to cover demand. 
 
