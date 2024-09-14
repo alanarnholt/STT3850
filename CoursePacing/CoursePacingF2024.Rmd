@@ -202,8 +202,6 @@ ___________
 
 * In class go over this [document](https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html)
 
-* Class [notes](../Handouts/RegHandout.html) for one quantitative and one qualitative predictor
-
 * Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Sep 9
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Sep 10
@@ -233,6 +231,8 @@ __________________
 * [Lecture Slides](../Rmarkdown/Week05/Week5_Lect.pdf)
 
 * Regression with a single [categorical variable](../Handouts/RegWithCategoricalVariables.html) handout.
+
+* Class [notes](../Handouts/RegHandout.html) for one quantitative and one qualitative predictor
 
 * Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Sep 16
 
