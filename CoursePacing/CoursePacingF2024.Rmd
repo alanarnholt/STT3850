@@ -246,6 +246,8 @@ __________________
 
 * Complete _Correlation and Regression in R_ [(DataCamp)](https://www.datacamp.com/)
 
+* For additional ideas with Quarto documents watch [Hello,  Quarto: A World of Possibilities (for Reproducible Publishing)](https://www.youtube.com/watch?v=Qrz2rUWM-uY)
+
 ```
 
 _______________
