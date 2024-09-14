@@ -12,7 +12,6 @@ editor: source
 ____________
 
 ```{r}
-#| echo: fenced
 #| include: false
 # Do not edit this code block/chunk!
 library(knitr)
@@ -39,7 +38,10 @@ gapminder1982 |>
   kable()
 ```
 
-```{r, label = "exp", fig.cap = "Worldwide life expectancies in 1982."}
+```{r}
+#| echo: fenced
+#| label: "fig-exp"
+#| fig-cap: "Worldwide life expectancies in 1982"
 ggplot(data = gapminder1982, aes(x = lifeexp)) +
   geom_histogram(binwidth = 3,
                  color = "black",
@@ -49,6 +51,24 @@ ggplot(data = gapminder1982, aes(x = lifeexp)) +
        x = "Life expectancy in years",
        y = "Number of countries")
 ```
+
+Based on @fig-exp, woldwide life expectancies in 1982 has a unimodal skew left distribution with statistics given in @tbl-stat.
+
+```{r}
+#| echo: fenced
+#| label: "tbl-stat"
+#| tbl-cap: "Descriptive statistics" 
+library(e1071)
+gapminder1982 |> 
+  summarize(
+    Median = median(lifeexp),
+    iqr = IQR(lifeexp),
+    Skew = skewness(lifeexp)
+  ) -> T1
+T1 |> 
+  knitr::kable()
+```
+
 
 ```{r}
 ggplot(data = gapminder1982, aes(x = lifeexp)) +
@@ -63,6 +83,8 @@ ggplot(data = gapminder1982, aes(x = lifeexp)) +
 ```
 
 ```{r}
+#| label: "tbl-age"
+#| tbl-cap: "Statistics by continent"
 gapminder1982 |>
   group_by(continent) |>
   summarize(
