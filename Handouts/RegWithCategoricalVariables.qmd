@@ -62,7 +62,7 @@ library(e1071)
 gapminder1982 |> 
   summarize(
     Median = median(lifeexp),
-    iqr = IQR(lifeexp),
+    IQR = IQR(lifeexp),
     Skew = skewness(lifeexp)
   ) -> T1
 T1 |> 
@@ -91,7 +91,7 @@ gapminder1982 |>
     Mean = mean(lifeexp),
     SD = sd(lifeexp),
     Median = median(lifeexp),
-    iqr = IQR(lifeexp)
+    IQR = IQR(lifeexp)
   ) -> results
 results |> 
   knitr::kable()
