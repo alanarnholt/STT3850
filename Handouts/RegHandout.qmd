@@ -130,7 +130,7 @@ ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
   theme_bw() +
   geom_smooth(method = "lm", se = FALSE) +
   scale_y_continuous(labels = label_currency(prefix = "€")) +
-  scale_x_continuous(labels = label_number(suffix = "m squared")) +
+  scale_x_continuous(labels = label_number(suffix = " square meters")) +
   labs(x = "Apartment Area", y = "Appraised Price")
 ```
 :::
@@ -240,7 +240,7 @@ ggplot(data = VIT2005, aes(x = area, y = totalprice, color = elevator)) +
        color = "Elevator") +
   scale_y_continuous(labels = label_currency(prefix = "€"),
                      limits = c(50000, 500000)) +
-  scale_x_continuous(labels = label_number(suffix = "m squared"),
+  scale_x_continuous(labels = label_number(suffix = " square meters"),
                      limits = c(10, 200)) 
 ```
 
