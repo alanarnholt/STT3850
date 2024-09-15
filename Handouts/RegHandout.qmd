@@ -13,6 +13,7 @@ editor: source
 knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center", warning = FALSE, message = FALSE)
 library(tidyverse)
 library(knitr)
+library(scales)
 ```
 
 # Qualitative Predictors
@@ -110,21 +111,27 @@ Suppose a realtor wants to model the appraised price of an apartment as a functi
 ```{r}
 library(tidyverse)
 library(PASWR2)
-VIT2005 <- VIT2005 %>% 
+VIT2005 <- VIT2005 |> 
   mutate(elevator = factor(elevator, labels = c("No", "Yes")))
 mod_simple <- lm(totalprice ~ area, data = VIT2005)
 summary(mod_simple) 
 library(moderndive)
-get_regression_table(mod_simple) |> kable()
+get_regression_table(mod_simple) |> 
+  kable()
 ```
+
+
 
 ```{r}
 #| label: "fig-sol1"
 #| fig-cap: "Scatterplot of `totalprice` versus `area` with the fitted regression line superimposed from `mod_simple`"
-ggplot(data = VIT2005, aes(x = area, y = totalprice)) + 
-  geom_point() + 
+ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
+  geom_point() +
   theme_bw() +
-  geom_smooth(method = "lm", se = FALSE)
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_y_continuous(labels = label_currency(prefix = "€")) +
+  scale_x_continuous(labels = label_number(suffix = "m squared")) +
+  labs(x = "Apartment Area", y = "Appraised Price")
 ```
 :::
 
@@ -195,7 +202,8 @@ H_0: \beta_2 = 0 \text{ versus }H_1: \beta_2 \neq 0.
 ```{r}
 mod_full <- lm(totalprice ~ area + elevator + area:elevator, data = VIT2005)
 mod_inter <- lm(totalprice ~ area + area:elevator, data = VIT2005)
-anova(mod_inter, mod_full)  # compare models
+# compare models
+anova(mod_inter, mod_full) 
 ```
 :::
 
@@ -217,16 +225,23 @@ The fitted model is $\widehat{Y}_i = `r scales::comma(coef(summary(mod_inter))[1
 ```{r}
 #| label: "fig-DSSI"
 #| fig-cap: "Fitted regression lines for `mod_inter`"
-ggplot(data = VIT2005, aes(x = area, y = totalprice, color = elevator)) + 
-  geom_point(alpha = 0.5) + 
-  theme_bw() + 
-  geom_abline(intercept = b0, slope = b1NO, color = "red") + 
-  geom_abline(intercept = b0, slope = b1YES, color = "blue") + 
-  scale_color_manual(values = c("red", "blue")) + 
-  xlim(10, 200) + 
-  ylim(50000, 500000) + 
-  labs(x = "Living Area is Square Meters",
-       y = "Appraised Price in Euros")
+ggplot(data = VIT2005, aes(x = area, y = totalprice, color = elevator)) +
+  geom_point(alpha = 0.5) +
+  theme_bw() +
+  geom_abline(intercept = b0,
+              slope = b1NO,
+              color = "red") +
+  geom_abline(intercept = b0,
+              slope = b1YES,
+              color = "blue") +
+  scale_color_manual(values = c("red", "blue")) +
+  labs(x = "Apartment Area", 
+       y = "Appraised Price",
+       color = "Elevator") +
+  scale_y_continuous(labels = label_currency(prefix = "€"),
+                     limits = c(50000, 500000)) +
+  scale_x_continuous(labels = label_number(suffix = "m squared"),
+                     limits = c(10, 200)) 
 ```
 
 # Diagnostics
@@ -307,7 +322,7 @@ anova(mod_full) |>
 ::: {.callout-caution icon="false" title="R Code"}
 ```{r, fig.width = 10}
 library(ISLR)
-credit_paradox <- Credit %>% 
+credit_paradox <- Credit |> 
   select(ID, debt = Balance, credit_limit = Limit, 
          credit_rating = Rating, income = Income, age = Age)
 ggplot(data = credit_paradox, aes(x = credit_limit, y = debt)) + 
@@ -324,7 +339,7 @@ p1 + p2
 
 ```{r, fig.width = 12}
 library(plotly)
-p <- plot_ly(data = credit_paradox, z = ~debt, x = ~credit_limit, y = ~income) %>% 
+p <- plot_ly(data = credit_paradox, z = ~debt, x = ~credit_limit, y = ~income) |> 
   add_markers()
 p
 mod <- lm(debt ~ credit_limit + income, data = credit_paradox)
@@ -333,7 +348,7 @@ x <- seq(min(credit_paradox$credit_limit), max(credit_paradox$credit_limit), len
 y <- seq(min(credit_paradox$income), max(credit_paradox$income), length = 70) 
 plane <- outer(x, y, function(a, b){coef(mod)[1] + coef(mod)[2]*a + coef(mod)[3]*b})
 # draw the plane
-p %>% 
+p |> 
   add_surface(x = ~x, y = ~y, z = ~plane)
 ```
 
@@ -341,7 +356,7 @@ p %>%
 qs <- quantile(credit_paradox$credit_limit, probs = seq(0, 1, .25))
 # credit_paradox$credit_cats <- cut(credit_paradox$credit_limit, breaks = qs, include.lowest = TRUE)
 ############### Or above
-credit_paradox <- credit_paradox %>% 
+credit_paradox <- credit_paradox |> 
   mutate(credit_cats = cut(credit_limit, breaks = qs, include.lowest = TRUE))
 head(credit_paradox)
 
@@ -351,8 +366,8 @@ ggplot(data = credit_paradox, aes(x = credit_limit)) +
   geom_vline(xintercept = qs, color = "blue") + 
   theme_bw()
 
-credit_paradox %>% 
-  group_by(credit_cats) %>% 
+credit_paradox |> 
+  group_by(credit_cats) |> 
   summarize(n())
 ```
 
