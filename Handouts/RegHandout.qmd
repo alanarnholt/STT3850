@@ -192,7 +192,7 @@ anova(mod_full)
 ```
 :::
 
-Based on the p-value = $`r anova(mod_full)[3, 5]`$, it may be concluded that $\beta_3 \neq 0$, which implies that the lines are not parallel.
+Based on the p-value = $`r anova(mod_full)[3, 5]`$, it may be concluded that $\beta_3 \neq 0$, which implies that the lines are not parallel.  
 
 To test for equal intercepts (which means that appraised price with and without elevators starts at the same value), the hypotheses to be evaluated are \begin{equation*}
 H_0: \beta_2 = 0 \text{ versus }H_1: \beta_2 \neq 0.
