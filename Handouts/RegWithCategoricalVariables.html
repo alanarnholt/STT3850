@@ -98,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified on September 15, 2024 08:02:56 Eastern Daylight Time</p>
+      <p class="date">Last modified on September 17, 2024 08:53:52 Eastern Daylight Time</p>
     </div>
   </div>
   
@@ -122,6 +122,8 @@ R Code
 </div>
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>gapminder1982 <span class="ot">&lt;-</span> gapminder <span class="sc">|&gt;</span> </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1982</span>) <span class="sc">|&gt;</span> </span>
@@ -130,6 +132,7 @@ R Code
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gapminder1982 <span class="sc">|&gt;</span> </span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <thead>
@@ -182,6 +185,8 @@ R Code
 </div>
 </div>
 <div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: "fig-exp"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Worldwide life expectancies in 1982"</span></span>
@@ -194,6 +199,7 @@ R Code
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Life expectancy in years"</span>,</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of countries"</span>)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div id="fig-exp" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -205,6 +211,8 @@ R Code
 </div>
 <p>Based on <a href="#fig-exp">Figure&nbsp;1</a>, woldwide life expectancies in 1982 has a unimodal skew left distribution with statistics given in <a href="#tbl-stat">Table&nbsp;1</a>.</p>
 <div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: "tbl-stat"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Descriptive statistics"</span></span>
@@ -218,6 +226,7 @@ R Code
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>T1 <span class="sc">|&gt;</span> </span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div id="tbl-stat" class="anchored">
 <table class="table table-sm table-striped small">
@@ -241,6 +250,8 @@ R Code
 </div>
 </div>
 <div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder1982, <span class="fu">aes</span>(<span class="at">x =</span> lifeexp)) <span class="sc">+</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">3</span>,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"black"</span>,</span>
@@ -250,6 +261,7 @@ R Code
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Life expectancy in years"</span>,</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of countries"</span>) <span class="sc">+</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(continent))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -259,6 +271,8 @@ R Code
 </div>
 </div>
 <div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gapminder1982 <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
@@ -269,6 +283,7 @@ R Code
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="ot">-&gt;</span> results</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>results <span class="sc">|&gt;</span> </span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div id="tbl-age" class="anchored">
 <table class="table table-sm table-striped small">
@@ -324,10 +339,13 @@ R Code
 </div>
 </div>
 <div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lifeexp_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(lifeexp <span class="sc">~</span> continent, <span class="at">data =</span> gapminder1982)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_regression_table</span>(lifeexp_mod) <span class="ot">-&gt;</span> T2</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>T2 <span class="sc">|&gt;</span> </span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <colgroup>
@@ -399,28 +417,31 @@ R Code
 </tbody>
 </table>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#OR</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>T2 <span class="sc">|&gt;</span> </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 
-<div id="nbchdesakh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nbchdesakh table {
+<div id="rfwogdefac" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rfwogdefac table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nbchdesakh thead, #nbchdesakh tbody, #nbchdesakh tfoot, #nbchdesakh tr, #nbchdesakh td, #nbchdesakh th {
+#rfwogdefac thead, #rfwogdefac tbody, #rfwogdefac tfoot, #rfwogdefac tr, #rfwogdefac td, #rfwogdefac th {
   border-style: none;
 }
 
-#nbchdesakh p {
+#rfwogdefac p {
   margin: 0;
   padding: 0;
 }
 
-#nbchdesakh .gt_table {
+#rfwogdefac .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -446,12 +467,12 @@ R Code
   border-left-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_caption {
+#rfwogdefac .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nbchdesakh .gt_title {
+#rfwogdefac .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -463,7 +484,7 @@ R Code
   border-bottom-width: 0;
 }
 
-#nbchdesakh .gt_subtitle {
+#rfwogdefac .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -475,7 +496,7 @@ R Code
   border-top-width: 0;
 }
 
-#nbchdesakh .gt_heading {
+#rfwogdefac .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -487,13 +508,13 @@ R Code
   border-right-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_bottom_border {
+#rfwogdefac .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_col_headings {
+#rfwogdefac .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -508,7 +529,7 @@ R Code
   border-right-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_col_heading {
+#rfwogdefac .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -528,7 +549,7 @@ R Code
   overflow-x: hidden;
 }
 
-#nbchdesakh .gt_column_spanner_outer {
+#rfwogdefac .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -540,15 +561,15 @@ R Code
   padding-right: 4px;
 }
 
-#nbchdesakh .gt_column_spanner_outer:first-child {
+#rfwogdefac .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nbchdesakh .gt_column_spanner_outer:last-child {
+#rfwogdefac .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nbchdesakh .gt_column_spanner {
+#rfwogdefac .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -560,11 +581,11 @@ R Code
   width: 100%;
 }
 
-#nbchdesakh .gt_spanner_row {
+#rfwogdefac .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nbchdesakh .gt_group_heading {
+#rfwogdefac .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -590,7 +611,7 @@ R Code
   text-align: left;
 }
 
-#nbchdesakh .gt_empty_group_heading {
+#rfwogdefac .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -605,15 +626,15 @@ R Code
   vertical-align: middle;
 }
 
-#nbchdesakh .gt_from_md > :first-child {
+#rfwogdefac .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nbchdesakh .gt_from_md > :last-child {
+#rfwogdefac .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nbchdesakh .gt_row {
+#rfwogdefac .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -632,7 +653,7 @@ R Code
   overflow-x: hidden;
 }
 
-#nbchdesakh .gt_stub {
+#rfwogdefac .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -645,7 +666,7 @@ R Code
   padding-right: 5px;
 }
 
-#nbchdesakh .gt_stub_row_group {
+#rfwogdefac .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -659,15 +680,15 @@ R Code
   vertical-align: top;
 }
 
-#nbchdesakh .gt_row_group_first td {
+#rfwogdefac .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nbchdesakh .gt_row_group_first th {
+#rfwogdefac .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nbchdesakh .gt_summary_row {
+#rfwogdefac .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -677,16 +698,16 @@ R Code
   padding-right: 5px;
 }
 
-#nbchdesakh .gt_first_summary_row {
+#rfwogdefac .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_first_summary_row.thick {
+#rfwogdefac .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nbchdesakh .gt_last_summary_row {
+#rfwogdefac .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -696,7 +717,7 @@ R Code
   border-bottom-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_grand_summary_row {
+#rfwogdefac .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -706,7 +727,7 @@ R Code
   padding-right: 5px;
 }
 
-#nbchdesakh .gt_first_grand_summary_row {
+#rfwogdefac .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -716,7 +737,7 @@ R Code
   border-top-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_last_grand_summary_row_top {
+#rfwogdefac .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -726,11 +747,11 @@ R Code
   border-bottom-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_striped {
+#rfwogdefac .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nbchdesakh .gt_table_body {
+#rfwogdefac .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -739,7 +760,7 @@ R Code
   border-bottom-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_footnotes {
+#rfwogdefac .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -753,7 +774,7 @@ R Code
   border-right-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_footnote {
+#rfwogdefac .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -762,7 +783,7 @@ R Code
   padding-right: 5px;
 }
 
-#nbchdesakh .gt_sourcenotes {
+#rfwogdefac .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -776,7 +797,7 @@ R Code
   border-right-color: #D3D3D3;
 }
 
-#nbchdesakh .gt_sourcenote {
+#rfwogdefac .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -784,72 +805,72 @@ R Code
   padding-right: 5px;
 }
 
-#nbchdesakh .gt_left {
+#rfwogdefac .gt_left {
   text-align: left;
 }
 
-#nbchdesakh .gt_center {
+#rfwogdefac .gt_center {
   text-align: center;
 }
 
-#nbchdesakh .gt_right {
+#rfwogdefac .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nbchdesakh .gt_font_normal {
+#rfwogdefac .gt_font_normal {
   font-weight: normal;
 }
 
-#nbchdesakh .gt_font_bold {
+#rfwogdefac .gt_font_bold {
   font-weight: bold;
 }
 
-#nbchdesakh .gt_font_italic {
+#rfwogdefac .gt_font_italic {
   font-style: italic;
 }
 
-#nbchdesakh .gt_super {
+#rfwogdefac .gt_super {
   font-size: 65%;
 }
 
-#nbchdesakh .gt_footnote_marks {
+#rfwogdefac .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nbchdesakh .gt_asterisk {
+#rfwogdefac .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nbchdesakh .gt_indent_1 {
+#rfwogdefac .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nbchdesakh .gt_indent_2 {
+#rfwogdefac .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nbchdesakh .gt_indent_3 {
+#rfwogdefac .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nbchdesakh .gt_indent_4 {
+#rfwogdefac .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nbchdesakh .gt_indent_5 {
+#rfwogdefac .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nbchdesakh .katex-display {
+#rfwogdefac .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nbchdesakh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rfwogdefac div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -914,15 +935,24 @@ R Code
 <li>Report the average life expectancy for Africans in 1982 using <code>lifeexp_mod</code>.</li>
 </ol>
 <div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>T2[<span class="dv">1</span>, <span class="st">"estimate"</span>] <span class="sc">|&gt;</span> <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 51.593</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>T2[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">|&gt;</span> <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 51.593</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lifeexp_mod)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) 
    51.59287 </code></pre>
@@ -935,21 +965,33 @@ R Code
 <li>Report the average life expectancy for Europeans in 1982 using <code>lifeexp_mod</code>.</li>
 </ol>
 <div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>T2[<span class="dv">1</span>,<span class="dv">2</span>] <span class="sc">|&gt;</span> <span class="fu">pull</span>() <span class="sc">+</span> T2[<span class="dv">4</span>,<span class="dv">2</span>] <span class="sc">|&gt;</span> <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 72.807</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lifeexp_mod)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(lifeexp_mod)[<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) 
     72.8064 </code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(lifeexp_mod)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(lifeexp_mod)[<span class="dv">4</span>],<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) 
      72.806 </code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lifeexp_mod, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">continent =</span> <span class="st">"Europe"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      1 
 72.8064 </code></pre>
@@ -963,13 +1005,19 @@ R Code
 <li>The average life expectancy for Europeans in 1982 was 72.8064 years. Which if you want to round to three decimal places would be: 72.806 years. Another way to get the desired answer is with the <code>predict()</code> function. The average life expectancy for Europeans in 1982 was 72.8064 years.</li>
 </ul>
 <div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gapminder1982)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "country"   "lifeexp"   "continent" "gdppercap"</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mod_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(lifeexp <span class="sc">~</span> gdppercap<span class="sc">*</span>continent, <span class="at">data =</span> gapminder1982)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mod_simple <span class="ot">&lt;-</span> <span class="fu">lm</span>(lifeexp <span class="sc">~</span> gdppercap, <span class="at">data =</span> gapminder1982)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_simple, mod_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -981,7 +1029,10 @@ Model 2: lifeexp ~ gdppercap * continent
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -994,8 +1045,11 @@ Residuals           132 4553.2    34.5
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>modpar <span class="ot">&lt;-</span> <span class="fu">lm</span>(lifeexp <span class="sc">~</span> gdppercap <span class="sc">+</span> continent, <span class="at">data =</span> gapminder1982)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modpar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1020,11 +1074,14 @@ Residual standard error: 5.948 on 136 degrees of freedom
 Multiple R-squared:  0.7058,    Adjusted R-squared:  0.695 
 F-statistic: 65.26 on 5 and 136 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moderndive)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder1982, <span class="fu">aes</span>(<span class="at">x =</span> gdppercap, <span class="at">y =</span> lifeexp, <span class="at">color =</span> continent)) <span class="sc">+</span> </span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_parallel_slopes</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

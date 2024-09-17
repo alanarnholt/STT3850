@@ -4,9 +4,11 @@ author: "ATA - In-class"
 date: last-modified
 date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
 format: 
-  html: default
+  html: 
+    theme: cosmo
   pdf: default
 editor: source
+code-fold: true
 ---
 
 ____________
