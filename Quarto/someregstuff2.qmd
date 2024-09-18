@@ -1,0 +1,57 @@
+---
+title: "Regression Stuff"
+format: html
+---
+
+## Some Graphs
+
+Create a scatterplot of `score` versus `age` using the `evals` data set.
+
+```{r}
+#| label: "setup"
+#| warning: false
+library(tidyverse)
+library(moderndive)
+```
+
+```{r}
+ggplot(data= evals, aes(x = age, y = score, color = gender)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
+
+```{r}
+mod_full <- lm(score ~ age + gender + age:gender, data = evals)
+mod_full
+```
+
+
+```{r}
+ggplot(data= evals, aes(x = age, y = score, color = gender)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw() + 
+  geom_abline(intercept = 4.88, slope = -0.01752, color = "pink", linetype = "dashed") + 
+  geom_abline(intercept = 4.88-.44604, slope = -0.01752 +.01353, color = "purple", linetype = "dashed")
+```
+
+
+Suppose we want a parallel slope model.
+
+```{r}
+ggplot(data= evals, aes(x = age, y = score, color = gender)) + 
+  geom_point() + 
+  geom_parallel_slopes(se = FALSE) + 
+  theme_bw() + 
+  geom_abline(intercept = 4.48, slope = -.0086, color = "pink") +
+  geom_abline(intercept = 4.48 + .19, slope = -.0086, color = "lightblue")
+```
+
+```{r}
+mod_par <- lm(score ~ age + gender, data = evals)
+mod_par
+get_regression_table(mod_par) |> 
+  knitr::kable()
+```
+
+The slope for males in the `mod_full` is `r coef(mod_full)[2] + coef(mod_full)[4]`.
