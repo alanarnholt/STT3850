@@ -1,0 +1,66 @@
+---
+title: "Some Regression Highlights"
+format: html
+---
+
+## Regression and `ggplot()` Graphs
+
+```{r}
+#| label: "setup"
+#| warning: false
+#| message: false
+library(moderndive)
+library(tidyverse)
+```
+
+Create a scatterplot of `score` versus `age` using `evals` map `gender` to `color`.
+
+```{r}
+ggplot(data = evals, aes(x = age, y = score, color = gender)) + 
+  geom_point()
+```
+
+```{r}
+ggplot(data = evals, aes(x = age, y = score, color = gender)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw() +
+  geom_abline(intercept = 4.88, slope = -.0172, color = "orange", linetype = "dashed") + 
+  geom_abline(intercept = 4.88-.44, slope = -0.0172 + .01353, color = "lightblue", linetype = "dashed")
+```
+
+```{r}
+mod_full <- lm(score ~ age + gender + age:gender, data = evals)
+mod_full |> 
+  get_regression_table() |> 
+  knitr::kable()
+```
+
+
+```{r}
+ggplot(data = evals, aes(x = age, y = score, color = gender)) + 
+  geom_point() + 
+  geom_parallel_slopes(se = FALSE) +
+  theme_bw()
+```
+
+```{r}
+mod_par <- lm(score ~ age + gender, data = evals)
+get_regression_table(mod_par) |> 
+  knitr::kable()
+```
+
+What is the y-intercept for males in the parallel slopes model?
+
+The y-intercept is `r coef(mod_par)[1] + coef(mod_par)[3]`
+
+```{r}
+predict(mod_par, newdata = data.frame(gender = "female", age = 30), interval = "conf", level = 0.90)
+```
+
+```{r}
+mod_cat <- lm(score ~ gender, data = evals)
+get_regression_table(mod_cat)
+predict(mod_cat, newdata = data.frame(gender = "male"), interval = "conf", level = 0.98)
+```
+
