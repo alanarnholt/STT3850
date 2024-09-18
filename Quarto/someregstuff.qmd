@@ -64,3 +64,4 @@ get_regression_table(mod_cat)
 predict(mod_cat, newdata = data.frame(gender = "male"), interval = "conf", level = 0.98)
 ```
 
+
