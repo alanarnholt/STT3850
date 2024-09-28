@@ -260,7 +260,7 @@ _______________
 
 * Go over in class [_Misc Regression_](../Rmarkdown/MiscRegression.html)
 
-* Quiz # 2 - Sep 26
+* ~~Quiz # 2 - Sep 26~~
 
 * Complete [PS-06](https://classroom.github.com/a/p75xdu-k) by 5:00 pm Sep 26 
 
@@ -315,15 +315,15 @@ ___________
 
 * [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)
 
-* Complete (**The binomial distribution**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Sep 30
+* Complete (**The binomial distribution**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Oct 7
 
-* Complete (**Laws of probability**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Oct 1
+* Complete (**Laws of probability**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Oct 8
 
-* Complete (**Bayesian statistics**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Oct 2
+* Complete (**Bayesian statistics**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Oct 9
 
-* Complete (**Related distributions**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Oct 7
+* Complete (**Related distributions**) in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f24/assignments) --- Due NLT 5:00 pm Oct 10
 
-* **Mid-Term Exam/Opportunity To Excel** --- Due no later than 2:00 pm Oct 10 
+* ~~**Mid-Term Exam/Opportunity To Excel** --- Due no later than 2:00 pm Oct 10~~ 
 
 ```{block, week8optional, type='rmdoptional'}
 #### Optional {-}
