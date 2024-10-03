@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.12)  20 AUG 2024 13:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.25)  3 OCT 2024 06:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **SyllabusSTT3850F2024.tex
 (./SyllabusSTT3850F2024.tex
 LaTeX2e <2024-06-01> patch level 2
-L3 programming layer <2024-07-20>
+L3 programming layer <2024-09-10>
 (/home/faculty/arnholtat/.TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2024/02/08 v1.4n Standard LaTeX document class
 (/home/faculty/arnholtat/.TinyTeX/texmf-dist/tex/latex/base/size10.clo
@@ -471,7 +471,7 @@ l.179 \begin{rmdnote}
 Here is how much of TeX's memory you used:
  12979 strings out of 475519
  205626 string characters out of 5775502
- 1942957 words of memory out of 5000000
+ 642301 words of memory out of 5000000
  35395 multiletter control sequences out of 15000+600000
  590001 words of font info for 85 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191

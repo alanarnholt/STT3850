@@ -3,7 +3,6 @@ title: "STT 3850 Syllabus - Fall 2024"
 author: ''
 date: ''
 output:
-  pdf_document: default
   html_document:
     css: ../css/style.css
     highlight: textmate
@@ -54,7 +53,7 @@ ________
 
 * 15% of the course grade will come from DataCamp assignments (22).  **DataCamp** assignments are assigned for students to practice coding and to receive immediate computerized feedback.  You should attempt to answer the DataCamp questions correctly and not simply ask the program to show you a solution. 60% of your DataCamp grade will be a binary grade (1 or 0) for completion of the assigned DataCamp Chapter.  The remaining 40% of your DataCamp grade will be computed at the end of the course and will be based on your total XP points accumulated during the semester in DataCamp.  (XP greater than 19,720 A; XP greater than 18560B; XP greater than 17,400 C; XP greater than 16,240 D) 
 
-* 35% of the course grade will come from Problem Sets (9).  See the grading rubric on the [Course Pacing Guide](../CoursePacing/CoursePacingF2024.html) for how Problem Sets will be evaluated.
+* 35% of the course grade will come from Problem Sets (9).  See the grading rubric on the [Course Pacing Guide](../CoursePacing/CoursePacingF2024H.html) for how Problem Sets will be evaluated.
 
 ```{block, tiered, type='rmdnote'}
 **Tiered Feedback Explanation**
@@ -118,7 +117,7 @@ ___________
 
 **Assignments**
 
-The [Course Pacing Guide](../CoursePacing/CoursePacingF2024.html) has all course assignments and due dates.
+The [Course Pacing Guide](../CoursePacing/CoursePacingF2024H.html) has all course assignments and due dates.
 
 ____________
 
