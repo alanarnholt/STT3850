@@ -89,7 +89,7 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA, warning = FALSE, message = FALS
 
 - If the probability is based on repeatedly observing the event’s outcome,
 this probability is called **empirical probability** and given by:
-$$\gil{P}(\text{E})=\frac{\text{Number of times E occurs}}{\text{Total number of trails}}$$
+$$\gil{P}(\text{E})=\frac{\text{Number of times E occurs}}{\text{Total number of trials}}$$
 - When the probability comes from a mathematical model and not from
 observations, it is called **theoretical probability**. This is given by:
 $$\gil{P}(\text{E})=\frac{\text{Number of outcomes in E}}{\text{Number of possible outcomes}}$$
