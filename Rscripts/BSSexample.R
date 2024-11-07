@@ -4,7 +4,7 @@ library(infer)
 library(tidyverse)
 head(bowl)
 bowl %>% 
-  summarize(phat = mean(color == "red"))
+  summarize(p = mean(color == "red"))
 bowl_sample_1
 #### Bootstrap CI
 bowl_sample_1 %>% 
@@ -24,14 +24,17 @@ ans
 ### SE CI
 bsd1 %>% 
   summarize(SE = sd(stat),
-            lep = ans -2*SE,
-            uep = ans + 2*SE)
+            lep = ans -qnorm(.975)*SE,
+            uep = ans + qnorm(.975)*SE)
+
+### Using Infer wrapper function (Note it uses Z_(1 - alpha/2) vs T_(1-alpha/2, n - 1))
+get_confidence_interval(bsd1, type = "se", point_estimate = ans)
 ############ Using a loop
 
-N <- 10000
-phat <- numeric(N)
-for(i in 1:N){
-  bss <- sample(bowl_sample_1$color, size = 50, replace = TRUE)
+B <- 10000
+phat <- numeric(B)
+for(i in 1:B){
+  bss <- sample(bowl_sample_1$color, size = sum(!is.na(bowl_sample_1$color)), replace = TRUE)
   phat[i] <- mean(bss == "red")
 }
 hist(phat)
@@ -41,7 +44,7 @@ CIPI
 
 ###
 (p1 <- mean(bowl_sample_1$color == "red"))
-CISE <- p1 + c(-1,1)*2*sd(phat)
+CISE <- p1 + c(-1,1)*qnorm(.975)*sd(phat)
 CISE
 
 
@@ -87,7 +90,7 @@ obs_diff4 <- diff(tapply(mythbusters_yawn$yawn == "yes", mythbusters_yawn$group,
 obs_diff4
 
 #### Using xtabs
-T1 <- xtabs(~yawn+group, data = mythbusters_yawn)
+T1 <- xtabs(~yawn + group, data = mythbusters_yawn)
 T1
 prop.table(T1, 2)
 T1
