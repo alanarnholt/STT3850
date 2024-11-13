@@ -23,6 +23,9 @@ pnorm(90, 88, 1, lower = FALSE)
 
 
 
+qnorm(c(.1,.25,.75, .90), 31, 4)
+
+
 
 set.seed(34)
 stuff <- rgamma(50, 1, 1)
