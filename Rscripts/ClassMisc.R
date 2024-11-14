@@ -44,6 +44,16 @@ library(moderndive)
 library(nycflights13) 
 library(ggplot2movies)
 
+promotions |> 
+  group_by(gender) |> 
+  summarize(p = mean(decision == "promoted")) -> ans1
+ans1
+(pd <- -diff(ans1$p))
+
+
+
+
+
 promotions
 tapply(promotions$decision == "promoted", promotions$gender, mean)
 (obs_diff <- -diff(tapply(promotions$decision == "promoted", promotions$gender, mean)))
