@@ -133,7 +133,7 @@ for(i in 1:B){
   bss <- sample(c(0,1), size = 24, replace = TRUE, prob = c(0.30, 0.70))
   ps[i] <- mean(bss)
 }
-hist(ps)
+hist(ps, breaks = 20)
 summary(ps)
 (pvalue <- (sum(ps >= phat) + 1)/(B + 1))
 mean(ps)
