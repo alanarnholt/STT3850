@@ -1,5 +1,7 @@
 library(tidyverse)
 library(resampledata)
+library(infer)
+library(moderndive)
 chlorine <- Bangladesh |>
   select(Chlorine) |>
   pull()
@@ -76,7 +78,7 @@ pd
 get_pvalue(pd, obs_stat = obs_diff, direction = "right")
 ((sum(pd$stat >= obs_diff) + 1)/(B + 1) -> pv2)
 
-#######
+####### class stuff from 11/19/2024
 #### Bangladesh
 
 # Want to test H_0: mu = 0.45 vs H_A: mu > 0.45
@@ -100,26 +102,38 @@ hist(xb)
 Bangladesh |> 
   specify(response = Cobalt) |> 
   hypothesize(null = "point", mu = 0.45) |> 
-  generate(reps = 10^5, type = "bootstrap") |> 
+  generate(reps = 10^5) |> 
   calculate(stat = "mean") -> pd
 pd |> 
 get_p_value(obs_stat = xbar, direction = "right")
 
 
 #######
-## Lets Test H_0: p_male = 0.70 vs H_A: p_male > 0.70
+## Lets Test H_0: p_male = 0.7 vs H_A: p_male > 0.7
+library(moderndive)
 promotions |> 
   filter(gender == "male") -> pm
-pm
 (mean(pm$decision=="promoted") -> phat)
-(delta <- 0.70 - phat)
 
-B <- 10^5 - 1
+pm |>
+  specify(response = decision, success = "promoted") |>
+  hypothesize(null = "point", p = 0.7) |>
+  generate(reps = 10^4, type = "draw") |>
+  calculate(stat = "prop") -> pd
+visualize(pd)
+get_pvalue(pd, obs_stat = phat, direction = "right")
+
+
+(mean(pm$decision=="promoted") -> phat)
+
+
+B <- 10^4 - 1
 ps <- numeric(B)
 for(i in 1:B){
-  bss <- sample(pm$decision=="promoted", size = 24, replace = TRUE)
-  ps[i] <- mean(bss) + delta
+  bss <- sample(c(0,1), size = 24, replace = TRUE, prob = c(0.30, 0.70))
+  ps[i] <- mean(bss)
 }
 hist(ps)
+summary(ps)
 (pvalue <- (sum(ps >= phat) + 1)/(B + 1))
-
+mean(ps)
