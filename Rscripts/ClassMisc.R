@@ -75,3 +75,51 @@ promotions |>
 pd
 get_pvalue(pd, obs_stat = obs_diff, direction = "right")
 ((sum(pd$stat >= obs_diff) + 1)/(B + 1) -> pv2)
+
+#######
+#### Bangladesh
+
+# Want to test H_0: mu = 0.45 vs H_A: mu > 0.45
+library(resampledata)
+Bangladesh |> 
+  summarize(MC = mean(Cobalt, na.rm = TRUE))
+# t.test(Bangladesh$Cobalt, alte = "greater", mu = 0.45)
+Bangladesh$Cobalt[!is.na(Bangladesh$Cobalt)] -> cobalt
+(xbar <- mean(cobalt))
+(delta <- 0.45 - xbar)
+B <- 10^5 - 1
+xb <- numeric(B)
+for(i in 1:B){
+  bss <- sample(cobalt, size = length(cobalt), replace = TRUE) + delta
+  xb[i] <- mean(bss)
+}
+hist(xb)
+(pvalue <- (sum(xb >= xbar) + 1)/(B + 1))
+
+### Same thing with infer
+Bangladesh |> 
+  specify(response = Cobalt) |> 
+  hypothesize(null = "point", mu = 0.45) |> 
+  generate(reps = 10^5, type = "bootstrap") |> 
+  calculate(stat = "mean") -> pd
+pd |> 
+get_p_value(obs_stat = xbar, direction = "right")
+
+
+#######
+## Lets Test H_0: p_male = 0.70 vs H_A: p_male > 0.70
+promotions |> 
+  filter(gender == "male") -> pm
+pm
+(mean(pm$decision=="promoted") -> phat)
+(delta <- 0.70 - phat)
+
+B <- 10^5 - 1
+ps <- numeric(B)
+for(i in 1:B){
+  bss <- sample(pm$decision=="promoted", size = 24, replace = TRUE)
+  ps[i] <- mean(bss) + delta
+}
+hist(ps)
+(pvalue <- (sum(ps >= phat) + 1)/(B + 1))
+
