@@ -137,3 +137,46 @@ hist(ps, breaks = 20)
 summary(ps)
 (pvalue <- (sum(ps >= phat) + 1)/(B + 1))
 mean(ps)
+
+## Stuff from 11/21/2024
+## Test: H_0: mu_ale(alcohol) = mu_lager(alcohol) vs not equal
+Alelager |> 
+  ggplot(aes(Alcohol)) + 
+  geom_density() + 
+  facet_grid(rows = vars(Type))
+
+Alelager |> 
+  ggplot(aes(sample = Alcohol)) + 
+  geom_qq_line() + 
+  geom_qq() +
+  facet_grid(rows = vars(Type))
+
+Alelager |> 
+  group_by(Type) |> 
+  summarize(MA = mean(Alcohol), SA = sd(Alcohol), MC = mean(Calories), SC = sd(Calories), n = n())
+
+# Quick test
+t.test(Alelager$Alcohol ~ Alelager$Type) 
+
+# Permutation test
+(obs_diff <- -diff(tapply(Alelager$Alcohol, Alelager$Type, mean))) # Ale - Lager
+B <- 10^4 - 1
+md <- numeric(B)
+for(i in 1:B){
+   md[i] <- -diff(tapply(Alelager$Alcohol, sample(Alelager$Type), mean))
+}
+hist(md)
+abline(v = obs_diff)            
+pvalue <- (sum(md >= obs_diff) + sum(md <= -obs_diff) + 1)/(B + 1)
+pvalue
+
+# infer now
+
+Alelager |> 
+  specify(formula = Alcohol ~ Type) |> 
+  hypothesize(null = "independence") |> 
+  generate(10^4, type = "permute") |> 
+  calculate(stat = "diff in means", order = c("Ale", "Lager")) -> pd
+visualize(pd) + 
+  shade_p_value(obs_diff, direction = "both")
+get_pvalue(pd, obs_stat = obs_diff, direction = "both")
