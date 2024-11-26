@@ -140,6 +140,9 @@ mean(ps)
 
 ## Stuff from 11/21/2024
 ## Test: H_0: mu_ale(alcohol) = mu_lager(alcohol) vs not equal
+library(tidyverse)
+library(infer)
+library(resampledata)
 Alelager |> 
   ggplot(aes(Alcohol)) + 
   geom_density() + 
@@ -170,6 +173,24 @@ abline(v = obs_diff)
 pvalue <- (sum(md >= obs_diff) + sum(md <= -obs_diff) + 1)/(B + 1)
 pvalue
 
+#######
+#######
+Alelager$Alcohol[Alelager$Type == "Lager"] -> AL
+Alelager$Alcohol[Alelager$Type == "Ale"] -> AA
+(nl <- length(AL))
+(na <- length(AA))
+
+B <- 10^4 - 1
+md <- numeric(B)
+for(i in 1:B){
+  bssL <- sample(AL, size = 18, replace = TRUE)
+  bssA <- sample(AA, size = 13, replace = TRUE)
+  md[i] <- mean(bssA) - mean(bssL)
+}
+hist(md)
+CI <- quantile(md, prob = c(0.025, 0.975))
+CI
+
 # infer now
 
 Alelager |> 
@@ -180,3 +201,11 @@ Alelager |>
 visualize(pd) + 
   shade_p_value(obs_diff, direction = "both")
 get_pvalue(pd, obs_stat = obs_diff, direction = "both")
+
+
+Alelager |> 
+  specify(formula = Alcohol ~ Type) |> 
+  # hypothesize(null = "independence") |> 
+  generate(10^4, type = "bootstrap") |> 
+  calculate(stat = "diff in means", order = c("Ale", "Lager")) -> pdc
+get_confidence_interval(pdc)
