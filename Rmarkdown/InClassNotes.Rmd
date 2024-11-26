@@ -14,7 +14,7 @@ library(openintro)
 library(PASWR2)
 # Parallel Processing
 library(doMC)
-registerDoMC(cores = 12)
+registerDoMC(cores = 20)
 ```
 
 Is there a relationship between `pclass` and `survived`?
