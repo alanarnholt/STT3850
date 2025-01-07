@@ -78,7 +78,7 @@ We will walk through everything outlined below in class.  If you want to complet
 
 * [VIDEO of the setup process](https://drive.google.com/file/d/1L-v9qAVHWtvXOTYjY8wvedH5VyzmeQeL/view?usp=drive_link)
 
-* Complete [PS-01](https://classroom.github.com/a/xKESmfBx) due by 5:00 pm Jan 16 
+* Complete [PS-01](https://classroom.github.com/a/8SLvNcRr) due by 5:00 pm Jan 16 
 * [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1JUag-0U-reD_JcKHvez50I_4R-CCMUMt/view?usp=drive_link)
  
 ```{block, week1optional, type='rmdoptional'}
@@ -117,7 +117,7 @@ ______________
 
 * Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Jan 21
 
-* Complete [PS-02](https://classroom.github.com/a/uGeKnKvo) due by 5:00 pm Jan 23
+* Complete [PS-02](https://classroom.github.com/a/l7kUul5z) due by 5:00 pm Jan 23
 
 * [Lecture Slides](../Rmarkdown/Week02/Week2_Lect.pdf)
 
@@ -145,7 +145,7 @@ __________________
 
 * Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Jan 28
 
-* Complete [PS-03](https://classroom.github.com/a/kfv7V-Qo) by 5:00 pm Jan 30
+* Complete [PS-03](https://classroom.github.com/a/0k-LQUx0) by 5:00 pm Jan 30
 
 * In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/WPIu32zo)
 
@@ -206,7 +206,7 @@ ___________
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Feb 4
 
-* Complete [PS-04](https://classroom.github.com/a/YdZmikBr) due by 5:00 pm Feb 6
+* Complete [PS-04](https://classroom.github.com/a/cpHMZ7QB) due by 5:00 pm Feb 6
 
 
 ```{block, week4optional, type='rmdoptional'}
@@ -238,7 +238,7 @@ __________________
 
 * Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Feb 11
 
-* Complete [PS-05](https://classroom.github.com/a/auci0dhf) by 5:00 pm Feb 13 
+* Complete [PS-05](https://classroom.github.com/a/Cyn6fq5L) by 5:00 pm Feb 13 
 
 
 ```{block, week5optional, type='rmdoptional'}
@@ -265,7 +265,7 @@ _______________
 
 * Quiz # 2 - Feb 20
 
-* Complete [PS-06](https://classroom.github.com/a/HQDWUjOz) by 5:00 pm Feb 20 
+* Complete [PS-06](https://classroom.github.com/a/M1Ca4uDL) by 5:00 pm Feb 20 
 
 
 ```{block, week6optional, type='rmdoptional'}
