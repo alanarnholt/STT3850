@@ -147,7 +147,7 @@ __________________
 
 * Complete [PS-03](https://classroom.github.com/a/0k-LQUx0) by 5:00 pm Jan 30
 
-* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/WPIu32zo)
+* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/NUxqNLIg)
 
 * Quiz #1 - Jan 30
 
@@ -185,11 +185,11 @@ Test yourself:
 
 * Work through chapter 4 (Data Manipulation) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
-* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/07LSd4MF) 
+* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/ERg_Okdr) 
 
-* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/GwaVpLyL) 
+* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/AlYwdHKY) 
 
-* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/ZOX7kXns)  
+* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/BpgPB7CU)  
 ```
 
 ___________
@@ -334,14 +334,14 @@ _______________
 
 * Before class read chapter 7 (Sampling) of [MD](https://moderndive.com/7-sampling.html) --- pgs 195-232
 
-* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/_TstctSt) by 5:00 pm Mar 19 --- not graded
+* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/CRAoB8Zm) by 5:00 pm Mar 19 --- not graded
 [Partial Solution](https://mathr.appstate.edu/connect/content/2d388531-2e05-485b-9f58-83855a1437e3)
 
 * Complete  the **More Distributions and the Central Limit Theorem** chapter in _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Mar 17
 
 * Quiz #3 - Mar 20
 
-* Start [PS-07](https://classroom.github.com/a/yIB8MndN) due by 5:00 pm Mar 20
+* Start [PS-07](https://classroom.github.com/a/GnKv8J56) due by 5:00 pm Mar 20
 
 ```{block, week9optional, type='rmdoptional'}
 #### Optional {-}
@@ -399,7 +399,7 @@ _______________________
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
-* Complete [PS-08](https://classroom.github.com/a/Gwp5evxM) by 5:00 pm Apr 3 
+* Complete [PS-08](https://classroom.github.com/a/hFUbON7L) by 5:00 pm Apr 3 
 
 _____________________
 
@@ -461,7 +461,7 @@ ______________________
 
 * Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Apr 15
 
-* Complete [PS-09](https://classroom.github.com/a/CVGT845f) by 5:00 pm Apr 17 
+* Complete [PS-09](https://classroom.github.com/a/ajpyuL8w) by 5:00 pm Apr 17 
 
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
