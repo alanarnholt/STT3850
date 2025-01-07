@@ -108,7 +108,7 @@ __________
 * [RStudio Server](https://mathr.appstate.edu/)
 * [DataCamp](https://www.datacamp.com/)
 * [GitHub](https://github.com/)
-* [Github Classroom Repository](https://github.com/STT3850-FALL2024)
+* [Github Classroom Repository](https://github.com/STT3850-S2025)
 
 
 Note: All technology used in the class is either open source (free) or will be accessible to students enrolled in the course for no cost.
