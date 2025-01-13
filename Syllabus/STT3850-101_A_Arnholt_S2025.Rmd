@@ -3,6 +3,7 @@ title: "STT 3850 Syllabus - Spring 2025"
 author: ''
 date: ''
 output:
+  pdf_document: default
   html_document:
     css: ../css/style.css
     highlight: textmate
@@ -15,13 +16,11 @@ output:
 
 Make an appointment to see me by clicking [here](https://calendar.app.google/2UnDLo1n8SBobRv5A).
 
-_________
 
 **Course Description:**  
 
 This course provides an overview of modern statistical data analysis. Programming with data, including simulations and bootstrapping, will be an integral part of the course. Techniques for parsing univariate and multivariate data sets will be examined. Coverage of probability, random variables, standard probability distributions and statistical sampling distributions will be sufficient to prepare the student for statistical inference. Inferential topics will include parameter estimation, hypothesis testing for proportions, means and medians, goodness of fit tests, and tests for independence. Standard and computationally intensive regression techniques may also be covered. (NUMERICAL DATA; COMPUTER) — Prerequisite: MAT 1110
 
-_______
 
 **Course Objectives:**
 
@@ -35,11 +34,10 @@ _______
 8. Students will learn how to work with named sampling distributions (t, F, binomial, chi-square, and normal).
 9. Students will learn the scope of inferential conclusions for numerous scenarios (experiments, observational studies, etc.).
 
-__________
 
 **Course Texts:**
 
-* Chester Ismay and Albert Y. Kim (2020). [_Statistical Inference via Data Science: A ModernDive into R and the Tidyverse_](https://moderndive.com)
+* Chester Ismay and Albert Y. Kim (2020). [_Statistical Inference via Data Science: A ModernDive into R and the Tidyverse _](htpps://moderndive.com)
 
 * Chihara, L. and Hesterberg, T. (2019). _Mathematical Statistics with Resampling and R_, Second Edition. Hoboken, NJ: John Wiley & Sons, Inc.---Available on [ASULearn](https://asulearn.appstate.edu/user/index.php?id=180523)
 
@@ -47,7 +45,6 @@ __________
 
 * Other materials are available from the [course webpage](https://alanarnholt.github.io/STT3850/).
 
-________
 
 **Course Grading & Assessment:**
 
@@ -55,7 +52,6 @@ ________
 
 * 35% of the course grade will come from Problem Sets (9).  See the grading rubric on the [Course Pacing Guide](../CoursePacing/CoursePacingS2025.html) for how Problem Sets will be evaluated.
 
-```{block, tiered, type='rmdnote'}
 **Tiered Feedback Explanation**
 
 **Level one**. Problem Sets are graded using the rubric on the course pacing guide.  The same rubric is used for all of the PS assignments, and you are graded on five categories with possible 3, 2, 1, or 0 points awarded per category.  Everyone who accepts a Problem Set will receive level 1 feedback in their repository **Issues**.  
@@ -67,7 +63,6 @@ I will provide Level two feedback using **Issues** in your repository to give ad
 **Level three**.  After you have received your level 2 feedback, if you are still unclear as to how you can improve your work, you may request to meet with me during student help/office hours Wednesday to receive in-depth feedback and guidance for how to be more successful on the next assignment and how to resolve the Level 2 feedback/Git issues before noon on **Thursday**.
 
 Asking for level 2 feedback is an agreement between you and me that you will revise and resubmit your document by noon on **Thursday** and I will look at your revisions and may revise your original rubric grade.  If you ask for level 2 feedback and do not revise your document by noon of Thursday I may revise your original grade. After the **Thursday** following the **Thursday** when your PS is due, I will not review any further updates or corrections you push to your repository.
-```
 
 * 15% of the course grade will come from 5 Quizzes
 
@@ -75,13 +70,11 @@ Asking for level 2 feedback is an agreement between you and me that you will rev
 
 * 25% of the course grade will come from the Final exam
 
-________
 
 **University Policies**
 
 This course conforms with all Appalachian State University policies with respect to academic integrity, disability services, class attendance, and student engagement.  The details of the policies may be found at <https://academicaffairs.appstate.edu/resources/syllabi-policy-and-statement-information>.  Please pay particular attention to the [student engagement statement](https://academicaffairs.appstate.edu/sites/academicaffairs.appstate.edu/files/gerber_resolution_student_workload_removed_approved_statement_per_mmccoughy_and_sedwards.pdf).
 
-________
 
 **Computers and Software**
 
@@ -101,7 +94,6 @@ knitr::include_graphics("POSITlogin.png", dpi = 128)
 
 If you have problems with your Appstate Username or Password visit [IT Support Services](http://support.appstate.edu/) or call 262-6266.
 
-__________
 
 **Required Technology**
 
@@ -113,27 +105,24 @@ __________
 
 Note: All technology used in the class is either open source (free) or will be accessible to students enrolled in the course for no cost.
 
-___________
+
 
 **Assignments**
 
 The [Course Pacing Guide](../CoursePacing/CoursePacingS2025.html) has all course assignments and due dates.
 
-____________
 
-```{block, note-text, type='rmdnote'}
+
 **Faculty student responsibilities**
 
 * It is my (faculty) responsibility to explain and present the material you need to master for this course.  A detailed description of everything you need to do starting with day one to the Final Exam is provided in the course pacing guide which is available on day one of the course.
 
 * It is your (student) responsibility to learn the material and to seek help if you do not understand the material.  
-```
 
 Appalachian students are expected to make intensive engagement with courses their first priority. Practically speaking, students should spend approximately 2-3 hours on coursework outside of class for every hour they spend in class. 
 
 **_For this four-hour course, you you should anticipate 8-12 hours per week of outside work._**
 
-________________
 
 **How To Do Well In This Course**
 
@@ -143,10 +132,6 @@ The only way to learn statistics is to **DO** statistics, which includes using s
 You should read assigned textbook content and read/watch supplemental materials prior to coming to class.  When you read the assigned material, you should complete the problems (not just read about them) on your paper and computer. It will be easier to participate if you acquire some familiarity with the vocabulary and methods before we start to discuss and use them. You must “speak the language” (both statistics and R) to demonstrate your knowledge effectively.  If you come to class and have difficulty following the discussion, you should make sure you have read all of the assigned material and then go back and re-read the assigned material a second time.  Reading a technical book is not the same as a novel.  Most people, your instructor included, must read a technical section at least twice before understanding a topic.  If you are still having challenges after reading the assigned material twice and working the out the material on paper and the computer, it is your responsibility to seek help.  I am here to help and will be glad to assist you in your learning process.  Please make an appointment to visit with me on my [calendar](https://calendar.app.google/FS1gx8qdFUkN6Z9Y8). 
 
 
-_____________________________________________
-
 **How To Get Unstuck**
 
 Well constructed questions will elicit answers more rapidly than poorly constructed questions.  This [video](https://www.youtube.com/watch?v=ZFaWxxzouCY&list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ&index=3) provides some background on asking questions.  This stackoverflow thread details how to create a [minimal R reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example/5963610#5963610). Please read [How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html) by Eric Raymond and Rick Moen and heed their advice.
-
-____________
