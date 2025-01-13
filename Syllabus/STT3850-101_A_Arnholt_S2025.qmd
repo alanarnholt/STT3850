@@ -92,7 +92,10 @@ If you have problems with your Appstate Username or Password visit [IT Support S
 * [GitHub](https://github.com/)
 * [Github Classroom Repository](https://github.com/STT3850-S2025)
 
+:::{.callout-note title="Technology used in this class if free"}
 Note: All technology used in the class is either open source (free) or will be accessible to students enrolled in the course for no cost.
+:::
+
 :::
 
 
