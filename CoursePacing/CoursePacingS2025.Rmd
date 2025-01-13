@@ -499,7 +499,7 @@ _________________
 ________________________
 
 
-## Week 15: (Apr 29 -- May 1) {-}
+## Week 15: (Apr 29 - 30) {-}
 
 * [Reading material for weeks 14 and 15](../Rmarkdown/ChiSquareReading.pdf)
 
@@ -517,7 +517,7 @@ ________________________
 
 * Course Review
 
-* Quiz #5 - May 1
+* Quiz #5 - Apr 30
 
 _____________________________________
 
