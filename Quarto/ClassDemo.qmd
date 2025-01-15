@@ -1,0 +1,41 @@
+---
+title: "Class Demmonstration"
+format: html
+author: "Alan T. Arnholt"
+---
+
+## Quarto
+
+@fig-hist shows a histogram of the randomly generated numbers.
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this 
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+
+
+```{r}
+#| label: "fig-hist"
+#| fig-cap: "Histogram of randomly generated numbers"
+rn <- rnorm(1000, 100, 15)
+mean(rn)
+hist(rn)
+```
+
+
+
