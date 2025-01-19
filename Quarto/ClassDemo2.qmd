@@ -1,0 +1,33 @@
+---
+title: "Class Demo"
+author: "Alan T. Arnholt"
+format: html
+---
+
+Generate 1000 random values from a normal distribution.
+
+```{r}
+set.seed(123)
+rn <- rnorm(1000, 100, 10)
+mean(rn) -> xbar
+xbar
+S <- sd(rn)
+S
+```
+
+The mean of `rn` is `r round(xbar,3)` and the standard deviation is `r round(S, 2)`.
+
+* Create a histogram of the values in `rn`.  The histgram is visible in @fig-hist.
+
+```{r}
+#| echo: false
+#| label: "fig-hist"
+#| fig-cap: "Histogram of class junk"
+
+hist(rn)
+```
+
+:::{.callout-note title="This is something I want you to pay attention to!"}
+Here is some note.
+:::
+
