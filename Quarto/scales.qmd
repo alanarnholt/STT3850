@@ -1,0 +1,52 @@
+---
+title: "Foramtting Output"
+format: html
+---
+
+## Loading some packages:
+
+```{r}
+library(tidyverse)
+library(modeldata)
+library(scales)
+```
+
+```{r}
+ames |> 
+  group_by(Sale_Condition) |> 
+  summarize(MeanSalePrice = mean(Sale_Price), NumberOfSales = n())
+```
+
+
+```{r}
+ames |> 
+  group_by(Sale_Condition) |> 
+  summarize(MeanSalePrice = scales::dollar(mean(Sale_Price)), 
+            NumberOfSales = scales::comma(n()))
+```
+
+Better yet:
+
+
+```{r}
+ames |> 
+  group_by(Sale_Condition) |> 
+  summarize(MeanSalePrice = scales::dollar(mean(Sale_Price)), 
+            NumberOfSales = scales::comma(n())) |> 
+  knitr::kable()
+```
+
+
+```{r}
+ames |> 
+  group_by(Sale_Condition) |> 
+  summarize(MeanSalePrice = scales::dollar(mean(Sale_Price)), 
+            NumberOfSales = scales::comma(n())) -> T1
+T1 |> 
+  knitr::kable(align = c("r", "r", "r"),
+               col.names = c("Sale Condition", "Mean Sale Price", "Number of Sales"))
+```
+
+Using inline `R` code to answer questions such as: "How many houses had a sale condition of "Normal" and what was their average sale price?
+
+There were **`r T1$NumberOfSales[5]`** houses sold in Ames with a `"Normal"` sale condition for and their average sale price was **`r T1$MeanSalePrice[5]`**.
