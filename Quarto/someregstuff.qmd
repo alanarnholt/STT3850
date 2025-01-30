@@ -34,6 +34,19 @@ mod_full <- lm(score ~ age + gender + age:gender, data = evals)
 mod_full |> 
   get_regression_table() |> 
   knitr::kable()
+
+mod_full |> 
+  broom::tidy(conf.int = TRUE) |> 
+  knitr::kable()
+
+mod_full |> 
+  broom::glance() |> 
+  knitr::kable()
+
+mod_full |> 
+  broom::glance() |> 
+  round(2) |> 
+  knitr::kable()
 ```
 
 
