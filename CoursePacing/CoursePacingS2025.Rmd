@@ -151,6 +151,8 @@ __________________
 
 * Quiz #1 - Jan 30
 
+* [Scales](../Quarto/scales.html)
+
 
 ```{block, test3, type='rmdexercise'}
 Test yourself:
