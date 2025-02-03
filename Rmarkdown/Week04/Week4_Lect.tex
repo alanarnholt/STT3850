@@ -119,6 +119,13 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -157,12 +164,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 4},
-  pdfauthor={Fall 2024},
+  pdfauthor={Spring 2025},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 4}
-\author{Fall 2024}
+\author{Spring 2025}
 \date{}
 \institute{Appalachian State University}
 
@@ -497,11 +504,11 @@ random sample of the rows.
 # A tibble: 5 x 4
      ID score bty_avg   age
   <int> <dbl>   <dbl> <int>
-1   304   3.7    3.33    43
-2   120   3.4    4.33    57
-3   203   4      2.33    47
-4   248   3.9    3.17    50
-5   114   4      4.33    57
+1   254   3.6    3.17    52
+2   225   4.5    4.83    35
+3   375   3.7    4.17    43
+4   358   3.5    5.83    52
+5   154   3.6    3       73
 \end{verbatim}
 
 \normalsize
@@ -548,6 +555,8 @@ the data, and returns commonly used summary statistics
 \end{Shaded}
 
 \normalsize
+
+\begin{center}\includegraphics[width=2.69in]{./pics/skim} \end{center}
 \end{frame}
 
 \begin{frame}{Correlation coefficient \(r\)}
@@ -608,7 +617,7 @@ respectively.
 
 \begin{frame}{Correlation coefficient and scatterplot}
 \protect\hypertarget{correlation-coefficient-and-scatterplot}{}
-\begin{center}\includegraphics[width=0.9\linewidth,height=0.45\textheight]{week4_2} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,height=0.75\textheight]{week4_2} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Correlation coefficien: GPA Example}
@@ -654,7 +663,7 @@ set of the \texttt{BSDA} package.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,height=0.5\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-8-1} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth,height=0.5\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-9-1} \end{center}
 \normalsize
 
 The scatterplot shows that the college GPA increases as the high school
@@ -778,7 +787,7 @@ package.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-13-1} \end{center}
+\begin{center}\includegraphics[width=0.35\linewidth,height=0.4\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-14-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -836,7 +845,7 @@ Example}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-16-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-17-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -849,7 +858,7 @@ Add ``best-fitting'' line (regression line).
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(evals\_ch5, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ bty\_avg, }\AttributeTok{y =}\NormalTok{ score)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{color =} \StringTok{"purple"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{color =} \StringTok{"purple"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Beauty Score"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Teaching Score"}\NormalTok{,}
        \AttributeTok{title =} \StringTok{"Teaching and Beauty Scores"}\NormalTok{) }\SpecialCharTok{+}  
   \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} 
@@ -857,7 +866,7 @@ Add ``best-fitting'' line (regression line).
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-17-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-18-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -936,7 +945,7 @@ and \[b_0=\bar{y}-b_1\bar{x}.\]
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
 \protect\hypertarget{regression-teaching-evaluations-example}{}
-\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-18-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-19-1} \end{center}
 
 \begin{itemize}
 \item
@@ -984,6 +993,45 @@ We obtain the regression line parameters in two steps:
 1 intercept    3.88      0.076     51.0        0    3.73     4.03 
 2 bty_avg      0.067     0.016      4.09       0    0.035    0.099
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make it look better}
+\FunctionTok{get\_regression\_table}\NormalTok{(score\_model) }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1538}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1385}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1538}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1538}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1231}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1385}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1385}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+estimate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+std\_error
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+statistic
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p\_value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+lower\_ci
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+upper\_ci
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+intercept & 3.880 & 0.076 & 50.961 & 0 & 3.731 & 4.030 \\
+bty\_avg & 0.067 & 0.016 & 4.090 & 0 & 0.035 & 0.099 \\
+\bottomrule\noalign{}
+\end{longtable}
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
@@ -1214,7 +1262,7 @@ the data we use the \texttt{get\_regression\_points()} function.
 
 \begin{frame}{Assessing the fit}
 \protect\hypertarget{assessing-the-fit-1}{}
-\begin{center}\includegraphics[width=0.9\linewidth]{Week4_Lect_files/figure-beamer/unnamed-chunk-25-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth]{Week4_Lect_files/figure-beamer/unnamed-chunk-26-1} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Assessing the fit: Teaching Evaluations Example}
@@ -1229,7 +1277,7 @@ the data we use the \texttt{get\_regression\_points()} function.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth,height=0.6\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-26-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth,height=0.6\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-27-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -1334,17 +1382,41 @@ reject \(H_0\) if \(\wp\text{-value}<\alpha\).
 \CommentTok{\# Fit regression model:}
 \NormalTok{score\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(score }\SpecialCharTok{\textasciitilde{}}\NormalTok{ bty\_avg, }\AttributeTok{data =}\NormalTok{ evals\_ch5)}
 \CommentTok{\# Get regression table:}
-\FunctionTok{get\_regression\_table}\NormalTok{(score\_model, }\AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{) }
+\FunctionTok{get\_regression\_table}\NormalTok{(score\_model, }\AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-# A tibble: 2 x 7
-  term      estimate std_error statistic p_value lower_ci upper_ci
-  <chr>        <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
-1 intercept    3.88      0.076     51.0        0    3.73     4.03 
-2 bty_avg      0.067     0.016      4.09       0    0.035    0.099
-\end{verbatim}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1538}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1385}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1538}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1538}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1231}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1385}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1385}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+estimate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+std\_error
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+statistic
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p\_value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+lower\_ci
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+upper\_ci
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+intercept & 3.880 & 0.076 & 50.961 & 0 & 3.731 & 4.030 \\
+bty\_avg & 0.067 & 0.016 & 4.090 & 0 & 0.035 & 0.099 \\
+\bottomrule\noalign{}
+\end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1692,6 +1764,17 @@ Some common misunderstandings of \(R^2\):
 [1] 0.03502226
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Or}
+\NormalTok{broom}\SpecialCharTok{::}\FunctionTok{glance}\NormalTok{(score\_model)}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.03502226
+\end{verbatim}
+
 \normalsize
 \end{frame}
 
@@ -1859,7 +1942,7 @@ So, the prediction interval for \(y_*\) is:
 
 \begin{frame}{Confidence Regions and Prediction Bands}
 \protect\hypertarget{confidence-regions-and-prediction-bands-1}{}
-\begin{center}\includegraphics[width=0.7\linewidth,height=0.7\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-40-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth,height=0.7\textheight]{Week4_Lect_files/figure-beamer/unnamed-chunk-41-1} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}

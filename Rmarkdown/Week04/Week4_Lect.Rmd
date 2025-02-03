@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Week 4"
-author: "Fall 2024"
+author: "Spring 2025"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:
@@ -257,6 +257,11 @@ evals_ch5 |>
 ```
 \normalsize
 
+```{r, echo = FALSE}
+knitr::include_graphics("./pics/skim.png", dpi=600)
+```
+
+
 
 
 ## Correlation coefficient $r$
@@ -285,7 +290,7 @@ where $\bar{x}$ and $\bar{y}$ represents the mean of the $x$ and $y$ variables. 
 ## Correlation coefficient and scatterplot 
 
 
-```{r echo = FALSE, out.height = '45%', out.width = '90%'}
+```{r echo = FALSE, out.height = '75%', out.width = '90%'}
 knitr::include_graphics("week4_2.png")
 ```
 
@@ -367,7 +372,7 @@ Gpa |>
 
 
 \normalsize
-```{r out.height = '45%', out.width = '60%'}
+```{r out.height = '40%', out.width = '35%'}
 p1 <- ggplot(data = Gpa, aes(x = hsgpa, y = collgpa)) + 
   geom_point(size = 5, color = "red") + 
   theme_bw()
@@ -418,7 +423,7 @@ Add “best-fitting” line (regression line).
 \tiny
 ```{r out.height = '45%',out.width = '60%'}
 ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
-  geom_point(size = 3, color = "purple") +
+  geom_point(size = 3, color = "purple", alpha = 0.2) +
   labs(x = "Beauty Score", y = "Teaching Score",
        title = "Teaching and Beauty Scores") +  
   geom_smooth(method = "lm", se = FALSE) + 
@@ -491,7 +496,7 @@ $$b_0=\bar{y}-b_1\bar{x}.$$
 
 ```{r echo = FALSE, out.height = '45%', out.width = '60%'}
 ggplot(evals_ch5, aes(x = bty_avg, y = score)) +
-  geom_point(size = 3, color = "purple") +
+  geom_point(size = 3, color = "purple", alpha = 0.2) +
   labs(x = "Beauty Score", y = "Teaching Score",
        title = "Teaching and Beauty Scores") +  
   geom_smooth(method = "lm", se = FALSE) + 
@@ -527,6 +532,9 @@ We obtain the regression line parameters in two steps:
 score_model <- lm(score ~ bty_avg, data = evals_ch5)
 # Get regression table:
 get_regression_table(score_model)
+# Make it look better
+get_regression_table(score_model) |> 
+  knitr::kable()
 ```
 
 ## Regression: Teaching Evaluations Example
@@ -744,7 +752,8 @@ reject $H_0$ if $\pv<\alpha$.
 # Fit regression model:
 score_model <- lm(score ~ bty_avg, data = evals_ch5)
 # Get regression table:
-get_regression_table(score_model, conf.level = 0.95) 
+get_regression_table(score_model, conf.level = 0.95) |> 
+  knitr::kable()
 # conf.level = 0.95 is default
 ```
 \normalsize
@@ -914,6 +923,8 @@ R2 <- (TSS - RSS)/TSS
 R2
 # Or
 summary(score_model)$r.squared
+# Or
+broom::glance(score_model)$r.squared
 ```
 \normalsize
 
