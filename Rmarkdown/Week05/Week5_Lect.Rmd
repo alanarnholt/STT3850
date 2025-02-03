@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Week 5"
-author: "Fall 2024"
+author: "Spring 2025"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:
@@ -39,7 +39,7 @@ header-includes:
    - \newfont{\gilfont}{msbm10 scaled 1000}
    - \newcommand{\DOT}{\usebox{\biggercirc}}
    - \newcommand{\pv}{\wp\text{-value}}
-   - \newcommand{\theHtable}{\thetable}
+   
 
 ---
 

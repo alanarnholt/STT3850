@@ -156,7 +156,6 @@
 \newfont{\gilfont}{msbm10 scaled 1000}
 \newcommand{\DOT}{\usebox{\biggercirc}}
 \newcommand{\pv}{\wp\text{-value}}
-\newcommand{\theHtable}{\thetable}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -165,12 +164,12 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 5},
-  pdfauthor={Fall 2024},
+  pdfauthor={Spring 2025},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 5}
-\author{Fall 2024}
+\author{Spring 2025}
 \date{}
 \institute{Appalachian State University}
 
@@ -363,13 +362,13 @@ Let's look at a random sample of five out of the 142 countries
 
 \begin{verbatim}
 # A tibble: 5 x 4
-  country   lifeExp continent gdpPercap
-  <fct>       <dbl> <fct>         <dbl>
-1 Honduras     70.2 Americas      3548.
-2 Spain        80.9 Europe       28821.
-3 Algeria      72.3 Africa        6223.
-4 Italy        80.5 Europe       28570.
-5 Australia    81.2 Oceania      34435.
+  country         lifeExp continent gdpPercap
+  <fct>             <dbl> <fct>         <dbl>
+1 Slovak Republic    74.7 Europe       18678.
+2 Nepal              63.8 Asia          1091.
+3 Djibouti           54.8 Africa        2082.
+4 Israel             80.7 Asia         25523.
+5 India              64.7 Asia          2452.
 \end{verbatim}
 \end{frame}
 
@@ -874,8 +873,8 @@ $ gender <fct> female, female, female, female, male, male, male, male, male, f~
 # A tibble: 2 x 4
      ID score   age gender
   <int> <dbl> <int> <fct> 
-1   437   3.4    62 male  
-2    99   4.3    48 male  
+1    81   3.3    37 female
+2   243   3.9    56 female
 \end{verbatim}
 
 \normalsize
@@ -1722,11 +1721,11 @@ $ age           <int> 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, ~
 # A tibble: 5 x 6
      ID  debt credit_limit income credit_rating   age
   <int> <int>        <int>  <dbl>         <int> <int>
-1   168     0         2327   29.4           178    37
-2   361   712         5891   53.6           434    82
-3   371   992         6135   35.6           466    40
-4     9   279         3300   15.1           266    66
-5   218   955         5395   12.5           392    65
+1    38  1093         6481   30.0           462    69
+2   222  1230         8760   98.5           633    78
+3   167     0         2880   35.7           214    35
+4   168     0         2327   29.4           178    37
+5   190   126         4411   58.4           326    85
 \end{verbatim}
 
 \normalsize
