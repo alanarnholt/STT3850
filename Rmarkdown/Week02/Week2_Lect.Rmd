@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Week 2"
-author: "Fall 2024"
+author: "Spring 2025"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:
@@ -532,7 +532,7 @@ You can set many options on a chunk by chunk basis. The most common R chunk opti
 
 - Before you submit a document or share it with someone else, please spell check your document! 
 
-- Spell check your **`first_quarto.qmd** document.  Did you have an typos?
+- Spell check your **`first_quarto.qmd** document.  Did you have any typos?
 
 
 
