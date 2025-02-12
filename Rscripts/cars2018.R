@@ -76,3 +76,6 @@ red_mod <- lm(mpg~ displacement + drive,
 summary(red_mod)
 #
 anova(red_mod, full_mod)
+
+library(moderndive)
+get_regression_table(red_mod)
