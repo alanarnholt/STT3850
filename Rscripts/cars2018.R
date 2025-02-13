@@ -98,11 +98,12 @@ library(moderndive)
 get_regression_table(red_mod) -> T3
 T3
 T3$estimate
+T3$estimate[2] -> SLOPE
 T3$estimate[1] -> FW2
 sum(T3$estimate[c(1, 3)]) -> RW2
 sum(T3$estimate[c(1, 4)]) -> FourW
 sum(T3$estimate[c(1, 5)]) -> AWD
-c(FW2, RW2, FourW, AWD)
+c(SLOPE, FW2, RW2, FourW, AWD)
 ######
 
 ggplot(data = cars_sub_premium_auto, 
@@ -110,7 +111,7 @@ ggplot(data = cars_sub_premium_auto,
   geom_point() + 
   moderndive::geom_parallel_slopes(se = FALSE) + 
   theme_bw() +
-  geom_abline(intercept = FW2, slope = -0.019, color = "red", lty = "dashed") + 
-  geom_abline(intercept = RW2, slope = -0.019, color = "green", lty = "dashed") + 
-  geom_abline(intercept = FourW, slope = -0.019, color = "lightblue", lty = "dashed") + 
-  geom_abline(intercept = AWD, slope = -0.019, color = "purple", lty = "dashed")
+  geom_abline(intercept = FW2, slope = SLOPE, color = "red", lty = "dashed") + 
+  geom_abline(intercept = RW2, slope = SLOPE, color = "green", lty = "dashed") + 
+  geom_abline(intercept = FourW, slope = SLOPE, color = "lightblue", lty = "dashed") + 
+  geom_abline(intercept = AWD, slope = SLOPE, color = "purple", lty = "dashed")
