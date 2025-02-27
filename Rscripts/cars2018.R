@@ -71,6 +71,8 @@ cars_sub_premium_auto <- cars2018 |>
          recommended_fuel == "Premium Unleaded Recommended")
 
 # Recall
+full_mod <- lm(log10_mpg ~ displacement + drive + displacement:drive, 
+               data = cars_sub_premium_auto)
 full_mod
 # Graph now
 ggplot(data = cars_sub_premium_auto, 
