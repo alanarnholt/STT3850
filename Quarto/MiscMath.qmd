@@ -1,0 +1,12 @@
+---
+title: "Misc Mathematics"
+format: html
+---
+
+$P(E|F) = \frac{P(E \cap F)}{P(F)}$
+
+$P(C|Br) = \frac{P(Br|C)\cdot P(C)}{P(Br|C)\cdot P(C) + P(Br|B)\cdot P(B) + P(Br|A)\cdot P(A)}$
+
+$E(X) = \sum x \cdot P(X = x)$
+
+$V(X) = \sigma_X^2 = E\left[(X - \mu_X)^2\right] = \sum(x - \mu_X)^2\cdot P(X=x)$
