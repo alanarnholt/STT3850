@@ -318,7 +318,7 @@ ___________
 
 * Complete  the **Related distributions** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Mar 3
 
-* **Mid-Term Exam/Opportunity To Excel** --- Due no later than 2:00 pm Mar 6 
+* **Mid-Term Exam/Opportunity To Excel** --- Due no later than 2:00 pm Mar 6 --- Assignment link in ASULEARN --- Opens Mar 3, 2025 @ 7:00 am.  
 
 ```{block, week8optional, type='rmdoptional'}
 #### Optional {-}
