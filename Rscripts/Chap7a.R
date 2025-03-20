@@ -60,7 +60,12 @@ virtual_samples |>
   summarize(num_red = sum(color == "red"),
             prop_red = sum(color =="red")/50) -> virtual_prop_red
 virtual_prop_red
+quantile(virtual_prop_red$prop_red)
+quantile(virtual_prop_red$prop_red, probs = c(0.01, 0.5, 0.99))
 
+virtual_prop_red |> 
+  summarize(Q10 = quantile(prop_red, 0.1),
+            Q90 = quantile(prop_red, 0.9))
 #### Create a histogram of prop_red from 33 samples
 
 ggplot(data = virtual_prop_red, aes(x = prop_red)) + 
