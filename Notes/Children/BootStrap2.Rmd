@@ -22,7 +22,7 @@ The birth weight of a baby is of interest to health officials since many studies
 library(resampledata)
 library(xtable)
 Babies <- NCBirths2004
-Babies %>% 
+Babies |>  
   summarize(Mean = mean(Weight), n = n())
 ```
 
@@ -69,7 +69,7 @@ mean(BD[,"xbarstar"])
 # or
 mean(BD$xbarstar)
 # tidyverse
-BD %>%
+BD |> 
   summarize(BootMean = mean(xbarstar), BootSD = sd(xbarstar))
 ```
 
@@ -114,15 +114,15 @@ ggplot(data = data.frame(x = my.boot.statB), aes(x = x)) +
 quantile(my.boot.statB, prob = c(0.025, 0.975))
 ```
 
-Note that the bootstrap distribution is approximately normal.  Second, with mean `r mean(my.boot.statB)`, it is centered at approximately the same location as the original mean, `r mean(Babies$Weight)`.  The difference between where the bootstrap distribution is centered and the mean of the of original sample is the bootstrap bias in this example `r boot.bias`.  In general, the *bias* of an estimate $\hat{\theta}$ is $$Bias[\hat{\theta}] = E[\hat{\theta}] - \theta .$$  The bootstrap estimate of bias is $$Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta},$$ the mean of the bootstrap distribution, minus the estimate from the original data. Third, we get a rough idea of the amount of variability.  We can quantify the variability by computing the standard deviation of the bootstrap distribution, in this case `r sd(my.boot.statB)`.  This is the bootstrap standard error.
+Note that the bootstrap distribution is approximately normal.  Second, with mean `r mean(my.boot.statB)`, it is centered at approximately the same location as the original mean, `r mean(Babies$Weight)`.  The difference between where the bootstrap distribution is centered and the mean of the of original sample is the bootstrap bias in this example `r boot.bias`.  In general, the ***bias*** of an estimate $\hat{\theta}$ is $$\text{Bias}[\hat{\theta}] = E[\hat{\theta}] - \theta.$$  The bootstrap estimate of bias is $$\text{Bias}_{\text{boot}}\left[\widehat{\theta^*}\right] = E\left[\widehat{\theta^*}\right] - \hat{\theta},$$ the mean of the bootstrap distribution, minus the estimate from the original data. Third, we get a rough idea of the amount of variability.  We can quantify the variability by computing the standard deviation of the bootstrap distribution, in this case `r sd(my.boot.statB)`.  This is the bootstrap standard error.
 
 
 #### Using `rep_sample_n` from the `infer` package{-}
 
 ```{r}
-Babies %>% 
-  rep_sample_n(size = 1009, replace = TRUE, reps = 10000) %>% 
-  group_by(replicate) %>% 
+Babies |>  
+  rep_sample_n(size = 1009, replace = TRUE, reps = 10000) |>  
+  group_by(replicate) |> 
   summarize(stat = mean(Weight)) -> BSD
 c(mean(BSD$stat), sd(BSD$stat))
 ggplot(data = BSD, aes(x = stat)) + 
@@ -137,9 +137,9 @@ quantile(my.boot.statB, prob = c(0.025, 0.975))
 
 ```{r}
 library(infer)
-bsd <- Babies %>% 
-  specify(response = Weight) %>% 
-  generate(reps = 10^4, type = "bootstrap") %>% 
+bsd <- Babies |>  
+  specify(response = Weight) |>  
+  generate(reps = 10^4, type = "bootstrap") |>  
   calculate(stat = "mean")
 visualize(bsd)
 get_confidence_interval(bsd, level = 0.95) -> CI
@@ -157,9 +157,9 @@ visualize(bsd) +
  
 #### BIAS {-}
 
-> A statistic used to estimate a parameter is *biased* when the mean of its sampling distribution is not equal to the true value of the parameter.  The bias of a statistic $\hat{\theta}$ is $Bias[\hat{\theta}] = E[\hat{\theta}] - \theta$.  A statistic is **unbiased** if its bias is zero.
+> A statistic used to estimate a parameter is *biased* when the mean of its sampling distribution is not equal to the true value of the parameter.  The bias of a statistic $\widehat{\theta}$ is $\text{Bias}[\widehat{\theta}] = E[\widehat{\theta}] - \theta$.  A statistic is **unbiased** if its bias is zero.
 >
-> The bootstrap method allows us to check for bias by seeing whether the bootstrap distribution of a statistic is centered at the statistic of the original random sample.  The bootstrap estimate of bias is the mean of the bootstrap distribution minus the statistic for the original data, $Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta}$.
+> The bootstrap method allows us to check for bias by seeing whether the bootstrap distribution of a statistic is centered at the statistic of the original random sample.  The bootstrap estimate of bias is the mean of the bootstrap distribution minus the statistic for the original data, $\text{Bias}_{\text{boot}}\left[\widehat{\theta}^*\right] = E\left[\widehat{\theta}^*\right] - \widehat{\theta}$.
 
 ### Solution With The `boot` Package {-}
 
@@ -235,11 +235,11 @@ par(opar)
 
 The previous code shows the distributions of two such random samples with sample means $\bar{x}_1 =$ `r mean(rs1)`, $\bar{x}_2 =$ `r mean(rs2)` and standard deviations $s_1 =$ `r sd(rs1)`, $s_2 =$ `r sd(rs2)`, respectively.  Based on the graphs above, we can see that the bootstrap distribution has roughly the same spread and shape as the theoretical sampling distribution, but the centers are different.  This example illustrates some important features of the bootstrap that hold for other statistics besides the mean:  the bootstrap distribution of a particular statistic $\hat{\theta}$ has approximately the same spread and shape as the sampling distribution of the statistic $\hat{\theta}$, but the center of the bootstrap distribution is at the center of the original sample.  Hence we do not use the center of the bootstrap distribution in its own right, but we do compare the center of the bootstrap distribution with the observed statistic; if they differ, it indicates bias.
 
-Recall that the bootstrap estimate of bias is the mean of the bootstrap distribution minus the statistic for the original data, $Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta}$.  
+Recall that the bootstrap estimate of bias is the mean of the bootstrap distribution minus the statistic for the original data, $\text{Bias}_{\text{boot}}\left[\widehat{\theta}^*\right] = E\left[\widehat{\theta}^*\right] - \widehat{\theta}$.  
 
-* For the second row, $Bias_{boot}[\hat{\theta}^*] = `r mean(my.boot.stat1)` - `r mean(rs1)` = `r mean(my.boot.stat1) - mean(rs1)`$.  
+* For the second row, $\text{Bias}_{\text{boot}}\left[\widehat{\theta}^*\right] = `r mean(my.boot.stat1)` - `r mean(rs1)` = `r mean(my.boot.stat1) - mean(rs1)`$.  
 
-* For the third row, $Bias_{boot}[\hat{\theta}^*] = `r mean(my.boot.stat2)` - `r mean(rs2)` = `r mean(my.boot.stat2) - mean(rs2)`$.
+* For the third row, $\text{Bias}_{\text{boot}}\left[\widehat{\theta}^*\right] = `r mean(my.boot.stat2)` - `r mean(rs2)` = `r mean(my.boot.stat2) - mean(rs2)`$.
 
 #### BOOTSTRAP DISTRIBUTIONS AND SAMPLING DISTRIBUTIONS {-}
 
@@ -281,21 +281,21 @@ par(opar)
 
 The first graph in the second and third rows shows the distribution of a random sample with sample means and standard deviations $\bar{x}_1 =$ `r mean(rsg1)`, $\bar{x}_2 =$ `r mean(rsg2)`, $s_1 =$ `r sd(rsg1)`, and  $s_2 =$ `r sd(rsg2)`,  respectively.  Based on the graphs above, we can see that the bootstrap distribution has roughly the same spread and shape as the theoretical sampling distribution, but the centers are different. 
 
-Recall that the bootstrap estimate of bias is the mean of the bootstrap distribution minus the statistic for the original data, $Bias_{boot}[\hat{\theta}^*] = E[\hat{\theta}^*] - \hat{\theta}$. 
+Recall that the bootstrap estimate of bias is the mean of the bootstrap distribution minus the statistic for the original data, $\text{Bias}_{\text{boot}}\left[\widehat{\theta}^*\right] = E\left[\widehat{\theta}^*\right] - \widehat{\theta}$. 
 
-* For the second row, $Bias_{boot}[\hat{\theta}^*] = `r mean(my.boot.statg1)` - `r mean(rsg1)` = `r mean(my.boot.statg1) - mean(rsg1)`$.  
+* For the second row, $\text{Bias}_{\text{boot}}\left[\widehat{\theta}^*\right] = `r mean(my.boot.statg1)` - `r mean(rsg1)` = `r mean(my.boot.statg1) - mean(rsg1)`$.  
 
-* For the third row, $Bias_{boot}[\hat{\theta}^*] = `r mean(my.boot.statg2)` - `r mean(rsg2)` = `r mean(my.boot.statg2) - mean(rsg2)`$.
+* For the third row, $\text{Bias}_{\text{boot}}\left[\widehat{\theta}^*\right] = `r mean(my.boot.statg2)` - `r mean(rsg2)` = `r mean(my.boot.statg2) - mean(rsg2)`$.
 
 #### For most common estimators and under fairly general distribution assumptions, the following need to be noted: {-}
 
-* *Center* The center of the bootstrap distribution is *not* an accurate approximation for the center of the sampling distribution.  For example, the center of the bootstrap distribution for $\bar{X}$ is centered at approximately $\bar{x} = \mu_{\hat{F}}$, the mean of the sample, whereas the sampling distribution is centered at $\mu$.
+* ___Center___ The center of the bootstrap distribution is *not* an accurate approximation for the center of the sampling distribution.  For example, the center of the bootstrap distribution for $\bar{X}$ is centered at approximately $\bar{x} = \mu_{\hat{F}}$, the mean of the sample, whereas the sampling distribution is centered at $\mu$.
 
-* *Spread* The spread of the bootstrap distribution does reflect the spread of the sampling distribution.
+* ___Spread___ - The spread of the bootstrap distribution does reflect the spread of the sampling distribution.
 
-* *Bias* The bootstrap bias estimate does reflect the bias of the sampling distribution.  Bias occurs if a sampling distribution is not centered at the parameter
+* ___Bias___  - The bootstrap bias estimate does reflect the bias of the sampling distribution.  Bias occurs if a sampling distribution is not centered at the parameter
 
-* *Skewness* The skewness of the bootstrap distribution does reflect the skewness of the sampling distribution.
+* ___Skewness___  - The skewness of the bootstrap distribution does reflect the skewness of the sampling distribution.
 
 The first point bears emphasis.  It means that *the bootstrap is not used to get better paramter estimates* because the bootstrap distributions are centered around statistics $\hat{\theta}$ calculated from the data rather than unknown population values.  Drawing thousands of bootstrap observations from the original data is not like drawing observations from the underlying population, it does not create new data. 
 
@@ -341,9 +341,9 @@ For the normal distribution, we know that the 2.5 and 97.5 percentiles are at th
 #### Using the `infer` package{-}
 
 ```{r}
-Bang %>% 
-specify(response = Arsenic) %>% 
-  generate(reps = 10^4, type = "bootstrap") %>% 
+Bang |> 
+specify(response = Arsenic) |> 
+  generate(reps = 10^4, type = "bootstrap") |> 
   calculate(stat = "mean") -> bsd
 get_confidence_interval(bsd, level = 0.95) -> CI
 CI
@@ -396,8 +396,8 @@ head(TV)
 ct <- tapply(TV$Times, TV$Cable, mean)
 ct
 # Tidy approach
-TV %>%
-  group_by(Cable) %>%
+TV |>
+  group_by(Cable) |>
   summarize(Means = mean(Times), n = n())
 ```
 
@@ -431,9 +431,9 @@ qqline(times.diff.mean, col = "red")
 par(opar)
 
 # Using infer
-TV %>% 
-  specify(Times ~ Cable) %>% 
-  generate(reps = 10^4 - 1, type = "bootstrap") %>% 
+TV |> 
+  specify(Times ~ Cable) |> 
+  generate(reps = 10^4 - 1, type = "bootstrap") |> 
   calculate(stat = "diff in means", order = c("Basic", "Extended")) -> bootdist
 visualize(bootdist) + theme_bw() +
   labs(x = substitute(paste(bar(x)[basic],"*", - bar(x)[extended],"*")))
@@ -490,8 +490,8 @@ Phone <- Verizon
 rt <- tapply(Phone$Time, Phone$Group, mean)
 rt
 # Tidy approach
-Phone %>% 
-  group_by(Group) %>% 
+Phone |> 
+  group_by(Group) |> 
   summarize(Mean = mean(Time), n = n(), SD = sd(Time))
 times.ILEC <- subset(Phone, select = Time, subset = Group == "ILEC", drop = TRUE)
 B <- 10^4
