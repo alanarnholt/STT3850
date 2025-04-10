@@ -95,10 +95,12 @@ Verizon %>%
   filter(Group == "CLEC") %>%
   select(Time) -> CLEC
 as.vector(CLEC$Time) -> clec.time
+
+set.seed(37)
 BootT2M(ilec.time, clec.time)
 
-
-BootT2M(Time.CLEC, Time.ILEC)
+set.seed(37)
+BootT2M(Time.ILEC, Time.CLEC)
 
 
 
