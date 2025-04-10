@@ -140,3 +140,28 @@ library(resampledata)
 Verizon
 Time.ILEC <- subset(Verizon, select=Time, Group == "ILEC", drop=TRUE)
 Time.CLEC <- subset(Verizon, select=Time, Group == "CLEC", drop=TRUE)
+
+
+
+##### Test H_0: mu = 8.5 hours vs H_A: mu > 8.5 - for clec repairs
+xbar <- mean(clec.time)
+xbar
+delta <- 8.5 - xbar
+delta
+B <- 10^4
+xb <- numeric(B)
+for(i in 1:B){
+  bss <- sample(clec.time, size = length(clec.time), replace = TRUE) + delta
+  xb[i] <- mean(bss)
+}
+hist(xb)
+(pvalue <- mean(xb>= xbar))
+
+Verizon |> 
+  filter(Group == "CLEC") |> 
+  specify(response = Time) |> 
+  hypothesize(null = "point", mu = 8.5) |> 
+  generate(reps = 10^4, type = "bootstrap") |> 
+  calculate(stat = "mean") -> PD
+visualize(PD)
+get_pvalue(PD, obs_stat = mean(clec.time), direction = "right")
