@@ -1,0 +1,27 @@
+---
+title: "3D Plot for Mike"
+format: html
+---
+
+## Read in the Data
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(readxl)
+MikeData <- read_excel("../Data/MikeData.xlsx")
+glimpse(MikeData)
+```
+
+```{r, fig.width = 8.5, fig.width = 8.5, message = FALSE, warning = FALSE}
+library(plotly)
+p <- plot_ly(data = MikeData, 
+             z = ~`GL Score`, 
+             x = ~`TS Score`, 
+             y = ~Year, 
+             opacity = 0.25) %>% 
+  add_markers
+p
+```
+
+
+
