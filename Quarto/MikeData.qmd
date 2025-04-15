@@ -1,28 +1,62 @@
 ---
-title: "3D Plot for Mike"
+title: "3D Plot"
 format: html
 ---
 
-## Read in the Data
 
-```{r, message = FALSE, warning = FALSE}
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
 library(tidyverse)
 library(readxl)
 MikeData <- read_excel("../Data/MikeData.xlsx")
-glimpse(MikeData)
+# glimpse(MikeData)
 ```
 
-```{r, fig.width = 8.5, fig.width = 8.5, message = FALSE, warning = FALSE}
+```{r, fig.width = 8.5, fig.width = 8.5, message = FALSE, warning = FALSE, echo = FALSE}
 library(plotly)
 p <- plot_ly(data = MikeData, 
              z = ~`GL Score`, 
              x = ~`TS Score`, 
              y = ~Year, 
-             opacity = 0.75,
+             opacity = 1,
              color = ~Nation) %>% 
   add_markers
 p
 ```
 
 
+```{r}
+library(tidyverse)
+ggplot(data = MikeData, aes(x = `GL Score`, y = `TS Score`)) + 
+  geom_point(alpha = 0.2) + 
+  geom_hline(yintercept = 4, lty = "dashed") +
+  geom_vline(xintercept = 4, lty = "dashed") +
+  theme_bw() +
+  xlim(0,8) + 
+  geom_smooth(method = "lm", se = FALSE)
+
+```
+
+```{r, fig.width = 8, fig.height = 8, warning = FALSE, message = FALSE}
+library(tidymodels)
+ggplot(data = MikeData, aes(x = `GL Score`, y = `TS Score`)) + 
+  geom_point(alpha = 0.2) + 
+  geom_hline(yintercept = 4, lty = "dashed") +
+  geom_vline(xintercept = 4, lty = "dashed") +
+  theme_bw() +
+  coord_obs_pred() +
+  xlim(0, 8) + 
+  ylim(0, 8) +
+  geom_smooth(method = "lm", se = FALSE) + 
+  facet_wrap(vars(Year))
+```
+
+
+
+
+```{r}
+mod <- lm(`TS Score` ~ `GL Score`, data = MikeData)
+summary(mod)
+mod_base <- lm(`TS Score` ~ `GL Score` + as.factor(Year), data = MikeData)
+summary(mod_base)
+```
 
