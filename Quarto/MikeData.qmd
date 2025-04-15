@@ -18,7 +18,8 @@ p <- plot_ly(data = MikeData,
              z = ~`GL Score`, 
              x = ~`TS Score`, 
              y = ~Year, 
-             opacity = 0.25) %>% 
+             opacity = 0.75,
+             color = ~Nation) %>% 
   add_markers
 p
 ```
