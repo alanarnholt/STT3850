@@ -20,12 +20,13 @@ p <- plot_ly(data = MikeData,
              opacity = 1,
              color = ~Nation) %>% 
   add_markers
-
+p
 
 x <- seq(0, 8, length = 50)
 y <- seq(0, 8, length = 50)
-plane1 <- outer(x, y, function(a,b){2019 + 1*a + 0*b})
-plane2 <- outer(x, y, function(a,b){2019 + 0*a + 1*b})
+z <- seq(2015, 2025, length = 50)
+plane1 <- outer(x, y, function(a,b){1*a + 0*b + 2019})
+plane2 <- outer(x, y, function(a,b){0*a + 1*b + 2019})
 p %>% add_surface(x = ~x, y = ~y, z = ~plane1, showscale = FALSE) %>% add_surface(x = ~x, y = ~y, z = ~plane2, showscale = FALSE)
 ```
 
