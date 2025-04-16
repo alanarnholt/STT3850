@@ -11,20 +11,30 @@ MikeData <- read_excel("../Data/MikeData.xlsx")
 # glimpse(MikeData)
 ```
 
-```{r, fig.width = 8.5, fig.width = 8.5, message = FALSE, warning = FALSE, echo = FALSE}
+```{r, fig.width = 10.5, fig.width = 10.5, message = FALSE, warning = FALSE, echo = FALSE}
 library(plotly)
 p <- plot_ly(data = MikeData, 
-             z = ~`GL Score`, 
-             x = ~`TS Score`, 
-             y = ~Year, 
+             x = ~`GL Score`, 
+             y = ~`TS Score`, 
+             z = ~Year, 
              opacity = 1,
              color = ~Nation) %>% 
   add_markers
-p
+
+
+x <- seq(0, 8, length = 50)
+y <- seq(0, 8, length = 50)
+plane1 <- outer(x, y, function(a,b){2019 + 1*a + 0*b})
+plane2 <- outer(x, y, function(a,b){2019 + 0*a + 1*b})
+p %>% add_surface(x = ~x, y = ~y, z = ~plane1, showscale = FALSE) %>% add_surface(x = ~x, y = ~y, z = ~plane2, showscale = FALSE)
 ```
 
 
-```{r}
+
+
+## Something else
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 library(tidyverse)
 ggplot(data = MikeData, aes(x = `GL Score`, y = `TS Score`)) + 
   geom_point(alpha = 0.2) + 
@@ -36,17 +46,17 @@ ggplot(data = MikeData, aes(x = `GL Score`, y = `TS Score`)) +
 
 ```
 
-```{r, fig.width = 8, fig.height = 8, warning = FALSE, message = FALSE}
+```{r, fig.width = 8, fig.height = 8, warning = FALSE, message = FALSE, echo = FALSE}
 library(tidymodels)
 ggplot(data = MikeData, aes(x = `GL Score`, y = `TS Score`)) + 
-  geom_point(alpha = 0.2) + 
+  geom_point(alpha = 0.8) + 
   geom_hline(yintercept = 4, lty = "dashed") +
   geom_vline(xintercept = 4, lty = "dashed") +
   theme_bw() +
   coord_obs_pred() +
   xlim(0, 8) + 
   ylim(0, 8) +
-  geom_smooth(method = "lm", se = FALSE) + 
+  # geom_smooth(se = FALSE) + 
   facet_wrap(vars(Year))
 ```
 

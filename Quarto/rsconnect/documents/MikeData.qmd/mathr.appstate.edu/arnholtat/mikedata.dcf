@@ -5,7 +5,7 @@ account: arnholtat
 server: mathr.appstate.edu
 hostUrl: https://mathr.appstate.edu/connect/__api__
 appId: 132
-bundleId: 369
+bundleId: 378
 url: https://mathr.appstate.edu/connect/content/0c2e3dd8-717d-4660-a47a-06c6f93b2e34/
 version: 1
 asMultiple: FALSE
