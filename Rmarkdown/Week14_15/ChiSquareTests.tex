@@ -152,7 +152,7 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
@@ -169,12 +169,11 @@
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{chi-square-goodness-of-fit-tests}{%
 \section{Chi-Square Goodness-of-Fit
-Tests}\label{chi-square-goodness-of-fit-tests}}
+Tests}\label{chi-square-goodness-of-fit-tests}
 
 \begin{frame}{Background}
-\protect\hypertarget{background}{}
+\phantomsection\label{background}
 \begin{itemize}
 \item
   Many statistical procedures require knowledge of the population from
@@ -199,7 +198,7 @@ Tests}\label{chi-square-goodness-of-fit-tests}}
 \end{frame}
 
 \begin{frame}{Background}
-\protect\hypertarget{background-1}{}
+\phantomsection\label{background-1}
 \begin{itemize}
 \item
   Goodness-of-fit tests are typically used when the form of the
@@ -215,7 +214,7 @@ Tests}\label{chi-square-goodness-of-fit-tests}}
 \end{frame}
 
 \begin{frame}[fragile]{Background}
-\protect\hypertarget{background-2}{}
+\phantomsection\label{background-2}
 \begin{itemize}
 \item
   For example, using the data frame \texttt{SOCCER} from the
@@ -232,7 +231,7 @@ Tests}\label{chi-square-goodness-of-fit-tests}}
 \end{frame}
 
 \begin{frame}{Background}
-\protect\hypertarget{background-3}{}
+\phantomsection\label{background-3}
 \begin{itemize}
 \item
   Once the probabilities for a data point to fall into each of the
@@ -247,13 +246,13 @@ Tests}\label{chi-square-goodness-of-fit-tests}}
 \end{frame}
 
 \begin{frame}{Background}
-\protect\hypertarget{background-4}{}
+\phantomsection\label{background-4}
 \begin{itemize}
 \tightlist
 \item
   The test criterion for testing
   \(H_0: F_X(x) = F_0(x) \text{ for all } x\) against the alternative
-  \(H_1: F_X(x) \ne F_0(x) \text{ for some } x\) when the null
+  \(H_1: F_X(x) \ne F_0(x)  \text{ for some } x\) when the null
   hypothesis is completely specified is
 \end{itemize}
 
@@ -273,7 +272,7 @@ is distributed approximately \(\chi^2\) with \(k-1\) degrees of freedom.
 \end{frame}
 
 \begin{frame}{Background}
-\protect\hypertarget{background-5}{}
+\phantomsection\label{background-5}
 \begin{itemize}
 \tightlist
 \item
@@ -285,7 +284,7 @@ is distributed approximately \(\chi^2\) with \(k-1\) degrees of freedom.
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Example}
-\protect\hypertarget{soccer-example}{}
+\phantomsection\label{soccer-example}
 Test the hypothesis that the number of goals scored during regulation
 time for the 232 soccer matches stored in the data frame \texttt{SOCCER}
 has a Poisson \texttt{cdf} with \(\lambda=2.5\) with the chi-square
@@ -297,7 +296,7 @@ distribution with \(\lambda=2.5\).
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Solution}
-\protect\hypertarget{soccer-solution}{}
+\phantomsection\label{soccer-solution}
 \begin{itemize}
 \tightlist
 \item
@@ -321,7 +320,7 @@ goals
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Solution}
-\protect\hypertarget{soccer-solution-1}{}
+\phantomsection\label{soccer-solution-1}
 Based on the table, a decision is made to create categories for 0, 1, 2,
 3, 4, 5, and 6 or more goals. Under the null hypothesis that \(F_0(x)\)
 is a Poisson distribution with \(\lambda=2.5\), the probabilities of
@@ -341,17 +340,17 @@ scoring 0, 1, 2, 3, 4, 5, and 6 or more goals are computed with
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{PX[}\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{] }\CommentTok{\# Probabilities for categories 4, 5, and 6 or more}
+\NormalTok{PX[}\DecValTok{5}\SpecialCharTok{:}\DecValTok{7}\NormalTok{] }\CommentTok{\# Probabilities for categories 4, 5, and 6 or more}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-[1] 0.21376302 0.13360189 0.06680094
+[1] 0.13360189 0.06680094 0.04202104
 \end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Solution}
-\protect\hypertarget{soccer-solution-2}{}
+\phantomsection\label{soccer-solution-2}
 \begin{tcolorbox}
 Since there were a total of $n=232$ soccer games, the expected
 number of goals for the six categories is simply $232 \times
@@ -381,7 +380,7 @@ number of goals for the six categories is simply $232 \times
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Solution}
-\protect\hypertarget{soccer-solution-3}{}
+\phantomsection\label{soccer-solution-3}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{ans}
@@ -401,7 +400,7 @@ X>=6 0.04202104  9.748881  7
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Solution}
-\protect\hypertarget{soccer-solution-4}{}
+\phantomsection\label{soccer-solution-4}
 The null and alternative hypotheses for using the chi-square
 goodness-of-fit test to test the hypothesis that the number of goals
 scored during regulation time for the 232 soccer matches stored in the
@@ -416,7 +415,7 @@ data frame \texttt{SOCCER} has a Poisson \texttt{cdf} with
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Solution}
-\protect\hypertarget{soccer-solution-5}{}
+\phantomsection\label{soccer-solution-5}
 \begin{itemize}
 \item
   The test statistic chosen is \(\chi_{\text{obs}}^2.\)
@@ -437,7 +436,7 @@ data frame \texttt{SOCCER} has a Poisson \texttt{cdf} with
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Solution}
-\protect\hypertarget{soccer-solution-6}{}
+\phantomsection\label{soccer-solution-6}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{chisq.test}\NormalTok{(}\AttributeTok{x =}\NormalTok{ OB, }\AttributeTok{p =}\NormalTok{ PX)}
@@ -454,10 +453,10 @@ X-squared = 1.3919, df = 6, p-value = 0.9663
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Solution}
-\protect\hypertarget{soccer-solution-7}{}
+\phantomsection\label{soccer-solution-7}
 \(1.3919402=\chi^2_{\text{obs}}\overset{?}{>}\chi^2_{0.95;6}=12.5915872\).
 
-The \(p\)-value is 0.9663469.
+The \(\wp\text{-value}= 0.9663469\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -472,19 +471,19 @@ The \(p\)-value is 0.9663469.
 \end{frame}
 
 \begin{frame}{Soccer Solution}
-\protect\hypertarget{soccer-solution-8}{}
+\phantomsection\label{soccer-solution-8}
 \begin{itemize}
 \item
   Since \(\chi^2_{\text{obs}}= 1.3919402\) is not greater than
   \(\chi^2_{0.95;6}=12.5915872\), fail to reject \(H_0\).
 \item
-  Since the \(p\)-value = 0.9663469 is greater than 0.05, fail to reject
-  \(H_0\).
+  Since the \(\wp\text{-value}= 0.9663469\) is greater than 0.05, fail
+  to reject \(H_0\).
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Soccer Solution}
-\protect\hypertarget{soccer-solution-9}{}
+\phantomsection\label{soccer-solution-9}
 \begin{tcolorbox}
 \textbf{English Conclusion:} There is no evidence to suggest that the true \textbf{cdf} does not equal the Poisson 
 distribution with $\lambda=2.5$ for at least one $x$.
@@ -492,7 +491,7 @@ distribution with $\lambda=2.5$ for at least one $x$.
 \end{frame}
 
 \begin{frame}[fragile]{Soccer Solution}
-\protect\hypertarget{soccer-solution-10}{}
+\phantomsection\label{soccer-solution-10}
 The following code can be used to create a histogram with superimposed
 expected goals.
 
@@ -511,12 +510,12 @@ expected goals.
 \end{frame}
 
 \begin{frame}{Soccer Solution}
-\protect\hypertarget{soccer-solution-11}{}
+\phantomsection\label{soccer-solution-11}
 \begin{center}\includegraphics[width=0.85\linewidth,height=0.65\textheight]{ChiSquareTests_files/figure-beamer/unnamed-chunk-9-1} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{All Parameters Known}
-\protect\hypertarget{all-parameters-known}{}
+\phantomsection\label{all-parameters-known}
 \begin{itemize}
 \tightlist
 \item
@@ -541,7 +540,7 @@ expected goals.
 \end{frame}
 
 \begin{frame}{All Parameters Known}
-\protect\hypertarget{all-parameters-known-1}{}
+\phantomsection\label{all-parameters-known-1}
 We wish to test whether these data are consistent with the hypothesis
 that birthdays of soccer players are uniformly distributed across the
 four quarters of the year. Let \(P_i\) denote the probability of a birth
@@ -555,8 +554,12 @@ the expected count for each quarter is \(528/4 = 132\).
 \end{frame}
 
 \begin{frame}[fragile]{All Parameters Known}
-\protect\hypertarget{all-parameters-known-2}{}
-\(\chi^2_{obs} = \sum_{i=1}^k\frac{(O_i - E_i)^2}{E_i} = \frac{(150 - 132)^2}{132} + \frac{(138 - 132)^2}{132} + \frac{(140 - 132)^2}{132} + \frac{(100 - 132)^2}{132} = 10.97\)
+\phantomsection\label{all-parameters-known-2}
+\[
+\begin{aligned}
+\chi^2_{obs} &= \sum_{i=1}^k\frac{(O_i - E_i)^2}{E_i}\\ & = \frac{(150 - 132)^2}{132} + \frac{(138 - 132)^2}{132} + \frac{(140 - 132)^2}{132} + \frac{(100 - 132)^2}{132}\\ &= 10.97
+\end{aligned}
+\]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -582,7 +585,7 @@ X-squared
 \end{frame}
 
 \begin{frame}[fragile]{All Parameters Known}
-\protect\hypertarget{all-parameters-known-3}{}
+\phantomsection\label{all-parameters-known-3}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{chisq.test}\NormalTok{(Observed, }\AttributeTok{p =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ CST}
@@ -622,7 +625,7 @@ X-squared = 10.97, df = 3, p-value = 0.01189
 \end{frame}
 
 \begin{frame}[fragile]{All Parameters Known}
-\protect\hypertarget{all-parameters-known-4}{}
+\phantomsection\label{all-parameters-known-4}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{(pvalue }\OtherTok{\textless{}{-}} \FunctionTok{pchisq}\NormalTok{(CST}\SpecialCharTok{$}\NormalTok{stat, }\DecValTok{3}\NormalTok{, }\AttributeTok{lower =} \ConstantTok{FALSE}\NormalTok{))}
@@ -647,14 +650,14 @@ X-squared = 10.97, df = 3, p-value = 0.01189
 \end{frame}
 
 \begin{frame}{All Parameters Known - Conclusion}
-\protect\hypertarget{all-parameters-known---conclusion}{}
+\phantomsection\label{all-parameters-known---conclusion}
 \begin{tcolorbox}
-Given the $p-value$ of $0.012$ evidence suggests birthdays for World Cup soccer players are not uniformly distributed.
+Given the $\wp\text{-value}$ of $0.0118909$, evidence suggests birthdays for World Cup soccer players are not uniformly distributed.
 \end{tcolorbox}
 \end{frame}
 
 \begin{frame}{All Parameters Known - Example 2}
-\protect\hypertarget{all-parameters-known---example-2}{}
+\phantomsection\label{all-parameters-known---example-2}
 Suppose you draw 100 numbers at random from an unknown distribution.
 Thirty values fall in the interval \((0, 0.25]\), 30 fall in
 \((0.25, 0.75]\), 22 fall in \((0.75, 1.25]\), and the rest fall in
@@ -672,7 +675,7 @@ exponential with parameter \(\lambda = 1\). Do you believe her?
 \end{frame}
 
 \begin{frame}{All Parameters Known - Example 2}
-\protect\hypertarget{all-parameters-known---example-2-1}{}
+\phantomsection\label{all-parameters-known---example-2-1}
 We wish to test the following:
 
 \begin{tcolorbox}
@@ -683,7 +686,7 @@ $H_A:$ The data are not from an exponential distribution with $\lambda = 1$.
 \end{frame}
 
 \begin{frame}{All Parameters Known - Example 2}
-\protect\hypertarget{all-parameters-known---example-2-2}{}
+\phantomsection\label{all-parameters-known---example-2-2}
 Given \(X \sim \text{Exp}(\lambda = 1)\). The probabilities for each
 interval are as follows:
 
@@ -697,7 +700,7 @@ interval are as follows:
 \end{frame}
 
 \begin{frame}[fragile]{All Parameters Known - Example 2}
-\protect\hypertarget{all-parameters-known---example-2-3}{}
+\phantomsection\label{all-parameters-known---example-2-3}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{pexp}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\DecValTok{1}\NormalTok{)}
@@ -712,10 +715,20 @@ interval are as follows:
 \begin{verbatim}
 [1] 0.2211992 0.3064342 0.1858618 0.2865048
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(ps) }\CommentTok{\# check to make sure sum is 1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1
+\end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile]{All Parameters Known - Example 2}
-\protect\hypertarget{all-parameters-known---example-2-4}{}
+\phantomsection\label{all-parameters-known---example-2-4}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{EXP }\OtherTok{\textless{}{-}}\NormalTok{ ps}\SpecialCharTok{*}\DecValTok{100}
@@ -741,7 +754,7 @@ interval are as follows:
 \end{frame}
 
 \begin{frame}[fragile]{All Parameters Known - Example 2}
-\protect\hypertarget{all-parameters-known---example-2-5}{}
+\phantomsection\label{all-parameters-known---example-2-5}
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Another approach}
@@ -770,17 +783,16 @@ X-squared = 7.407, df = 3, p-value = 0.06
 \end{frame}
 
 \begin{frame}{All Parameters Known - Example 2 - Conclusion}
-\protect\hypertarget{all-parameters-known---example-2---conclusion}{}
+\phantomsection\label{all-parameters-known---example-2---conclusion}
 \begin{tcolorbox}
-If you test using $\alpha = 0.05$, you will fail to reject the null hypothesis since the $p-value$ $= 0.0599 > \alpha = 0.05$.  There is not convincing evidence that the data do not come from an Exp($\lambda = 1$).
+If you test using $\alpha = 0.05$, you will fail to reject the null hypothesis since the $\wp\text{-value}= 0.0599978  > \alpha = 0.05$.  There is not convincing evidence that the data do not come from an Exp($\lambda = 1$).
 \end{tcolorbox}
 \end{frame}
 
-\hypertarget{categorical-data}{%
-\section{Categorical Data}\label{categorical-data}}
+\section{Categorical Data}\label{categorical-data}
 
 \begin{frame}{Different Scenarios}
-\protect\hypertarget{different-scenarios}{}
+\phantomsection\label{different-scenarios}
 The \(2 \times 2\) contingency table can be generalized for \(I\) rows
 and \(J\) columns and is referred to as an \(I \times J\) contingency
 table. The sampling scheme employed to acquire the information in the
@@ -789,7 +801,7 @@ the following two scenarios:
 \end{frame}
 
 \begin{frame}{Scenario One:}
-\protect\hypertarget{scenario-one}{}
+\phantomsection\label{scenario-one}
 SCENARIO ONE: Is there an association between gender and a person's
 happiness? To investigate whether happiness depends on gender, one might
 use information collected from the General Social Survey (GSS)
@@ -803,7 +815,7 @@ variables HAPPY and SEX.
 \end{frame}
 
 \begin{frame}[fragile]{Scenario One:}
-\protect\hypertarget{scenario-one-1}{}
+\phantomsection\label{scenario-one-1}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{HA }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{110}\NormalTok{, }\DecValTok{277}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{163}\NormalTok{, }\DecValTok{302}\NormalTok{, }\DecValTok{63}\NormalTok{)}
@@ -823,7 +835,7 @@ SEX      Very Happy Pretty Happy Not To Happy
 \end{frame}
 
 \begin{frame}[fragile]{Scenario One - Expected Values}
-\protect\hypertarget{scenario-one---expected-values}{}
+\phantomsection\label{scenario-one---expected-values}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{E }\OtherTok{\textless{}{-}} \FunctionTok{outer}\NormalTok{(}\FunctionTok{rowSums}\NormalTok{(HAT), }\FunctionTok{colSums}\NormalTok{(HAT), }\StringTok{"*"}\NormalTok{)}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(HAT)}
@@ -853,7 +865,7 @@ SEX      Very Happy Pretty Happy Not To Happy
 \end{frame}
 
 \begin{frame}{Scenario Two}
-\protect\hypertarget{scenario-two}{}
+\phantomsection\label{scenario-two}
 SCENARIO TWO: In a double blind randomized drug trial (neither the
 patient nor the physician evaluating the patient knows the treatment,
 drug or placebo, the patient receives), 400 male patients with mild
@@ -868,7 +880,7 @@ treatments?
 \end{frame}
 
 \begin{frame}[fragile]{Scenario Two}
-\protect\hypertarget{scenario-two-1}{}
+\phantomsection\label{scenario-two-1}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{DT }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{67}\NormalTok{, }\DecValTok{76}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{73}\NormalTok{, }\DecValTok{79}\NormalTok{)}
@@ -888,7 +900,7 @@ Treatment Improve No Change Worse
 \end{frame}
 
 \begin{frame}[fragile]{Scenario Two - Expected Values}
-\protect\hypertarget{scenario-two---expected-values}{}
+\phantomsection\label{scenario-two---expected-values}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{E }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(DTT)}\SpecialCharTok{$}\NormalTok{expected}
@@ -905,7 +917,7 @@ Treatment Improve No Change Worse
 \end{frame}
 
 \begin{frame}{Categorical Data}
-\protect\hypertarget{categorical-data-1}{}
+\phantomsection\label{categorical-data-1}
 The two scenarios illustrate two different sampling schemes that both
 result in \(I \times J\) contingency tables. In the first scenario,
 there is a single population (Americans) and individuals are sampled
@@ -923,7 +935,7 @@ while the number of observations in the \(i\)\textsuperscript{th} row
 \end{frame}
 
 \begin{frame}{Categorical Data}
-\protect\hypertarget{categorical-data-2}{}
+\phantomsection\label{categorical-data-2}
 \begin{table}[!ht]
 \caption{Contingency table when sampling from a single population\label{CTtable}}
 \medskip
@@ -943,7 +955,7 @@ while the number of observations in the \(i\)\textsuperscript{th} row
 \end{frame}
 
 \begin{frame}{Categorial Data}
-\protect\hypertarget{categorial-data}{}
+\phantomsection\label{categorial-data}
 The true population proportion of individuals in cell \((i, j)\) will be
 denoted \(\pi_{ij}\). Under the assumption of independence between row
 and column variables (SEX and HAPPY in this example),
@@ -964,7 +976,7 @@ expected count for cell \((i, j)\) is
 \end{frame}
 
 \begin{frame}{Categorical Data}
-\protect\hypertarget{categorical-data-3}{}
+\phantomsection\label{categorical-data-3}
 In the second scenario, there are two distinct populations from which
 samples are taken. The first population is the group of all patients
 receiving the experimental drug while the second population is the group
@@ -982,7 +994,7 @@ Table \ref{CTtable} with a contingency table from a single sample.
 \end{frame}
 
 \begin{frame}{Categorical Data}
-\protect\hypertarget{categorical-data-4}{}
+\phantomsection\label{categorical-data-4}
 Since the sample sizes of the \(I\) distinct populations are denoted
 \(n_{i\bullet}\), the total for all \(I\) samples is denoted by
 \(n_{\bullet\bullet}\) rather than the notation \(n\) used for a single
@@ -1001,7 +1013,7 @@ observations in the \(i\)\textsuperscript{th} row is
 \end{frame}
 
 \begin{frame}{Categorical Data}
-\protect\hypertarget{categorical-data-5}{}
+\phantomsection\label{categorical-data-5}
 \begin{table}[!ht]\caption{General form and
 notation used for an $I \times J$ contingency table when sampling from $I$
 distinct populations\label{CTRP}}
@@ -1026,12 +1038,11 @@ $}\setlength{\extrarowheight}{0pt}\setlength{\arraycolsep}{1.5pt}
 \end{table}
 \end{frame}
 
-\hypertarget{chi-square-tests-of-independence}{%
 \section{Chi-Square Tests of
-Independence}\label{chi-square-tests-of-independence}}
+Independence}\label{chi-square-tests-of-independence}
 
 \begin{frame}{Scenario One}
-\protect\hypertarget{scenario-one-2}{}
+\phantomsection\label{scenario-one-2}
 Scenario one asks if there is an association between gender and a
 person's happiness. Recall that two events, \(A\) and \(B\), were
 defined as independent when
@@ -1049,18 +1060,18 @@ between gender and a person's happiness.
 \end{frame}
 
 \begin{frame}{Scenario One}
-\protect\hypertarget{scenario-one-3}{}
+\phantomsection\label{scenario-one-3}
 That is, the variables gender and happiness would be considered
 mathematically independent. Since the entire population is not given but
 rather a sample from a population, the values in the \(I \times J\)
 contingency table can be expected to change from sample to sample. The
 question is, ``By how much can the variables deviate from the
-mathematical definition of independence and still be
-consideredstatistically independent?'\,'
+mathematical definition of independence and still be considered
+statistically independent?'\,'
 \end{frame}
 
 \begin{frame}{Scenario One}
-\protect\hypertarget{scenario-one-4}{}
+\phantomsection\label{scenario-one-4}
 The null and alternative hypotheses to test for independence between row
 and column variables is written
 \(H_0: \pi_{ij}=\pi_{i\bullet}\pi_{\bullet j}\) versus
@@ -1071,7 +1082,7 @@ is \begin{equation}\label{ChiSqStatIndep} \chi_{\text{obs}}^2
 \end{frame}
 
 \begin{frame}{Scenario One}
-\protect\hypertarget{scenario-one-5}{}
+\phantomsection\label{scenario-one-5}
 It compares the observed frequencies in the table with the expected
 frequencies when \(H_0\) is true. Under the assumption of independence,
 and when the observations in the cells are sufficiently large (usually
@@ -1083,18 +1094,17 @@ when \(\chi_{\text{obs}}^2 > \chi^2_{1-\alpha; (I-1)(J-1)}\).
 \end{frame}
 
 \begin{frame}{Scenario One}
-\protect\hypertarget{scenario-one-6}{}
+\phantomsection\label{scenario-one-6}
 The chi-squared approximation is generally satisfactory if the
 \(E_{ij}\)s (\(\hat{\mu}_{ij}\)s) in the test statistic are not too
 small. Various rules of thumb exist for what might be considered too
-small. A very conservative rule is to require all \(E_{ij}\)s to be 5 or
-more. This can be accomplished by combining cells with small \(E_{ij}\)s
-and reducing the overall degrees of freedom. At times, it may be
-permissible to let the \(E_{ij}\) of a cell be as low as 0.5.
+small. One rule of thumb is to require all \(E_{ij}\)s to be 5 or more.
+This can be accomplished by combining cells with small \(E_{ij}\)s and
+reducing the overall degrees of freedom.
 \end{frame}
 
 \begin{frame}{Test for Scenario One}
-\protect\hypertarget{test-for-scenario-one}{}
+\phantomsection\label{test-for-scenario-one}
 \textbf{Hypotheses}--- \(H_0: \pi_{ij} = \pi_{i\bullet}\pi_{\bullet j}\)
 (Row and column variables are independent.) versus
 \(H_1: \pi_{ij} \ne \pi_{i\bullet}\pi_{\bullet j}\) for at least one
@@ -1102,7 +1112,7 @@ permissible to let the \(E_{ij}\) of a cell be as low as 0.5.
 \end{frame}
 
 \begin{frame}{Test for Scenario One}
-\protect\hypertarget{test-for-scenario-one-1}{}
+\phantomsection\label{test-for-scenario-one-1}
 \textbf{Test Statistic} --- The test statistic is
 \[\chi_{\text{obs}}^2=\sum_{i=1}^I \sum_{j=1}^J \frac{(O_{ij}-E_{ij})^2}{E_{ij}} \overset{\bullet}{\sim} \chi^2_{(I-1)(J-1)}=\chi^2_{(2-1)(3-1)}=\chi^2_2\]
 under the assumption of independence. The \(\chi^2_{\text{obs}}\) value
@@ -1110,19 +1120,19 @@ is \(4.3215\).
 \end{frame}
 
 \begin{frame}{Test for Scenario One}
-\protect\hypertarget{test-for-scenario-one-2}{}
+\phantomsection\label{test-for-scenario-one-2}
 \textbf{Rejection Region Calculations} --- The rejection region is
 \[\chi_{\text{obs}}^2 > \chi^2_{1-\alpha; (I-1)(J-1)}=\chi^2_{0.95;2}=
         5.9914645.\] Before the statistic
-\(\chi^2_{\text{obs}}= \sum_{i=1}^I\sum_{j=1}^J  \frac{(O_{ij} - E_{ij})^2}{E_{ij}}\)
-can be computed, the expected counts for each of the \(ij\) cells must
-be calculated.\\
+\(\chi^2_{\text{obs}}= \sum_{i=1}^I\sum_{j=1}^J
+        \frac{(O_{ij} - E_{ij})^2}{E_{ij}}\) can be computed, the
+expected counts for each of the \(ij\) cells must be calculated.\\
 Note that \(O_{ij}=n_{ij}\) and
 \(E_{ij}=\frac{n_{i\bullet}n_{\bullet j}}{n}\).
 \end{frame}
 
 \begin{frame}[fragile]{Test for Scenario One}
-\protect\hypertarget{test-for-scenario-one-3}{}
+\phantomsection\label{test-for-scenario-one-3}
 \textbf{Rejection Region Calculations}
 
 \begin{Shaded}
@@ -1143,7 +1153,7 @@ SEX      Very Happy Pretty Happy Not To Happy
 \end{frame}
 
 \begin{frame}[fragile]{Test for Scenario One}
-\protect\hypertarget{test-for-scenario-one-4}{}
+\phantomsection\label{test-for-scenario-one-4}
 The value of the test statistic is \(\chi^2_{obs}=4.3215\). This can be
 done with code by entering
 
@@ -1162,7 +1172,7 @@ done with code by entering
 \end{frame}
 
 \begin{frame}[fragile]{Test for Scenario One}
-\protect\hypertarget{test-for-scenario-one-5}{}
+\phantomsection\label{test-for-scenario-one-5}
 \textbf{Statistical Conclusion}---The \(\wp\text{-value}\) is 0.1152.
 
 \begin{Shaded}
@@ -1190,7 +1200,7 @@ done with code by entering
 \end{frame}
 
 \begin{frame}[fragile]{Test for Scenario One}
-\protect\hypertarget{test-for-scenario-one-6}{}
+\phantomsection\label{test-for-scenario-one-6}
 \textbf{English Conclusion}---There is not sufficient evidence to
 suggest the variables gender and happiness are statistically dependent.
 
@@ -1213,7 +1223,7 @@ X-squared = 4.3215, df = 2, p-value = 0.1152
 \end{frame}
 
 \begin{frame}[fragile]{Example}
-\protect\hypertarget{example}{}
+\phantomsection\label{example}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(PASWR2)}
@@ -1245,7 +1255,7 @@ X-squared = 365.89, df = 1, p-value < 2.2e-16
 \end{frame}
 
 \begin{frame}[fragile]{Example}
-\protect\hypertarget{example-1}{}
+\phantomsection\label{example-1}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{(EXP }\OtherTok{\textless{}{-}}\NormalTok{ CST}\SpecialCharTok{$}\NormalTok{expected)}
@@ -1283,12 +1293,11 @@ sex        0   1
 \end{verbatim}
 \end{frame}
 
-\hypertarget{chi-square-tests-of-homogeneity}{%
 \section{Chi-Square Tests of
-Homogeneity}\label{chi-square-tests-of-homogeneity}}
+Homogeneity}\label{chi-square-tests-of-homogeneity}
 
 \begin{frame}{Question}
-\protect\hypertarget{question}{}
+\phantomsection\label{question}
 The question of interest in scenario two is whether the proportions in
 each of the \(j=3\) categories for the \(i=2\) populations are
 equivalent. Specifically, is \(\pi_{1j} = \pi_{2j}\) for all \(j\)? This
@@ -1301,7 +1310,7 @@ hypothesis for a test of homogeneity with \(i=I\) populations is written
 \end{frame}
 
 \begin{frame}{Expressed in Words}
-\protect\hypertarget{expressed-in-words}{}
+\phantomsection\label{expressed-in-words}
 \begin{itemize}
 \tightlist
 \item
@@ -1312,7 +1321,7 @@ hypothesis for a test of homogeneity with \(i=I\) populations is written
 \end{frame}
 
 \begin{frame}{Equivalent Formulation}
-\protect\hypertarget{equivalent-formulation}{}
+\phantomsection\label{equivalent-formulation}
 \begin{tcolorbox}
 An equivalent interpretation is that for each population $i=1,2,\dots, I$, the
 proportion of people in the $j\textsuperscript{th}$ category is the same.  When $H_0$ is
@@ -1321,7 +1330,7 @@ true, $\pi_{1j}=\pi_{2j}=\dots=\pi_{Ij}$ for all $j$.
 \end{frame}
 
 \begin{frame}{Theory}
-\protect\hypertarget{theory}{}
+\phantomsection\label{theory}
 Under the null hypothesis, \(\mu_{ij}= n_{i\bullet} \pi_{ij}\),
 \(\hat\pi_{ij}=p_{ij}= \frac{n_{\bullet j}}{n_{\bullet\bullet}}\), and
 \(\hat{\mu}_{ij}= \frac{n_{i\bullet} n_{\bullet j}}{n_{\bullet\bullet}}=E_{ij}\).
@@ -1345,7 +1354,7 @@ The null hypothesis of homogeneity is rejected when
 \end{frame}
 
 \begin{frame}{Test for Scenario Two}
-\protect\hypertarget{test-for-scenario-two}{}
+\phantomsection\label{test-for-scenario-two}
 \textbf{Hypotheses} --- \(H_0: \pi_{1j}=\pi_{2j} \text{ for all } j\)
 versus \(H_1: \pi_{i,\, j} \ne \pi_{i+1,\, j}\text{ for some }(i, j)\).
 That is, all the probabilities in the same column are equal to each
@@ -1354,7 +1363,7 @@ not equal to each other.
 \end{frame}
 
 \begin{frame}{Test for Scenario Two}
-\protect\hypertarget{test-for-scenario-two-1}{}
+\phantomsection\label{test-for-scenario-two-1}
 \textbf{Test Statistic}---The test statistic is
 \[\chi_{\text{obs}}^2=\sum_{i=1}^I \sum_{j=1}^J 
         \frac{(O_{ij}-E_{ij})^2}{E_{ij}} \sim \chi^2_{(I-1)(J-1)}=
@@ -1363,7 +1372,7 @@ not equal to each other.
 \end{frame}
 
 \begin{frame}{Test for Scenario Two}
-\protect\hypertarget{test-for-scenario-two-2}{}
+\phantomsection\label{test-for-scenario-two-2}
 \textbf{Rejection Region Calculations}---The rejection region is
 \[\chi_{\text{obs}}^2 > \chi^2_{1-\alpha; (I-1)\cdot(J-1)} = \chi^2_{0.95;2}=5.9914645.\]
 
@@ -1380,7 +1389,7 @@ not equal to each other.
 \end{frame}
 
 \begin{frame}[fragile]{The Data}
-\protect\hypertarget{the-data}{}
+\phantomsection\label{the-data}
 \begin{itemize}
 \tightlist
 \item
@@ -1407,7 +1416,7 @@ Pop       Improve No Change Worse
 \end{frame}
 
 \begin{frame}[fragile]{Putting the data back in a tidy format}
-\protect\hypertarget{putting-the-data-back-in-a-tidy-format}{}
+\phantomsection\label{putting-the-data-back-in-a-tidy-format}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyverse)}
@@ -1429,11 +1438,24 @@ Pop       Improve No Change Worse
 \end{frame}
 
 \begin{frame}[fragile]{More Output for Scenario Two}
-\protect\hypertarget{more-output-for-scenario-two}{}
+\phantomsection\label{more-output-for-scenario-two}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{E }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(TDP)}\SpecialCharTok{$}\NormalTok{expected}
-\NormalTok{E}
+\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{Pop }\SpecialCharTok{+}\NormalTok{ Status, }\AttributeTok{data =}\NormalTok{ NT) }\OtherTok{{-}\textgreater{}}\NormalTok{ T3}
+\NormalTok{T3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         Status
+Pop       Improve No Change Worse
+  Drug         67        76    57
+  Placebo      48        73    79
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(E }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(T3)}\SpecialCharTok{$}\NormalTok{expected)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1449,13 +1471,13 @@ Pop       Improve No Change Worse
 \end{frame}
 
 \begin{frame}[fragile]{Test for Scenario Two}
-\protect\hypertarget{test-for-scenario-two-3}{}
+\phantomsection\label{test-for-scenario-two-3}
 The value of the test statistic is \(\chi^2_{obs}=6.7584.\). This can be
 done with code by entering
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{chi.obs }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((TDP }\SpecialCharTok{{-}}\NormalTok{ E)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{E )}
+\NormalTok{chi.obs }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((T3 }\SpecialCharTok{{-}}\NormalTok{ E)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\NormalTok{E )}
 \NormalTok{chi.obs}
 \end{Highlighting}
 \end{Shaded}
@@ -1468,8 +1490,8 @@ done with code by entering
 \end{frame}
 
 \begin{frame}[fragile]{Test for Scenario Two}
-\protect\hypertarget{test-for-scenario-two-4}{}
-\textbf{Statistical Conclusion}---The \(\wp\text{-value}\) is 0.03408.
+\phantomsection\label{test-for-scenario-two-4}
+\textbf{Statistical Conclusion}---The \(\wp\text{-value}\) is 0.0340754.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1494,7 +1516,7 @@ done with code by entering
 \end{frame}
 
 \begin{frame}[fragile]{Test for Scenario Two}
-\protect\hypertarget{test-for-scenario-two-5}{}
+\phantomsection\label{test-for-scenario-two-5}
 \textbf{English Conclusion}---There is sufficient evidence to suggest
 that not all of the probabilities for the \(i=2\) populations with
 respect to each of the \(J\) categories are equal.
@@ -1503,7 +1525,7 @@ Using \texttt{chisq.test()} directly produces the same results.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{chisq.test}\NormalTok{(TDP)}
+\FunctionTok{chisq.test}\NormalTok{(T3)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1511,7 +1533,7 @@ Using \texttt{chisq.test()} directly produces the same results.
 
     Pearson's Chi-squared test
 
-data:  TDP
+data:  T3
 X-squared = 6.7584, df = 2, p-value = 0.03408
 \end{verbatim}
 \end{frame}

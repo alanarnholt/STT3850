@@ -18,15 +18,23 @@ p <- plot_ly(data = MikeData,
              y = ~`TS Score`, 
              z = ~Year, 
              opacity = 1,
-             color = ~Nation) %>% 
-  add_markers
+             color = ~Nation,
+             type = 'scatter3d') 
 p
+```
 
+```{r}
+p <- plot_ly(data = MikeData, 
+             x = ~`GL Score`, 
+             y = ~`TS Score`, 
+             z = ~Year, 
+             opacity = 1,
+             color = ~Nation) |> add_markers() 
+p
 x <- seq(0, 8, length = 50)
 y <- seq(0, 8, length = 50)
-z <- seq(2015, 2025, length = 50)
-plane1 <- outer(x, y, function(a,b){1*a + 0*b + 2019})
-plane2 <- outer(x, y, function(a,b){0*a + 1*b + 2019})
+plane1 <- outer(x, y, function(a,b){1*a + 0*b - 4})
+plane2 <- outer(x, y, function(a,b){0*a + 1*b - 4})
 p %>% add_surface(x = ~x, y = ~y, z = ~plane1, showscale = FALSE) %>% add_surface(x = ~x, y = ~y, z = ~plane2, showscale = FALSE)
 ```
 

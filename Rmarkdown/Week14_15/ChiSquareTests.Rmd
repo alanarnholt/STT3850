@@ -124,7 +124,7 @@ Based on the table, a decision is made to create categories for 0, 1, 2, 3, 4, 5
 ```{r}
 PX <- c(dpois(0:5, 2.5), ppois(5, 2.5, lower = FALSE))
 PX[1:4] # Probabilities for categories 0, 1, 2, 3
-PX[4:6] # Probabilities for categories 4, 5, and 6 or more
+PX[5:7] # Probabilities for categories 4, 5, and 6 or more
 ```
 
 ## Soccer Solution
@@ -184,7 +184,7 @@ chisq.test(x = OB, p = PX)
 
 $`r chi.obs`=\chi^2_{\text{obs}}\overset{?}{>}\chi^2_{0.95;6}=`r qchisq(0.95, 6)`$.
 
-The $p$-value is `r pchisq(chi.obs,6, lower = FALSE)`.
+The $\pv = `r pchisq(chi.obs,6, lower = FALSE)`$.
 
 ```{r}
 p.val <- pchisq(chi.obs, 7-1, lower = FALSE)
@@ -195,7 +195,7 @@ p.val
 
 - Since $\chi^2_{\text{obs}}= `r chi.obs`$ is not greater than $\chi^2_{0.95;6}=`r qchisq(0.95, 6)`$, fail to reject $H_0$.
 
-- Since the $p$-value = `r p.val` is greater than 0.05, fail to reject $H_0$.
+- Since the $\pv  = `r p.val`$ is greater than 0.05, fail to reject $H_0$.
 
 ## Soccer Solution
 
@@ -256,7 +256,11 @@ There were a total of $n = 528$ players considered for this study, so the expect
 
 ## All Parameters Known
 
-$\chi^2_{obs} = \sum_{i=1}^k\frac{(O_i - E_i)^2}{E_i} = \frac{(150 - 132)^2}{132} + \frac{(138 - 132)^2}{132} + \frac{(140 - 132)^2}{132} + \frac{(100 - 132)^2}{132} = 10.97$
+$$
+\begin{aligned}
+\chi^2_{obs} &= \sum_{i=1}^k\frac{(O_i - E_i)^2}{E_i}\\ & = \frac{(150 - 132)^2}{132} + \frac{(138 - 132)^2}{132} + \frac{(140 - 132)^2}{132} + \frac{(100 - 132)^2}{132}\\ &= 10.97
+\end{aligned}
+$$
 
 ```{r}
 (chi_obs <- sum((Observed - 132)^2/132))
@@ -283,7 +287,7 @@ CST$p.value
 ## All Parameters Known - Conclusion
 
 \begin{tcolorbox}
-Given the $p-value$ of $0.012$ evidence suggests birthdays for World Cup soccer players are not uniformly distributed.
+Given the $\pv$ of $`r CST$p.value`$, evidence suggests birthdays for World Cup soccer players are not uniformly distributed.
 \end{tcolorbox}
 
 ## All Parameters Known - Example 2
@@ -325,6 +329,7 @@ p3 <- pexp(1.25, 1) - pexp(0.75, 1)
 p4 <- pexp(1.25, 1, lower = FALSE)
 ps <- c(p1, p2, p3, p4)
 ps
+sum(ps) # check to make sure sum is 1
 ```
 
 ## All Parameters Known - Example 2
@@ -349,7 +354,7 @@ pvalue
 ## All Parameters Known - Example 2 - Conclusion
 
 \begin{tcolorbox}
-If you test using $\alpha = 0.05$, you will fail to reject the null hypothesis since the $p-value$ $= 0.0599 > \alpha = 0.05$.  There is not convincing evidence that the data do not come from an Exp($\lambda = 1$).
+If you test using $\alpha = 0.05$, you will fail to reject the null hypothesis since the $\pv = `r pvalue`  > \alpha = 0.05$.  There is not convincing evidence that the data do not come from an Exp($\lambda = 1$).
 \end{tcolorbox}
 
 
@@ -476,7 +481,7 @@ Scenario one asks if there is an association between gender and a person's happi
 
 ## Scenario One
 
-That is, the variables gender and happiness would be considered mathematically independent. Since the entire population is not given but rather a sample from a population, the values in the $I \times J$ contingency table can be expected to change from sample to sample. The question is, ``By how much can the variables deviate from the mathematical definition of independence and still be consideredstatistically independent?''
+That is, the variables gender and happiness would be considered mathematically independent. Since the entire population is not given but rather a sample from a population, the values in the $I \times J$ contingency table can be expected to change from sample to sample. The question is, ``By how much can the variables deviate from the mathematical definition of independence and still be considered statistically independent?''
 
 ## Scenario One
 
@@ -493,7 +498,7 @@ It compares the observed frequencies in the table with the expected frequencies 
 
 ## Scenario One
 
-The chi-squared approximation is generally satisfactory if the $E_{ij}$s ($\hat{\mu}_{ij}$s) in the test statistic are not too small.  Various rules of thumb exist for what might be considered too small.  A very conservative rule is to require all $E_{ij}$s to be 5 or more.  This can be accomplished by combining cells with small $E_{ij}$s and reducing the overall degrees of freedom.  At times, it may be permissible to let the $E_{ij}$ of a cell be as low as 0.5.
+The chi-squared approximation is generally satisfactory if the $E_{ij}$s ($\hat{\mu}_{ij}$s) in the test statistic are not too small.  Various rules of thumb exist for what might be considered too small.  One rule of thumb is to require all $E_{ij}$s to be 5 or more.  This can be accomplished by combining cells with small $E_{ij}$s and reducing the overall degrees of freedom.
 
 ## Test for Scenario One
 
@@ -672,8 +677,9 @@ head(NT, 3)
 ## More Output for Scenario Two
 
 ```{r}
-E <- chisq.test(TDP)$expected
-E
+xtabs(~Pop + Status, data = NT) -> T3
+T3
+(E <- chisq.test(T3)$expected)
 ```
 
 $$\chi^2_{\text{obs}}=\frac{(67 - 57.5)^2}{57.5} + \frac{(76 - 74.5)^2}{74.5}+
@@ -685,7 +691,7 @@ $$\chi^2_{\text{obs}}=\frac{(67 - 57.5)^2}{57.5} + \frac{(76 - 74.5)^2}{74.5}+
 The value of the test statistic is $\chi^2_{obs}=6.7584.$. This can be done with code by entering
 
 ```{r}
-chi.obs <- sum((TDP - E)^2/E )
+chi.obs <- sum((T3 - E)^2/E )
 chi.obs
 ```
 
@@ -693,7 +699,7 @@ $6.7584 = \chi^2_{\text{obs}}\overset{?}{>} \chi^2_{.95,2}= `r qchisq(0.95, 2)`.
 
 ## Test for Scenario Two
 
-**Statistical Conclusion**---The $\pv$ is 0.03408.
+**Statistical Conclusion**---The $\pv$ is `r pchisq(chi.obs, 2, lower = FALSE)`.
 
 ```{r}
 p.val <- pchisq(chi.obs, 2, lower = FALSE)
@@ -711,6 +717,6 @@ p.val
 Using `chisq.test()` directly produces the same results.
 
 ```{r}
-chisq.test(TDP)
+chisq.test(T3)
 ```
 
