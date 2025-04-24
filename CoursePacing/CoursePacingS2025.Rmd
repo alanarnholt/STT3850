@@ -489,6 +489,8 @@ _________________
 
 * [Lecture Slides](../Rmarkdown/Week14_15/ChiSquareTests.pdf)
 
+* Quiz #5 - Apr 24
+
 
 
 
@@ -519,7 +521,7 @@ ________________________
 
 * Course Review
 
-* Quiz #5 - Apr 30
+
 
 _____________________________________
 
