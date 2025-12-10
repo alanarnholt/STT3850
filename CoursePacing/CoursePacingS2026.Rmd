@@ -85,11 +85,11 @@ ______________
 
 * [Lecture Slides](../Rmarkdown/Week02/Week2_Lect.pdf)
 
-* Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Jan 19
+* Complete the **Data Visualization** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Jan 19
 
 * Before class read chapter 2 (Data Visualization) of [MD](https://moderndive.com/2-viz.html) --- pgs 21-62
 
-* Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Jan 20
+* Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Jan 20
 
 * Complete [PS-02](https://classroom.github.com/a/l7kUul5z) due by 5:00 pm Jan 21
 
@@ -115,9 +115,9 @@ __________________
 
 * Before class read chapter 3 (Data Wrangling) of [MD](https://moderndive.com/3-wrangling.html) --- pgs 65-96
 
-* Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Jan 26
+* Complete the **Data Wrangling** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Jan 25
 
-* Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Jan 26
+* Complete the **Grouping and Summarizing** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Jan 26
 
 * [Scales](../Quarto/scales.html)
 
@@ -177,13 +177,13 @@ ___________
 
 * [Lecture Slides](../Rmarkdown/Week04/Week4_Lect.pdf)
 
-* Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Feb 1
+* Complete the **Introduction to Modeling** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 1
 
 * Before class read chapter 5 (Basic Regression) of [MD](https://moderndive.com/5-regression.html) --- pgs 119-160
 
 * In class go over this [document](https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html)
 
-* Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Feb 2
+* Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 2
 
 * Complete [PS-04](https://classroom.github.com/a/cpHMZ7QB) due by 5:00 pm Feb 4
 
@@ -209,7 +209,7 @@ __________________
 
 * [Lecture Slides](../Rmarkdown/Week05/Week5_Lect.pdf)
 
-* Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments)---Due NLT 5:00 pm Feb 8
+* Complete the **Modeling with Multiple Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments)---Due NLT 5:00 pm Feb 8
 
 * Before class read chapter 6 (Multiple Regression) of [MD](https://moderndive.com/6-multiple-regression.html) --- pgs 161-191
 
@@ -217,7 +217,7 @@ __________________
 
 * Class [notes](../Handouts/RegHandout.html) for one quantitative and one qualitative predictor
 
-* Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Feb 9
+* Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 9
 
 * Complete [PS-05](https://classroom.github.com/a/Cyn6fq5L) by 5:00 pm Feb 11
 
@@ -238,13 +238,13 @@ _______________
 
 * [Lecture Slides](../Rmarkdown/Week06/Week6_Lect.pdf)
 
-* Complete the **Summary Statistics** chapter of _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Feb 15
+* Complete the **Summary Statistics** chapter of _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 15
 
 * Before class read/review chapter 6 (Multiple Regression) of [MD](https://moderndive.com/6-multiple-regression.html) --- pgs 161-191
 
 * Go over in class [_Misc Regression_](../Rmarkdown/MiscRegression.html)
 
-* Complete the **Random Numbers and Probability** chapter of _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Feb 16
+* Complete the **Random Numbers and Probability** chapter of _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 16
 
 * Complete [PS-06](https://classroom.github.com/a/M1Ca4uDL) by 5:00 pm Feb 18 
 
@@ -268,9 +268,9 @@ _____________
 
 * [Lecture Slides](../Rmarkdown/Week07/Week7_Lect.pdf)
 
-* Complete the **The binomial distribution** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Feb 22
+* Complete the **The binomial distribution** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 22
 
-* Complete the **Laws of probability** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Feb 23
+* Complete the **Laws of probability** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 23
 
 * [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)
 
@@ -284,9 +284,9 @@ _____________
 
 * [Foundations of Probability with some Extras](https://mathr.appstate.edu/connect/content/4c81be04-9184-4aa6-84bd-a9a1858365f9)
 
-* Complete the **Improving the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments)
+* Complete the **Improving the Report** chapter of _Reporting with R Markdown_--- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments)
 
-* Complete the **Customizing the Report** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments)
+* Complete the **Customizing the Report** chapter of _Reporting with R Markdown_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments)
 ```
 
 
@@ -298,9 +298,9 @@ ___________
 
 * [Lecture Slides](../Rmarkdown/Week07/Week7_Lect.pdf)
 
-* Complete the **Bayesian statistics** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Mar 1
+* Complete the **Bayesian statistics** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Mar 1
 
-* Complete  the **Related distributions** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Mar 2
+* Complete  the **Related distributions** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Mar 2
 
 * **Quiz #7** Mar 5 
 
@@ -312,7 +312,7 @@ _______________
 
 ## Week 9: (Mar 16 -- 19) {-}
 
-* Complete  the **More Distributions and the Central Limit Theorem** chapter in _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Mar 15
+* Complete  the **More Distributions and the Central Limit Theorem** chapter in _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Mar 15
 
 * Before class read chapter 7 (Sampling) of [MD](https://moderndive.com/7-sampling.html) --- pgs 195-232
 
@@ -345,13 +345,13 @@ ___________________________
 
 * Read Chapter 5 of MSWR
 
-* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Mar 22
+* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Mar 22
 
 * Before class read chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com/8-confidence-intervals.html) --- pgs 233-305
 
-* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Mar 23
+* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Mar 23
 
-* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Mar 24
+* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Mar 24
 
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
@@ -410,15 +410,15 @@ __________________
 
 * [Lecture Slides for weeks 11, 12, and 13](../Rmarkdown/Week11_12_13/Week11_12_13.pdf)
 
-* Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Apr 5
+* Complete the **Introduction to ideas of inference** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Apr 5
 
 * Before class read Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com/9-hypothesis-testing.html) --- pgs 307-360
 
 * Read about [Permutation Testing](../Rmarkdown/PermutationTesting.html) 
 
-* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Apr 6
+* Complete the **Completing a randomization test: gender discrimination** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Apr 6
 
-* Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Apr 7
+* Complete the **Hypothesis testing errors: opportunity cost** chapter of _Foundations of Inference_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Apr 7
 
 * **Quiz #11** - Apr 9
 
@@ -439,13 +439,13 @@ ______________________
 
 * [Lecture Slides for weeks 11, 12, and 13](../Rmarkdown/Week11_12_13/Week11_12_13.pdf)
 
-* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Apr 12
+* Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Apr 12
 
 * Before class review Chapter 9 (Hypothesis Testing) of [MD](https://moderndive.com/9-hypothesis-testing.html) --- pgs 307-360
 
 * [Permutation Examples](../Rmarkdown/PermutationExamples.html)
 
-* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Apr 13
+* Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Apr 13
 
 * Complete [PS-09](https://classroom.github.com/a/ajpyuL8w) by 5:00 pm Apr 15
 
@@ -467,7 +467,7 @@ _________________
 
 * [Reading material for weeks 14 and 15](../Rmarkdown/ChiSquareReading.pdf)
 
-* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Apr 19
+* Complete the **Comparing Many Parameters: Independence** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Apr 19
 
 * Watch Goodness-Of-Fit video on ASULEARN
 
@@ -492,7 +492,7 @@ ________________________
 
 * [Reading material for weeks 14 and 15](../Rmarkdown/ChiSquareReading.pdf)
 
-* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-s2025/assignments) --- Due NLT 5:00 pm Apr 26
+* Complete the **Comparing Many Parameters: Goodness of Fit** chapter in _Inference for Categorical Data in R_--- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Apr 26
 
 * Watch Chi-Square Test of Independence video on ASULEARN
 
