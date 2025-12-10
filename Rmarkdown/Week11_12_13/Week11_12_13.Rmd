@@ -1,6 +1,6 @@
 ---
 title: "STT 3850 : Weeks 11, 12, and 13"
-author: "Spring 2025"
+author: "ATA"
 institute: "Appalachian State University"
 output: 
  beamer_presentation:

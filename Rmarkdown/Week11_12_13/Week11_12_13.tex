@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,7 +44,6 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -56,8 +56,8 @@
 \fi
 \usepackage{lmodern}
 \usetheme[]{Madrid}
-\usecolortheme{orchid}
-\usefonttheme{professionalfonts}
+\usecolortheme[]{orchid}
+\usefonttheme[]{professionalfonts}
 \ifPDFTeX\else
   % xetex/luatex font selection
 \fi
@@ -77,8 +77,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -122,7 +120,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{placeins}
 \usepackage{color}
 \usepackage{bm}
@@ -149,32 +146,28 @@
 \newfont{\gilfont}{msbm10 scaled 1000}
 \newcommand{\DOT}{\usebox{\biggercirc}}
 \newcommand{\pv}{\wp\text{-value}}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Weeks 11, 12, and 13},
-  pdfauthor={Spring 2025},
+  pdfauthor={ATA},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Weeks 11, 12, and 13}
-\author{Spring 2025}
+\author{ATA}
 \date{}
 \institute{Appalachian State University}
 
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{topics-for-the-next-three-weeks}{%
 \section{Topics for the next three
-weeks}\label{topics-for-the-next-three-weeks}}
+weeks}\label{topics-for-the-next-three-weeks}
 
 \begin{frame}{By the end of week 13:}
-\protect\hypertarget{by-the-end-of-week-13}{}
+\phantomsection\label{by-the-end-of-week-13}
 \begin{itemize}
 \tightlist
 \item
@@ -189,12 +182,11 @@ weeks}\label{topics-for-the-next-three-weeks}}
 \end{itemize}
 \end{frame}
 
-\hypertarget{theory-based-confidence-intervals}{%
 \section{Theory-based confidence
-intervals}\label{theory-based-confidence-intervals}}
+intervals}\label{theory-based-confidence-intervals}
 
 \begin{frame}[fragile]{Needed packages}
-\protect\hypertarget{needed-packages}{}
+\phantomsection\label{needed-packages}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyverse)}
@@ -207,7 +199,7 @@ intervals}\label{theory-based-confidence-intervals}}
 \end{frame}
 
 \begin{frame}{Confidence Intervals for a Difference in Means}
-\protect\hypertarget{confidence-intervals-for-a-difference-in-means}{}
+\phantomsection\label{confidence-intervals-for-a-difference-in-means}
 Let \(X\) and \(Y\) be random variables with
 \(X\sim N(\mu_1, \sigma_1)\) and \(Y\sim N(\mu_2, \sigma_2)\). Then:
 \[\bar{X}-\bar{Y}\sim N\left(\mu_1-\mu_2, \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}\right)\]
@@ -223,7 +215,7 @@ populations are normal.
 \end{frame}
 
 \begin{frame}{Confidence Intervals for a Difference in Means}
-\protect\hypertarget{confidence-intervals-for-a-difference-in-means-1}{}
+\phantomsection\label{confidence-intervals-for-a-difference-in-means-1}
 The difficult part is the degrees of freedom. The degrees of freedom are
 given with Welch's approximation:
 \[\nu=\frac{\left(\frac{S^2_X}{n_X}+\frac{S^2_Y}{n_Y}\right)^2}{\frac{\left(\frac{S^2_X}{n_X}\right)^2}{n_X-1}+\frac{\left(\frac{S^2_Y}{n_Y}\right)^2}{n_Y-1}}.\]
@@ -241,14 +233,14 @@ given with Welch's approximation:
 \end{frame}
 
 \begin{frame}{Example 1}
-\protect\hypertarget{example-1}{}
+\phantomsection\label{example-1}
 \begin{tcolorbox}
 Construct a $90\%$ confidence interval for $\mu_X-\mu_Y$ using the information in `CALCULUS` which provides the assessment scores for students enrolled in a biostatistics course according to whether they had completed a calculus course prior to enrolling in the biostatistics course. Before constructing a confidence interval, one should verify the assumptions needed to have a valid confidence interval. In this case we need to check for normality of both samples.
 \end{tcolorbox}
 \end{frame}
 
 \begin{frame}[fragile]{Example 1}
-\protect\hypertarget{example-1-1}{}
+\phantomsection\label{example-1-1}
 \small
 
 \begin{Shaded}
@@ -265,7 +257,7 @@ Construct a $90\%$ confidence interval for $\mu_X-\mu_Y$ using the information i
 \end{frame}
 
 \begin{frame}[fragile]{Example 1}
-\protect\hypertarget{example-1-2}{}
+\phantomsection\label{example-1-2}
 \small
 
 \begin{Shaded}
@@ -291,7 +283,7 @@ the CI.
 \end{frame}
 
 \begin{frame}[fragile]{Example 1}
-\protect\hypertarget{example-1-3}{}
+\phantomsection\label{example-1-3}
 \tiny
 
 \begin{Shaded}
@@ -331,7 +323,7 @@ attr(,"conf.level")
 \end{frame}
 
 \begin{frame}[fragile]{Example 1}
-\protect\hypertarget{example-1-4}{}
+\phantomsection\label{example-1-4}
 Compare to bootstrap CI: \tiny
 
 \begin{Shaded}
@@ -369,7 +361,7 @@ attr(,"conf.level")
 \end{frame}
 
 \begin{frame}{Confidence Intervals for a Difference in Means}
-\protect\hypertarget{confidence-intervals-for-a-difference-in-means-2}{}
+\phantomsection\label{confidence-intervals-for-a-difference-in-means-2}
 \begin{itemize}
 \item
   If the confidence interval for the difference in means contains 0,
@@ -392,7 +384,7 @@ attr(,"conf.level")
 \end{frame}
 
 \begin{frame}[fragile]{Example 2}
-\protect\hypertarget{example-2}{}
+\phantomsection\label{example-2}
 \begin{tcolorbox}
 Consider the weights of boy and girl babies born in Texas in 2004. Construct a $95\%$ $t$ confidence interval for the mean difference in weights (boys -girls).
 \end{tcolorbox}
@@ -402,7 +394,7 @@ package.
 \end{frame}
 
 \begin{frame}[fragile]{Example 2}
-\protect\hypertarget{example-2-1}{}
+\phantomsection\label{example-2-1}
 \tiny
 
 \begin{Shaded}
@@ -420,7 +412,7 @@ package.
 \end{frame}
 
 \begin{frame}[fragile]{Example 2}
-\protect\hypertarget{example-2-2}{}
+\phantomsection\label{example-2-2}
 \tiny
 
 \begin{Shaded}
@@ -437,7 +429,7 @@ package.
 \end{frame}
 
 \begin{frame}[fragile]{Example 2}
-\protect\hypertarget{example-2-3}{}
+\phantomsection\label{example-2-3}
 \tiny
 
 \begin{Shaded}
@@ -485,7 +477,7 @@ sample estimates:
 \end{frame}
 
 \begin{frame}{Confidence Intervals for Proportions}
-\protect\hypertarget{confidence-intervals-for-proportions}{}
+\phantomsection\label{confidence-intervals-for-proportions}
 \begin{tcolorbox}
 In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 likely voters responded that they felt things in this country were heading in the wrong direction (http:www.ap-gfkpoll.com/poll.archive.html). 
 \end{tcolorbox}
@@ -505,7 +497,7 @@ In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 l
 \end{frame}
 
 \begin{frame}{Confidence Intervals for Proportions}
-\protect\hypertarget{confidence-intervals-for-proportions-1}{}
+\phantomsection\label{confidence-intervals-for-proportions-1}
 Thus:
 \[P\left(-z_{1-\alpha/2}<\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}<z_{1-\alpha/2}\right)\approx 1-\alpha \]
 This gives:
@@ -515,7 +507,7 @@ At this point the different methods diverge.
 \end{frame}
 
 \begin{frame}{The Wald method}
-\protect\hypertarget{the-wald-method}{}
+\phantomsection\label{the-wald-method}
 The traditional Wald method completes the algebra to the following step
 before making an approximation:
 
@@ -529,7 +521,7 @@ interval formula for a proportion:
 \end{frame}
 
 \begin{frame}{The Wald method}
-\protect\hypertarget{the-wald-method-1}{}
+\phantomsection\label{the-wald-method-1}
 \begin{tcolorbox}
 In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 likely voters responded that they felt things in this country were heading in the wrong direction (http:www.ap-gfkpoll.com/poll.archive.html). Find a $95\%$ confidence interval. 
 \end{tcolorbox}
@@ -541,7 +533,7 @@ $$0.59\pm 1.96\sqrt{\frac{0.59(0.41)}{846}}=(0.5569,0.6231)$$
 \end{frame}
 
 \begin{frame}[fragile]{The Wald method}
-\protect\hypertarget{the-wald-method-2}{}
+\phantomsection\label{the-wald-method-2}
 \small
 
 \begin{Shaded}
@@ -573,7 +565,7 @@ $$0.59\pm 1.96\sqrt{\frac{0.59(0.41)}{846}}=(0.5569,0.6231)$$
 \end{frame}
 
 \begin{frame}{The Agresti-Coull Interval for a Proportion}
-\protect\hypertarget{the-agresti-coull-interval-for-a-proportion}{}
+\phantomsection\label{the-agresti-coull-interval-for-a-proportion}
 Agresti and Coull (1998) considered the \(95\%\) confidence interval for
 which the 0.975 quantile is \(z_{0.975}\approx1.96\), and hence
 \(z^2_{0.975}\approx 4\)
@@ -591,7 +583,7 @@ Then the \((1-\alpha)\times 100\) confidence interval is given by:
 \end{frame}
 
 \begin{frame}{The Agresti-Coull Interval for a Proportion}
-\protect\hypertarget{the-agresti-coull-interval-for-a-proportion-1}{}
+\phantomsection\label{the-agresti-coull-interval-for-a-proportion-1}
 \begin{tcolorbox}
 In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 likely voters responded that they felt things in this country were heading in the wrong direction (http:www.ap-gfkpoll.com/poll.archive.html). Find a $95\%$ confidence interval. 
 \end{tcolorbox}
@@ -603,7 +595,7 @@ $$CI_{1 - \alpha}(p)=0.5896\pm 1.96\sqrt{\frac{0.5896(0.4104)}{850}}=(0.5565,0.6
 \end{frame}
 
 \begin{frame}[fragile]{The Agresti-Coull Interval for a Proportion}
-\protect\hypertarget{the-agresti-coull-interval-for-a-proportion-2}{}
+\phantomsection\label{the-agresti-coull-interval-for-a-proportion-2}
 \small
 
 \begin{Shaded}
@@ -635,7 +627,7 @@ $$CI_{1 - \alpha}(p)=0.5896\pm 1.96\sqrt{\frac{0.5896(0.4104)}{850}}=(0.5565,0.6
 \end{frame}
 
 \begin{frame}{Wilson Score method}
-\protect\hypertarget{wilson-score-method}{}
+\phantomsection\label{wilson-score-method}
 The Wilson Score method does not make the approximation to the equation
 below
 \[CI_{1 - \alpha}(p)=\hat{p}\pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}\]
@@ -652,7 +644,7 @@ equation), and a more complicated solution.
 \end{frame}
 
 \begin{frame}{Wilson Score method}
-\protect\hypertarget{wilson-score-method-1}{}
+\phantomsection\label{wilson-score-method-1}
 \begin{tcolorbox}
 In 2010, according to an AP-Gfk Poll conducted on October 13-18, $59\%$ of 846 likely voters responded that they felt things in this country were heading in the wrong direction (http:www.ap-gfkpoll.com/poll.archive.html). Find a $95\%$ confidence interval. 
 \end{tcolorbox}
@@ -664,7 +656,7 @@ $$p=\frac{0.59+\frac{1.96^2}{2(846)}\pm 1.96\sqrt{\frac{0.59(0.41)}{846}+\frac{1
 \end{frame}
 
 \begin{frame}[fragile]{Wilson Score method}
-\protect\hypertarget{wilson-score-method-2}{}
+\phantomsection\label{wilson-score-method-2}
 \tiny
 
 \begin{Shaded}
@@ -703,7 +695,7 @@ sample estimates:
 \end{frame}
 
 \begin{frame}{Example}
-\protect\hypertarget{example}{}
+\phantomsection\label{example}
 \begin{tcolorbox}
 A political candidate prepares to conduct a survey to gauge voter support for his candidacy for senator. He would like a confidence interval with an error of at most $4\%$, with $95\%$ confidence. How large should the sample size be for the survey? 
 \end{tcolorbox}
@@ -716,7 +708,7 @@ Unfortunately, we do not know $\tilde{p}$. If we did, the candidate would not ne
 \end{frame}
 
 \begin{frame}[fragile]{Example}
-\protect\hypertarget{example-3}{}
+\phantomsection\label{example-3}
 \tiny
 
 \begin{Shaded}
@@ -734,7 +726,7 @@ Unfortunately, we do not know $\tilde{p}$. If we did, the candidate would not ne
 \end{frame}
 
 \begin{frame}[fragile]{Example}
-\protect\hypertarget{example-4}{}
+\phantomsection\label{example-4}
 Solving for \(\tilde{n}\) yields
 \[\left(\frac{1.96(0.5)}{0.04}\right)^2\leq \tilde{n} \implies \tilde{n}\geq 600.25\]
 
@@ -757,7 +749,7 @@ Then \[n\geq 596.25\] \tiny
 \end{frame}
 
 \begin{frame}{Coverage Probabilities of Binomial Confidence Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals}
 \begin{itemize}
 \item
   Suppose a new process for making a prescription drug is in
@@ -786,7 +778,7 @@ to obtain the approximate \(95\%\) confidence interval
 \end{frame}
 
 \begin{frame}{Coverage Probabilities of Binomial Confidence Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-1}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals-1}
 The question is whether a \(95\%\) level of confidence in the resulting
 interval is warranted.
 
@@ -808,7 +800,7 @@ interval is warranted.
 \end{frame}
 
 \begin{frame}{Coverage Probabilities of Binomial Confidence Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-2}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals-2}
 \begin{itemize}
 \item
   Now choose a particular value of \(p\), say \(p=0.8\), so that
@@ -840,7 +832,7 @@ interval is warranted.
 
 \begin{frame}[fragile]{Coverage Probabilities of Binomial Confidence
 Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-3}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals-3}
 \tiny
 
 \begin{Shaded}
@@ -891,7 +883,7 @@ Intervals}
 
 \begin{frame}[fragile]{Coverage Probabilities of Binomial Confidence
 Intervals}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals-4}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals-4}
 Now use \(p=0.79\) \tiny
 
 \begin{Shaded}
@@ -921,7 +913,7 @@ Now use \(p=0.79\) \tiny
 
 \begin{frame}[fragile]{Coverage Probabilities of Binomial Confidence
 Intervals - Wald}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---wald}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals---wald}
 We step through two thousand values of \(p\) from near 0 to near 1.
 Subsequently plot coverage probability versus \(p\).
 
@@ -961,7 +953,7 @@ Subsequently plot coverage probability versus \(p\).
 
 \begin{frame}{Coverage Probabilities of Binomial Confidence Intervals -
 Wald}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---wald-1}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals---wald-1}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.8\textheight]{Week11_12_13_files/figure-beamer/unnamed-chunk-17-1} \end{center}
@@ -970,7 +962,7 @@ Wald}
 
 \begin{frame}[fragile]{Coverage Probabilities of Binomial Confidence
 Intervals - Agresti-Coull}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---agresti-coull}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals---agresti-coull}
 Next consider the Agresti-Coull confidence intervals.
 
 \tiny
@@ -1009,7 +1001,7 @@ Next consider the Agresti-Coull confidence intervals.
 
 \begin{frame}{Coverage Probabilities of Binomial Confidence Intervals -
 Agresti-Coull}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---agresti-coull-1}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals---agresti-coull-1}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.8\textheight]{Week11_12_13_files/figure-beamer/unnamed-chunk-19-1} \end{center}
@@ -1018,7 +1010,7 @@ Agresti-Coull}
 
 \begin{frame}[fragile]{Coverage Probabilities of Binomial Confidence
 Intervals - Wilson}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---wilson}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals---wilson}
 Next we use Wilson score intervals to do the same thing.
 
 \tiny
@@ -1057,19 +1049,18 @@ Next we use Wilson score intervals to do the same thing.
 
 \begin{frame}{Coverage Probabilities of Binomial Confidence Intervals -
 Wilson}
-\protect\hypertarget{coverage-probabilities-of-binomial-confidence-intervals---wilson-1}{}
+\phantomsection\label{coverage-probabilities-of-binomial-confidence-intervals---wilson-1}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.8\textheight]{Week11_12_13_files/figure-beamer/unnamed-chunk-21-1} \end{center}
 \normalsize
 \end{frame}
 
-\hypertarget{bootstrap-t-confidence-interval}{%
 \section{\texorpdfstring{Bootstrap \(t\) Confidence
-Interval}{Bootstrap t Confidence Interval}}\label{bootstrap-t-confidence-interval}}
+Interval}{Bootstrap t Confidence Interval}}\label{bootstrap-t-confidence-interval}
 
 \begin{frame}[fragile]{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-1}{}
+\phantomsection\label{bootstrap-t-confidence-interval-1}
 \begin{itemize}
 \item
   The bootstrap percentile confidence interval for giving a range of
@@ -1107,7 +1098,7 @@ arsenic levels was skewed right.
 \end{frame}
 
 \begin{frame}[fragile]{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-2}{}
+\phantomsection\label{bootstrap-t-confidence-interval-2}
 \tiny
 
 \begin{Shaded}
@@ -1128,7 +1119,7 @@ That seems unlikely for data this skewed.
 \end{frame}
 
 \begin{frame}{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-3}{}
+\phantomsection\label{bootstrap-t-confidence-interval-3}
 Instead
 
 \begin{itemize}
@@ -1151,7 +1142,7 @@ Instead
 \end{frame}
 
 \begin{frame}[fragile]{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-4}{}
+\phantomsection\label{bootstrap-t-confidence-interval-4}
 \tiny
 
 \begin{Shaded}
@@ -1197,7 +1188,7 @@ Instead
 \end{frame}
 
 \begin{frame}[fragile]{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-5}{}
+\phantomsection\label{bootstrap-t-confidence-interval-5}
 \tiny
 
 \begin{Shaded}
@@ -1216,7 +1207,7 @@ Instead
 \end{frame}
 
 \begin{frame}{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-6}{}
+\phantomsection\label{bootstrap-t-confidence-interval-6}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.8\textheight]{Week11_12_13_files/figure-beamer/unnamed-chunk-26-1} \end{center}
@@ -1224,7 +1215,7 @@ Instead
 \end{frame}
 
 \begin{frame}{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-7}{}
+\phantomsection\label{bootstrap-t-confidence-interval-7}
 \begin{itemize}
 \item
   Note that the bootstrap distribution for the \(t\) statistic is left
@@ -1261,7 +1252,7 @@ Instead
 \end{frame}
 
 \begin{frame}{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-8}{}
+\phantomsection\label{bootstrap-t-confidence-interval-8}
 \begin{itemize}
 \item
   The \(2.5\%\) and \(97.5\%\) percentiles of the bootstrap \(t\)
@@ -1298,7 +1289,7 @@ Instead
 \end{frame}
 
 \begin{frame}{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-9}{}
+\phantomsection\label{bootstrap-t-confidence-interval-9}
 \begin{itemize}
 \item
   Let
@@ -1330,7 +1321,7 @@ Instead
 \end{frame}
 
 \begin{frame}[fragile]{Bootstrap \(t\) Confidence Interval}
-\protect\hypertarget{bootstrap-t-confidence-interval-10}{}
+\phantomsection\label{bootstrap-t-confidence-interval-10}
 \begin{itemize}
 \item
   We use the standard error formula for every bootstrap sample because
@@ -1371,7 +1362,7 @@ Instead
 \end{frame}
 
 \begin{frame}[fragile]{Using the package \texttt{boot}}
-\protect\hypertarget{using-the-package-boot}{}
+\phantomsection\label{using-the-package-boot}
 Next we consider computing the bootstrap percentile and \(t\) confidence
 intervals using the functions \texttt{boot()} and \texttt{boot.ci()}
 functions from the package \texttt{boot}.
@@ -1389,7 +1380,7 @@ functions from the package \texttt{boot}.
 \end{frame}
 
 \begin{frame}[fragile]{Using the package \texttt{boot}}
-\protect\hypertarget{using-the-package-boot-1}{}
+\phantomsection\label{using-the-package-boot-1}
 \tiny
 
 \begin{Shaded}
@@ -1423,7 +1414,7 @@ Calculations and Intervals on Original Scale
 \end{frame}
 
 \begin{frame}[fragile]{Using the package \texttt{boot}}
-\protect\hypertarget{using-the-package-boot-2}{}
+\phantomsection\label{using-the-package-boot-2}
 \tiny
 
 \begin{Shaded}
@@ -1437,7 +1428,7 @@ Calculations and Intervals on Original Scale
 \end{frame}
 
 \begin{frame}[fragile]{Using the package \texttt{boot}}
-\protect\hypertarget{using-the-package-boot-3}{}
+\phantomsection\label{using-the-package-boot-3}
 \tiny
 
 \begin{Shaded}
@@ -1460,7 +1451,7 @@ The bootstrap intervals for a difference in means follows the same idea.
 
 \begin{frame}[fragile]{Bootstrap \(t\) confidence interval for
 \(\mu_1-\mu_2\)}
-\protect\hypertarget{bootstrap-t-confidence-interval-for-mu_1-mu_2}{}
+\phantomsection\label{bootstrap-t-confidence-interval-for-mu_1-mu_2}
 For each of many resamples, calculate the bootstrap \(t\) statistic
 \[T^*=\frac{\bar{X}^*_1-\bar{X}^*_2-(\bar{x}_1-\bar{x}_2)}{\sqrt{S^{2*}_1/n_1+S^{2*}_2/n_2}}\]
 
@@ -1477,7 +1468,7 @@ data again.
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example}{}
+\phantomsection\label{verizon-example}
 \tiny
 
 \begin{Shaded}
@@ -1513,7 +1504,7 @@ data again.
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-1}{}
+\phantomsection\label{verizon-example-1}
 \tiny
 
 \begin{Shaded}
@@ -1560,7 +1551,7 @@ negative direction, even more than the bootstrap percentile interval.
 
 \begin{frame}[fragile]{Using the package boot for the difference in
 means}
-\protect\hypertarget{using-the-package-boot-for-the-difference-in-means}{}
+\phantomsection\label{using-the-package-boot-for-the-difference-in-means}
 Bootstrap percentile and \(t\) confidence intervals using the functions
 \texttt{boot()} and \texttt{boot.ci()} functions from the package
 \texttt{boot} are constructed using the user created
@@ -1601,7 +1592,7 @@ Calculations and Intervals on Original Scale
 
 \begin{frame}[fragile]{Using the package boot for the difference in
 means}
-\protect\hypertarget{using-the-package-boot-for-the-difference-in-means-1}{}
+\phantomsection\label{using-the-package-boot-for-the-difference-in-means-1}
 \tiny
 
 \begin{Shaded}
@@ -1616,7 +1607,7 @@ means}
 
 \begin{frame}[fragile]{Using the package boot for the difference in
 means}
-\protect\hypertarget{using-the-package-boot-for-the-difference-in-means-2}{}
+\phantomsection\label{using-the-package-boot-for-the-difference-in-means-2}
 \tiny
 
 \begin{Shaded}
@@ -1637,7 +1628,7 @@ means}
 
 \begin{frame}{Comparing Bootstrap \(t\) and Formula \(t\) Confidence
 Intervals}
-\protect\hypertarget{comparing-bootstrap-t-and-formula-t-confidence-intervals}{}
+\phantomsection\label{comparing-bootstrap-t-and-formula-t-confidence-intervals}
 \begin{itemize}
 \item
   Where the bootstrap does differ from classical inference is in how it
@@ -1675,18 +1666,17 @@ Intervals}
 \end{itemize}
 \end{frame}
 
-\hypertarget{hypothesis-testing}{%
-\section{Hypothesis Testing}\label{hypothesis-testing}}
+\section{Hypothesis Testing}\label{hypothesis-testing}
 
 \begin{frame}{Fundamental Question of Inference}
-\protect\hypertarget{fundamental-question-of-inference}{}
+\phantomsection\label{fundamental-question-of-inference}
 How does what we observed in our data compare to what would happen if
 the null hypothesis were actually true and we repeated the process many
 times?
 \end{frame}
 
 \begin{frame}{Hypothesis Testing}
-\protect\hypertarget{hypothesis-testing-1}{}
+\phantomsection\label{hypothesis-testing-1}
 \begin{itemize}
 \item
   Now that we've studied confidence intervals, let's study another
@@ -1709,7 +1699,7 @@ times?
 \end{frame}
 
 \begin{frame}[fragile]{Needed packages}
-\protect\hypertarget{needed-packages-1}{}
+\phantomsection\label{needed-packages-1}
 Let's load all the packages needed for this chapter
 
 \small
@@ -1728,7 +1718,7 @@ Let's load all the packages needed for this chapter
 \end{frame}
 
 \begin{frame}{Promotions activity}
-\protect\hypertarget{promotions-activity}{}
+\phantomsection\label{promotions-activity}
 Let's start with an activity studying the effect of gender on promotions
 at a bank.
 
@@ -1745,7 +1735,7 @@ at a bank.
 \end{frame}
 
 \begin{frame}{Promotions activity}
-\protect\hypertarget{promotions-activity-1}{}
+\phantomsection\label{promotions-activity-1}
 To begin the study, 48 bank supervisors were asked to assume the role of
 a hypothetical director of a bank with multiple branches.
 
@@ -1774,7 +1764,7 @@ a hypothetical director of a bank with multiple branches.
 \end{frame}
 
 \begin{frame}[fragile]{Promotions activity}
-\protect\hypertarget{promotions-activity-2}{}
+\phantomsection\label{promotions-activity-2}
 The \texttt{moderndive} package contains the data on the 48 applicants
 in the \texttt{promotions} data frame.
 
@@ -1808,7 +1798,7 @@ in the \texttt{promotions} data frame.
 \end{frame}
 
 \begin{frame}[fragile]{Promotions activity}
-\protect\hypertarget{promotions-activity-3}{}
+\phantomsection\label{promotions-activity-3}
 Let's perform an exploratory data analysis of the relationship between
 the two categorical variables \texttt{decision} and \texttt{gender}.
 
@@ -1830,7 +1820,7 @@ likely to be accepted for promotion.
 \end{frame}
 
 \begin{frame}[fragile]{Promotions activity}
-\protect\hypertarget{promotions-activity-4}{}
+\phantomsection\label{promotions-activity-4}
 Let's quantify these promotion rates
 
 \tiny
@@ -1875,7 +1865,7 @@ Résumés with male names were selected for promotion at a rate
 \end{frame}
 
 \begin{frame}{Promotions activity}
-\protect\hypertarget{promotions-activity-5}{}
+\phantomsection\label{promotions-activity-5}
 The question is, however, does this provide conclusive evidence that
 there is gender discrimination in promotions at banks?
 
@@ -1894,7 +1884,7 @@ there is gender discrimination in promotions at banks?
 \end{frame}
 
 \begin{frame}[fragile]{Promotions activity: Shuffling once}
-\protect\hypertarget{promotions-activity-shuffling-once}{}
+\phantomsection\label{promotions-activity-shuffling-once}
 First, try to imagine a hypothetical universe where no gender
 discrimination in promotions existed.
 
@@ -1912,7 +1902,7 @@ discrimination in promotions existed.
 \end{frame}
 
 \begin{frame}[fragile]{Promotions activity: Shuffling once}
-\protect\hypertarget{promotions-activity-shuffling-once-1}{}
+\phantomsection\label{promotions-activity-shuffling-once-1}
 \begin{itemize}
 \item
   To illustrate this idea, let's narrow our focus to 6 arbitrarily
@@ -1935,7 +1925,7 @@ discrimination in promotions existed.
 \end{frame}
 
 \begin{frame}{Promotions activity: Shuffling once}
-\protect\hypertarget{promotions-activity-shuffling-once-2}{}
+\phantomsection\label{promotions-activity-shuffling-once-2}
 \begin{itemize}
 \item
   Again, such random shuffling of the gender label only makes sense in
@@ -1958,7 +1948,7 @@ discrimination in promotions existed.
 \end{frame}
 
 \begin{frame}{Promotions activity: Shuffling once}
-\protect\hypertarget{promotions-activity-shuffling-once-3}{}
+\phantomsection\label{promotions-activity-shuffling-once-3}
 \begin{itemize}
 \tightlist
 \item
@@ -1976,7 +1966,7 @@ discrimination in promotions existed.
 \end{frame}
 
 \begin{frame}[fragile]{Promotions activity: Shuffling once}
-\protect\hypertarget{promotions-activity-shuffling-once-4}{}
+\phantomsection\label{promotions-activity-shuffling-once-4}
 We have one such shuffling in the \texttt{promotions\_shuffled} data
 frame of the \texttt{moderndive} package:
 
@@ -1999,7 +1989,7 @@ promotion rates is now different.
 \end{frame}
 
 \begin{frame}[fragile]{Promotions activity: Shuffling once}
-\protect\hypertarget{promotions-activity-shuffling-once-5}{}
+\phantomsection\label{promotions-activity-shuffling-once-5}
 Let's also compute the proportion of résumés accepted for promotion for
 each group:
 
@@ -2045,7 +2035,7 @@ Résumés with male names were selected for promotion at a rate
 \end{frame}
 
 \begin{frame}{Promotions activity: Shuffling 16 times}
-\protect\hypertarget{promotions-activity-shuffling-16-times}{}
+\phantomsection\label{promotions-activity-shuffling-16-times}
 \begin{itemize}
 \item
   We recruited 16 groups of our friends to repeat this shuffling
@@ -2061,7 +2051,7 @@ Résumés with male names were selected for promotion at a rate
 \end{frame}
 
 \begin{frame}{Promotions activity: Shuffling 16 times}
-\protect\hypertarget{promotions-activity-shuffling-16-times-1}{}
+\phantomsection\label{promotions-activity-shuffling-16-times-1}
 Things to note:
 
 \begin{itemize}
@@ -2097,7 +2087,7 @@ Things to note:
 \end{frame}
 
 \begin{frame}{Fundamental Question of Inference}
-\protect\hypertarget{fundamental-question-of-inference-1}{}
+\phantomsection\label{fundamental-question-of-inference-1}
 \begin{itemize}
 \item
   Ask yourself:
@@ -2114,7 +2104,7 @@ Things to note:
 \end{frame}
 
 \begin{frame}{What did we just do?}
-\protect\hypertarget{what-did-we-just-do}{}
+\phantomsection\label{what-did-we-just-do}
 What we just demonstrated in this activity is the statistical procedure
 known as \textbf{hypothesis testing} using a \textbf{permutation test}
 also referred to as \textbf{randomization test}.
@@ -2140,7 +2130,7 @@ also referred to as \textbf{randomization test}.
 \end{frame}
 
 \begin{frame}[fragile]{What did we just do?}
-\protect\hypertarget{what-did-we-just-do-1}{}
+\phantomsection\label{what-did-we-just-do-1}
 In our previous example, we tested the validity of the hypothesized
 universe of no gender discrimination.
 
@@ -2181,12 +2171,11 @@ universe of no gender discrimination.
 \end{itemize}
 \end{frame}
 
-\hypertarget{understanding-hypothesis-tests}{%
 \section{Understanding hypothesis
-tests}\label{understanding-hypothesis-tests}}
+tests}\label{understanding-hypothesis-tests}
 
 \begin{frame}{Understanding hypothesis tests}
-\protect\hypertarget{understanding-hypothesis-tests-1}{}
+\phantomsection\label{understanding-hypothesis-tests-1}
 Terminology, notation, and definitions related to hypothesis testing.
 
 \begin{itemize}
@@ -2208,7 +2197,7 @@ Terminology, notation, and definitions related to hypothesis testing.
 \end{frame}
 
 \begin{frame}{Understanding hypothesis tests}
-\protect\hypertarget{understanding-hypothesis-tests-2}{}
+\phantomsection\label{understanding-hypothesis-tests-2}
 Second, a hypothesis test consists of a test between two competing
 hypotheses:
 
@@ -2239,7 +2228,7 @@ hypotheses:
 \end{frame}
 
 \begin{frame}{Understanding hypothesis tests}
-\protect\hypertarget{understanding-hypothesis-tests-3}{}
+\phantomsection\label{understanding-hypothesis-tests-3}
 In our résumé activity, an appropriate hypothesis test would be:
 
 \[\begin{array}{ll}
@@ -2270,7 +2259,7 @@ vs&H_A: \text{men are promoted at a higher rate than women}
 \end{frame}
 
 \begin{frame}{Understanding hypothesis tests}
-\protect\hypertarget{understanding-hypothesis-tests-4}{}
+\phantomsection\label{understanding-hypothesis-tests-4}
 We can write our hypothesis test using the mathematical notation as:
 
 \[\begin{array}{ll}
@@ -2286,7 +2275,7 @@ vs&H_A: p_m-p_f\neq 0
 \end{frame}
 
 \begin{frame}{Understanding hypothesis tests}
-\protect\hypertarget{understanding-hypothesis-tests-5}{}
+\phantomsection\label{understanding-hypothesis-tests-5}
 \begin{itemize}
 \item
   Third, a \textbf{test statistic} is a point estimate/sample statistic
@@ -2318,7 +2307,7 @@ vs&H_A: p_m-p_f\neq 0
 \end{frame}
 
 \begin{frame}{Understanding hypothesis tests}
-\protect\hypertarget{understanding-hypothesis-tests-6}{}
+\phantomsection\label{understanding-hypothesis-tests-6}
 Fifth, the \textbf{null distribution} is the sampling distribution of
 the test statistic assuming the null hypothesis \(H_0\) is true.
 
@@ -2355,14 +2344,14 @@ the test statistic assuming the null hypothesis \(H_0\) is true.
 \end{frame}
 
 \begin{frame}{Understanding hypothesis tests}
-\protect\hypertarget{understanding-hypothesis-tests-7}{}
+\phantomsection\label{understanding-hypothesis-tests-7}
 The null distribution from 1000 permutations is given below
 
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.4\textheight]{Week11_12_13_files/figure-beamer/unnamed-chunk-48-1} \end{center}
 \end{frame}
 
 \begin{frame}{Understanding hypothesis tests}
-\protect\hypertarget{understanding-hypothesis-tests-8}{}
+\phantomsection\label{understanding-hypothesis-tests-8}
 \begin{itemize}
 \item
   Sixth, the \textbf{p-value} is the probability of obtaining a test
@@ -2390,7 +2379,7 @@ The null distribution from 1000 permutations is given below
 \end{frame}
 
 \begin{frame}{Understanding hypothesis tests}
-\protect\hypertarget{understanding-hypothesis-tests-9}{}
+\phantomsection\label{understanding-hypothesis-tests-9}
 Seventh and lastly, in many hypothesis testing procedures, the
 \textbf{significance level} of the test is set before evaluating the
 data.
@@ -2417,12 +2406,10 @@ data.
 \end{itemize}
 \end{frame}
 
-\hypertarget{conducting-hypothesis-tests}{%
-\section{Conducting hypothesis
-tests}\label{conducting-hypothesis-tests}}
+\section{Conducting hypothesis tests}\label{conducting-hypothesis-tests}
 
 \begin{frame}[fragile]{Conducting hypothesis tests}
-\protect\hypertarget{conducting-hypothesis-tests-1}{}
+\phantomsection\label{conducting-hypothesis-tests-1}
 Earlier we showed how to construct confidence intervals.
 
 \begin{itemize}
@@ -2438,7 +2425,7 @@ Earlier we showed how to construct confidence intervals.
 
 \begin{frame}[fragile]{\texttt{infer} package workflow: \texttt{specify}
 variables}
-\protect\hypertarget{infer-package-workflow-specify-variables}{}
+\phantomsection\label{infer-package-workflow-specify-variables}
 Recall that we use the \texttt{specify()} verb to specify the response
 variable and, if needed, any explanatory variables for our study.
 
@@ -2475,7 +2462,7 @@ Explanatory: gender (factor)
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{hypothesize} the null}
-\protect\hypertarget{infer-package-workflow-hypothesize-the-null}{}
+\phantomsection\label{infer-package-workflow-hypothesize-the-null}
 In order to conduct hypothesis tests using the infer workflow, we need a
 new step not present for confidence intervals: \texttt{hypothesize()}.
 
@@ -2504,7 +2491,7 @@ from? These are two technical statistical terms.
 
 \begin{frame}{\texttt{infer} package workflow: \texttt{hypothesize} the
 null}
-\protect\hypertarget{infer-package-workflow-hypothesize-the-null-1}{}
+\phantomsection\label{infer-package-workflow-hypothesize-the-null-1}
 \begin{itemize}
 \item
   The term ``point'' relates from the fact that for a single group of
@@ -2529,7 +2516,7 @@ vs&H_A: \mu\neq 1993
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{hypothesize} the null}
-\protect\hypertarget{infer-package-workflow-hypothesize-the-null-2}{}
+\phantomsection\label{infer-package-workflow-hypothesize-the-null-2}
 \begin{itemize}
 \item
   The term ``independence'' relates to the fact that for two groups of
@@ -2551,7 +2538,7 @@ vs&H_A: \mu\neq 1993
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{hypothesize} the null}
-\protect\hypertarget{infer-package-workflow-hypothesize-the-null-3}{}
+\phantomsection\label{infer-package-workflow-hypothesize-the-null-3}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{promotions }\SpecialCharTok{|\textgreater{}} 
@@ -2564,7 +2551,7 @@ vs&H_A: \mu\neq 1993
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{generate} replicates}
-\protect\hypertarget{infer-package-workflow-generate-replicates}{}
+\phantomsection\label{infer-package-workflow-generate-replicates}
 \begin{itemize}
 \item
   After we \texttt{hypothesize()} the null hypothesis, we
@@ -2585,7 +2572,7 @@ vs&H_A: \mu\neq 1993
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{generate} replicates}
-\protect\hypertarget{infer-package-workflow-generate-replicates-1}{}
+\phantomsection\label{infer-package-workflow-generate-replicates-1}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{promotions\_generate }\OtherTok{\textless{}{-}}\NormalTok{ promotions }\SpecialCharTok{|\textgreater{}} 
@@ -2602,7 +2589,7 @@ times and \(48,000=1000\cdot 48\).
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{calculate} summary statistics}
-\protect\hypertarget{infer-package-workflow-calculate-summary-statistics}{}
+\phantomsection\label{infer-package-workflow-calculate-summary-statistics}
 Now that we have generated 1000 replicates of ``shuffles'' assuming the
 null hypothesis is true, let's \texttt{calculate()} the appropriate
 summary statistic for each of our 1000 shuffles.
@@ -2630,7 +2617,7 @@ accordingly.
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{calculate} summary statistics}
-\protect\hypertarget{infer-package-workflow-calculate-summary-statistics-1}{}
+\phantomsection\label{infer-package-workflow-calculate-summary-statistics-1}
 \tiny
 
 \begin{Shaded}
@@ -2648,7 +2635,7 @@ accordingly.
 \begin{verbatim}
 Response: decision (factor)
 Explanatory: gender (factor)
-Null Hypothesis: independence
+Null Hypothesis: ind...
 # A tibble: 1,000 x 2
    replicate    stat
        <int>   <dbl>
@@ -2670,7 +2657,7 @@ Null Hypothesis: independence
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{calculate} summary statistics}
-\protect\hypertarget{infer-package-workflow-calculate-summary-statistics-2}{}
+\phantomsection\label{infer-package-workflow-calculate-summary-statistics-2}
 What was the observed difference in promotion rates?
 
 \begin{Shaded}
@@ -2695,7 +2682,7 @@ Explanatory: gender (factor)
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{visualize} the p-value}
-\protect\hypertarget{infer-package-workflow-visualize-the-p-value}{}
+\phantomsection\label{infer-package-workflow-visualize-the-p-value}
 The final step is to measure how surprised we are by a promotion
 difference of \(29.2\%\) in a hypothesized universe of no gender
 discrimination
@@ -2724,7 +2711,7 @@ discrimination
 
 \begin{frame}[fragile]{\texttt{infer} package workflow:
 \texttt{visualize} the p-value}
-\protect\hypertarget{infer-package-workflow-visualize-the-p-value-1}{}
+\phantomsection\label{infer-package-workflow-visualize-the-p-value-1}
 \begin{itemize}
 \item
   However, what does the shaded-region correspond to? This is the
@@ -2776,7 +2763,7 @@ discrimination
 
 \begin{frame}{\texttt{infer} package workflow: \texttt{visualize} the
 p-value}
-\protect\hypertarget{infer-package-workflow-visualize-the-p-value-2}{}
+\phantomsection\label{infer-package-workflow-visualize-the-p-value-2}
 Since this p-value is smaller than our pre-specified significance level
 \(\alpha=0.05\), we reject the null hypothesis \(H_0: p_m-p_f=0\).
 
@@ -2791,7 +2778,7 @@ Since this p-value is smaller than our pre-specified significance level
 \end{frame}
 
 \begin{frame}[fragile]{Comparison with confidence intervals}
-\protect\hypertarget{comparison-with-confidence-intervals}{}
+\phantomsection\label{comparison-with-confidence-intervals}
 This is the entire code that creates the null distribution.
 
 \begin{Shaded}
@@ -2809,7 +2796,7 @@ This is the entire code that creates the null distribution.
 \end{frame}
 
 \begin{frame}[fragile]{Comparison with confidence intervals}
-\protect\hypertarget{comparison-with-confidence-intervals-1}{}
+\phantomsection\label{comparison-with-confidence-intervals-1}
 We need to make \textbf{two changes two changes} to create the bootstrap
 distribution needed to construct a \(95\%\) confidence interval for
 \(p_m-p_f\).
@@ -2830,7 +2817,7 @@ distribution needed to construct a \(95\%\) confidence interval for
 \end{frame}
 
 \begin{frame}[fragile]{Comparison with confidence intervals}
-\protect\hypertarget{comparison-with-confidence-intervals-2}{}
+\phantomsection\label{comparison-with-confidence-intervals-2}
 \tiny
 
 \begin{Shaded}
@@ -2864,7 +2851,7 @@ suggesting that \(p_m\) and \(p_f\) are truly different!
 \end{frame}
 
 \begin{frame}{Summary}
-\protect\hypertarget{summary}{}
+\phantomsection\label{summary}
 \begin{itemize}
 \item
   If you can understand the framework, you can easily generalize these
@@ -2886,12 +2873,11 @@ suggesting that \(p_m\) and \(p_f\) are truly different!
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{week12_8} \end{center}
 \end{frame}
 
-\hypertarget{interpreting-hypothesis-tests}{%
 \section{Interpreting hypothesis
-tests}\label{interpreting-hypothesis-tests}}
+tests}\label{interpreting-hypothesis-tests}
 
 \begin{frame}{Interpreting hypothesis tests}
-\protect\hypertarget{interpreting-hypothesis-tests-1}{}
+\phantomsection\label{interpreting-hypothesis-tests-1}
 \begin{itemize}
 \item
   We mentioned that given a pre-specified significance level \(\alpha\)
@@ -2924,7 +2910,7 @@ tests}\label{interpreting-hypothesis-tests}}
 \end{frame}
 
 \begin{frame}{Interpreting hypothesis tests}
-\protect\hypertarget{interpreting-hypothesis-tests-2}{}
+\phantomsection\label{interpreting-hypothesis-tests-2}
 Let's use the United States criminal justice system as an analogy.
 
 \begin{itemize}
@@ -2957,7 +2943,7 @@ Let's use the United States criminal justice system as an analogy.
 \end{frame}
 
 \begin{frame}{Types of errors}
-\protect\hypertarget{types-of-errors}{}
+\phantomsection\label{types-of-errors}
 \begin{itemize}
 \item
   Nobody's perfect. Even with lots of evidence, we can still make wrong
@@ -2983,7 +2969,7 @@ Let's use the United States criminal justice system as an analogy.
 \end{frame}
 
 \begin{frame}{Types of errors}
-\protect\hypertarget{types-of-errors-1}{}
+\phantomsection\label{types-of-errors-1}
 The Type I and II errors can be illustrated in the Table of TRUTH below:
 
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.3\textheight]{week12_9a} \end{center}
@@ -2994,7 +2980,7 @@ We apply these terms to our criminal justice analogy
 \end{frame}
 
 \begin{frame}{Probabilities of Type I and II Errors}
-\protect\hypertarget{probabilities-of-type-i-and-ii-errors}{}
+\phantomsection\label{probabilities-of-type-i-and-ii-errors}
 \begin{itemize}
 \item
   \(P(\text{Type I Error})=P(\text{Reject } H_0 | H_0 \text{ true})=\alpha\)
@@ -3033,7 +3019,7 @@ We apply these terms to our criminal justice analogy
 \end{frame}
 
 \begin{frame}{Relationship Between Sample Size, Errors, and Power}
-\protect\hypertarget{relationship-between-sample-size-errors-and-power}{}
+\phantomsection\label{relationship-between-sample-size-errors-and-power}
 \begin{columns}
 \begin{column}{0.3\textwidth}
 Below we test: 
@@ -3073,7 +3059,7 @@ $$H_A:p>p_o $$
 \end{frame}
 
 \begin{frame}{Relationship Between Errors, and Power}
-\protect\hypertarget{relationship-between-errors-and-power}{}
+\phantomsection\label{relationship-between-errors-and-power}
 \begin{itemize}
 \item
   Decreasing \(\alpha\) results in an increase of \(\beta\) (reduce
