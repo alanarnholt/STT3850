@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,7 +44,6 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -56,8 +56,8 @@
 \fi
 \usepackage{lmodern}
 \usetheme[]{Madrid}
-\usecolortheme{orchid}
-\usefonttheme{professionalfonts}
+\usecolortheme[]{orchid}
+\usefonttheme[]{professionalfonts}
 \ifPDFTeX\else
   % xetex/luatex font selection
 \fi
@@ -77,8 +77,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -122,7 +120,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{placeins}
 \usepackage{color}
 \usepackage{bm}
@@ -149,31 +146,27 @@
 \newfont{\gilfont}{msbm10 scaled 1000}
 \newcommand{\DOT}{\usebox{\biggercirc}}
 \newcommand{\pv}{\wp\text{-value}}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 3},
-  pdfauthor={Spring 2025},
+  pdfauthor={ATA},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 3}
-\author{Spring 2025}
+\author{ATA}
 \date{}
 \institute{Appalachian State University}
 
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{outline-for-the-week}{%
-\section{Outline for the week}\label{outline-for-the-week}}
+\section{Outline for the week}\label{outline-for-the-week}
 
 \begin{frame}{By the end of the week:}
-\protect\hypertarget{by-the-end-of-the-week}{}
+\phantomsection\label{by-the-end-of-the-week}
 \begin{itemize}
 \tightlist
 \item
@@ -183,11 +176,10 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{data-wrangling}{%
-\section{Data Wrangling}\label{data-wrangling}}
+\section{Data Wrangling}\label{data-wrangling}
 
 \begin{frame}[fragile]{Data Wrangling}
-\protect\hypertarget{data-wrangling-1}{}
+\phantomsection\label{data-wrangling-1}
 In this chapter, we'll introduce a series of functions from the
 \texttt{dplyr} package for data wrangling. We will be able to take a
 data frame and \textbf{``wrangle'' it (transform it)} to suit your
@@ -214,7 +206,7 @@ needs. Such functions include:
 \end{frame}
 
 \begin{frame}[fragile]{Data Wrangling}
-\protect\hypertarget{data-wrangling-2}{}
+\phantomsection\label{data-wrangling-2}
 \begin{enumerate}
 \setcounter{enumi}{3}
 \item
@@ -235,7 +227,7 @@ querying language).
 \end{frame}
 
 \begin{frame}[fragile]{Needed packages}
-\protect\hypertarget{needed-packages}{}
+\phantomsection\label{needed-packages}
 Let's load all the packages needed for this chapter.
 
 \normalsize
@@ -253,7 +245,7 @@ Let's load all the packages needed for this chapter.
 
 \begin{frame}[fragile]{The pipe operator:
 \texttt{\textbar{}\textgreater{}}}
-\protect\hypertarget{the-pipe-operator}{}
+\phantomsection\label{the-pipe-operator}
 Before we start, let's first introduce a nifty tool: \textbf{the pipe
 operator \texttt{\textbar{}\textgreater{}}}.
 
@@ -285,7 +277,7 @@ hypothetical data frame \texttt{x} using hypothetical functions \(f()\),
 
 \begin{frame}[fragile]{The pipe operator:
 \texttt{\textbar{}\textgreater{}}}
-\protect\hypertarget{the-pipe-operator-1}{}
+\phantomsection\label{the-pipe-operator-1}
 One way to achieve this sequence of operations is by using nesting
 parentheses as follows:
 
@@ -320,13 +312,13 @@ sequence of operations line-by-line.
 \end{frame}
 
 \begin{frame}{The pipe operator: \texttt{\textbar{}\textgreater{}}}
-\protect\hypertarget{the-pipe-operator-2}{}
+\phantomsection\label{the-pipe-operator-2}
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.6\textheight]{week3_9} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{The pipe operator:
 \texttt{\textbar{}\textgreater{}}}
-\protect\hypertarget{the-pipe-operator-3}{}
+\phantomsection\label{the-pipe-operator-3}
 For example:
 
 \normalsize
@@ -356,7 +348,7 @@ end of lines.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{filter} rows}
-\protect\hypertarget{filter-rows}{}
+\phantomsection\label{filter-rows}
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.4\textheight]{week3_1} \end{center}
 
 The \texttt{filter()} function allows you to specify criteria about the
@@ -365,7 +357,7 @@ that match that criteria.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{filter} rows}
-\protect\hypertarget{filter-rows-1}{}
+\phantomsection\label{filter-rows-1}
 \begin{itemize}
 \item
   We begin by focusing only on flights from New York City to Portland,
@@ -399,7 +391,7 @@ single equal sign \texttt{=}.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{filter} rows}
-\protect\hypertarget{filter-rows-2}{}
+\phantomsection\label{filter-rows-2}
 \begin{itemize}
 \item
   You can use other operators beyond just the \texttt{==} operator that
@@ -434,7 +426,7 @@ single equal sign \texttt{=}.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{filter} rows}
-\protect\hypertarget{filter-rows-3}{}
+\phantomsection\label{filter-rows-3}
 \begin{itemize}
 \item
   We filter flights for all rows that
@@ -481,7 +473,7 @@ One may use commas in place of \&
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{filter} rows}
-\protect\hypertarget{filter-rows-4}{}
+\phantomsection\label{filter-rows-4}
 Lets filter rows corresponding to flights that didn't go to Burlington,
 VT or Seattle, WA.
 
@@ -511,7 +503,7 @@ different results. \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{filter} rows}
-\protect\hypertarget{filter-rows-5}{}
+\phantomsection\label{filter-rows-5}
 Say we have a larger number of airports we want to filter for. We could
 continue to use the \texttt{\textbar{}} (or) operator:
 
@@ -547,7 +539,7 @@ in one vector/variable compared to another.
 \end{frame}
 
 \begin{frame}{\texttt{summarize} variables}
-\protect\hypertarget{summarize-variables}{}
+\phantomsection\label{summarize-variables}
 The next common task when working with data frames is to compute
 \textbf{summary statistics}. Summary statistics are single numerical
 values that summarize a large number of values.
@@ -577,7 +569,7 @@ values that summarize a large number of values.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{summarize} variables}
-\protect\hypertarget{summarize-variables-1}{}
+\phantomsection\label{summarize-variables-1}
 Let's calculate two summary statistics (mean and standard deviation) of
 the \texttt{temp} temperature variable in the \texttt{weather} data
 frame from \texttt{nycflights13} package.
@@ -610,7 +602,7 @@ frame from \texttt{nycflights13} package.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{summarize} variables}
-\protect\hypertarget{summarize-variables-2}{}
+\phantomsection\label{summarize-variables-2}
 \begin{itemize}
 \item
   If you want to ignore the \texttt{NA} values:
@@ -647,7 +639,7 @@ frame from \texttt{nycflights13} package.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{summarize} variables}
-\protect\hypertarget{summarize-variables-3}{}
+\phantomsection\label{summarize-variables-3}
 Other summary functions we can use inside the \texttt{summarize()}:
 
 \begin{itemize}
@@ -669,7 +661,7 @@ Other summary functions we can use inside the \texttt{summarize()}:
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{group\_by}}
-\protect\hypertarget{group_by}{}
+\phantomsection\label{group_by}
 \begin{itemize}
 \item
   Say instead of a single mean temperature for the whole year, you would
@@ -690,7 +682,7 @@ Other summary functions we can use inside the \texttt{summarize()}:
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{group\_by}}
-\protect\hypertarget{group_by-1}{}
+\phantomsection\label{group_by-1}
 \normalsize
 
 \begin{Shaded}
@@ -718,7 +710,7 @@ Other summary functions we can use inside the \texttt{summarize()}:
 \end{frame}
 
 \begin{frame}[fragile]{Grouping by more than one variable}
-\protect\hypertarget{grouping-by-more-than-one-variable}{}
+\phantomsection\label{grouping-by-more-than-one-variable}
 We can also group by more than one variable
 
 \small
@@ -759,7 +751,7 @@ there are 12 months for 3 airports (\texttt{EWR}, \texttt{JFK}, and
 \end{frame}
 
 \begin{frame}[fragile]{Grouping by more than one variable}
-\protect\hypertarget{grouping-by-more-than-one-variable-1}{}
+\phantomsection\label{grouping-by-more-than-one-variable-1}
 Why do we \texttt{group\_by(origin,\ month)} and not
 \texttt{group\_by(origin)} and then \texttt{group\_by(month)}? Let's
 investigate:
@@ -801,7 +793,7 @@ The second \texttt{group\_by(month)} overwrote
 \end{frame}
 
 \begin{frame}{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables}{}
+\phantomsection\label{mutate-existing-variables}
 Another common transformation of data is to create/compute new variables
 based on existing ones.
 
@@ -813,7 +805,7 @@ from \(^\circ\)F to \(^\circ\)C using the formula
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-1}{}
+\phantomsection\label{mutate-existing-variables-1}
 We can apply this formula to the \texttt{temp} variable using the
 \texttt{mutate()} function from the \texttt{dplyr} package.
 
@@ -841,7 +833,7 @@ We can apply this formula to the \texttt{temp} variable using the
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-2}{}
+\phantomsection\label{mutate-existing-variables-2}
 \begin{itemize}
 \item
   In this code:
@@ -861,7 +853,7 @@ We can apply this formula to the \texttt{temp} variable using the
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-3}{}
+\phantomsection\label{mutate-existing-variables-3}
 Let's compute monthly average temperatures in both \(^\circ\)F and
 \(^\circ\)C.
 
@@ -893,7 +885,7 @@ Let's compute monthly average temperatures in both \(^\circ\)F and
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-4}{}
+\phantomsection\label{mutate-existing-variables-4}
 Let's consider another example.
 
 \begin{itemize}
@@ -921,7 +913,7 @@ Let's consider another example.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-5}{}
+\phantomsection\label{mutate-existing-variables-5}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{flights\_gain}
@@ -947,7 +939,7 @@ Let's consider another example.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-6}{}
+\phantomsection\label{mutate-existing-variables-6}
 Let's look at some summary statistics of the \texttt{gain} variable
 
 \small
@@ -980,7 +972,7 @@ Let's look at some summary statistics of the \texttt{gain} variable
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{mutate} existing variables}
-\protect\hypertarget{mutate-existing-variables-7}{}
+\phantomsection\label{mutate-existing-variables-7}
 Since \texttt{gain} is a numerical variable, we can visualize its
 distribution using a histogram.
 
@@ -1001,7 +993,7 @@ distribution using a histogram.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{arrange} and sort rows}
-\protect\hypertarget{arrange-and-sort-rows}{}
+\phantomsection\label{arrange-and-sort-rows}
 \begin{itemize}
 \item
   One of the most commonly performed data wrangling tasks is to sort a
@@ -1015,7 +1007,7 @@ distribution using a histogram.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{arrange} and sort rows}
-\protect\hypertarget{arrange-and-sort-rows-1}{}
+\phantomsection\label{arrange-and-sort-rows-1}
 Suppose we are interested in determining the most frequent destination
 airports for all domestic flights departing from New York City in 2013.
 
@@ -1046,7 +1038,7 @@ data frame are sorted in alphabetical order of destination.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{arrange} and sort rows}
-\protect\hypertarget{arrange-and-sort-rows-2}{}
+\phantomsection\label{arrange-and-sort-rows-2}
 Say instead we would like to see the same data, but sorted from the most
 to the least number of flights (\texttt{num\_flights}) instead
 
@@ -1078,7 +1070,7 @@ the least frequent destination airports displayed first.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{arrange} and sort rows}
-\protect\hypertarget{arrange-and-sort-rows-3}{}
+\phantomsection\label{arrange-and-sort-rows-3}
 To switch the ordering to be in ``descending'' order instead, we use the
 \texttt{desc()} function.
 
@@ -1107,7 +1099,7 @@ To switch the ordering to be in ``descending'' order instead, we use the
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{join} data frames}
-\protect\hypertarget{join-data-frames}{}
+\phantomsection\label{join-data-frames}
 Another common data transformation task is ``joining'' or ``merging''
 two different datasets.
 
@@ -1126,14 +1118,14 @@ two different datasets.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{join} data frames}
-\protect\hypertarget{join-data-frames-1}{}
+\phantomsection\label{join-data-frames-1}
 Lets see the data relationships from the \texttt{nycflights13} package.
 
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.6\textheight]{week3_5} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Matching ``key'' variable names}
-\protect\hypertarget{matching-key-variable-names}{}
+\phantomsection\label{matching-key-variable-names}
 In both the \texttt{flights} and \texttt{airlines} data frames, the key
 variable we want to join/merge/match the rows by has the same name:
 \textbf{carrier}.
@@ -1165,7 +1157,7 @@ additional variable \texttt{name}.
 \end{frame}
 
 \begin{frame}[fragile]{Matching ``key'' variable names}
-\protect\hypertarget{matching-key-variable-names-1}{}
+\phantomsection\label{matching-key-variable-names-1}
 A visual representation of the \texttt{inner\_join()} is shown below
 
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.3\textheight]{week3_6} \end{center}
@@ -1187,7 +1179,7 @@ A visual representation of the \texttt{inner\_join()} is shown below
 \end{frame}
 
 \begin{frame}[fragile]{Different ``key'' variable names}
-\protect\hypertarget{different-key-variable-names}{}
+\phantomsection\label{different-key-variable-names}
 \begin{itemize}
 \item
   Say instead you are interested in the destinations of all domestic
@@ -1236,7 +1228,7 @@ A visual representation of the \texttt{inner\_join()} is shown below
 \end{frame}
 
 \begin{frame}[fragile]{Different ``key'' variable names}
-\protect\hypertarget{different-key-variable-names-1}{}
+\phantomsection\label{different-key-variable-names-1}
 In order to join these two data frames by airport code, our
 \texttt{inner\_join()} operation will use the
 \texttt{by\ =\ c("dest"\ =\ "faa")} argument:
@@ -1255,7 +1247,7 @@ In order to join these two data frames by airport code, our
 \end{frame}
 
 \begin{frame}[fragile]{Different ``key'' variable names}
-\protect\hypertarget{different-key-variable-names-2}{}
+\phantomsection\label{different-key-variable-names-2}
 Let's construct the chain of pipe operators
 \texttt{\textbar{}\textgreater{}} that computes the number of flights
 from NYC to each destination, but also includes information about each
@@ -1287,7 +1279,7 @@ destination airport:
 \end{frame}
 
 \begin{frame}[fragile]{Multiple ``key'' variables}
-\protect\hypertarget{multiple-key-variables}{}
+\phantomsection\label{multiple-key-variables}
 \begin{itemize}
 \item
   Say instead we want to join two data frames by multiple key variables.
@@ -1320,7 +1312,7 @@ destination airport:
 \end{frame}
 
 \begin{frame}[fragile]{Multiple ``key'' variables}
-\protect\hypertarget{multiple-key-variables-1}{}
+\phantomsection\label{multiple-key-variables-1}
 \normalsize
 
 \begin{Shaded}
@@ -1353,7 +1345,7 @@ destination airport:
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{select} variables}
-\protect\hypertarget{select-variables}{}
+\phantomsection\label{select-variables}
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{week3_8} \end{center}
 
 We've seen that the \texttt{flights} data frame in the
@@ -1371,7 +1363,7 @@ We've seen that the \texttt{flights} data frame in the
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{select} variables}
-\protect\hypertarget{select-variables-1}{}
+\phantomsection\label{select-variables-1}
 However, say you only need two of these 19 variables, say
 \texttt{carrier} and \texttt{flight}. You can \texttt{select()} these
 two variables:
@@ -1404,7 +1396,7 @@ example, lets say we want to remove the \texttt{year} in the
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{select} variables}
-\protect\hypertarget{select-variables-2}{}
+\phantomsection\label{select-variables-2}
 Another way of selecting columns/variables is by specifying a range of
 columns:
 
@@ -1440,7 +1432,7 @@ This will \texttt{select()} all columns between \texttt{month} and
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{select} variables}
-\protect\hypertarget{select-variables-3}{}
+\phantomsection\label{select-variables-3}
 The \texttt{select()} function can also be used to reorder columns when
 used with the \texttt{everything()} helper function.
 
@@ -1470,7 +1462,7 @@ used with the \texttt{everything()} helper function.
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{select} variables}
-\protect\hypertarget{select-variables-4}{}
+\phantomsection\label{select-variables-4}
 Lastly, the helper functions \texttt{starts\_with()},
 \texttt{ends\_with()}, and \texttt{contains(}) can be used to select
 variables/columns that match those conditions. As examples,
@@ -1489,15 +1481,14 @@ variables/columns that match those conditions. As examples,
 \end{frame}
 
 \begin{frame}{Summary table}
-\protect\hypertarget{summary-table}{}
+\phantomsection\label{summary-table}
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.6\textheight]{week3_7} \end{center}
 \end{frame}
 
-\hypertarget{tidy-data}{%
-\section{``Tidy'' data}\label{tidy-data}}
+\section{``Tidy'' data}\label{tidy-data}
 
 \begin{frame}[fragile]{``Tidy'' data}
-\protect\hypertarget{tidy-data-1}{}
+\phantomsection\label{tidy-data-1}
 Let's now learn about the concept of \textbf{``tidy''} data format.
 
 \small
@@ -1529,7 +1520,7 @@ Let's now learn about the concept of \textbf{``tidy''} data format.
 \end{frame}
 
 \begin{frame}[fragile]{``Tidy'' data}
-\protect\hypertarget{tidy-data-2}{}
+\phantomsection\label{tidy-data-2}
 The \texttt{drinks\_smaller} data frame, cannot be used to create the
 side-by-side barplot show below.
 
@@ -1539,7 +1530,7 @@ why?
 \end{frame}
 
 \begin{frame}{``Tidy'' data}
-\protect\hypertarget{tidy-data-3}{}
+\phantomsection\label{tidy-data-3}
 \begin{itemize}
 \item
   Let's break down the grammar of graphics we introduced earlier:
@@ -1563,7 +1554,7 @@ why?
 \end{frame}
 
 \begin{frame}{``Tidy'' data: Definition}
-\protect\hypertarget{tidy-data-definition}{}
+\phantomsection\label{tidy-data-definition}
 The word ``tidy'' in data science means that your data follows a
 standardized format.
 
@@ -1591,7 +1582,7 @@ standardized format.
 \end{frame}
 
 \begin{frame}{``Tidy'' data: Definition}
-\protect\hypertarget{tidy-data-definition-1}{}
+\phantomsection\label{tidy-data-definition-1}
 Stock prices (non-tidy format):
 
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.25\textheight]{week3new3} \end{center}
@@ -1602,7 +1593,7 @@ Stock prices (tidy format):
 \end{frame}
 
 \begin{frame}{``Tidy'' data: Definition}
-\protect\hypertarget{tidy-data-definition-2}{}
+\phantomsection\label{tidy-data-definition-2}
 \begin{itemize}
 \item
   Observe that:
@@ -1627,7 +1618,7 @@ Stock prices (tidy format):
 \end{frame}
 
 \begin{frame}[fragile]{Coverting to ``Tidy'' format}
-\protect\hypertarget{coverting-to-tidy-format}{}
+\phantomsection\label{coverting-to-tidy-format}
 We convert the \texttt{drinks\_smaller} data to ``tidy'' format by using
 the \texttt{pivot\_longer()} function from the \texttt{tidyr} package:
 
@@ -1647,7 +1638,7 @@ the \texttt{pivot\_longer()} function from the \texttt{tidyr} package:
 \end{frame}
 
 \begin{frame}[fragile]{Coverting to ``Tidy'' format}
-\protect\hypertarget{coverting-to-tidy-format-1}{}
+\phantomsection\label{coverting-to-tidy-format-1}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{drinks\_smaller\_tidy}
@@ -1674,7 +1665,7 @@ the \texttt{pivot\_longer()} function from the \texttt{tidyr} package:
 \end{frame}
 
 \begin{frame}[fragile]{Coverting to ``Tidy'' format}
-\protect\hypertarget{coverting-to-tidy-format-2}{}
+\phantomsection\label{coverting-to-tidy-format-2}
 Note that the two ways to specify the vector argument to \texttt{cols}
 produce the same output.
 
@@ -1699,7 +1690,7 @@ produce the same output.
 \end{frame}
 
 \begin{frame}[fragile]{Coverting to ``Tidy'' format}
-\protect\hypertarget{coverting-to-tidy-format-3}{}
+\phantomsection\label{coverting-to-tidy-format-3}
 \normalsize
 
 \begin{Shaded}
