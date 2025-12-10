@@ -1,5 +1,5 @@
 \frametitle{Best-fitting line}
-\protect\hypertarget{best-fitting-line-4}{}
+\phantomsection\label{best-fitting-line-4}
 You can also get the residuals using the function \texttt{resid} on a
 linear model object.
 

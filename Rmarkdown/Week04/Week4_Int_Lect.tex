@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,7 +44,6 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -56,8 +56,8 @@
 \fi
 \usepackage{lmodern}
 \usetheme[]{Madrid}
-\usecolortheme{orchid}
-\usefonttheme{professionalfonts}
+\usecolortheme[]{orchid}
+\usefonttheme[]{professionalfonts}
 \ifPDFTeX\else
   % xetex/luatex font selection
 \fi
@@ -77,8 +77,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -122,7 +120,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{placeins}
 \usepackage{color}
 \usepackage{bm}
@@ -149,31 +146,27 @@
 \newfont{\gilfont}{msbm10 scaled 1000}
 \newcommand{\DOT}{\usebox{\biggercirc}}
 \newcommand{\pv}{\wp\text{-value}}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 4},
-  pdfauthor={Fall 2024},
+  pdfauthor={ATA},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 4}
-\author{Fall 2024}
+\author{ATA}
 \date{}
 \institute{Appalachian State University}
 
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{outline-for-the-week}{%
-\section{Outline for the week}\label{outline-for-the-week}}
+\section{Outline for the week}\label{outline-for-the-week}
 
 \begin{frame}{By the end of the week: Basic Regression}
-\protect\hypertarget{by-the-end-of-the-week-basic-regression}{}
+\phantomsection\label{by-the-end-of-the-week-basic-regression}
 \begin{itemize}
 \tightlist
 \item
@@ -185,11 +178,10 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{basic-regression}{%
-\section{Basic Regression}\label{basic-regression}}
+\section{Basic Regression}\label{basic-regression}
 
 \begin{frame}{Basic Regression}
-\protect\hypertarget{basic-regression-1}{}
+\phantomsection\label{basic-regression-1}
 \begin{itemize}
 \item
   Now that we are equipped with
@@ -222,7 +214,7 @@
 \end{frame}
 
 \begin{frame}{Data Modeling}
-\protect\hypertarget{data-modeling}{}
+\phantomsection\label{data-modeling}
 Data modeling serves one of two purposes:
 
 \begin{enumerate}
@@ -257,7 +249,7 @@ Data modeling serves one of two purposes:
 \end{frame}
 
 \begin{frame}{Data Modeling}
-\protect\hypertarget{data-modeling-1}{}
+\phantomsection\label{data-modeling-1}
 \begin{itemize}
 \item
   For example, say you are interested in
@@ -301,7 +293,7 @@ Data modeling serves one of two purposes:
 \end{frame}
 
 \begin{frame}{Linear regression}
-\protect\hypertarget{linear-regression}{}
+\phantomsection\label{linear-regression}
 \begin{itemize}
 \item
   There are many techniques for modeling, such as
@@ -336,7 +328,7 @@ Data modeling serves one of two purposes:
 \end{frame}
 
 \begin{frame}[fragile]{Needed packages}
-\protect\hypertarget{needed-packages}{}
+\phantomsection\label{needed-packages}
 Let's now load all the packages needed
 
 \normalsize
@@ -356,7 +348,7 @@ Let's now load all the packages needed
 \end{frame}
 
 \begin{frame}[fragile]{One numerical explanatory variable}
-\protect\hypertarget{one-numerical-explanatory-variable}{}
+\phantomsection\label{one-numerical-explanatory-variable}
 \begin{itemize}
 \item
   Researchers at the University of Texas in Austin, Texas (UT Austin)
@@ -381,7 +373,7 @@ Let's now load all the packages needed
 \end{frame}
 
 \begin{frame}[fragile]{One numerical explanatory variable}
-\protect\hypertarget{one-numerical-explanatory-variable-1}{}
+\phantomsection\label{one-numerical-explanatory-variable-1}
 Let's fully describe the 4 variables we will focus on:
 
 \begin{enumerate}
@@ -406,7 +398,7 @@ Let's fully describe the 4 variables we will focus on:
 \end{frame}
 
 \begin{frame}{One numerical explanatory variable}
-\protect\hypertarget{one-numerical-explanatory-variable-2}{}
+\phantomsection\label{one-numerical-explanatory-variable-2}
 We'll answer these questions by modeling the relationship between
 teaching scores and ``beauty'' scores using simple linear regression
 where we have:
@@ -422,7 +414,7 @@ where we have:
 \end{frame}
 
 \begin{frame}{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis}{}
+\phantomsection\label{exploratory-data-analysis}
 \begin{itemize}
 \item
   A crucial step before doing any kind of analysis or modeling is
@@ -456,7 +448,7 @@ where we have:
 \end{frame}
 
 \begin{frame}[fragile]{Step 1: Examine the raw data values}
-\protect\hypertarget{step-1-examine-the-raw-data-values}{}
+\phantomsection\label{step-1-examine-the-raw-data-values}
 \normalsize
 
 \begin{Shaded}
@@ -480,7 +472,7 @@ $ age     <int> 36, 36, 36, 36, 59, 59, 59, 51, 51, 40, 40, 40, 40, 40, 40, 40~
 \end{frame}
 
 \begin{frame}[fragile]{Step 1: Examine the raw data values}
-\protect\hypertarget{step-1-examine-the-raw-data-values-1}{}
+\phantomsection\label{step-1-examine-the-raw-data-values-1}
 An alternative way to look at the raw data values is by choosing a
 random sample of the rows.
 
@@ -497,18 +489,18 @@ random sample of the rows.
 # A tibble: 5 x 4
      ID score bty_avg   age
   <int> <dbl>   <dbl> <int>
-1   190   4.2    4.33    47
-2   403   3.8    2.83    57
-3   316   3.7    6       52
-4   191   4.3    2.33    54
-5    16   4.3    3.17    40
+1   377   4.5    2.5     38
+2   179   4      4.33    47
+3    29   4.9    5.5     62
+4    53   4.5    5.5     47
+5   303   3.1    3.33    43
 \end{verbatim}
 
 \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Step 2: summary statistics}
-\protect\hypertarget{step-2-summary-statistics}{}
+\phantomsection\label{step-2-summary-statistics}
 \normalsize
 
 \begin{Shaded}
@@ -532,7 +524,7 @@ random sample of the rows.
 \end{frame}
 
 \begin{frame}[fragile]{Step 2: summary statistics}
-\protect\hypertarget{step-2-summary-statistics-1}{}
+\phantomsection\label{step-2-summary-statistics-1}
 The \texttt{skim()} function from the \texttt{skimr} package, ``skims''
 the data, and returns commonly used summary statistics
 
@@ -551,7 +543,7 @@ the data, and returns commonly used summary statistics
 \end{frame}
 
 \begin{frame}{Correlation coefficient \(r\)}
-\protect\hypertarget{correlation-coefficient-r}{}
+\phantomsection\label{correlation-coefficient-r}
 When the two variables are numerical, we can compute the
 \textbf{correlation coefficient}.
 
@@ -572,7 +564,7 @@ respectively.
 \end{frame}
 
 \begin{frame}{Properties of \(r\)}
-\protect\hypertarget{properties-of-r}{}
+\phantomsection\label{properties-of-r}
 \begin{itemize}
 \item
   sign of \(r\) gives direction of association
@@ -607,12 +599,12 @@ respectively.
 \end{frame}
 
 \begin{frame}{Correlation coefficient and scatterplot}
-\protect\hypertarget{correlation-coefficient-and-scatterplot}{}
+\phantomsection\label{correlation-coefficient-and-scatterplot}
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.45\textheight]{week4_2} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Correlation coefficien: GPA Example}
-\protect\hypertarget{correlation-coefficien-gpa-example}{}
+\phantomsection\label{correlation-coefficien-gpa-example}
 Following are the high school GPAs and the college GPAs at the end of
 the freshman year for ten different students from the \texttt{Gpa} data
 set of the \texttt{BSDA} package.
@@ -642,7 +634,7 @@ set of the \texttt{BSDA} package.
 \end{frame}
 
 \begin{frame}[fragile]{Correlation coefficient: GPA Example}
-\protect\hypertarget{correlation-coefficient-gpa-example}{}
+\phantomsection\label{correlation-coefficient-gpa-example}
 \normalsize
 
 \begin{Shaded}
@@ -662,7 +654,7 @@ GPA increases
 \end{frame}
 
 \begin{frame}[fragile]{Correlation coefficien: GPA Example}
-\protect\hypertarget{correlation-coefficien-gpa-example-1}{}
+\phantomsection\label{correlation-coefficien-gpa-example-1}
 \small
 
 \begin{Shaded}
@@ -677,18 +669,18 @@ GPA increases
 
 \begin{verbatim}
 # A tibble: 10 x 6
-   hsgpa collgpa y_ybar  x_xbar      zx     zy
-   <dbl>   <dbl>  <dbl>   <dbl>   <dbl>  <dbl>
- 1   2.7     2.2 -0.5   -0.0100 -0.0210 -0.657
- 2   3.1     2.8  0.100  0.39    0.817   0.131
- 3   2.1     2.4 -0.300 -0.61   -1.28   -0.394
- 4   3.2     3.8  1.1    0.49    1.03    1.44 
- 5   2.4     1.9 -0.8   -0.31   -0.650  -1.05 
- 6   3.4     3.5  0.8    0.69    1.45    1.05 
- 7   2.6     3.1  0.4   -0.110  -0.231   0.525
- 8   2       1.4 -1.3   -0.71   -1.49   -1.71 
- 9   3.1     3.4  0.7    0.39    0.817   0.919
-10   2.5     2.5 -0.200 -0.21   -0.440  -0.263
+   hsgpa collgpa  y_ybar   x_xbar      zx     zy
+   <dbl>   <dbl>   <dbl>    <dbl>   <dbl>  <dbl>
+ 1   2.7     2.2 -0.5    -0.01000 -0.0210 -0.657
+ 2   3.1     2.8  0.1000  0.39     0.817   0.131
+ 3   2.1     2.4 -0.300  -0.61    -1.28   -0.394
+ 4   3.2     3.8  1.1     0.49     1.03    1.44 
+ 5   2.4     1.9 -0.8    -0.31    -0.650  -1.05 
+ 6   3.4     3.5  0.8     0.69     1.45    1.05 
+ 7   2.6     3.1  0.4    -0.110   -0.231   0.525
+ 8   2       1.4 -1.3    -0.71    -1.49   -1.71 
+ 9   3.1     3.4  0.7     0.39     0.817   0.919
+10   2.5     2.5 -0.200  -0.21    -0.440  -0.263
 \end{verbatim}
 
 \normalsize
@@ -697,7 +689,7 @@ GPA increases
 \end{frame}
 
 \begin{frame}[fragile]{Correlation coefficient: GPA Example}
-\protect\hypertarget{correlation-coefficient-gpa-example-1}{}
+\phantomsection\label{correlation-coefficient-gpa-example-1}
 \normalsize
 
 \begin{Shaded}
@@ -738,7 +730,7 @@ Using the build in \texttt{cor()} function:
 \end{frame}
 
 \begin{frame}[fragile]{Correlation coefficient: GPA Example}
-\protect\hypertarget{correlation-coefficient-gpa-example-2}{}
+\phantomsection\label{correlation-coefficient-gpa-example-2}
 Using \texttt{get\_correlation()} function in the \texttt{moderndive}
 package.
 
@@ -762,7 +754,7 @@ package.
 \end{frame}
 
 \begin{frame}[fragile]{Correlation coefficient: GPA Example}
-\protect\hypertarget{correlation-coefficient-gpa-example-3}{}
+\phantomsection\label{correlation-coefficient-gpa-example-3}
 \normalsize
 
 \begin{Shaded}
@@ -784,7 +776,7 @@ package.
 
 \begin{frame}[fragile]{Correlation coefficient: Teaching Evaluations
 Example}
-\protect\hypertarget{correlation-coefficient-teaching-evaluations-example}{}
+\phantomsection\label{correlation-coefficient-teaching-evaluations-example}
 \normalsize
 
 \begin{Shaded}
@@ -823,7 +815,7 @@ Example}
 \end{frame}
 
 \begin{frame}[fragile]{Step 3: create data visualizations}
-\protect\hypertarget{step-3-create-data-visualizations}{}
+\phantomsection\label{step-3-create-data-visualizations}
 \normalsize
 
 \begin{Shaded}
@@ -841,7 +833,7 @@ Example}
 \end{frame}
 
 \begin{frame}[fragile]{Step 3: creating data visualizations}
-\protect\hypertarget{step-3-creating-data-visualizations}{}
+\phantomsection\label{step-3-creating-data-visualizations}
 Add ``best-fitting'' line (regression line).
 
 \tiny
@@ -861,11 +853,10 @@ Add ``best-fitting'' line (regression line).
 \normalsize
 \end{frame}
 
-\hypertarget{simple-linear-regression}{%
-\section{Simple linear regression}\label{simple-linear-regression}}
+\section{Simple linear regression}\label{simple-linear-regression}
 
 \begin{frame}{Simple linear regression}
-\protect\hypertarget{simple-linear-regression-1}{}
+\phantomsection\label{simple-linear-regression-1}
 You may recall from secondary/high school algebra that the equation of a
 line is: \[y=m\cdot x + b\]
 
@@ -882,7 +873,7 @@ different notation.
 \end{frame}
 
 \begin{frame}{Simple linear regression}
-\protect\hypertarget{simple-linear-regression-2}{}
+\phantomsection\label{simple-linear-regression-2}
 The regression equation is given by: \[y=\beta_0+\beta_1x+\epsilon\]
 
 \begin{itemize}
@@ -900,7 +891,7 @@ The regression equation is given by: \[y=\beta_0+\beta_1x+\epsilon\]
 \end{frame}
 
 \begin{frame}{Simple linear regression}
-\protect\hypertarget{simple-linear-regression-3}{}
+\phantomsection\label{simple-linear-regression-3}
 The line that best fits the data is given by, \[\hat{y}=b_0+b_1x\] where
 \(b_0\) and \(b_1\) are estimates for the population parameters
 \(\beta_0\) and \(\beta_1\).
@@ -924,7 +915,7 @@ The line that best fits the data is given by, \[\hat{y}=b_0+b_1x\] where
 \end{frame}
 
 \begin{frame}{The least squares regression line}
-\protect\hypertarget{the-least-squares-regression-line}{}
+\phantomsection\label{the-least-squares-regression-line}
 The least squares regression line is:
 
 \[\hat{y}=b_0+b_1x\]
@@ -935,7 +926,7 @@ and \[b_0=\bar{y}-b_1\bar{x}.\]
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example}{}
+\phantomsection\label{regression-teaching-evaluations-example}
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.45\textheight]{Week4_Int_Lect_files/figure-beamer/unnamed-chunk-18-1} \end{center}
 
 \begin{itemize}
@@ -949,7 +940,7 @@ and \[b_0=\bar{y}-b_1\bar{x}.\]
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-1}{}
+\phantomsection\label{regression-teaching-evaluations-example-1}
 We obtain the regression line parameters in two steps:
 
 \begin{enumerate}
@@ -965,7 +956,7 @@ We obtain the regression line parameters in two steps:
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-2}{}
+\phantomsection\label{regression-teaching-evaluations-example-2}
 \small
 
 \begin{Shaded}
@@ -987,7 +978,7 @@ We obtain the regression line parameters in two steps:
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-3}{}
+\phantomsection\label{regression-teaching-evaluations-example-3}
 \small
 
 \begin{Shaded}
@@ -1020,7 +1011,7 @@ F-statistic: 16.73 on 1 and 461 DF,  p-value: 5.083e-05
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-4}{}
+\phantomsection\label{regression-teaching-evaluations-example-4}
 \small
 
 \begin{Shaded}
@@ -1041,7 +1032,7 @@ F-statistic: 16.73 on 1 and 461 DF,  p-value: 5.083e-05
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-5}{}
+\phantomsection\label{regression-teaching-evaluations-example-5}
 Lets interpret the regression table. The equation of the regression
 line:
 
@@ -1071,7 +1062,7 @@ line:
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-6}{}
+\phantomsection\label{regression-teaching-evaluations-example-6}
 \begin{itemize}
 \item
   The slope \(b_1\) of \texttt{bty\_avg} is 0.067.
@@ -1090,7 +1081,7 @@ line:
 \end{frame}
 
 \begin{frame}[fragile]{Observed/fitted values and residuals}
-\protect\hypertarget{observedfitted-values-and-residuals}{}
+\phantomsection\label{observedfitted-values-and-residuals}
 Now we are interested in information on individual observations. For
 example, let's focus on the 21st of the 463 courses in the
 \texttt{evals\_ch5} dataframe
@@ -1133,7 +1124,7 @@ example, let's focus on the 21st of the 463 courses in the
 \end{frame}
 
 \begin{frame}{Observed/fitted values and residuals}
-\protect\hypertarget{observedfitted-values-and-residuals-1}{}
+\phantomsection\label{observedfitted-values-and-residuals-1}
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.4\textheight]{week4_4} \end{center}
 
 \begin{itemize}
@@ -1150,7 +1141,7 @@ example, let's focus on the 21st of the 463 courses in the
 \end{frame}
 
 \begin{frame}[fragile]{Observed/fitted values and residuals}
-\protect\hypertarget{observedfitted-values-and-residuals-2}{}
+\phantomsection\label{observedfitted-values-and-residuals-2}
 To compute both the fitted value and residual for all observations in
 the data we use the \texttt{get\_regression\_points()} function.
 
@@ -1184,7 +1175,7 @@ the data we use the \texttt{get\_regression\_points()} function.
 \end{frame}
 
 \begin{frame}{Assessing the fit}
-\protect\hypertarget{assessing-the-fit}{}
+\phantomsection\label{assessing-the-fit}
 \begin{itemize}
 \item
   The regression model is a good model if the scatterplot of residuals
@@ -1213,12 +1204,12 @@ the data we use the \texttt{get\_regression\_points()} function.
 \end{frame}
 
 \begin{frame}{Assessing the fit}
-\protect\hypertarget{assessing-the-fit-1}{}
+\phantomsection\label{assessing-the-fit-1}
 \begin{center}\includegraphics[width=0.9\linewidth]{Week4_Int_Lect_files/figure-beamer/unnamed-chunk-25-1} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Assessing the fit: Teaching Evaluations Example}
-\protect\hypertarget{assessing-the-fit-teaching-evaluations-example}{}
+\phantomsection\label{assessing-the-fit-teaching-evaluations-example}
 \normalsize
 
 \begin{Shaded}
@@ -1233,12 +1224,11 @@ the data we use the \texttt{get\_regression\_points()} function.
 \normalsize
 \end{frame}
 
-\hypertarget{confidence-intervals-and-tests}{%
 \section{Confidence Intervals and
-Tests}\label{confidence-intervals-and-tests}}
+Tests}\label{confidence-intervals-and-tests}
 
 \begin{frame}{Estimating \(\sigma^2\)}
-\protect\hypertarget{estimating-sigma2}{}
+\phantomsection\label{estimating-sigma2}
 The regression equations give the mean of the group. What is the
 standard deviation of this group? That is, we have to estimate
 \(\sigma\).
@@ -1250,7 +1240,7 @@ Since, \(\beta_0\) and \(\beta_1\) are unknown, we use the estimators:
 \end{frame}
 
 \begin{frame}{Estimating \(\sigma^2\)}
-\protect\hypertarget{estimating-sigma2-1}{}
+\phantomsection\label{estimating-sigma2-1}
 Since \(b_0\), \(b_1\) are estimators, the \(\hat{e}_i^2\) are not
 independent. We use the following estimator of \(\sigma^2\):
 \[ s^2=\frac{SSE}{n-2}=MSE,\] where \(n-2\) is the degree of freedom
@@ -1266,7 +1256,7 @@ square. Generally, \(df=\text{number of cases - number of parameters}\).
 \end{frame}
 
 \begin{frame}{Properties of OLS}
-\protect\hypertarget{properties-of-ols}{}
+\phantomsection\label{properties-of-ols}
 If we assume that \(\epsilon_i \sim N(0, \sigma^2)\), then the OLS
 estimates are also maximum likelihood estimates (MLE). Under the normal
 assumption,
@@ -1277,7 +1267,7 @@ perform hypothesis testing, and to make other statistical inferences.
 \end{frame}
 
 \begin{frame}{Confidence Intervals}
-\protect\hypertarget{confidence-intervals}{}
+\phantomsection\label{confidence-intervals}
 Linear model assumptions:
 \[y_i=\beta_0+\beta_1 x_i+\epsilon_i, \quad \quad \epsilon_i \sim N(0, \sigma^2)\]
 
@@ -1296,7 +1286,7 @@ Under this model:
 \end{frame}
 
 \begin{frame}{Hypothesis Tests}
-\protect\hypertarget{hypothesis-tests}{}
+\phantomsection\label{hypothesis-tests}
 \begin{itemize}
 \tightlist
 \item
@@ -1313,7 +1303,7 @@ reject \(H_0\) if \(\wp\text{-value}<\alpha\).
 \end{frame}
 
 \begin{frame}{Hypothesis Tests}
-\protect\hypertarget{hypothesis-tests-1}{}
+\phantomsection\label{hypothesis-tests-1}
 Similarly, a hypothesis test of
 \(H_0: \beta_1=0\quad vs \quad H_a: \beta_1\neq0\),
 
@@ -1326,7 +1316,7 @@ reject \(H_0\) if \(\wp\text{-value}<\alpha\).
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-7}{}
+\phantomsection\label{regression-teaching-evaluations-example-7}
 \small
 
 \begin{Shaded}
@@ -1356,7 +1346,7 @@ reject \(H_0\) if \(\wp\text{-value}<\alpha\).
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-8}{}
+\phantomsection\label{regression-teaching-evaluations-example-8}
 \small
 
 \begin{Shaded}
@@ -1390,7 +1380,7 @@ F-statistic: 16.73 on 1 and 461 DF,  p-value: 5.083e-05
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-9}{}
+\phantomsection\label{regression-teaching-evaluations-example-9}
 To obtain the \texttt{residuals} for \texttt{score\_model} use the
 function \texttt{resid} on a linear model object.
 
@@ -1434,7 +1424,7 @@ function \texttt{resid} on a linear model object.
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-10}{}
+\phantomsection\label{regression-teaching-evaluations-example-10}
 \normalsize
 
 \begin{Shaded}
@@ -1468,7 +1458,7 @@ bty_avg     -0.001172503  0.0002654016
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-11}{}
+\phantomsection\label{regression-teaching-evaluations-example-11}
 \normalsize
 
 \begin{Shaded}
@@ -1511,7 +1501,7 @@ bty_avg     -0.001172503  0.0002654016
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-12}{}
+\phantomsection\label{regression-teaching-evaluations-example-12}
 \normalsize
 
 \begin{Shaded}
@@ -1551,7 +1541,7 @@ bty_avg     0.03462292 0.09865116
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-13}{}
+\phantomsection\label{regression-teaching-evaluations-example-13}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{c}\NormalTok{(tb0, tb1)}
@@ -1589,7 +1579,7 @@ bty_avg     0.03462292 0.09865116
 \end{frame}
 
 \begin{frame}{Partition of Total sum of squares}
-\protect\hypertarget{partition-of-total-sum-of-squares}{}
+\phantomsection\label{partition-of-total-sum-of-squares}
 \begin{itemize}
 \item
   For the linear regression model:
@@ -1604,7 +1594,7 @@ Partition of Total sum of squares:
 \end{frame}
 
 \begin{frame}{Partition of Total sum of squares}
-\protect\hypertarget{partition-of-total-sum-of-squares-1}{}
+\phantomsection\label{partition-of-total-sum-of-squares-1}
 \begin{itemize}
 \item
   Total sum of squares (\(SST\)): \(SST=\sum(y_i-\bar{y})^2.\)
@@ -1621,7 +1611,7 @@ That is: \(SST=SSR+SSE\)
 \end{frame}
 
 \begin{frame}{Coefficient of Determination}
-\protect\hypertarget{coefficient-of-determination}{}
+\phantomsection\label{coefficient-of-determination}
 A natural measure of the effect of \(x\) in reducing in variation in
 \(y\) is to express the reduction in variation as a proportion of the
 total variation: \[R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}.\]
@@ -1634,7 +1624,7 @@ Note that: \[0\leq R^2 \leq 1\]
 \end{frame}
 
 \begin{frame}{Coefficient of Determination}
-\protect\hypertarget{coefficient-of-determination-1}{}
+\phantomsection\label{coefficient-of-determination-1}
 Some common misunderstandings of \(R^2\):
 
 \begin{itemize}
@@ -1651,12 +1641,12 @@ Some common misunderstandings of \(R^2\):
 \end{frame}
 
 \begin{frame}{Coefficient of Determination}
-\protect\hypertarget{coefficient-of-determination-2}{}
+\phantomsection\label{coefficient-of-determination-2}
 \begin{center}\includegraphics[width=0.6\linewidth]{week2_7} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-14}{}
+\phantomsection\label{regression-teaching-evaluations-example-14}
 \normalsize
 
 \begin{Shaded}
@@ -1696,7 +1686,7 @@ Some common misunderstandings of \(R^2\):
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-15}{}
+\phantomsection\label{regression-teaching-evaluations-example-15}
 \normalsize
 
 \begin{Shaded}
@@ -1724,7 +1714,7 @@ Some common misunderstandings of \(R^2\):
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-16}{}
+\phantomsection\label{regression-teaching-evaluations-example-16}
 \small
 
 \begin{Shaded}
@@ -1745,12 +1735,11 @@ Some common misunderstandings of \(R^2\):
 \end{verbatim}
 \end{frame}
 
-\hypertarget{prediction-intervals}{%
-\section{Prediction intervals}\label{prediction-intervals}}
+\section{Prediction intervals}\label{prediction-intervals}
 
 \begin{frame}{Interval Estimation for Mean Response and a Single
 Response}
-\protect\hypertarget{interval-estimation-for-mean-response-and-a-single-response}{}
+\phantomsection\label{interval-estimation-for-mean-response-and-a-single-response}
 \begin{enumerate}
 \tightlist
 \item
@@ -1784,7 +1773,7 @@ a single day for a given temperature.
 \end{frame}
 
 \begin{frame}{Interval Estimation of Mean Response}
-\protect\hypertarget{interval-estimation-of-mean-response}{}
+\phantomsection\label{interval-estimation-of-mean-response}
 Let \(x_h\) denote the level of \(x\) for which we wish to estimate the
 mean response. Then, by the regression equation we have:
 \[E(y_h|x_h)=\hat{y}_h=b_0+b_1x_h\] Variance:
@@ -1796,7 +1785,7 @@ Estimated Variance:
 \end{frame}
 
 \begin{frame}{Interval Estimation of Mean Response}
-\protect\hypertarget{interval-estimation-of-mean-response-1}{}
+\phantomsection\label{interval-estimation-of-mean-response-1}
 \begin{itemize}
 \tightlist
 \item
@@ -1810,7 +1799,7 @@ is: \[\hat{y}_h\pm t_{1 -\alpha/2; n-2}S(\hat{y}_h).\]
 \end{frame}
 
 \begin{frame}{Prediction Intervals for a Single Response}
-\protect\hypertarget{prediction-intervals-for-a-single-response}{}
+\phantomsection\label{prediction-intervals-for-a-single-response}
 In prediction of a single response, we can use the estimated mean
 function to predict it. Let \(x_*\) denote the level of \(x\), then we
 have:
@@ -1829,7 +1818,7 @@ A natural estimation is: \[ \hat{y}_*=b_0+b_1x_*.\]
 \end{frame}
 
 \begin{frame}{Prediction Intervals for a Single Response}
-\protect\hypertarget{prediction-intervals-for-a-single-response-1}{}
+\phantomsection\label{prediction-intervals-for-a-single-response-1}
 Hence,
 
 \[\frac{y_*-\hat{y}_*}{S(pred)}\sim t_{n-2}.\]
@@ -1839,7 +1828,7 @@ So, the prediction interval for \(y_*\) is:
 \end{frame}
 
 \begin{frame}[fragile]{Confidence Regions and Prediction Bands}
-\protect\hypertarget{confidence-regions-and-prediction-bands}{}
+\phantomsection\label{confidence-regions-and-prediction-bands}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{PIM }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(score\_model, }\AttributeTok{interval =} \StringTok{"pred"}\NormalTok{)}
@@ -1858,12 +1847,12 @@ So, the prediction interval for \(y_*\) is:
 \end{frame}
 
 \begin{frame}{Confidence Regions and Prediction Bands}
-\protect\hypertarget{confidence-regions-and-prediction-bands-1}{}
+\phantomsection\label{confidence-regions-and-prediction-bands-1}
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.7\textheight]{Week4_Int_Lect_files/figure-beamer/unnamed-chunk-40-1} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Regression: Teaching Evaluations Example}
-\protect\hypertarget{regression-teaching-evaluations-example-17}{}
+\phantomsection\label{regression-teaching-evaluations-example-17}
 \normalsize
 
 \begin{Shaded}
@@ -1907,11 +1896,10 @@ So, the prediction interval for \(y_*\) is:
 \normalsize
 \end{frame}
 
-\hypertarget{related-topics}{%
-\section{Related topics}\label{related-topics}}
+\section{Related topics}\label{related-topics}
 
 \begin{frame}[fragile]{Correlation is not necessarily causation}
-\protect\hypertarget{correlation-is-not-necessarily-causation}{}
+\phantomsection\label{correlation-is-not-necessarily-causation}
 \begin{itemize}
 \item
   Throughout this chapter we've been cautious when interpreting
@@ -1945,7 +1933,7 @@ So, the prediction interval for \(y_*\) is:
 \end{frame}
 
 \begin{frame}{Correlation is not necessarily causation}
-\protect\hypertarget{correlation-is-not-necessarily-causation-1}{}
+\phantomsection\label{correlation-is-not-necessarily-causation-1}
 Here is another example:
 
 \begin{itemize}
@@ -1966,7 +1954,7 @@ Here is another example:
 \end{frame}
 
 \begin{frame}{Correlation is not necessarily causation}
-\protect\hypertarget{correlation-is-not-necessarily-causation-2}{}
+\phantomsection\label{correlation-is-not-necessarily-causation-2}
 \begin{itemize}
 \item
   However, there is a good chance that if someone is sleeping with their
@@ -1993,7 +1981,7 @@ Here is another example:
 \end{frame}
 
 \begin{frame}{Correlation is not necessarily causation}
-\protect\hypertarget{correlation-is-not-necessarily-causation-3}{}
+\phantomsection\label{correlation-is-not-necessarily-causation-3}
 \begin{itemize}
 \item
   Establishing \textbf{causation} is a tricky problem which requires:
@@ -2019,7 +2007,7 @@ Here is another example:
 \end{frame}
 
 \begin{frame}{Best-fitting line}
-\protect\hypertarget{best-fitting-line}{}
+\phantomsection\label{best-fitting-line}
 Regression lines are also known as ``best-fitting'' lines. But what do
 we mean by ``best''?
 
@@ -2037,7 +2025,7 @@ vertical blue line.
 \end{frame}
 
 \begin{frame}{Best-fitting line}
-\protect\hypertarget{best-fitting-line-1}{}
+\phantomsection\label{best-fitting-line-1}
 \begin{itemize}
 \item
   Now say we repeated this process of computing residuals for all 463
@@ -2072,7 +2060,7 @@ vertical blue line.
 \end{frame}
 
 \begin{frame}[fragile]{Best-fitting line}
-\protect\hypertarget{best-fitting-line-2}{}
+\phantomsection\label{best-fitting-line-2}
 \normalsize
 
 \begin{Shaded}
@@ -2101,7 +2089,7 @@ vertical blue line.
 \end{frame}
 
 \begin{frame}[fragile]{Best-fitting line}
-\protect\hypertarget{best-fitting-line-3}{}
+\phantomsection\label{best-fitting-line-3}
 Any other straight line drawn in the figure would yield a sum of squared
 residuals greater than 132.
 
@@ -2127,7 +2115,7 @@ residuals greater than 132.
 \end{frame}
 
 \begin{frame}[fragile]{Best-fitting line}
-\protect\hypertarget{best-fitting-line-4}{}
+\phantomsection\label{best-fitting-line-4}
 You can also get the residuals using the function \texttt{resid} on a
 linear model object.
 
