@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,7 +44,6 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -56,8 +56,8 @@
 \fi
 \usepackage{lmodern}
 \usetheme[]{Madrid}
-\usecolortheme{orchid}
-\usefonttheme{professionalfonts}
+\usecolortheme[]{orchid}
+\usefonttheme[]{professionalfonts}
 \ifPDFTeX\else
   % xetex/luatex font selection
 \fi
@@ -77,8 +77,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -122,7 +120,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{placeins}
 \usepackage{color}
 \usepackage{bm}
@@ -149,32 +146,28 @@
 \newfont{\gilfont}{msbm10 scaled 1000}
 \newcommand{\DOT}{\usebox{\biggercirc}}
 \newcommand{\pv}{\wp\text{-value}}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 10},
-  pdfauthor={Spring 2025},
+  pdfauthor={ATA},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 10}
-\author{Spring 2025}
+\author{ATA}
 \date{}
 \institute{Appalachian State University}
 
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{outline-for-the-week}{%
-\section{Outline for the week}\label{outline-for-the-week}}
+\section{Outline for the week}\label{outline-for-the-week}
 
 \begin{frame}{By the end of the week: Bootstrapping and Confidence
 Intervals}
-\protect\hypertarget{by-the-end-of-the-week-bootstrapping-and-confidence-intervals}{}
+\phantomsection\label{by-the-end-of-the-week-bootstrapping-and-confidence-intervals}
 \begin{itemize}
 \item
   Key features of the Bootstrap and understanding confidence intervals
@@ -188,12 +181,11 @@ Intervals}
 \end{itemize}
 \end{frame}
 
-\hypertarget{key-features-of-the-bootstrap}{%
 \section{Key features of the
-Bootstrap}\label{key-features-of-the-bootstrap}}
+Bootstrap}\label{key-features-of-the-bootstrap}
 
 \begin{frame}[fragile]{Needed packages}
-\protect\hypertarget{needed-packages}{}
+\phantomsection\label{needed-packages}
 \small
 
 \begin{Shaded}
@@ -209,7 +201,7 @@ Bootstrap}\label{key-features-of-the-bootstrap}}
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap: Example 1}
-\protect\hypertarget{key-features-of-the-bootstrap-example-1}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-1}
 To highlight some key features of the bootstrap distribution:
 
 \begin{itemize}
@@ -231,7 +223,7 @@ To highlight some key features of the bootstrap distribution:
 \end{frame}
 
 \begin{frame}[fragile]{Key features of the Bootstrap: Example 1}
-\protect\hypertarget{key-features-of-the-bootstrap-example-1-1}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-1-1}
 \tiny
 
 \begin{Shaded}
@@ -272,7 +264,7 @@ To highlight some key features of the bootstrap distribution:
 \end{frame}
 
 \begin{frame}[fragile]{Key features of the Bootstrap: Example 1}
-\protect\hypertarget{key-features-of-the-bootstrap-example-1-2}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-1-2}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.75\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-3-1} \end{center}
@@ -286,7 +278,7 @@ To highlight some key features of the bootstrap distribution:
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap: Example 1}
-\protect\hypertarget{key-features-of-the-bootstrap-example-1-3}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-1-3}
 \begin{itemize}
 \item
   The previous code shows the distributions of two such random samples
@@ -315,7 +307,7 @@ To highlight some key features of the bootstrap distribution:
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap: Example 1}
-\protect\hypertarget{key-features-of-the-bootstrap-example-1-4}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-1-4}
 \begin{itemize}
 \item
   This example illustrates some important features of the bootstrap that
@@ -342,7 +334,7 @@ To highlight some key features of the bootstrap distribution:
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap: Example 2}
-\protect\hypertarget{key-features-of-the-bootstrap-example-2}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-2}
 We now consider an example where neither the population nor the sampling
 distribution is normal.
 
@@ -371,7 +363,7 @@ distribution is normal.
 \end{frame}
 
 \begin{frame}[fragile]{Key features of the Bootstrap: Example 2}
-\protect\hypertarget{key-features-of-the-bootstrap-example-2-1}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-2-1}
 \tiny
 
 \begin{Shaded}
@@ -410,7 +402,7 @@ distribution is normal.
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap: Example 2}
-\protect\hypertarget{key-features-of-the-bootstrap-example-2-2}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-2-2}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.75\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-5-1} \end{center}
@@ -418,7 +410,7 @@ distribution is normal.
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap: Example 2}
-\protect\hypertarget{key-features-of-the-bootstrap-example-2-3}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-2-3}
 \begin{itemize}
 \item
   The first graph in the second and third rows shows the distribution of
@@ -447,7 +439,7 @@ distribution is normal.
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap}
-\protect\hypertarget{key-features-of-the-bootstrap-1}{}
+\phantomsection\label{key-features-of-the-bootstrap-1}
 For most common estimators and under fairly general distribution
 assumptions, the following need to be noted:
 
@@ -479,7 +471,7 @@ assumptions, the following need to be noted:
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap}
-\protect\hypertarget{key-features-of-the-bootstrap-2}{}
+\phantomsection\label{key-features-of-the-bootstrap-2}
 \begin{itemize}
 \item
   The first point bears emphasis.
@@ -513,14 +505,14 @@ assumptions, the following need to be noted:
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap: Example 3}
-\protect\hypertarget{key-features-of-the-bootstrap-example-3}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-3}
 \begin{tcolorbox}
 Arsenic is a naturally occurring element in the groundwater of Bangladesh. However, much of this groundwater is used for drinking water by rural populations, so arsenic poisoning is a serious health issue. Figure 1a displays the distribution of arsenic concentrations from 271 wells in Bangladesh. The sample mean and standard deviation are $\bar{x}=125.32$ and $s =297.98$, respectively (measured in micrograms per liter). We draw resamples of size 271 with replacement from the data and compute the mean for each resample.
 \end{tcolorbox}
 \end{frame}
 
 \begin{frame}[fragile]{Key features of the Bootstrap: Example 3}
-\protect\hypertarget{key-features-of-the-bootstrap-example-3-1}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-3-1}
 \tiny
 
 \begin{Shaded}
@@ -550,7 +542,7 @@ Arsenic is a naturally occurring element in the groundwater of Bangladesh. Howev
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap: Example 3}
-\protect\hypertarget{key-features-of-the-bootstrap-example-3-2}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-3-2}
 \tiny
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.85\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-7-1} \end{center}
@@ -558,7 +550,7 @@ Arsenic is a naturally occurring element in the groundwater of Bangladesh. Howev
 \end{frame}
 
 \begin{frame}{Key features of the Bootstrap: Example 3}
-\protect\hypertarget{key-features-of-the-bootstrap-example-3-3}{}
+\phantomsection\label{key-features-of-the-bootstrap-example-3-3}
 \begin{itemize}
 \item
   Figures 2a and 2b show a histogram and a normal quantile plot of the
@@ -572,12 +564,11 @@ Arsenic is a naturally occurring element in the groundwater of Bangladesh. Howev
 \end{itemize}
 \end{frame}
 
-\hypertarget{understanding-confidence-intervals}{%
 \section{Understanding confidence
-intervals}\label{understanding-confidence-intervals}}
+intervals}\label{understanding-confidence-intervals}
 
 \begin{frame}[fragile]{Understanding confidence intervals}
-\protect\hypertarget{understanding-confidence-intervals-1}{}
+\phantomsection\label{understanding-confidence-intervals-1}
 \begin{itemize}
 \item
   Let's start this section with an analogy involving fishing. Say you
@@ -618,7 +609,7 @@ intervals}\label{understanding-confidence-intervals}}
 \end{frame}
 
 \begin{frame}[fragile]{Understanding confidence intervals}
-\protect\hypertarget{understanding-confidence-intervals-2}{}
+\phantomsection\label{understanding-confidence-intervals-2}
 \begin{itemize}
 \item
   On the one hand, we could use the appropriate point estimate/sample
@@ -652,7 +643,7 @@ intervals}\label{understanding-confidence-intervals}}
 \end{frame}
 
 \begin{frame}{Understanding confidence intervals}
-\protect\hypertarget{understanding-confidence-intervals-3}{}
+\phantomsection\label{understanding-confidence-intervals-3}
 \begin{itemize}
 \item
   As opposed to a point estimate/sample statistic that estimates the
@@ -669,7 +660,7 @@ intervals}\label{understanding-confidence-intervals}}
 \end{frame}
 
 \begin{frame}[fragile]{Percentile method}
-\protect\hypertarget{percentile-method}{}
+\phantomsection\label{percentile-method}
 \small
 
 \begin{Shaded}
@@ -696,7 +687,7 @@ intervals}\label{understanding-confidence-intervals}}
 \end{frame}
 
 \begin{frame}[fragile]{Percentile method}
-\protect\hypertarget{percentile-method-1}{}
+\phantomsection\label{percentile-method-1}
 \small
 
 \begin{Shaded}
@@ -731,7 +722,7 @@ intervals}\label{understanding-confidence-intervals}}
 \end{frame}
 
 \begin{frame}[fragile]{Percentile method}
-\protect\hypertarget{percentile-method-2}{}
+\phantomsection\label{percentile-method-2}
 One method to construct a confidence interval
 
 \begin{itemize}
@@ -774,7 +765,7 @@ One method to construct a confidence interval
 \end{frame}
 
 \begin{frame}[fragile]{Standard error method}
-\protect\hypertarget{standard-error-method}{}
+\phantomsection\label{standard-error-method}
 \begin{itemize}
 \item
   Given that our bootstrap distribution based on 1000 resamples with
@@ -799,7 +790,7 @@ One method to construct a confidence interval
 \end{frame}
 
 \begin{frame}[fragile]{Standard error method}
-\protect\hypertarget{standard-error-method-1}{}
+\phantomsection\label{standard-error-method-1}
 \small
 
 \begin{Shaded}
@@ -835,7 +826,7 @@ One method to construct a confidence interval
 \end{frame}
 
 \begin{frame}[fragile]{Standard error method}
-\protect\hypertarget{standard-error-method-2}{}
+\phantomsection\label{standard-error-method-2}
 Recall that for a normal distribution, roughly \(95\%\) of values fall
 between \(\pm1.96\) standard deviations of the mean.
 
@@ -865,7 +856,7 @@ between \(\pm1.96\) standard deviations of the mean.
 \end{frame}
 
 \begin{frame}{Standard error method vs.~Percentile method}
-\protect\hypertarget{standard-error-method-vs.-percentile-method}{}
+\phantomsection\label{standard-error-method-vs.-percentile-method}
 \begin{itemize}
 \item
   We see that both methods produce nearly identical \(95\%\) confidence
@@ -884,12 +875,11 @@ between \(\pm1.96\) standard deviations of the mean.
 \end{itemize}
 \end{frame}
 
-\hypertarget{constructing-confidence-intervals}{%
 \section{Constructing confidence
-intervals}\label{constructing-confidence-intervals}}
+intervals}\label{constructing-confidence-intervals}
 
 \begin{frame}[fragile]{Percentile method example: Pennies Activity}
-\protect\hypertarget{percentile-method-example-pennies-activity}{}
+\phantomsection\label{percentile-method-example-pennies-activity}
 Using \texttt{rep\_sample\_n} from the \texttt{infer} package.
 
 \tiny
@@ -913,7 +903,7 @@ Using \texttt{rep\_sample\_n} from the \texttt{infer} package.
 \end{frame}
 
 \begin{frame}[fragile]{Percentile method example: Pennies Activity}
-\protect\hypertarget{percentile-method-example-pennies-activity-1}{}
+\phantomsection\label{percentile-method-example-pennies-activity-1}
 Using \texttt{rep\_sample\_n} from the \texttt{infer} package.
 
 \begin{Shaded}
@@ -930,7 +920,7 @@ Using \texttt{rep\_sample\_n} from the \texttt{infer} package.
 \end{frame}
 
 \begin{frame}[fragile]{Percentile method example: Pennies Activity}
-\protect\hypertarget{percentile-method-example-pennies-activity-2}{}
+\phantomsection\label{percentile-method-example-pennies-activity-2}
 Using the \texttt{infer} pipeline
 
 \tiny
@@ -951,7 +941,7 @@ Using the \texttt{infer} pipeline
 \end{frame}
 
 \begin{frame}[fragile]{Percentile method example: Pennies Activity}
-\protect\hypertarget{percentile-method-example-pennies-activity-3}{}
+\phantomsection\label{percentile-method-example-pennies-activity-3}
 Using the \texttt{infer} pipeline
 
 \tiny
@@ -983,7 +973,7 @@ Using the \texttt{infer} pipeline
 \end{frame}
 
 \begin{frame}[fragile]{Standard error example: Pennies Activity}
-\protect\hypertarget{standard-error-example-pennies-activity}{}
+\phantomsection\label{standard-error-example-pennies-activity}
 Using the \texttt{infer} pipeline
 
 \tiny
@@ -1017,7 +1007,7 @@ Using the \texttt{infer} pipeline
 
 \begin{frame}[fragile]{Percentile method example: Birth weight of a
 baby}
-\protect\hypertarget{percentile-method-example-birth-weight-of-a-baby}{}
+\phantomsection\label{percentile-method-example-birth-weight-of-a-baby}
 Using the \texttt{infer} pipeline
 
 \tiny
@@ -1041,7 +1031,7 @@ Using the \texttt{infer} pipeline
 
 \begin{frame}[fragile]{Percentile method example: Birth weight of a
 baby}
-\protect\hypertarget{percentile-method-example-birth-weight-of-a-baby-1}{}
+\phantomsection\label{percentile-method-example-birth-weight-of-a-baby-1}
 Using the \texttt{infer} pipeline
 
 \tiny
@@ -1073,7 +1063,7 @@ Using the \texttt{infer} pipeline
 \end{frame}
 
 \begin{frame}[fragile]{Standard error example: Birth weight of a baby}
-\protect\hypertarget{standard-error-example-birth-weight-of-a-baby}{}
+\phantomsection\label{standard-error-example-birth-weight-of-a-baby}
 Using the \texttt{infer} pipeline
 
 \tiny
@@ -1105,12 +1095,11 @@ Using the \texttt{infer} pipeline
 \normalsize
 \end{frame}
 
-\hypertarget{interpreting-confidence-intervals}{%
 \section{Interpreting confidence
-intervals}\label{interpreting-confidence-intervals}}
+intervals}\label{interpreting-confidence-intervals}
 
 \begin{frame}{Interpreting confidence intervals}
-\protect\hypertarget{interpreting-confidence-intervals-1}{}
+\phantomsection\label{interpreting-confidence-intervals-1}
 \begin{itemize}
 \item
   Now that we've shown you how to construct confidence intervals using a
@@ -1139,7 +1128,7 @@ intervals}\label{interpreting-confidence-intervals}}
 \end{frame}
 
 \begin{frame}[fragile]{Interpreting confidence intervals}
-\protect\hypertarget{interpreting-confidence-intervals-2}{}
+\phantomsection\label{interpreting-confidence-intervals-2}
 \begin{itemize}
 \item
   In order to interpret a confidence interval's effectiveness, we need
@@ -1174,7 +1163,7 @@ other words, we know that \(37.5\%\) of the bowl's balls are red.
 \end{frame}
 
 \begin{frame}[fragile]{Interpreting confidence intervals}
-\protect\hypertarget{interpreting-confidence-intervals-3}{}
+\phantomsection\label{interpreting-confidence-intervals-3}
 \begin{itemize}
 \item
   Recall that we had 33 groups of friends each take samples of size 50
@@ -1236,7 +1225,7 @@ other words, we know that \(37.5\%\) of the bowl's balls are red.
 \end{frame}
 
 \begin{frame}[fragile]{Percentile method example: sampling bowl example}
-\protect\hypertarget{percentile-method-example-sampling-bowl-example}{}
+\phantomsection\label{percentile-method-example-sampling-bowl-example}
 Using the \texttt{infer} pipeline
 
 \begin{Shaded}
@@ -1261,7 +1250,7 @@ Using the \texttt{infer} pipeline
 \end{frame}
 
 \begin{frame}[fragile]{Percentile method example: sampling bowl example}
-\protect\hypertarget{percentile-method-example-sampling-bowl-example-1}{}
+\phantomsection\label{percentile-method-example-sampling-bowl-example-1}
 Using the \texttt{infer} pipeline
 
 \tiny
@@ -1283,7 +1272,7 @@ contains the true value of 0.375.
 \end{frame}
 
 \begin{frame}{Interpreting confidence intervals: Sampling bowl example}
-\protect\hypertarget{interpreting-confidence-intervals-sampling-bowl-example}{}
+\phantomsection\label{interpreting-confidence-intervals-sampling-bowl-example}
 \begin{itemize}
 \item
   However, will every \(95\%\) confidence interval for \(p\) capture
@@ -1312,7 +1301,7 @@ contains the true value of 0.375.
 \end{frame}
 
 \begin{frame}{Interpreting confidence intervals: Sampling bowl example}
-\protect\hypertarget{interpreting-confidence-intervals-sampling-bowl-example-1}{}
+\phantomsection\label{interpreting-confidence-intervals-sampling-bowl-example-1}
 \begin{itemize}
 \tightlist
 \item
@@ -1333,7 +1322,7 @@ contains the true value of 0.375.
 \end{frame}
 
 \begin{frame}{Interpreting confidence intervals}
-\protect\hypertarget{interpreting-confidence-intervals-4}{}
+\phantomsection\label{interpreting-confidence-intervals-4}
 The precise and mathematically correct interpretation of a \(95\%\)
 confidence interval is a little long-winded:
 
@@ -1349,7 +1338,7 @@ Short-hand interpretation: We are $95\%$ “confident” that a $95\%$ confidenc
 \end{frame}
 
 \begin{frame}{Width of confidence intervals}
-\protect\hypertarget{width-of-confidence-intervals}{}
+\phantomsection\label{width-of-confidence-intervals}
 Let's go over some factors that determine their width.
 
 \begin{enumerate}
@@ -1360,11 +1349,10 @@ Let's go over some factors that determine their width.
 \end{enumerate}
 \end{frame}
 
-\hypertarget{two-sample-boostrap}{%
-\section{Two Sample Boostrap}\label{two-sample-boostrap}}
+\section{Two Sample Boostrap}\label{two-sample-boostrap}
 
 \begin{frame}{Two Sample Boostrap}
-\protect\hypertarget{two-sample-boostrap-1}{}
+\phantomsection\label{two-sample-boostrap-1}
 We now turn to the problem of comparing two samples.
 
 \begin{itemize}
@@ -1385,7 +1373,7 @@ We now turn to the problem of comparing two samples.
 \end{frame}
 
 \begin{frame}{Two Sample Boostrap}
-\protect\hypertarget{two-sample-boostrap-2}{}
+\phantomsection\label{two-sample-boostrap-2}
 Given independent samples of sizes \(m\) and \(n\) from two populations,
 
 \begin{enumerate}
@@ -1403,7 +1391,7 @@ Given independent samples of sizes \(m\) and \(n\) from two populations,
 \end{frame}
 
 \begin{frame}[fragile]{TV example}
-\protect\hypertarget{tv-example}{}
+\phantomsection\label{tv-example}
 \begin{tcolorbox}
 A high school student was curious about the total number of minutes devoted to commercials during any given half-hour time period on basic and extended cable TV channels.
 \end{tcolorbox}
@@ -1435,7 +1423,7 @@ Lets use the \texttt{TV} dataset from the \texttt{resampledata} package.
 \end{frame}
 
 \begin{frame}[fragile]{TV example}
-\protect\hypertarget{tv-example-1}{}
+\phantomsection\label{tv-example-1}
 \small
 
 \begin{Shaded}
@@ -1479,7 +1467,7 @@ Lets use the \texttt{TV} dataset from the \texttt{resampledata} package.
 \end{frame}
 
 \begin{frame}{TV example}
-\protect\hypertarget{tv-example-2}{}
+\phantomsection\label{tv-example-2}
 \begin{itemize}
 \item
   The original data are simple random samples of size 10 from two
@@ -1498,7 +1486,7 @@ Lets use the \texttt{TV} dataset from the \texttt{resampledata} package.
 \end{frame}
 
 \begin{frame}[fragile]{TV example}
-\protect\hypertarget{tv-example-3}{}
+\phantomsection\label{tv-example-3}
 \tiny
 
 \begin{Shaded}
@@ -1533,7 +1521,7 @@ Lets use the \texttt{TV} dataset from the \texttt{resampledata} package.
 \end{frame}
 
 \begin{frame}[fragile]{TV example}
-\protect\hypertarget{tv-example-4}{}
+\phantomsection\label{tv-example-4}
 \tiny
 
 \begin{Shaded}
@@ -1567,7 +1555,7 @@ Lets use the \texttt{TV} dataset from the \texttt{resampledata} package.
 \end{frame}
 
 \begin{frame}{TV example}
-\protect\hypertarget{tv-example-5}{}
+\phantomsection\label{tv-example-5}
 \begin{itemize}
 \item
   Figure a shows the bootstrap distribution of the difference of sample
@@ -1606,7 +1594,7 @@ Lets use the \texttt{TV} dataset from the \texttt{resampledata} package.
 \end{frame}
 
 \begin{frame}[fragile]{TV example}
-\protect\hypertarget{tv-example-6}{}
+\phantomsection\label{tv-example-6}
 Using the \texttt{infer} pipeline
 
 \tiny
@@ -1628,7 +1616,7 @@ Using the \texttt{infer} pipeline
 \end{frame}
 
 \begin{frame}[fragile]{TV example}
-\protect\hypertarget{tv-example-7}{}
+\phantomsection\label{tv-example-7}
 Using the \texttt{infer} pipeline
 
 \tiny
@@ -1662,14 +1650,14 @@ Using the \texttt{infer} pipeline
 \end{frame}
 
 \begin{frame}{Verizon example}
-\protect\hypertarget{verizon-example}{}
+\phantomsection\label{verizon-example}
 \begin{tcolorbox}
 Verizon is the primary local telephone company (incumbent local exchange carrier, ILEC) for a large area of the eastern United States. As such it is responsible for providing repair service for the customers of other telephone companies known as competing local exchange carriers (CLECs) in this region. Verizon is subject to fines if the repair times (the time it takes to fix a problem) for CLEC customers are substantially worse than those for Verizon customers. The data set Verizon contains a random sample of repair times for 1664 ILEC and 23 CLEC customers.
 \end{tcolorbox}
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-1}{}
+\phantomsection\label{verizon-example-1}
 \normalsize
 
 \begin{Shaded}
@@ -1706,7 +1694,7 @@ Verizon is the primary local telephone company (incumbent local exchange carrier
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-2}{}
+\phantomsection\label{verizon-example-2}
 \tiny
 
 \begin{Shaded}
@@ -1734,7 +1722,7 @@ Verizon is the primary local telephone company (incumbent local exchange carrier
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-3}{}
+\phantomsection\label{verizon-example-3}
 \begin{itemize}
 \item
   The bootstrap distribution for the larger ILEC data set (\(n=1664\))
@@ -1784,7 +1772,7 @@ Verizon is the primary local telephone company (incumbent local exchange carrier
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-4}{}
+\phantomsection\label{verizon-example-4}
 The bootstrap distribution for the smaller CLEC data set (n=23)
 
 \tiny
@@ -1814,7 +1802,7 @@ The bootstrap distribution for the smaller CLEC data set (n=23)
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-5}{}
+\phantomsection\label{verizon-example-5}
 \begin{itemize}
 \tightlist
 \item
@@ -1861,7 +1849,7 @@ The bootstrap distribution for the smaller CLEC data set (n=23)
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-6}{}
+\phantomsection\label{verizon-example-6}
 Distribution of the difference:
 
 \small
@@ -1892,7 +1880,7 @@ Distribution of the difference:
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-7}{}
+\phantomsection\label{verizon-example-7}
 Distribution of the difference:
 
 \tiny
@@ -1926,7 +1914,7 @@ Distribution of the difference:
 \end{frame}
 
 \begin{frame}{Verizon example}
-\protect\hypertarget{verizon-example-8}{}
+\phantomsection\label{verizon-example-8}
 \begin{itemize}
 \item
   The bootstrap distribution for the difference in means is shown in
@@ -1952,7 +1940,7 @@ Distribution of the difference:
 \end{frame}
 
 \begin{frame}{Other Statistics}
-\protect\hypertarget{other-statistics}{}
+\phantomsection\label{other-statistics}
 \begin{itemize}
 \item
   When bootstrapping, we are not limited to simple statistics like the
@@ -1985,7 +1973,7 @@ Distribution of the difference:
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-9}{}
+\phantomsection\label{verizon-example-9}
 \begin{itemize}
 \item
   Figure below shows the bootstrap distribution for the difference in
@@ -2022,7 +2010,7 @@ Distribution of the difference:
 \end{frame}
 
 \begin{frame}[fragile]{Verizon example}
-\protect\hypertarget{verizon-example-10}{}
+\phantomsection\label{verizon-example-10}
 \tiny
 
 \begin{Shaded}
@@ -2054,7 +2042,7 @@ Distribution of the difference:
 \end{frame}
 
 \begin{frame}[fragile]{Mythbusters example}
-\protect\hypertarget{mythbusters-example}{}
+\phantomsection\label{mythbusters-example}
 \begin{tcolorbox}
 Fifty adult participants who thought they were being considered for an appearance on the show were interviewed by a show recruiter. In the interview, the recruiter either yawned or did not. Participants then sat by themselves in a large van and were asked to wait. While in the van, the Mythbusters team watched the participants using a hidden camera to see if they yawned. 
 \end{tcolorbox}
@@ -2076,7 +2064,7 @@ Fifty adult participants who thought they were being considered for an appearanc
 \end{frame}
 
 \begin{frame}[fragile]{Mythbusters example}
-\protect\hypertarget{mythbusters-example-1}{}
+\phantomsection\label{mythbusters-example-1}
 \small
 
 \begin{Shaded}
@@ -2105,7 +2093,7 @@ Fifty adult participants who thought they were being considered for an appearanc
 \end{frame}
 
 \begin{frame}[fragile]{Mythbusters example}
-\protect\hypertarget{mythbusters-example-2}{}
+\phantomsection\label{mythbusters-example-2}
 Here, we are interested in \(p_{seed}-p_{control}\). Let's use
 \texttt{infer} pipeline to obtain the bootstrap distribution.
 
@@ -2128,7 +2116,7 @@ Here, we are interested in \(p_{seed}-p_{control}\). Let's use
 \end{frame}
 
 \begin{frame}[fragile]{Mythbusters example}
-\protect\hypertarget{mythbusters-example-3}{}
+\phantomsection\label{mythbusters-example-3}
 Compute a \(95\%\) confidence interval for \(p_{seed}-p_{control}\)
 using the percentile method.
 
@@ -2186,7 +2174,7 @@ Explanatory: group (factor)
 \end{frame}
 
 \begin{frame}[fragile]{Mythbusters example}
-\protect\hypertarget{mythbusters-example-4}{}
+\phantomsection\label{mythbusters-example-4}
 Compute a \(95\%\) confidence interval for \(p_{seed}-p_{control}\)
 using the standard error method.
 
@@ -2213,7 +2201,7 @@ using the standard error method.
 \end{frame}
 
 \begin{frame}[fragile]{Mythbusters example}
-\protect\hypertarget{mythbusters-example-5}{}
+\phantomsection\label{mythbusters-example-5}
 \tiny
 
 \begin{Shaded}
@@ -2243,12 +2231,11 @@ using the standard error method.
 \end{itemize}
 \end{frame}
 
-\hypertarget{theory-based-confidence-intervals}{%
 \section{Theory-based confidence
-intervals}\label{theory-based-confidence-intervals}}
+intervals}\label{theory-based-confidence-intervals}
 
 \begin{frame}{Theory-based confidence intervals}
-\protect\hypertarget{theory-based-confidence-intervals-1}{}
+\phantomsection\label{theory-based-confidence-intervals-1}
 \begin{itemize}
 \item
   So far, we've constructed confidence intervals using two methods:
@@ -2275,14 +2262,14 @@ intervals}\label{theory-based-confidence-intervals}}
 \end{frame}
 
 \begin{frame}{Confidence intervals for a Mean, \(\sigma\) known}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-known}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-known}
 \begin{tcolorbox}
 The Centers for Disease Control maintains growth charts for infants and children (http://cdc.gov/growthcharts/zscore.html). For 13-year-old girls, the mean weight is 101 pounds with a standard deviation of 24.6 pounds. We assume the weights are normally distributed. The public health officials in Sodor are interested in the weights of the teens in their town: they suspect that the mean weight of their girls might be different from the mean weight in the growth chart but are willing to assume that the variation is the same. If they survey a random sample of 150 thirteen-year-old girls and find their mean weight – an estimate of the population mean weight – is 95 pounds, how accurate will this estimate be?
 \end{tcolorbox}
 \end{frame}
 
 \begin{frame}{Confidence intervals for a Mean, \(\sigma\) known}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-known-1}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-known-1}
 We assume the 150 sample values are from a normal distribution,
 \(N(\mu, 24.6)\).
 
@@ -2297,7 +2284,7 @@ We assume the 150 sample values are from a normal distribution,
 \end{frame}
 
 \begin{frame}{Confidence intervals for a Mean, \(\sigma\) known}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-known-2}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-known-2}
 \begin{itemize}
 \tightlist
 \item
@@ -2314,7 +2301,7 @@ has a probability of 0.95 of containing the mean \(\mu\).
 \end{frame}
 
 \begin{frame}{Confidence intervals for a Mean, \(\sigma\) known}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-known-3}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-known-3}
 \begin{itemize}
 \tightlist
 \item
@@ -2336,7 +2323,7 @@ Which is no longer a random interval.
 \end{frame}
 
 \begin{frame}{Confidence intervals for a Mean, \(\sigma\) known}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-known-4}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-known-4}
 More generally, for a sample of size \(n\) drawn from a normal
 distribution with unknown \(\mu\), and known \(\sigma\), a
 \((1-\alpha)\times 100\%\) confidence interval for the mean of \(\mu\)
@@ -2352,7 +2339,7 @@ contain \(\mu\).
 
 \begin{frame}[fragile]{Confidence intervals for a Mean, \(\sigma\)
 known}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-known-5}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-known-5}
 \normalsize
 
 \begin{Shaded}
@@ -2383,7 +2370,7 @@ known}
 
 \begin{frame}[fragile]{Confidence intervals for a Mean, \(\sigma\)
 known}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-known-6}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-known-6}
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.7\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-49-1} \end{center}
 \normalsize
 
@@ -2405,7 +2392,7 @@ known}
 
 \begin{frame}[fragile]{Confidence intervals for a Mean, \(\sigma\)
 known}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-known-7}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-known-7}
 \normalsize
 
 \begin{Shaded}
@@ -2428,7 +2415,7 @@ known}
 \end{frame}
 
 \begin{frame}{Example 2}
-\protect\hypertarget{example-2}{}
+\phantomsection\label{example-2}
 \begin{tcolorbox}
 An engineer test the gas mileage of a random sample of $n=30$ of his company cars ready to be sold. The $95\%$ confidence interval for the mean mileage of all the cars is $(29.5, 33.4)$ miles per gallon. Evaluate the following statements:
 \begin{itemize}
@@ -2442,7 +2429,7 @@ An engineer test the gas mileage of a random sample of $n=30$ of his company car
 \end{frame}
 
 \begin{frame}{Example 2}
-\protect\hypertarget{example-2-1}{}
+\phantomsection\label{example-2-1}
 \begin{tcolorbox}
 Solution: 
 
@@ -2452,7 +2439,7 @@ Solution:
 \end{frame}
 
 \begin{frame}{Example 3}
-\protect\hypertarget{example-3}{}
+\phantomsection\label{example-3}
 \begin{tcolorbox}
  Suppose the sample 3.4, 2.9, 2.8, 5.1, 6.3, 3.9 is drawn from the normal distribution with unknown $\mu$ and known $\sigma=2.5$. Find a $90\%$ confidence interval for $\mu$.
 \end{tcolorbox}
@@ -2467,7 +2454,7 @@ Solution:
 \end{frame}
 
 \begin{frame}[fragile]{Example 3}
-\protect\hypertarget{example-3-1}{}
+\phantomsection\label{example-3-1}
 \small
 
 \begin{Shaded}
@@ -2517,7 +2504,7 @@ attr(,"conf.level")
 \end{frame}
 
 \begin{frame}{Example 4}
-\protect\hypertarget{example-4}{}
+\phantomsection\label{example-4}
 \begin{tcolorbox}
 Suppose researchers want to estimate the mean weight of girls in Sodor. They assume that the distribution of weights is normal with unknown mean $\mu$, but with known $\sigma=24.6$. How many girls should they sample if they want, with $95\%$ confidence, their margin of error to be at most 5 pounds?
 \end{tcolorbox}
@@ -2531,7 +2518,7 @@ Suppose researchers want to estimate the mean weight of girls in Sodor. They ass
 \end{frame}
 
 \begin{frame}[fragile]{Example 4}
-\protect\hypertarget{example-4-1}{}
+\phantomsection\label{example-4-1}
 \normalsize
 
 \begin{Shaded}
@@ -2577,7 +2564,7 @@ of error is no more than 5 is 93.
 \end{frame}
 
 \begin{frame}{Confidence intervals for a Mean, \(\sigma\) unknown}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-unknown}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-unknown}
 In most real-life settings, a data analyst will not know the mean or the
 standard deviation of the population of interest.
 
@@ -2613,7 +2600,7 @@ standard deviation of the population of interest.
 
 \begin{frame}[fragile]{Confidence intervals for a Mean, \(\sigma\)
 unknown}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-unknown-1}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-unknown-1}
 \tiny
 
 \begin{Shaded}
@@ -2641,7 +2628,7 @@ unknown}
 
 \begin{frame}[fragile]{Confidence intervals for a Mean, \(\sigma\)
 unknown}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-unknown-2}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-unknown-2}
 Consider qq plot for \(t_{15}\)
 
 \tiny
@@ -2669,7 +2656,7 @@ Consider qq plot for \(t_{15}\)
 \end{frame}
 
 \begin{frame}{Confidence intervals for a Mean, \(\sigma\) unknown}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-unknown-3}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-unknown-3}
 \begin{itemize}
 \item
   In effect, having to estimate \(\sigma\) using \(S\) adds variability.
@@ -2696,7 +2683,7 @@ has a Students \(t\) distribution with \(n-1\) degrees of freedom.
 
 \begin{frame}[fragile]{Confidence intervals for a Mean, \(\sigma\)
 unknown}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-unknown-4}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-unknown-4}
 \tiny
 
 \begin{Shaded}
@@ -2719,7 +2706,7 @@ unknown}
 
 \begin{frame}[fragile]{Confidence intervals for a Mean, \(\sigma\)
 unknown}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-unknown-5}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-unknown-5}
 with \texttt{ggplot2}
 
 \tiny
@@ -2743,7 +2730,7 @@ with \texttt{ggplot2}
 \end{frame}
 
 \begin{frame}{Confidence intervals for a Mean, \(\sigma\) unknown}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-unknown-6}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-unknown-6}
 We derive the confidence interval for \(\mu\) when \(\sigma\) is unknown
 in the same way as when \(\sigma\) is known.
 
@@ -2763,7 +2750,7 @@ we have: \[\begin{array}{ll}
 \end{frame}
 
 \begin{frame}{Confidence intervals for a Mean, \(\sigma\) unknown}
-\protect\hypertarget{confidence-intervals-for-a-mean-sigma-unknown-7}{}
+\phantomsection\label{confidence-intervals-for-a-mean-sigma-unknown-7}
 If \(N(\mu, \sigma)\), \(i=1,\ldots, n\), with \(\sigma\) unknown then a
 \((1-\alpha)\times 100\%\) confidence interval for \(\mu\) is given by:
 \[\begin{array}{ll}
@@ -2772,7 +2759,7 @@ CI_{1-\alpha}(\mu)=P\left(\bar{X}-t_{1-\alpha/2;n-1}\times S/\sqrt{n}<\mu<\bar{X
 \end{frame}
 
 \begin{frame}[fragile]{Example 5}
-\protect\hypertarget{example-5}{}
+\phantomsection\label{example-5}
 \begin{tcolorbox}
 The distribution of weights of boys in Sodor is normal with unknown mean $\mu$. From a random sample of 28 boys, we find a sample mean of 110 pounds and a sample standard deviation of 7.5 pounds. Compute a $90\%$ confidence interval. 
 \end{tcolorbox}
@@ -2797,7 +2784,7 @@ To compute a \(90\%\) confidence interval, find the 0.95 quantile of the
 \end{frame}
 
 \begin{frame}[fragile]{Example 5}
-\protect\hypertarget{example-5-1}{}
+\phantomsection\label{example-5-1}
 The interval is \[\begin{array}{ll}
 (110-1.7033\times 7.5/\sqrt{28},110+1.7033\times 7.5/\sqrt{28})=(107.6, 112.4).
 \end{array}\]
@@ -2822,7 +2809,7 @@ attr(,"conf.level")
 \end{frame}
 
 \begin{frame}[fragile]{Example 5: Birth weight of a baby}
-\protect\hypertarget{example-5-birth-weight-of-a-baby}{}
+\phantomsection\label{example-5-birth-weight-of-a-baby}
 \begin{tcolorbox}
 The birth weight of a baby is of interest to health officials since many studies have shown possible links between this weight and conditions in later life, such as obesity or diabetes. Researchers look for possible relationships between the birth weight of a baby and age of the mother or whether or not she smokes cigarettes or drink alcohol during her pregnancy. The centers for disease control and prevention CDC, using data provided by the U.S. Department of Health and Human Services, National Center for Health Statistics, the Division of Vital Statistics as well as the CDC, maintain a database on all babies born in a given year. We will investigate different samples taken from the CDC’s database of births. Find a $99\%$ confidence interval for the mean weight of baby girls born in North Carolina in 2004.
 \end{tcolorbox}
@@ -2832,7 +2819,7 @@ We will use the \texttt{NCBirths2004} data from the
 \end{frame}
 
 \begin{frame}[fragile]{Example 5: Birth weight of a baby}
-\protect\hypertarget{example-5-birth-weight-of-a-baby-1}{}
+\phantomsection\label{example-5-birth-weight-of-a-baby-1}
 \normalsize
 
 \begin{Shaded}
@@ -2868,7 +2855,7 @@ We will use the \texttt{NCBirths2004} data from the
 \end{frame}
 
 \begin{frame}[fragile]{Example 5: Birth weight of a baby}
-\protect\hypertarget{example-5-birth-weight-of-a-baby-2}{}
+\phantomsection\label{example-5-birth-weight-of-a-baby-2}
 A normal quantile plot shows that the weights are approximately normally
 distributed, so \(t\) interval is reasonable. \normalsize
 
@@ -2884,7 +2871,7 @@ distributed, so \(t\) interval is reasonable. \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Example 5: Birth weight of a baby}
-\protect\hypertarget{example-5-birth-weight-of-a-baby-3}{}
+\phantomsection\label{example-5-birth-weight-of-a-baby-3}
 \tiny
 
 \begin{Shaded}
@@ -2902,7 +2889,7 @@ distributed, so \(t\) interval is reasonable. \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Example 5: Birth weight of a baby}
-\protect\hypertarget{example-5-birth-weight-of-a-baby-4}{}
+\phantomsection\label{example-5-birth-weight-of-a-baby-4}
 Since \(1-\alpha=0.99\), then \(\alpha/2=0.005\). The 0.995 quantile for
 the \(t\) distribution with 520 df, \(t_{0.995;520}\) is
 
@@ -2928,7 +2915,7 @@ The interval is \[\begin{array}{ll}
 \end{frame}
 
 \begin{frame}[fragile]{Example 5: Birth weight of a baby}
-\protect\hypertarget{example-5-birth-weight-of-a-baby-5}{}
+\phantomsection\label{example-5-birth-weight-of-a-baby-5}
 \normalsize
 
 \begin{Shaded}
@@ -2964,7 +2951,7 @@ attr(,"conf.level")
 \end{frame}
 
 \begin{frame}[fragile]{Example 5: Birth weight of a baby}
-\protect\hypertarget{example-5-birth-weight-of-a-baby-6}{}
+\phantomsection\label{example-5-birth-weight-of-a-baby-6}
 Compare to \(99\%\) bootstrap standard error confidence intervals
 \normalsize
 
@@ -3001,7 +2988,7 @@ Compare to \(99\%\) bootstrap standard error confidence intervals
 \end{frame}
 
 \begin{frame}{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval}
 Recall: If \(N(\mu, \sigma)\), \(i=1,\ldots, n\), with \(\sigma\)
 unknown then a \((1-\alpha)\times 100\%\) confidence interval for
 \(\mu\) is given by: \[\begin{array}{ll}
@@ -3013,7 +3000,7 @@ normal, so what happens if that is not the case?
 \end{frame}
 
 \begin{frame}{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval-1}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval-1}
 \begin{itemize}
 \item
   When the population has a normal distribution, the \(t\) interval is
@@ -3035,7 +3022,7 @@ normal, so what happens if that is not the case?
 \end{frame}
 
 \begin{frame}[fragile]{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval-2}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval-2}
 \begin{tcolorbox}
 We draw random samples from the right-skewed gamma distribution with $\alpha=5$ and $\lambda=2$ and count the number of times the $95\%$ confidence interval misses the mean $\mu=5/2$ on each side.
 \end{tcolorbox}
@@ -3056,7 +3043,7 @@ We draw random samples from the right-skewed gamma distribution with $\alpha=5$ 
 \end{frame}
 
 \begin{frame}[fragile]{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval-3}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval-3}
 \tiny
 
 \begin{Shaded}
@@ -3105,7 +3092,7 @@ We draw random samples from the right-skewed gamma distribution with $\alpha=5$ 
 \end{frame}
 
 \begin{frame}{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval-4}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval-4}
 \begin{itemize}
 \item
   When the population is non-normal but symmetric and the sample size is
@@ -3130,7 +3117,7 @@ statistic is to having a \(t\) distribution.
 \end{frame}
 
 \begin{frame}[fragile]{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval-5}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval-5}
 \tiny
 
 \begin{Shaded}
@@ -3172,7 +3159,7 @@ statistic is to having a \(t\) distribution.
 \end{frame}
 
 \begin{frame}{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval-6}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval-6}
 \tiny
 
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-69-1} \end{center}
@@ -3189,7 +3176,7 @@ statistic is to having a \(t\) distribution.
 \end{frame}
 
 \begin{frame}[fragile]{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval-7}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval-7}
 \tiny
 
 \begin{Shaded}
@@ -3232,7 +3219,7 @@ statistic is to having a \(t\) distribution.
 \end{frame}
 
 \begin{frame}{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval-8}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval-8}
 \tiny
 
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.5\textheight]{Week10_Lect_files/figure-beamer/unnamed-chunk-71-1} \end{center}
@@ -3246,7 +3233,7 @@ statistic is to having a \(t\) distribution.
 \end{frame}
 
 \begin{frame}{Assumptions underlying \(t\)-confidence interval}
-\protect\hypertarget{assumptions-underlying-t-confidence-interval-9}{}
+\phantomsection\label{assumptions-underlying-t-confidence-interval-9}
 \begin{itemize}
 \item
   Before using a \(t\) confidence interval, you should create a normal

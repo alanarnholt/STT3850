@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,7 +44,6 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -56,8 +56,8 @@
 \fi
 \usepackage{lmodern}
 \usetheme[]{Madrid}
-\usecolortheme{orchid}
-\usefonttheme{professionalfonts}
+\usecolortheme[]{orchid}
+\usefonttheme[]{professionalfonts}
 \ifPDFTeX\else
   % xetex/luatex font selection
 \fi
@@ -77,8 +77,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -122,7 +120,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{placeins}
 \usepackage{color}
 \usepackage{bm}
@@ -149,31 +146,27 @@
 \newfont{\gilfont}{msbm10 scaled 1000}
 \newcommand{\DOT}{\usebox{\biggercirc}}
 \newcommand{\pv}{\wp\text{-value}}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 7},
-  pdfauthor={Spring 2025},
+  pdfauthor={ATA},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 7}
-\author{Spring 2025}
+\author{ATA}
 \date{}
 \institute{Appalachian State University}
 
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{outline-for-the-week}{%
-\section{Outline for the week}\label{outline-for-the-week}}
+\section{Outline for the week}\label{outline-for-the-week}
 
 \begin{frame}{By the end of the week: Foundations of Probability}
-\protect\hypertarget{by-the-end-of-the-week-foundations-of-probability}{}
+\phantomsection\label{by-the-end-of-the-week-foundations-of-probability}
 \begin{itemize}
 \tightlist
 \item
@@ -187,11 +180,10 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{laws-of-probability}{%
-\section{Laws of probability}\label{laws-of-probability}}
+\section{Laws of probability}\label{laws-of-probability}
 
 \begin{frame}{Basics of probability}
-\protect\hypertarget{basics-of-probability}{}
+\phantomsection\label{basics-of-probability}
 \begin{itemize}
 \item
   The set of all possible outcomes of a random experiment is called the
@@ -205,7 +197,7 @@
 \end{frame}
 
 \begin{frame}{Basics of probability}
-\protect\hypertarget{basics-of-probability-1}{}
+\phantomsection\label{basics-of-probability-1}
 \begin{itemize}
 \tightlist
 \item
@@ -222,7 +214,7 @@
 \end{frame}
 
 \begin{frame}{Axioms of probability}
-\protect\hypertarget{axioms-of-probability}{}
+\phantomsection\label{axioms-of-probability}
 \begin{enumerate}
 \item
   For any event \(E\):
@@ -254,7 +246,7 @@ In general, for any sequence of mutually exclusive events
 \end{frame}
 
 \begin{frame}{Example 1}
-\protect\hypertarget{example-1}{}
+\phantomsection\label{example-1}
 \begin{tcolorbox}
 
 In a dresser, there are 7 blue shirts, 5 red shirts,and 8 black shirts.
@@ -276,7 +268,7 @@ Solution.
 \end{frame}
 
 \begin{frame}{Example 2: Birthday Problem}
-\protect\hypertarget{example-2-birthday-problem}{}
+\phantomsection\label{example-2-birthday-problem}
 \begin{tcolorbox}
 
 Suppose that a room contains $m$ students. What is the probability that at least two of them have the same birthday? Start by assuming every day of the year is equally likely to be a birthday, and disregard leap years. That is, assume there are always $n=365$ days to a year.
@@ -285,7 +277,7 @@ Suppose that a room contains $m$ students. What is the probability that at least
 \end{frame}
 
 \begin{frame}{Example 2: Birthday Problem}
-\protect\hypertarget{example-2-birthday-problem-1}{}
+\phantomsection\label{example-2-birthday-problem-1}
 \begin{tcolorbox}
 Solution: 
 
@@ -295,7 +287,7 @@ Solution:
 \end{frame}
 
 \begin{frame}[fragile]{Some R}
-\protect\hypertarget{some-r}{}
+\phantomsection\label{some-r}
 \scriptsize
 
 \begin{Shaded}
@@ -318,7 +310,7 @@ Solution:
 \end{frame}
 
 \begin{frame}{Addition Rules for Probability}
-\protect\hypertarget{addition-rules-for-probability}{}
+\phantomsection\label{addition-rules-for-probability}
 \begin{itemize}
 \tightlist
 \item
@@ -341,7 +333,7 @@ In general, for any sequence of mutually exclusive events
 \end{frame}
 
 \begin{frame}{Example 3}
-\protect\hypertarget{example-3}{}
+\phantomsection\label{example-3}
 \begin{tcolorbox}
 What is the probability of drawing a diamond or a spade from a standard card deck?
 \end{tcolorbox}
@@ -354,7 +346,7 @@ Solution:
 \end{frame}
 
 \begin{frame}{Example 4}
-\protect\hypertarget{example-4}{}
+\phantomsection\label{example-4}
 \begin{tcolorbox}
 What is the probability of drawing a diamond or an ace from a standard card deck?
 \end{tcolorbox}
@@ -367,7 +359,7 @@ Solution:
 \end{frame}
 
 \begin{frame}{Example 5}
-\protect\hypertarget{example-5}{}
+\phantomsection\label{example-5}
 \begin{tcolorbox}
 A class with 30 students consists of 16 Math majors, 21 CS majors and 8 double CS and Math majors. If a student is randomly selected, what is the probability that the student is a Math major or a CS major?
 \end{tcolorbox}
@@ -380,7 +372,7 @@ Solution:
 \end{frame}
 
 \begin{frame}{Multiplication Rules}
-\protect\hypertarget{multiplication-rules}{}
+\phantomsection\label{multiplication-rules}
 \begin{itemize}
 \tightlist
 \item
@@ -391,7 +383,7 @@ Solution:
 \end{frame}
 
 \begin{frame}{Example 6}
-\protect\hypertarget{example-6}{}
+\phantomsection\label{example-6}
 \begin{tcolorbox}
 What is the probability of selecting 2 aces if 2 cards are randomly selected with replacement?
 \end{tcolorbox}
@@ -408,7 +400,7 @@ Solution:
 
 \begin{frame}{Conditional Probability and the General Multiplication
 Rule}
-\protect\hypertarget{conditional-probability-and-the-general-multiplication-rule}{}
+\phantomsection\label{conditional-probability-and-the-general-multiplication-rule}
 \begin{itemize}
 \tightlist
 \item
@@ -432,7 +424,7 @@ Equivalently,
 \end{frame}
 
 \begin{frame}{Definition of Independence}
-\protect\hypertarget{definition-of-independence}{}
+\phantomsection\label{definition-of-independence}
 \begin{itemize}
 \tightlist
 \item
@@ -447,7 +439,7 @@ Then:
 \begin{itemize}
 \item
   If \(E\) and \(F\) are independent then
-  \(\textrm{\gilfont{P}}\normalfont ( E| F)=\textrm{\gilfont{P}}\normalfont ( E)\)
+  \(\textrm{\gilfont{P}}\normalfont ( E|  F)=\textrm{\gilfont{P}}\normalfont ( E)\)
 \item
   Equivalently
 \end{itemize}
@@ -456,7 +448,7 @@ Then:
 \end{frame}
 
 \begin{frame}{Example 7}
-\protect\hypertarget{example-7}{}
+\phantomsection\label{example-7}
 \begin{tcolorbox}
 What is the probability of selecting 2 aces if 2 cards are randomly selected without replacement?
 \end{tcolorbox}
@@ -471,7 +463,7 @@ Solution:
 \end{frame}
 
 \begin{frame}{Example 8}
-\protect\hypertarget{example-8}{}
+\phantomsection\label{example-8}
 \begin{tcolorbox}
 Suppose two fair dice are rolled where each of the 36 possible outcomes is equally likely to occur. Knowing that the first die shows a 3, what is the probability that the sum of the two dice equals 6?
 \end{tcolorbox}
@@ -485,12 +477,11 @@ Solution:
 \end{tcolorbox}
 \end{frame}
 
-\hypertarget{law-of-total-probability-and-bayes-rule}{%
 \section{Law of Total Probability and Bayes'
-Rule}\label{law-of-total-probability-and-bayes-rule}}
+Rule}\label{law-of-total-probability-and-bayes-rule}
 
 \begin{frame}{Law of Total Probability and Bayes' Rule}
-\protect\hypertarget{law-of-total-probability-and-bayes-rule-1}{}
+\phantomsection\label{law-of-total-probability-and-bayes-rule-1}
 \begin{itemize}
 \item
   Bayes' Rule is used for reversing the condition
@@ -513,7 +504,7 @@ Rule}\label{law-of-total-probability-and-bayes-rule}}
 \end{frame}
 
 \begin{frame}{Example 1}
-\protect\hypertarget{example-1-1}{}
+\phantomsection\label{example-1-1}
 \begin{tcolorbox}
 Suppose the prior probabilities that a document was written in Word, LaTeX, and HTML are: 0.50, 0.30, and 0.20, respectively.  From past experience it is known that 40\% of Word documents exceed 10 pages; 20\% of LaTeX documents exceed 10 pages; 20\% of HTML documents exceed 10 pages.  
 
@@ -528,7 +519,7 @@ Suppose the prior probabilities that a document was written in Word, LaTeX, and 
 \end{frame}
 
 \begin{frame}{Example 1 - Partial Solution}
-\protect\hypertarget{example-1---partial-solution}{}
+\phantomsection\label{example-1---partial-solution}
 \begin{itemize}
 \item Let $E$ be the event a document selected at random is more than 10 pages.
 \item Let $W$ be the event the document is written with Word.
@@ -550,7 +541,7 @@ The probability a randomly selected document is more than 10 pages is 0.30.
 \end{frame}
 
 \begin{frame}{Example 1 - Partial Solution}
-\protect\hypertarget{example-1---partial-solution-1}{}
+\phantomsection\label{example-1---partial-solution-1}
 If the document that was chosen at random was found to exceed 10 pages,
 what is the probability it was written in LaTeX? \[
 \begin{aligned}
@@ -568,7 +559,7 @@ Given a randomly selected document was found to exceed 10 pages, the probability
 \end{frame}
 
 \begin{frame}{Example 1 - Partial Solution}
-\protect\hypertarget{example-1---partial-solution-2}{}
+\phantomsection\label{example-1---partial-solution-2}
 If the document that was chosen at random was found to exceed 10 pages,
 what is the probability it was written in Word? \[
 \begin{aligned}
@@ -586,7 +577,7 @@ Given a randomly selected document was found to exceed 10 pages, the probability
 \end{frame}
 
 \begin{frame}{Example 1 - Partial Solution}
-\protect\hypertarget{example-1---partial-solution-3}{}
+\phantomsection\label{example-1---partial-solution-3}
 If the document that was chosen at random was found to exceed 10 pages,
 what is the probability it was written in HTML? \[
 \begin{aligned}
@@ -604,7 +595,7 @@ Given a randomly selected document was found to exceed 10 pages, the probability
 \end{frame}
 
 \begin{frame}{Example 2}
-\protect\hypertarget{example-2}{}
+\phantomsection\label{example-2}
 \begin{tcolorbox}
 Dan's Diner employs three dishwashers. Al washes $20\%$ of the dishes and breaks only $1\%$ of those he handles. Betty and Chuck each wash $40\%$ of the dishes, and Betty breaks only $1\%$ of hers, but Chuck breaks $5\%$ of the dishes he washes. You go to Dan's for supper one night and hear a dish break at the sink. What's the probability that Chuck is on the job?
 
@@ -613,7 +604,7 @@ Dan's Diner employs three dishwashers. Al washes $20\%$ of the dishes and breaks
 \end{frame}
 
 \begin{frame}{Example 2}
-\protect\hypertarget{example-2-1}{}
+\phantomsection\label{example-2-1}
 \begin{tcolorbox}
 Solution:
 
@@ -624,7 +615,7 @@ Solution:
 \end{frame}
 
 \begin{frame}{Choose a Door}
-\protect\hypertarget{choose-a-door}{}
+\phantomsection\label{choose-a-door}
 \begin{tcolorbox}
 The television show Let's Make a Deal hosted by Monty Hall, gave contestants the opportunity to choose one of three doors. Contestants hoped to choose the one that concealed the grand prize. Behind the other two doors were much less valuable prizes. After the contestant chose one of the doors, say Door 1, Monty opened one of the other two doors, say Door 3, containing a much less valuable prize. The contestant was then asked whether he or she wished to stay with the original choice (Door 1) or switch to the other closed door (Door 2). What should the contestant do? Is it better to stay with original choice of switch to the other closed door? (a) What is the probability of winning by switching doors when given the opportunity? (b) What is the probability of winning by staying with the initial selection?
 
@@ -633,7 +624,7 @@ The television show Let's Make a Deal hosted by Monty Hall, gave contestants the
 \end{frame}
 
 \begin{frame}[fragile]{Choose a Door: \texttt{R} Code}
-\protect\hypertarget{choose-a-door-r-code}{}
+\phantomsection\label{choose-a-door-r-code}
 \small
 
 \begin{Shaded}
@@ -661,7 +652,7 @@ P(Win no Switch)    P(Win Switch)
 \end{frame}
 
 \begin{frame}{Choose a Door: Solution}
-\protect\hypertarget{choose-a-door-solution}{}
+\phantomsection\label{choose-a-door-solution}
 To solve with Bayes' Rule, start by assuming the contestant initially
 guesses Door 1 and that Monty opens Door 3. Let the event \(D_i=\) Door
 \(i\) conceals the prize and \(O_j=\) Monty opens door \(j\) after the
@@ -680,7 +671,7 @@ following are known:
 \end{frame}
 
 \begin{frame}{Choose a Door: Solution}
-\protect\hypertarget{choose-a-door-solution-1}{}
+\phantomsection\label{choose-a-door-solution-1}
 \begin{itemize}
 \item $\textrm{\gilfont{P}}\normalfont (O_3|D_1)=1/2$ since Monty can open one of either Door 3 or Door 2 without revealing the grand prize.
 \item $\textrm{\gilfont{P}}\normalfont (O_3|D_2)=1$ since the only door Monty can open without revealing the grand prize is Door 3.
@@ -689,7 +680,7 @@ following are known:
 \end{frame}
 
 \begin{frame}{Choose a Door: Solution}
-\protect\hypertarget{choose-a-door-solution-2}{}
+\phantomsection\label{choose-a-door-solution-2}
 \begin{equation*}
 \begin{split}
 \textrm{\gilfont{P}}\normalfont (D_1|O_3)&=\dfrac{\textrm{\gilfont{P}}\normalfont (O_3|D_1)\textrm{\gilfont{P}}\normalfont (D_1)}{\textrm{\gilfont{P}}\normalfont (O_3|D_1)\textrm{\gilfont{P}}\normalfont (D_1)+\textrm{\gilfont{P}}\normalfont (O_3|D_2)\textrm{\gilfont{P}}\normalfont (D_2)+\textrm{\gilfont{P}}\normalfont (O_3|D_3)\textrm{\gilfont{P}}\normalfont (D_3)}\\
@@ -709,7 +700,7 @@ switch doors.
 \end{frame}
 
 \begin{frame}{Monte Hall Problem with \(n\) Doors}
-\protect\hypertarget{monte-hall-problem-with-n-doors}{}
+\phantomsection\label{monte-hall-problem-with-n-doors}
 \begin{itemize}
 \item
   Consider the case with \(n\) Doors and just one grand prize
@@ -739,7 +730,7 @@ switch doors.
 \end{frame}
 
 \begin{frame}{Monte Hall Problem with \(n\) Doors}
-\protect\hypertarget{monte-hall-problem-with-n-doors-1}{}
+\phantomsection\label{monte-hall-problem-with-n-doors-1}
 In other words, the probability of winning using the ``switch'' strategy
 is
 \[\textrm{\gilfont{P}}\normalfont (G \cap C)=P(G)\cdot \textrm{\gilfont{P}}\normalfont (C|G)=\frac{n-1}{n}\cdot \frac{1}{n-2}=\frac{n-1}{n(n-2)}\]
