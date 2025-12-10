@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,7 +44,6 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -56,8 +56,8 @@
 \fi
 \usepackage{lmodern}
 \usetheme[]{Madrid}
-\usecolortheme{orchid}
-\usefonttheme{professionalfonts}
+\usecolortheme[]{orchid}
+\usefonttheme[]{professionalfonts}
 \ifPDFTeX\else
   % xetex/luatex font selection
 \fi
@@ -77,8 +77,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -129,7 +127,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{placeins}
 \usepackage{color}
 \usepackage{bm}
@@ -156,31 +153,27 @@
 \newfont{\gilfont}{msbm10 scaled 1000}
 \newcommand{\DOT}{\usebox{\biggercirc}}
 \newcommand{\pv}{\wp\text{-value}}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 5},
-  pdfauthor={Spring 2025},
+  pdfauthor={ATA},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 5}
-\author{Spring 2025}
+\author{ATA}
 \date{}
 \institute{Appalachian State University}
 
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{outline-for-the-week}{%
-\section{Outline for the week}\label{outline-for-the-week}}
+\section{Outline for the week}\label{outline-for-the-week}
 
 \begin{frame}{By the end of the week: Multiple Linear Regression}
-\protect\hypertarget{by-the-end-of-the-week-multiple-linear-regression}{}
+\phantomsection\label{by-the-end-of-the-week-multiple-linear-regression}
 \begin{itemize}
 \tightlist
 \item
@@ -195,12 +188,11 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{one-categorical-explanatory-variable}{%
 \section{One categorical explanatory
-variable}\label{one-categorical-explanatory-variable}}
+variable}\label{one-categorical-explanatory-variable}
 
 \begin{frame}{One categorical explanatory variable}
-\protect\hypertarget{one-categorical-explanatory-variable-1}{}
+\phantomsection\label{one-categorical-explanatory-variable-1}
 \begin{itemize}
 \item
   It's an unfortunate truth that life expectancy is not the same across
@@ -233,7 +225,7 @@ variable}\label{one-categorical-explanatory-variable}}
 \end{frame}
 
 \begin{frame}[fragile]{One categorical explanatory variable}
-\protect\hypertarget{one-categorical-explanatory-variable-2}{}
+\phantomsection\label{one-categorical-explanatory-variable-2}
 \begin{itemize}
 \item
   To answer such questions, we'll use the \texttt{gapminder} data frame
@@ -263,7 +255,7 @@ variable}\label{one-categorical-explanatory-variable}}
 \end{frame}
 
 \begin{frame}[fragile]{Needed packages}
-\protect\hypertarget{needed-packages}{}
+\phantomsection\label{needed-packages}
 Loading needed packages.
 
 \begin{Shaded}
@@ -278,7 +270,7 @@ Loading needed packages.
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis}{}
+\phantomsection\label{exploratory-data-analysis}
 \begin{itemize}
 \item
   The data on the 142 countries can be found in the \texttt{gapminder}
@@ -320,7 +312,7 @@ $ gdpPercap <dbl> 974.5803, 5937.0295, 6223.3675, 4797.2313, 12779.3796, 34435~
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-1}{}
+\phantomsection\label{exploratory-data-analysis-1}
 \begin{itemize}
 \item
   A full description of all the variables included in \texttt{gapminder}
@@ -350,7 +342,7 @@ $ gdpPercap <dbl> 974.5803, 5937.0295, 6223.3675, 4797.2313, 12779.3796, 34435~
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-2}{}
+\phantomsection\label{exploratory-data-analysis-2}
 Let's look at a random sample of five out of the 142 countries
 
 \begin{Shaded}
@@ -362,18 +354,18 @@ Let's look at a random sample of five out of the 142 countries
 
 \begin{verbatim}
 # A tibble: 5 x 4
-  country         lifeExp continent gdpPercap
-  <fct>             <dbl> <fct>         <dbl>
-1 Slovak Republic    74.7 Europe       18678.
-2 Nepal              63.8 Asia          1091.
-3 Djibouti           54.8 Africa        2082.
-4 Israel             80.7 Asia         25523.
-5 India              64.7 Asia          2452.
+  country   lifeExp continent gdpPercap
+  <fct>       <dbl> <fct>         <dbl>
+1 Canada       80.7 Americas     36319.
+2 Singapore    80.0 Asia         47143.
+3 Belgium      79.4 Europe       33693.
+4 Peru         71.4 Americas      7409.
+5 Thailand     70.6 Asia          7458.
 \end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-3}{}
+\phantomsection\label{exploratory-data-analysis-3}
 Let's compute the summary statistics using the \texttt{skim()} function
 
 \normalsize
@@ -409,7 +401,7 @@ Let's compute the summary statistics using the \texttt{skim()} function
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-4}{}
+\phantomsection\label{exploratory-data-analysis-4}
 Why is the mean life expectancy lower than the median?
 
 \small
@@ -433,7 +425,7 @@ We see that this data is skewed to the left \(\rightarrow\) mean
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-5}{}
+\phantomsection\label{exploratory-data-analysis-5}
 \small
 
 \begin{Shaded}
@@ -455,7 +447,7 @@ We see that this data is skewed to the left \(\rightarrow\) mean
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-6}{}
+\phantomsection\label{exploratory-data-analysis-6}
 \small
 
 \begin{Shaded}
@@ -473,7 +465,7 @@ We see that this data is skewed to the left \(\rightarrow\) mean
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-7}{}
+\phantomsection\label{exploratory-data-analysis-7}
 \normalsize
 
 \begin{Shaded}
@@ -504,7 +496,7 @@ Oceania & 80.7195 & 80.71950 & 25.91346 \\
 \end{frame}
 
 \begin{frame}[fragile]{Linear regression}
-\protect\hypertarget{linear-regression}{}
+\phantomsection\label{linear-regression}
 In our life expectancy example, we now instead have a
 \textbf{categorical} explanatory variable \texttt{continent}:
 
@@ -518,13 +510,13 @@ In our life expectancy example, we now instead have a
 \end{Shaded}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.2667}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1200}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1333}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1333}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1067}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1200}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1200}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2667}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1200}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1333}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1333}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1067}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1200}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1200}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 term
@@ -559,7 +551,7 @@ comparison.
 \end{frame}
 
 \begin{frame}[fragile]{Linear regression}
-\protect\hypertarget{linear-regression-1}{}
+\phantomsection\label{linear-regression-1}
 Let's break the 5 estimates down one-by-one:
 
 \begin{itemize}
@@ -584,7 +576,7 @@ Let's break the 5 estimates down one-by-one:
 \end{frame}
 
 \begin{frame}[fragile]{Linear regression}
-\protect\hypertarget{linear-regression-2}{}
+\phantomsection\label{linear-regression-2}
 We can change the baseline group to be another continent. In what
 follows the baseline is changed to be \texttt{Americas} instead of
 \texttt{Africa}.
@@ -600,13 +592,13 @@ follows the baseline is changed to be \texttt{Americas} instead of
 \end{Shaded}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.2568}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1216}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1351}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1351}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1081}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1216}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1216}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2568}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1216}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1351}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1351}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1081}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1216}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1216}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 term
@@ -638,7 +630,7 @@ continent: Oceania & 7.111 & 5.434 & 1.309 & 0.193 & -3.634 & 17.857 \\
 \end{frame}
 
 \begin{frame}[fragile]{Linear regression}
-\protect\hypertarget{linear-regression-3}{}
+\phantomsection\label{linear-regression-3}
 The equation for our fitted values for model (\texttt{lifeExp\_model})
 is written as:
 
@@ -655,7 +647,7 @@ where for example:
 \end{frame}
 
 \begin{frame}{Linear regression}
-\protect\hypertarget{linear-regression-4}{}
+\phantomsection\label{linear-regression-4}
 Let's put this all together and compute the fitted value
 \(\hat{y}=\widehat{\text{life exp}}\) for a country in Africa.
 
@@ -675,7 +667,7 @@ Let's put this all together and compute the fitted value
 \end{frame}
 
 \begin{frame}{Linear regression}
-\protect\hypertarget{linear-regression-5}{}
+\phantomsection\label{linear-regression-5}
 For a country in in the Americas, in this case, only the indicator
 function \(1_{\text{Amer}}(x)=1\).
 
@@ -692,7 +684,7 @@ regression table will return an intercept and \(k-1\) offsets.
 \end{frame}
 
 \begin{frame}[fragile]{Observed/fitted values and residuals}
-\protect\hypertarget{observedfitted-values-and-residuals}{}
+\phantomsection\label{observedfitted-values-and-residuals}
 \normalsize
 
 \begin{Shaded}
@@ -723,11 +715,10 @@ Bangladesh & 64.062 & Asia & 70.728 & -6.666 \\
 \normalsize
 \end{frame}
 
-\hypertarget{multiple-regression}{%
-\section{Multiple Regression}\label{multiple-regression}}
+\section{Multiple Regression}\label{multiple-regression}
 
 \begin{frame}{Multiple Regression}
-\protect\hypertarget{multiple-regression-1}{}
+\phantomsection\label{multiple-regression-1}
 In the previous chapter, we introduced ideas related to modeling for
 \textbf{explanation.}
 
@@ -754,7 +745,7 @@ In the previous chapter, we introduced ideas related to modeling for
 \end{frame}
 
 \begin{frame}[fragile]{Needed packages}
-\protect\hypertarget{needed-packages-1}{}
+\phantomsection\label{needed-packages-1}
 Let's load all the packages needed for this chapter.
 
 \normalsize
@@ -773,7 +764,7 @@ Let's load all the packages needed for this chapter.
 
 \begin{frame}[fragile]{One numerical and one categorical explanatory
 variable}
-\protect\hypertarget{one-numerical-and-one-categorical-explanatory-variable}{}
+\phantomsection\label{one-numerical-and-one-categorical-explanatory-variable}
 Let's revisit the instructor evaluation data we introduced earlier.
 
 \begin{itemize}
@@ -812,7 +803,7 @@ Let's revisit the instructor evaluation data we introduced earlier.
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-8}{}
+\phantomsection\label{exploratory-data-analysis-8}
 Let's \texttt{select()} only the subset of the variables we'll consider
 in this chapter.
 
@@ -841,7 +832,7 @@ Recall the three common steps in an exploratory data analysis:
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-9}{}
+\phantomsection\label{exploratory-data-analysis-9}
 Let's first look at the raw data values.
 
 \small
@@ -873,15 +864,15 @@ $ gender <fct> female, female, female, female, male, male, male, male, male, f~
 # A tibble: 2 x 4
      ID score   age gender
   <int> <dbl> <int> <fct> 
-1    81   3.3    37 female
-2   243   3.9    56 female
+1    62   4.3    35 male  
+2    71   4      42 male  
 \end{verbatim}
 
 \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-10}{}
+\phantomsection\label{exploratory-data-analysis-10}
 \normalsize
 
 \begin{Shaded}
@@ -915,7 +906,7 @@ $ gender <fct> female, female, female, female, male, male, male, male, male, f~
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-11}{}
+\phantomsection\label{exploratory-data-analysis-11}
 Let's compute the correlation coefficient between our two numerical
 variables: \texttt{score} and \texttt{age}:
 
@@ -955,7 +946,7 @@ variables: \texttt{score} and \texttt{age}:
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-12}{}
+\phantomsection\label{exploratory-data-analysis-12}
 \normalsize
 
 \begin{Shaded}
@@ -974,7 +965,7 @@ variables: \texttt{score} and \texttt{age}:
 \end{frame}
 
 \begin{frame}{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-13}{}
+\phantomsection\label{exploratory-data-analysis-13}
 \normalsize
 \begin{figure}
 
@@ -988,7 +979,7 @@ variables: \texttt{score} and \texttt{age}:
 \end{frame}
 
 \begin{frame}[fragile]{Interaction model}
-\protect\hypertarget{interaction-model}{}
+\phantomsection\label{interaction-model}
 \begin{itemize}
 \item
   Let's now quantify the relationship of our outcome variable \(y\) and
@@ -1015,7 +1006,7 @@ variables: \texttt{score} and \texttt{age}:
 \end{frame}
 
 \begin{frame}[fragile]{Interaction model}
-\protect\hypertarget{interaction-model-1}{}
+\phantomsection\label{interaction-model-1}
 \small
 
 \begin{Shaded}
@@ -1029,13 +1020,13 @@ variables: \texttt{score} and \texttt{age}:
 \end{Shaded}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.2143}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1286}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1143}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1286}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1286}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2143}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1286}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1143}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1286}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1286}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 term
@@ -1065,7 +1056,7 @@ age:gendermale & 0.014 & 0.006 & 2.446 & 0.015 & 0.003 & 0.024 \\
 \end{frame}
 
 \begin{frame}[fragile]{Interaction model}
-\protect\hypertarget{interaction-model-2}{}
+\phantomsection\label{interaction-model-2}
 Female instructors are the ``baseline for comparison'' group.
 
 \begin{itemize}
@@ -1086,7 +1077,7 @@ Female instructors are the ``baseline for comparison'' group.
 \end{frame}
 
 \begin{frame}[fragile]{Interaction model}
-\protect\hypertarget{interaction-model-3}{}
+\phantomsection\label{interaction-model-3}
 What about the intercept and slope for age of the male instructors in
 the blue line of Figure 1?
 
@@ -1119,7 +1110,7 @@ the blue line of Figure 1?
 \end{frame}
 
 \begin{frame}[fragile]{Interaction model}
-\protect\hypertarget{interaction-model-4}{}
+\phantomsection\label{interaction-model-4}
 \begin{center}\includegraphics[width=0.6\linewidth,height=0.3\textheight]{week5_2} \end{center}
 
 \begin{itemize}
@@ -1138,7 +1129,7 @@ the blue line of Figure 1?
 \end{frame}
 
 \begin{frame}{Interaction model: Prediction}
-\protect\hypertarget{interaction-model-prediction}{}
+\phantomsection\label{interaction-model-prediction}
 Let's now write the equation for our regression lines, which we can use
 to compute our fitted values
 
@@ -1154,7 +1145,7 @@ where:
 \end{frame}
 
 \begin{frame}{Interaction model: Prediction}
-\protect\hypertarget{interaction-model-prediction-1}{}
+\phantomsection\label{interaction-model-prediction-1}
 Let's put this all together and compute the fitted
 value\(\hat{y}=\widehat{\text{score}}\) for female instructors.
 
@@ -1183,7 +1174,7 @@ value\(\hat{y}=\widehat{\text{score}}\) for female instructors.
 \end{frame}
 
 \begin{frame}{Interaction model: Explanation}
-\protect\hypertarget{interaction-model-explanation}{}
+\phantomsection\label{interaction-model-explanation}
 \begin{itemize}
 \item
   The term \(b_{\text{age:gender}}\) in the equation for the fitted
@@ -1206,7 +1197,7 @@ value\(\hat{y}=\widehat{\text{score}}\) for female instructors.
 \end{frame}
 
 \begin{frame}[fragile]{Parallel slopes model}
-\protect\hypertarget{parallel-slopes-model}{}
+\phantomsection\label{parallel-slopes-model}
 With one numerical and one categorical explanatory variable, another
 type of model we can use is known as a \textbf{parallel slopes} model.
 
@@ -1235,7 +1226,7 @@ type of model we can use is known as a \textbf{parallel slopes} model.
 \end{frame}
 
 \begin{frame}{Parallel slopes model}
-\protect\hypertarget{parallel-slopes-model-1}{}
+\phantomsection\label{parallel-slopes-model-1}
 \normalsize
 
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.9\textheight]{Week5_Lect_files/figure-beamer/unnamed-chunk-23-1} \end{center}
@@ -1243,7 +1234,7 @@ type of model we can use is known as a \textbf{parallel slopes} model.
 \end{frame}
 
 \begin{frame}[fragile]{Parallel slopes model}
-\protect\hypertarget{parallel-slopes-model-2}{}
+\phantomsection\label{parallel-slopes-model-2}
 \small
 
 \begin{Shaded}
@@ -1257,13 +1248,13 @@ type of model we can use is known as a \textbf{parallel slopes} model.
 \end{Shaded}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1912}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1324}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1176}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1324}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1324}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1912}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1324}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1176}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1324}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1324}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 term
@@ -1294,7 +1285,7 @@ gender: male & 0.191 & 0.052 & 3.632 & 0.000 & 0.087 & 0.294 \\
 \end{frame}
 
 \begin{frame}{Parallel slopes model: Prediction}
-\protect\hypertarget{parallel-slopes-model-prediction}{}
+\phantomsection\label{parallel-slopes-model-prediction}
 Let's now write the equation for our regression lines, which we can use
 to compute our fitted values
 
@@ -1305,7 +1296,7 @@ to compute our fitted values
 \end{frame}
 
 \begin{frame}{Parallel slopes model: Prediction}
-\protect\hypertarget{parallel-slopes-model-prediction-1}{}
+\phantomsection\label{parallel-slopes-model-prediction-1}
 Let's put this all together and compute the fitted
 value\(\hat{y}=\widehat{\text{score}}\) for female instructors.
 
@@ -1334,12 +1325,12 @@ value\(\hat{y}=\widehat{\text{score}}\) for female instructors.
 \end{frame}
 
 \begin{frame}{Interaction Model and Parallel Slopes Model}
-\protect\hypertarget{interaction-model-and-parallel-slopes-model}{}
+\phantomsection\label{interaction-model-and-parallel-slopes-model}
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.9\textheight]{Week5_Lect_files/figure-beamer/unnamed-chunk-26-1} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Observed/fitted values and residuals}
-\protect\hypertarget{observedfitted-values-and-residuals-1}{}
+\phantomsection\label{observedfitted-values-and-residuals-1}
 \begin{itemize}
 \item
   We'll compute the observed values, fitted values, and residuals for
@@ -1364,7 +1355,7 @@ value\(\hat{y}=\widehat{\text{score}}\) for female instructors.
 \end{frame}
 
 \begin{frame}{Observed/fitted values and residuals}
-\protect\hypertarget{observedfitted-values-and-residuals-2}{}
+\phantomsection\label{observedfitted-values-and-residuals-2}
 \begin{itemize}
 \tightlist
 \item
@@ -1389,7 +1380,7 @@ value\(\hat{y}=\widehat{\text{score}}\) for female instructors.
 \end{frame}
 
 \begin{frame}[fragile]{Observed/fitted values and residuals}
-\protect\hypertarget{observedfitted-values-and-residuals-3}{}
+\phantomsection\label{observedfitted-values-and-residuals-3}
 Note: It is better to let R compute the values and round at the end.
 
 \normalsize
@@ -1423,7 +1414,7 @@ Note: It is better to let R compute the values and round at the end.
 
 \begin{frame}{Example: One numerical and one categorical explanatory
 variable}
-\protect\hypertarget{example-one-numerical-and-one-categorical-explanatory-variable}{}
+\phantomsection\label{example-one-numerical-and-one-categorical-explanatory-variable}
 \begin{tcolorbox}
 Suppose a realtor wants to model the appraised price of an apartment as a function of the predictors living area (in $\text{m}^2$) and the presence or absence of elevators. Consider the data frame `VIT2005`, which contains data about apartments in Vitoria, Spain, including \textbf{totalprice}, \textbf{area}, and \textbf{elevator}, which are the appraised apartment value in Euros, living space in square meters, and the absence or presence of at least one elevator in the building, respectively. The realtor first wants to know if there is any relationship between appraised price ($Y$) and living area ($x_1$). Next, the realtor wants to know how adding a dummy variable for whether or not an elevator is present changes the relationship: Are the lines the same? Are the slopes the same? Are the intercepts the same?
 \end{tcolorbox}
@@ -1431,7 +1422,7 @@ Suppose a realtor wants to model the appraised price of an apartment as a functi
 
 \begin{frame}[fragile]{Solution (is there a realationship between
 \texttt{totalprice} and \texttt{area}?):}
-\protect\hypertarget{solution-is-there-a-realationship-between-totalprice-and-area}{}
+\phantomsection\label{solution-is-there-a-realationship-between-totalprice-and-area}
 \normalsize
 
 \begin{Shaded}
@@ -1452,7 +1443,7 @@ Suppose a realtor wants to model the appraised price of an apartment as a functi
 
 \begin{frame}[fragile]{Solution (is there a realationship between
 \texttt{totalprice} and \texttt{area}?):}
-\protect\hypertarget{solution-is-there-a-realationship-between-totalprice-and-area-1}{}
+\phantomsection\label{solution-is-there-a-realationship-between-totalprice-and-area-1}
 \scriptsize
 
 \begin{Shaded}
@@ -1488,7 +1479,7 @@ F-statistic: 409.8 on 1 and 216 DF,  p-value: < 2.2e-16
 
 \begin{frame}[fragile]{Solution (is there a realationship between
 \texttt{totalprice} and \texttt{area}?):}
-\protect\hypertarget{solution-is-there-a-realationship-between-totalprice-and-area-2}{}
+\phantomsection\label{solution-is-there-a-realationship-between-totalprice-and-area-2}
 \normalsize
 
 \begin{Shaded}
@@ -1498,13 +1489,13 @@ F-statistic: 409.8 on 1 and 216 DF,  p-value: < 2.2e-16
 \end{Shaded}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1176}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1176}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 term
@@ -1534,7 +1525,7 @@ area & 2704.751 & 133.616 & 20.243 & 0.000 & 2441.393 & 2968.109 \\
 
 \begin{frame}[fragile]{Solution (does adding a dummy variable
 (\texttt{elevator}) change the relationship?):}
-\protect\hypertarget{solution-does-adding-a-dummy-variable-elevator-change-the-relationship}{}
+\phantomsection\label{solution-does-adding-a-dummy-variable-elevator-change-the-relationship}
 \scriptsize
 
 \begin{Shaded}
@@ -1554,7 +1545,7 @@ area & 2704.751 & 133.616 & 20.243 & 0.000 & 2441.393 & 2968.109 \\
 
 \begin{frame}[fragile]{Solution (does adding a dummy variable
 (\texttt{elevator}) change the relationship?):}
-\protect\hypertarget{solution-does-adding-a-dummy-variable-elevator-change-the-relationship-1}{}
+\phantomsection\label{solution-does-adding-a-dummy-variable-elevator-change-the-relationship-1}
 \scriptsize
 
 \begin{Shaded}
@@ -1592,7 +1583,7 @@ F-statistic: 174.3 on 3 and 214 DF,  p-value: < 2.2e-16
 
 \begin{frame}[fragile]{Solution (does adding a dummy variable
 (\texttt{elevator}) change the relationship?):}
-\protect\hypertarget{solution-does-adding-a-dummy-variable-elevator-change-the-relationship-2}{}
+\phantomsection\label{solution-does-adding-a-dummy-variable-elevator-change-the-relationship-2}
 \scriptsize
 
 \begin{Shaded}
@@ -1628,7 +1619,7 @@ F-statistic: 248.8 on 2 and 215 DF,  p-value: < 2.2e-16
 \end{frame}
 
 \begin{frame}[fragile]{Diagnostic Plots}
-\protect\hypertarget{diagnostic-plots}{}
+\phantomsection\label{diagnostic-plots}
 \small
 
 \begin{Shaded}
@@ -1643,12 +1634,11 @@ F-statistic: 248.8 on 2 and 215 DF,  p-value: < 2.2e-16
 \normalsize
 \end{frame}
 
-\hypertarget{two-numerical-explanatory-variables}{%
 \section{Two numerical explanatory
-variables}\label{two-numerical-explanatory-variables}}
+variables}\label{two-numerical-explanatory-variables}
 
 \begin{frame}[fragile]{Two numerical explanatory variables}
-\protect\hypertarget{two-numerical-explanatory-variables-1}{}
+\phantomsection\label{two-numerical-explanatory-variables-1}
 \begin{itemize}
 \item
   Let's switch gears and consider multiple regression models where
@@ -1675,7 +1665,7 @@ variables}\label{two-numerical-explanatory-variables}}
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-14}{}
+\phantomsection\label{exploratory-data-analysis-14}
 Use \texttt{select()} to create a subset of the variables we'll consider
 in this chapter.
 
@@ -1707,7 +1697,7 @@ $ age           <int> 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, ~
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-15}{}
+\phantomsection\label{exploratory-data-analysis-15}
 \normalsize
 
 \begin{Shaded}
@@ -1721,11 +1711,11 @@ $ age           <int> 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, ~
 # A tibble: 5 x 6
      ID  debt credit_limit income credit_rating   age
   <int> <int>        <int>  <dbl>         <int> <int>
-1    38  1093         6481   30.0           462    69
-2   222  1230         8760   98.5           633    78
-3   167     0         2880   35.7           214    35
-4   168     0         2327   29.4           178    37
-5   190   126         4411   58.4           326    85
+1   387   371         3683   19.3           287    57
+2   170  1099         6179   27.3           459    36
+3   392   721         6555   73.3           472    43
+4   321     5         1160   16.3           126    78
+5   371   992         6135   35.6           466    40
 \end{verbatim}
 
 \normalsize
@@ -1742,7 +1732,7 @@ $ age           <int> 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, ~
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-16}{}
+\phantomsection\label{exploratory-data-analysis-16}
 \normalsize
 
 \begin{Shaded}
@@ -1767,7 +1757,7 @@ $ age           <int> 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, ~
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-17}{}
+\phantomsection\label{exploratory-data-analysis-17}
 We can compute the correlation coefficient between the different
 possible pairs of these variables.
 
@@ -1792,7 +1782,7 @@ income       0.4636565    0.7920883 1.0000000
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis}
-\protect\hypertarget{exploratory-data-analysis-18}{}
+\phantomsection\label{exploratory-data-analysis-18}
 \small
 
 \begin{Shaded}
@@ -1813,7 +1803,7 @@ income       0.4636565    0.7920883 1.0000000
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis: Collinearity}
-\protect\hypertarget{exploratory-data-analysis-collinearity}{}
+\phantomsection\label{exploratory-data-analysis-collinearity}
 \begin{itemize}
 \item
   We say there is a high degree of collinearity between the
@@ -1841,7 +1831,7 @@ income       0.4636565    0.7920883 1.0000000
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis: visualization}
-\protect\hypertarget{exploratory-data-analysis-visualization}{}
+\phantomsection\label{exploratory-data-analysis-visualization}
 Let's visualize the relationship of the outcome variable with each of
 the two explanatory variables in two separate plots
 
@@ -1870,12 +1860,12 @@ the two explanatory variables in two separate plots
 \end{frame}
 
 \begin{frame}{Exploratory data analysis: visualization}
-\protect\hypertarget{exploratory-data-analysis-visualization-1}{}
+\phantomsection\label{exploratory-data-analysis-visualization-1}
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.9\textheight]{Week5_Lect_files/figure-beamer/unnamed-chunk-43-1} \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Exploratory data analysis: visualization}
-\protect\hypertarget{exploratory-data-analysis-visualization-2}{}
+\phantomsection\label{exploratory-data-analysis-visualization-2}
 To visualize the joint relationship of all three variables
 simultaneously, we need a 3-dimensional (3D) scatterplot. The following
 code will create a 3-dimensional scatterplot.
@@ -1900,7 +1890,7 @@ code will create a 3-dimensional scatterplot.
 \end{frame}
 
 \begin{frame}{Exploratory data analysis: visualization}
-\protect\hypertarget{exploratory-data-analysis-visualization-3}{}
+\phantomsection\label{exploratory-data-analysis-visualization-3}
 \begin{center}\includegraphics[width=0.7\linewidth,height=0.5\textheight]{week5_7} \end{center}
 
 The regression plane is the ``best-fitting'' plane that similarly
@@ -1908,7 +1898,7 @@ minimizes the sum of squared residuals.
 \end{frame}
 
 \begin{frame}[fragile]{Regression plane}
-\protect\hypertarget{regression-plane}{}
+\phantomsection\label{regression-plane}
 \footnotesize
 
 \begin{Shaded}
@@ -1922,13 +1912,13 @@ minimizes the sum of squared residuals.
 \end{Shaded}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1912}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1324}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1471}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1176}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1324}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1324}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1912}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1324}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1471}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1176}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1324}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1324}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 term
@@ -1957,7 +1947,7 @@ income & -7.663 & 0.385 & -19.901 & 0 & -8.420 & -6.906 \\
 \end{frame}
 
 \begin{frame}[fragile]{Regression plane: Interpretation}
-\protect\hypertarget{regression-plane-interpretation}{}
+\phantomsection\label{regression-plane-interpretation}
 \begin{itemize}
 \item
   First, the intercept value is \(-\$385.179\).
@@ -2004,7 +1994,7 @@ income & -7.663 & 0.385 & -19.901 & 0 & -8.420 & -6.906 \\
 \end{frame}
 
 \begin{frame}{Regression plane: Prediction}
-\protect\hypertarget{regression-plane-prediction}{}
+\phantomsection\label{regression-plane-prediction}
 Putting these results together, the equation of the regression plane
 that gives us fitted values \(\hat{y}=\widehat{\text{debt}}\) is:
 
@@ -2016,7 +2006,7 @@ that gives us fitted values \(\hat{y}=\widehat{\text{debt}}\) is:
 \end{frame}
 
 \begin{frame}[fragile]{Diagnostic Plots}
-\protect\hypertarget{diagnostic-plots-1}{}
+\phantomsection\label{diagnostic-plots-1}
 \normalsize
 
 \begin{Shaded}
@@ -2031,7 +2021,7 @@ that gives us fitted values \(\hat{y}=\widehat{\text{debt}}\) is:
 \end{frame}
 
 \begin{frame}[fragile]{Simpson's Paradox}
-\protect\hypertarget{simpsons-paradox}{}
+\phantomsection\label{simpsons-paradox}
 \tiny
 
 \begin{Shaded}
@@ -2058,7 +2048,7 @@ that gives us fitted values \(\hat{y}=\widehat{\text{debt}}\) is:
 \end{frame}
 
 \begin{frame}[fragile]{Simpson's Paradox}
-\protect\hypertarget{simpsons-paradox-1}{}
+\phantomsection\label{simpsons-paradox-1}
 \small
 
 \begin{Shaded}
@@ -2079,7 +2069,7 @@ income         -7.6633230  0.385072058 -19.90101  1.260933e-61
 \end{frame}
 
 \begin{frame}[fragile]{Simpson's Paradox}
-\protect\hypertarget{simpsons-paradox-2}{}
+\phantomsection\label{simpsons-paradox-2}
 \small
 
 \begin{Shaded}
@@ -2093,13 +2083,13 @@ income         -7.6633230  0.385072058 -19.90101  1.260933e-61
 \end{Shaded}
 
 \begin{longtable}[]{@{}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.0448}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.0746}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1940}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.2090}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1194}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.0597}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.2985}}@{}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0448}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0746}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1940}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2090}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1194}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0597}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2985}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedleft
 ID
@@ -2131,7 +2121,7 @@ credit\_cats
 \end{frame}
 
 \begin{frame}[fragile]{Simpson's Paradox}
-\protect\hypertarget{simpsons-paradox-3}{}
+\phantomsection\label{simpsons-paradox-3}
 \small
 
 \begin{Shaded}
@@ -2149,7 +2139,7 @@ credit\_cats
 \end{frame}
 
 \begin{frame}[fragile]{Simpson's Paradox}
-\protect\hypertarget{simpsons-paradox-4}{}
+\phantomsection\label{simpsons-paradox-4}
 \normalsize
 
 \begin{Shaded}
@@ -2174,7 +2164,7 @@ credit\_cats
 \end{frame}
 
 \begin{frame}[fragile]{Simpson's Paradox}
-\protect\hypertarget{simpsons-paradox-5}{}
+\phantomsection\label{simpsons-paradox-5}
 \normalsize
 
 \begin{Shaded}
@@ -2201,7 +2191,7 @@ credit\_cats
 \end{frame}
 
 \begin{frame}{Simpson's Paradox}
-\protect\hypertarget{simpsons-paradox-6}{}
+\phantomsection\label{simpsons-paradox-6}
 \begin{center}\includegraphics[width=0.9\linewidth,height=0.9\textheight]{Week5_Lect_files/figure-beamer/unnamed-chunk-54-1} \end{center}
 \end{frame}
 
