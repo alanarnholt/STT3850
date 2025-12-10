@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,7 +44,6 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -56,8 +56,8 @@
 \fi
 \usepackage{lmodern}
 \usetheme[]{Madrid}
-\usecolortheme{orchid}
-\usefonttheme{professionalfonts}
+\usecolortheme[]{orchid}
+\usefonttheme[]{professionalfonts}
 \ifPDFTeX\else
   % xetex/luatex font selection
 \fi
@@ -77,8 +77,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -122,7 +120,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{placeins}
 \usepackage{color}
 \usepackage{bm}
@@ -149,31 +146,27 @@
 \newfont{\gilfont}{msbm10 scaled 1000}
 \newcommand{\DOT}{\usebox{\biggercirc}}
 \newcommand{\pv}{\wp\text{-value}}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   pdftitle={STT 3850 : Week 2},
-  pdfauthor={Spring 2025},
+  pdfauthor={ATA},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{STT 3850 : Week 2}
-\author{Spring 2025}
+\author{ATA}
 \date{}
 \institute{Appalachian State University}
 
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{outline-for-the-week}{%
-\section{Outline for the week}\label{outline-for-the-week}}
+\section{Outline for the week}\label{outline-for-the-week}
 
 \begin{frame}{By the end of the week:}
-\protect\hypertarget{by-the-end-of-the-week}{}
+\phantomsection\label{by-the-end-of-the-week}
 \begin{itemize}
 \tightlist
 \item
@@ -185,11 +178,10 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{control-structures-in-r}{%
-\section{Control Structures in R}\label{control-structures-in-r}}
+\section{Control Structures in R}\label{control-structures-in-r}
 
 \begin{frame}[fragile]{Control Structures in R}
-\protect\hypertarget{control-structures-in-r-1}{}
+\phantomsection\label{control-structures-in-r-1}
 \texttt{R} executes statements/commands sequentially. If you want to
 control the flow of statement execution, you need to use \textbf{control
 structures}.
@@ -215,7 +207,7 @@ As an example, look at the following R commands:
 \end{frame}
 
 \begin{frame}[fragile]{Conditional Statement}
-\protect\hypertarget{conditional-statement}{}
+\phantomsection\label{conditional-statement}
 \small
 
 \begin{Shaded}
@@ -259,7 +251,7 @@ Similarly,
 \end{frame}
 
 \begin{frame}[fragile]{Conditional Statement and Logical Operators}
-\protect\hypertarget{conditional-statement-and-logical-operators}{}
+\phantomsection\label{conditional-statement-and-logical-operators}
 \begin{itemize}
 \item
   Conditional statements can be combined using logical operators
@@ -309,7 +301,7 @@ On the other hand, \small
 \end{frame}
 
 \begin{frame}[fragile]{Conditional Statement and Logical Operators}
-\protect\hypertarget{conditional-statement-and-logical-operators-1}{}
+\phantomsection\label{conditional-statement-and-logical-operators-1}
 However, the following will yield TRUE since at least one condition is
 TRUE. That is, the \texttt{\textbar{}} operator will yield TRUE if at
 least one of the conditions is TRUE.
@@ -348,7 +340,7 @@ Note the use of parentheses.
 \end{frame}
 
 \begin{frame}[fragile]{Conditional Statement and Logical Operators}
-\protect\hypertarget{conditional-statement-and-logical-operators-2}{}
+\phantomsection\label{conditional-statement-and-logical-operators-2}
 To see the effect of parentheses, let's remove the parentheses in the
 previous statement. \small
 
@@ -378,7 +370,7 @@ Lets see an example.
 \end{frame}
 
 \begin{frame}[fragile]{If Statement}
-\protect\hypertarget{if-statement}{}
+\phantomsection\label{if-statement}
 The following will display the value of the sum of the first two
 elements of the vector \texttt{x} since the conditional statement is
 TRUE.
@@ -419,7 +411,7 @@ statements within the square brackets.
 \end{frame}
 
 \begin{frame}{If Statement}
-\protect\hypertarget{if-statement-1}{}
+\phantomsection\label{if-statement-1}
 Note that the syntax of an if statement is as follows
 
 \begin{itemize}
@@ -450,7 +442,7 @@ Note that the syntax of an if statement is as follows
 \end{frame}
 
 \begin{frame}[fragile]{If Else Statement}
-\protect\hypertarget{if-else-statement}{}
+\phantomsection\label{if-else-statement}
 As an example, the following will display the sum of the elements of
 \texttt{x} since the conditional statement is TRUE:
 
@@ -476,7 +468,7 @@ As an example, the following will display the sum of the elements of
 \end{frame}
 
 \begin{frame}[fragile]{If Else Statement}
-\protect\hypertarget{if-else-statement-1}{}
+\phantomsection\label{if-else-statement-1}
 On the other hand, the following will display the sum of the elements of
 \texttt{y} since the conditional statement is FALSE:
 
@@ -502,7 +494,7 @@ On the other hand, the following will display the sum of the elements of
 \end{frame}
 
 \begin{frame}{If Else If Statement}
-\protect\hypertarget{if-else-if-statement}{}
+\phantomsection\label{if-else-if-statement}
 The other variant of the if statement is the \textbf{if else if}
 structure which has the following syntax:
 
@@ -518,7 +510,7 @@ structure which has the following syntax:
 \end{frame}
 
 \begin{frame}[fragile]{If Else If Statement}
-\protect\hypertarget{if-else-if-statement-1}{}
+\phantomsection\label{if-else-if-statement-1}
 As an example, the following code will display the sum of the elements
 of \texttt{y} since the 1st condition is FALSE and 2nd condition is
 TRUE. It will not evaluate the 3rd condition.
@@ -551,7 +543,7 @@ TRUE. It will not evaluate the 3rd condition.
 \end{frame}
 
 \begin{frame}[fragile]{If Else If Statement}
-\protect\hypertarget{if-else-if-statement-2}{}
+\phantomsection\label{if-else-if-statement-2}
 On the other hand, the following will display the product of the
 elements of y (the content of the object \texttt{prody}) since the 3
 conditions are FALSE:
@@ -584,7 +576,7 @@ conditions are FALSE:
 \end{frame}
 
 \begin{frame}[fragile]{For Loop Statement}
-\protect\hypertarget{for-loop-statement}{}
+\phantomsection\label{for-loop-statement}
 The for loop is one of the most useful control structures in R. Its
 syntax is as follows
 
@@ -620,7 +612,7 @@ code will display the text ``HELLO'' five times.
 \end{frame}
 
 \begin{frame}[fragile]{For Loop Statement}
-\protect\hypertarget{for-loop-statement-1}{}
+\phantomsection\label{for-loop-statement-1}
 Similarly, the following code will do the same thing:
 
 \small
@@ -648,7 +640,7 @@ exactly how many times you want the command repeated.
 \end{frame}
 
 \begin{frame}[fragile]{For Loop Statement}
-\protect\hypertarget{for-loop-statement-2}{}
+\phantomsection\label{for-loop-statement-2}
 \begin{itemize}
 \item
   The following code will display the contents of the vector \(z\) in
@@ -685,11 +677,10 @@ exactly how many times you want the command repeated.
 \normalsize
 \end{frame}
 
-\hypertarget{quarto}{%
-\section{Quarto}\label{quarto}}
+\section{Quarto}\label{quarto}
 
 \begin{frame}{Quarto}
-\protect\hypertarget{quarto-1}{}
+\phantomsection\label{quarto-1}
 \textbf{Quarto} provides an easy way to produce rich, fully-documented,
 reproducible analyses.
 
@@ -725,7 +716,7 @@ Quarto document once you get the hang of it.
 \end{frame}
 
 \begin{frame}{Create New Quarto File}
-\protect\hypertarget{create-new-quarto-file}{}
+\phantomsection\label{create-new-quarto-file}
 To open/create a new (Quarto) file, click on the little green plus on
 the upper left hand and select Quarto Document; see Figure
 \ref{fig:open_qmd}.
@@ -743,7 +734,7 @@ the upper left hand and select Quarto Document; see Figure
 \end{frame}
 
 \begin{frame}{Create New Quarto File}
-\protect\hypertarget{create-new-quarto-file-1}{}
+\phantomsection\label{create-new-quarto-file-1}
 Let's make some changes to the Quarto file you just opened
 
 \begin{itemize}
@@ -763,7 +754,7 @@ After editing the file you \textbf{Render} to your desired output format
 \end{frame}
 
 \begin{frame}[fragile]{The Components of a Quarto File: YAML}
-\protect\hypertarget{the-components-of-a-quarto-file-yaml}{}
+\phantomsection\label{the-components-of-a-quarto-file-yaml}
 The top part of the file is called the YAML header.
 
 \begin{itemize}
@@ -785,7 +776,7 @@ The top part of the file is called the YAML header.
 \end{frame}
 
 \begin{frame}[fragile]{The Components of a Quarto File: Headers}
-\protect\hypertarget{the-components-of-a-quarto-file-headers}{}
+\phantomsection\label{the-components-of-a-quarto-file-headers}
 You can create many different sized headers by simply adding one or more
 \# in front of the text you'd like to denote the header.
 
@@ -808,7 +799,7 @@ You can create many different sized headers by simply adding one or more
 \end{frame}
 
 \begin{frame}[fragile]{The Components of Quarto File: Emphasis}
-\protect\hypertarget{the-components-of-quarto-file-emphasis}{}
+\phantomsection\label{the-components-of-quarto-file-emphasis}
 \begin{itemize}
 \item
   We can add italics by surrounding the word by
@@ -838,7 +829,7 @@ You can create many different sized headers by simply adding one or more
 \end{frame}
 
 \begin{frame}[fragile]{The Components of a Quarto File: Links}
-\protect\hypertarget{the-components-of-a-quarto-file-links}{}
+\phantomsection\label{the-components-of-a-quarto-file-links}
 \begin{itemize}
 \item
   To add a link to a URL,
@@ -856,7 +847,7 @@ You can create many different sized headers by simply adding one or more
 \end{frame}
 
 \begin{frame}[fragile]{The Components of a Quarto File: Lists}
-\protect\hypertarget{the-components-of-a-quarto-file-lists}{}
+\phantomsection\label{the-components-of-a-quarto-file-lists}
 \begin{itemize}
 \item
   To create an unordered list, use \texttt{-} in front of each item.
@@ -881,7 +872,7 @@ You can create many different sized headers by simply adding one or more
 \end{frame}
 
 \begin{frame}[fragile]{The Components of a Quarto File: Equations}
-\protect\hypertarget{the-components-of-a-quarto-file-equations}{}
+\phantomsection\label{the-components-of-a-quarto-file-equations}
 \begin{itemize}
 \item
   If you'd like nice mathematical formulas in your document, you can add
@@ -901,7 +892,7 @@ You can create many different sized headers by simply adding one or more
 \end{frame}
 
 \begin{frame}{The Components of a Quarto File: Inline R code}
-\protect\hypertarget{the-components-of-a-quarto-file-inline-r-code}{}
+\phantomsection\label{the-components-of-a-quarto-file-inline-r-code}
 \begin{itemize}
 \item
   We've seen that we can add R code and have that run in an R chunk of
@@ -925,7 +916,7 @@ You can create many different sized headers by simply adding one or more
 \end{frame}
 
 \begin{frame}[fragile]{The Components of a Quarto File: Chunk Options}
-\protect\hypertarget{the-components-of-a-quarto-file-chunk-options}{}
+\phantomsection\label{the-components-of-a-quarto-file-chunk-options}
 You can set many options on a chunk by chunk basis. The most common R
 chunk options are \texttt{echo}, \texttt{eval}, and \texttt{include}. By
 default, all three of these options are set to TRUE,
@@ -946,7 +937,7 @@ default, all three of these options are set to TRUE,
 \end{frame}
 
 \begin{frame}[fragile]{The Components of a Quarto File: Chunk Options}
-\protect\hypertarget{the-components-of-a-quarto-file-chunk-options-1}{}
+\phantomsection\label{the-components-of-a-quarto-file-chunk-options-1}
 \begin{itemize}
 \item
   Do the following in your \textbf{`first\_quarto.qmd} document.
@@ -965,7 +956,7 @@ default, all three of these options are set to TRUE,
 \end{frame}
 
 \begin{frame}{Spell Check}
-\protect\hypertarget{spell-check}{}
+\phantomsection\label{spell-check}
 \begin{itemize}
 \item
   Near the top of your editor window sits one of the more useful tools
@@ -988,11 +979,10 @@ default, all three of these options are set to TRUE,
 \end{itemize}
 \end{frame}
 
-\hypertarget{data-visualization}{%
-\section{Data Visualization}\label{data-visualization}}
+\section{Data Visualization}\label{data-visualization}
 
 \begin{frame}{Data Visualization}
-\protect\hypertarget{data-visualization-1}{}
+\phantomsection\label{data-visualization-1}
 We begin the development of your data science toolbox with \textbf{data
 visualization}.
 
@@ -1021,7 +1011,7 @@ visualization}.
 \end{frame}
 
 \begin{frame}[fragile]{Needed packages}
-\protect\hypertarget{needed-packages}{}
+\phantomsection\label{needed-packages}
 Let's load all the packages needed for this chapter. You need to install
 them if you haven't already.
 
@@ -1039,7 +1029,7 @@ them if you haven't already.
 \end{frame}
 
 \begin{frame}[fragile]{The grammar of graphics}
-\protect\hypertarget{the-grammar-of-graphics}{}
+\phantomsection\label{the-grammar-of-graphics}
 We start with a discussion of a theoretical framework for data
 visualization known as ``\textbf{the grammar of graphics}.''
 
@@ -1068,7 +1058,7 @@ visualization known as ``\textbf{the grammar of graphics}.''
 \end{frame}
 
 \begin{frame}[fragile]{Components of the grammar}
-\protect\hypertarget{components-of-the-grammar}{}
+\phantomsection\label{components-of-the-grammar}
 In short, the grammar tells us that
 
 \begin{tcolorbox}
@@ -1093,7 +1083,7 @@ components:
 \end{frame}
 
 \begin{frame}[fragile]{Other components}
-\protect\hypertarget{other-components}{}
+\phantomsection\label{other-components}
 There are other components of the grammar of graphics we can control as
 well. In this class, we'll keep things simple and only work with these
 two additional components:
@@ -1108,7 +1098,7 @@ two additional components:
 \end{frame}
 
 \begin{frame}{Five named graphs - the 5NG}
-\protect\hypertarget{five-named-graphs---the-5ng}{}
+\phantomsection\label{five-named-graphs---the-5ng}
 We will only focus on five different types of graphics, each with a
 commonly given name. - We term these ``five named graphs'' or in
 abbreviated form, the 5NG:
@@ -1144,7 +1134,7 @@ abbreviated form, the 5NG:
 \end{frame}
 
 \begin{frame}[fragile]{5NG\#1: Scatterplots}
-\protect\hypertarget{ng1-scatterplots}{}
+\phantomsection\label{ng1-scatterplots}
 The simplest of the 5NG are \textbf{scatterplots}, also called bivariate
 plots. They allow you to visualize the relationship between two
 \textbf{numerical} variables.
@@ -1168,7 +1158,7 @@ plots. They allow you to visualize the relationship between two
 \end{frame}
 
 \begin{frame}[fragile]{Scatterplots via \texttt{geom\_point}}
-\protect\hypertarget{scatterplots-via-geom_point}{}
+\phantomsection\label{scatterplots-via-geom_point}
 \tiny
 
 \begin{Shaded}
@@ -1188,7 +1178,7 @@ increase, arrival delays tend to also increase.
 \end{frame}
 
 \begin{frame}[fragile]{Scatterplots via \texttt{geom\_point}}
-\protect\hypertarget{scatterplots-via-geom_point-1}{}
+\phantomsection\label{scatterplots-via-geom_point-1}
 \begin{itemize}
 \tightlist
 \item
@@ -1223,7 +1213,7 @@ increase, arrival delays tend to also increase.
 \end{frame}
 
 \begin{frame}[fragile]{Scatterplots via \texttt{geom\_point}}
-\protect\hypertarget{scatterplots-via-geom_point-2}{}
+\phantomsection\label{scatterplots-via-geom_point-2}
 \tiny
 
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.4\textheight]{Week2_1} \end{center}
@@ -1235,7 +1225,7 @@ line.
 \end{frame}
 
 \begin{frame}[fragile]{Overplotting}
-\protect\hypertarget{overplotting}{}
+\phantomsection\label{overplotting}
 From the scatterplot from the \texttt{alaska\_flights}, the large mass
 of points near \((0, 0)\), can cause some confusion since it is hard to
 tell the true number of points that are plotted.
@@ -1268,7 +1258,7 @@ tell the true number of points that are plotted.
 \end{frame}
 
 \begin{frame}[fragile]{Method 1: Changing the transparency}
-\protect\hypertarget{method-1-changing-the-transparency}{}
+\phantomsection\label{method-1-changing-the-transparency}
 \begin{itemize}
 \item
   Change the transparency/opacity of the points by setting the
@@ -1295,7 +1285,7 @@ created the scatterplot with overplotting, but with
 \end{frame}
 
 \begin{frame}[fragile]{Method 1: Changing the transparency}
-\protect\hypertarget{method-1-changing-the-transparency-1}{}
+\phantomsection\label{method-1-changing-the-transparency-1}
 \tiny
 
 \begin{Shaded}
@@ -1314,7 +1304,7 @@ with a lower degree are less dark.
 \end{frame}
 
 \begin{frame}{Method 2: Jittering the points}
-\protect\hypertarget{method-2-jittering-the-points}{}
+\phantomsection\label{method-2-jittering-the-points}
 The second way of addressing overplotting is by \textbf{jittering} all
 the points.
 
@@ -1332,7 +1322,7 @@ the points.
 \end{frame}
 
 \begin{frame}{Method 2: Jittering the points}
-\protect\hypertarget{method-2-jittering-the-points-1}{}
+\phantomsection\label{method-2-jittering-the-points-1}
 \begin{itemize}
 \item
   Example: Say we have a data frame with 4 identical rows of x and y
@@ -1354,7 +1344,7 @@ the points.
 \end{frame}
 
 \begin{frame}[fragile]{Method 2: Jittering the points}
-\protect\hypertarget{method-2-jittering-the-points-2}{}
+\phantomsection\label{method-2-jittering-the-points-2}
 \tiny
 
 \begin{Shaded}
@@ -1379,7 +1369,7 @@ Which method was better?
 \end{frame}
 
 \begin{frame}[fragile]{5NG\#2: Linegraphs}
-\protect\hypertarget{ng2-linegraphs}{}
+\phantomsection\label{ng2-linegraphs}
 \begin{itemize}
 \item
   Linegraphs show the relationship between two numerical variables when
@@ -1407,7 +1397,7 @@ observations.
 \end{frame}
 
 \begin{frame}[fragile]{Linegraphs via \texttt{geom\_line}}
-\protect\hypertarget{linegraphs-via-geom_line}{}
+\phantomsection\label{linegraphs-via-geom_line}
 \tiny
 
 \begin{Shaded}
@@ -1426,7 +1416,7 @@ We observe an upward trend and seasonality.
 \end{frame}
 
 \begin{frame}[fragile]{5NG\#3: Histograms}
-\protect\hypertarget{ng3-histograms}{}
+\phantomsection\label{ng3-histograms}
 Let's consider the \texttt{temp} variable in the \texttt{weather} data
 frame from the \texttt{nycflights13} package.
 
@@ -1451,7 +1441,7 @@ frame from the \texttt{nycflights13} package.
 \end{frame}
 
 \begin{frame}{5NG\#3: Histograms}
-\protect\hypertarget{ng3-histograms-1}{}
+\phantomsection\label{ng3-histograms-1}
 One way to do that is by producing a \textbf{histogram}. A histogram is
 a plot that visualizes the distribution of a numerical value as follows:
 
@@ -1469,7 +1459,7 @@ a plot that visualizes the distribution of a numerical value as follows:
 \end{frame}
 
 \begin{frame}[fragile]{Histograms via \texttt{geom\_histogram}}
-\protect\hypertarget{histograms-via-geom_histogram}{}
+\phantomsection\label{histograms-via-geom_histogram}
 \tiny
 
 \begin{Shaded}
@@ -1500,7 +1490,7 @@ a plot that visualizes the distribution of a numerical value as follows:
 \end{frame}
 
 \begin{frame}[fragile]{Histograms via \texttt{geom\_histogram}}
-\protect\hypertarget{histograms-via-geom_histogram-1}{}
+\phantomsection\label{histograms-via-geom_histogram-1}
 Now let's unpack the resulting histogram
 
 \begin{itemize}
@@ -1521,7 +1511,7 @@ Now let's unpack the resulting histogram
 \end{frame}
 
 \begin{frame}[fragile]{Histograms via \texttt{geom\_histogram}}
-\protect\hypertarget{histograms-via-geom_histogram-2}{}
+\phantomsection\label{histograms-via-geom_histogram-2}
 \tiny
 
 \begin{Shaded}
@@ -1546,7 +1536,7 @@ Now let's unpack the resulting histogram
 \end{frame}
 
 \begin{frame}[fragile]{Histograms via \texttt{geom\_histogram}}
-\protect\hypertarget{histograms-via-geom_histogram-3}{}
+\phantomsection\label{histograms-via-geom_histogram-3}
 \tiny
 
 \begin{Shaded}
@@ -1571,7 +1561,7 @@ Now let's unpack the resulting histogram
 \end{frame}
 
 \begin{frame}[fragile]{Adjusting the bins}
-\protect\hypertarget{adjusting-the-bins}{}
+\phantomsection\label{adjusting-the-bins}
 \textbf{Method 1}: By adjusting the number of bins via the bins argument
 to \texttt{geom\_histogram()}.
 
@@ -1590,7 +1580,7 @@ to \texttt{geom\_histogram()}.
 \end{frame}
 
 \begin{frame}[fragile]{Adjusting the bins}
-\protect\hypertarget{adjusting-the-bins-1}{}
+\phantomsection\label{adjusting-the-bins-1}
 \textbf{Method 2}: By adjusting the width of the bins via the binwidth
 argument to \texttt{geom\_histogram()}
 
@@ -1609,7 +1599,7 @@ argument to \texttt{geom\_histogram()}
 \end{frame}
 
 \begin{frame}{Facets}
-\protect\hypertarget{facets}{}
+\phantomsection\label{facets}
 Before continuing with the next of the 5NG, let's briefly introduce a
 new concept called \textbf{faceting}.
 
@@ -1628,7 +1618,7 @@ differed in each \textbf{month}.
 \end{frame}
 
 \begin{frame}[fragile]{Facets}
-\protect\hypertarget{facets-1}{}
+\phantomsection\label{facets-1}
 \tiny
 
 \begin{Shaded}
@@ -1645,7 +1635,7 @@ differed in each \textbf{month}.
 \end{frame}
 
 \begin{frame}[fragile]{Facets}
-\protect\hypertarget{facets-2}{}
+\phantomsection\label{facets-2}
 We can also specify the number of rows and columns in the grid by using
 the \texttt{nrow} and \texttt{ncol} arguments inside of
 \texttt{facet\_wrap()}.
@@ -1666,7 +1656,7 @@ the \texttt{nrow} and \texttt{ncol} arguments inside of
 \end{frame}
 
 \begin{frame}{5NG\#4: Boxplots}
-\protect\hypertarget{ng4-boxplots}{}
+\phantomsection\label{ng4-boxplots}
 Another type of visualization that can be used to compare the
 distribution of a numerical variable split by the values of another
 variable is a \textbf{side-by-side boxplot}.
@@ -1696,7 +1686,7 @@ variable is a \textbf{side-by-side boxplot}.
 \end{frame}
 
 \begin{frame}{5NG\#4: Boxplots}
-\protect\hypertarget{ng4-boxplots-1}{}
+\phantomsection\label{ng4-boxplots-1}
 \begin{itemize}
 \item
   From the figure below:
@@ -1721,7 +1711,7 @@ variable is a \textbf{side-by-side boxplot}.
 \end{frame}
 
 \begin{frame}{5NG\#4: Boxplots}
-\protect\hypertarget{ng4-boxplots-2}{}
+\phantomsection\label{ng4-boxplots-2}
 From the Boxplot:
 
 \begin{itemize}
@@ -1743,7 +1733,7 @@ From the Boxplot:
 \end{frame}
 
 \begin{frame}{5NG\#4: Boxplots}
-\protect\hypertarget{ng4-boxplots-3}{}
+\phantomsection\label{ng4-boxplots-3}
 From the Boxplot:
 
 \begin{itemize}
@@ -1766,7 +1756,7 @@ From the Boxplot:
 
 \begin{frame}[fragile]{Boxplots via \texttt{geom\_boxplot}: Invalid
 specification}
-\protect\hypertarget{boxplots-via-geom_boxplot-invalid-specification}{}
+\phantomsection\label{boxplots-via-geom_boxplot-invalid-specification}
 \tiny
 
 \begin{Shaded}
@@ -1796,7 +1786,7 @@ specification}
 \end{frame}
 
 \begin{frame}[fragile]{Boxplots via \texttt{geom\_boxplot}}
-\protect\hypertarget{boxplots-via-geom_boxplot}{}
+\phantomsection\label{boxplots-via-geom_boxplot}
 \tiny
 
 \begin{Shaded}
@@ -1814,7 +1804,7 @@ Thus the 12 separate boxplots are shown ``side-by-side.''
 \end{frame}
 
 \begin{frame}{5NG\#5: Barplots}
-\protect\hypertarget{ng5-barplots}{}
+\phantomsection\label{ng5-barplots}
 \begin{itemize}
 \item
   Both histograms and boxplots are tools to visualize the distribution
@@ -1837,7 +1827,7 @@ Thus the 12 separate boxplots are shown ``side-by-side.''
 \end{frame}
 
 \begin{frame}[fragile]{5NG\#5: Barplots}
-\protect\hypertarget{ng5-barplots-1}{}
+\phantomsection\label{ng5-barplots-1}
 \begin{itemize}
 \item
   One complication, however, is how your data is represented.
@@ -1871,7 +1861,7 @@ Thus the 12 separate boxplots are shown ``side-by-side.''
 \end{frame}
 
 \begin{frame}[fragile]{5NG\#5: Barplots}
-\protect\hypertarget{ng5-barplots-2}{}
+\phantomsection\label{ng5-barplots-2}
 \tiny
 
 \begin{Shaded}
@@ -1913,7 +1903,7 @@ a barplot.
 \end{frame}
 
 \begin{frame}[fragile]{Barplots via \texttt{geom\_bar}}
-\protect\hypertarget{barplots-via-geom_bar}{}
+\phantomsection\label{barplots-via-geom_bar}
 \tiny
 
 \begin{Shaded}
@@ -1933,7 +1923,7 @@ When the categorical variable whose distribution you want to visualize
 \end{frame}
 
 \begin{frame}[fragile]{Barplots via \texttt{geom\_col}}
-\protect\hypertarget{barplots-via-geom_col}{}
+\phantomsection\label{barplots-via-geom_col}
 \tiny
 
 \begin{Shaded}
@@ -1952,7 +1942,7 @@ When the categorical variable whose distribution you want to visualize
 \end{frame}
 
 \begin{frame}[fragile]{Barplots for \texttt{flights} data}
-\protect\hypertarget{barplots-for-flights-data}{}
+\phantomsection\label{barplots-for-flights-data}
 Let's now go back to the \texttt{flights} data frame in the
 \texttt{nycflights13} package and visualize the distribution of the
 categorical variable \texttt{carrier}.
@@ -1966,7 +1956,7 @@ categorical variable \texttt{carrier}.
 \end{frame}
 
 \begin{frame}[fragile]{Barplots for \texttt{flights} data}
-\protect\hypertarget{barplots-for-flights-data-1}{}
+\phantomsection\label{barplots-for-flights-data-1}
 \tiny
 
 \begin{Shaded}
@@ -1982,7 +1972,7 @@ categorical variable \texttt{carrier}.
 \end{frame}
 
 \begin{frame}{Pie charts}
-\protect\hypertarget{pie-charts}{}
+\phantomsection\label{pie-charts}
 \begin{itemize}
 \item
   One of the most common plots used to visualize the distribution of
@@ -2006,7 +1996,7 @@ categorical variable \texttt{carrier}.
 \end{frame}
 
 \begin{frame}{Cases Were Barplots are Preferred}
-\protect\hypertarget{cases-were-barplots-are-preferred}{}
+\phantomsection\label{cases-were-barplots-are-preferred}
 \begin{center}\includegraphics[width=0.8\linewidth,height=0.7\textheight]{week2_4} \end{center}
 
 It is hard to see the pattern in the pie chart but the bar chart makes
@@ -2014,7 +2004,7 @@ it easier to compare frequencies in groups.
 \end{frame}
 
 \begin{frame}[fragile]{Two categorical variables}
-\protect\hypertarget{two-categorical-variables}{}
+\phantomsection\label{two-categorical-variables}
 \begin{itemize}
 \item
   Barplots are a very common way to visualize the frequency of different
@@ -2029,7 +2019,7 @@ NYC by \texttt{carrier} as well as \texttt{origin}.
 \end{frame}
 
 \begin{frame}[fragile]{Two categorical variables: Stacked barplot}
-\protect\hypertarget{two-categorical-variables-stacked-barplot}{}
+\phantomsection\label{two-categorical-variables-stacked-barplot}
 \tiny
 
 \begin{Shaded}
@@ -2054,7 +2044,7 @@ NYC by \texttt{carrier} as well as \texttt{origin}.
 \end{frame}
 
 \begin{frame}[fragile]{Two categorical variables: Stacked barplot}
-\protect\hypertarget{two-categorical-variables-stacked-barplot-1}{}
+\phantomsection\label{two-categorical-variables-stacked-barplot-1}
 \tiny
 
 \begin{Shaded}
@@ -2077,7 +2067,7 @@ NYC by \texttt{carrier} as well as \texttt{origin}.
 \end{frame}
 
 \begin{frame}[fragile]{Two categorical variables: side-by-side barplots}
-\protect\hypertarget{two-categorical-variables-side-by-side-barplots}{}
+\phantomsection\label{two-categorical-variables-side-by-side-barplots}
 While simple to make, in certain aspects it is not ideal.
 
 \begin{itemize}
@@ -2103,7 +2093,7 @@ While simple to make, in certain aspects it is not ideal.
 \end{frame}
 
 \begin{frame}[fragile]{Two categorical variables: side-by-side barplots}
-\protect\hypertarget{two-categorical-variables-side-by-side-barplots-1}{}
+\phantomsection\label{two-categorical-variables-side-by-side-barplots-1}
 \tiny
 
 \begin{Shaded}
@@ -2129,7 +2119,7 @@ While simple to make, in certain aspects it is not ideal.
 \end{frame}
 
 \begin{frame}[fragile]{Two categorical variables: side-by-side barplots}
-\protect\hypertarget{two-categorical-variables-side-by-side-barplots-2}{}
+\phantomsection\label{two-categorical-variables-side-by-side-barplots-2}
 \tiny
 
 \begin{Shaded}
@@ -2145,7 +2135,7 @@ While simple to make, in certain aspects it is not ideal.
 \end{frame}
 
 \begin{frame}[fragile]{Two categorical variables: side-by-side barplots}
-\protect\hypertarget{two-categorical-variables-side-by-side-barplots-3}{}
+\phantomsection\label{two-categorical-variables-side-by-side-barplots-3}
 Change order:
 
 \tiny
@@ -2167,7 +2157,7 @@ Change order:
 \end{frame}
 
 \begin{frame}[fragile]{Two categorical variables: faceted barplot}
-\protect\hypertarget{two-categorical-variables-faceted-barplot}{}
+\phantomsection\label{two-categorical-variables-faceted-barplot}
 \tiny
 
 \begin{Shaded}
@@ -2184,7 +2174,7 @@ Change order:
 \end{frame}
 
 \begin{frame}{Summary table}
-\protect\hypertarget{summary-table}{}
+\phantomsection\label{summary-table}
 \begin{figure}[h]
 
 {\centering \includegraphics[width=0.8\linewidth,height=0.7\textheight]{week2_5} 
