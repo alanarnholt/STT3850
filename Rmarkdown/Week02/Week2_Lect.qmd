@@ -1,6 +1,6 @@
 ---
 title: "MAT 3850 : Week 2"
-author: "Spring 2024"
+author: "ATA"
 institute: "Appalachian State University"
 output: 
 #   pdf_document:
@@ -191,7 +191,7 @@ if (x[1] == y[1]){
 ```
 \normalsize
 
-Similarly, the following code will not display anything since the conditional statement is FALSE and hence R will not execute the R statements within the square brackets.
+Similarly, the following code will not display anything since the conditional statement is FALSE and hence R will not execute the R statements within the curly brackets.
 
 \small
 ```{r}

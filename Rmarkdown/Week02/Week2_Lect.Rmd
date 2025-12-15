@@ -181,7 +181,7 @@ if (x[1] == y[1]){
 ```
 \normalsize
 
-Similarly, the following code will not display anything since the conditional statement is FALSE and hence R will not execute the R statements within the square brackets.
+Similarly, the following code will not display anything since the conditional statement is FALSE and hence R will not execute the R statements within the curl brackets.
 
 \small
 ```{r}
@@ -199,7 +199,7 @@ Note that the syntax of an if statement is as follows
 
 - if (conditional statement) {R statements} 
 
-    - brackets are optional if there is only one R statement
+    - curly brackets are optional if there is only one R statement
 
 - If you want R to perform either a series of R statements 
 
