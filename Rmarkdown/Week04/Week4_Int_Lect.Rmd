@@ -273,9 +273,9 @@ where $\bar{x}$ and $\bar{y}$ represents the mean of the $x$ and $y$ variables. 
 - sign of $r$ gives direction of association
 - $-1\leq r \leq 1$
 
-    - -1 indicates a perfect negative relationship: As one variable increases, the value of the other variable tends to go down, following a straight line.
-    - 0 indicates no relationship: The values of both variables go up/down independently of each other.
-    - +1 indicates a perfect positive relationship: As the value of one variable goes up, the value of the other variable tends to go up as well in a linear fashion.
+    - -1 indicates a perfect negative linear relationship: As one variable increases, the value of the other variable tends to go down, following a straight line.
+    - 0 indicates no linear relationship: The values of both variables go up/down independently of each other.
+    - +1 indicates a perfect positive linear relationship: As the value of one variable goes up, the value of the other variable tends to go up as well in a linear fashion.
 - $r_{x,y}= r_{y,x}$
 - Correlation has no units. 
 - Correlation is not affected by multiplying or shifting data
