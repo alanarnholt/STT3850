@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alan Arnholt">
+
+<title>Least Squares Regression</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="regression_files/libs/clipboard/clipboard.min.js"></script>
+<script src="regression_files/libs/quarto-html/quarto.js"></script>
+<script src="regression_files/libs/quarto-html/popper.min.js"></script>
+<script src="regression_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="regression_files/libs/quarto-html/anchor.min.js"></script>
+<link href="regression_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="regression_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="regression_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="regression_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="regression_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="regression.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Least Squares Regression</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alan Arnholt </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Last modified on February 03, 2026 12:51:26 Eastern Standard Time</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="correlation" class="level1">
+<h1>Correlation</h1>
+<p>The <strong>correlation coefficient</strong>, denoted by <span class="math inline">\(r\)</span>, measures the direction and strength of the linear relationship between two numerical variables. Is is given by the equation</p>
+<p><span id="eq-cor"><span class="math display">\[
+r = \frac{1}{(n-1)}\sum_{i=1}^n\left(\frac{x_i - \bar{x}}{s_x}\right)\left(\frac{y_i - \bar{y}}{s_y}\right)
+\tag{1}\]</span></span></p>
+<p>Following are the high school GPAs and the college GPAs at the end of the freshman year for ten different students from the <code>Gpa</code> data set of the <code>BSDA</code> package.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">hsgpa</th>
+<th style="text-align: right;">collgpa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">2.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">2.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">2.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">3.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">1.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">3.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.6</td>
+<td style="text-align: right;">3.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">1.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">3.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">2.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Create a scatterplot and then comment on the relationship between the two variables.</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="R Code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BSDA)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Gpa, <span class="fu">aes</span>(<span class="at">x =</span> hsgpa, <span class="at">y =</span> collgpa)) <span class="sc">+</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"High School GPA"</span>, <span class="at">y =</span> <span class="st">"College GPA"</span>) <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-sp1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="regression_files/figure-html/fig-sp1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Scatterplot of College GPA versus High School GPA</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The college GPA is the response variable and is labeled on the vertical axis. The scatterplot in <a href="#fig-sp1">Figure&nbsp;1</a> shows that the college GPA increases as the high school GPA increases. In fact, the the dots appear to cluster along a straight line. The correlation coefficient is <span class="math inline">\(r = 0.844\)</span>, which indicates that a straight line is a reasonable relationship between the two variables.</p>
+<ul>
+<li>Compute the correlation coefficient using <a href="#eq-cor">Equation&nbsp;1</a>.</li>
+</ul>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="R Code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Gpa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  hsgpa collgpa
+  &lt;dbl&gt;   &lt;dbl&gt;
+1   2.7     2.2
+2   3.1     2.8
+3   2.1     2.4
+4   3.2     3.8
+5   2.4     1.9
+6   3.4     3.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> Gpa <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_ybar =</span> collgpa <span class="sc">-</span> <span class="fu">mean</span>(collgpa), </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x_xbar =</span> hsgpa <span class="sc">-</span> <span class="fu">mean</span>(hsgpa), </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">zx =</span> x_xbar<span class="sc">/</span><span class="fu">sd</span>(hsgpa), </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">zy =</span> y_ybar<span class="sc">/</span><span class="fu">sd</span>(collgpa),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">zxzy =</span> zx<span class="sc">*</span>zy)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">hsgpa</th>
+<th style="text-align: right;">collgpa</th>
+<th style="text-align: right;">y_ybar</th>
+<th style="text-align: right;">x_xbar</th>
+<th style="text-align: right;">zx</th>
+<th style="text-align: right;">zy</th>
+<th style="text-align: right;">zxzy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">-0.5</td>
+<td style="text-align: right;">-0.01</td>
+<td style="text-align: right;">-0.0209580</td>
+<td style="text-align: right;">-0.6565322</td>
+<td style="text-align: right;">0.0137596</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.8173628</td>
+<td style="text-align: right;">0.1313064</td>
+<td style="text-align: right;">0.1073250</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">-0.3</td>
+<td style="text-align: right;">-0.61</td>
+<td style="text-align: right;">-1.2784393</td>
+<td style="text-align: right;">-0.3939193</td>
+<td style="text-align: right;">0.5036019</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">1.1</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">1.0269430</td>
+<td style="text-align: right;">1.4443708</td>
+<td style="text-align: right;">1.4832865</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">1.9</td>
+<td style="text-align: right;">-0.8</td>
+<td style="text-align: right;">-0.31</td>
+<td style="text-align: right;">-0.6496987</td>
+<td style="text-align: right;">-1.0504515</td>
+<td style="text-align: right;">0.6824769</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">1.4461035</td>
+<td style="text-align: right;">1.0504515</td>
+<td style="text-align: right;">1.5190615</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.6</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">-0.11</td>
+<td style="text-align: right;">-0.2305382</td>
+<td style="text-align: right;">0.5252257</td>
+<td style="text-align: right;">-0.1210846</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">1.4</td>
+<td style="text-align: right;">-1.3</td>
+<td style="text-align: right;">-0.71</td>
+<td style="text-align: right;">-1.4880195</td>
+<td style="text-align: right;">-1.7069836</td>
+<td style="text-align: right;">2.5400249</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.8173628</td>
+<td style="text-align: right;">0.9191450</td>
+<td style="text-align: right;">0.7512750</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">-0.2</td>
+<td style="text-align: right;">-0.21</td>
+<td style="text-align: right;">-0.4401184</td>
+<td style="text-align: right;">-0.2626129</td>
+<td style="text-align: right;">0.1155808</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>values <span class="sc">|&gt;</span>  </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">r =</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>)<span class="sc">*</span><span class="fu">sum</span>(zxzy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      r
+  &lt;dbl&gt;
+1 0.844</code></pre>
+</div>
+</div>
+<p>Using the build in <code>cor()</code> function:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Gpa <span class="sc">|&gt;</span>  </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">r =</span> <span class="fu">cor</span>(collgpa, hsgpa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      r
+  &lt;dbl&gt;
+1 0.844</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Note:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Gpa, <span class="fu">aes</span>(<span class="at">x =</span> hsgpa, <span class="at">y =</span> collgpa)) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> values, <span class="fu">aes</span>(<span class="at">x =</span> zx, <span class="at">y =</span> zy)) <span class="sc">+</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="regression_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or better yet</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">/</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="regression_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="regression_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> gt<span class="sc">::</span><span class="fu">gt</span>(Gpa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="regression_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="least-squares-regression" class="level1">
+<h1>Least Squares Regression</h1>
+<p>The equation of a straight line is</p>
+<p><span id="eq-sl"><span class="math display">\[y = b_0 + b_1x \tag{2}\]</span></span></p>
+<p>where <span class="math inline">\(b_0\)</span> is the <span class="math inline">\(y\)</span>-intercept and <span class="math inline">\(b_1\)</span> is the slope of the line. From the equation of the line that best fits the data,</p>
+<p><span id="eq-lr"><span class="math display">\[\hat{y} = b_0 + b_1x \tag{3}\]</span></span></p>
+<p>we can compute a predicted <span class="math inline">\(y\)</span> for each value of <span class="math inline">\(x\)</span> and then measure the error of the prediction. The error of the prediction, <span class="math inline">\(e_i\)</span> (also called the residual) is the difference in the actual <span class="math inline">\(y_i\)</span> and the predicted <span class="math inline">\(\hat{y}_i\)</span>. That is, the residual associated with the data point <span class="math inline">\((x_i, y_i)\)</span> is</p>
+<p><span id="eq-res"><span class="math display">\[e_i = y_i - \hat{y}_i. \tag{4}\]</span></span></p>
+<p>The least squares regression line is</p>
+<p><span id="eq-lsr"><span class="math display">\[\hat{y} = b_0 + b_1x \tag{5}\]</span></span></p>
+<p>where</p>
+<p><span id="eq-b1"><span class="math display">\[
+b_1 = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{\sum(x_i - \bar{x})^2} = r\frac{s_y}{s_x}
+\tag{6}\]</span></span></p>
+<p>and</p>
+<p><span id="eq-b0"><span class="math display">\[
+b_0 = \bar{y} - b_1\bar{x}
+\tag{7}\]</span></span></p>
+<p>Find the least squares regression line <span class="math inline">\(\hat{y} = b_0 + b_1x\)</span> for the <code>Gpa</code> data.</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="R Code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Gpa <span class="sc">|&gt;</span>  </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">b1 =</span> <span class="fu">cor</span>(hsgpa, collgpa)<span class="sc">*</span><span class="fu">sd</span>(collgpa)<span class="sc">/</span><span class="fu">sd</span>(hsgpa),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">b0 =</span> <span class="fu">mean</span>(collgpa) <span class="sc">-</span> b1<span class="sc">*</span><span class="fu">mean</span>(hsgpa)) <span class="ot">-&gt;</span> ans1</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>ans1 <span class="sc">|&gt;</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">b1</th>
+<th style="text-align: right;">b0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1.346998</td>
+<td style="text-align: right;">-0.950366</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span id="eq-lsl"><span class="math display">\[
+\widehat{\text{collgpa}} = -0.950366 + 1.3469985 \times \text{hsgpa}
+\tag{8}\]</span></span></p>
+</div>
+</div>
+<p>The coefficients are also computed when using the <code>lm()</code> function.</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="R Code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(collgpa <span class="sc">~</span> hsgpa, <span class="at">data =</span> Gpa)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mod1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = collgpa ~ hsgpa, data = Gpa)
+
+Coefficients:
+(Intercept)        hsgpa  
+    -0.9504       1.3470  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = collgpa ~ hsgpa, data = Gpa)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.48653 -0.37273 -0.02328  0.37365  0.54817 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  -0.9504     0.8318  -1.143  0.28625   
+hsgpa         1.3470     0.3027   4.449  0.00214 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4333 on 8 degrees of freedom
+Multiple R-squared:  0.7122,    Adjusted R-squared:  0.6762 
+F-statistic:  19.8 on 1 and 8 DF,  p-value: 0.002141</code></pre>
+</div>
+</div>
+<p><span id="eq-lsl2"><span class="math display">\[
+\widehat{\text{collgpa}} = -0.950366 + 1.3469985 \times \text{hsgpa}
+\tag{9}\]</span></span></p>
+<p>Or</p>
+<p><span id="eq-lsl3"><span class="math display">\[
+\widehat{\text{collgpa}} = -0.950366 + 1.3469985 \times \text{hsgpa}
+\tag{10}\]</span></span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(mod1)<span class="sc">$</span>coef)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Std. Error</th>
+<th style="text-align: right;">t value</th>
+<th style="text-align: right;">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-0.950366</td>
+<td style="text-align: right;">0.8317729</td>
+<td style="text-align: right;">-1.142579</td>
+<td style="text-align: right;">0.2862536</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hsgpa</td>
+<td style="text-align: right;">1.346998</td>
+<td style="text-align: right;">0.3027332</td>
+<td style="text-align: right;">4.449458</td>
+<td style="text-align: right;">0.0021408</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moderndive)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_regression_table</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  term      estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept    -0.95     0.832     -1.14   0.286   -2.87     0.968
+2 hsgpa         1.35     0.303      4.45   0.002    0.649    2.04 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spruce up some</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_regression_table</span>(mod1) <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std_error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p_value</th>
+<th style="text-align: right;">lower_ci</th>
+<th style="text-align: right;">upper_ci</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">intercept</td>
+<td style="text-align: right;">-0.950</td>
+<td style="text-align: right;">0.832</td>
+<td style="text-align: right;">-1.143</td>
+<td style="text-align: right;">0.286</td>
+<td style="text-align: right;">-2.868</td>
+<td style="text-align: right;">0.968</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hsgpa</td>
+<td style="text-align: right;">1.347</td>
+<td style="text-align: right;">0.303</td>
+<td style="text-align: right;">4.449</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.649</td>
+<td style="text-align: right;">2.045</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span id="eq-lsl4"><span class="math display">\[
+\widehat{\text{collgpa}} = -0.95 + 1.347 \times \text{hsgpa}
+\tag{11}\]</span></span></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(mod1, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-0.950366</td>
+<td style="text-align: right;">0.8317729</td>
+<td style="text-align: right;">-1.142579</td>
+<td style="text-align: right;">0.2862536</td>
+<td style="text-align: right;">-2.8684378</td>
+<td style="text-align: right;">0.9677057</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hsgpa</td>
+<td style="text-align: right;">1.346998</td>
+<td style="text-align: right;">0.3027332</td>
+<td style="text-align: right;">4.449458</td>
+<td style="text-align: right;">0.0021408</td>
+<td style="text-align: right;">0.6488945</td>
+<td style="text-align: right;">2.0451026</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GOF measures</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(mod1) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.7122061</td>
+<td style="text-align: right;">0.6762319</td>
+<td style="text-align: right;">0.4333422</td>
+<td style="text-align: right;">19.79767</td>
+<td style="text-align: right;">0.0021408</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-4.711393</td>
+<td style="text-align: right;">15.42279</td>
+<td style="text-align: right;">16.33054</td>
+<td style="text-align: right;">1.502284</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span id="eq-lsl5"><span class="math display">\[
+\widehat{\text{collgpa}} = -0.950366 + 1.3469985 \times \text{hsgpa}
+\tag{12}\]</span></span></p>
+</div>
+</div>
+<p>Find the residuals for <code>mod1</code>.</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="R Code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_regression_points</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 5
+      ID collgpa hsgpa collgpa_hat residual
+   &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;
+ 1     1     2.2   2.7        2.69   -0.487
+ 2     2     2.8   3.1        3.22   -0.425
+ 3     3     2.4   2.1        1.88    0.522
+ 4     4     3.8   3.2        3.36    0.44 
+ 5     5     1.9   2.4        2.28   -0.382
+ 6     6     3.5   3.4        3.63   -0.129
+ 7     7     3.1   2.6        2.55    0.548
+ 8     8     1.4   2          1.74   -0.344
+ 9     9     3.4   3.1        3.22    0.175
+10    10     2.5   2.5        2.42    0.083</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spruced up</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_regression_points</span>(mod1) <span class="sc">|&gt;</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">ID</th>
+<th style="text-align: right;">collgpa</th>
+<th style="text-align: right;">hsgpa</th>
+<th style="text-align: right;">collgpa_hat</th>
+<th style="text-align: right;">residual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">2.687</td>
+<td style="text-align: right;">-0.487</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">3.225</td>
+<td style="text-align: right;">-0.425</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">1.878</td>
+<td style="text-align: right;">0.522</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">3.360</td>
+<td style="text-align: right;">0.440</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.9</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">2.282</td>
+<td style="text-align: right;">-0.382</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">3.629</td>
+<td style="text-align: right;">-0.129</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">2.6</td>
+<td style="text-align: right;">2.552</td>
+<td style="text-align: right;">0.548</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1.4</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">1.744</td>
+<td style="text-align: right;">-0.344</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">3.225</td>
+<td style="text-align: right;">0.175</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">2.417</td>
+<td style="text-align: right;">0.083</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or broom</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">augment</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 8
+   collgpa hsgpa .fitted  .resid  .hat .sigma .cooksd .std.resid
+     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+ 1     2.2   2.7    2.69 -0.487  0.100  0.421 0.0779      -1.18 
+ 2     2.8   3.1    3.23 -0.425  0.174  0.428 0.123       -1.08 
+ 3     2.4   2.1    1.88  0.522  0.282  0.401 0.395        1.42 
+ 4     3.8   3.2    3.36  0.440  0.217  0.423 0.183        1.15 
+ 5     1.9   2.4    2.28 -0.382  0.147  0.436 0.0786      -0.955
+ 6     3.5   3.4    3.63 -0.129  0.332  0.459 0.0333      -0.366
+ 7     3.1   2.6    2.55  0.548  0.106  0.408 0.106        1.34 
+ 8     1.4   2      1.74 -0.344  0.346  0.435 0.254       -0.981
+ 9     3.4   3.1    3.23  0.175  0.174  0.458 0.0208       0.444
+10     2.5   2.5    2.42  0.0829 0.122  0.462 0.00288      0.204</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spruced up</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">augment</span>(mod1) <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">collgpa</th>
+<th style="text-align: right;">hsgpa</th>
+<th style="text-align: right;">.fitted</th>
+<th style="text-align: right;">.resid</th>
+<th style="text-align: right;">.hat</th>
+<th style="text-align: right;">.sigma</th>
+<th style="text-align: right;">.cooksd</th>
+<th style="text-align: right;">.std.resid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">2.686530</td>
+<td style="text-align: right;">-0.4865300</td>
+<td style="text-align: right;">0.1000488</td>
+<td style="text-align: right;">0.4207573</td>
+<td style="text-align: right;">0.0778576</td>
+<td style="text-align: right;">-1.1835024</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.8</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">3.225329</td>
+<td style="text-align: right;">-0.4253294</td>
+<td style="text-align: right;">0.1742313</td>
+<td style="text-align: right;">0.4281537</td>
+<td style="text-align: right;">0.1230746</td>
+<td style="text-align: right;">-1.0801031</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">1.878331</td>
+<td style="text-align: right;">0.5216691</td>
+<td style="text-align: right;">0.2816008</td>
+<td style="text-align: right;">0.4006194</td>
+<td style="text-align: right;">0.3953669</td>
+<td style="text-align: right;">1.4203035</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">3.360029</td>
+<td style="text-align: right;">0.4399707</td>
+<td style="text-align: right;">0.2171791</td>
+<td style="text-align: right;">0.4234225</td>
+<td style="text-align: right;">0.1826622</td>
+<td style="text-align: right;">1.1475234</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.9</td>
+<td style="text-align: right;">2.4</td>
+<td style="text-align: right;">2.282430</td>
+<td style="text-align: right;">-0.3824305</td>
+<td style="text-align: right;">0.1469009</td>
+<td style="text-align: right;">0.4360286</td>
+<td style="text-align: right;">0.0786029</td>
+<td style="text-align: right;">-0.9554802</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">3.629429</td>
+<td style="text-align: right;">-0.1294290</td>
+<td style="text-align: right;">0.3323572</td>
+<td style="text-align: right;">0.4593774</td>
+<td style="text-align: right;">0.0332574</td>
+<td style="text-align: right;">-0.3655346</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">2.6</td>
+<td style="text-align: right;">2.551830</td>
+<td style="text-align: right;">0.5481698</td>
+<td style="text-align: right;">0.1059053</td>
+<td style="text-align: right;">0.4081668</td>
+<td style="text-align: right;">0.1059959</td>
+<td style="text-align: right;">1.3378036</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.4</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">1.743631</td>
+<td style="text-align: right;">-0.3436310</td>
+<td style="text-align: right;">0.3460224</td>
+<td style="text-align: right;">0.4345316</td>
+<td style="text-align: right;">0.2543732</td>
+<td style="text-align: right;">-0.9805730</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">3.225329</td>
+<td style="text-align: right;">0.1746706</td>
+<td style="text-align: right;">0.1742313</td>
+<td style="text-align: right;">0.4575302</td>
+<td style="text-align: right;">0.0207566</td>
+<td style="text-align: right;">0.4435673</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">2.417130</td>
+<td style="text-align: right;">0.0828697</td>
+<td style="text-align: right;">0.1215227</td>
+<td style="text-align: right;">0.4620554</td>
+<td style="text-align: right;">0.0028794</td>
+<td style="text-align: right;">0.2040325</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>Add the least squares line to the scatterplot for <code>collgpa</code> versus <code>hsgpa</code>.</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="R Code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Gpa, <span class="fu">aes</span>(<span class="at">x =</span> hsgpa, <span class="at">y =</span> collgpa)) <span class="sc">+</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"High School GPA"</span>, <span class="at">y =</span> <span class="st">"College GPA"</span>) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="regression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="using-the-model-to-predict" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-model-to-predict">Using the model to predict</h2>
+<p>What does the least squares regression model (<code>mod1</code>) predict for <code>collgpa</code> for a student with a 3.3 <code>hsgpa</code>?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">0.950366</span> <span class="sc">+</span> <span class="fl">1.346999</span><span class="sc">*</span><span class="fl">3.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.494731</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mod1<span class="sc">$</span>coef[<span class="dv">1</span>] <span class="sc">+</span> mod1<span class="sc">$</span>coef[<span class="dv">2</span>]<span class="sc">*</span><span class="fl">3.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+   3.494729 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(mod1, <span class="at">newdata =</span> <span class="fu">tibble</span>(<span class="at">hsgpa =</span> <span class="fl">3.3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+3.494729 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_regression_points</span>(mod1, <span class="at">newdata =</span> <span class="fu">tibble</span>(<span class="at">hsgpa =</span> <span class="fl">3.3</span>), <span class="at">digits =</span> <span class="dv">7</span>) <span class="ot">-&gt;</span> T3</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>T3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+     ID hsgpa collgpa_hat
+  &lt;int&gt; &lt;dbl&gt;       &lt;dbl&gt;
+1     1   3.3        3.49</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>T3<span class="sc">$</span>collgpa_hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.494729</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>T3[<span class="dv">1</span>, <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  collgpa_hat
+        &lt;dbl&gt;
+1        3.49</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>T3[<span class="dv">1</span>, <span class="dv">3</span>] <span class="sc">|&gt;</span> <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.494729</code></pre>
+</div>
+</div>
+</section>
+<section id="assessing-the-fit" class="level2">
+<h2 class="anchored" data-anchor-id="assessing-the-fit">Assessing the fit</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R^2 plot</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">augment</span>(mod1) <span class="sc">|&gt;</span> </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> collgpa, <span class="at">y =</span> .fitted)) <span class="sc">+</span> </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  tune<span class="sc">::</span><span class="fu">coord_obs_pred</span>() <span class="sc">+</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="R Code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(mod1, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="regression_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
