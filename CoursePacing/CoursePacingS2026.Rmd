@@ -181,7 +181,9 @@ ___________
 
 * Before class read chapter 5 (Basic Regression) of [MD](https://moderndive.com/5-regression.html) --- pgs 119-160
 
-* In class go over this [document](https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html)
+* In class go over this [document](../Handouts/regression.html)
+
+# https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 2
 
