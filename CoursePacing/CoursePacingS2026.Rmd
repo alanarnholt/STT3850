@@ -183,8 +183,6 @@ ___________
 
 * In class go over this [document](../Handouts/regression.html)
 
-# https://stat-ata-asu.github.io/STT3851ClassRepo/Handouts/regression.html
-
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 2
 
 * Complete [PS-04](https://classroom.github.com/a/vBV1KD6v) due by 5:00 pm Feb 4
