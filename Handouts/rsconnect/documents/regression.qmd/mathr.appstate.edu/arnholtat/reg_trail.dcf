@@ -1,0 +1,14 @@
+name: reg_trail
+title: Reg Trail
+username: arnholtat
+account: arnholtat
+server: mathr.appstate.edu
+hostUrl: https://mathr.appstate.edu/connect/__api__
+appId: 2
+bundleId: 422
+url: https://mathr.appstate.edu/connect/content/ae223a22-513f-4d41-94f8-cf27d77f9dc5/
+version: 1
+quarto_version: 1.3.433
+quarto_engines: knitr
+asMultiple: FALSE
+asStatic: FALSE
