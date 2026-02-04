@@ -245,3 +245,4 @@ autoplot(mod1, ncol = 2, nrow = 1, which = 1:2) + theme_bw()
 ```
 :::
 
+That's all Folks
