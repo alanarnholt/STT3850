@@ -374,19 +374,19 @@ p1 + p2
 
 
 ## ----eval = FALSE--------------------------------------------------------------------------------------
-## library(plotly)
-## p <- plot_ly(data = credit_ch6, z = ~debt, x = ~credit_limit,
-##              y = ~income) |> add_markers()
-## mod <- lm(debt ~ credit_limit + income, data = credit_ch6)
-## x <- seq(min(credit_ch6$credit_limit),
-##          max(credit_ch6$credit_limit), length = 70)
-## y <- seq(min(credit_ch6$income),
-##          max(credit_ch6$income), length = 70)
-## plane <- outer(x, y, function(a, b){coef(mod)[1] +
-##                coef(mod)[2]*a + coef(mod)[3]*b})
-## # draw the plane
-## p |>
-##   add_surface(x = ~x, y = ~y, z = ~plane)
+library(plotly)
+p <- plot_ly(data = credit_ch6, z = ~debt, x = ~credit_limit,
+             y = ~income) |> add_markers()
+mod <- lm(debt ~ credit_limit + income, data = credit_ch6)
+x <- seq(min(credit_ch6$credit_limit),
+         max(credit_ch6$credit_limit), length = 70)
+y <- seq(min(credit_ch6$income),
+         max(credit_ch6$income), length = 70)
+plane <- outer(x, y, function(a, b){coef(mod)[1] +
+               coef(mod)[2]*a + coef(mod)[3]*b})
+# draw the plane
+p |>
+  add_surface(x = ~x, y = ~y, z = ~plane)
 
 
 ## ----echo = FALSE, warning=FALSE, message=FALSE,out.height = '50%',out.width = '70%', fig.align='center'----
