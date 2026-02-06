@@ -18,27 +18,27 @@ library(gapminder)   # datasets
 
 
 ## ------------------------------------------------------------------------------------------------------
-gapminder2007 <- gapminder %>% 
-  filter(year == 2007) %>%
+gapminder2007 <- gapminder |> 
+  filter(year == 2007) |>
   select(country, lifeExp, continent, gdpPercap)
 glimpse(gapminder2007)
 
 
 ## ------------------------------------------------------------------------------------------------------
-gapminder2007 %>% 
+gapminder2007 |> 
   sample_n(size = 5)
 
 
 ## ---- eval = FALSE-------------------------------------------------------------------------------------
-gapminder2007 %>%
-  select(lifeExp, continent) %>%
+gapminder2007 |>
+  select(lifeExp, continent) |>
   skim()
 
 
 ## ------------------------------------------------------------------------------------------------------
 # Or using summary()
-gapminder2007 %>% 
-  select(lifeExp, continent) %>%
+gapminder2007 |> 
+  select(lifeExp, continent) |>
   summary()
 
 
@@ -72,10 +72,10 @@ ggplot(gapminder2007, aes(x = continent, y = lifeExp)) +
 
 
 ## ------------------------------------------------------------------------------------------------------
-lifeExp_by_continent <- gapminder2007 %>%
-  group_by(continent) %>%
+lifeExp_by_continent <- gapminder2007 |>
+  group_by(continent) |>
   summarize(median = median(lifeExp), 
-            mean = mean(lifeExp)) %>% 
+            mean = mean(lifeExp)) |> 
   mutate(`Difference versus Africa` = mean - mean[1])
 knitr::kable(lifeExp_by_continent)
 
@@ -94,7 +94,7 @@ knitr::kable(get_regression_table(lifeExp_model1))
 ## ------------------------------------------------------------------------------------------------------
 regression_points <- get_regression_points(lifeExp_model, 
                                            ID = "country") 
-knitr::kable(regression_points %>% head(n = 9))
+knitr::kable(regression_points |> head(n = 9))
 
 
 ## ------------------------------------------------------------------------------------------------------
@@ -105,36 +105,36 @@ library(ISLR)
 
 
 ## ------------------------------------------------------------------------------------------------------
-evals_ch6 <- evals %>%
+evals_ch6 <- evals |>
   select(ID, score, age, gender)
 
 
 ## ------------------------------------------------------------------------------------------------------
 glimpse(evals_ch6)
 # Or
-evals_ch6 %>% 
+evals_ch6 |> 
   sample_n(size = 2)
 
 
 ## ----eval = FALSE--------------------------------------------------------------------------------------
-## evals_ch6 %>%
-##   select(score, age, gender) %>%
-##   skim()
+evals_ch6 |>
+  select(score, age, gender) |>
+  skim()
 
 
 ## ------------------------------------------------------------------------------------------------------
 # Or
-evals_ch6 %>% 
-  select(score, age, gender) %>% 
+evals_ch6 |> 
+  select(score, age, gender) |> 
   summary()
 
 
 ## ------------------------------------------------------------------------------------------------------
-evals_ch6 %>% 
+evals_ch6 |> 
   summarize(r = cor(score, age))
 # or using the get_correlation wrapper
 # from moderndive
-evals_ch6 %>% 
+evals_ch6 |> 
   get_correlation(score ~ age)
 
 
@@ -157,6 +157,9 @@ ggplot(evals_ch6, aes(x = age, y = score, color = gender)) +
   theme_bw() -> int_mod
 int_mod
 
+## Question: How do we get the title to be centered?....Google
+## theme(plot.title = element_text(hjust = 0.5))
+int_mod + theme(plot.title = element_text(hjust = 0.5))
 
 ## ------------------------------------------------------------------------------------------------------
 # Fit regression model:
@@ -164,7 +167,25 @@ score_model_interaction <- lm(score ~ age + gender + age:gender,
                               data = evals_ch6)
 # Get regression table:
 knitr::kable(get_regression_table(score_model_interaction))
+# OR
+knitr::kable(summary(score_model_interaction)$coef)
+# OR
+knitr::kable(broom::tidy(score_model_interaction))
 
+
+#######################################################
+int_mod
+
+# Note: when gender = female, intercept = 4.8829891, and the slope = -0.0175234
+# Note: when gender = male, intercept  = 4.8829891 - 0.4460436 = 4.436945,
+# Slope for male instructors is not 0.0135306....rather this is the offset.
+# Slope for male instructors = -0.0175234 + 0.0135306 = -0.0039928
+
+# Consider superimposing the two computed lines on int_mod
+
+int_mod + 
+  geom_abline(intercept = 4.8829891, slope = -0.0175234, color = "pink") + 
+  geom_abline(intercept = 4.8829891 - 0.4460436, slope = -0.0175234 + 0.0135306, color = "blue")
 
 ## ----echo = FALSE, out.height = '30%', out.width = '60%'-----------------------------------------------
 knitr::include_graphics("week5_2.png")
@@ -196,7 +217,12 @@ score_model_parallel_slopes <- lm(score ~ age + gender,
                                   data = evals_ch6)
 # Get regression table:
 knitr::kable(get_regression_table(score_model_parallel_slopes))
+knitr::kable(broom::tidy(score_model_parallel_slopes))
+#### Add lines from output
 
+ps_mod + 
+  geom_abline(intercept = 4.4841162, slope = -0.0086777, color = "pink") + 
+  geom_abline(intercept = 4.4841162 + 0.1905710, slope = -0.0086777, color = "blue")
 
 ## ----echo = FALSE, out.height = '20%', out.width = '60%'-----------------------------------------------
 knitr::include_graphics("week5_3.png")
@@ -220,10 +246,15 @@ predict(score_model_interaction,
 predict(score_model_interaction, 
         newdata = data.frame(age = 59, gender = "male"))
 
+# OR
+get_regression_points(score_model_interaction, 
+        newdata = data.frame(age = 36, gender = "female"))
+get_regression_points(score_model_interaction, 
+        newdata = data.frame(age = 59, gender = "male"))
 
 ## ----out.height = '40%', out.width = '70%'-------------------------------------------------------------
 library(PASWR2)
-VIT2005 <- VIT2005 %>% 
+VIT2005 <- VIT2005 |> 
   mutate(elevator = factor(elevator, labels = c("No", "Yes")))
 ggplot(data = VIT2005, aes(x = area, y = totalprice)) + 
   geom_point() + 
@@ -267,33 +298,33 @@ autoplot(mod_int, ncol = 2, nrow = 1, which = 1:2) +
 
 ## ------------------------------------------------------------------------------------------------------
 library(ISLR)
-credit_ch6 <- Credit %>% 
-  as_tibble() %>% 
+credit_ch6 <- Credit |> 
+  as_tibble() |> 
   select(ID, debt = Balance, credit_limit = Limit, 
          income = Income, credit_rating = Rating, age = Age)
 glimpse(credit_ch6)
 
 
 ## ------------------------------------------------------------------------------------------------------
-credit_ch6 %>% 
+credit_ch6 |> 
   sample_n(size = 5)
 
 
 ## ---- eval = FALSE-------------------------------------------------------------------------------------
-## credit_ch6 %>%
-##   select(debt, credit_limit, income) %>%
+## credit_ch6 |>
+##   select(debt, credit_limit, income) |>
 ##   skim()
 
 
 ## ------------------------------------------------------------------------------------------------------
-credit_ch6 %>% 
-  select(debt, credit_limit, income) %>% 
+credit_ch6 |> 
+  select(debt, credit_limit, income) |> 
   summary()
 
 
 ## ------------------------------------------------------------------------------------------------------
-credit_ch6 %>% 
-  select(debt, credit_limit, income) %>% 
+credit_ch6 |> 
+  select(debt, credit_limit, income) |> 
   cor()
 
 
@@ -345,7 +376,7 @@ p1 + p2
 ## ----eval = FALSE--------------------------------------------------------------------------------------
 ## library(plotly)
 ## p <- plot_ly(data = credit_ch6, z = ~debt, x = ~credit_limit,
-##              y = ~income) %>% add_markers()
+##              y = ~income) |> add_markers()
 ## mod <- lm(debt ~ credit_limit + income, data = credit_ch6)
 ## x <- seq(min(credit_ch6$credit_limit),
 ##          max(credit_ch6$credit_limit), length = 70)
@@ -354,7 +385,7 @@ p1 + p2
 ## plane <- outer(x, y, function(a, b){coef(mod)[1] +
 ##                coef(mod)[2]*a + coef(mod)[3]*b})
 ## # draw the plane
-## p %>%
+## p |>
 ##   add_surface(x = ~x, y = ~y, z = ~plane)
 
 
@@ -377,7 +408,7 @@ autoplot(debt_model, ncol = 2, nrow = 1, which = 1:2) +
 
 ## ----echo=TRUE,warning=FALSE, message=FALSE,out.height = '40%',out.width = '80%', fig.align='center'----
 library(ISLR)
-credit_paradox <- Credit %>% 
+credit_paradox <- Credit |> 
   select(ID, debt = Balance, credit_limit = Limit, 
          credit_rating = Rating, income = Income, age = Age)
 ggplot(data = credit_paradox, aes(x = credit_limit, y = debt)) + 
@@ -399,7 +430,7 @@ summary(mod)$coef
 
 ## ------------------------------------------------------------------------------------------------------
 qs <- quantile(credit_paradox$credit_limit, probs = seq(0, 1, .25))
-credit_paradox <- credit_paradox %>% 
+credit_paradox <- credit_paradox |> 
   mutate(credit_cats = cut(credit_limit, breaks = qs, 
                            include.lowest = TRUE))
 knitr::kable(head(credit_paradox))
@@ -414,8 +445,8 @@ ggplot(data = credit_paradox, aes(x = credit_limit)) +
 
 
 ## ------------------------------------------------------------------------------------------------------
-credit_paradox %>% 
-  group_by(credit_cats) %>% 
+credit_paradox |> 
+  group_by(credit_cats) |> 
   summarize(n())
 
 

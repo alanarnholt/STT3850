@@ -194,7 +194,7 @@ gapminder2007 |>
 Why is the mean life expectancy lower than the median?
 
 \small
-```{r out.height = '30%', out.width = '40%'}
+```{r out.height = '30 |> %', out.width = '40%'}
 ggplot(gapminder2007, aes(x = lifeExp)) +
   geom_histogram(binwidth=5, color = "blue", fill = "lightblue") +
   labs(x = "Life expectancy", y = "Number of countries",
