@@ -295,7 +295,7 @@ s3d$points3d(x = AD$TV, y = AD$radio,
 ## -----------------------------------------------------------------------------------------
 library(plotly)
 # draw the 3D scatterplot
-p <- plot_ly(data = AD, z = ~sales, x = ~TV, y = ~radio, opacity = 0.5) |> 
+p <- plot_ly(data = AD, z = ~sales, x = ~TV, y = ~radio, opacity = 0.5) %>%
   add_markers
 p
 
