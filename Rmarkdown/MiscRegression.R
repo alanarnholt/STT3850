@@ -1,11 +1,11 @@
-
+## ----label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE-----
 set.seed(123)
 library(knitr)
 library(tidyverse)
 knitr::opts_chunk$set(comment = NA,  fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = TRUE))
 
 
-
+## ----label = "readin", message = FALSE----------------------------------------------------
 site <- "http://statlearning.com/s/Advertising.csv"
 AD <- read.csv(site)
 head(AD)
@@ -15,6 +15,7 @@ datatable(AD[, -1], rownames = FALSE,
           caption = 'Table 1: This is a simple caption for the table.') 
 
 
+## -----------------------------------------------------------------------------------------
 #| label: "fig-base1"
 #| fig-cap: "Base R scatterplot of `sales` versus `TV`"
 plot(sales ~ TV, data = AD, col = "red", pch = 19)
@@ -22,6 +23,7 @@ mod1 <- lm(sales ~ TV, data = AD)
 abline(mod1, col = "blue")
 
 
+## ----fig.width = 12, fig.height = 4-------------------------------------------------------
 #| label: "fig-youchange"
 #| fig-cap: "You should change this caption"
 par(mfrow = c(1, 3))
@@ -37,6 +39,7 @@ abline(mod3, col = "blue")
 par(mfrow=c(1, 1))
 
 
+## -----------------------------------------------------------------------------------------
 #| label: "fig-ggp"
 #| fig-cap: "`ggplot` graph with three superimposed lines"
 library(ggplot2)
@@ -50,6 +53,7 @@ p <- ggplot(data = AD, aes(x = TV, y = sales)) +
 p
 
 
+## ----fig.width = 12, fig.height = 4-------------------------------------------------------
 #| label: "fig-gm"
 #| fig-cap: "Using `grid.arrange()` with `ggplot`"
 library(gridExtra)
@@ -68,38 +72,39 @@ p3 <- ggplot(data = AD, aes(x = newspaper, y = sales)) +
 grid.arrange(p1, p2, p3, ncol = 3)
 
 
+## ----fig.width = 12, fig.height = 4-------------------------------------------------------
 #| fig-cap: "Using `patchwork` with `ggplot`"
 library(patchwork)
 p1 + p2 + p3
 
 
-
+## ----label = "ggvis", message = FALSE-----------------------------------------------------
 library(ggvis)
-AD %>% 
-  ggvis(x = ~TV, y = ~sales) %>% 
-  layer_points() %>% 
-  layer_model_predictions(model = "lm", se = FALSE) %>% 
-  layer_model_predictions(model = "MASS::rlm", se = FALSE, stroke := "blue") %>%
+AD |> 
+  ggvis(x = ~TV, y = ~sales) |> 
+  layer_points() |> 
+  layer_model_predictions(model = "lm", se = FALSE) |> 
+  layer_model_predictions(model = "MASS::rlm", se = FALSE, stroke := "blue") |>
   layer_smooths(stroke:="red", se = FALSE)
 
 
-
+## ----label = "plotly", message = FALSE----------------------------------------------------
 library(plotly)
 p11 <- ggplotly(p)
 p11
 
 
-
+## ----label = "SPM", fig.width = 8, fig.height = 8-----------------------------------------
 library(car)
 scatterplotMatrix(~ sales + TV + radio + newspaper, data = AD)
 
 
-
+## ----label = "regstart"-------------------------------------------------------------------
 mod1 <- lm(sales ~ TV, data = AD)
 summary(mod1)
 
 
-
+## ----label = "resids"---------------------------------------------------------------------
 eis <- resid(mod1)
 RSS <- sum(eis^2)
 RSS
@@ -110,32 +115,47 @@ summary(mod1)$sigma
 # Or
 library(broom)
 NDF <- augment(mod1)
+NDF
 sum(NDF$.resid^2)
 RSE <- sqrt(sum(NDF$.resid^2)/df.residual(mod1))
 RSE
 
 
-
+## ----label = "modern_stuff"---------------------------------------------------------------
 library(moderndive)
 get_regression_table(mod1)
 MDDF <- get_regression_points(mod1)
 MDDF
 library(dplyr)
-MDDF %>% 
+MDDF |> 
   summarize(RSS = sum(residual^2))
 
 
-
+## ----label = "byhand"---------------------------------------------------------------------
 y <- AD$sales
 x <- AD$TV
 b1 <- sum( (x - mean(x))*(y - mean(y)) ) / sum((x - mean(x))^2)
 b0 <- mean(y) - b1*mean(x)
 c(b0, b1)
+# Design Matrix
+model.matrix(mod1) -> X
+X
+head(X)
+t(X)%*%X -> XTX # p*n times n*p = p*p
+XTX
+XTXI <- solve(XTX)
+XTXI
+betahat <- XTXI %*%t(X)%*%y
+betahat
+anova(mod1)
+MSE <- anova(mod1)[2, 3]
+MSE
 # Or using
 coef(mod1)
 summary(mod1)
-XTXI <- summary(mod1)$cov.unscaled
+XTXI <- summary(mod1)$cov.unscaled # preferred way to compute!
 MSE <- summary(mod1)$sigma^2
+MSE
 var.cov.b <- MSE*XTXI
 var.cov.b
 seb0 <- sqrt(var.cov.b[1, 1])
@@ -155,10 +175,11 @@ c(RSS, TSS)
 R2 <- (TSS - RSS)/TSS
 R2
 # Or
+summary(mod1)
 summary(mod1)$r.squared
 
 
-
+## ----label = "CIBeta"---------------------------------------------------------------------
 alpha <- 0.10
 ct <- qt(1 - alpha/2, df.residual(mod1))
 ct
@@ -171,16 +192,18 @@ library(moderndive)
 get_regression_table(mod1)
 
 
-
+## ----label = "linearALG"------------------------------------------------------------------
 A <- matrix(c(2, -3, -2, 1, -1, 1, -1, 2, 2), nrow = 3)
+A
 b <- matrix(c(8, -11, -3), nrow = 3)
+b
 x <- solve(A)%*%b
 x
 # Or
 solve(A, b)
 
 
-
+## ----label = "mola"-----------------------------------------------------------------------
 A <- matrix(c(2, 9, 4, 5), nrow = 2)
 A
 t(A)          # Transpose of A
@@ -189,9 +212,11 @@ solve(A)%*%A  # I_2
 zapsmall(solve(A)%*%A)  # What you expect I_2
 
 
-
+## ----label = "MM"-------------------------------------------------------------------------
 X <- model.matrix(mod1)
+X
 XTX <- t(X)%*%X
+XTX
 dim(XTX)
 XTXI <- solve(XTX)
 XTXI
@@ -206,7 +231,7 @@ var_cov_b <- MSE*XTXI
 var_cov_b
 
 
-
+## ----label = "mipack"---------------------------------------------------------------------
 library(PASWR2)
 mod.lm <- lm(gpa ~ sat, data = GRADES)
 summary(mod.lm)
@@ -215,6 +240,7 @@ betahat
 knitr::kable(tidy(mod.lm))
 #
 Xh <- matrix(c(1, 1300), nrow = 1)
+Xh
 Yhath <- Xh%*%betahat
 Yhath
 predict(mod.lm, newdata = data.frame(sat = 1300))
@@ -238,11 +264,12 @@ CI_EYh
 predict(mod.lm, newdata = data.frame(sat = 1300), interval = "conf", level = 0.90)
 
 
-
+## ----label = "modtwo"---------------------------------------------------------------------
 mod2 <- lm(sales ~ TV + radio, data = AD)
 summary(mod2)
 
 
+## -----------------------------------------------------------------------------------------
 #| label: "fig-mucho"
 #| fig-cap: "3-D residuals and fitted plane"
 library(scatterplot3d)
@@ -265,29 +292,29 @@ s3d$points3d(x = AD$TV, y = AD$radio,
              pch = 20)
 
 
-
+## -----------------------------------------------------------------------------------------
 library(plotly)
 # draw the 3D scatterplot
-p <- plot_ly(data = AD, z = ~sales, x = ~TV, y = ~radio, opacity = 0.5) %>% 
+p <- plot_ly(data = AD, z = ~sales, x = ~TV, y = ~radio, opacity = 0.5) |> 
   add_markers
 p
 
 
-
+## -----------------------------------------------------------------------------------------
 x <- seq(0, 300, length = 70)
 y <- seq(0, 50, length = 70)
 plane <- outer(x, y, function(a, b){summary(mod2)$coef[1, 1] + summary(mod2)$coef[2, 1]*a + summary(mod2)$coef[3, 1]*b})
 # draw the plane
-p %>% 
+p |> 
   add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE)
 
 
-
+## ----label = "modthree"-------------------------------------------------------------------
 mod3 <- lm(sales ~ TV + radio + newspaper, data = AD)
 summary(mod3)
 
 
-
+## ----label = "ANOVA"----------------------------------------------------------------------
 anova(mod3)
 SSR <- sum(anova(mod3)[1:3, 2])
 MSR <- SSR/3
@@ -302,12 +329,12 @@ summary(mod3)
 summary(mod3)$fstatistic
 
 
-
+## ----label = "MA"-------------------------------------------------------------------------
 summary(mod3)
 anova(mod1, mod3)
 
 
-
+## ----label = "Forward"--------------------------------------------------------------------
 mod.fs <- lm(sales ~ 1, data = AD)
 SCOPE <- (~ TV + radio + newspaper)
 add1(mod.fs, scope = SCOPE, test = "F")
@@ -318,7 +345,7 @@ add1(mod.fs, scope = SCOPE, test = "F")
 summary(mod.fs)
 
 
-
+## ----label = "step"-----------------------------------------------------------------------
 stepAIC(lm(sales ~ 1, data = AD), scope = (~TV + radio + newspaper), direction = "forward", test = "F")
 # Or
 null <- lm(sales ~ 1, data = AD)
@@ -326,7 +353,7 @@ full <- lm(sales ~ ., data = AD)
 stepAIC(null, scope = list(lower = null, upper = full), direction = "forward", test = "F")
 
 
-
+## ----label = "backward"-------------------------------------------------------------------
 mod.be <- lm(sales ~ TV + radio + newspaper, data = AD)
 drop1(mod.be, test = "F")
 mod.be <- update(mod.be, .~. - newspaper)
@@ -334,27 +361,27 @@ drop1(mod.be, test = "F")
 summary(mod.be)
 
 
-
+## ----label = "moSTEP"---------------------------------------------------------------------
 stepAIC(lm(sales ~ TV + radio + newspaper, data = AD), scope = (~TV + radio + newspaper), direction = "backward", test = "F")
 # Or
 stepAIC(full, scope = list(lower = null, upper = full), direction = "backward", test = "F")
 
 
-
+## ----label = "daignos", fig.width = 7, fig.height = 7-------------------------------------
 residualPlots(mod2)
 qqPlot(mod2)
 influenceIndexPlot(mod2)
 
 
-
+## ----label = "predbe"---------------------------------------------------------------------
 predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "conf")
 
 
-
+## ----label = "predbe2"--------------------------------------------------------------------
 predict(mod.be, newdata = data.frame(TV = 100, radio = 20), interval = "pred")
 
 
-
+## ----label = "noadd"----------------------------------------------------------------------
 nam1 <- lm(sales ~ TV*radio, data = AD)
 # Same as 
 nam2 <- lm(sales ~ TV + radio + TV:radio, data = AD)
@@ -362,17 +389,17 @@ summary(nam1)
 summary(nam2)
 
 
-
+## ----label = "readin2"--------------------------------------------------------------------
 Credit <- read.csv("http://statlearning.com/s/Credit.csv")
 datatable(Credit[, -1], rownames = FALSE)
 
 
-
+## ----label = "modNOTATION"----------------------------------------------------------------
 modP <- lm(Balance ~ Income*Student, data = Credit)
 summary(modP)
 
 
-
+## ----label = "GGSD"-----------------------------------------------------------------------
 library(ISLR)
 data(Credit)
 modS <- lm(Balance ~ Gender, data = Credit)
@@ -387,17 +414,17 @@ ggplot(data = Credit, aes(x = Gender, y = Balance)) +
   geom_hline(yintercept = coef(modS)[1], color = "green")
 
 
-
+## ----label = "OT"-------------------------------------------------------------------------
 Credit$Utilization <- Credit$Balance / (Credit$Income*100)
 tapply(Credit$Utilization, Credit$Gender, mean)
 # Tidyverse approach
-Credit %>%
-  mutate(Ratio = Balance / (Income*100) ) %>%
-  group_by(Gender) %>%
+Credit |>
+  mutate(Ratio = Balance / (Income*100) ) |>
+  group_by(Gender) |>
   summarize(mean(Ratio))
 
 
-
+## ----label = "UTIL"-----------------------------------------------------------------------
 modU <- lm(Utilization ~ Gender, data = Credit)
 summary(modU)
 coef(modU)
@@ -408,7 +435,7 @@ ggplot(data = Credit, aes(x = Gender, y = Utilization)) +
   geom_hline(yintercept = coef(modU)[1], color = "green")
 
 
-
+## ----label = "movealong"------------------------------------------------------------------
 modS1 <- lm(Balance ~ Limit + Student, data = Credit)
 summary(modS1)
 coef(modS1)
@@ -417,6 +444,7 @@ modS2 <- lm(Balance ~ Limit*Student, data = Credit)
 summary(modS2)
 
 
+## -----------------------------------------------------------------------------------------
 #| label: "fig-GGDWDYE"
 #| fig-cap: " Balance versus Limit"
 ggplot(data = Credit, aes(x = Limit, y = Balance, color = Student)) + 
@@ -425,6 +453,7 @@ ggplot(data = Credit, aes(x = Limit, y = Balance, color = Student)) +
   theme_bw()
 
 
+## -----------------------------------------------------------------------------------------
 #| label: "fig-CG"
 #| fig-cap: "Figure this one out!"
 S2M <- lm(Balance ~ Limit + Student, data = Credit)
@@ -437,7 +466,7 @@ ggplot(data = Credit, aes(x = Limit, y = Balance, color = Student)) +
   scale_color_manual(values = c("red", "blue"))
 
 
-
+## ----label = "TL"-------------------------------------------------------------------------
 modQ3 <- lm(Balance ~ Limit + Ethnicity, data = Credit)
 summary(modQ3)
 coef(modQ3)
@@ -445,7 +474,7 @@ modRM <- lm(Balance ~ Limit, data = Credit)
 anova(modRM, modQ3)
 
 
-
+## ----label = "threesep"-------------------------------------------------------------------
 AfAmer <- lm(Balance ~ Limit, data = subset(Credit, Ethnicity == "African American"))
 AsAmer <- lm(Balance ~ Limit, data = subset(Credit, Ethnicity == "Asian"))
 CaAmer <- lm(Balance ~ Limit, data = subset(Credit, Ethnicity == "Caucasian"))
@@ -456,14 +485,14 @@ ggplot(data = Credit, aes(x = Limit, y = Balance, color = Ethnicity)) +
   stat_smooth(method = "lm", se = FALSE)
 
 
-
+## ----label = "oneline"--------------------------------------------------------------------
 ggplot(data = Credit, aes(x = Limit, y = Balance)) +
   geom_point(aes(color = Ethnicity)) + 
   theme_bw() +
   stat_smooth(method = "lm")
 
 
-
+## ----label = "SP23", warning = FALSE, message = FALSE, fig.width = 12, fig.height = 12----
 scatterplotMatrix(~ Balance + Income + Limit + Rating + Cards + Age + Education + Gender + Student + Married + Ethnicity,  data = Credit)
 null <- lm(Balance ~ 1, data = Credit)
 full <- lm(Balance ~ ., data = Credit)
@@ -475,14 +504,15 @@ modD
 predict(modC, newdata = data.frame(Income = 80, Limit = 5000, Cards = 3, Age = 52, Student = "No", Rating = 800, Utilization = 0.10), interval = "pred")
 
 
-
+## ----label = "DPcar"----------------------------------------------------------------------
 residualPlots(modC)
 qqPlot(modC)
 influenceIndexPlot(modC)
 
 
+## -----------------------------------------------------------------------------------------
 #| label: "fig-NLR"
-#| fig-cap: "Showing non-linear relationships"
+#| fig-cap: "Showing non-linear relationships" 
 library(ISLR)
 car1 <- lm(mpg ~ horsepower, data = Auto)
 car2 <- lm(mpg ~ poly(horsepower, 2), data = Auto)
@@ -500,7 +530,7 @@ ggplot(data = Auto, aes(x = horsepower, y = mpg)) +
   geom_line(data = DF, aes(x = x, y = y5), color = "green")
 
 
-
+## ----label = "smooth"---------------------------------------------------------------------
 ggplot(data = Auto, aes(x = horsepower, y = mpg)) + 
   geom_point(color = "lightblue") + 
   theme_bw() + 
@@ -509,7 +539,7 @@ ggplot(data = Auto, aes(x = horsepower, y = mpg)) +
   stat_smooth(method = "lm", formula = y ~ poly(x, 5), data = Auto, color = "green", se = FALSE) 
 
 
-
+## -----------------------------------------------------------------------------------------
 newC <- update(modC, .~. - Limit - Income - Rating + poly(Income, 2) + poly(Limit, 4))
 summary(newC)
 residualPlots(newC)
@@ -517,7 +547,7 @@ qqPlot(newC)
 influenceIndexPlot(newC)
 
 
-
+## ----label = "VIF"------------------------------------------------------------------------
 modC
 R2inc <- summary(lm(Income ~ Limit + Rating + Cards + Age + Student + Utilization, data = Credit))$r.squared
 R2inc
@@ -529,6 +559,6 @@ VIFlim <- 1/(1 - R2lim)
 VIFlim
 
 
-
+## -----------------------------------------------------------------------------------------
 car::vif(modC)
 

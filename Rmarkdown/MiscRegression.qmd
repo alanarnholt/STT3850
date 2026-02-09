@@ -100,11 +100,11 @@ p1 + p2 + p3
 
 ```{r , label = "ggvis", message = FALSE}
 library(ggvis)
-AD %>% 
-  ggvis(x = ~TV, y = ~sales) %>% 
-  layer_points() %>% 
-  layer_model_predictions(model = "lm", se = FALSE) %>% 
-  layer_model_predictions(model = "MASS::rlm", se = FALSE, stroke := "blue") %>%
+AD |> 
+  ggvis(x = ~TV, y = ~sales) |> 
+  layer_points() |> 
+  layer_model_predictions(model = "lm", se = FALSE) |> 
+  layer_model_predictions(model = "MASS::rlm", se = FALSE, stroke := "blue") |>
   layer_smooths(stroke:="red", se = FALSE)
 ```
 
@@ -158,7 +158,7 @@ get_regression_table(mod1)
 MDDF <- get_regression_points(mod1)
 MDDF
 library(dplyr)
-MDDF %>% 
+MDDF |> 
   summarize(RSS = sum(residual^2))
 ```
 
@@ -382,7 +382,7 @@ s3d$points3d(x = AD$TV, y = AD$radio,
 ```{r}
 library(plotly)
 # draw the 3D scatterplot
-p <- plot_ly(data = AD, z = ~sales, x = ~TV, y = ~radio, opacity = 0.5) %>% 
+p <- plot_ly(data = AD, z = ~sales, x = ~TV, y = ~radio, opacity = 0.5) |> 
   add_markers
 p
 ```
@@ -392,7 +392,7 @@ x <- seq(0, 300, length = 70)
 y <- seq(0, 50, length = 70)
 plane <- outer(x, y, function(a, b){summary(mod2)$coef[1, 1] + summary(mod2)$coef[2, 1]*a + summary(mod2)$coef[3, 1]*b})
 # draw the plane
-p %>% 
+p |> 
   add_surface(x = ~x, y = ~y, z = ~plane, showscale = FALSE)
 ```
 
@@ -547,9 +547,9 @@ Do females have a higher ratio of `Balance` to `Income` (credit utilization)? He
 Credit$Utilization <- Credit$Balance / (Credit$Income*100)
 tapply(Credit$Utilization, Credit$Gender, mean)
 # Tidyverse approach
-Credit %>%
-  mutate(Ratio = Balance / (Income*100) ) %>%
-  group_by(Gender) %>%
+Credit |>
+  mutate(Ratio = Balance / (Income*100) ) |>
+  group_by(Gender) |>
   summarize(mean(Ratio))
 ```
 
