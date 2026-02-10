@@ -31,7 +31,7 @@ gapminder2007 |>
 
 ## ---- eval = FALSE-------------------------------------------------------------------------------------
 gapminder2007 |>
-  select(lifeExp, continent) |>
+  select(lifeExp, continent) |> 
   skim()
 
 
@@ -44,22 +44,25 @@ gapminder2007 |>
 
 ## ----out.height = '30%', out.width = '40%'-------------------------------------------------------------
 ggplot(gapminder2007, aes(x = lifeExp)) +
-  geom_histogram(binwidth=5, color = "blue", fill = "lightblue") +
+  geom_histogram(binwidth=5, color = "purple", fill = "lavender") +
   labs(x = "Life expectancy", y = "Number of countries",
        title = "Histogram of distribution of worldwide 
        life expectancies") +
   theme_bw()
 
+gapminder2007 |> 
+  summarize(MLE = mean(lifeExp), MDLE = median(lifeExp),
+            SPREAD = IQR(lifeExp))
 
 ## ----out.height = '45%', out.width = '80%'-------------------------------------------------------------
 ggplot(gapminder2007, aes(x = lifeExp)) +
-  geom_histogram(binwidth = 5, color = "blue",
-                 fill = "lightblue") +
+  geom_histogram(binwidth = 5, color = "darkgreen",
+                 fill = "limegreen") +
   labs(x = "Life expectancy", 
        y = "Number of countries",
        title = "Histogram of distribution of worldwide 
        life expectancies") +
-  facet_wrap(vars(continent), nrow = 2) + 
+  facet_wrap(vars(continent), nrow = 3) + 
   theme_bw()
 
 
