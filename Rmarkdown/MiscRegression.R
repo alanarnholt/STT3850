@@ -76,7 +76,7 @@ grid.arrange(p1, p2, p3, ncol = 3)
 #| fig-cap: "Using `patchwork` with `ggplot`"
 library(patchwork)
 p1 + p2 + p3
-
+p1 / p2 / p3
 
 ## ----label = "ggvis", message = FALSE-----------------------------------------------------
 library(ggvis)
