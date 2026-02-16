@@ -215,7 +215,6 @@ __________________
 
 * Regression with a single [categorical variable](../Handouts/RegWithCategoricalVariables.html) handout.
 
-* Class [notes](../Handouts/RegHandout.html) for one quantitative and one qualitative predictor
 
 * Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 9
 
@@ -241,6 +240,8 @@ _______________
 * Complete the **Summary Statistics** chapter of _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Feb 15
 
 * Before class read/review chapter 6 (Multiple Regression) of [MD](https://moderndive.com/6-multiple-regression.html) --- pgs 161-191
+
+* Class [notes](../Handouts/RegHandout.html) for one quantitative and one qualitative predictor
 
 * Go over in class [_Misc Regression_](../Rmarkdown/MiscRegression.html)
 
