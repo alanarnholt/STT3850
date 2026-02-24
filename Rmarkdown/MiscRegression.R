@@ -562,3 +562,17 @@ VIFlim
 ## -----------------------------------------------------------------------------------------
 car::vif(modC)
 
+Credit <- read.csv("http://statlearning.com/s/Credit.csv")
+head(Credit)
+library(MASS)
+null <- lm(Rating ~ 1, data = Credit)
+full <- lm(Rating ~ ., data = Credit)
+stepAIC(null, scope = list(lower = null, upper = full), direction = "forward", test = "F")
+stepAIC(full, scope = list(lower = null, upper = full), direction = "backward", test = "F")
+
+mod.fs <- lm(Rating ~ Limit + Cards + Married +Education + Student, data = Credit)
+mod.fs
+
+predict(mod.fs, newdata = tibble(Limit = 6000, Cards = 4, Married = "Yes", Student = "No", Education = 16))
+
+predict(mod.fs, newdata = tibble(Limit = 12000, Cards = 2, Married = "Yes", Student = "No", Education = 8))
