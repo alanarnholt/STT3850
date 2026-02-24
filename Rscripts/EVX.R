@@ -6,6 +6,7 @@ EVX <- function(x, px){
   names(results) <- c("E(X)", "S(X)", "V(X)")
   results
 }
+
 x <- 0:3
 px <- c(1/8, 3/8, 3/8, 1/8)
 EVX(x, px)
