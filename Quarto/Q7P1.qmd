@@ -1,0 +1,37 @@
+---
+title: "P1 Write Out"
+format: html
+editor: source
+---
+
+## **1. Identify the Given Information**
+
+-   **Prior Probability of Cancer $P(C)$:** $1\% = 0.01$
+
+-   **Prior Probability of No Cancer $P(C^c)$:** $99\% = 0.99$
+
+-   **Sensitivity $P(+ | C)$:** $90\% = 0.90$ (True Positive Rate)
+
+-   **Specificity $P(-| C^c)$:** $91\% = 0.91$
+
+-   **False Positive Rate $P(+| C^c)$:** $1 - 0.91 = 0.09$
+
+## **2. Calculate the Total Probability of a Positive Result $P(+)$**
+
+A positive result can happen in two ways: a woman has cancer and tests positive, or she doesn't have cancer and tests positive (false positive).
+
+\$\$P(+) = \[P(+\\text{ }\| C) \\times P(C)\] + \[P(+\\text{ }\| C\^c) \\times P(C\^c)\]\$\$
+
+\$\$P(+) = (0.90 \\times 0.01) + (0.09 \\times 0.99)\$\$
+
+\$\$P(+) = 0.009 + 0.0891 = 0.0981\$\$
+
+## **3. Apply Bayes' Theorem**
+
+Now, we calculate the probability of having cancer given that the test was positive:
+
+\$\$P(C\\text{ }\| +) = \\frac{P(+\\text{ }\| C) \\times P(C)}{P(+)}\$\$
+
+\$\$P(C\\text{ }\| +) = \\frac{0.009}{0.0981}\$\$
+
+\$\$P(C\\text{ }\| +) \\approx 0.091743...\$\$
