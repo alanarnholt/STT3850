@@ -26,3 +26,22 @@ mean(xbar)
 sd(xbar)
 
 e1071::skewness(xbar)
+
+################
+set.seed(321)
+pop <- runif(10000, 0, 10)
+hist(pop)
+#
+mu <- mean(pop)
+sigma <- sd(pop)*(999999/1000000)
+c(mu, sigma)
+set.seed(441)
+n <- 10
+B <- 10000
+xbar <- numeric(B)
+for(i in 1:B){
+  xs <- sample(pop, size = n, replace = TRUE)
+  xbar[i] <- mean(xs)
+}
+hist(xbar)
+
