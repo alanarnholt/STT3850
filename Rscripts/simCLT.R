@@ -7,16 +7,22 @@ mu <- mean(pop)
 sigma <- sd(pop)*(999999/1000000)
 c(mu, sigma)
 
-set.seed(44)
+# Change n from 10 to 1500
+set.seed(441)
+n <- 100
 B <- 10000
 xbar <- numeric(B)
 for(i in 1:B){
-  xs <- sample(pop, size = 100, replace = TRUE)
+  xs <- sample(pop, size = n, replace = TRUE)
   xbar[i] <- mean(xs)
 }
 hist(xbar)
 
-mean(xbar <= 0.75)
-pnorm(0.75, mu, sigma/sqrt(100))
+##### 
+mean(xbar <= mu - 2*sigma/sqrt(n))
+pnorm(mu - 2*sigma/sqrt(n), mu, sigma/sqrt(n))
+## Note there is too little area in the left tail to be a normal distribution!
 mean(xbar)
 sd(xbar)
+
+e1071::skewness(xbar)
