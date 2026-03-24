@@ -207,6 +207,8 @@ visualize(bs_dist) +
 
 ## -------------------------------------------------------------------
 # Using a for loop to do the same thing
+
+set.seed(32)
 B <- 1000
 bm <- numeric(B)
 for(i in 1:B){
