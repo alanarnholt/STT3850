@@ -69,11 +69,11 @@ diff_actual + c(-1,1)*qnorm(.95)*sd(bs_dist$stat)
 
 
 Sat2008 |> 
-  specify(response = Reading) |> 
-  generate(reps = 10^4, type = "bootstrap") |> 
-  calculate(stat = "mean") -> bs_read_dist
-bs_read_dist
-get_confidence_interval(bs_read_dist, level = 0.95)
+  specify(response = Math) |> 
+  generate(reps = 10^5, type = "bootstrap") |> 
+  calculate(stat = "mean") -> bs_math_dist
+bs_math_dist
+get_confidence_interval(bs_math_dist, level = 0.90)
 
 math <- Sat2008$Math
 math
@@ -89,12 +89,12 @@ quantile(bs_mean, probs = c(0.05, 0.95))
 boot_bias <- mean(bs_mean) - mean(math)
 boot_bias
 
-
-BODYFAT |> 
-  specify(fat ~ sex) |> 
-  generate(reps = 10^4, type = "bootstrap") |> 
-  calculate(stat = "diff in means", order = c("F", "M")) -> bs_dist
-get_confidence_interval(bs_dist, level = 0.95)
+library(PASWR2)
+# BODYFAT |> 
+#   specify(fat ~ sex) |> 
+#   generate(reps = 10^4, type = "bootstrap") |> 
+#   calculate(stat = "diff in means", order = c("F", "M")) -> bs_dist
+# get_confidence_interval(bs_dist, level = 0.95)
 
 
 BODYFAT$fat[BODYFAT$sex=="M"] -> mf
@@ -112,13 +112,3 @@ quantile(dm, probs = c(.025, 0.975))
 
 
 ##############################################################
-
-manatees |> 
-  mutate(rat = killed/boats) -> nm
-nm
-hist(nm$rat)
-
-ggplot(data = manatees, aes(x = boats, y = killed)) + 
-  geom_point() + 
-  theme_bw() + 
-  geom_smooth(method = "lm", se = FALSE)
