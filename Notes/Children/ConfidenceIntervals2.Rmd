@@ -67,7 +67,7 @@ cisim(samples = 100, n = 30, parameter = 25, sigma = 4, type = "Mean")
 
 **Example 7.2** An engineer test the gas mileage of a random sample of $n = 30$ of his company cars ready to be sold.  The 95% confidence interval for the mean mileage of all the cars is (29.5, 33.4) miles per gallon.  Evaluate the following statements:
 
-1. We are 95% confident that the gas mileage for cars in this company is between 25.5 and 33.4 mpg.
+1. We are 95% confident that the gas mileage for cars in this company is between 29.5 and 33.4 mpg.
 
 2. 95% of all samples will give an average mileage between 29.5 and 33.4 mpg.
 
