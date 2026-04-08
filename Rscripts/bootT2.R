@@ -14,3 +14,7 @@ c(q1, q2)
 LL <- mean(tristan) - q2*sd(tristan)/sqrt(50)
 UL <- mean(tristan) - q1*sd(tristan)/sqrt(50)
 c(LL, UL)
+t.test(tristan, conf.level = 0.94)$conf.int
+
+pnorm(1.5) - pnorm(-1.5)
+qt(.90, 10)
