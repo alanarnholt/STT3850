@@ -46,6 +46,9 @@ get_p_value(pd, obs_stat = obs_diff, direction = "greater")
 
 
 ### Test mu_male_hours - mu_female_hours = 0 vs >
+
+obs_diff <- -diff(tapply(gss$hours, gss$sex, mean))
+obs_diff
 gss |> 
   specify(hours ~ sex) |> 
   hypothesize(null = "independence") |> 
@@ -53,3 +56,4 @@ gss |>
   calculate(stat = "diff in means", order = c("male", "female")) -> pd
 head(pd)
 visualize(pd)
+get_p_value(pd, obs_stat = obs_diff, direction = "greater")
