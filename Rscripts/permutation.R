@@ -43,3 +43,13 @@ ic |>
   calculate(stat = "diff in means", order = c("no", "yes")) -> pd
 pd
 get_p_value(pd, obs_stat = obs_diff, direction = "greater")
+
+
+### Test mu_male_hours - mu_female_hours = 0 vs >
+gss |> 
+  specify(hours ~ sex) |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 10^4, type = "permute") |> 
+  calculate(stat = "diff in means", order = c("male", "female")) -> pd
+head(pd)
+visualize(pd)
