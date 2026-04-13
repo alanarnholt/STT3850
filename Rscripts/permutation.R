@@ -20,3 +20,16 @@ for(i in 1:P){
 hist(md)
 
 (pvalue <- mean(md >= obs_diff))
+
+#####
+## using infer now
+library(infer)
+set.seed(321)
+ic |> 
+  specify(formula = worms ~ treat) |> 
+  # specify(response = worms, explanatory = treat) |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 10^4, type = "permute") |> 
+  calculate(stat = "diff in means", order = c("no", "yes")) -> pd
+pd
+get_p_value(pd, obs_stat = obs_diff, direction = "greater")
