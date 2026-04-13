@@ -18,8 +18,18 @@ for(i in 1:P){
   md[i] <- -diff(tapply(worms, sample(treat), mean))
 }
 hist(md)
-
 (pvalue <- mean(md >= obs_diff))
+
+# another approach
+set.seed(321)
+P <- 10^4
+md2 <- numeric(P)
+for(i in 1:P){
+  junk <- sample(10, 5)
+  md2[i] <- mean(worms[junk]) - mean(worms[-junk])
+}
+hist(md2)
+(pv2 <- mean(md2 >= obs_diff))
 
 #####
 ## using infer now
