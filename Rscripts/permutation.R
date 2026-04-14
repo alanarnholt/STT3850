@@ -55,7 +55,7 @@ ic |>
   calculate(stat = "t", order = c("no", "yes")) -> pd2
 pd2
 visualize(pd2)
-obs_t <- t.test(worms~treat, data = ic, var.equal = TRUE)$stat
+obs_t <- t.test(worms~treat, data = ic, var.equal = TRUE, alternative = "greater")$stat
 get_p_value(pd2, obs_stat = obs_t, direction = "greater")
 
 ## Note t = {(xbar1 - xbar2) - (mu1 - mu2)}/{sp*sqrt(1/n1 + 1/n2)}
