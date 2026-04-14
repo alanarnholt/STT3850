@@ -1,4 +1,4 @@
-worms <-c(17, 16, 10, 10, 7, 10, 7, 2, 2, 1)
+worms <- c(17, 16, 10, 10, 7, 10, 7, 2, 2, 1)
 treat <- c(rep("no", 5), rep("yes", 5))
 ic <- tibble(worms, treat)
 
