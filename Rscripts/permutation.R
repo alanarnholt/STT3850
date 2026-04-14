@@ -45,6 +45,27 @@ pd
 get_p_value(pd, obs_stat = obs_diff, direction = "greater")
 
 
+
+set.seed(321)
+ic |> 
+  specify(formula = worms ~ treat) |> 
+  # specify(response = worms, explanatory = treat) |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 10^4, type = "permute") |> 
+  calculate(stat = "t", order = c("no", "yes")) -> pd2
+pd2
+obs_t <- t.test(worms~treat, data = ic, var.equal = TRUE)$stat
+get_p_value(pd2, obs_stat = obs_t, direction = "greater")
+
+##### With a for loop
+P <- 10^4
+tstat <- numeric(P)
+for(i in 1:P){
+  tstat[i] <- t.test(worms~sample(treat), data = ic, var.equal = TRUE)$stat
+}
+p_val <- mean(tstat >= obs_t)
+p_val
+
 ### Test mu_male_hours - mu_female_hours = 0 vs >
 
 obs_diff <- -diff(tapply(gss$hours, gss$sex, mean))
