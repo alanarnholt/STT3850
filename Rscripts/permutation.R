@@ -43,7 +43,7 @@ ic |>
   calculate(stat = "diff in means", order = c("no", "yes")) -> pd
 pd
 get_p_value(pd, obs_stat = obs_diff, direction = "greater")
-
+mean(pd$stat >= 7.6)
 
 
 set.seed(321)
@@ -54,6 +54,7 @@ ic |>
   generate(reps = 10^4, type = "permute") |> 
   calculate(stat = "t", order = c("no", "yes")) -> pd2
 pd2
+visualize(pd2)
 obs_t <- t.test(worms~treat, data = ic, var.equal = TRUE)$stat
 get_p_value(pd2, obs_stat = obs_t, direction = "greater")
 
