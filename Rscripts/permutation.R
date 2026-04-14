@@ -58,9 +58,25 @@ visualize(pd2)
 obs_t <- t.test(worms~treat, data = ic, var.equal = TRUE)$stat
 get_p_value(pd2, obs_stat = obs_t, direction = "greater")
 
-## Note t = {(xbar1 - xbar2) - (mu1 - mu2)}/{sp*(1/n1 + 1/n2)}
+## Note t = {(xbar1 - xbar2) - (mu1 - mu2)}/{sp*sqrt(1/n1 + 1/n2)}
 ## where sp2 = {(n1 - 1)s1^2 + (n2 - 1)S2^2}/(n1 + n2 -2)
-
+ic |> 
+  group_by(treat) |> 
+  summarize(n = n(), xbar = mean(worms), SD = sd(worms)) -> SUM
+SUM
+(sp2 <- ( (5 - 1)*4.30^2 + (5 - 1)*3.91^2 )/(5 + 5 -2))
+(sp <- sqrt(sp2))
+(tstar <- (12 - 4.4)/(sp*sqrt(1/5 + 1/5)) )
+# Note that the value is not quite the same due to our rounding....
+(s1 <- SUM$SD[1])
+(s2 <- SUM$SD[2])
+(sp2 <- ((5 - 1)*s1^2 + (5 - 1)*s2^2)/(5 + 5 -2))
+(sp <- sqrt(sp2))
+(tstar2 <- (12 - 4.4)/(sp*sqrt(1/5 + 1/5)) ) 
+  
+  
+  
+  
 ##### With a for loop
 P <- 10^4
 tstat <- numeric(P)
