@@ -58,6 +58,9 @@ visualize(pd2)
 obs_t <- t.test(worms~treat, data = ic, var.equal = TRUE)$stat
 get_p_value(pd2, obs_stat = obs_t, direction = "greater")
 
+## Note t = {(xbar1 - xbar2) - (mu1 - mu2)}/{sp*(1/n1 + 1/n2)}
+## where sp2 = {(n1 - 1)s1^2 + (n2 - 1)S2^2}/(n1 + n2 -2)
+
 ##### With a for loop
 P <- 10^4
 tstat <- numeric(P)
