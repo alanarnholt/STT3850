@@ -66,6 +66,11 @@ for(i in 1:P){
 p_val <- mean(tstat >= obs_t)
 p_val
 
+
+
+
+
+
 ### Test mu_male_hours - mu_female_hours = 0 vs >
 
 obs_diff <- -diff(tapply(gss$hours, gss$sex, mean))
