@@ -448,6 +448,8 @@ ______________________
 
 * Complete the **Proportions: Testing and Power** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Apr 13
 
+* [One Proportion](../Quarto/onep.html)
+
 * Complete [PS-09](https://classroom.github.com/a/niy6TafV) by 5:00 pm Apr 15
 
 * **Quiz #12** Apr 16

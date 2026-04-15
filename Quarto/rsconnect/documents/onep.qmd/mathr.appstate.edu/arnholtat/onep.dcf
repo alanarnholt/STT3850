@@ -1,0 +1,12 @@
+name: onep
+title: onep
+username: arnholtat
+account: arnholtat
+server: mathr.appstate.edu
+hostUrl: https://mathr.appstate.edu/connect/__api__
+appId: 155
+bundleId: 433
+url: https://mathr.appstate.edu/connect/content/244d982d-ad0d-43cf-99ee-666705e28077/
+version: 1
+asMultiple: FALSE
+asStatic: TRUE
