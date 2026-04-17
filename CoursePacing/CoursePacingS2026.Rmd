@@ -476,7 +476,7 @@ _________________
 
 * [Goodness-Of-Fit](../Handouts/ChiGOF.html)
 
-* [In class Examples](../Rmarkdown/InClassNotes.html)
+* In class [Example 1](../Rmarkdown/InClassNotes.html) and [Example 2](../Quarto/Chi_square.html)
 
 * **Quiz #13** Apr 23
 
@@ -503,7 +503,7 @@ ________________________
 
 * [Goodness-Of-Fit](../Handouts/ChiGOF.html)
 
-* [In class Examples](../Rmarkdown/InClassNotes.html)
+* In class [Example 1](../Rmarkdown/InClassNotes.html) and [Example 2](../Quarto/Chi_square.html)
 
 * Course Review
 
