@@ -1,0 +1,127 @@
+---
+title: "Chi-Square tests of Independence"
+format: html
+editor: visual
+---
+## Cleaning up the data
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(infer)
+load("../Data/gss.RData")
+gss2016 <- gss |>
+  filter(year == 2016) |> 
+  # I am filtering to get a similar set used in DataCamp
+  filter(!is.na(consci)) |> 
+  filter(!is.na(cappun)) |> 
+  filter(!is.na(sex)) |> 
+  filter(!is.na(partyid)) |> 
+  filter(!is.na(postlife)) |> 
+  filter(!is.na(natspac)) |> 
+  filter(!is.na(natarms)) |> 
+  filter(!is.na(happy)) |> 
+  filter(!is.na(region))
+# Recoding levels of consci---similar to data camp???
+gss2016$consci <- ifelse(gss2016$consci == "A GREAT DEAL", "High", "Low")
+set.seed(321)  # Make same size as data camp...randomly
+ind <- sample(1:nrow(gss2016), 150, replace = FALSE)
+gss2016 <- gss2016[ind, ]
+# Create new variable party
+gss2016$party <- ifelse(gss2016$partyid %in% c("STRONG DEMOCRAT",
+                                               "NOT STR DEMOCRAT"),
+                        "Dem", ifelse(gss2016$partyid %in% 
+                          c("IND,NEAR DEM", "IND,NEAR REP",
+                            "INDEPENDENT"), "Ind",
+                          ifelse(gss2016$partyid %in% 
+                                   c("STRONG REPUBLICAN", 
+                                     "NOT STR REPUBLICAN"), 
+                                 "Rep", "Oth")))
+###
+# Subset data
+gss_party <- gss2016 |>
+  # Filter out the "Oth"
+  filter(party != "Oth") 
+tab_politics <- gss_party |>
+  # Select columns of interest
+  select(natarms, party) |>
+  # Create table
+  table()
+# View the result
+tab_politics
+```
+## Test of Independence Hypotheses
+
+We would like to test the null hypothesis that opinions on how much money is spend on defense (`natarms`) is independent of party (`party`) affiliation.  The alternative hypothesis is that there is an association between opinions on how much money is spend on defense and party affiliation.
+
+## Graphing the Counts
+
+```{r}
+gss_party |> 
+  ggplot(aes(x = party, fill = natarms)) +
+  geom_bar() + 
+  theme_bw()
+```
+
+If we want to look at the proportions we would code the graph as follows:
+
+```{r}
+gss_party |> 
+  ggplot(aes(x = party, fill = natarms)) +
+  geom_bar(position = "fill") + 
+  theme_bw()
+```
+
+## Computing the expected counts
+
+```{r}
+tab_politics -> obs
+obs
+chisq.test(obs)$expected -> exp
+exp
+```
+
+## Computing the test statistic
+
+```{r}
+chi_sq_stat <- sum((obs - exp)^2/exp)
+chi_sq_stat
+```
+
+## Computing the p-value
+
+```{r}
+pchisq(chi_sq_stat, 4, lower = FALSE)
+# Making assumptions and using chisq.test()
+chisq.test(obs, correct = FALSE)
+```
+
+## Verifying the result without assumptions
+
+```{r}
+null_natarms <- gss_party |> 
+  specify(natarms ~ party) |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 10000, type = "permute") |> 
+  calculate(stat = "Chisq")
+visualize(null_natarms) + 
+  shade_p_value(chi_sq_stat, direction = "right")
+get_p_value(null_natarms, obs_stat = chi_sq_stat, direction = "right")
+```
+
+## Doing the same resampling process with a for loop
+
+```{r}
+set.seed(31)
+(T1 <- table(gss_party$natarms, gss_party$party))
+(obs_stat <- chisq.test(T1, correct = FALSE)$stat)
+P <- 10^4
+chi_stat <- numeric(P)
+for(i in 1:P){
+  chi_stat[i] <- chisq.test(table(gss_party$natarms, sample(gss_party$party)), correct = FALSE)$stat
+}
+hist(chi_stat)
+(p_value <- mean(chi_stat >= obs_stat))
+```
+## Conclusion
+
+Given the p-value ($`r p_value`$) is significantly less than $\alpha = 0.05$ we reject the null hypothesis and conclude there is an **association** between a persons opinion on the how much the country is spending on national defense and their party affiliation.
