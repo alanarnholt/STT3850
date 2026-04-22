@@ -1,6 +1,8 @@
 library(infer)
 library(tidyverse)
 library(moderndive)
+names(gss)
+str(gss)
 # Create a contingency table using gss for the variables sex and partyid
 xtabs(~sex + partyid, data = gss) -> T1
 T1
