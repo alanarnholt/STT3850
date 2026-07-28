@@ -93,7 +93,6 @@ ______________
 
 * Complete [PS-02](https://classroom.github.com/a/mXggb_gR) due by 5:00 pm Aug 27
 
-* **Quiz #1** Aug 28
 
 ```{block, week2optional, type='rmdoptional'}
 #### Optional {-}
@@ -125,7 +124,7 @@ __________________
 
 * In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/V9EAEhmH)
 
-* **Quiz #2** - Sep 4
+* **Quiz #1** - Sep 4
 
 
 
@@ -187,7 +186,6 @@ ___________
 
 * Complete [PS-04](https://classroom.github.com/a/vBV1KD6v) due by 5:00 pm Sep 10
 
-* **Quiz #3** Sep 11 
 
 
 ```{block, week4optional, type='rmdoptional'}
@@ -220,7 +218,7 @@ __________________
 
 * Complete [PS-05](https://classroom.github.com/a/o_eNFe3g) by 5:00 pm Sep 17
 
-* **Quiz #4** Sep 18
+* **Exam #1** Sep 18
 
 
 ```{block, week5optional, type='rmdoptional'}
@@ -249,7 +247,6 @@ _______________
 
 * Complete [PS-06](https://classroom.github.com/a/IkY2uHOT) by 5:00 pm Sep 24 
 
-* **Quiz #5**  Sep 25
 
 ```{block, week6optional, type='rmdoptional'}
 #### Optional {-}
@@ -275,7 +272,6 @@ _____________
 
 * [Probability](https://alanarnholt.github.io/GeneralStatistics/rmarkdown/probability.html)
 
-* **Quiz #6** Oct 2
 
 
 ```{block, week7optional, type='rmdoptional'}
@@ -303,7 +299,7 @@ ___________
 
 * Complete  the **Related distributions** chapter in _Foundations of Probability in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Oct 8
 
-* **Quiz #7** Oct 9 
+* **Quiz #2** Oct 9 
 
 _______________
 
@@ -318,7 +314,7 @@ _______________
 
 * Start [PS-07](https://classroom.github.com/a/yauAfDyL) due by 5:00 pm Oct 15
 
-* **Quiz #8**  Oct 16
+* **Test #2**  Oct 16
 
 
 
@@ -352,7 +348,6 @@ ___________________________
 
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
-* **Quiz #9** Oct 23
 
 
 ```{block, week10optional, type='rmdoptional'}
@@ -382,7 +377,7 @@ _______________________
 
 * Complete [PS-08](https://classroom.github.com/a/usPPma58) by 5:00 pm Oct 29
 
-* **Quiz #10** Oct 30
+* **Quiz #3** Oct 30
 
 _____________________
 
@@ -404,6 +399,8 @@ _____________________
 __________________
 
 ## Week 12: (Nov 2---6) {-}
+
+* NPC Nov 5-9
 
 * [Lecture Slides for weeks 11, 12, and 13](../Rmarkdown/Week11_12_13/Week11_12_13.pdf)
 
@@ -433,6 +430,8 @@ ______________________
 
 ## Week 13: (Nov 9---13) {-}
 
+* NPC Nov 5-9
+
 * [Lecture Slides for weeks 11, 12, and 13](../Rmarkdown/Week11_12_13/Week11_12_13.pdf)
 
 * Complete the **Inference for a Single Parameter** chapter in _Inference for Categorical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Nov 8
@@ -447,7 +446,7 @@ ______________________
 
 * Complete [PS-09](https://classroom.github.com/a/niy6TafV) by 5:00 pm Nov 12
 
-* **Quiz #11** Nov 13
+* **Exam #3** Nov 13
 
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
@@ -473,8 +472,6 @@ _________________
 
 * In class [Example 1](../Rmarkdown/InClassNotes.html) and [Example 2](../Quarto/Chi_Square.html)
 
-* **Quiz #12** Nov 20
-
 
 ```{block, week14optional, type='rmdoptional'}
 #### Optional {-}
@@ -499,8 +496,6 @@ ________________________
 * [Goodness-Of-Fit](../Handouts/ChiGOF.html)
 
 * In class [Example 1](../Rmarkdown/InClassNotes.html) and [Example 2](../Quarto/Chi_Square.html)
-
-* **Quiz #13** Nov 30
 
 * Course Review---Dec 1
 
