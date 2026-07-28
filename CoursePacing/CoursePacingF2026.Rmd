@@ -49,7 +49,7 @@ We will walk through everything outlined below in class.  If you want to complet
 
 * [VIDEO of the setup process](https://drive.google.com/file/d/1L-v9qAVHWtvXOTYjY8wvedH5VyzmeQeL/view?usp=drive_link)
 
-* Complete [PS-01](https://classroom.github.com/a/faGtQ02z) due by 5:00 pm Aug 21 
+* Complete [PS-01](https://classroom.github.com/a/8K5E9W5B) due by 5:00 pm Aug 21 
 * [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1JUag-0U-reD_JcKHvez50I_4R-CCMUMt/view?usp=drive_link)
  
 ```{block, week1optional, type='rmdoptional'}
@@ -91,7 +91,7 @@ ______________
 
 * Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Aug 24
 
-* Complete [PS-02](https://classroom.github.com/a/mXggb_gR) due by 5:00 pm Aug 27
+* Complete [PS-02](https://classroom.github.com/a/t6rM65zh) due by 5:00 pm Aug 27
 
 
 ```{block, week2optional, type='rmdoptional'}
@@ -120,9 +120,9 @@ __________________
 
 * [Scales](../Quarto/scales.html)
 
-* Complete [PS-03](https://classroom.github.com/a/ntSeGMft) by 5:00 pm Sep 3
+* Complete [PS-03](https://classroom.github.com/a/SLc1f-fS) by 5:00 pm Sep 3
 
-* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/V9EAEhmH)
+* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/gyNJbSzZ)
 
 * **Quiz #1** - Sep 4
 
@@ -162,11 +162,11 @@ Test yourself:
 
 * Work through chapter 4 (Data Manipulation) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
-* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/1f3Hi26V) 
+* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/p1mWolja) 
 
-* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/yKruzgNV) 
+* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/yRRj0-kd) 
 
-* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/GlLktIRG)  
+* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/M23eplJi)  
 ```
 
 ___________
@@ -184,7 +184,7 @@ ___________
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Sep 8
 
-* Complete [PS-04](https://classroom.github.com/a/vBV1KD6v) due by 5:00 pm Sep 10
+* Complete [PS-04](https://classroom.github.com/a/8PVWtyVK) due by 5:00 pm Sep 10
 
 
 
@@ -216,7 +216,7 @@ __________________
 
 * Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Sep 14
 
-* Complete [PS-05](https://classroom.github.com/a/o_eNFe3g) by 5:00 pm Sep 17
+* Complete [PS-05](https://classroom.github.com/a/FjrWiVhm) by 5:00 pm Sep 17
 
 * **Exam #1** Sep 18
 
@@ -245,7 +245,7 @@ _______________
 
 * Complete the **Random Numbers and Probability** chapter of _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-s2026/assignments) --- Due NLT 5:00 pm Sep 21
 
-* Complete [PS-06](https://classroom.github.com/a/IkY2uHOT) by 5:00 pm Sep 24 
+* Complete [PS-06](https://classroom.github.com/a/0Cho6KfQ) by 5:00 pm Sep 24 
 
 
 ```{block, week6optional, type='rmdoptional'}
@@ -309,7 +309,7 @@ _______________
 
 * Before class read chapter 7 (Sampling) of [MD](https://moderndive.com/7-sampling.html) --- pgs 195-232
 
-* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/CRAoB8Zm) by 5:00 pm Oct 12 --- not graded
+* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/SNc2Yj1I) by 5:00 pm Oct 12 --- not graded
 [Partial Solution](https://mathr.appstate.edu/connect/content/2d388531-2e05-485b-9f58-83855a1437e3)
 
 * Start [PS-07](https://classroom.github.com/a/yauAfDyL) due by 5:00 pm Oct 15
@@ -375,7 +375,7 @@ _______________________
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
-* Complete [PS-08](https://classroom.github.com/a/usPPma58) by 5:00 pm Oct 29
+* Complete [PS-08](https://classroom.github.com/a/cyd7CygN) by 5:00 pm Oct 29
 
 * **Quiz #3** Oct 30
 
@@ -444,7 +444,7 @@ ______________________
 
 * [One Proportion](../Quarto/onep.html)
 
-* Complete [PS-09](https://classroom.github.com/a/niy6TafV) by 5:00 pm Nov 12
+* Complete [PS-09](https://classroom.github.com/a/9WGcLCyR) by 5:00 pm Nov 12
 
 * **Exam #3** Nov 13
 
