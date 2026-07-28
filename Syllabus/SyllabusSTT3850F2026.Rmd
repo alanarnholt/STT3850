@@ -11,7 +11,7 @@ output:
 
 **Instructor:**  Dr. Alan T. Arnholt    
 **Office:** Walker Hall 237      
-**Student Help Hours:** 10am---10:50am MTRF, and by appointment.
+**Student Help Hours:** 10am---10:50am MTWF, and by appointment.
 
 Make an appointment to see me by clicking [here](https://calendar.app.google/brgFqeP18zqU3Ff59).
 
@@ -101,7 +101,7 @@ ___________
 
 **Assignments**
 
-The [Course Pacing Guide](../CoursePacing/CoursePacingS2026.html) has all course assignments and due dates.
+The [Course Pacing Guide](../CoursePacing/CoursePacingF2026.html) has all course assignments and due dates.
 
 ____________
 
