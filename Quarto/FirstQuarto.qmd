@@ -1,0 +1,68 @@
+---
+title: "Some Instructive Title Goes Here"
+format: html
+editor: source
+---
+
+# First Level Header
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.  To get quick help, one might use *Help* -> *Markdown Quick Reference*.
+
+## Second Level Header
+
+When you click the ***Render*** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+### Third Level Header
+
+Consider using data (Data Frame) from an `R` package such as `PASWR2`.  First the package must be loaded (if it is installed - `PASWR2` is installed on the server) using the function `library()`.
+
+```{r}
+#| message: false
+# Using message: false will remove messages that may appear after running certain functions.
+library(PASWR2)
+# show the first five rows of VIT2005
+head(VIT2005)
+library(tidyverse)
+ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
+  geom_point() + 
+  theme_bw()
+ggplot(data = VIT2005, aes(x = area, y = totalprice, color = as.factor(elevator))) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_smooth(method = "lm")
+```
+
+### Some Descriptive statistics
+
+```{r}
+VIT2005 |> 
+  group_by(elevator) |> 
+  summarize(Mean_Area = mean(area), MeanTotalprice = mean(totalprice))
+```
+
+Let's make the output look better:
+
+```{r}
+VIT2005 |> 
+  group_by(elevator) |> 
+  summarize(Mean_Area = mean(area), Mean_TotalPrice = mean(totalprice)) -> stuff
+library(knitr)
+kable(stuff)
+```
+
+Use some inline `r` code now to report the average area for apartments with elevators.
+
+The average area for apartments with an elevator is `r round(stuff$Mean_Area[2],2)` $\text{m}^2$.
