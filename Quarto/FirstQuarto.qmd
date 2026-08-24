@@ -36,13 +36,16 @@ library(PASWR2)
 # show the first five rows of VIT2005
 head(VIT2005)
 library(tidyverse)
+library(scales)
 ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
   geom_point() + 
-  theme_bw()
+  theme_bw() + 
+  scale_y_continuous(labels = label_dollar(prefix = "€"))
 ggplot(data = VIT2005, aes(x = area, y = totalprice, color = as.factor(elevator))) + 
   geom_point() + 
   theme_bw() + 
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm") + 
+  scale_y_continuous(labels = label_dollar(prefix = "€"))
 ```
 
 ### Some Descriptive statistics
