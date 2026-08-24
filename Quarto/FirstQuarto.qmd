@@ -87,3 +87,6 @@ kable(stuff)
 Use some inline `r` code now to report the average area for apartments with elevators.
 
 The average area for apartments with an elevator is `r round(stuff$Mean_Area[2],2)` $\text{m}^2$.
+
+
+
