@@ -40,17 +40,35 @@ library(scales)
 ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
   geom_point() + 
   theme_bw() + 
-  scale_y_continuous(labels = label_dollar(prefix = "€"))
+  scale_y_continuous(labels = label_currency(prefix = "€"))
 ggplot(data = VIT2005, aes(x = area, y = totalprice, color = as.factor(elevator))) + 
   geom_point() + 
   theme_bw() + 
   geom_smooth(method = "lm") + 
-  scale_y_continuous(labels = label_dollar(prefix = "€"))
+  scale_y_continuous(labels = label_currency(
+    big.mark = ".", 
+      decimal.mark = ",", 
+      suffix = "€", 
+      prefix = "")
+    ) 
+
+ggplot(data = VIT2005, aes(x = area, y = totalprice, color = as.factor(elevator))) + 
+  geom_point() + 
+  theme_bw() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  scale_y_continuous(labels = label_currency(
+    big.mark = ".", 
+      decimal.mark = ",", 
+      suffix = "€", 
+      prefix = "")
+    ) +
+  labs(color = "Elevator")
 ```
 
 ### Some Descriptive statistics
 
 ```{r}
+VIT2005$elevator <- factor(VIT2005$elevator, levels = c("0", "1"), labels = c("No", "Yes"))
 VIT2005 |> 
   group_by(elevator) |> 
   summarize(Mean_Area = mean(area), MeanTotalprice = mean(totalprice))
