@@ -103,6 +103,8 @@ ______________
 
 * Complete _Data Visualization with `ggplot2`_ (Part 1) [(DataCamp)](https://www.datacamp.com/)
 
+* Find the file `5ng.qmd` in the `Rmarkdown` directory of the class and complete the document.
+
 ```
 
 __________________
