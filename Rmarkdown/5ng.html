@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alan Arnholt">
+<meta name="author" content="Alan T. Arnholt">
 
 <title>In Class Demo</title>
 <style>
@@ -128,14 +128,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Alan Arnholt </p>
+             <p>Alan T. Arnholt </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified on August 28, 2026 10:13:45 Eastern Daylight Time</p>
+      <p class="date">Last modified on August 28, 2026 13:08:11 Eastern Daylight Time</p>
     </div>
   </div>
   
@@ -189,14 +189,14 @@ Figure&nbsp;1: This is a scatterplot of pressure versus temperature
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>RN <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">2500</span>, <span class="fl">8.7952</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>(xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(RN))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2500.235</code></pre>
+<pre><code>[1] 2500.419</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(S <span class="ot">&lt;-</span> <span class="fu">sd</span>(RN))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.61068</code></pre>
+<pre><code>[1] 8.917359</code></pre>
 </div>
 </div>
-<p>The mean of <code>RN</code> is 2500.23 and the standard deviation is 8.61.</p>
+<p>The mean of <code>RN</code> is 2500.42 and the standard deviation is 8.92.</p>
 </section>
 <section id="using-latex" class="level2">
 <h2 class="anchored" data-anchor-id="using-latex">Using <span class="math inline">\(\LaTeX\)</span></h2>
@@ -245,12 +245,12 @@ Figure&nbsp;1: This is a scatterplot of pressure versus temperature
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(RND)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         x
-1 2508.132
-2 2506.292
-3 2508.677
-4 2489.206
-5 2508.832
-6 2502.234</code></pre>
+1 2488.738
+2 2509.955
+3 2502.026
+4 2502.293
+5 2494.241
+6 2501.858</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> RND, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> ..density..)) <span class="sc">+</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"pink"</span>) <span class="sc">+</span> </span>
