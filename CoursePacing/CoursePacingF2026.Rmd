@@ -49,7 +49,7 @@ We will walk through everything outlined below in class.  If you want to complet
 
 * [VIDEO of the setup process](https://drive.google.com/file/d/1L-v9qAVHWtvXOTYjY8wvedH5VyzmeQeL/view?usp=drive_link)
 
-* Complete [PS-01](https://classroom.github.com/a/8K5E9W5B) due by 5:00 pm Aug 21 
+* Complete [PS-01](https://github.com/STAT-ATA-ASU/MD-PS01-SC) due by 5:00 pm Aug 21 
 * [VIDEO of how to accept and clone the assignment](https://drive.google.com/file/d/1JUag-0U-reD_JcKHvez50I_4R-CCMUMt/view?usp=drive_link)
  
 ```{block, week1optional, type='rmdoptional'}
@@ -91,7 +91,7 @@ ______________
 
 * Complete the **Types of Visualizations** chapter of _Introduction to the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Aug 24
 
-* Complete [PS-02](https://classroom.github.com/a/t6rM65zh) due by 5:00 pm Aug 27
+* Complete [PS-02](https://github.com/STAT-ATA-ASU/MD-PS02-SC) due by 5:00 pm Aug 27
 
 
 ```{block, week2optional, type='rmdoptional'}
@@ -122,9 +122,9 @@ __________________
 
 * [Scales](../Quarto/scales.html)
 
-* Complete [PS-03](https://classroom.github.com/a/SLc1f-fS) by 5:00 pm Sep 3
+* Complete [PS-03](https://github.com/STAT-ATA-ASU/MD-PS03-SC) by 5:00 pm Sep 3
 
-* In-class work on [dplyr-CH1-handout](https://classroom.github.com/a/gyNJbSzZ)
+* In-class work on [dplyr-CH1-handout](https://github.com/STAT-ATA-ASU/dplyrCH1_handout_SC)
 
 * **Quiz #1** - Sep 4
 
@@ -164,11 +164,11 @@ Test yourself:
 
 * Work through chapter 4 (Data Manipulation) of [DSWR](https://stat-ata-asu.github.io/R_DS_BD2020/)
 
-* In-class work on [dplyr-CH2-handout](https://classroom.github.com/a/p1mWolja) 
+* In-class work on [dplyr-CH2-handout](https://github.com/STAT-ATA-ASU/dplyrCH2_SC) 
 
-* In-class work on [dplyr-CH3-handout](https://classroom.github.com/a/yRRj0-kd) 
+* In-class work on [dplyr-CH3-handout](https://github.com/STAT-ATA-ASU/dplyrCH3_SC) 
 
-* In-class work on [dplyr-CH4-handout](https://classroom.github.com/a/M23eplJi)  
+* In-class work on [dplyr-CH4-handout](https://github.com/STAT-ATA-ASU/dplyrCH4_SC)  
 ```
 
 ___________
@@ -186,7 +186,7 @@ ___________
 
 * Complete the **Modeling with Basic Regression** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Sep 8
 
-* Complete [PS-04](https://classroom.github.com/a/8PVWtyVK) due by 5:00 pm Sep 10
+* Complete [PS-04](https://github.com/STAT-ATA-ASU/MD-PS04-SC) due by 5:00 pm Sep 10
 
 
 
@@ -218,7 +218,7 @@ __________________
 
 * Complete the **Model Assessment and Selection** chapter of _Modeling with Data in the Tidyverse_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Sep 14
 
-* Complete [PS-05](https://classroom.github.com/a/FjrWiVhm) by 5:00 pm Sep 17
+* Complete [PS-05](https://github.com/STAT-ATA-ASU/MD-PS05-SC) by 5:00 pm Sep 17
 
 * **Exam #1** Sep 18
 
@@ -247,7 +247,7 @@ _______________
 
 * Complete the **Random Numbers and Probability** chapter of _Introduction to Statistics in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Sep 21
 
-* Complete [PS-06](https://classroom.github.com/a/0Cho6KfQ) by 5:00 pm Sep 24 
+* Complete [PS-06](https://github.com/STAT-ATA-ASU/MD-PS06-SC) by 5:00 pm Sep 24 
 
 
 ```{block, week6optional, type='rmdoptional'}
@@ -314,7 +314,7 @@ _______________
 * Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/SNc2Yj1I) by 5:00 pm Oct 12 --- not graded
 [Partial Solution](https://mathr.appstate.edu/connect/content/2d388531-2e05-485b-9f58-83855a1437e3)
 
-* Start [PS-07](https://classroom.github.com/a/yauAfDyL) due by 5:00 pm Oct 15
+* Start [PS-07](https://github.com/STAT-ATA-ASU/MD-PS07-SC) due by 5:00 pm Oct 15
 
 * **Test #2**  Oct 16
 
@@ -377,7 +377,7 @@ _______________________
 
 * [Bootstrap $t$](../Rmarkdown/MoreBootstrapping.html)
 
-* Complete [PS-08](https://classroom.github.com/a/cyd7CygN) by 5:00 pm Oct 29
+* Complete [PS-08](https://github.com/STAT-ATA-ASU/MD-PS08-SC) by 5:00 pm Oct 29
 
 * **Quiz #3** Oct 30
 
@@ -446,7 +446,7 @@ ______________________
 
 * [One Proportion](../Quarto/onep.html)
 
-* Complete [PS-09](https://classroom.github.com/a/9WGcLCyR) by 5:00 pm Nov 12
+* Complete [PS-09](https://github.com/STAT-ATA-ASU/MD-PS09-SC) by 5:00 pm Nov 12
 
 * **Exam #3** Nov 13
 
