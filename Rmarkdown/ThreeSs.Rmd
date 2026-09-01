@@ -1,0 +1,44 @@
+---
+title: "SSS"
+author: "Alan T. Arnholt"
+date: 'Last compiled: `r format(Sys.time(), "%B %d, %Y at %X")`'
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+library(tidyverse)
+```
+
+
+
+```{r, label = "HIS", fig.cap = "Histogram", echo = FALSE}
+i <- sample(1:3, 1)
+if(i == 1){
+  xs <- rnorm(500, 100, 15)
+} else if(i == 2){
+  xs <- rexp(500, .01)
+} else {
+  xs <- (-1)*rexp(500, .01)
+}
+hist(xs, col = "pink", main = "", breaks = 20)
+```
+
+```{r, echo = FALSE}
+g1 <- e1071::skewness(xs)
+Shapes <- ifelse(abs(g1) <= 0.2, "symmetric", ifelse(g1 > 0.2, "right skewed", "left skewed"))
+
+if(Shapes == "symmetric"){
+  ans <- c("the mean", round(mean(xs),4),"the standard deviation", round(sd(xs),4))
+} else {
+  ans <- c("the median", round(median(xs),4), "the IQR", round(IQR(xs),4))
+}
+```
+
+```{r, label = "TABLE", echo = FALSE}
+DF <- data.frame(Mean = mean(xs), Median = median(xs), StDev = sd(xs), IQR = IQR(xs), Skew = e1071::skewness(xs))
+knitr::kable(DF, col.names = c("$\\bar{x}$", "$\\hat{\\theta}$", "$\\hat{\\sigma}$", "$\\text{IQR}$", "$\\text{G}_1$"), caption = "Summary statistics for the values in Figure \\@ref(fig:HIS)")
+```
+
+
+The distribution in Figure \@ref(fig:HIS) is unimodal and `r Shapes`. Appropriate measures of center and spread for Figure \@ref(fig:HIS) shown in Table \@ref(tab:TABLE) are `r ans[1:2]`, and `r ans[3:4]`, respectively. 
