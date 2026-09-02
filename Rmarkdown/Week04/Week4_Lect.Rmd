@@ -295,7 +295,7 @@ knitr::include_graphics("week4_2.png")
 ```
 
 
-## Correlation coefficien: GPA Example
+## Correlation coefficient: GPA Example
 
 Following are the high school GPAs and the college GPAs at the end of the freshman year for ten different students from the `Gpa` data set of the `BSDA` package.
 
@@ -321,7 +321,7 @@ ggplot(data = Gpa, aes(x = hsgpa, y = collgpa)) +
 
 The scatterplot shows that the college GPA increases as the high school GPA increases
 
-## Correlation coefficien: GPA Example
+## Correlation coefficient: GPA Example
 
 \small
 ```{r}
