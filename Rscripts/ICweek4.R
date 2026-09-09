@@ -38,4 +38,9 @@ ggplot(data = ames2, aes(x = Log10Gr_Liv_Area, y = Log10Sale_Price)) +
   geom_smooth(method = "lm", se = FALSE)
 
 
+# Use only the Residential homes (type) from the tibble Sacramento
+# Create a scatterplot of price versus sqft
 
+Sacramento |> 
+  filter(type=="Residential") -> sacramento
+ggplot(data = sacramento, aes(x = sqft, y= price)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
