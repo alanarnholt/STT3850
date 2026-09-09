@@ -48,7 +48,19 @@ ggplot(data = VIT2005, aes(x = area, y = totalprice)) +
 get_regression_points(model_lm) |> 
   arrange(desc(residual))
 
+get_regression_points(model_lm) -> RP
+RP
+
+ggplot(data = RP, aes(x = area, y = residual)) +
+  geom_point()
+
+# Base R
+plot(model_lm)
+plot(model_lm, which = 1)
+
+
 ggplot(data = VIT2005, aes(x = area, y = totalprice)) + 
   geom_point() + 
   theme_bw() + 
   geom_smooth(method = "lm", se = FALSE) 
+

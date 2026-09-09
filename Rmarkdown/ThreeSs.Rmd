@@ -26,7 +26,7 @@ hist(xs, col = "pink", main = "", breaks = 20)
 
 ```{r, echo = FALSE}
 g1 <- e1071::skewness(xs)
-Shapes <- ifelse(abs(g1) <= 0.2, "symmetric", ifelse(g1 > 0.2, "right skewed", "left skewed"))
+Shapes <- ifelselibrary(PASWR2(abs(g1) <= 0.2, "symmetric", ifelse(g1 > 0.2, "right skewed", "left skewed"))
 
 if(Shapes == "symmetric"){
   ans <- c("the mean", round(mean(xs),4),"the standard deviation", round(sd(xs),4))
