@@ -18,7 +18,7 @@ get_regression_table(model_lm)
 
 get_regression_table(model_lm) -> T1
 T1
-
+T1[1,2]
 T1$estimate
 b0 <- T1$estimate[1]
 b1 <- T1$estimate[2]

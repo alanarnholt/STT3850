@@ -2,6 +2,14 @@
 library(tidymodels)
 ames
 # Characterize the distribution of Sale_Price
+ggplot(data = ames, aes(x = Sale_Price)) +
+  geom_density()
+
+ames |> 
+  summarize(e1071::skewness(Sale_Price), 
+            MD = median(Sale_Price),
+            IQR = IQR(Sale_Price))
+
 
 ## Create a scatter plot of Sale_Price vs Gr_Liv_Area
 ggplot(data = ames, aes(x = Gr_Liv_Area, y = Sale_Price)) + 
@@ -21,7 +29,7 @@ ggplot(data = ames2, aes(x = Log10Sale_Price)) +
 
 # Create a scatter plot of Log10Sale_Price versus Log10Gr_Liv_Area
 
-ggplot(data = ames2, aes(x = Log10Gr_Liv_Area, y = Log10Sale_Price)) + 
+ggplot(data = ames2, aes(x = Log10Gr_Liv_Area, y = Log10Sale_Price, color = Heating)) + 
   geom_point()
 
 # Compute the correalation between Log10Gr_Liv_Area and Log10Sale_Price
@@ -44,3 +52,15 @@ ggplot(data = ames2, aes(x = Log10Gr_Liv_Area, y = Log10Sale_Price)) +
 Sacramento |> 
   filter(type=="Residential") -> sacramento
 ggplot(data = sacramento, aes(x = sqft, y= price)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
+
+
+ames3 <- ames2 |> 
+  filter(Central_Air=="Y", MS_SubClass=="One_Story_1946_and_Newer_All_Styles", Bldg_Type=="OneFam")
+
+ggplot(data = ames3, aes(x = Log10Gr_Liv_Area, y = Log10Sale_Price)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+
+ggplot(data = ames2, aes(x = Gr_Liv_Area, y = Sale_Price)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
