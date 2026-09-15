@@ -147,17 +147,24 @@ Note: `moderndive` wrapper functions round answers.  This is not always a good t
 ```{r}
 names(gapminder1982)
 mod_full <- lm(lifeexp ~ gdppercap*continent, data = gapminder1982)
+
 mod_simple <- lm(lifeexp ~ gdppercap, data = gapminder1982)
+
 anova(mod_simple, mod_full)
 anova(mod_full)
 modpar <- lm(lifeexp ~ gdppercap + continent, data = gapminder1982)
 summary(modpar)
 library(moderndive)
+get_regression_table(mod_simple) |> knitr::kable()
 ggplot(data = gapminder1982, aes(x = gdppercap, y = lifeexp, color = continent)) + 
   geom_point() + 
   geom_parallel_slopes(se = FALSE) + 
   theme_bw()
-
+get_regression_table(mod_full) |>  knitr::kable()
+ggplot(data = gapminder1982, aes(x = gdppercap, y = lifeexp, color = continent)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw()
 ```
 
 
