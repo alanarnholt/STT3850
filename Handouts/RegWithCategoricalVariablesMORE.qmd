@@ -1,0 +1,184 @@
+---
+title: "One Categorical Variable - Hints"
+author: "ATA - In-class"
+date: last-modified
+date-format: "[Last modified on] MMMM DD, YYYY HH:mm:ss zzz"
+format: 
+  html: 
+    theme: cosmo
+  pdf: default
+editor: source
+code-fold: true
+---
+
+____________
+
+```{r}
+#| include: false
+# Do not edit this code block/chunk!
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", comment = NA, message = FALSE,  warning = FALSE, fig.width = 16/2, fig.height = 9/2)
+library(tidyverse)
+library(moderndive)
+library(gapminder)
+library(data.table)
+library(janitor)
+```
+
+
+# Exploratory Data Analysis
+
+::: {.callout-caution icon="false" title="R Code"}
+```{r}
+library(gapminder)
+gapminder1982 <- gapminder |> 
+  filter(year == 1982) |> 
+  rename(lifeexp = lifeExp, gdppercap = gdpPercap) |> 
+  select(country, lifeexp, continent, gdppercap) 
+gapminder1982 |> 
+  head() |> 
+  kable()
+```
+
+```{r}
+#| echo: fenced
+#| label: "fig-exp"
+#| fig-cap: "Worldwide life expectancies in 1982"
+ggplot(data = gapminder1982, aes(x = lifeexp)) +
+  geom_histogram(binwidth = 3,
+                 color = "black",
+                 fill = "darkgreen") +
+  theme_bw() +
+  labs(title = "Worldwide life expectancies in 1982",
+       x = "Life expectancy in years",
+       y = "Number of countries")
+```
+
+Based on @fig-exp, woldwide life expectancies in 1982 has a unimodal skew left distribution with statistics given in @tbl-stat.
+
+```{r}
+#| echo: fenced
+#| label: "tbl-stat"
+#| tbl-cap: "Descriptive statistics" 
+library(e1071)
+gapminder1982 |> 
+  summarize(
+    Median = median(lifeexp),
+    IQR = IQR(lifeexp),
+    Skew = skewness(lifeexp)
+  ) -> T1
+T1 |> 
+  knitr::kable()
+```
+
+
+```{r}
+ggplot(data = gapminder1982, aes(x = lifeexp)) +
+  geom_histogram(binwidth = 3,
+                 color = "black",
+                 fill = "darkgreen") +
+  theme_bw() +
+  labs(title = "Worldwide life expectancies in 1982",
+       x = "Life expectancy in years",
+       y = "Number of countries") +
+  facet_wrap(vars(continent))
+```
+
+```{r}
+#| label: "tbl-age"
+#| tbl-cap: "Statistics by continent"
+gapminder1982 |>
+  group_by(continent) |>
+  summarize(
+    Mean = mean(lifeexp),
+    SD = sd(lifeexp),
+    Median = median(lifeexp),
+    IQR = IQR(lifeexp)
+  ) -> results
+results |> 
+  knitr::kable()
+```
+
+```{r}
+lifeexp_mod <- lm(lifeexp ~ continent, data = gapminder1982)
+get_regression_table(lifeexp_mod) -> T2
+T2 |> 
+  knitr::kable()
+#OR
+T2 |> 
+  gt::gt()
+```
+:::
+
+
+
+1. Report the average life expectancy for Africans in 1982 using `lifeexp_mod`.
+
+
+```{r}
+T2[1, "estimate"] |> pull()
+T2[1, 2] |> pull()
+coef(lifeexp_mod)[1]
+```
+
++ The average life expectancy for Africans in 1982 was `r T2[1,2] |> pull()` years.  Or, one could use `coef(lifeexp_mod)[1]` to return `r  coef(lifeexp_mod)[1]` years. 
+
+
+2. Report the average life expectancy for Europeans in 1982 using `lifeexp_mod`.
+
+
+
+```{r}
+T2[1,2] |> pull() + T2[4,2] |> pull()
+coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4]
+round(coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4],3)
+predict(lifeexp_mod, newdata = data.frame(continent = "Europe"))
+```
+
+
++ The average life expectancy for Europeans in 1982 was `r T2[1,2] |> pull() + T2[4,2] |> pull()` years.
+
+Note: `moderndive` wrapper functions round answers.  This is not always a good thing.  It is best to leave the rounding until the very end! Consider the following inline R code.
+
++ The average life expectancy for Europeans in 1982 was `r coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4]` years.  Which if you want to round to three decimal places would be: `r round(coef(lifeexp_mod)[1] + coef(lifeexp_mod)[4],3)` years.  Another way to get the desired answer is with the `predict()` function.  The average life expectancy for Europeans in 1982 was `r predict(lifeexp_mod, newdata = data.frame(continent = "Europe"))` years.
+
+ 
+
+```{r}
+names(gapminder1982)
+mod_full <- lm(lifeexp ~ gdppercap*continent, data = gapminder1982)
+
+mod_simple <- lm(lifeexp ~ gdppercap + continent, data = gapminder1982)
+
+anova(mod_simple, mod_full)
+anova(mod_full)
+modpar <- lm(lifeexp ~ gdppercap + continent, data = gapminder1982)
+summary(modpar)
+library(moderndive)
+get_regression_table(mod_simple) |> knitr::kable()
+ggplot(data = gapminder1982, aes(x = gdppercap, y = lifeexp, color = continent)) + 
+  geom_point() + 
+  geom_parallel_slopes(se = FALSE) + 
+  theme_bw()
+get_regression_table(mod_full) |>  knitr::kable()
+summary(mod_full)
+ggplot(data = gapminder1982, aes(x = gdppercap, y = lifeexp, color = continent)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw()
+```
+
+
+```{r}
+summary(mod_full)
+ggplot(data = gapminder1982, aes(x = gdppercap, y = lifeexp, color = continent)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  theme_bw() + 
+  geom_abline(intercept = coef(mod_full)[1], slope = coef(mod_full)[2], color = "red", linetype = "dashed") + 
+  geom_abline(intercept = coef(mod_full)[1] + coef(mod_full)[3], slope = coef(mod_full)[2] + coef(mod_full)[7], color = "green", linetype = "dashed") +
+  geom_abline(intercept = coef(mod_full)[1] + coef(mod_full)[4], slope = coef(mod_full)[2] + coef(mod_full)[8], color = "darkgreen", linetype = "dashed") + 
+  geom_abline(intercept = coef(mod_full)[1] + coef(mod_full)[5], slope = coef(mod_full)[2] + coef(mod_full)[9], color = "blue", linetype = "dashed") + 
+  geom_abline(intercept = coef(mod_full)[1] + coef(mod_full)[6], slope = coef(mod_full)[2] + coef(mod_full)[10], color = "purple", linetype = "dashed") 
+```
+
