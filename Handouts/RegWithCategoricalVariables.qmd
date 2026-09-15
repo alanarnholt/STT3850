@@ -161,6 +161,7 @@ ggplot(data = gapminder1982, aes(x = gdppercap, y = lifeexp, color = continent))
   geom_parallel_slopes(se = FALSE) + 
   theme_bw()
 get_regression_table(mod_full) |>  knitr::kable()
+summary(mod_full)
 ggplot(data = gapminder1982, aes(x = gdppercap, y = lifeexp, color = continent)) + 
   geom_point() + 
   geom_smooth(method = "lm", se = FALSE) + 
