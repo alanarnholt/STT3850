@@ -148,7 +148,7 @@ Note: `moderndive` wrapper functions round answers.  This is not always a good t
 names(gapminder1982)
 mod_full <- lm(lifeexp ~ gdppercap*continent, data = gapminder1982)
 
-mod_simple <- lm(lifeexp ~ gdppercap, data = gapminder1982)
+mod_simple <- lm(lifeexp ~ gdppercap + continent, data = gapminder1982)
 
 anova(mod_simple, mod_full)
 anova(mod_full)
