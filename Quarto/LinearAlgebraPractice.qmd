@@ -1,0 +1,33 @@
+---
+title: "Linear Algebra Practice"
+format: html
+editor: visual
+---
+
+1. Use the following code to read in data and store the results in `Credit`
+
+```{r}
+Credit <- read.csv("http://statlearning.com/s/Credit.csv")
+```
+
+2. Create a linear model object named `mod_num` by regressing `Balance` onto `Income`, `Limit`, `Rating`, `Cards` and `Age`.
+
+3. Create the model matrix and store the results in `X`.
+
+4. Create the matrix $X'X^{-1}$ and store the result in `XTX`.
+
+5. Find the inverse of $X'X^{-1}$ and store the result in `XTXI`.
+
+6. Verify that the answer you computed in 5. is the same thing as `summary(mod_num)$cov.unscaled`.
+
+7. Use the normal equations to find the coefficients for `mod_num`.  Verify that your estimates computed with the normal equations are the same as `coef(mod_num)`.
+
+8.  What is the MSE for `mod_num`.
+
+9. Compute the variance covariance matrix for your estimated coefficients.  Store the values in an object named `var_cov_b`.
+
+10.  Compute the standard errors for your estimated coefficients.  Verify that your answers are the same as `summary(mod_num)$coef[, 2]`.
+
+11. Compute the t values using your answers from 7. and 10.  Verify that the values are the same as `summary(mod_num)$coef[, 3]`
+
+12.  Compute the p-values for testing $H_0:\beta_{i} = 0$ versus $H_0:\beta_{i}\neq 0$ for $i =0,...,5$.
