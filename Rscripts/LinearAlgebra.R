@@ -4,18 +4,24 @@ library(tidyverse)
 library(moderndive)
 mod_num <- lm(Balance ~ Income + Limit + Rating + Cards + Age, data = Credit)
 model.matrix(mod_num) -> X
-head(X)
+X
+XTX <- t(X)%*%X
+XTX
+XTXI <- solve(XTX)
+XTXI
+summary(mod_num)$cov.unscaled
+
 betahat <- solve(t(X)%*%X)%*%t(X)%*%Credit$Balance
 betahat
 coef(mod_num)
-XTXI <- summary(mod_num)$cov.unscaled
-XTXI
+
 MSE <- summary(mod_num)$sigma^2
 MSE
 var_cov_b <- MSE*XTXI
 var_cov_b
 diag(var_cov_b)
 se_b <- diag(var_cov_b)^.5
+se_b
 b <- coef(mod_num)
 b
 se_b
