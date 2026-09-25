@@ -12,22 +12,92 @@ Credit <- read.csv("http://statlearning.com/s/Credit.csv")
 
 2.  Create a linear model object named `mod_num` by regressing `Balance` onto `Income`, `Limit`, `Rating`, `Cards` and `Age`.
 
+```{r}
+mod_num <- lm(Balance ~ Income + Limit + Rating + Cards + Age, data = Credit)
+mod_num
+summary(mod_num)
+```
+
 3.  Create the model matrix and store the results in `X`.
+
+```{r}
+X <- model.matrix(mod_num)
+head(X)
+```
 
 4.  Create the matrix $X'X$ and store the result in `XTX`.
 
+```{r}
+XTX <- t(X)%*%X
+XTX
+```
+
+\pagebreak
+
 5.  Find the inverse of $(X'X)^{-1}$ and store the result in `XTXI`.
+
+```{r}
+XTXI <- solve(XTX)
+XTXI
+```
+
 
 6.  Verify that the answer you computed in 5. is the same thing as `summary(mod_num)$cov.unscaled`.
 
+```{r}
+summary(mod_num)$cov.unscaled -> p6
+p6
+all.equal(XTXI, p6, tolerance = 0.0000001)
+```
+
+
 7.  Use the normal equations to find the coefficients for `mod_num`. Verify that your estimates computed with the normal equations are the same as `coef(mod_num)`.
+
+```{r}
+betahat <- XTXI%*%t(X)%*%Credit$Balance
+betahat
+coef(mod_num)
+```
 
 8.  What is the MSE for `mod_num`.
 
+```{r}
+MSE <- summary(mod_num)$sigma^2
+MSE
+```
+
+
 9.  Compute the variance covariance matrix for your estimated coefficients. Store the values in an object named `var_cov_b`.
+
+```{r}
+var_cov_b <- MSE*XTXI
+var_cov_b
+```
+
 
 10. Compute the standard errors for your estimated coefficients. Verify that your answers are the same as `summary(mod_num)$coef[, 2]`.
 
+```{r}
+se_b <- diag(var_cov_b)^.5
+se_b
+summary(mod_num)$coef[,2]
+```
+
+
 11. Compute the t values using your answers from 7. and 10. Verify that the values are the same as `summary(mod_num)$coef[, 3]`
 
+```{r}
+Ts <- betahat/se_b
+Ts
+summary(mod_num)$coef[, 3]
+```
+
+
 12. Compute the p-values for testing $H_0:\beta_{i} = 0$ versus $H_0:\beta_{i}\neq 0$ for $i =0,...,5$.
+
+```{r}
+ps <- pt(abs(Ts), 394, lower = FALSE)*2
+ps
+summary(mod_num)$coef[, 4]
+```
+

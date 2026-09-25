@@ -142,8 +142,8 @@ window.Quarto = {
 <ol start="2" type="1">
 <li><p>Create a linear model object named <code>mod_num</code> by regressing <code>Balance</code> onto <code>Income</code>, <code>Limit</code>, <code>Rating</code>, <code>Cards</code> and <code>Age</code>.</p></li>
 <li><p>Create the model matrix and store the results in <code>X</code>.</p></li>
-<li><p>Create the matrix <span class="math inline">\(X'X^{-1}\)</span> and store the result in <code>XTX</code>.</p></li>
-<li><p>Find the inverse of <span class="math inline">\(X'X^{-1}\)</span> and store the result in <code>XTXI</code>.</p></li>
+<li><p>Create the matrix <span class="math inline">\(X'X\)</span> and store the result in <code>XTX</code>.</p></li>
+<li><p>Find the inverse of <span class="math inline">\((X'X)^{-1}\)</span> and store the result in <code>XTXI</code>.</p></li>
 <li><p>Verify that the answer you computed in 5. is the same thing as <code>summary(mod_num)$cov.unscaled</code>.</p></li>
 <li><p>Use the normal equations to find the coefficients for <code>mod_num</code>. Verify that your estimates computed with the normal equations are the same as <code>coef(mod_num)</code>.</p></li>
 <li><p>What is the MSE for <code>mod_num</code>.</p></li>
