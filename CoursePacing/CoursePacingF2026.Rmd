@@ -402,7 +402,7 @@ __________________
 
 ## Week 12: (Nov 2---6) {-}
 
-* NPC Nov 5-9
+* NIPC Nov 4-9
 
 * [Lecture Slides for weeks 11, 12, and 13](../Rmarkdown/Week11_12_13/Week11_12_13.pdf)
 
@@ -432,7 +432,7 @@ ______________________
 
 ## Week 13: (Nov 9---13) {-}
 
-* NPC Nov 5-9
+* NIPC Nov 4-9
 
 * [Lecture Slides for weeks 11, 12, and 13](../Rmarkdown/Week11_12_13/Week11_12_13.pdf)
 
