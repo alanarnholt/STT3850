@@ -36,6 +36,10 @@ XTX
 
 5.  Find the inverse of $(X'X)^{-1}$ and store the result in `XTXI`.
 
+
+
+
+
 ```{r}
 XTXI <- solve(XTX)
 XTXI
