@@ -258,6 +258,8 @@ _______________
 * Work on [Is this Discrimination?](../Rmarkdown/ClassAssignment.html)
 
 * Some ideas for how to answer the [Is this Discrimination?](../Rmarkdown/discrimination.html)
+
+* [Linear Algebra Practice](https://mathr.appstate.edu/connect/content/17d84285-20f1-473b-9dc5-eef4a25845ee)
 ```
 
 _____________

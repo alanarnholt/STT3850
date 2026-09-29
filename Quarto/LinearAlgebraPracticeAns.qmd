@@ -1,6 +1,6 @@
 ---
 title: "Linear Algebra Practice"
-format: pdf
+format: html
 editor: source
 ---
 
