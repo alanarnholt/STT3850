@@ -318,8 +318,6 @@ _______________
 
 * Start [PS-07](https://github.com/STAT-ATA-ASU/MD-PS07-SC) due by 5:00 pm Oct 15
 
-* **Test #2**  Oct 16
-
 
 
 ```{block, week9optional, type='rmdoptional'}
@@ -335,6 +333,8 @@ ___________________________
 
 
 ## Week 10: (Oct 19---23) {-}
+
+* **Test #2**  Oct 20
 
 * [Lecture Slides](../Rmarkdown/Week10/Week10_Lect.pdf)
 
