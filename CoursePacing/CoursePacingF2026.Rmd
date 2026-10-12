@@ -313,7 +313,7 @@ _______________
 
 * Before class read chapter 7 (Sampling) of [MD](https://moderndive.com/7-sampling.html) --- pgs 195-232
 
-* Complete (will go over most questions in class) [Sampling Distributions Lab](https://classroom.github.com/a/SNc2Yj1I) by 5:00 pm Oct 12 --- not graded
+* Complete (will go over most questions in class) [Sampling Distributions Lab](https://github.com/STAT-ATA-ASU/SWRL-SamplingDistributions-SC) by 5:00 pm Oct 12 --- not graded
 [Partial Solution](https://mathr.appstate.edu/connect/content/2d388531-2e05-485b-9f58-83855a1437e3)
 
 * Start [PS-07](https://github.com/STAT-ATA-ASU/MD-PS07-SC) due by 5:00 pm Oct 15
