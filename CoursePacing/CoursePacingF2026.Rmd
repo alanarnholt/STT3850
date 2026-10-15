@@ -338,17 +338,17 @@ ___________________________
 
 * [Lecture Slides](../Rmarkdown/Week10/Week10_Lect.pdf)
 
-* [Chapter 5 notes](../Notes/Children/BootStrap2.html)
+* [Chapter 5 notes](../Notes/Children/BootStrap2.html) - Read these notes and make your own notes on what you read Oct 21.
 
-* Read Chapter 5 of MSWR
+* Read Chapter 5 of MSWR Oct 21
 
-* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Oct 18
+* Complete the **Bootstrapping for Estimating a Parameter** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Oct 21
 
-* Before class read chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com/8-confidence-intervals.html) --- pgs 233-305
+* Before Oct 22 read chapter 8 (Bootstrapping and Confidence Intervals) of [MD](https://moderndive.com/8-confidence-intervals.html) --- pgs 233-305
 
-* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Oct 19
+* Complete the **Introducing the t-distribution** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Oct 22
 
-* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Oct 20
+* Complete the **Inference for Difference in Two Parameters** chapter in _Inference for Numerical Data in R_ --- [DataCamp](https://app.datacamp.com/groups/stt3850-f2026/assignments) --- Due NLT 5:00 pm Oct 23
 
 * Bootstrap [Example](https://stat-ata-asu.github.io/STT3851ClassRepo/Rmarkdown/TheBootstrap.html)
 
