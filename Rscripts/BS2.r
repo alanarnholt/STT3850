@@ -8,7 +8,7 @@ for(i in 1:B){
   bxbar[i] <- mean(bss)
 }
 hist(bxbar)
-quantile(bxbar, probs = c(.04, .96)) -> BPCI
+quantile(bxbar, probs = c(.025, .975)) -> BPCI
 BPCI
 
 library(infer)
@@ -20,15 +20,16 @@ TB |>
   generate(reps = 10000, type = "bootstrap") |> 
   calculate(stat = "mean") -> BSD
 BSD
+visualize(BSD)
 BSD |> 
-  summarize(LEP = quantile(stat, 0.04),
-            UEP = quantile(stat, 0.96)) -> BPCI2
+  summarize(LEP = quantile(stat, 0.025),
+            UEP = quantile(stat, 0.975)) -> BPCI2
 BPCI2
 
 visualize(BSD)
 visualise(BSD)
-get_ci(BSD, level = .92)
-t.test(hours, conf.level = .92)$conf
+get_ci(BSD, level = .95)
+t.test(hours, conf.level = .95)$conf
 
 ### t-simulation
 mu <- 100
