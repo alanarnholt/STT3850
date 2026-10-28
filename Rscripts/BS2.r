@@ -59,6 +59,11 @@ for(i in 1:B){
 hist(bts, freq = FALSE, breaks = "Scott")
 curve(dt(x, n - 1), -5, 5, add = TRUE, lwd = 2)
 ####
+set.seed(421)
+hours <- round(rexp(50, .075), 0)
+hours
+hist(hours)
+
 # create bootstrap t distribution based on sample in hours
 hist(hours)
 (mean(hours))
@@ -68,8 +73,8 @@ set.seed(123)
 B <- 100000
 bts <- numeric(B)
 for(i in 1:B){
-  bss <- sample(hours, size = 14, replace = TRUE)
-  bts[i] <- (mean(bss) - mean(hours))/(sd(bss)/sqrt(14))
+  bss <- sample(hours, size = 50, replace = TRUE)
+  bts[i] <- (mean(bss) - mean(hours))/(sd(bss)/sqrt(50))
 }
 hist(bts, freq = FALSE, breaks = "Scott")
 
@@ -79,7 +84,7 @@ Q[1]
 Q[2]
 # Bootstrap t CI
 
-c(mean(hours) -Q[2]*sd(hours)/sqrt(14), mean(hours) -Q[1]*sd(hours)/sqrt(14)) -> BTCI
+c(mean(hours) -Q[2]*sd(hours)/sqrt(50), mean(hours) -Q[1]*sd(hours)/sqrt(50)) -> BTCI
 BTCI
 
 # Compare to bootstrap percentile CI
@@ -87,7 +92,7 @@ set.seed(123)
 B <- 100000
 bxbar <- numeric(B)
 for(i in 1:B){
-  bss <- sample(hours, size = 9, replace = TRUE)
+  bss <- sample(hours, size = 50, replace = TRUE)
   bxbar[i] <- mean(bss)
 }
 hist(bxbar)
@@ -96,9 +101,15 @@ mean(bxbar)
 quantile(bxbar, probs = c(0.025, 1 - 0.025)) -> BPCI
 BPCI
 # Compare to SE CI
-c(mean(hours) -qt(.975, 8)*sd(bxbar), mean(hours) +qt(.975, 8)*sd(bxbar)) -> SECI
+c(mean(hours) -qt(.975, 49)*sd(bxbar), mean(hours) +qt(.975, 49)*sd(bxbar)) -> SECI
 SECI
 ###
 # Theoretical CI
-t.test(hours)$conf
+t.test(hours)$conf -> TCI
+TCI
 
+#
+BPCI
+BTCI
+SECI
+TCI
