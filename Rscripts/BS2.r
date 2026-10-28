@@ -108,7 +108,7 @@ SECI
 t.test(hours)$conf -> TCI
 TCI
 
-#
+# Comparison of CIs
 BPCI
 BTCI
 SECI
