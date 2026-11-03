@@ -22,6 +22,7 @@ for(i in 1:B){
 }
 
 hist(mwd)
+(pv <- mean(mwd >= 7.6))
 sum(mwd >= 7.6)
 (pv <- sum(mwd >= 7.6)/B)
 
