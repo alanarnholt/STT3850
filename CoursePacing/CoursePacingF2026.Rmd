@@ -450,8 +450,6 @@ ______________________
 
 * Complete [PS-09](https://github.com/STAT-ATA-ASU/MD-PS09-SC) by 5:00 pm Nov 12
 
-* **Exam #3** Nov 13
-
 ```{block, week13optional, type='rmdoptional'}
 #### Optional {-}
 
@@ -475,6 +473,8 @@ _________________
 * [Goodness-Of-Fit](../Handouts/ChiGOF.html)
 
 * In class [Example 1](../Rmarkdown/InClassNotes.html) and [Example 2](../Quarto/Chi_Square.html)
+
+* **Exam #3** Nov 18
 
 
 ```{block, week14optional, type='rmdoptional'}
