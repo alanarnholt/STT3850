@@ -5,8 +5,8 @@ DF
 rm(worms, group)
 DF
 library(tidyverse)
-DF %>% 
-  group_by(group) %>% 
+DF |> 
+  group_by(group) |> 
   summarize(M = mean(worms))
 
 tapply(DF$worms, DF$group, mean)

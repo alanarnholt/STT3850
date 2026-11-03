@@ -30,14 +30,7 @@ ggplot(data = schis, aes(x = group,
   labs(x = "", y = "Number of schistosomes", 
        title = "K11777 results",
        subtitle = "Some reference goes here")
-# OCD like me....how to ceter title?
-ggplot(data = schis, aes(x = group, y = worms, color = group)) +
-  geom_point(position = "jitter") + 
-  theme_bw() + 
-  labs(x = "", y = "Number of schistosomes", title = "K11777 results",
-       subtitle = "Some reference goes here") + 
-  theme(plot.title = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 1.0))
+# OCD like me....how to ceter title
 ##
 library(dplyr)
 ANS <- schis %>% 
