@@ -68,6 +68,28 @@ for(i in 1:Sims){
 pvalue <- (sum(result >= MD$Mean) + 1)/(Sims + 1)
 pvalue
 ######
+# Another way
+Sims <- 10^4 - 1
+result <- numeric(Sims)
+set.seed(3)
+for(i in 1:Sims){
+  ps <- sample(Worms)
+  result[i] <- mean(ps[1:5]) - mean(ps[6:10])
+  }
+pvalue <- (sum(result >= MD$Mean) + 1)/(Sims + 1)
+pvalue
+######
+# Another way....that is terribly inefficient
+P <- 10^4 - 1
+md <- numeric(P)
+for(i in 1:P){
+  schis |> 
+    group_by(sample(group)) |> 
+    summarize(MS  = mean(worms)) -> BT
+  md[i] <- BT$MS[1] - BT$MS[2]
+}
+pvalue <- (sum(md >= MD$Mean) + 1)/(P + 1)
+pvalue
 # 8/30/2018
 # Class more ggplot2
 # Scatterplot
