@@ -90,6 +90,19 @@ for(i in 1:P){
 }
 pvalue <- (sum(md >= MD$Mean) + 1)/(P + 1)
 pvalue
+###############
+### Using infer
+library(infer)
+schis |> 
+  specify(worms ~ group) |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = P, type = "permute") |> 
+  calculate(stat = "diff in means") -> PD
+PD
+get_p_value(PD, obs_stat = MD$Mean, direction = "greater")
+# Which is the same as
+mean(PD$stat >= MD$Mean)
+hist(PD$stat)
 # 8/30/2018
 # Class more ggplot2
 # Scatterplot
