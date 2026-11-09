@@ -1,7 +1,7 @@
 ---
 title: "Testing a single proportion"
 format: html
-editor: visual
+editor: source
 ---
 
 To test a single proportion using the infer package, we will use the `gss` (General Social Survey) dataset. In this example, we will test whether the proportion of college graduates in the population is equal to **30%**.
@@ -10,14 +10,14 @@ The process follows the four main verbs of the infer pipeline: `specify()`, `hyp
 
 The Hypothesis Test
 
-* Null Hypothesis ($H_0: p = 0.30$) The proportion of college graduates is $0.30$.
+- Null Hypothesis ($H_0: p = 0.30$) The proportion of college graduates is $0.30$.
 
-* Alternative Hypothesis ($H_A: p \neq 0.30$): The proportion of college graduates is not $0.30$.
+- Alternative Hypothesis ($H_A: p \neq 0.30$): The proportion of college graduates is not $0.30$.
 
 ```{r, message = FALSE, warning = FALSE}
 library(infer)
 library(dplyr)
-
+set.seed(33)
 # 1. Calculate the observed statistic from the data
 obs_stat <- gss |>
   specify(response = college, success = "degree") |>
@@ -27,7 +27,7 @@ obs_stat <- gss |>
 null_distribution <- gss |>
   specify(response = college, success = "degree") |>
   hypothesize(null = "point", p = 0.30) |>
-  generate(reps = 1000, type = "draw") |>
+  generate(reps = 10000, type = "draw") |>
   calculate(stat = "prop")
 
 # 3. Visualize the results
@@ -40,4 +40,19 @@ null_distribution |>
   get_p_value(obs_stat = obs_stat, direction = "two-sided")
 ```
 
-* **A Note on `type = "draw"`** In the infer documentation, `type = "draw"` is used for point estimates of a single proportion. This method samples from a theoretical distribution (like a binomial) based on the $p$ value you specified in `hypothesize()`.
+- **A Note on `type = "draw"`** In the infer documentation, `type = "draw"` is used for point estimates of a single proportion. This method samples from a theoretical distribution (like a binomial) based on the $p$ value you specified in `hypothesize()`.
+
+## Doing a similar thing with a for loop.
+
+```{r}
+set.seed(32)
+D <- 10^4
+phat <- numeric(D)
+for(i in 1:D){
+  xs <- rbinom(1, 500, 0.3)
+  phat[i] <- xs/500
+}
+hist(phat)
+(pvalue <- mean(phat >= obs_stat$stat)*2)
+```
+
