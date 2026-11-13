@@ -22,7 +22,7 @@ set.seed(33)
 obs_stat <- gss |>
   specify(response = college, success = "degree") |>
   calculate(stat = "prop")
-
+obs_stat
 # 2. Generate the null distribution
 null_distribution <- gss |>
   specify(response = college, success = "degree") |>
