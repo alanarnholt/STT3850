@@ -53,6 +53,18 @@ for(i in 1:D){
   phat[i] <- xs/500
 }
 hist(phat)
+abline(v = c(.3 - .048, .3 + .048), col = "blue")
 (pvalue <- mean(phat >= obs_stat$stat)*2)
+# Or
+mean(phat >= .348) + mean(phat <= 0.3 -.048)
+```
+
+```{r}
+xtabs(~college, data = gss) -> T1
+T1
+prop.table(T1)
+prop.test(x = 174, n = 500, p = 0.3, alternative = "two.sided")
+# Or
+binom.test(x = 174, n = 500, p = 0.3, alternative = "two.sided")
 ```
 
