@@ -47,4 +47,6 @@ visualize(BD) +
 xtabs(~decision + gender, data = promotions) -> T1
 T1
 prop.table(T1, 2)
+(obs_p_diff <- -diff(prop.table(T1, 2)[2,]))
+
 prop.test(x = c(21, 14), n = c(24, 24), alternative = "greater")
