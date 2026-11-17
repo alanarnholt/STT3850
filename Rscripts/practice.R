@@ -2,8 +2,22 @@ library(tidyverse)
 library(infer)
 library(moderndive)
 movies_sample
+movies_sample |> 
+  specify(rating ~ genre) |> 
+  calculate(stat = "diff in means", order = c("Romance", "Action"))
+# Generate permutation dist
+set.seed(123)
+movies_sample |> 
+  specify(rating ~ genre) |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 10^4, type = "permute") |> 
+  calculate(stat = "diff in means", order = c("Romance", "Action")) -> PD
+PD
 
+visualize(PD) + 
+  shade_pvalue(obs_stat = 1.05, direction = "both")
 
+get_pvalue(PD, obs_stat = 1.05, direction = "both")
 
 
 
