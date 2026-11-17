@@ -50,3 +50,40 @@ prop.table(T1, 2)
 (obs_p_diff <- -diff(prop.table(T1, 2)[2,]))
 
 prop.test(x = c(21, 14), n = c(24, 24), alternative = "greater")
+
+################
+
+# H_0: mu_Romance - mu_Action = 0
+# H_A: mu_Romance - mu_Action > 0
+
+ggplot(data = movies_sample, aes(x = genre, y = rating)) +
+  geom_boxplot()
+
+# Get observed diff in means
+movies_sample |> 
+  specify(rating ~ genre) |> 
+  calculate(stat = "diff in means", order = c("Romance", "Action"))
+
+# Generate permutation distribution
+set.seed(123)
+movies_sample |> 
+  specify(rating ~ genre) |> 
+  hypothesize(null = "independence") |> 
+  generate(reps = 10^4, type = "permute") |> 
+  calculate(stat = "diff in means", order = c("Romance", "Action")) -> PD
+PD
+
+# Visualize
+visualize(PD) +
+  shade_p_value(obs_stat = 1.05, direction = "greater")
+# Get p value
+get_p_value(PD, obs_stat = 1.05, direction = "greater") # 0.0027 < alpha value of 0.05
+
+# 95% bootstrap percentile CI
+set.seed(123)
+movies_sample |> 
+  specify(rating ~ genre) |> 
+  generate(reps = 10^4, type = "bootstrap") |> 
+  calculate(stat = "diff in means", order = c("Romance", "Action")) -> BD
+get_ci(BD, type = "percentile", level = 0.95)
+  
