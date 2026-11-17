@@ -2,6 +2,29 @@ library(tidyverse)
 library(infer)
 library(moderndive)
 movies_sample
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 tapply(movies_sample$rating, movies_sample$genre, mean)
 movies_sample |> 
   group_by(genre) |> 
